@@ -1,12 +1,12 @@
 # ── Site ───────────────────────────────────────────────────────────────────────
 title: "Rahul's Portfolio"
 description: "Portfolio + blog built with GitHub Pages (Jekyll)"
-url: "https://RahulBhattacharya1.github.io"   # OK if this is your site URL
+url: "https://RahulBhattacharya1.github.io"
 locale: "en-US"
 
 # ── Theme (Minimal Mistakes) ──────────────────────────────────────────────────
 remote_theme: mmistakes/minimal-mistakes
-minimal_mistakes_skin: default   # skins: default, dark, air, contrast, neon
+minimal_mistakes_skin: default
 
 # ── Plugins (GitHub Pages) ────────────────────────────────────────────────────
 plugins:
@@ -51,18 +51,25 @@ author:
 permalink: "/:categories/:title/"
 
 defaults:
+  # Posts: your existing preferences
   - scope:
       path: ""
       type: posts
     values:
-      layout: single          # use Minimal Mistakes' post layout
-      author_profile: true    # show the left author sidebar on posts
+      layout: single
+      author_profile: true
       show_date: false
       read_time: true
-      toc: true               # right-side table of contents
+      toc: true
       toc_sticky: true
-      # If you'd rather show a nav menu on the left instead of the author box,
-      # comment out author_profile above and use the block below:
-      # sidebar:
-      #   nav: main            # uses links from _data/navigation.yml
 
+  # Pages (incl. home page): force non-overlay hero so image is on top and text is below
+  - scope:
+      path: ""
+      type: pages
+    values:
+      header:
+        image: /assets/images/avatar.jpg   # stacked hero image
+        overlay_image:                     # explicitly cleared → no overlay
+        overlay_color:
+        overlay_filter:
