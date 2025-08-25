@@ -100,27 +100,8 @@
 /* tighten spacing below the photo */
 .sidebar .author__urls-wrapper { margin-top: 0.75rem !important; }
 
-/* Overlay → stacked (CSS-only) */
 @media (max-width: 767px) {
-  :root { --hero-mobile-gap: 60vw; } /* tune: 45–80vw depending on image shape */
-
-  /* Reserve space for the image area */
-  .layout--home .page__hero--overlay,
-  .layout--single .page__hero--overlay {
-    min-height: var(--hero-mobile-gap);
-  }
-
-  /* Push the text block below that image area */
-  .layout--home .page__hero--overlay .wrapper,
-  .layout--single .page__hero--overlay .wrapper {
-    margin-top: var(--hero-mobile-gap);
-    background: #fff;        /* masks the photo behind it so nothing looks overlapped */
-    padding: 1rem 1rem 0;    /* optional breathing room */
-  }
-
-  /* Remove the dark tint layer Minimal Mistakes draws over the image */
-  .layout--home .page__hero--overlay:before,
-  .layout--single .page__hero--overlay:before {
-    display: none !important;
-  }
+  .page__hero--overlay { padding-bottom: 50vh; }   /* reserve space */
+  .page__hero--overlay .wrapper { transform: translateY(50vh); }
 }
+
