@@ -53,9 +53,14 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: single
-      author_profile: true
+      layout: single          # use Minimal Mistakes' post layout
+      author_profile: true    # show the left author sidebar on posts
+      show_date: true
       read_time: true
-      comments: false
-      share: true
+      toc: true               # right-side table of contents
+      toc_sticky: true
+      # If you'd rather show a nav menu on the left instead of the author box,
+      # comment out author_profile above and use the block below:
+      # sidebar:
+      #   nav: main            # uses links from _data/navigation.yml
 
