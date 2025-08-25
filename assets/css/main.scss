@@ -64,3 +64,25 @@
   position: static !important;
   margin-top: 2rem;
 }
+
+/* Avatar: full-width square in the sidebar */
+.sidebar .author__avatar {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.sidebar .author__avatar img {
+  display: block;
+  width: 100% !important;
+  aspect-ratio: 1 / 1;     /* force square */
+  object-fit: cover;       /* crop to fill the square */
+  height: auto !important;
+  border-radius: 0 !important;   /* remove circle */
+  box-shadow: none !important;
+}
+
+/* tighten spacing under the photo */
+.sidebar .author__urls-wrapper { margin-top: 0.75rem !important; }
+
