@@ -1,6 +1,6 @@
 ---
 layout: home
-title: "Insight Crunch"
+title: "Rahul's Portfolio"
 author_profile: true
 ---
 
