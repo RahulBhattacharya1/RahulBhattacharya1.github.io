@@ -4,12 +4,20 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
-/* Make page + content not use inner scrollbars */
+/* ───────────────── Layout: one page-level scroll, no nested scrollbars ───── */
 .page,
 .page__inner-wrap,
 .page__content {
   overflow: visible !important;
   max-height: none !important;
+}
+
+/* Hide any residual inner scrollbar chrome */
+.page__content {
+  scrollbar-width: none;          /* Firefox */
+}
+.page__content::-webkit-scrollbar { /* Chrome/Safari */
+  display: none;
 }
 
 /* Expand the left sidebar so it doesn’t create its own scrollbar */
@@ -22,3 +30,22 @@
 
 /* (Optional) If the sidebar still feels sticky-weird, unstick it completely */
 /* .sticky { position: static !important; } */
+
+/* ───────────────── Footer tweaks ───────────────── */
+/* Hide the FEED block */
+.page__footer .page__footer-follow {
+  display: none !important;
+}
+
+/* Keep only your custom footer line (from _includes/footer/custom.html).
+   Minimal Mistakes renders the default copyright after custom;
+   hide that last one. */
+.page__footer .page__footer-copyright:last-of-type {
+  display: none !important;
+}
+
+/* Ensure footer stays at bottom and has spacing */
+.page__footer {
+  position: static !important;
+  margin-top: 2rem;
+}
