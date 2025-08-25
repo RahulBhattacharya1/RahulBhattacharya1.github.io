@@ -61,3 +61,15 @@ defaults:
       read_time: true
       toc: true
       toc_sticky: true
+
+  # Pages (includes index.md): force a non-overlay hero that uses your avatar
+  - scope:
+      path: ""        # applies to pages at the repo root, incl. index.md
+      type: pages
+    values:
+      header:
+        image: /assets/images/avatar.jpg
+        overlay_image: ~     # explicitly null → prevents overlay
+        overlay_color: ~
+        overlay_filter: ~
+
