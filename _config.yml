@@ -1,5 +1,5 @@
 # ── Site ───────────────────────────────────────────────────────────────────────
-title: "Insight Crunch"
+title: "Rahul's Portfolio"
 description: "Portfolio + blog built with GitHub Pages (Jekyll)"
 url: "https://RahulBhattacharya1.github.io"   # OK if this is your site URL
 locale: "en-US"
@@ -17,7 +17,7 @@ plugins:
 
 # ── Author sidebar ────────────────────────────────────────────────────────────
 author:
-  name: "A K"
+  name: "Rahul Bhattacharya"
   # Upload your photo at /assets/images/avatar.jpg, or delete the next line.
   avatar: "/assets/images/avatar.jpg"
   bio: "AI & Data Science — MLOps, analytics, and storytelling."
