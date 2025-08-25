@@ -47,3 +47,15 @@ author:
     - label: "YouTube"
       icon: "fab fa-youtube"
       url: "https://youtube.com/@USERNAME"
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
+
