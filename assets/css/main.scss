@@ -68,7 +68,7 @@
 /* ── Avatar: square and FULL width of the sidebar ─────────────────────────── */
 .sidebar .author__avatar {
   display: block !important;
-  width: 90% !important;
+  width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -76,7 +76,7 @@
 
 .sidebar .author__avatar img {
   display: block !important;
-  width: 90% !important;
+  width: 100% !important;
   max-width: none !important;   /* overrides theme's 120px cap */
   height: auto !important;
   aspect-ratio: 1 / 1;          /* square */
@@ -87,13 +87,13 @@
 }
 
 /* Mobile cap so the avatar doesn't overwhelm the content */
-@media (max-width: 768px) {
-  .sidebar .author__avatar img {
-    height: 220px !important;   /* adjust to taste (e.g., 180px/260px) */
-    object-fit: cover !important;
-  }
+@media (min-width: 769px) {
   .sidebar .author__avatar {
-    margin: 0 0 0.75rem 0 !important;
+    width: 90% !important;       /* was 100% */
+    margin: 0 auto !important;   /* center it */
+  }
+  .sidebar .author__avatar img {
+    width: 90% !important;       /* was 100% */
   }
 }
 
