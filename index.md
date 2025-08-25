@@ -2,17 +2,10 @@
 layout: home
 title: "Rahul’s Portfolio"
 author_profile: true
-#header:
-  #image: /assets/images/avatar.jpg
----
----
-layout: home
-title: "Rahul’s Portfolio"
-author_profile: true
 featured_posts:
-  - /intro/post1/
-  - /intro/post1/
-  - /intro/second/
+  - /intro/my-third-post/
+  - /intro/my-second-post/
+  - /intro/my-first-post/
 ---
 
 {% include right-rail.html %}
