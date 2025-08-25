@@ -3,9 +3,9 @@ layout: home
 title: "Rahul’s Portfolio"
 author_profile: true
 featured_posts:
-  - /intro/my-third-post/
-  - /intro/my-second-post/
-  - /intro/my-first-post/
+  - /intro/post1/
+  - /intro/post1/
+  - /intro/second/
 ---
 
 {% include right-rail.html %}
