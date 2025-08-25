@@ -1,0 +1,21 @@
+---
+---
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
+/* Use one page-level scroll; avoid nested scrolling in the content column */
+.page,
+.page__inner-wrap,
+.page__content {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+/* Hide any residual inner scrollbar (browser-specific) */
+.page__content {
+  scrollbar-width: none;               /* Firefox */
+}
+.page__content::-webkit-scrollbar {     /* Chrome/Safari */
+  display: none;
+}
