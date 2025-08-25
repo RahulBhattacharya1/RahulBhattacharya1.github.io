@@ -1,0 +1,7 @@
+main:
+  - title: "Blog"
+    url: /
+  - title: "About"
+    url: /about/
+  - title: "Google"
+    url: https://google.com
