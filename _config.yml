@@ -18,7 +18,6 @@ plugins:
 # ── Author sidebar ────────────────────────────────────────────────────────────
 author:
   name: "Rahul Bhattacharya"
-  # Upload your photo at /assets/images/avatar.jpg, or delete the next line.
   avatar: "/assets/images/avatar.jpg"
   bio: "AI & Data Science — MLOps, analytics, and storytelling."
   location: "Chicago, IL"
@@ -51,7 +50,7 @@ author:
 permalink: "/:categories/:title/"
 
 defaults:
-  # Posts: your existing preferences
+  # Posts only
   - scope:
       path: ""
       type: posts
@@ -62,14 +61,3 @@ defaults:
       read_time: true
       toc: true
       toc_sticky: true
-
-  # Pages (incl. home page): force non-overlay hero so image is on top and text is below
-  - scope:
-      path: ""
-      type: pages
-    values:
-      header:
-        image: /assets/images/avatar.jpg   # stacked hero image
-        overlay_image:                     # explicitly cleared → no overlay
-        overlay_color:
-        overlay_filter:
