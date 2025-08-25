@@ -68,7 +68,7 @@
 /* ── Avatar: make it square and FULL width of the sidebar ─────────────── */
 .sidebar .author__avatar {
   display: block !important;
-  width: 100% !important;
+  width: 90% !important;
   max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -76,7 +76,7 @@
 
 .sidebar .author__avatar img {
   display: block !important;
-  width: 100% !important;
+  width: 90% !important;
   max-width: none !important;   /* <-- overrides theme's 120px cap */
   height: auto !important;
   aspect-ratio: 1 / 1;          /* force square */
