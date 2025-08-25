@@ -1,5 +1,5 @@
 ---
 layout: home
-title: "Rahul's Blog"
+title: ""
 author_profile: true
 ---
