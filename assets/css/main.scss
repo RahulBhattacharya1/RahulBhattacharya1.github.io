@@ -65,8 +65,9 @@
   margin-top: 2rem;
 }
 
-/* Avatar: full-width square in the sidebar */
+/* ── Avatar: make it square and FULL width of the sidebar ─────────────── */
 .sidebar .author__avatar {
+  display: block !important;
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
@@ -74,15 +75,16 @@
 }
 
 .sidebar .author__avatar img {
-  display: block;
+  display: block !important;
   width: 100% !important;
-  aspect-ratio: 1 / 1;     /* force square */
-  object-fit: cover;       /* crop to fill the square */
+  max-width: none !important;   /* <-- overrides theme's 120px cap */
   height: auto !important;
-  border-radius: 0 !important;   /* remove circle */
+  aspect-ratio: 1 / 1;          /* force square */
+  object-fit: cover;            /* crop to fill */
+  border-radius: 0 !important;  /* remove circle */
   box-shadow: none !important;
+  border: 0 !important;         /* remove thin border you see */
 }
 
-/* tighten spacing under the photo */
+/* tighten spacing below the photo */
 .sidebar .author__urls-wrapper { margin-top: 0.75rem !important; }
-
