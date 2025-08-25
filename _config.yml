@@ -19,7 +19,7 @@ plugins:
 author:
   name: "A K"
   # Upload your photo at /assets/images/avatar.jpg, or delete the next line.
-  # avatar: "/assets/images/avatar.jpg"
+  avatar: "/assets/images/avatar.jpg"
   bio: "AI & Data Science — MLOps, analytics, and storytelling."
   location: "Chicago, IL"
   links:
