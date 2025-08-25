@@ -127,3 +127,33 @@
   .layout--home .page__content { display: block; }
   .layout--home .right-rail { position: static; margin-top: 1.25rem; }
 }
+
+/* Right rail on HOME: push main content left and float the rail right */
+@media (min-width: 1025px) {
+  .layout--home .right-rail {
+    float: right;
+    width: 300px;        /* adjust: 260–360px */
+    margin-left: 2rem;
+    position: sticky;
+    top: 1rem;
+  }
+
+  /* Reserve space on the right for the rail */
+  .layout--home .page__content > *:not(.right-rail) {
+    margin-right: 340px; /* width + gap (300 + 40) */
+  }
+}
+
+/* Stack on tablets/phones */
+@media (max-width: 1024px) {
+  .layout--home .right-rail {
+    float: none;
+    width: auto;
+    margin: 1.25rem 0 0;
+    position: static;
+  }
+  .layout--home .page__content > *:not(.right-rail) {
+    margin-right: 0;
+  }
+}
+
