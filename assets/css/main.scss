@@ -105,3 +105,25 @@
   .page__hero--overlay .wrapper { transform: translateY(50vh); }
 }
 
+/* Right rail on home */
+.layout--home .page__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px; /* content | right rail */
+  gap: 2rem;
+}
+.layout--home .archive { grid-column: 1; }      /* posts list */
+.layout--home .right-rail { grid-column: 2; }   /* featured list */
+
+.right-rail {
+  position: sticky;
+  top: 1rem;
+}
+.right-rail__title { margin: 0 0 .5rem 0; }
+.right-rail__list { list-style: none; margin: 0; padding: 0; }
+.right-rail__list li { margin: .25rem 0; }
+
+/* Stack on small screens */
+@media (max-width: 1024px) {
+  .layout--home .page__content { display: block; }
+  .layout--home .right-rail { position: static; margin-top: 1.25rem; }
+}
