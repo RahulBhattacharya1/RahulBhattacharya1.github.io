@@ -1,0 +1,16 @@
+{% assign featured_urls = page.featured_posts | default: [] %}
+{% if featured_urls.size > 0 %}
+<div class="right-rail">
+  <h3 class="right-rail__title">Featured</h3>
+  <ul class="right-rail__list">
+  {% for u in featured_urls %}
+    {% assign p = site.posts | where: "url", u | first %}
+    {% if p %}
+      <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
+    {% else %}
+      <li><a href="{{ u | relative_url }}">{{ u }}</a></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
