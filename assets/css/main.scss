@@ -140,7 +140,7 @@
 
   /* Reserve space on the right for the rail */
   .layout--home .page__content > *:not(.right-rail) {
-    margin-right: 340px; /* width + gap (300 + 40) */
+    margin-right: 10px; /* width + gap (300 + 40) */
   }
 }
 
