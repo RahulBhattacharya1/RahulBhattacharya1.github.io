@@ -4,23 +4,6 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
-/* Place this after the Minimal Mistakes imports */
-:root { --hero-push-mobile: 55vh; } /* try 45–70vh; or swap to 60% if you prefer % */
-
-@media (max-width: 767px) {
-  /* Home page only. Remove .layout--home if you want it on all pages */
-  .layout--home .page__hero--overlay .page__title,
-  .layout--home .page__hero--overlay .page__lead,
-  .layout--home .page__hero--overlay .btn {
-    margin-top: var(--hero-push-mobile);
-  }
-
-  /* Optional: add a little breathing room after the hero */
-  .layout--home .page__hero--overlay + .page__inner-wrap {
-    margin-top: 2rem;
-  }
-}
-
 /* ───────────────── Layout: one page-level scroll, no nested scrollbars ───── */
 .page,
 .page__inner-wrap,
@@ -116,3 +99,28 @@
 
 /* tighten spacing below the photo */
 .sidebar .author__urls-wrapper { margin-top: 0.75rem !important; }
+
+/* Overlay → stacked (CSS-only) */
+@media (max-width: 767px) {
+  :root { --hero-mobile-gap: 60vw; } /* tune: 45–80vw depending on image shape */
+
+  /* Reserve space for the image area */
+  .layout--home .page__hero--overlay,
+  .layout--single .page__hero--overlay {
+    min-height: var(--hero-mobile-gap);
+  }
+
+  /* Push the text block below that image area */
+  .layout--home .page__hero--overlay .wrapper,
+  .layout--single .page__hero--overlay .wrapper {
+    margin-top: var(--hero-mobile-gap);
+    background: #fff;        /* masks the photo behind it so nothing looks overlapped */
+    padding: 1rem 1rem 0;    /* optional breathing room */
+  }
+
+  /* Remove the dark tint layer Minimal Mistakes draws over the image */
+  .layout--home .page__hero--overlay:before,
+  .layout--single .page__hero--overlay:before {
+    display: none !important;
+  }
+}
