@@ -4,7 +4,7 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
-/* Use one page-level scroll; avoid nested scrolling in the content column */
+/* Make page + content not use inner scrollbars */
 .page,
 .page__inner-wrap,
 .page__content {
@@ -12,10 +12,13 @@
   max-height: none !important;
 }
 
-/* Hide any residual inner scrollbar (browser-specific) */
-.page__content {
-  scrollbar-width: none;               /* Firefox */
+/* Expand the left sidebar so it doesn’t create its own scrollbar */
+.sidebar,
+.sidebar__inner,
+.author__urls-wrapper {
+  max-height: none !important;
+  overflow: visible !important;
 }
-.page__content::-webkit-scrollbar {     /* Chrome/Safari */
-  display: none;
-}
+
+/* (Optional) If the sidebar still feels sticky-weird, unstick it completely */
+/* .sticky { position: static !important; } */
