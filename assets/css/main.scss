@@ -4,6 +4,23 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
+/* Place this after the Minimal Mistakes imports */
+:root { --hero-push-mobile: 55vh; } /* try 45–70vh; or swap to 60% if you prefer % */
+
+@media (max-width: 767px) {
+  /* Home page only. Remove .layout--home if you want it on all pages */
+  .layout--home .page__hero--overlay .page__title,
+  .layout--home .page__hero--overlay .page__lead,
+  .layout--home .page__hero--overlay .btn {
+    margin-top: var(--hero-push-mobile);
+  }
+
+  /* Optional: add a little breathing room after the hero */
+  .layout--home .page__hero--overlay + .page__inner-wrap {
+    margin-top: 2rem;
+  }
+}
+
 /* ───────────────── Layout: one page-level scroll, no nested scrollbars ───── */
 .page,
 .page__inner-wrap,
