@@ -1,5 +1,5 @@
 ---
 layout: home
-title: "Insight Crunch"
+title: "Rahul's Blog"
 author_profile: true
 ---
