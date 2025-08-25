@@ -1,5 +1,46 @@
+# ── Site ───────────────────────────────────────────────────────────────────────
 title: "Insight Crunch"
-theme: minima
 description: "Portfolio + blog built with GitHub Pages (Jekyll)"
-# Optional social links (edit or remove)
-github_username: rahul1bh
+url: "https://RahulBhattacharya1.github.io"
+locale: "en-US"
+
+# ── Theme (Minimal Mistakes) ──────────────────────────────────────────────────
+remote_theme: mmistakes/minimal-mistakes
+minimal_mistakes_skin: default   # other skins: dark, air, contrast, neon, etc.
+
+# ── Plugins (supported on GitHub Pages) ────────────────────────────────────────
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-sitemap
+
+# ── Author sidebar (left panel) ────────────────────────────────────────────────
+author:
+  name: "A K"
+  # Either replace this image path with your photo, or delete the avatar line.
+  avatar: "/assets/images/avatar.jpg"
+  bio: "AI & Data Science — MLOps, analytics, and storytelling."
+  location: "Chicago, IL"
+  links:
+    - label: "Website"
+      icon: "fas fa-globe"
+      url: "https://google.com"         # <- you asked to include google.com
+    - label: "GitHub"
+      icon: "fab fa-github"
+      url: "https://github.com/RahulBhattacharya1"
+    - label: "LinkedIn"
+      icon: "fab fa-linkedin"
+      url: "https://www.linkedin.com/in/USERNAME/"
+    - label: "Email"
+      icon: "fas fa-envelope"
+      url: "mailto:YOUREMAIL@example.com"
+    - label: "X (Twitter)"
+      icon: "fab fa-x-twitter"
+      url: "https://twitter.com/USERNAME"
+    - label: "Kaggle"
+      icon: "fab fa-kaggle"
+      url: "https://www.kaggle.com/USERNAME"
+    - label: "Medium"
+      icon: "fab fa-medium"
+      url: "https://medium.com/@USERNAME"
+    - label
