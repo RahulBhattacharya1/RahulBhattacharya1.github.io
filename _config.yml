@@ -48,6 +48,8 @@ author:
       icon: "fab fa-youtube"
       url: "https://youtube.com/@USERNAME"
 
+permalink: "/:categories/:title/"
+
 defaults:
   - scope:
       path: ""
@@ -55,7 +57,7 @@ defaults:
     values:
       layout: single          # use Minimal Mistakes' post layout
       author_profile: true    # show the left author sidebar on posts
-      show_date: true
+      show_date: false
       read_time: true
       toc: true               # right-side table of contents
       toc_sticky: true
