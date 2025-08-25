@@ -44,6 +44,21 @@
   display: none !important;
 }
 
+/* ── Hide masthead (site title + nav) ─────────────────────────────────────── */
+.masthead { 
+  display: none !important;
+}
+
+/* Remove any extra space the masthead would have reserved */
+.initial-content {
+  margin-top: 0 !important;
+}
+
+/* Hide the accessibility skip-links bar if it shows briefly */
+.skip-links { 
+  display: none !important;
+}
+
 /* Ensure footer stays at bottom and has spacing */
 .page__footer {
   position: static !important;
