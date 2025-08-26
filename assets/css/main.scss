@@ -12,7 +12,7 @@
 /* Mobile: responsive avatar */
 @media (max-width: 768px) {
   .sidebar .avatar {
-    width: 20vw;      /* was 80vw; 20vw keeps it smaller/consistent */
+    width: 80vw;
     max-width: none;
   }
 }
