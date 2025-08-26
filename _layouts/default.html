@@ -109,5 +109,47 @@
       });
     })();
   </script>
+
+{% if page.collection == "posts" %}
+<script>
+(function () {
+  var root = document.querySelector('.main-inner');
+  if (!root) return;
+
+  var URL = 'https://rahulbhattacharya1.github.io/';
+  var SKIP = new Set(['A','CODE','PRE','KBD','SAMP','SCRIPT','STYLE','TEXTAREA','BUTTON','SVG','FIGCAPTION']);
+
+  function walk(node) {
+    for (var child = node.firstChild; child; child = child.nextSibling) {
+      if (child.nodeType === 3) {
+        var text = child.nodeValue;
+        var re = /\bdata\b/gi; // whole word, case-insensitive
+        if (!re.test(text)) continue;
+
+        var frag = document.createDocumentFragment();
+        var last = 0;
+        text.replace(re, function(match, idx){
+          if (idx > last) frag.appendChild(document.createTextNode(text.slice(last, idx)));
+          var a = document.createElement('a');
+          a.href = URL;
+          a.textContent = match;
+          a.rel = 'noopener';
+          a.target = '_blank';
+          frag.appendChild(a);
+          last = idx + match.length;
+        });
+        if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+        child.parentNode.replaceChild(frag, child);
+      } else if (child.nodeType === 1 && !SKIP.has(child.tagName)) {
+        walk(child);
+      }
+    }
+  }
+
+  walk(root);
+})();
+</script>
+{% endif %}
+
 </body>
 </html>
