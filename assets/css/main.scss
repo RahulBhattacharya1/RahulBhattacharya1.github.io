@@ -159,3 +159,15 @@ body {
   border-radius: 6px;
 }
 
+.post-hero {
+  margin: 0 0 1rem;
+}
+
+.post-hero__caption {
+  display: block;
+  text-align: center;
+  color: #888;         /* light grey */
+  font-size: 0.95rem;
+  margin-top: 0.5rem;  /* sits just below the image */
+}
+
