@@ -209,3 +209,18 @@ body {
     height: auto;
   }
 }
+
+/* Remove default UL indent so items align with the header */
+.featured ul,
+.posts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;              /* or padding-inline-start: 0; */
+}
+
+/* Ensure each list item has no stray left offset */
+.featured .post-item,
+.posts .post-item {
+  margin-left: 0;
+  padding-left: 0;
+}
