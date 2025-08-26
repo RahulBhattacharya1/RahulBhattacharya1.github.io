@@ -1,4 +1,91 @@
+
+/* ──────────────── GLOBAL STYLES ──────────────── */
+
+body {
+  background-color: #fffaf0; /* light golden tint */
+  margin: 0;
+  padding: 0;
+}
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 3rem;
+  background-color: #fffefc;
+  gap: 2rem;
+  flex-wrap: nowrap;
+}
+
+.sidebar {
+  width: 20%;
+  min-width: 200px;
+}
+
+.main-content {
+  width: 80%;
+}
+
+.main-inner {
+  width: 100%;
+}
+
+.featured,
+.posts {
+  margin-bottom: 2rem;
+}
+
+.featured h2,
+.posts h2 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.post-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.post-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.post-text {
+  flex: 1;
+}
+
+/* ──────────────── MOBILE STYLES ──────────────── */
 @media screen and (max-width: 768px) {
+  .layout-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .main-content {
+    width: 100%;
+  }
+
+  .sidebar img {
+    width: 20vw !important; /* Avatar 20% of screen width */
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+
+  .featured,
+  .posts {
+    display: none !important;
+  }
+
   .page__content,
   .page__inner-wrap,
   .page,
@@ -12,11 +99,6 @@
     padding: 0 1rem !important;
   }
 
-  .sidebar {
-    width: 100% !important;
-    order: -1;
-  }
-
   .sidebar__inner {
     padding: 1rem;
   }
@@ -27,6 +109,7 @@
   }
 }
 
+/* ──────────────── DESKTOP WIDTH OVERRIDE ──────────────── */
 @media screen and (min-width: 769px) {
   .page__inner-wrap,
   .page,
