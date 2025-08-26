@@ -232,3 +232,20 @@ body {
   font-weight: 600;
 }
 
+/* Posts: body text color + paragraph indent */
+.is-post .main-inner {
+  color: #737373;            /* post body text color */
+}
+
+/* Indent the first line of each content paragraph */
+.is-post .main-inner > p {
+  text-indent: 2em;          /* ~a “tab” */
+  margin-top: 0;             /* avoid extra jump after the header */
+}
+
+/* Don’t indent meta/captions or list items */
+.is-post .post-header p,
+.is-post .post-hero__caption,
+.is-post .main-inner li p {
+  text-indent: 0;
+}
