@@ -56,6 +56,7 @@
           </header>
 
           {% capture body %}{{ content }}
+        {% if page.comments != false %}
         <script src="https://giscus.app/client.js"
         data-repo="RahulBhattacharya1/RahulBhattacharya1.github.io"
         data-repo-id="R_kgDOPjm-rA"
@@ -70,7 +71,8 @@
         data-lang="en"
         crossorigin="anonymous"
         async>
-</script>
+        </script>
+        {% endif %}
         {% endcapture %}
           {% assign parts = body | split: '</p>' %}
 
