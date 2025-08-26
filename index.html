@@ -1,0 +1,77 @@
+---
+layout: default
+title: "Rahul Bhattacharya"
+---
+
+<style>
+  .layout-wrapper {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  .sidebar {
+    width: 20%;
+    padding-right: 2rem;
+  }
+  .main-content {
+    width: 80%;
+  }
+  .main-inner {
+    width: 75%;
+  }
+  .featured, .posts {
+    margin-bottom: 2rem;
+  }
+  .featured h2, .posts h2 {
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 0.5rem;
+  }
+  .post-item {
+    margin-bottom: 1rem;
+  }
+</style>
+
+<div class="layout-wrapper">
+  <div class="sidebar">
+    <img src="/assets/images/avatar.jpg" alt="Rahul Bhattacharya" style="width:100%; border-radius: 8px;">
+    <p><strong>Rahul Bhattacharya</strong></p>
+    <p>AI & Data Science — MLOps, analytics, and storytelling.</p>
+    <ul>
+      <li><a href="https://github.com/RahulBhattacharya1">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/USERNAME/">LinkedIn</a></li>
+      <li><a href="mailto:YOUREMAIL@example.com">Email</a></li>
+      <li><a href="https://twitter.com/USERNAME">Twitter</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="main-inner">
+      <section class="featured">
+        <h2>Featured</h2>
+        <ul>
+          {%- for post in site.posts -%}
+            {%- if post.featured == true -%}
+              <li class="post-item">
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </section>
+
+      <section class="posts">
+        <h2>Blog Posts</h2>
+        <ul>
+          {%- for post in site.posts -%}
+            <li class="post-item">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
