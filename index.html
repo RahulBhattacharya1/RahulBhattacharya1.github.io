@@ -10,28 +10,17 @@ featured_posts:
 <div class="page__inner-wrap">
   <section class="featured-block">
     <h2>Featured</h2>
-    <ul class="taxonomy__index">
+    <ul>
       {%- assign featured_list = page.featured_posts | compact -%}
-      {%- if featured_list and featured_list.size > 0 -%}
-        {%- for url in featured_list -%}
-          {%- assign post = site.posts | where: "url", url | first -%}
-          {%- if post -%}
-            <li class="archive__item">
-              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-              {%- if post.excerpt -%}<p>{{ post.excerpt | strip_html | truncate: 140 }}</p>{%- endif -%}
-            </li>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- else -%}
-        {%- for post in site.posts -%}
-          {%- if post.featured == true -%}
-            <li class="archive__item">
-              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-              {%- if post.excerpt -%}<p>{{ post.excerpt | strip_html | truncate: 140 }}</p>{%- endif -%}
-            </li>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
+      {%- for url in featured_list -%}
+        {%- assign post = site.posts | where: "url", url | first -%}
+        {%- if post -%}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
     </ul>
   </section>
 
@@ -39,16 +28,10 @@ featured_posts:
     <h2>Blog Posts</h2>
     <div class="entries-list">
       {%- for post in site.posts -%}
-        <article class="archive__item">
-          <h3 class="archive__item-title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          </h3>
-          <p class="page__meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-          </p>
-          {%- if post.excerpt -%}
-            <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
-          {%- endif -%}
+        <article>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></p>
+          <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
         </article>
       {%- endfor -%}
     </div>
