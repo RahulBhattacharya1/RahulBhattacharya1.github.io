@@ -202,9 +202,10 @@ body {
 .sidebar .social-icons a:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
 @media (max-width: 768px) {
-  /* Hide list thumbnails in Featured + Blog sections on the home page */
   .featured .post-item img,
   .posts .post-item img {
-    display: none !important;
+    width: 80vw !important;
+    aspect-ratio: 16 / 9; /* or 1 / 1 */
+    height: auto;
   }
 }
