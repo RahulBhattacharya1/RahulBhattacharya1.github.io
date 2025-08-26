@@ -29,6 +29,9 @@
           <header class="post-header">
             <h1 class="post-title">{{ page.title }}</h1>
             <p class="post-meta">{{ page.date | date: "%B %d, %Y" }}</p>
+            <div class="post-actions">
+              <button id="share-btn" type="button" aria-label="Share this post">Share</button>
+            </div>
           </header>
 
           {% capture body %}{{ content }}{% endcapture %}
@@ -39,6 +42,7 @@
             {% if page.thumbnail %}
               <figure class="post-hero">
                 <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
+                <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
               </figure>
             {% endif %}
             {% for p in parts offset:1 %}
@@ -50,6 +54,7 @@
             {% if page.thumbnail %}
               <figure class="post-hero">
                 <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
+                <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
               </figure>
             {% endif %}
             {{ content }}
@@ -62,5 +67,27 @@
       </div>
     </main>
   </div>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('share-btn');
+      if (!btn) return;
+      var url = "{{ page.url | absolute_url }}";
+      var title = "{{ page.title | escape }}";
+
+      btn.addEventListener('click', function () {
+        if (navigator.share) {
+          navigator.share({ title: title, url: url }).catch(function(){});
+        } else if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(url).then(function(){ btn.textContent = 'Link copied'; setTimeout(function(){ btn.textContent='Share'; }, 1200); });
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = url; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); btn.textContent='Link copied'; setTimeout(function(){ btn.textContent='Share'; }, 1200); } catch(e){}
+          document.body.removeChild(ta);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
