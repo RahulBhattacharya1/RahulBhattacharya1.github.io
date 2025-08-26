@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <meta charset="utf-8">
   <title>{{ page.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Optional: smooth, modern font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Your compiled site CSS -->
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 </head>
 <body>
-  {{ content }}
+  <div class="layout-wrapper">
+    <aside class="sidebar">
+      <img src="/assets/images/avatar.jpg" alt="Rahul Bhattacharya" style="width:100%; border-radius: 8px;">
+      <p><strong>Rahul Bhattacharya</strong></p>
+      <p>AI & Data Science — MLOps, analytics, and storytelling.</p>
+      <ul>
+        <li><a href="https://github.com/RahulBhattacharya1">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/USERNAME/">LinkedIn</a></li>
+        <li><a href="mailto:YOUREMAIL@example.com">Email</a></li>
+        <li><a href="https://twitter.com/USERNAME">Twitter</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="main-inner">
+        {{ content }}
+      </div>
+    </main>
+  </div>
 </body>
 </html>
