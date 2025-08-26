@@ -1,45 +1,19 @@
 ---
 ---
-/* Desktop: stable size controlled by the container, not the viewport */
+/* Desktop: stable size for avatar */
 .sidebar .avatar {
   display: block;
   width: 100%;
-  max-width: 220px;   /* pick a size you like (e.g., 180–240px) */
+  max-width: 220px;   /* adjust 180–240px to taste */
   border-radius: 8px;
   margin: 0 auto;
 }
 
-/* Mobile: make it responsive, but no !important, and scoped */
+/* Mobile: responsive avatar */
 @media (max-width: 768px) {
   .sidebar .avatar {
-    width: 20vw;      /* or 30–40vw if you want larger on phones */
-    max-width: none;  /* override the desktop cap on small screens */
-  }
-}
-
-/* REMOVE this whole block if it’s in your file:
-.sidebar img {
-  width: 20vw !important;
-  display: block;
-  margin: 0 auto;
-  border-radius: 8px;
-}
-*/
-
-/* Desktop: lock in a consistent avatar size */
-.sidebar .avatar {
-  display: block;
-  width: 100%;
-  max-width: 220px;      /* <- pick your fixed visual size */
-  border-radius: 8px;
-  margin: 0 auto;
-}
-
-/* Mobile: keep your 20% of screen width requirement */
-@media (max-width: 768px) {
-  .sidebar .avatar {
-    width: 80vw;
-    max-width: none;     /* override the desktop cap on small screens */
+    width: 20vw;      /* was 80vw; 20vw keeps it smaller/consistent */
+    max-width: none;
   }
 }
 
@@ -47,32 +21,26 @@
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;   /* Smooths on macOS/iOS */
-  -moz-osx-font-smoothing: grayscale;    /* Smooths on Firefox */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background-color: #fffaf0; /* keep your golden tint */
+  background-color: #fffaf0;
   margin: 0;
   padding: 0;
 }
 
 /* ──────────────── GLOBAL STYLES ──────────────── */
 
-body {
-  background-color: #fffaf0; /* light golden tint */
-  margin: 0;
-  padding: 0;
-}
-
 .layout-wrapper {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;  /* ← changed from space-between to stop right-shift */
   max-width: 100%;
   margin: 0 auto;
   padding: 1.5rem 3rem;
   background-color: #fffefc;
-  gap: 2rem;
+  gap: 2rem;                    /* provides consistent spacing */
   flex-wrap: nowrap;
 }
 
