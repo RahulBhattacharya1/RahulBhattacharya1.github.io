@@ -5,10 +5,7 @@
   <title>{{ page.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Optional: smooth, modern font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- Your compiled site CSS -->
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 </head>
 <body>
@@ -27,19 +24,41 @@
 
     <main class="main-content">
       <div class="main-inner">
+
         {% if page.collection == "posts" %}
           <header class="post-header">
             <h1 class="post-title">{{ page.title }}</h1>
             <p class="post-meta">{{ page.date | date: "%B %d, %Y" }}</p>
+          </header>
+
+          {% capture body %}{{ content }}{% endcapture %}
+          {% assign parts = body | split: '</p>' %}
+
+          {% if parts.size > 1 %}
+            {{ parts[0] }}</p>
             {% if page.thumbnail %}
               <figure class="post-hero">
                 <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
               </figure>
             {% endif %}
-          </header>
+            {% for p in parts offset:1 %}
+              {% unless p == '' %}
+                {{ p }}</p>
+              {% endunless %}
+            {% endfor %}
+          {% else %}
+            {% if page.thumbnail %}
+              <figure class="post-hero">
+                <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
+              </figure>
+            {% endif %}
+            {{ content }}
+          {% endif %}
+
+        {% else %}
+          {{ content }}
         {% endif %}
 
-        {{ content }}
       </div>
     </main>
   </div>
