@@ -1,5 +1,23 @@
 ---
 ---
+
+/* Desktop: lock in a consistent avatar size */
+.sidebar .avatar {
+  display: block;
+  width: 100%;
+  max-width: 180px;      /* <- pick your fixed visual size */
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+/* Mobile: keep your 20% of screen width requirement */
+@media (max-width: 768px) {
+  .sidebar .avatar {
+    width: 80vw;
+    max-width: none;     /* override the desktop cap on small screens */
+  }
+}
+
 /* Font and smoothing */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
