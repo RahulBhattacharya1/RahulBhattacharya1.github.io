@@ -1,0 +1,24 @@
+@media screen and (max-width: 768px) {
+  .page__content,
+  .page__inner-wrap,
+  .page,
+  .layout--single .page,
+  .archive,
+  .post,
+  .page__main,
+  .page__body {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 1rem !important;
+  }
+
+  .sidebar,
+  .sidebar__inner {
+    display: none !important; /* Optional: hide sidebar */
+  }
+
+  .author__avatar,
+  .author__bio {
+    text-align: center;
+  }
+}
