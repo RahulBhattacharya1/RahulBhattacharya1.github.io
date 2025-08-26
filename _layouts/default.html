@@ -76,7 +76,7 @@
 
           {% if parts.size > 1 %}
             {{ parts[0] }}</p>
-            {% if page.thumbnail %}
+            {% if page.thumbnail and page.hide_thumbnail_in_body != true %}
               <figure class="post-hero">
                 <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
                 <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
@@ -88,7 +88,7 @@
               {% endunless %}
             {% endfor %}
           {% else %}
-            {% if page.thumbnail %}
+            {% if page.thumbnail and page.hide_thumbnail_in_body != true %}
               <figure class="post-hero">
                 <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
                 <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
