@@ -178,16 +178,27 @@ body {
   padding: 0;
   list-style: none;
 }
+
 .sidebar .social-icons a {
   display: inline-flex;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: #f2f2f2;
-  transition: transform .15s ease, background .15s ease;
+  transition: transform .15s ease, filter .15s ease;
 }
-.sidebar .social-icons a:hover { transform: translateY(-2px); background: #e9e9e9; }
-.sidebar .social-icons svg { width: 18px; height: 18px; fill: #333; }
+.sidebar .social-icons a svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+}
+
+/* Brand colors */
+.sidebar .social-icons a.linkedin { background: #0A66C2; }  /* LinkedIn */
+.sidebar .social-icons a.email    { background: #EA4335; }  /* Gmail red */
+.sidebar .social-icons a.github   { background: #181717; }  /* GitHub */
+
+.sidebar .social-icons a:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
 
