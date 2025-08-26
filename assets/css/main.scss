@@ -1,5 +1,30 @@
 ---
 ---
+/* Desktop: stable size controlled by the container, not the viewport */
+.sidebar .avatar {
+  display: block;
+  width: 100%;
+  max-width: 220px;   /* pick a size you like (e.g., 180–240px) */
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+/* Mobile: make it responsive, but no !important, and scoped */
+@media (max-width: 768px) {
+  .sidebar .avatar {
+    width: 20vw;      /* or 30–40vw if you want larger on phones */
+    max-width: none;  /* override the desktop cap on small screens */
+  }
+}
+
+/* REMOVE this whole block if it’s in your file:
+.sidebar img {
+  width: 20vw !important;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+*/
 
 /* Desktop: lock in a consistent avatar size */
 .sidebar .avatar {
@@ -103,18 +128,6 @@ body {
   .sidebar,
   .main-content {
     width: 100%;
-  }
-
-  .sidebar img {
-    width: 20vw !important; /* Avatar 20% of screen width */
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
-  }
-
-  .featured,
-  .posts {
-    display: none !important;
   }
 
   .page__content,
