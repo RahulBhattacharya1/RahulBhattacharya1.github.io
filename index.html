@@ -12,7 +12,7 @@ title: "Rahul's Portfolio"
           <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-            <p>{{ post.excerpt | strip_html | truncate: 250 }}</p>
+            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 250 }}</p>
           </div>
         </li>
       {%- endif -%}
