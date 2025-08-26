@@ -1,6 +1,3 @@
-@import "minimal-mistakes"; // base theme
-@import "custom";           // your overrides
-
 @media screen and (max-width: 768px) {
   .page__content,
   .page__inner-wrap,
@@ -15,9 +12,13 @@
     padding: 0 1rem !important;
   }
 
-  .sidebar,
+  .sidebar {
+    width: 100% !important;
+    order: -1;
+  }
+
   .sidebar__inner {
-    display: none !important; /* Optional: hide sidebar */
+    padding: 1rem;
   }
 
   .author__avatar,
