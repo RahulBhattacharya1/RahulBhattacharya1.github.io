@@ -66,6 +66,30 @@ title: "Rahul's Portfolio"
   .post-text {
     flex: 1;
   }
+
+  @media screen and (max-width: 768px) {
+  .layout-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .main-content {
+    width: 100%;
+  }
+
+  .sidebar img {
+    width: 20vw !important;         /* 20% of viewport width */
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+
+  .featured,
+  .posts {
+    display: none !important;
+  }
+}
+
 </style>
 
 <div class="layout-wrapper">
