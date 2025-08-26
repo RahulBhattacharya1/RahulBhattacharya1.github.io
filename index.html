@@ -3,55 +3,34 @@ layout: default
 title: "Rahul's Portfolio"
 ---
 
+<section class="featured">
+  <h2>Featured</h2>
+  <ul>
+    {%- for post in site.posts -%}
+      {%- if post.featured == true -%}
+        <li class="post-item">
+          <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
+          <div class="post-text">
+            <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
+            <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
+          </div>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</section>
 
-<div class="layout-wrapper">
-  <div class="sidebar">
-    <img src="/assets/images/avatar.jpg" alt="Rahul Bhattacharya" style="width:100%; border-radius: 8px;">
-    <p><strong>Rahul Bhattacharya</strong></p>
-    <p>AI & Data Science — MLOps, analytics, and storytelling.</p>
-    <ul>
-      <li><a href="https://github.com/RahulBhattacharya1">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/USERNAME/">LinkedIn</a></li>
-      <li><a href="mailto:YOUREMAIL@example.com">Email</a></li>
-      <li><a href="https://twitter.com/USERNAME">Twitter</a></li>
-    </ul>
-  </div>
-
-  <div class="main-content">
-    <div class="main-inner">
-      
-      <section class="featured">
-        <h2>Featured</h2>
-        <ul>
-          {%- for post in site.posts -%}
-            {%- if post.featured == true -%}
-              <li class="post-item">
-                <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
-                <div class="post-text">
-                  <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-                  <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
-                </div>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
-      </section>
-
-      <section class="posts">
-        <h2>Blog Posts</h2>
-        <ul>
-          {%- for post in site.posts -%}
-            <li class="post-item">
-              <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
-              <div class="post-text">
-                <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-                <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
-              </div>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </section>
-
-    </div>
-  </div>
-</div>
+<section class="posts">
+  <h2>Blog Posts</h2>
+  <ul>
+    {%- for post in site.posts -%}
+      <li class="post-item">
+        <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
+        <div class="post-text">
+          <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
+          <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
