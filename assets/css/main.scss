@@ -23,7 +23,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background-color: #FCFCFC;
+  background-color: #FEFEFE;
   line-height: 1.4;
   margin: 0;
   padding: 0;
@@ -39,7 +39,7 @@ body {
   max-width: 100%;
   margin: 0 auto;
   padding: 1.5rem 3rem;
-  background-color: #FCFCFC;
+  background-color: #FEFEFE;
   gap: 2rem;                    /* provides consistent spacing */
   flex-wrap: nowrap;
 }
@@ -244,9 +244,9 @@ body {
   text-indent: 0;
 }
 
-/* Post body images: 50% on desktop, full-width on mobile */
+/* Post body images: 75% on desktop, full-width on mobile */
 .is-post .main-inner img {
-  width: 50% !important;
+  width: 75% !important;
   height: auto;
   display: block;
   margin: 1rem auto; /* center it */
@@ -258,9 +258,11 @@ body {
   }
 }
 
-/* Sidebar bio text (moved from inline style) */
+/* Sidebar bio text */
 .bio {
   color: #737373;
+  font-size: 0.9rem;   /* ~14–15px on most browsers */
+  line-height: 1.5;    /* keeps it readable */
 }
 
 /* Generic button + “Share” variant */
