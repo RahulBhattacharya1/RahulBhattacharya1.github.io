@@ -10,7 +10,7 @@ title: "Rahul's Portfolio"
       {%- if post.featured == true -%}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <img src="{{ post.thumbnail | default: post.image | default: post.header.image | default: '/assets/images/default.jpg' | relative_url }}" alt="{{ post.title }}">
+            <img src="{{ post.thumbnail }}" alt="{{ post.title }}">
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
@@ -28,7 +28,7 @@ title: "Rahul's Portfolio"
     {%- for post in site.posts -%}
       <li class="post-item">
         <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-          <img src="{{ post.thumbnail | default: post.image | default: post.header.image | default: '/assets/images/default.jpg' | relative_url }}" alt="{{ post.title }}">
+          <img src="{{ post.thumbnail }}" alt="{{ post.title }}">
         </a>
         <div class="post-text">
           <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
