@@ -5,6 +5,15 @@ sass:
 
 plugins:
   - jekyll-paginate
-
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  
 paginate: 3
 paginate_path: "/page:num"
+
+timezone: "America/Chicago"
+future: false
+markdown: kramdown
+kramdown:
+  input: GFM
