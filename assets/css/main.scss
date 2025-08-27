@@ -291,16 +291,17 @@ body {
 .btn:active { transform: translateY(0); }
 
 .btn--share {
-  background: #1877f2;   /* blue background */
+  background: #1877f2;
   color: #fff;
   border: none;
-  font-size: 0.75rem;    /* smaller text */
-  padding: 2px 8px;      /* slim padding */
+  font-size: 0.75rem;
+  padding: 2px 8px;
   line-height: 1.2;
   border-radius: 4px;
+  text-decoration: none;
 }
 
 .btn--share:hover {
-  background: #145dbf;   /* darker on hover */
+  background: #145dbf;
 }
 
