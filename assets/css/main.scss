@@ -203,21 +203,12 @@ body {
   transform: translateY(-2px);
 }
 
-/*@media (max-width: 768px) {
+@media (max-width: 768px) {
   .featured .post-item img,
   .posts .post-item img {
     width: 20vw !important;
     aspect-ratio: 16 / 9; /* or 1 / 1 */
     height: auto;
-  }
-}*/
-
-@media (max-width: 768px) {
-  .featured .post-item img,
-  .posts .post-item img {
-    width: 160px;      /* keep SAME size on mobile */
-    height: 100px;     /* keep SAME size on mobile */
-    object-fit: cover;
   }
 }
 
