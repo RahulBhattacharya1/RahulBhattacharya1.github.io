@@ -257,3 +257,29 @@ body {
     width: 100% !important; /* easier to view on phones */
   }
 }
+
+/* Sidebar bio text (moved from inline style) */
+.bio {
+  color: #737373;
+}
+
+/* Generic button + “Share” variant */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .55rem .9rem;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  font: inherit;
+  cursor: pointer;
+  transition: transform .12s ease, background .2s ease, border-color .2s ease;
+}
+.btn:hover { background: #f0f0f0; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn--share {
+  border-color: #e0e0e0;
+}
+
