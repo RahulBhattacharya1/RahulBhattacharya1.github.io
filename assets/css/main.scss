@@ -282,6 +282,12 @@ body {
 .btn:active { transform: translateY(0); }
 
 .btn--share {
-  border-color: #e0e0e0;
+  background: #1877f2;   /* Facebook blue */
+  color: #fff;
+  border: none;
+}
+
+.btn--share:hover {
+  background: #145dbf;   /* darker on hover */
 }
 
