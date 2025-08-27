@@ -149,39 +149,30 @@
 </div>
 
 <script>
-(async function () {
-  const el = document.getElementById('visitor-count');
+(function () {
+  var el = document.getElementById('visitor-count');
   if (!el) return;
 
-  const NS  = 'rahulbhattacharya1_github';  // namespace (your choice)
-  const KEY = 'site_visitors';              // counter key (your choice)
+  // Use a clean namespace/key and the single-call "hit" endpoint.
+  // Add a timestamp to avoid any weird caching.
+  var url = 'https://api.countapi.xyz/hit/rahulbhattacharya1_github/site_visitors?t=' + Date.now();
 
-  // helpers
-  const getURL    = `https://api.countapi.xyz/get?namespace=${encodeURIComponent(NS)}&key=${encodeURIComponent(KEY)}`;
-  const createURL = `https://api.countapi.xyz/create?namespace=${encodeURIComponent(NS)}&key=${encodeURIComponent(KEY)}&value=0`;
-  const updateURL = `https://api.countapi.xyz/update?namespace=${encodeURIComponent(NS)}&key=${encodeURIComponent(KEY)}&amount=1`;
-
-  try {
-    // 1) ensure key exists
-    let res = await fetch(getURL);
-    if (res.status === 404) {
-      await fetch(createURL); // create at 0
-    }
-
-    // 2) increment and display
-    const upd = await fetch(updateURL);
-    const data = await upd.json();
-    if (typeof data.value === 'number') {
-      el.textContent = data.value.toLocaleString();
-    } else {
+  fetch(url, { cache: 'no-store' })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data && typeof data.value === 'number') {
+        el.textContent = data.value.toLocaleString();
+      } else {
+        el.textContent = '—';
+      }
+    })
+    .catch(function () {
+      // Adblock / network / CORS issues: show a neutral dash instead of 0
       el.textContent = '—';
-    }
-  } catch (e) {
-    // network/adblock fallback
-    el.textContent = '—';
-  }
+    });
 })();
 </script>
+
 
 
     </aside>
