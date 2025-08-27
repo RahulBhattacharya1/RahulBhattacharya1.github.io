@@ -6,6 +6,9 @@ baseurl: ""   # keep empty for user/org pages
 
 sass:
   sass_dir: assets/css
+  style: compressed
+
+incremental: true
 
 plugins:
   - jekyll-paginate
