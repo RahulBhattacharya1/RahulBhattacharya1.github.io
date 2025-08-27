@@ -9,42 +9,9 @@ title: "Rahul's Portfolio"
     {%- for post in site.posts -%}
       {%- if post.featured == true -%}
         <li class="post-item">
-
-<a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-  {%- comment -%}
-    Compute candidate URL from common keys
-  {%- endcomment -%}
-  {%- assign _cand = post.thumbnail | to_s | strip -%}
-  {%- if _cand == '' and post.image -%}
-    {%- if post.image.path -%}
-      {%- assign _cand = post.image.path | to_s | strip -%}
-    {%- else -%}
-      {%- assign _cand = post.image | to_s | strip -%}
-    {%- endif -%}
-  {%- endif -%}
-  {%- if _cand == '' and post.header and post.header.image -%}
-    {%- assign _cand = post.header.image | to_s | strip -%}
-  {%- endif -%}
-  {%- if _cand == '' and post.header and post.header.teaser -%}
-    {%- assign _cand = post.header.teaser | to_s | strip -%}
-  {%- endif -%}
-
-  {%- assign _fallback = '/assets/images/default.jpg' | relative_url -%}
-  {%- assign _is_abs = _cand contains '://' -%}
-  {%- if _is_abs -%}
-    {%- assign _cand_url = _cand -%}
-  {%- else -%}
-    {%- assign _cand_url = _cand | relative_url -%}
-  {%- endif -%}
-
-  <!-- Always start with the fallback -->
-  <img
-    class="post-thumb"
-    src="{{ _fallback }}"
-    data-src="{{ _cand_url }}"
-    alt="{{ post.title }}">
-</a>
-
+          <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+            <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
+          </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
             <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 250 }}</p>
@@ -60,41 +27,9 @@ title: "Rahul's Portfolio"
   <ul>
     {%- for post in site.posts -%}
       <li class="post-item">
-<a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-  {%- comment -%}
-    Compute candidate URL from common keys
-  {%- endcomment -%}
-  {%- assign _cand = post.thumbnail | to_s | strip -%}
-  {%- if _cand == '' and post.image -%}
-    {%- if post.image.path -%}
-      {%- assign _cand = post.image.path | to_s | strip -%}
-    {%- else -%}
-      {%- assign _cand = post.image | to_s | strip -%}
-    {%- endif -%}
-  {%- endif -%}
-  {%- if _cand == '' and post.header and post.header.image -%}
-    {%- assign _cand = post.header.image | to_s | strip -%}
-  {%- endif -%}
-  {%- if _cand == '' and post.header and post.header.teaser -%}
-    {%- assign _cand = post.header.teaser | to_s | strip -%}
-  {%- endif -%}
-
-  {%- assign _fallback = '/assets/images/default.jpg' | relative_url -%}
-  {%- assign _is_abs = _cand contains '://' -%}
-  {%- if _is_abs -%}
-    {%- assign _cand_url = _cand -%}
-  {%- else -%}
-    {%- assign _cand_url = _cand | relative_url -%}
-  {%- endif -%}
-
-  <!-- Always start with the fallback -->
-  <img
-    class="post-thumb"
-    src="{{ _fallback }}"
-    data-src="{{ _cand_url }}"
-    alt="{{ post.title }}">
-</a>
-
+        <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+          <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
+        </a>
         <div class="post-text">
           <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
           <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 300 }}</p>
@@ -103,25 +38,3 @@ title: "Rahul's Portfolio"
     {%- endfor -%}
   </ul>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var thumbs = document.querySelectorAll('.post-thumb');
-  var fallback = '{{ "/assets/images/default.jpg" | relative_url }}';
-
-  thumbs.forEach(function (img) {
-    var cand = (img.getAttribute('data-src') || '').trim();
-    if (!cand) return; // no candidate -> keep fallback
-
-    // Preload candidate; only swap if it truly loads
-    var test = new Image();
-    test.onload = function () {
-      if (test.naturalWidth > 0) img.src = cand;
-    };
-    test.onerror = function () {
-      // keep fallback
-    };
-    test.src = cand;
-  });
-});
-</script>
