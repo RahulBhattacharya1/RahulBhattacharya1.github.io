@@ -8,6 +8,8 @@ sass:
   sass_dir: assets/css
   style: compressed
 
+excerpt_separator: "\n\n"
+
 incremental: true
 
 plugins:
