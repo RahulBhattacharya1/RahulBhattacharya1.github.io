@@ -14,7 +14,7 @@
   <div class="layout-wrapper">
     <aside class="sidebar">
       <a href="{{ '/' | relative_url }}">
-        <img class="avatar" src="/assets/images/avatar.jpg" alt="Rahul Bhattacharya">
+        <img class="avatar" src="/assets/images/avatar.jpg" alt="Rahul Bhattacharya" loading="lazy" decoding="async">
       </a>
       <p><strong>Rahul Bhattacharya</strong></p>
       
@@ -174,7 +174,7 @@
             {{ parts[0] }}</p>
             {% if page.thumbnail and page.hide_thumbnail_in_body != true %}
               <figure class="post-hero">
-                <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
+                <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
                 <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
               </figure>
             {% endif %}
@@ -186,7 +186,7 @@
           {% else %}
             {% if page.thumbnail and page.hide_thumbnail_in_body != true %}
               <figure class="post-hero">
-                <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
+                <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
                 <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
               </figure>
             {% endif %}
