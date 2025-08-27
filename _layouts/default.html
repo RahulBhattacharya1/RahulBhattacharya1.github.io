@@ -153,27 +153,29 @@
   var el = document.getElementById('visitor-count');
   if (!el) return;
 
-  // Use a clean namespace/key and the single-call "hit" endpoint.
-  // Add a timestamp to avoid any weird caching.
-  var url = 'https://api.countapi.xyz/hit/rahulbhattacharya1_github/site_visitors?t=' + Date.now();
+  // Use a clean namespace/key (letters, numbers, underscores only)
+  var ns  = 'rahulbhattacharya1_github';
+  var key = 'site_visitors';
 
-  fetch(url, { cache: 'no-store' })
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      if (data && typeof data.value === 'number') {
-        el.textContent = data.value.toLocaleString();
-      } else {
-        el.textContent = '—';
-      }
-    })
-    .catch(function () {
-      // Adblock / network / CORS issues: show a neutral dash instead of 0
+  // 1) define the callback globally
+  window.__vcb = function (data) {
+    if (data && typeof data.value === 'number') {
+      el.textContent = data.value.toLocaleString();
+    } else {
       el.textContent = '—';
-    });
+    }
+    // cleanup
+    try { delete window.__vcb; } catch(e) { window.__vcb = undefined; }
+  };
+
+  // 2) inject a script to hit+return the count (JSONP)
+  var s = document.createElement('script');
+  s.src = 'https://api.countapi.xyz/hit/' + ns + '/' + key + '?callback=__vcb&_=' + Date.now();
+  s.async = true;
+  s.onerror = function(){ el.textContent = '—'; };
+  document.head.appendChild(s);
 })();
 </script>
-
-
 
     </aside>
 
