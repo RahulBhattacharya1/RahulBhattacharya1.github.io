@@ -11,12 +11,12 @@ title: "Rahul's Portfolio"
         <li class="post-item">
 <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
   {%- comment -%}
-    Robust thumbnail resolver (handles many schemas):
+    Robust resolver:
     1) post.thumbnail (string)
     2) post.image.path (object) or post.image (string)
-    3) post.header.image, post.header.teaser
+    3) post.header.image / post.header.teaser
     4) post.teaser
-    5) fallback to /assets/images/default.jpg
+    5) final fallback → /assets/images/default.jpg
   {%- endcomment -%}
 
   {%- assign _thumb = post.thumbnail | to_s | strip -%}
@@ -47,10 +47,12 @@ title: "Rahul's Portfolio"
 
   {%- assign _is_abs = _thumb contains '://' -%}
   <img
+    class="post-thumb"
     src="{% if _is_abs %}{{ _thumb }}{% else %}{{ _thumb | relative_url }}{% endif %}"
     alt="{{ post.title }}"
     onerror="this.onerror=null;this.src='{{ '/assets/images/default.jpg' | relative_url }}'">
 </a>
+
 
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
@@ -69,12 +71,12 @@ title: "Rahul's Portfolio"
       <li class="post-item">
 <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
   {%- comment -%}
-    Robust thumbnail resolver (handles many schemas):
+    Robust resolver:
     1) post.thumbnail (string)
     2) post.image.path (object) or post.image (string)
-    3) post.header.image, post.header.teaser
+    3) post.header.image / post.header.teaser
     4) post.teaser
-    5) fallback to /assets/images/default.jpg
+    5) final fallback → /assets/images/default.jpg
   {%- endcomment -%}
 
   {%- assign _thumb = post.thumbnail | to_s | strip -%}
@@ -105,10 +107,12 @@ title: "Rahul's Portfolio"
 
   {%- assign _is_abs = _thumb contains '://' -%}
   <img
+    class="post-thumb"
     src="{% if _is_abs %}{{ _thumb }}{% else %}{{ _thumb | relative_url }}{% endif %}"
     alt="{{ post.title }}"
     onerror="this.onerror=null;this.src='{{ '/assets/images/default.jpg' | relative_url }}'">
 </a>
+
 
         <div class="post-text">
           <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
@@ -118,3 +122,25 @@ title: "Rahul's Portfolio"
     {%- endfor -%}
   </ul>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var fallback = '{{ "/assets/images/default.jpg" | relative_url }}';
+  document.querySelectorAll('.post-thumb').forEach(function (img) {
+    // If src is empty/whitespace, set fallback
+    var s = (img.getAttribute('src') || '').trim();
+    if (!s) img.src = fallback;
+
+    // If image fails to load, swap to fallback
+    img.addEventListener('error', function () {
+      this.onerror = null;
+      this.src = fallback;
+    });
+
+    // If it already "completed" but has zero width (silent 404/CDN), swap to fallback
+    if (img.complete && img.naturalWidth === 0) {
+      img.src = fallback;
+    }
+  });
+});
+</script>
