@@ -151,15 +151,6 @@ body {
   border-radius: 8px;
 }
 
-/* Make any images inside the post content responsive too */
-.main-inner img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 1rem 0;
-  border-radius: 6px;
-}
-
 .post-hero {
   margin: 0 0 1rem;
 }
@@ -254,7 +245,7 @@ body {
 }
 
 /* Post body images: 50% on desktop, full-width on mobile */
-.layout--single .entry-content img {
+.is-post .main-inner img {
   width: 50% !important;
   height: auto;
   display: block;
@@ -262,7 +253,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .layout--single .entry-content img {
+  .is-post .main-inner img {
     width: 100% !important; /* easier to view on phones */
   }
 }
