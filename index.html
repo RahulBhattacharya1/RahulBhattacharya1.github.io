@@ -25,16 +25,44 @@ title: "Rahul's Portfolio"
 <section class="posts">
   <h2>Blog Posts</h2>
   <ul>
-    {%- for post in site.posts -%}
-      <li class="post-item">
-        <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-          <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
-        </a>
-        <div class="post-text">
-          <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-          <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 300 }}</p>
-        </div>
-      </li>
-    {%- endfor -%}
+    {% if paginator %}
+      {%- for post in paginator.posts -%}
+        <li class="post-item">
+          <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+            <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
+          </a>
+          <div class="post-text">
+            <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
+            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 300 }}</p>
+          </div>
+        </li>
+      {%- endfor -%}
+    {% else %}
+      {%- for post in site.posts limit:3 -%}
+        <li class="post-item">
+          <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+            <img src="{{ post.thumbnail | default: '/assets/images/default.jpg' }}" alt="{{ post.title }}">
+          </a>
+          <div class="post-text">
+            <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
+            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 300 }}</p>
+          </div>
+        </li>
+      {%- endfor -%}
+    {% endif %}
   </ul>
 </section>
+
+{% if paginator %}
+  <nav class="pagination">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">Newer</a>
+    {% endif %}
+
+    <span>Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">Older</a>
+    {% endif %}
+  </nav>
+{% endif %}
