@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 }}">
   {% seo %}
 </head>
 <body{% if page.collection == "posts" %} class="is-post"{% endif %}>
@@ -271,6 +272,26 @@
 })();
 </script>
 {% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Prefer an on-page post title element; fall back to document.title.
+  var titleEl = document.querySelector('h1, .post-title, .page-title');
+  var fallbackTitle = titleEl ? titleEl.textContent.trim() : document.title.trim();
+
+  // Select images inside typical content containers; add others if you use them.
+  var imgs = document.querySelectorAll(
+    '.page__content img, article img, .post-content img, .content img, .entry-content img'
+  );
+
+  imgs.forEach(function (img) {
+    var alt = img.getAttribute('alt');
+    if (!alt || alt.trim() === '') {
+      img.setAttribute('alt', fallbackTitle);
+    }
+  });
+});
+</script>
   
 </body>
 </html>
