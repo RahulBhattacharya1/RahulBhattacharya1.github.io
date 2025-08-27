@@ -10,11 +10,20 @@ title: "Rahul's Portfolio"
       {%- if post.featured == true -%}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            {% if post.thumbnail and post.thumbnail != '' %}
-              <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}">
-            {% else %}
-              <img src="{{ '/assets/images/default.jpg' | relative_url }}" alt="{{ post.title }}">
+            {% assign _thumb = post.thumbnail | to_s | strip %}
+            {% if _thumb == '' or _thumb == nil %}
+              {% assign _thumb = post.image | to_s | strip %}
             {% endif %}
+            {% if _thumb == '' or _thumb == nil %}
+              {% assign _thumb = post.header.image | to_s | strip %}
+            {% endif %}
+            {% if _thumb == '' or _thumb == nil %}
+              {% assign _thumb = '/assets/images/default.jpg' %}
+            {% endif %}
+            <img
+              src="{{ _thumb | relative_url }}"
+              alt="{{ post.title }}"
+              onerror="this.onerror=null;this.src='{{ '/assets/images/default.jpg' | relative_url }}'">
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
@@ -32,11 +41,20 @@ title: "Rahul's Portfolio"
     {%- for post in site.posts -%}
       <li class="post-item">
         <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            {% if post.thumbnail and post.thumbnail != '' %}
-              <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}">
-            {% else %}
-              <img src="{{ '/assets/images/default.jpg' | relative_url }}" alt="{{ post.title }}">
-            {% endif %}
+          {% assign _thumb = post.thumbnail | to_s | strip %}
+          {% if _thumb == '' or _thumb == nil %}
+            {% assign _thumb = post.image | to_s | strip %}
+          {% endif %}
+          {% if _thumb == '' or _thumb == nil %}
+            {% assign _thumb = post.header.image | to_s | strip %}
+          {% endif %}
+          {% if _thumb == '' or _thumb == nil %}
+            {% assign _thumb = '/assets/images/default.jpg' %}
+          {% endif %}
+          <img
+            src="{{ _thumb | relative_url }}"
+            alt="{{ post.title }}"
+            onerror="this.onerror=null;this.src='{{ '/assets/images/default.jpg' | relative_url }}'">
         </a>
         <div class="post-text">
           <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
