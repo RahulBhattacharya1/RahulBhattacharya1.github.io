@@ -143,39 +143,6 @@
 <div class="visitor-counter">
     <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Frahulbhattacharya1.github.io%2F&label=Readers&labelColor=%23fafafa&countColor=%23f0f0f0&style=flat&labelStyle=upper" alt="Readers count" />
 </div>
-      
-<div class="visitor-counter">
-  Readers: <span id="visitor-count">0</span>
-</div>
-
-<script>
-(function () {
-  var el = document.getElementById('visitor-count');
-  if (!el) return;
-
-  // Use a clean namespace/key (letters, numbers, underscores only)
-  var ns  = 'rahulbhattacharya1_github';
-  var key = 'site_visitors';
-
-  // 1) define the callback globally
-  window.__vcb = function (data) {
-    if (data && typeof data.value === 'number') {
-      el.textContent = data.value.toLocaleString();
-    } else {
-      el.textContent = '—';
-    }
-    // cleanup
-    try { delete window.__vcb; } catch(e) { window.__vcb = undefined; }
-  };
-
-  // 2) inject a script to hit+return the count (JSONP)
-  var s = document.createElement('script');
-  s.src = 'https://api.countapi.xyz/hit/' + ns + '/' + key + '?callback=__vcb&_=' + Date.now();
-  s.async = true;
-  s.onerror = function(){ el.textContent = '—'; };
-  document.head.appendChild(s);
-})();
-</script>
 
     </aside>
 
