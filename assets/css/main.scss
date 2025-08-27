@@ -186,23 +186,21 @@ body {
   background: none !important;
   border-radius: 0 !important;
   padding: 0 !important;
-  width: auto;
-  height: auto;
-  transition: color .15s ease, transform .15s ease;
+  transition: transform .15s ease;
 }
 
 .sidebar .social-icons a svg {
   width: 24px;
   height: 24px;
-  fill: #666 !important;
+  fill: #666;   /* subtle gray */
+  transition: fill 0.2s ease;
 }
-
 
 /* Monochrome hover */
 .sidebar .social-icons a:hover svg {
   fill: #000 !important;
+  transform: translateY(-2px);
 }
-.sidebar .social-icons a:hover { transform: translateY(-2px); }
 
 @media (max-width: 768px) {
   .featured .post-item img,
