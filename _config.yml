@@ -1,6 +1,9 @@
 title: "Rahul Bhattacharya"
 description: "Portfolio and blog of Rahul Bhattacharya — featuring projects, AI, and insights."
 
+url: "https://rahulbhattacharya1.github.io"
+baseurl: ""   # keep empty for user/org pages
+
 sass:
   sass_dir: assets/css
 
