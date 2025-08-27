@@ -9,22 +9,49 @@ title: "Rahul's Portfolio"
     {%- for post in site.posts -%}
       {%- if post.featured == true -%}
         <li class="post-item">
-          <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            {% assign _thumb = post.thumbnail | to_s | strip %}
-            {% if _thumb == '' or _thumb == nil %}
-              {% assign _thumb = post.image | to_s | strip %}
-            {% endif %}
-            {% if _thumb == '' or _thumb == nil %}
-              {% assign _thumb = post.header.image | to_s | strip %}
-            {% endif %}
-            {% if _thumb == '' or _thumb == nil %}
-              {% assign _thumb = '/assets/images/default.jpg' %}
-            {% endif %}
-            <img
-              src="{{ _thumb | relative_url }}"
-              alt="{{ post.title }}"
-              onerror="this.onerror=null;this.src='{{ '/assets/images/default.jpg' | relative_url }}'">
-          </a>
+<a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+  {%- comment -%}
+    Robust thumbnail resolver (handles many schemas):
+    1) post.thumbnail (string)
+    2) post.image.path (object) or post.image (string)
+    3) post.header.image, post.header.teaser
+    4) post.teaser
+    5) fallback to /assets/images/default.jpg
+  {%- endcomment -%}
+
+  {%- assign _thumb = post.thumbnail | to_s | strip -%}
+
+  {%- if _thumb == '' and post.image -%}
+    {%- if post.image.path -%}
+      {%- assign _thumb = post.image.path | to_s | strip -%}
+    {%- else -%}
+      {%- assign _thumb = post.image | to_s | strip -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if _thumb == '' and post.header -%}
+    {%- if post.header.image -%}
+      {%- assign _thumb = post.header.image | to_s | strip -%}
+    {%- elsif post.header.teaser -%}
+      {%- assign _thumb = post.header.teaser | to_s | strip -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if _thumb == '' and post.teaser -%}
+    {%- assign _thumb = post.teaser | to_s | strip -%}
+  {%- endif -%}
+
+  {%- if _thumb == '' -%}
+    {%- assign _thumb = '/assets/images/default.jpg' -%}
+  {%- endif -%}
+
+  {%- assign _is_abs = _thumb contains '://' -%}
+  <img
+    src="{% if _is_abs %}{{ _thumb }}{% else %}{{ _thumb | relative_url }}{% endif %}"
+    alt="{{ post.title }}"
+    onerror="this.onerror=null;this.src='{{ '/assets/images/default.jpg' | relative_url }}'">
+</a>
+
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
             <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 250 }}</p>
@@ -40,22 +67,49 @@ title: "Rahul's Portfolio"
   <ul>
     {%- for post in site.posts -%}
       <li class="post-item">
-        <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-          {% assign _thumb = post.thumbnail | to_s | strip %}
-          {% if _thumb == '' or _thumb == nil %}
-            {% assign _thumb = post.image | to_s | strip %}
-          {% endif %}
-          {% if _thumb == '' or _thumb == nil %}
-            {% assign _thumb = post.header.image | to_s | strip %}
-          {% endif %}
-          {% if _thumb == '' or _thumb == nil %}
-            {% assign _thumb = '/assets/images/default.jpg' %}
-          {% endif %}
-          <img
-            src="{{ _thumb | relative_url }}"
-            alt="{{ post.title }}"
-            onerror="this.onerror=null;this.src='{{ '/assets/images/default.jpg' | relative_url }}'">
-        </a>
+<a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+  {%- comment -%}
+    Robust thumbnail resolver (handles many schemas):
+    1) post.thumbnail (string)
+    2) post.image.path (object) or post.image (string)
+    3) post.header.image, post.header.teaser
+    4) post.teaser
+    5) fallback to /assets/images/default.jpg
+  {%- endcomment -%}
+
+  {%- assign _thumb = post.thumbnail | to_s | strip -%}
+
+  {%- if _thumb == '' and post.image -%}
+    {%- if post.image.path -%}
+      {%- assign _thumb = post.image.path | to_s | strip -%}
+    {%- else -%}
+      {%- assign _thumb = post.image | to_s | strip -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if _thumb == '' and post.header -%}
+    {%- if post.header.image -%}
+      {%- assign _thumb = post.header.image | to_s | strip -%}
+    {%- elsif post.header.teaser -%}
+      {%- assign _thumb = post.header.teaser | to_s | strip -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if _thumb == '' and post.teaser -%}
+    {%- assign _thumb = post.teaser | to_s | strip -%}
+  {%- endif -%}
+
+  {%- if _thumb == '' -%}
+    {%- assign _thumb = '/assets/images/default.jpg' -%}
+  {%- endif -%}
+
+  {%- assign _is_abs = _thumb contains '://' -%}
+  <img
+    src="{% if _is_abs %}{{ _thumb }}{% else %}{{ _thumb | relative_url }}{% endif %}"
+    alt="{{ post.title }}"
+    onerror="this.onerror=null;this.src='{{ '/assets/images/default.jpg' | relative_url }}'">
+</a>
+
         <div class="post-text">
           <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
           <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 300 }}</p>
