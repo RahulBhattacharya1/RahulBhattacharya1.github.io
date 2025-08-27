@@ -2,6 +2,8 @@ name: Deploy to GitHub Pages
 on:
   push: { branches: [ main ] }
   workflow_dispatch:
+  schedule:
+  - cron: '22 18 27 8 *'   # midnight UTC = 6pm CST / 7pm CDT
 
 permissions:
   contents: read
