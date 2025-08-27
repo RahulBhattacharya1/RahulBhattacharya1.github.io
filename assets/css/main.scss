@@ -253,12 +253,16 @@ body {
   text-indent: 0;
 }
 
-/* Limit images inside post content to 50% width, keep aspect ratio */
-.post img,
-.page__content .page__inner-wrap .entry-content img,
-.page__content .entry-content img {
+/* Post body images: 50% on desktop, full-width on mobile */
+.layout--single .entry-content img {
   width: 50% !important;
   height: auto;
   display: block;
-  margin: 1em auto; // center horizontally
+  margin: 1rem auto; /* center it */
+}
+
+@media (max-width: 768px) {
+  .layout--single .entry-content img {
+    width: 100% !important; /* easier to view on phones */
+  }
 }
