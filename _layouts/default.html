@@ -143,7 +143,18 @@
 <div class="visitor-counter">
     <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Frahulbhattacharya1.github.io%2F&label=Readers&labelColor=%23fafafa&countColor=%23f0f0f0&style=flat&labelStyle=upper" alt="Readers count" />
 </div>
-      
+<div class="visitor-counter">
+  Readers: <span id="visitor-count">0</span>
+</div>
+
+<script>
+  fetch('https://api.countapi.xyz/hit/rahulbhattacharya1.github.io/visitors')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('visitor-count').textContent = data.value;
+    });
+</script>
+
     </aside>
 
     <main class="main-content">
