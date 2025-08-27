@@ -143,17 +143,46 @@
 <div class="visitor-counter">
     <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Frahulbhattacharya1.github.io%2F&label=Readers&labelColor=%23fafafa&countColor=%23f0f0f0&style=flat&labelStyle=upper" alt="Readers count" />
 </div>
+      
 <div class="visitor-counter">
   Readers: <span id="visitor-count">0</span>
 </div>
 
 <script>
-  fetch('https://api.countapi.xyz/hit/rahulbhattacharya1.github.io/visitors')
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('visitor-count').textContent = data.value;
-    });
+(async function () {
+  const el = document.getElementById('visitor-count');
+  if (!el) return;
+
+  const NS  = 'rahulbhattacharya1_github';  // namespace (your choice)
+  const KEY = 'site_visitors';              // counter key (your choice)
+
+  // helpers
+  const getURL    = `https://api.countapi.xyz/get?namespace=${encodeURIComponent(NS)}&key=${encodeURIComponent(KEY)}`;
+  const createURL = `https://api.countapi.xyz/create?namespace=${encodeURIComponent(NS)}&key=${encodeURIComponent(KEY)}&value=0`;
+  const updateURL = `https://api.countapi.xyz/update?namespace=${encodeURIComponent(NS)}&key=${encodeURIComponent(KEY)}&amount=1`;
+
+  try {
+    // 1) ensure key exists
+    let res = await fetch(getURL);
+    if (res.status === 404) {
+      await fetch(createURL); // create at 0
+    }
+
+    // 2) increment and display
+    const upd = await fetch(updateURL);
+    const data = await upd.json();
+    if (typeof data.value === 'number') {
+      el.textContent = data.value.toLocaleString();
+    } else {
+      el.textContent = '—';
+    }
+  } catch (e) {
+    // network/adblock fallback
+    el.textContent = '—';
+  }
+})();
 </script>
+
 
     </aside>
 
