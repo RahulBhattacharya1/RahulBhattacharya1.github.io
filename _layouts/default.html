@@ -30,11 +30,13 @@
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
   </noscript>
 
-<link rel="preload"
-      href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/main.css"
-      as="style">
+<!-- Theme CSS from Minimal Mistakes (pinned version) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/mmistakes/minimal-mistakes@4.24.0/assets/css/main.css" as="style">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mmistakes/minimal-mistakes@4.24.0/assets/css/main.css">
 
-<link rel="stylesheet" href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/main.css">
+<!-- Your custom overrides (local file we add next) -->
+<link rel="stylesheet" href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/overrides.css">
 
   <!--meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 }}"-->
   {% seo %}
