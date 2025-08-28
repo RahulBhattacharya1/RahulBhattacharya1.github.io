@@ -43,7 +43,11 @@ Requirements
 
 I created a requirements.txt with the basics:
 
-gradio>=4.0.0torchsentence-transformers
+```python
+gradio>=4.0.0
+torch
+sentence-transformers
+```
 
 Optionally, I added a runtime.txt with python-3.11 (or python-3.10) for reproducible builds.
 
@@ -390,6 +394,7 @@ def chat_core(message, state, tz):
         reply = f"{ack}\n\n_Current time in **{tz}**: **{tstr}**_\n\n{suggestion}"
 
     return reply, new_state
+```
 
 ### 5) Gradio UI Wiring
 
