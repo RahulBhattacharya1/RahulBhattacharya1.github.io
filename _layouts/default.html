@@ -255,6 +255,31 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("div.highlight").forEach(function (block) {
+    // detect language
+    let code = block.querySelector("pre code");
+    if (code && code.className) {
+      let lang = code.className.replace("language-", "");
+      block.setAttribute("data-lang", lang);
+    }
+
+    // add copy button
+    let btn = document.createElement("button");
+    btn.className = "copy-btn";
+    btn.textContent = "Copy";
+    btn.addEventListener("click", function () {
+      navigator.clipboard.writeText(code.innerText).then(() => {
+        btn.textContent = "Copied!";
+        setTimeout(() => btn.textContent = "Copy", 1200);
+      });
+    });
+    block.appendChild(btn);
+  });
+});
+</script>
+  
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya</p>
 </footer>
