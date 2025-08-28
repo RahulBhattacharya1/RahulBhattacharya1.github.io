@@ -257,16 +257,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll("div.highlight").forEach(function (box) {
-    // Find the <code> to read language + text
+  function detectLang(box) {
     const code = box.querySelector("pre code");
-    const langRaw = code && code.className ? code.className.replace("language-", "") : "";
-    const lang = (langRaw || "text").toLowerCase();
+    // look on <code>, on wrappers, and in data-* attrs
+    const classPile = [
+      code ? code.className : "",
+      box.className || "",
+      box.parentElement ? box.parentElement.className : "",
+      (box.closest('[class*="language-"]') || {}).className || ""
+    ].join(" ");
 
-    // Skip if header already added (avoid duplicates)
-    if (box.querySelector(".code-header")) return;
+    let m = classPile.match(/language-([a-z0-9+.-]+)/i)
+         || classPile.match(/\blang(?:uage)?-?([a-z0-9+.-]+)/i);
+    if (m) return m[1].toLowerCase();
 
-    // Build header
+    const dl = (code && code.getAttribute("data-lang"))
+            || box.getAttribute("data-lang")
+            || (box.parentElement && box.parentElement.getAttribute("data-lang"));
+    return (dl || "text").toLowerCase();
+  }
+
+  document.querySelectorAll("div.highlight").forEach(function (box) {
+    if (box.querySelector(".code-header")) return; // avoid duplicates
+
+    const code = box.querySelector("pre code");
+    const lang = detectLang(box);
+
+    // header
     const header = document.createElement("div");
     header.className = "code-header";
 
@@ -275,10 +292,10 @@ document.addEventListener("DOMContentLoaded", function () {
     label.textContent = lang;
     header.appendChild(label);
 
-    // Copy button
+    // copy button
     const btn = document.createElement("button");
     btn.className = "code-copy";
-    btn.setAttribute("type", "button");
+    btn.type = "button";
     btn.innerHTML = `
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M16 1H6a2 2 0 0 0-2 2v10h2V3h10V1z"></path>
@@ -288,19 +305,19 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     btn.addEventListener("click", function () {
       const text = code ? code.innerText : "";
-      navigator.clipboard.writeText(text).then(() => {
-        const label = btn.querySelector("span");
-        const old = label.textContent;
-        label.textContent = "Copied!";
-        setTimeout(() => { label.textContent = old; }, 1200);
+      navigator.clipboard.writeText(text).then(function () {
+        const s = btn.querySelector("span");
+        const old = s.textContent;
+        s.textContent = "Copied!";
+        setTimeout(function () { s.textContent = old; }, 1200);
       });
     });
 
     header.appendChild(btn);
 
-    // Insert header before <pre>
+    // insert before the <pre>
     const pre = box.querySelector("pre");
-    box.insertBefore(header, pre);
+    if (pre) box.insertBefore(header, pre);
   });
 });
 </script>
