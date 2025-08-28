@@ -143,17 +143,48 @@ return int(scores.argmax())
 
 ### 3) Planner: Generate a Morning Plan
 
-def generate\_plan(name, tz, energy, wake\_time, primary\_goal, secondary\_goal, extra\_note, use\_ai):seed = int(date.today().strftime("%Y%m%d"))random.seed(seed)
+```python
+def generate_plan(name, tz, energy, wake_time, primary_goal, secondary_goal, extra_note, use_ai):
+    seed = int(date.today().strftime("%Y%m%d"))
+    random.seed(seed)
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`intent = " ".join([s for s in [primary_goal or "", secondary_goal or "", extra_note or ""] if s]).strip()    if use_ai and intent:        t_idx = _ai_pick_best(_TIP_EMB, intent)        tip = FOCUS_TIPS[t_idx]        ai_badge = " (AI-personalized)"    else:        tip = random.choice(FOCUS_TIPS)        ai_badge = ""    now_local = datetime.now(ZoneInfo(tz))    time_str = now_local.strftime("%I:%M %p").lstrip("0")    blocks = []    if wake_time:        blocks.append(f"☀️ **{wake_time}** — Wake, hydrate (250 ml), 5 deep breaths, quick stretch")    blocks.append("📓 **Morning Prime (10 min)** — Write top 3 outcomes & clear desk")    blocks.append(f"🎯 **Deep Work (60–90 min)** — Focus on: **{primary_goal or 'your #1 task'}**")    if secondary_goal:        blocks.append(f"🔁 **Block 2 (45–60 min)** — Next: **{secondary_goal}**")    blocks.append("🍎 **Micro-break (5 min)** — Stand up, sip water, quick walk")    if extra_note:        blocks.append(f"📝 **Note** — {extra_note}")    plan_md = "\n".join([f"- {b}" for b in blocks])    energy_md = ENERGY_HINTS.get(energy, "")    greeting = f"Good morning{f', {name}' if name else ''}! It’s **{time_str}** in **{tz}**."    body = f"""`  
+    intent = " ".join([s for s in [primary_goal or "", secondary_goal or "", extra_note or ""] if s]).strip()
 
-**Today’s vibe:** {energy} energy{ai\_badge}**Focus tip:** {tip}
+    if use_ai and intent:
+        t_idx = _ai_pick_best(_TIP_EMB, intent)
+        tip = FOCUS_TIPS[t_idx]
+        ai_badge = " (AI-personalized)"
+    else:
+        tip = random.choice(FOCUS_TIPS)
+        ai_badge = ""
 
+    now_local = datetime.now(ZoneInfo(tz))
+    time_str = now_local.strftime("%I:%M %p").lstrip("0")
+
+    blocks = []
+    if wake_time:
+        blocks.append(f"☀️ **{wake_time}** — Wake, hydrate (250 ml), 5 deep breaths, quick stretch")
+    blocks.append("📓 **Morning Prime (10 min)** — Write top 3 outcomes & clear desk")
+    blocks.append(f"🎯 **Deep Work (60–90 min)** — Focus on: **{primary_goal or 'your #1 task'}**")
+    if secondary_goal:
+        blocks.append(f"🔁 **Block 2 (45–60 min)** — Next: **{secondary_goal}**")
+    blocks.append("🍎 **Micro-break (5 min)** — Stand up, sip water, quick walk")
+    if extra_note:
+        blocks.append(f"📝 **Note** — {extra_note}")
+
+    plan_md = "\n".join([f"- {b}" for b in blocks])
+    energy_md = ENERGY_HINTS.get(energy, "")
+    greeting = f"Good morning{f', {name}' if name else ''}! It’s **{time_str}** in **{tz}**."
+
+    body = f"""
+**Today’s vibe:** {energy} energy{ai_badge}  
+**Focus tip:** {tip}
 ### Your Morning Plan
-
-{plan\_md}
-
-**Pro tip:** {energy\_md}"""return textwrap.dedent(greeting + "\\n\\n" + body).strip()
+{plan_md}
+**Pro tip:** {energy_md}
+"""
+    return textwrap.dedent(greeting + "\n\n" + body).strip()
+```
 
 ### 4) Conversational Parsing (Chat)
 
