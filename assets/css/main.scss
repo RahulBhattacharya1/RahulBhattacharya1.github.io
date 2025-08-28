@@ -1,5 +1,8 @@
 ---
 ---
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
 /* Desktop: stable size for avatar */
 .sidebar .avatar {
   display: block;
