@@ -136,7 +136,7 @@
   {%- assign with_hero = content | replace_first: '</p>', injected -%}
 
   {%- if with_hero == content -%}
-    {#-- Fallback: no </p> found; prepend hero --#}
+    {% comment %} Fallback: no </p> found; prepend hero {% endcomment %}
     {{ hero }}
     {{ content }}
   {%- else -%}
