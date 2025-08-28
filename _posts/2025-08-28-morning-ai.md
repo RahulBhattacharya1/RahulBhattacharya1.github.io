@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Building a Conversational Morning Planner in Gradio (with a Sprinkle of AI)"
-date: 2025-08-23
+date: 2025-08-28
 categories: [intro]
 tags: [getting-started]
 thumbnail: /assets/images/ai.webp
