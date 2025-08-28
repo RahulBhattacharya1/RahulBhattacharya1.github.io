@@ -38,9 +38,13 @@
         <img class="avatar" src="/assets/images/avatar.webp" alt="Rahul Bhattacharya" fetchpriority="high" decoding="async">
       </a>
       <p><strong>Rahul Bhattacharya</strong></p>
-      
-<ul class="social-icons">
-  <li>
+
+<ul class="social-icons" id="social-icons"></ul>
+
+<script>
+  requestIdleCallback(() => {
+    document.getElementById("social-icons").innerHTML = `
+   <li>
     <a class="home" href="/" aria-label="Home">
       <svg viewBox="0 0 576 512">
         <path d="M541 229.16l-61-50.89V56a24 24 0 0 0-24-24h-72a24 
@@ -152,8 +156,10 @@
       </svg>
     </a>
   </li>
-</ul>
-
+    `;
+  });
+</script>
+      
       <!-- AFTER -->
 <p class="bio">Rahul Bhattacharya is a data scientist with 15+ years delivering insights across healthcare, retail, and finance. He builds pipelines and forecasting models in Python/Databricks/Azure, translates business needs into KPIs, and partners with leadership to drive decisions. Strengths include data governance, visualization, and storytelling that convert complex analytics into measurable outcomes.&#x20;</p>
 <div class="visitor-counter">
