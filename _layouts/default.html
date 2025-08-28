@@ -1,26 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  {% assign HASH = site.github.build_revision | default: "" %}
-  {% if HASH != "" %}
-    {% assign CDN = "https://cdn.jsdelivr.net/gh/RahulBhattacharya1/RahulBhattacharya1.github.io@" | append: HASH %}
-  {% else %}
-    {% assign CDN = "" %}
-  {% endif %}
-
-  <link rel="icon" href="{{ CDN }}/assets/images/favicon.ico">
+  <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
   <meta charset="utf-8">
-  <title>{{ page.title }} | {{ site.title }}</title>
+   <title>{{ page.title }} | {{ site.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--meta name="description" content="{{ page.description | default: site.description | escape }}"-->
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-
-  <!-- Preconnects for faster font load -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Google Fonts (async load) -->
   <link rel="preload"
         as="style"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
@@ -30,23 +20,22 @@
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
   </noscript>
 
-<!-- Theme CSS from Minimal Mistakes (pinned version) -->
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preload" href="https://cdn.jsdelivr.net/gh/mmistakes/minimal-mistakes@4.24.0/assets/css/main.css" as="style">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mmistakes/minimal-mistakes@4.24.0/assets/css/main.css">
-
-<!-- Your custom overrides (local file we add next) -->
-<link rel="stylesheet" href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/overrides.css">
+  <link rel="preload"
+        href="{{ '/assets/css/main.css' | relative_url }}"
+        as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  </noscript>
 
   <!--meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 }}"-->
   {% seo %}
 </head>
-
 <body{% if page.collection == "posts" %} class="is-post"{% endif %}>
   <div class="layout-wrapper">
     <aside class="sidebar">
       <a href="{{ '/' | relative_url }}">
-        <img class="avatar" src="{{ CDN }}/assets/images/avatar.webp" alt="Rahul Bhattacharya" loading="lazy" decoding="async">
+        <img class="avatar" src="/assets/images/avatar.webp" alt="Rahul Bhattacharya" loading="lazy" decoding="async">
       </a>
       <p><strong>Rahul Bhattacharya</strong></p>
       
@@ -210,12 +199,10 @@
             {{ parts[0] }}</p>
             {% assign thumb = page.thumbnail | default: page.image | default: '/assets/images/default.webp' %}
             {% if thumb and page.hide_thumbnail_in_body != true %}
-              {% capture thumb_url %}{% if thumb contains '/assets/' %}{{ CDN }}{{ thumb }}{% else %}{{ thumb | relative_url }}{% endif %}{% endcapture %}
               <figure class="post-hero">
-                <img src="{{ thumb_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
+                <img src="{{ thumb | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
                 <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
               </figure>
-
             {% endif %}
 
             {% for p in parts offset:1 %}
@@ -226,11 +213,10 @@
           {% else %}
           {% assign thumb = page.thumbnail | default: page.image | default: '/assets/images/default.webp' %}
           {% if thumb and page.hide_thumbnail_in_body != true %}
-          {% capture thumb_url %}{% if thumb contains '/assets/' %}{{ CDN }}{{ thumb }}{% else %}{{ thumb | relative_url }}{% endif %}{% endcapture %}
-          <figure class="post-hero">
-            <img src="{{ thumb_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
-            <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
-          </figure>
+            <figure class="post-hero">
+              <img src="{{ thumb | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
+              <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
+            </figure>
           {% endif %}
 
             {{ content }}
