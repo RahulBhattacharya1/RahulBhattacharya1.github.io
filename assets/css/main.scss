@@ -314,11 +314,30 @@ body {
   margin-top: 3rem;
 }
 
-/* Make long code lines scroll instead of widening the page */
+/* ──────────────── FLEX + CODEBLOCK OVERFLOW FIX ──────────────── */
+
+/* Let flex children shrink so long code lines don't blow out layout */
+.main-content,
+.sidebar,
+.main-inner,
+.page__content,
+.page__main,
+.page__body,
+.page__inner-wrap {
+  min-width: 0;   /* critical: allows shrinking inside flex */
+}
+
+/* Prevent outer flex container from creating horizontal scrollbar */
+.layout-wrapper {
+  overflow-x: hidden;
+}
+
+/* Ensure code blocks scroll horizontally instead of widening the page */
 .highlighter-rouge pre,
 .highlight pre,
 pre {
-  white-space: pre;     /* keep original spacing */
-  overflow-x: auto;     /* enable horizontal scroll */
-  max-width: 100%;      /* never exceed container */
+  white-space: pre;      /* preserve code formatting */
+  overflow-x: auto;      /* horizontal scroll when needed */
+  max-width: 100%;
+  box-sizing: border-box;
 }
