@@ -2,7 +2,12 @@
 <html lang="en">
 
 <head>
-  {% assign CDN = "https://cdn.jsdelivr.net/gh/RahulBhattacharya1/RahulBhattacharya1.github.io@" | append: site.github.build_revision %}
+  {% assign HASH = site.github.build_revision | default: "" %}
+  {% if HASH != "" %}
+    {% assign CDN = "https://cdn.jsdelivr.net/gh/RahulBhattacharya1/RahulBhattacharya1.github.io@" | append: HASH %}
+  {% else %}
+    {% assign CDN = "" %}
+  {% endif %}
 
   <link rel="icon" href="{{ CDN }}/assets/images/favicon.ico">
   <meta charset="utf-8">
@@ -26,13 +31,13 @@
   </noscript>
 
   <!-- Main CSS served from jsDelivr (immutable by commit) -->
-  <link rel="preload"
-        href="{{ CDN }}/assets/css/main.css"
-        as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="{{ CDN }}/assets/css/main.css">
-  </noscript>
+<link rel="preload"
+      href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/main.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/main.css">
+</noscript>
 
   <!--meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 }}"-->
   {% seo %}
