@@ -345,7 +345,7 @@ pre {
 /* ───────── CODE HEADER (GitHub-like) ───────── */
 .highlight {
   background: #f8f8f8;
-  border: 1px solid #e5e5e5;
+  border: 0px solid #e5e5e5;
   border-radius: 8px;
   margin: 1.25rem 0;
   overflow: hidden;          /* so header rounds with the box */
@@ -406,5 +406,6 @@ pre {
   font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.9rem;
   line-height: 1.5;
+  border-radius: 0 0 8px 8px; 
 }
 
