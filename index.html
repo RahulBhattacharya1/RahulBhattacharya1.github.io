@@ -10,7 +10,7 @@ title: "Rahul's Portfolio"
       {%- if post.featured == true -%}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}" alt="{{ post.title }}" loading="lazy">
+            <img src="{{ post.thumbnail | default: post.image | default: '/assets/images/default.webp' | relative_url }}" loading="lazy">
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
@@ -29,7 +29,7 @@ title: "Rahul's Portfolio"
       {% for post in paginator.posts %}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}" alt="{{ post.title }}" loading="lazy">
+            <img src="{{ post.thumbnail | default: post.image | default: '/assets/images/default.webp' | relative_url }}" loading="lazy">
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
@@ -41,7 +41,7 @@ title: "Rahul's Portfolio"
       {% for post in site.posts limit:3 %}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}" alt="{{ post.title }}" loading="lazy">
+            <img src="{{ post.thumbnail | default: post.image | default: '/assets/images/default.webp' | relative_url }}" loading="lazy">
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
