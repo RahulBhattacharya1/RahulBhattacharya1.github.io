@@ -122,53 +122,47 @@
             </p>
           </header>
 
-          {% capture body %}{{ content }}
-        {% if page.comments != false %}
-        <script src="https://giscus.app/client.js"
-        data-repo="RahulBhattacharya1/RahulBhattacharya1.github.io"
-        data-repo-id="R_kgDOPjm-rA"
-        data-category="Blog Comments"
-        data-category-id="DIC_kwDOPjm-rM4CumAZ"
-        data-mapping="title"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="light"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
-        </script>
-        {% endif %}
-        {% endcapture %}
-          {% assign parts = body | split: '</p>' %}
-
-          {% if parts.size > 1 %}
-            {{ parts[0] }}</p>
-            {% assign thumb = page.thumbnail | default: page.image | default: '/assets/images/default.webp' %}
-            {% if thumb and page.hide_thumbnail_in_body != true %}
-              <figure class="post-hero">
-                <img src="{{ thumb | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
-                <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
-              </figure>
-            {% endif %}
-
-            {% for p in parts offset:1 %}
-              {% unless p == '' %}
-                {{ p }}</p>
-              {% endunless %}
-            {% endfor %}
-          {% else %}
           {% assign thumb = page.thumbnail | default: page.image | default: '/assets/images/default.webp' %}
-          {% if thumb and page.hide_thumbnail_in_body != true %}
-            <figure class="post-hero">
-              <img src="{{ thumb | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
-              <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
-            </figure>
-          {% endif %}
 
-            {{ content }}
-          {% endif %}
+{% if thumb and page.hide_thumbnail_in_body != true %}
+  {% capture hero %}
+<figure class="post-hero">
+  <img src="{{ thumb | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
+  <figcaption class="post-hero__caption">{{ page.title }}</figcaption>
+</figure>
+  {% endcapture %}
+
+  {%- capture injected -%}</p>{{ hero }}{%- endcapture -%}
+  {%- assign with_hero = content | replace_first: '</p>', injected -%}
+
+  {%- if with_hero == content -%}
+    {#-- Fallback: no </p> found; prepend hero --#}
+    {{ hero }}
+    {{ content }}
+  {%- else -%}
+    {{ with_hero }}
+  {%- endif -%}
+{% else %}
+  {{ content }}
+{% endif %}
+
+{%- if page.comments != false -%}
+<script src="https://giscus.app/client.js"
+  data-repo="RahulBhattacharya1/RahulBhattacharya1.github.io"
+  data-repo-id="R_kgDOPjm-rA"
+  data-category="Blog Comments"
+  data-category-id="DIC_kwDOPjm-rM4CumAZ"
+  data-mapping="title"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="light"
+  data-lang="en"
+  crossorigin="anonymous"
+  async>
+</script>
+{%- endif -%}
 
         {% else %}
           {{ content }}
