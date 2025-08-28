@@ -341,3 +341,11 @@ pre {
   max-width: 100%;
   box-sizing: border-box;
 }
+
+/* Rouge syntax highlighting */
+.highlight { background: #f8f8f8; }
+.highlight .k { color: #d73a49; } /* keywords like def, if */
+.highlight .nf { color: #6f42c1; } /* function names */
+.highlight .nb { color: #005cc5; } /* built-in names */
+.highlight .s { color: #032f62; } /* strings */
+.highlight .c { color: #6a737d; font-style: italic; } /* comments */
