@@ -1,8 +1,13 @@
 source "https://rubygems.org"
 
-# GitHub Pages meta-gem (includes jekyll + safe plugins like jekyll-remote-theme)
+# GitHub Pages meta-gem (manages Jekyll + safe plugins)
 gem "github-pages", group: :jekyll_plugins
 
-# Markdown / misc deps
-gem "kramdown-parser-gfm"
+# Needed for Ruby 3.x local dev
 gem "webrick"
+
+# GitHub Pages uses kramdown, this adds GFM support
+gem "kramdown-parser-gfm"
+
+# Fixes the Faraday v2 retry warning
+gem "faraday-retry"
