@@ -4,7 +4,7 @@ title: "My Experience in Building a Conversational AI Morning Planner"
 date: 2025-08-28
 categories: [intro]
 tags: [getting-started]
-thumbnail: /assets/images/ai.webp
+thumbnail: /assets/images/ai_conversational.webp
 ---
 I wanted to build something lightweight yet useful—a conversational morning planner that runs locally and feels personal. The idea was simple:
 
