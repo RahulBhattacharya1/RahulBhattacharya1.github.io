@@ -15,7 +15,7 @@ I wanted to build something lightweight yet useful—a conversational morning pl
 
 And to make it smarter, I added a compact embedding model that picks a **relevant focus tip** for my goals. No API keys, no heavy infrastructure.
 
-<div class="hf-embed">
+<div class="hf-embed" markdown="1">
   <iframe
     src="https://rahulbhattacharya-zenrise.hf.space/?__theme=light"
     title="ZenRise on Hugging Face Spaces"
