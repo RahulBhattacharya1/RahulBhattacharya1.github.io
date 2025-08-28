@@ -24,6 +24,13 @@ paginate_path: "/page:num"
 timezone: "America/Chicago"
 future: false
 markdown: kramdown
+highlighter: rouge
 kramdown:
   input: GFM
   parse_block_html: true
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    guess_lang: false
+    line_numbers: false
+
+enable_copy_code_button: true
