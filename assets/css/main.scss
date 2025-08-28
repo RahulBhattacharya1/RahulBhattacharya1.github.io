@@ -342,18 +342,13 @@ pre {
   box-sizing: border-box;
 }
 
-/* Rouge syntax highlighting */
+/* ───────── CODE HEADER (GitHub-like) ───────── */
 .highlight {
   background: #f8f8f8;
   border: 1px solid #e5e5e5;
-  border-radius: 6px;
-  padding: 1rem;
+  border-radius: 8px;
   margin: 1.25rem 0;
-  position: relative;
-  overflow-x: auto;
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  overflow: hidden;          /* so header rounds with the box */
 }
 .highlight .k { color: #d73a49; } /* keywords like def, if */
 .highlight .nf { color: #6f42c1; } /* function names */
@@ -361,33 +356,55 @@ pre {
 .highlight .s { color: #032f62; } /* strings */
 .highlight .c { color: #6a737d; font-style: italic; } /* comments */
 
-/* Add a header bar */
-.highlight::before {
-  content: attr(data-lang);
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 0.75rem;
-  background: #f0f0f0;
-  color: #555;
-  padding: 2px 8px;
-  border-bottom-right-radius: 6px;
-  text-transform: uppercase;
-  font-weight: 600;
+/* header bar */
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  background: #f6f8fa;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 6px 10px;
+  font-size: 12.5px;
+  color: #57606a;
 }
 
-/* Copy button */
-.copy-btn {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  font-size: 0.75rem;
-  background: #fafafa;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 2px 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
+/* language label */
+.code-lang {
+  text-transform: lowercase;
+  letter-spacing: .2px;
 }
-.copy-btn:hover { background: #eee; }
+
+/* copy button (icon + label) */
+.code-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: 3px 8px;
+  font: inherit;
+  font-size: 12.5px;
+  color: #57606a;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.code-copy:hover { background: #f3f4f6; }
+.code-copy:active { background: #edeff2; }
+
+.code-copy svg {
+  width: 14px; height: 14px;
+  fill: currentColor;
+}
+
+/* code area */
+.highlight pre {
+  margin: 0;
+  padding: 12px 14px;
+  background: transparent;
+  overflow-x: auto;
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
 
