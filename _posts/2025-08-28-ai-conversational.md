@@ -6,8 +6,6 @@ categories: [intro]
 tags: [getting-started]
 thumbnail: /assets/images/ai.webp
 ---
-Building a Conversational Morning Planner in Gradio (with a Sprinkle of AI)
-===========================================================================
 I wanted to build something lightweight yet useful—a conversational morning planner that runs locally and feels personal. The idea was simple:
 
 *   A **Planner tab** where I could fill in some details and get a neat morning plan.
