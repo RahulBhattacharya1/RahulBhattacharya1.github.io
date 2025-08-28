@@ -30,14 +30,11 @@
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
   </noscript>
 
-  <!-- Main CSS served from jsDelivr (immutable by commit) -->
 <link rel="preload"
       href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/main.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-  <link rel="stylesheet" href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/main.css">
-</noscript>
+      as="style">
+
+<link rel="stylesheet" href="{% if CDN != "" %}{{ CDN }}{% endif %}/assets/css/main.css">
 
   <!--meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 }}"-->
   {% seo %}
