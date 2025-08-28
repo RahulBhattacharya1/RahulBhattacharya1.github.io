@@ -313,3 +313,12 @@ body {
   border-top: 1px solid #e5e5e5;
   margin-top: 3rem;
 }
+
+/* Make long code lines scroll instead of widening the page */
+.highlighter-rouge pre,
+.highlight pre,
+pre {
+  white-space: pre;     /* keep original spacing */
+  overflow-x: auto;     /* enable horizontal scroll */
+  max-width: 100%;      /* never exceed container */
+}
