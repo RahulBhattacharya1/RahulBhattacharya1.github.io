@@ -3,7 +3,7 @@ description: "Portfolio and blog of Rahul Bhattacharya — featuring projects, A
 
 url: "https://rahulbhattacharya1.github.io"
 baseurl: ""   # keep empty for user/org pages
-
+ 
 sass:
   sass_dir: assets/css
   style: compressed
