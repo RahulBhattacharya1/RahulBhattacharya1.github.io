@@ -415,58 +415,6 @@ pre {
 @media (max-width: 768px) {
   body{ padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
 
-  .mobile-glassbar{
-    position: fixed; left: 0; right: 0; bottom: 0;
-    z-index: 10010;
-    display: flex; align-items: center; justify-content: center;
-    padding: 10px max(16px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
-    pointer-events: none; /* sheet effect container */
-    isolation: isolate; /* own stacking context */
-  }
-
-  .mobile-glassbar::before{
-    content:""; position: absolute; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom));
-    height: var(--bar-height);
-    border-radius: 18px;
-    background: rgba(255,255,255,.4);  /* set transparency */
-    backdrop-filter: saturate(180%) blur(6px);
-    -webkit-backdrop-filter: saturate(180%) blur(6px);
-    box-shadow: 0 8px 28px rgba(0,0,0,.18);
-    pointer-events: none;
-    will-change: transform;
-    transform: translateZ(0);  
-  }
-
-  .mobile-glassbar .bar-btn{
-    pointer-events: auto;
-    -webkit-appearance: none; appearance: none; border: 0; background: none;
-    flex: 1 1 0; min-width: 0;
-    position: relative; z-index: 1;
-    height: 64px; margin: 0 6px;
-    border-radius: 14px;
-    display: inline-flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 6px;
-    text-decoration: none; color: #111;
-    font-size: 11.5px; font-weight: 600; line-height: 1;
-    padding: 0 6px;
-    transition: transform .08s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
-  }
-  .mobile-glassbar .bar-btn:link,
-  .mobile-glassbar .bar-btn:visited{ color:#111; text-decoration:none; }
-  .mobile-glassbar .bar-btn:hover{ background: rgba(255,255,255,.6); }
-  .mobile-glassbar .bar-btn:active{ transform: translateY(1px); }
-
-  .mobile-glassbar .bar-btn svg{
-    width: 22px; height: 22px; display:block; fill: currentColor;
-  }
-
-  /* Active tab “pill” */
-  .mobile-glassbar .bar-btn.is-active{
-    color: #f97316; /* orange */
-    background: #fff;
-    box-shadow: 0 6px 16px rgba(0,0,0,.12);
-  }
-
   /* Posts overlay sheet (unchanged functionality, prettier) */
   .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.35); z-index: 10020; }
   .posts-sheet{
@@ -498,46 +446,13 @@ pre {
   }
 }
 
-/* Hide the bar on large screens */
-@media (min-width: 1024px){ 
-  .mobile-glassbar{ display:none; } 
-  .bottom-nav{ display:none; }
-}
-
-@media (max-width: 768px) {
-  /* wave container matches your glass pill bounds */
-  .mobile-glassbar .bar-wave{
-    position: fixed;
-    left: 12px; right: 12px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    height: var(--bar-height);
-    border-radius: 18px;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .2s ease;
-    z-index: 10011; /* just above the pill */
-  }
-  .mobile-glassbar.is-waving .bar-wave{ opacity: 1; }
-
-  .mobile-glassbar .bar-wave svg{
-    position: absolute; inset: 0;
-    width: 220%; /* wider so the wave can sweep */
-    height: 100%;
-    transform: translateX(-110%); /* start off-screen left */
-  }
-  .mobile-glassbar.is-waving .bar-wave svg{
-    animation: wave-sweep 900ms ease-out forwards;
-  }
-
   @keyframes wave-sweep {
     from { transform: translateX(-110%); }
     to   { transform: translateX(0%); }
   }
-}
 
 /* ===========================
-   Mobile Bottom Bar (Unified)
+   Mobile Bottom Bar — SINGLE SOURCE OF TRUTH
    =========================== */
 
 /* Vars */
@@ -545,41 +460,42 @@ pre {
   --bar-height: 64px;
   --bar-radius: 18px;
   --bar-blur: 10px;
-  --tabs-min: 84px;      /* min width for each tile */
+  --tabs-width: 92px;   /* fixed width per tile: prevents drift */
   --tabs-gap: 12px;
 }
 @media (max-width: 768px){
   :root{ --bar-height: 58px; }
 }
 
-/* Containers: identical layout, no transforms (avoid subpixel shifts) */
+/* Containers: same layout for both bars (no transforms = no subpixel nudge) */
 .mobile-glassbar,
 .bottom-nav{
   position: fixed;
   left: 0; right: 0; bottom: 0;
   z-index: 10020;
   box-sizing: border-box;
-  isolation: isolate;                 /* own stacking context */
+  isolation: isolate;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(var(--tabs-min), max-content);
-  justify-content: center;            /* center the whole row */
+  grid-auto-columns: var(--tabs-width);   /* fixed track width */
+  justify-content: center;
   align-items: center;
   gap: var(--tabs-gap);
   height: calc(var(--bar-height) + env(safe-area-inset-bottom));
   padding: 10px max(16px, env(safe-area-inset-left))
            calc(10px + env(safe-area-inset-bottom))
            max(16px, env(safe-area-inset-right));
-  margin: 0 auto;
+  margin: 0;
+  max-width: none;
   background: transparent;
   color: #111;
   pointer-events: auto;
-  transition: opacity 220ms ease;
+  transform: none !important;            /* kill legacy transforms */
 }
 
-/* Single glass “pill” behind buttons (same for both bars) */
+/* Single glass “pill” behind buttons */
 .mobile-glassbar::before,
-.bottom-nav--up::before{
+.bottom-nav::before{
   content: "";
   position: absolute;
   left: 12px; right: 12px;
@@ -591,82 +507,74 @@ pre {
   -webkit-backdrop-filter: saturate(180%) blur(6px);
   box-shadow: 0 8px 28px rgba(0,0,0,.18);
   pointer-events: none;
-  z-index: 0;                          /* behind buttons */
+  z-index: 0;
 }
 
 /* Buttons: identical between bars */
 .mobile-glassbar .bar-btn,
 .bottom-nav .bar-btn{
   position: relative;
-  z-index: 1;                           /* above the pill */
-  box-sizing: border-box;
+  z-index: 1;
   display: inline-flex;
+  width: 100%;                    /* fill the grid column exactly */
+  height: var(--bar-height);
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  height: var(--bar-height);
   padding: 0 6px;
-  min-width: var(--tabs-min);
   border-radius: 14px;
   text-decoration: none;
   color: inherit;
-  font-size: 11.5px;
-  font-weight: 600;
-  line-height: 1;
+  font: 600 11.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
-.mobile-glassbar .bar-btn:link,
-.mobile-glassbar .bar-btn:visited,
-.bottom-nav .bar-btn:link,
-.bottom-nav .bar-btn:visited{ color: inherit; text-decoration: none; }
-
 .mobile-glassbar .bar-btn span,
-.bottom-nav .bar-btn span{
-  display: block; /* avoid baseline/line-box quirks */
-}
-
+.bottom-nav .bar-btn span{ display:block; }
 .mobile-glassbar .bar-btn svg,
-.bottom-nav .bar-btn svg{
-  width: 22px; height: 22px; display: block; fill: currentColor;
-}
+.bottom-nav .bar-btn svg{ width:22px; height:22px; display:block; fill:currentColor; }
 
-/* Active “pill” for a selected tab (optional) */
+/* Optional active pill */
 .mobile-glassbar .bar-btn.is-active{
   background: #fff;
   box-shadow: 0 6px 16px rgba(0,0,0,.12);
   color: #f97316;
 }
 
-/* Visibility switching without translate() (prevents horizontal nudge) */
+/* Show the UP bar without translate() to avoid layout shifts */
 .bottom-nav--up{
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: none !important;
 }
-.is-scrolling-up .mobile-glassbar{ display: none !important; } /* hide the DOWN bar entirely */
+.is-scrolling-up .mobile-glassbar{ display: none !important; }
 .is-scrolling-up .bottom-nav--up{
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
-.is-scrolling-down .bottom-nav--up{
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+
+/* Safety: center items & forbid transforms */
+.bottom-nav,
+.bottom-nav--up,
+.bottom-nav--down{
+  justify-content: center !important;
+  transform: none !important;
+  max-width: none !important;
 }
 
-/* Reduced transparency: keep both readable */
+/* Reduced transparency support */
 @media (prefers-reduced-transparency: reduce){
   .mobile-glassbar::before,
-  .bottom-nav--up::before{
+  .bottom-nav::before{
     background: rgba(255,255,255,0.92);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
 }
 
-/* Hide the bars on large screens */
+/* Hide bars on large screens */
 @media (min-width: 1024px){
   .mobile-glassbar,
   .bottom-nav{ display: none; }
