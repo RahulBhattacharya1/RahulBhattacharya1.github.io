@@ -379,21 +379,19 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="bar-wave" aria-hidden="true">
   <svg viewBox="0 0 600 64" preserveAspectRatio="none">
     <defs>
-      <linearGradient id="waveBlue" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%"  stop-color="#3b82f6" stop-opacity="0"/>
-        <stop offset="40%" stop-color="#3b82f6" stop-opacity=".18"/>
-        <stop offset="60%" stop-color="#3b82f6" stop-opacity=".18"/>
-        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+      <linearGradient id="waveOG" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"  stop-color="#fbbf24" stop-opacity="0"/>   <!-- light orange start transparent -->
+        <stop offset="40%" stop-color="#fbbf24" stop-opacity=".2"/> <!-- soft orange -->
+        <stop offset="60%" stop-color="#86efac" stop-opacity=".2"/> <!-- soft green -->
+        <stop offset="100%" stop-color="#86efac" stop-opacity="0"/> <!-- fade to transparent -->
       </linearGradient>
     </defs>
-    <!-- soft sine wave -->
     <path d="M0,32
              C100,0 200,64 300,32
              S500,0 600,32
-             V64 H0 Z" fill="url(#waveBlue)"/>
+             V64 H0 Z" fill="url(#waveOG)"/>
   </svg>
 </div>
-
   
 </nav>
 
