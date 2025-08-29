@@ -374,6 +374,27 @@ document.addEventListener("DOMContentLoaded", function () {
     <svg viewBox="0 0 448 512" width="22" height="22" aria-hidden="true"><path d="M120 256a56 56 0 1 1 56-56 56 56 0 0 1-56 56zm208-56a56 56 0 1 0-56 56 56 56 0 0 0 56-56zM120 384a56 56 0 1 0 56 56 56 56 0 0 0-56-56zm208 0a56 56 0 1 0 56 56 56 56 0 0 0-56-56z"/></svg>
     <span>More</span>
   </button>
+
+<!-- Wave overlay (mobile only) -->
+<div class="bar-wave" aria-hidden="true">
+  <svg viewBox="0 0 600 64" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="waveBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"  stop-color="#3b82f6" stop-opacity="0"/>
+        <stop offset="40%" stop-color="#3b82f6" stop-opacity=".18"/>
+        <stop offset="60%" stop-color="#3b82f6" stop-opacity=".18"/>
+        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- soft sine wave -->
+    <path d="M0,32
+             C100,0 200,64 300,32
+             S500,0 600,32
+             V64 H0 Z" fill="url(#waveBlue)"/>
+  </svg>
+</div>
+
+  
 </nav>
 
 <div id="posts-overlay" class="posts-overlay" role="dialog" aria-modal="true" aria-labelledby="posts-title" hidden>
@@ -405,6 +426,32 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !overlay.hidden) hide(); });
 })();
 </script>
+
+<script>
+(function () {
+  var bar = document.querySelector('.mobile-glassbar');
+  if (!bar) return;
+
+  var tid, cooling = false;
+
+  function triggerWave(){
+    // throttle: at most ~1 wave every 500ms
+    if (cooling) return;
+    cooling = true;
+    bar.classList.add('is-waving');
+    clearTimeout(tid);
+    // remove class after animation completes
+    tid = setTimeout(function(){
+      bar.classList.remove('is-waving');
+      // cool down a bit so we don't spam animations
+      setTimeout(function(){ cooling = false; }, 200);
+    }, 950);
+  }
+
+  // passive scroll listener
+  window.addEventListener('scroll', triggerWave, { passive: true });
+})();
+</script>  
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya</p>
