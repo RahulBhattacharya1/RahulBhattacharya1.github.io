@@ -451,33 +451,29 @@ pre {
   }
 
 /* ===========================
-   Mobile Bottom Bar — FINAL (strict display toggles)
+   Mobile Bottom Bar — FINAL
    =========================== */
 
-/* Vars */
 :root{
   --bar-height: 64px;
   --bar-radius: 18px;
-  --tabs-width: 92px;   /* fixed width per tile: prevents drift */
+  --tabs-width: 92px;    /* fixed tile width prevents drift */
   --tabs-gap: 12px;
 }
 @media (max-width: 768px){ :root{ --bar-height: 58px; } }
 
-/* keep page content from sliding under the fixed bar */
+/* keep content from sliding under the fixed bar */
 @media (max-width: 768px){
-  body{
-    padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
-  }
-  .site-footer{
-    padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
-  }
+  body{ padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom)); }
+  .site-footer{ padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom)); }
+  .tab-labels{ display:none !important; } /* hides the duplicate labels block */
 }
 
-/* Common layout for both bars */
+/* Common layout for both bars (down = .mobile-glassbar, up = .bottom-nav.bottom-nav--up) */
 @media (max-width: 768px){
   .mobile-glassbar,
   .bottom-nav{
-    position: fixed; left: 0; right: 0; bottom: 0;
+    position: fixed; left:0; right:0; bottom:0;
     z-index: 10020;
     box-sizing: border-box;
     display: grid;
@@ -494,8 +490,8 @@ pre {
     color: #111;
     background: transparent;
     pointer-events: auto;
-    transform: none !important;       /* kill legacy transforms */
-    overflow: visible;
+    transform: none !important;
+    overflow: hidden; /* keep everything inside the pill */
   }
 
   /* Single glass “pill” behind buttons */
@@ -526,8 +522,7 @@ pre {
     text-decoration: none; color: inherit; text-align: center;
     font: 600 11.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     -webkit-tap-highlight-color: transparent;
-    white-space: nowrap;           /* <- stops label from wrapping below the pill */
-    overflow: hidden;              /* <- prevents any label drop-through */
+    white-space: nowrap;
   }
   .mobile-glassbar .bar-btn span,
   .bottom-nav .bar-btn span{ display:block; line-height: 1; }
@@ -537,34 +532,25 @@ pre {
   /* Optional active state */
   .mobile-glassbar .bar-btn.is-active,
   .bottom-nav .bar-btn.is-active{
-    background:#fff;
+    background:#fff; color:#f97316;
     box-shadow:0 6px 16px rgba(0,0,0,.12);
-    color:#f97316;
   }
 
-  /* ————— Strict visibility control (never stack two bars) ————— */
-  /* Default: show DOWN (glass) bar, hide UP bar */
-  .mobile-glassbar{ display: grid; }
-  .bottom-nav{ display: none; }
-  .bottom-nav--down{ display: none; }   /* hidden unless explicitly shown below */
+  /* Strict visibility control (never stack two bars) */
+  .mobile-glassbar{ display: grid; }         /* DOWN bar shown by default */
+  .bottom-nav{ display: none; }              /* UP bar hidden by default */
   .bottom-nav--up{ display: none; }
 
-  /* Scroll DOWN: show the DOWN bar only */
   .is-scrolling-down .mobile-glassbar{ display: grid !important; }
   .is-scrolling-down .bottom-nav,
-  .is-scrolling-down .bottom-nav--up,
-  .is-scrolling-down .bottom-nav--down{ display: none !important; }
+  .is-scrolling-down .bottom-nav--up{ display: none !important; }
 
-  /* Scroll UP: hide the glass bar, show the UP bar only */
   .is-scrolling-up .mobile-glassbar{ display: none !important; }
   .is-scrolling-up .bottom-nav{ display: grid !important; }
   .is-scrolling-up .bottom-nav--up{ display: grid !important; }
-  .is-scrolling-up .bottom-nav--down{ display: none !important; }
 
-  /* Reduced transparency */
   @media (prefers-reduced-transparency: reduce){
-    .mobile-glassbar::before,
-    .bottom-nav::before{
+    .mobile-glassbar::before, .bottom-nav::before{
       background: rgba(255,255,255,0.92);
       backdrop-filter: none; -webkit-backdrop-filter: none;
     }
