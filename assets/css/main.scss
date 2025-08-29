@@ -413,7 +413,18 @@ pre {
 [hidden]{display:none!important;}
 
 @media (max-width: 768px) {
-  body{ padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+  /* keep content from sliding under the fixed bottom bar */
+  body {
+    padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
+  }
+
+  /* optional but recommended so the very last lines/links aren’t obscured */
+  .site-footer {
+    padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 768px) {
 
   /* Posts overlay sheet (unchanged functionality, prettier) */
   .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.35); z-index: 10020; }
@@ -579,4 +590,11 @@ pre {
 @media (min-width: 1024px){
   .mobile-glassbar,
   .bottom-nav{ display: none; }
+}
+
+@media (max-width: 768px) {
+  /* Hide the legacy DOWN bar – we use .mobile-glassbar for the down state */
+  .bottom-nav--down { 
+    display: none !important;
+  }
 }
