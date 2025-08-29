@@ -413,6 +413,55 @@ pre {
 [hidden]{display:none!important;}
 
 @media (max-width: 768px) {
+  body{ padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+
+  .mobile-glassbar{
+    position: fixed; left: 0; right: 0; bottom: 0;
+    z-index: 10010;
+    display: flex; align-items: center; justify-content: center;
+    padding: 10px max(16px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
+    pointer-events: none; /* sheet effect container */
+  }
+
+  .mobile-glassbar::before{
+    content:""; position: absolute; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom));
+    height: 64px; border-radius: 18px;
+    background: rgba(255,255,255,.4);  /* set transparency */
+    backdrop-filter: saturate(180%) blur(6px);
+    -webkit-backdrop-filter: saturate(180%) blur(6px);
+    box-shadow: 0 8px 28px rgba(0,0,0,.18);
+    pointer-events: none;
+  }
+
+  .mobile-glassbar .bar-btn{
+    pointer-events: auto;
+    -webkit-appearance: none; appearance: none; border: 0; background: none;
+    flex: 1 1 0; min-width: 0;
+    position: relative; z-index: 1;
+    height: 64px; margin: 0 6px;
+    border-radius: 14px;
+    display: inline-flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 6px;
+    text-decoration: none; color: #111;
+    font-size: 11.5px; font-weight: 600; line-height: 1;
+    padding: 0 6px;
+    transition: transform .08s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+  }
+  .mobile-glassbar .bar-btn:link,
+  .mobile-glassbar .bar-btn:visited{ color:#111; text-decoration:none; }
+  .mobile-glassbar .bar-btn:hover{ background: rgba(255,255,255,.6); }
+  .mobile-glassbar .bar-btn:active{ transform: translateY(1px); }
+
+  .mobile-glassbar .bar-btn svg{
+    width: 22px; height: 22px; display:block; fill: currentColor;
+  }
+
+  /* Active tab “pill” */
+  .mobile-glassbar .bar-btn.is-active{
+    color: #f97316; /* orange */
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  }
 
   /* Posts overlay sheet (unchanged functionality, prettier) */
   .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.35); z-index: 10020; }
@@ -445,119 +494,37 @@ pre {
   }
 }
 
+/* Hide the bar on large screens */
+@media (min-width: 1024px){ .mobile-glassbar{ display:none; } }
+
+@media (max-width: 768px) {
+  /* wave container matches your glass pill bounds */
+  .mobile-glassbar .bar-wave{
+    position: fixed;
+    left: 12px; right: 12px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    height: 64px;
+    border-radius: 18px;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s ease;
+    z-index: 10011; /* just above the pill */
+  }
+  .mobile-glassbar.is-waving .bar-wave{ opacity: 1; }
+
+  .mobile-glassbar .bar-wave svg{
+    position: absolute; inset: 0;
+    width: 220%; /* wider so the wave can sweep */
+    height: 100%;
+    transform: translateX(-110%); /* start off-screen left */
+  }
+  .mobile-glassbar.is-waving .bar-wave svg{
+    animation: wave-sweep 900ms ease-out forwards;
+  }
+
   @keyframes wave-sweep {
     from { transform: translateX(-110%); }
     to   { transform: translateX(0%); }
   }
-
-/* ===========================
-   Mobile Bottom Bar — FINAL
-   =========================== */
-
-:root{
-  --bar-height: 64px;
-  --bar-radius: 18px;
-  --tabs-width: 92px;    /* fixed tile width prevents drift */
-  --tabs-gap: 12px;
-}
-@media (max-width: 768px){ :root{ --bar-height: 58px; } }
-
-/* keep content from sliding under the fixed bar */
-@media (max-width: 768px){
-  body{ padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom)); }
-  .site-footer{ padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom)); }
-  .tab-labels{ display:none !important; } /* hides the duplicate labels block */
-}
-
-/* Common layout for both bars (down = .mobile-glassbar, up = .bottom-nav.bottom-nav--up) */
-@media (max-width: 768px){
-  .mobile-glassbar,
-  .bottom-nav{
-    position: fixed; left:0; right:0; bottom:0;
-    z-index: 10020;
-    box-sizing: border-box;
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: var(--tabs-width);
-    justify-content: center;
-    align-items: center;
-    gap: var(--tabs-gap);
-    height: calc(var(--bar-height) + env(safe-area-inset-bottom));
-    padding: 10px max(16px, env(safe-area-inset-left))
-             calc(10px + env(safe-area-inset-bottom))
-             max(16px, env(safe-area-inset-right));
-    margin: 0;
-    color: #111;
-    background: transparent;
-    pointer-events: auto;
-    transform: none !important;
-    overflow: hidden; /* keep everything inside the pill */
-  }
-
-  /* Single glass “pill” behind buttons */
-  .mobile-glassbar::before,
-  .bottom-nav::before{
-    content:"";
-    position:absolute; left:12px; right:12px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    height: var(--bar-height);
-    border-radius: var(--bar-radius);
-    background: rgba(255,255,255,.4);
-    backdrop-filter: saturate(180%) blur(6px);
-    -webkit-backdrop-filter: saturate(180%) blur(6px);
-    box-shadow: 0 8px 28px rgba(0,0,0,.18);
-    pointer-events:none;
-    z-index:0;
-  }
-
-  /* Buttons */
-  .mobile-glassbar .bar-btn,
-  .bottom-nav .bar-btn{
-    position: relative; z-index: 1;
-    display: inline-flex;
-    width: 100%; height: var(--bar-height);
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 6px; padding: 0 6px;
-    border-radius: 14px;
-    text-decoration: none; color: inherit; text-align: center;
-    font: 600 11.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    -webkit-tap-highlight-color: transparent;
-    white-space: nowrap;
-  }
-  .mobile-glassbar .bar-btn span,
-  .bottom-nav .bar-btn span{ display:block; line-height: 1; }
-  .mobile-glassbar .bar-btn svg,
-  .bottom-nav .bar-btn svg{ width:22px; height:22px; display:block; fill: currentColor; }
-
-  /* Optional active state */
-  .mobile-glassbar .bar-btn.is-active,
-  .bottom-nav .bar-btn.is-active{
-    background:#fff; color:#f97316;
-    box-shadow:0 6px 16px rgba(0,0,0,.12);
-  }
-
-  /* Strict visibility control (never stack two bars) */
-  .mobile-glassbar{ display: grid; }         /* DOWN bar shown by default */
-  .bottom-nav{ display: none; }              /* UP bar hidden by default */
-  .bottom-nav--up{ display: none; }
-
-  .is-scrolling-down .mobile-glassbar{ display: grid !important; }
-  .is-scrolling-down .bottom-nav,
-  .is-scrolling-down .bottom-nav--up{ display: none !important; }
-
-  .is-scrolling-up .mobile-glassbar{ display: none !important; }
-  .is-scrolling-up .bottom-nav{ display: grid !important; }
-  .is-scrolling-up .bottom-nav--up{ display: grid !important; }
-
-  @media (prefers-reduced-transparency: reduce){
-    .mobile-glassbar::before, .bottom-nav::before{
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: none; -webkit-backdrop-filter: none;
-    }
-  }
-}
-
-/* Hide on large screens */
-@media (min-width: 1024px){
-  .mobile-glassbar, .bottom-nav{ display:none !important; }
 }
