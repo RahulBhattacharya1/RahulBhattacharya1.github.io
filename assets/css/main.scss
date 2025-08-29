@@ -468,13 +468,14 @@ pre {
   /* Posts overlay sheet (unchanged functionality, prettier) */
   .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.35); z-index: 10020; }
   .posts-sheet{
-    background: rgba(255,255,255,0.12);   /* very light fill */
-    backdrop-filter: saturate(180%) blur(18px);
-    -webkit-backdrop-filter: saturate(180%) blur(18px);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 0 -12px 24px rgba(0,0,0,.15);  /* softer shadow */
-  }
+    position: absolute; left: 0; right: 0; bottom: 0;
+    max-height: 72vh; overflow:auto;
+    background: rgba(255,255,255,.5);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-top-left-radius: 20px; border-top-right-radius: 20px;
+    box-shadow: 0 -18px 30px rgba(0,0,0,.22);
+    padding: 14px 16px calc(18px + env(safe-area-inset-bottom))
+	}
   .posts-sheet__header{ display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:inherit; padding-bottom:8px; z-index:1; }
   .posts-sheet__header h3{ margin:4px 0; font-size:16px; }
   .close-posts{ appearance:none; border:1px solid rgba(0,0,0,.12); background:#fff; border-radius:10px; padding:6px 10px; }
