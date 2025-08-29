@@ -572,6 +572,28 @@ pre {
            max(16px, env(safe-area-inset-right));
 }
 
+/* The pill behind the UP bar’s buttons */
+.bottom-nav--up::before{
+  content:"";
+  position: absolute;
+  left: 12px; right: 12px;
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  height: var(--bar-height);   /* 64px desktop, 58px on mobile via :root */
+  border-radius: 18px;
+  background: rgba(255,255,255,.4);
+  backdrop-filter: saturate(180%) blur(6px);
+  -webkit-backdrop-filter: saturate(180%) blur(6px);
+  box-shadow: 0 8px 28px rgba(0,0,0,.18);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure icons/text are above the pill */
+.bottom-nav--up .bar-btn{
+  position: relative;
+  z-index: 1;
+}
+
 /* Make buttons/links/icons inherit the bar’s color on both bars */
 .bottom-nav .bar-btn,
 .bottom-nav .bar-btn:link,
@@ -585,12 +607,14 @@ pre {
 }
 
 .bottom-nav--up{
-  background: transparent;     /* no bg — use the glass pill (::before) */
+  position: fixed; /* already inherited, but explicit is fine */
+  isolation: isolate;          /* its own stacking context */
+  background: transparent;     /* keep the bar itself clear */
   color: #111;
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
-  z-index: 10020;
+  z-index: 10020;              /* above page */
 }
 
 .is-scrolling-up .mobile-glassbar {
