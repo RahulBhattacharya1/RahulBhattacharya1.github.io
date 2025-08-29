@@ -468,8 +468,8 @@ fill="#000000" stroke="none">
 </nav>
 
 <nav class="bottom-nav bottom-nav--up" aria-hidden="true">
-          <a class="home" href="/" aria-label="Home">
-          <svg viewBox="-20 -18 385 295">
+  <a class="bar-btn" href="{{ '/' | relative_url }}" aria-label="Home">
+            <svg viewBox="-20 -18 385 335" width="22" height="22" aria-hidden="true">
             <g transform="translate(0,299) scale(0.12,-0.11)">    
               <path d="M1570 2681 c-55 -30 -1427 -1177 -1435 -1200 -8 -26 7 -52 75 -133
               59 -71 89 -91 117 -81 10 4 314 253 676 555 362 301 662 548 667 548 5 0 305
@@ -484,7 +484,7 @@ fill="#000000" stroke="none">
               -221 183 -45 37 -88 67 -95 67 -8 -1 -39 -22 -70 -48z"/>
             </g>
           </svg>
-        </a>
+     <span>Home</span>
   <a class="bar-btn" href="mailto:rahulb@live.in" aria-label="Email"><span>Email</span></a>
   <a class="bar-btn" href="{{ site.phone | default: 'tel:+1' }}" aria-label="Call"><span>Call</span></a>
   <a class="bar-btn" href="/posts" aria-label="More"><span>More</span></a>
