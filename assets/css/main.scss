@@ -451,7 +451,7 @@ pre {
   }
 
 /* ===========================
-   Mobile Bottom Bar — FINAL
+   Mobile Bottom Bar — FINAL (strict display toggles)
    =========================== */
 
 /* Vars */
@@ -461,11 +461,10 @@ pre {
   --tabs-width: 92px;   /* fixed width per tile: prevents drift */
   --tabs-gap: 12px;
 }
+@media (max-width: 768px){ :root{ --bar-height: 58px; } }
 
+/* keep page content from sliding under the fixed bar */
 @media (max-width: 768px){
-  :root{ --bar-height: 58px; }
-
-  /* keep page content from sliding under the fixed bar */
   body{
     padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
   }
@@ -474,109 +473,105 @@ pre {
   }
 }
 
-/* Both bars use the same layout. No transforms = no subpixel nudges */
-.mobile-glassbar,
-.bottom-nav{
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
-  z-index: 10020;
-  box-sizing: border-box;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: var(--tabs-width);  /* fixed track width */
-  justify-content: center;
-  align-items: center;
-  gap: var(--tabs-gap);
-  height: calc(var(--bar-height) + env(safe-area-inset-bottom));
-  padding: 10px max(16px, env(safe-area-inset-left))
-           calc(10px + env(safe-area-inset-bottom))
-           max(16px, env(safe-area-inset-right));
-  margin: 0;
-  color: #111;
-  background: transparent;
-  pointer-events: auto;
-  transform: none !important;
-  will-change: opacity;
-  overflow: visible; /* ensures labels don’t clip oddly */
-}
+/* Common layout for both bars */
+@media (max-width: 768px){
+  .mobile-glassbar,
+  .bottom-nav{
+    position: fixed; left: 0; right: 0; bottom: 0;
+    z-index: 10020;
+    box-sizing: border-box;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--tabs-width);
+    justify-content: center;
+    align-items: center;
+    gap: var(--tabs-gap);
+    height: calc(var(--bar-height) + env(safe-area-inset-bottom));
+    padding: 10px max(16px, env(safe-area-inset-left))
+             calc(10px + env(safe-area-inset-bottom))
+             max(16px, env(safe-area-inset-right));
+    margin: 0;
+    color: #111;
+    background: transparent;
+    pointer-events: auto;
+    transform: none !important;       /* kill legacy transforms */
+    overflow: visible;
+  }
 
-/* Single glass “pill” behind buttons */
-.mobile-glassbar::before,
-.bottom-nav::before{
-  content: "";
-  position: absolute;
-  left: 12px; right: 12px;
-  bottom: calc(10px + env(safe-area-inset-bottom));
-  height: var(--bar-height);
-  border-radius: var(--bar-radius);
-  background: rgba(255,255,255,.4);
-  backdrop-filter: saturate(180%) blur(6px);
-  -webkit-backdrop-filter: saturate(180%) blur(6px);
-  box-shadow: 0 8px 28px rgba(0,0,0,.18);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Buttons (identical in both bars) */
-.mobile-glassbar .bar-btn,
-.bottom-nav .bar-btn{
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  width: 100%;                     /* fill the grid column exactly */
-  height: var(--bar-height);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 0 6px;
-  border-radius: 14px;
-  text-decoration: none;
-  color: inherit;
-  text-align: center;
-  font: 600 11.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  -webkit-tap-highlight-color: transparent;
-  overflow: hidden;                /* prevents label “dropping” below pill */
-}
-
-.mobile-glassbar .bar-btn span,
-.bottom-nav .bar-btn span{ display:block; }
-
-.mobile-glassbar .bar-btn svg,
-.bottom-nav .bar-btn svg{
-  width: 22px; height: 22px; display:block; fill: currentColor;
-}
-
-/* Optional active state */
-.mobile-glassbar .bar-btn.is-active,
-.bottom-nav .bar-btn.is-active{
-  background: #fff;
-  box-shadow: 0 6px 16px rgba(0,0,0,.12);
-  color: #f97316;
-}
-
-/* Default visibility: show DOWN bar, hide UP bar */
-.bottom-nav--down{ opacity: 1; visibility: visible; pointer-events: auto; }
-.bottom-nav--up  { opacity: 0; visibility: hidden; pointer-events: none; }
-
-/* Toggle purely by scroll direction (JS adds these classes on <html>) */
-.is-scrolling-up .bottom-nav--down{ opacity: 0; visibility: hidden; pointer-events: none; }
-.is-scrolling-up .bottom-nav--up  { opacity: 1; visibility: visible; pointer-events: auto; }
-.is-scrolling-down .bottom-nav--down{ opacity: 1; visibility: visible; pointer-events: auto; }
-.is-scrolling-down .bottom-nav--up  { opacity: 0; visibility: hidden; pointer-events: none; }
-
-/* Reduced transparency support */
-@media (prefers-reduced-transparency: reduce){
+  /* Single glass “pill” behind buttons */
   .mobile-glassbar::before,
   .bottom-nav::before{
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    content:"";
+    position:absolute; left:12px; right:12px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    height: var(--bar-height);
+    border-radius: var(--bar-radius);
+    background: rgba(255,255,255,.4);
+    backdrop-filter: saturate(180%) blur(6px);
+    -webkit-backdrop-filter: saturate(180%) blur(6px);
+    box-shadow: 0 8px 28px rgba(0,0,0,.18);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* Buttons */
+  .mobile-glassbar .bar-btn,
+  .bottom-nav .bar-btn{
+    position: relative; z-index: 1;
+    display: inline-flex;
+    width: 100%; height: var(--bar-height);
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; padding: 0 6px;
+    border-radius: 14px;
+    text-decoration: none; color: inherit; text-align: center;
+    font: 600 11.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;           /* <- stops label from wrapping below the pill */
+    overflow: hidden;              /* <- prevents any label drop-through */
+  }
+  .mobile-glassbar .bar-btn span,
+  .bottom-nav .bar-btn span{ display:block; line-height: 1; }
+  .mobile-glassbar .bar-btn svg,
+  .bottom-nav .bar-btn svg{ width:22px; height:22px; display:block; fill: currentColor; }
+
+  /* Optional active state */
+  .mobile-glassbar .bar-btn.is-active,
+  .bottom-nav .bar-btn.is-active{
+    background:#fff;
+    box-shadow:0 6px 16px rgba(0,0,0,.12);
+    color:#f97316;
+  }
+
+  /* ————— Strict visibility control (never stack two bars) ————— */
+  /* Default: show DOWN (glass) bar, hide UP bar */
+  .mobile-glassbar{ display: grid; }
+  .bottom-nav{ display: none; }
+  .bottom-nav--down{ display: none; }   /* hidden unless explicitly shown below */
+  .bottom-nav--up{ display: none; }
+
+  /* Scroll DOWN: show the DOWN bar only */
+  .is-scrolling-down .mobile-glassbar{ display: grid !important; }
+  .is-scrolling-down .bottom-nav,
+  .is-scrolling-down .bottom-nav--up,
+  .is-scrolling-down .bottom-nav--down{ display: none !important; }
+
+  /* Scroll UP: hide the glass bar, show the UP bar only */
+  .is-scrolling-up .mobile-glassbar{ display: none !important; }
+  .is-scrolling-up .bottom-nav{ display: grid !important; }
+  .is-scrolling-up .bottom-nav--up{ display: grid !important; }
+  .is-scrolling-up .bottom-nav--down{ display: none !important; }
+
+  /* Reduced transparency */
+  @media (prefers-reduced-transparency: reduce){
+    .mobile-glassbar::before,
+    .bottom-nav::before{
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+    }
   }
 }
 
-/* Hide bars on large screens */
+/* Hide on large screens */
 @media (min-width: 1024px){
-  .mobile-glassbar,
-  .bottom-nav{ display: none; }
+  .mobile-glassbar, .bottom-nav{ display:none !important; }
 }
