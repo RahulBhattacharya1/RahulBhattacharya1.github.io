@@ -662,3 +662,31 @@ pre {
   :root{ --bar-height: 58px; }
 }
 
+/* Make UP and DOWN bars look identical */
+.mobile-glassbar .bar-btn,
+.bottom-nav .bar-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: var(--bar-height);
+  margin: 0 6px;
+  border-radius: 14px;
+  font-size: 11.5px;   /* match DOWN bar */
+  font-weight: 600;    /* match DOWN bar */
+  line-height: 1;
+}
+
+.mobile-glassbar .bar-btn span,
+.bottom-nav .bar-btn span {
+  display: block;      /* avoid baseline weirdness */
+}
+
+.mobile-glassbar .bar-btn svg,
+.bottom-nav .bar-btn svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  fill: currentColor;
+}
