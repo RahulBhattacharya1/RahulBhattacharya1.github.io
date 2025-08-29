@@ -328,6 +328,55 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<!-- Mobile Glass Bottom Bar + Posts Overlay -->
+<nav class="mobile-glassbar" role="navigation" aria-label="Quick actions">
+  <a class="bar-btn" href="{{ '/' | relative_url }}" aria-label="Home">
+    <svg viewBox="0 0 576 512" width="22" height="22" aria-hidden="true"><path d="M541 229.16l-61-50.89V56a24 24 0 0 0-24-24h-72a24 24 0 0 0-24 24v24.6L314.52 43a35.43 35.43 0 0 0-45 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 31a12 12 0 0 0 16.9 1.6L96 232.81V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V344h64v112a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V232.81l20.2 16.87a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.6-16.92z"/></svg>
+    <span>Home</span>
+  </a>
+  <a class="bar-btn" href="mailto:rahulb@live.in" aria-label="Email">
+    <svg viewBox="0 0 512 512" width="22" height="22" aria-hidden="true"><path d="M502.3 190.8L327.4 338.2c-41.5 34.5-101.3 34.5-142.8 0L9.7 190.8C3.8 185.9 0 178.4 0 170.4V392c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V170.4c0 8-3.8 15.5-9.7 20.4zM256 320c23.6 0 47.3-7.9 66.7-23.7L512 160H0l189.3 136.3C208.7 312.1 232.4 320 256 320z"/></svg>
+    <span>Email</span>
+  </a>
+  <a class="bar-btn" href="{{ site.phone | default: 'tel:+1' }}" aria-label="Call">
+    <svg viewBox="0 0 512 512" width="22" height="22" aria-hidden="true"><path d="M511.7 380.6l-23.6 94.3c-3.3 13.2-15.2 22.6-28.8 22.6C206.1 497.5 14.5 305.9 14.5 52.7c0-13.6 9.3-25.5 22.6-28.8L131.4.3c13.6-3.4 27.8 3.7 33.6 16.5l43.5 97.1c5.5 12.2 2.6 26.6-7.1 35.5l-46 42.1c31.9 61.5 82.6 112.2 144.1 144.1l42.1-46c8.9-9.7 23.3-12.6 35.5-7.1l97.1 43.5c12.8 5.7 19.9 20 16.5 33.6z"/></svg>
+    <span>Call</span>
+  </a>
+  <button class="bar-btn" id="open-posts" type="button" aria-haspopup="dialog" aria-controls="posts-overlay" aria-expanded="false">
+    <svg viewBox="0 0 448 512" width="22" height="22" aria-hidden="true"><path d="M120 256a56 56 0 1 1 56-56 56 56 0 0 1-56 56zm208-56a56 56 0 1 0-56 56 56 56 0 0 0 56-56zM120 384a56 56 0 1 0 56 56 56 56 0 0 0-56-56zm208 0a56 56 0 1 0 56 56 56 56 0 0 0-56-56z"/></svg>
+    <span>More</span>
+  </button>
+</nav>
+
+<div id="posts-overlay" class="posts-overlay" role="dialog" aria-modal="true" aria-labelledby="posts-title" hidden>
+  <div class="posts-sheet">
+    <header class="posts-sheet__header">
+      <h3 id="posts-title">All Posts</h3>
+      <button class="close-posts" type="button" aria-label="Close">✕</button>
+    </header>
+    <ul class="posts-list">
+      {% for post in site.posts %}
+        <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<script>
+(function () {
+  var open = document.getElementById('open-posts');
+  var overlay = document.getElementById('posts-overlay');
+  if (!open || !overlay) return;
+
+  function show() { overlay.hidden = false; open.setAttribute('aria-expanded', 'true'); }
+  function hide() { overlay.hidden = true; open.setAttribute('aria-expanded', 'false'); }
+  open.addEventListener('click', show);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay || e.target.classList.contains('close-posts')) hide();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !overlay.hidden) hide(); });
+})();
+</script>
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya</p>
