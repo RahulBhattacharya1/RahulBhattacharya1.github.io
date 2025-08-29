@@ -536,195 +536,138 @@ pre {
   }
 }
 
-/* ──────────────────────────── */
-/*  Scroll-direction bottom nav */
-/* ──────────────────────────── */
+/* ===========================
+   Mobile Bottom Bar (Unified)
+   =========================== */
 
+/* Vars */
 :root{
   --bar-height: 64px;
-  --bar-radius: 14px;
-  --bar-bg: rgba(255,255,255,0.68);
-  --bar-bg-up: var(--bar-bg);         /* match the down-bar */
+  --bar-radius: 18px;
   --bar-blur: 10px;
-  --bar-shadow: 0 8px 28px rgba(0,0,0,0.18);
-  --z-bottomnav: 10010;               /* same layer as .mobile-glassbar */
+  --tabs-min: 84px;      /* min width for each tile */
+  --tabs-gap: 12px;
+}
+@media (max-width: 768px){
+  :root{ --bar-height: 58px; }
 }
 
+/* Containers: identical layout, no transforms (avoid subpixel shifts) */
+.mobile-glassbar,
 .bottom-nav{
   position: fixed;
   left: 0; right: 0; bottom: 0;
-  z-index: var(--z-bottomnav);
-  display: flex; align-items: center; justify-content: space-around;
+  z-index: 10020;
+  box-sizing: border-box;
+  isolation: isolate;                 /* own stacking context */
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(var(--tabs-min), max-content);
+  justify-content: center;            /* center the whole row */
+  align-items: center;
+  gap: var(--tabs-gap);
   height: calc(var(--bar-height) + env(safe-area-inset-bottom));
-  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-  border-top-left-radius: var(--bar-radius);
-  border-top-right-radius: var(--bar-radius);
-  margin: 0 auto;
-  max-width: 1100px;
-  box-shadow: none;
-  pointer-events: auto;
-  transition: transform 220ms ease, opacity 220ms ease, background-color 220ms ease;
-}
-
-/* Make the UP bar use the same safe-area padding as .mobile-glassbar */
-.bottom-nav.bottom-nav--up{
   padding: 10px max(16px, env(safe-area-inset-left))
            calc(10px + env(safe-area-inset-bottom))
            max(16px, env(safe-area-inset-right));
+  margin: 0 auto;
+  background: transparent;
+  color: #111;
+  pointer-events: auto;
+  transition: opacity 220ms ease;
 }
 
-/* The pill behind the UP bar’s buttons */
+/* Single glass “pill” behind buttons (same for both bars) */
+.mobile-glassbar::before,
 .bottom-nav--up::before{
-  content:"";
+  content: "";
   position: absolute;
   left: 12px; right: 12px;
   bottom: calc(10px + env(safe-area-inset-bottom));
-  height: var(--bar-height);   /* 64px desktop, 58px on mobile via :root */
-  border-radius: 18px;
+  height: var(--bar-height);
+  border-radius: var(--bar-radius);
   background: rgba(255,255,255,.4);
   backdrop-filter: saturate(180%) blur(6px);
   -webkit-backdrop-filter: saturate(180%) blur(6px);
   box-shadow: 0 8px 28px rgba(0,0,0,.18);
   pointer-events: none;
-  z-index: 0;
+  z-index: 0;                          /* behind buttons */
 }
 
-/* Ensure icons/text are above the pill */
-.bottom-nav--up .bar-btn{
-  position: relative;
-  z-index: 1;
-}
-
-/* Make buttons/links/icons inherit the bar’s color on both bars */
-.bottom-nav .bar-btn,
-.bottom-nav .bar-btn:link,
-.bottom-nav .bar-btn:visited { color: inherit; text-decoration: none; }
-
-.bottom-nav .bar-btn svg { fill: currentColor; }
-
-.bottom-nav--down{
-  background: transparent;   /* match UP bar: rely on the glass pill */
-  color: #1a1a1a;
-}
-
-.bottom-nav--up{
-  position: fixed; /* already inherited, but explicit is fine */
-  isolation: isolate;          /* its own stacking context */
-  background: transparent;     /* keep the bar itself clear */
-  color: #111;
-  opacity: 0;
-  transform: translateY(8px);
-  pointer-events: none;
-  z-index: 10020;              /* above page */
-}
-
-.is-scrolling-up .mobile-glassbar {
-  display: none !important;
-}
-
-.is-scrolling-down .mobile-glassbar{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.is-scrolling-up .bottom-nav--up{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.is-scrolling-up .bottom-nav--down{
-  opacity: 0;
-  transform: translateY(8px);
-  pointer-events: none;
-}
-
-.is-scrolling-down .bottom-nav--down{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.is-scrolling-down .bottom-nav--up{
-  opacity: 0;
-  transform: translateY(8px);
-  pointer-events: none;
-}
-
-@media (prefers-reduced-transparency: reduce){
-  .bottom-nav{
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-  .bottom-nav--down,
-  .bottom-nav--up{ background: rgba(255,255,255,0.92); }
-}
-
-@media (max-width: 768px){
-  :root{ --bar-height: 58px; }
-}
-
-/* Make UP and DOWN bars look identical */
+/* Buttons: identical between bars */
 .mobile-glassbar .bar-btn,
-.bottom-nav .bar-btn {
+.bottom-nav .bar-btn{
+  position: relative;
+  z-index: 1;                           /* above the pill */
+  box-sizing: border-box;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
   height: var(--bar-height);
-  margin: 0 6px;
-  border-radius: 14px;
-  font-size: 11.5px;   /* match DOWN bar */
-  font-weight: 600;    /* match DOWN bar */
-  line-height: 1;
-}
-
-.mobile-glassbar .bar-btn span,
-.bottom-nav .bar-btn span {
-  display: block;      /* avoid baseline weirdness */
-}
-
-.mobile-glassbar .bar-btn svg,
-.bottom-nav .bar-btn svg {
-  width: 22px;
-  height: 22px;
-  display: block;
-  fill: currentColor;
-}
-
-/* --- Fix: lock Home position the same in both bars --- */
-.mobile-glassbar,
-.bottom-nav {
-  justify-content: center !important;   /* stop space-around shifting */
-  gap: 12px;                             /* consistent spacing between icons */
-}
-
-/* Match horizontal padding (and safe areas) on both bars */
-.bottom-nav {
-  max-width: none; /* no narrower container */
-  padding: 10px max(16px, env(safe-area-inset-left))
-           calc(10px + env(safe-area-inset-bottom))
-           max(16px, env(safe-area-inset-right));
-}
-
-/* Normalize button box sizes so total row width is identical */
-.mobile-glassbar .bar-btn,
-.bottom-nav .bar-btn {
-  box-sizing: border-box;
-  min-width: 84px;        /* keeps each tile width consistent */
   padding: 0 6px;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  min-width: var(--tabs-min);
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
   font-size: 11.5px;
   font-weight: 600;
   line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-glassbar .bar-btn:link,
+.mobile-glassbar .bar-btn:visited,
+.bottom-nav .bar-btn:link,
+.bottom-nav .bar-btn:visited{ color: inherit; text-decoration: none; }
+
+.mobile-glassbar .bar-btn span,
+.bottom-nav .bar-btn span{
+  display: block; /* avoid baseline/line-box quirks */
 }
 
 .mobile-glassbar .bar-btn svg,
-.bottom-nav .bar-btn svg {
-  width: 22px;
-  height: 22px;
-  display: block;
+.bottom-nav .bar-btn svg{
+  width: 22px; height: 22px; display: block; fill: currentColor;
+}
+
+/* Active “pill” for a selected tab (optional) */
+.mobile-glassbar .bar-btn.is-active{
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  color: #f97316;
+}
+
+/* Visibility switching without translate() (prevents horizontal nudge) */
+.bottom-nav--up{
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.is-scrolling-up .mobile-glassbar{ display: none !important; } /* hide the DOWN bar entirely */
+.is-scrolling-up .bottom-nav--up{
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.is-scrolling-down .bottom-nav--up{
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Reduced transparency: keep both readable */
+@media (prefers-reduced-transparency: reduce){
+  .mobile-glassbar::before,
+  .bottom-nav--up::before{
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Hide the bars on large screens */
+@media (min-width: 1024px){
+  .mobile-glassbar,
+  .bottom-nav{ display: none; }
 }
