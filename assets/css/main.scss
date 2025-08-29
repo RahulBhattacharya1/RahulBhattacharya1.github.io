@@ -466,12 +466,12 @@ pre {
   }
 
   /* Posts overlay sheet (unchanged functionality, prettier) */
-  .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.35); z-index: 10020; }
+  .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.1); z-index: 10020; } /* Background dim on clicking More */
   .posts-sheet{
-	width: 80%;               /* or max-width: 400px; */
+	width: 60%;               /* or max-width: 400px; */
 	max-height: 72vh;
 	overflow: auto;
-    position: absolute; right: 0; bottom: calc(84px + env(safe-area-inset-bottom));
+    position: absolute; right: 15px; bottom: calc(84px + env(safe-area-inset-bottom));
     max-height: 72vh; overflow:auto;
     background: rgba(255,255,255,.75);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
