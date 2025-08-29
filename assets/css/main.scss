@@ -571,21 +571,6 @@ pre {
            max(16px, env(safe-area-inset-right));
 }
 
-/* Clone the glass pill used by .mobile-glassbar::before */
-.bottom-nav--up::before{
-  content:"";
-  position: absolute;
-  left: 12px; right: 12px;
-  bottom: calc(10px + env(safe-area-inset-bottom));
-  height: var(--bar-height);   /* match bar height on mobile (58px) */
-  border-radius: 18px;
-  background: rgba(255,255,255,.4);
-  backdrop-filter: saturate(180%) blur(6px);
-  -webkit-backdrop-filter: saturate(180%) blur(6px);
-  box-shadow: 0 8px 28px rgba(0,0,0,.18);
-  pointer-events: none;
-}
-
 /* Make buttons/links/icons inherit the bar’s color on both bars */
 .bottom-nav .bar-btn,
 .bottom-nav .bar-btn:link,
@@ -604,14 +589,13 @@ pre {
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
+  z-index: 10012;
 }
 
-.is-scrolling-up .mobile-glassbar{
-  opacity: 0;
-  transform: translateY(8px);
-  pointer-events: none;
-  transition: opacity .22s ease, transform .22s ease;
+.is-scrolling-up .mobile-glassbar {
+  display: none !important;   /* was just opacity 0 before */
 }
+
 .is-scrolling-down .mobile-glassbar{
   opacity: 1;
   transform: translateY(0);
@@ -653,8 +637,5 @@ pre {
   :root{ --bar-height: 58px; }
 }
 
-/* 1) Only one bar visible when scrolling DOWN (use the old glassbar) */
-.bottom-nav--down{ display:none !important; }
-
-/* 2) Keep the UP bar above everything */
+/* Keep the UP bar above everything */
 .bottom-nav{ z-index: 10020; }
