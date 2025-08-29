@@ -449,7 +449,7 @@ pre {
   }
   .mobile-glassbar .bar-btn:link,
   .mobile-glassbar .bar-btn:visited{ color:#111; text-decoration:none; }
-  .mobile-glassbar .bar-btn:hover{ background: rgba(255,255,255,.6); }
+  .mobile-glassbar .bar-btn:hover{ background: rgba(255,255,255,.2); }  /* Set transparency */
   .mobile-glassbar .bar-btn:active{ transform: translateY(1px); }
 
   .mobile-glassbar .bar-btn svg{
