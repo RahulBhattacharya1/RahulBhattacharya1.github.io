@@ -417,7 +417,7 @@ pre {
 
   .mobile-glassbar{
     position: fixed; left: 0; right: 0; bottom: 0;
-    z-index: 10010;
+    z-index: 11000;
     display: flex; align-items: center; justify-content: center;
     padding: 10px max(16px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
     pointer-events: none; /* sheet effect container */
@@ -471,7 +471,7 @@ pre {
 	width: 80%;               /* or max-width: 400px; */
 	max-height: 72vh;
 	overflow: auto;
-    position: absolute; right: 0; bottom: 0;
+    position: absolute; right: 0; bottom: calc(84px + env(safe-area-inset-bottom));
     max-height: 72vh; overflow:auto;
     background: rgba(255,255,255,.75);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -479,7 +479,7 @@ pre {
     box-shadow: 0 -18px 30px rgba(0,0,0,.22);
     padding: 14px 16px calc(18px + env(safe-area-inset-bottom))
 	}
-  .posts-sheet__header{ display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:inherit; padding-bottom:8px; z-index:1; }
+  .posts-sheet__header{ display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background: transparent; padding-bottom:8px; z-index:1; }
   .posts-sheet__header h3{ margin:4px 0; font-size:16px; }
   .close-posts{ appearance:none; border:1px solid rgba(0,0,0,.12); background:#fff; border-radius:10px; padding:6px 10px; }
   .posts-list{ list-style:none; margin:8px 0 0; padding:0; }
@@ -514,7 +514,7 @@ pre {
     pointer-events: none;
     opacity: 0;
     transition: opacity .2s ease;
-    z-index: 10011; /* just above the pill */
+    z-index: 11001; /* just above the pill */
   }
   .mobile-glassbar.is-waving .bar-wave{ opacity: 1; }
 
