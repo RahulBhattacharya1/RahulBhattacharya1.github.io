@@ -426,7 +426,7 @@ pre {
   .mobile-glassbar::before{
     content:""; position: absolute; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom));
     height: 64px; border-radius: 18px;
-    background: rgba(255,255,255,.6);  /* set transparency */
+    background: rgba(255,255,255,.4);  /* set transparency */
     backdrop-filter: saturate(180%) blur(18px);
     -webkit-backdrop-filter: saturate(180%) blur(18px);
     box-shadow: 0 8px 28px rgba(0,0,0,.18);
