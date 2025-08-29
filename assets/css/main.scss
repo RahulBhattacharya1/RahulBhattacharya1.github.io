@@ -485,3 +485,34 @@ pre {
 /* Hide the bar on large screens */
 @media (min-width: 1024px){ .mobile-glassbar{ display:none; } }
 
+@media (max-width: 768px) {
+  /* wave container matches your glass pill bounds */
+  .mobile-glassbar .bar-wave{
+    position: fixed;
+    left: 12px; right: 12px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    height: 64px;
+    border-radius: 18px;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s ease;
+    z-index: 10011; /* just above the pill */
+  }
+  .mobile-glassbar.is-waving .bar-wave{ opacity: 1; }
+
+  .mobile-glassbar .bar-wave svg{
+    position: absolute; inset: 0;
+    width: 220%; /* wider so the wave can sweep */
+    height: 100%;
+    transform: translateX(-110%); /* start off-screen left */
+  }
+  .mobile-glassbar.is-waving .bar-wave svg{
+    animation: wave-sweep 900ms ease-out forwards;
+  }
+
+  @keyframes wave-sweep {
+    from { transform: translateX(-110%); }
+    to   { transform: translateX(0%); }
+  }
+}
