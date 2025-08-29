@@ -559,7 +559,7 @@ pre {
   border-top-right-radius: var(--bar-radius);
   margin: 0 auto;
   max-width: 1100px;
-  box-shadow: var(--bar-shadow);
+  box-shadow: none;
   pointer-events: auto;
   transition: transform 220ms ease, opacity 220ms ease, background-color 220ms ease;
 }
@@ -604,6 +604,18 @@ pre {
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
+}
+
+.is-scrolling-up .mobile-glassbar{
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease;
+}
+.is-scrolling-down .mobile-glassbar{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .is-scrolling-up .bottom-nav--up{
