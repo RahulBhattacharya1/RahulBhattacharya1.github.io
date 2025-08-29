@@ -426,7 +426,8 @@ pre {
 
   .mobile-glassbar::before{
     content:""; position: absolute; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom));
-    height: 64px; border-radius: 18px;
+    height: var(--bar-height);
+    border-radius: 18px;
     background: rgba(255,255,255,.4);  /* set transparency */
     backdrop-filter: saturate(180%) blur(6px);
     -webkit-backdrop-filter: saturate(180%) blur(6px);
@@ -509,7 +510,7 @@ pre {
     position: fixed;
     left: 12px; right: 12px;
     bottom: calc(10px + env(safe-area-inset-bottom));
-    height: 64px;
+    height: var(--bar-height);
     border-radius: 18px;
     overflow: hidden;
     pointer-events: none;
