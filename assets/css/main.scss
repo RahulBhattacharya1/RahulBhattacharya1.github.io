@@ -479,7 +479,19 @@ pre {
   .close-posts{ appearance:none; border:1px solid rgba(0,0,0,.12); background:#fff; border-radius:10px; padding:6px 10px; }
   .posts-list{ list-style:none; margin:8px 0 0; padding:0; }
   .posts-list li{ padding:12px 0; border-bottom:1px dashed rgba(0,0,0,.12); }
-  .posts-list a{ text-decoration:none; color:#111; font-weight:600; }
+    /* Posts overlay list – softer look */
+  .posts-list a {
+    display: block;
+    font-size: 0.95rem;         /* slightly smaller than body */
+    font-weight: 300;           /* thin/slim */
+    color: #555;                /* soft gray */
+    text-decoration: none;
+    padding: 4px 0;
+    transition: color .2s ease;
+  }
+  .posts-list a:active {
+    color: #000;      /* darker while finger is pressing */
+  }
 }
 
 /* Hide the bar on large screens */
