@@ -118,7 +118,9 @@
             <h1 class="post-title">{{ page.title }}</h1>
             <p class="post-meta">
               <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
-              <a id="share-btn" class="btn btn--share" href="#" aria-label="Share this post">Share</a>
+              {% if page.share != false %}
+                <a id="share-btn" class="btn btn--share" href="#" aria-label="Share this post">Share</a>
+              {% endif %}
             </p>
           </header>
 
