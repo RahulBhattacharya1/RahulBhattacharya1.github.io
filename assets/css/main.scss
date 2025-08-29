@@ -471,7 +471,7 @@ pre {
 	width: 60%;               /* or max-width: 400px; */
 	max-height: 72vh;
 	overflow: auto;
-    position: absolute; right: 15px; bottom: calc(84px + env(safe-area-inset-bottom));
+    position: absolute; right: 15px; bottom: calc(80px + env(safe-area-inset-bottom));
     max-height: 72vh; overflow:auto;
     background: rgba(255,255,255,.75);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -481,7 +481,7 @@ pre {
 	}
   .posts-sheet__header{ display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background: transparent; padding-bottom:8px; z-index:1; }
   .posts-sheet__header h3{ margin:4px 0; font-size:16px; }
-  .close-posts{ appearance:none; border:1px solid rgba(0,0,0,.12); background:#fff; border-radius:10px; padding:6px 10px; }
+  .close-posts{ appearance:none; border:1px solid rgba(0,0,0,.12); background: transparent; border-radius:10px; padding:6px 10px; }
   .posts-list{ list-style:none; margin:8px 0 0; padding:0; }
   .posts-list li{ padding:12px 0; border-bottom:1px dashed rgba(0,0,0,.12); }
     /* Posts overlay list – softer look */
