@@ -409,82 +409,79 @@ pre {
   border-radius: 0 0 8px 8px; 
 }
 
-/* ── Mobile Glass Bottom Bar ───────────────────────────── */
+/* ── Mobile Glass Bottom Tab Bar (polished) ───────────────────────── */
+[hidden]{display:none!important;}
+
 @media (max-width: 768px) {
-  body {
-    /* prevent content being hidden behind the bar; respect safe-areas */
-    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  body{ padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+
+  .mobile-glassbar{
+    position: fixed; left: 0; right: 0; bottom: 0;
+    z-index: 10010;
+    display: flex; align-items: center; justify-content: center;
+    padding: 10px max(16px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
+    pointer-events: none; /* sheet effect container */
   }
 
-  .mobile-glassbar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 64px;
-    padding: 8px max(12px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right));
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    z-index: 9999;
-
-    /* glass effect */
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: saturate(180%) blur(16px);
-    -webkit-backdrop-filter: saturate(180%) blur(16px);
-    border-top: 1px solid rgba(0,0,0,.06);
-    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+  .mobile-glassbar::before{
+    content:""; position: absolute; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom));
+    height: 64px; border-radius: 18px;
+    background: rgba(255,255,255,.85);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    box-shadow: 0 8px 28px rgba(0,0,0,.18);
+    pointer-events: none;
   }
 
-  .mobile-glassbar .bar-btn {
-    flex: 1 1 0;
-    min-width: 0;
-    height: 48px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,.08);
-    background: rgba(255,255,255,.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-    color: #111;
-    transition: transform .06s ease, background .15s ease;
+  .mobile-glassbar .bar-btn{
+    pointer-events: auto;
+    -webkit-appearance: none; appearance: none; border: 0; background: none;
+    flex: 1 1 0; min-width: 0;
+    position: relative; z-index: 1;
+    height: 64px; margin: 0 6px;
+    border-radius: 14px;
+    display: inline-flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 6px;
+    text-decoration: none; color: #111;
+    font-size: 11.5px; font-weight: 600; line-height: 1;
+    padding: 0 6px;
+    transition: transform .08s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
   }
-  .mobile-glassbar .bar-btn:hover { background: rgba(255,255,255,.8); }
-  .mobile-glassbar .bar-btn:active { transform: translateY(1px); }
-  .mobile-glassbar .bar-btn svg { display: block; }
+  .mobile-glassbar .bar-btn:link,
+  .mobile-glassbar .bar-btn:visited{ color:#111; text-decoration:none; }
+  .mobile-glassbar .bar-btn:hover{ background: rgba(255,255,255,.6); }
+  .mobile-glassbar .bar-btn:active{ transform: translateY(1px); }
 
-  /* Posts overlay sheet */
-  .posts-overlay {
-    position: fixed; inset: 0; z-index: 10000;
-    background: rgba(0,0,0,.35);
+  .mobile-glassbar .bar-btn svg{
+    width: 22px; height: 22px; display:block; fill: currentColor;
   }
-  .posts-sheet {
-    position: absolute; left: 0; right: 0;
-    bottom: 0;
-    max-height: 70vh;
-    background: rgba(255,255,255,.9);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
-    box-shadow: 0 -12px 30px rgba(0,0,0,.2);
-    padding: 12px 16px calc(16px + env(safe-area-inset-bottom)) 16px;
-    overflow: auto;
+
+  /* Active tab “pill” */
+  .mobile-glassbar .bar-btn.is-active{
+    color: #f97316; /* orange */
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.12);
   }
-  .posts-sheet__header {
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; background: inherit; padding-bottom: 6px; z-index: 1;
+
+  /* Posts overlay sheet (unchanged functionality, prettier) */
+  .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.35); z-index: 10020; }
+  .posts-sheet{
+    position: absolute; left: 0; right: 0; bottom: 0;
+    max-height: 72vh; overflow:auto;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-top-left-radius: 20px; border-top-right-radius: 20px;
+    box-shadow: 0 -18px 30px rgba(0,0,0,.22);
+    padding: 14px 16px calc(18px + env(safe-area-inset-bottom));
   }
-  .posts-sheet__header h3 { margin: 4px 0; font-size: 16px; }
-  .close-posts {
-    border: 1px solid rgba(0,0,0,.1); background: rgba(255,255,255,.7);
-    border-radius: 10px; padding: 6px 10px; cursor: pointer;
-  }
-  .posts-list { list-style: none; padding: 0; margin: 8px 0 0; }
-  .posts-list li { margin: 0; padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,.1); }
-  .posts-list a { text-decoration: none; color: #111; font-weight: 600; }
+  .posts-sheet__header{ display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:inherit; padding-bottom:8px; z-index:1; }
+  .posts-sheet__header h3{ margin:4px 0; font-size:16px; }
+  .close-posts{ appearance:none; border:1px solid rgba(0,0,0,.12); background:#fff; border-radius:10px; padding:6px 10px; }
+  .posts-list{ list-style:none; margin:8px 0 0; padding:0; }
+  .posts-list li{ padding:12px 0; border-bottom:1px dashed rgba(0,0,0,.12); }
+  .posts-list a{ text-decoration:none; color:#111; font-weight:600; }
 }
+
+/* Hide the bar on large screens */
+@media (min-width: 1024px){ .mobile-glassbar{ display:none; } }
+
