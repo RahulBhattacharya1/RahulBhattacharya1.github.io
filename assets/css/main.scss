@@ -652,3 +652,9 @@ pre {
 @media (max-width: 768px){
   :root{ --bar-height: 58px; }
 }
+
+/* 1) Only one bar visible when scrolling DOWN (use the old glassbar) */
+.bottom-nav--down{ display:none !important; }
+
+/* 2) Keep the UP bar above everything */
+.bottom-nav{ z-index: 10020; }
