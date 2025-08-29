@@ -413,18 +413,6 @@ pre {
 [hidden]{display:none!important;}
 
 @media (max-width: 768px) {
-  /* keep content from sliding under the fixed bottom bar */
-  body {
-    padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
-  }
-
-  /* optional but recommended so the very last lines/links aren’t obscured */
-  .site-footer {
-    padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
-  }
-}
-
-@media (max-width: 768px) {
 
   /* Posts overlay sheet (unchanged functionality, prettier) */
   .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.35); z-index: 10020; }
@@ -463,32 +451,39 @@ pre {
   }
 
 /* ===========================
-   Mobile Bottom Bar — SINGLE SOURCE OF TRUTH
+   Mobile Bottom Bar — FINAL
    =========================== */
 
 /* Vars */
 :root{
   --bar-height: 64px;
   --bar-radius: 18px;
-  --bar-blur: 10px;
   --tabs-width: 92px;   /* fixed width per tile: prevents drift */
   --tabs-gap: 12px;
 }
+
 @media (max-width: 768px){
   :root{ --bar-height: 58px; }
+
+  /* keep page content from sliding under the fixed bar */
+  body{
+    padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
+  }
+  .site-footer{
+    padding-bottom: calc(var(--bar-height) + 20px + env(safe-area-inset-bottom));
+  }
 }
 
-/* Containers: same layout for both bars (no transforms = no subpixel nudge) */
+/* Both bars use the same layout. No transforms = no subpixel nudges */
 .mobile-glassbar,
 .bottom-nav{
   position: fixed;
   left: 0; right: 0; bottom: 0;
   z-index: 10020;
   box-sizing: border-box;
-  isolation: isolate;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: var(--tabs-width);   /* fixed track width */
+  grid-auto-columns: var(--tabs-width);  /* fixed track width */
   justify-content: center;
   align-items: center;
   gap: var(--tabs-gap);
@@ -497,11 +492,12 @@ pre {
            calc(10px + env(safe-area-inset-bottom))
            max(16px, env(safe-area-inset-right));
   margin: 0;
-  max-width: none;
-  background: transparent;
   color: #111;
+  background: transparent;
   pointer-events: auto;
-  transform: none !important;            /* kill legacy transforms */
+  transform: none !important;
+  will-change: opacity;
+  overflow: visible; /* ensures labels don’t clip oddly */
 }
 
 /* Single glass “pill” behind buttons */
@@ -521,13 +517,13 @@ pre {
   z-index: 0;
 }
 
-/* Buttons: identical between bars */
+/* Buttons (identical in both bars) */
 .mobile-glassbar .bar-btn,
 .bottom-nav .bar-btn{
   position: relative;
   z-index: 1;
   display: inline-flex;
-  width: 100%;                    /* fill the grid column exactly */
+  width: 100%;                     /* fill the grid column exactly */
   height: var(--bar-height);
   flex-direction: column;
   align-items: center;
@@ -537,44 +533,37 @@ pre {
   border-radius: 14px;
   text-decoration: none;
   color: inherit;
+  text-align: center;
   font: 600 11.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   -webkit-tap-highlight-color: transparent;
+  overflow: hidden;                /* prevents label “dropping” below pill */
 }
+
 .mobile-glassbar .bar-btn span,
 .bottom-nav .bar-btn span{ display:block; }
-.mobile-glassbar .bar-btn svg,
-.bottom-nav .bar-btn svg{ width:22px; height:22px; display:block; fill:currentColor; }
 
-/* Active “pill” (same on both bars) */
+.mobile-glassbar .bar-btn svg,
+.bottom-nav .bar-btn svg{
+  width: 22px; height: 22px; display:block; fill: currentColor;
+}
+
+/* Optional active state */
 .mobile-glassbar .bar-btn.is-active,
-.bottom-nav .bar-btn.is-active {
+.bottom-nav .bar-btn.is-active{
   background: #fff;
   box-shadow: 0 6px 16px rgba(0,0,0,.12);
   color: #f97316;
 }
 
-/* Show the UP bar without translate() to avoid layout shifts */
-.bottom-nav--up{
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: none !important;
-}
-.is-scrolling-up .mobile-glassbar{ display: none !important; }
-.is-scrolling-up .bottom-nav--up{
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
+/* Default visibility: show DOWN bar, hide UP bar */
+.bottom-nav--down{ opacity: 1; visibility: visible; pointer-events: auto; }
+.bottom-nav--up  { opacity: 0; visibility: hidden; pointer-events: none; }
 
-/* Safety: center items & forbid transforms */
-.bottom-nav,
-.bottom-nav--up,
-.bottom-nav--down{
-  justify-content: center !important;
-  transform: none !important;
-  max-width: none !important;
-}
+/* Toggle purely by scroll direction (JS adds these classes on <html>) */
+.is-scrolling-up .bottom-nav--down{ opacity: 0; visibility: hidden; pointer-events: none; }
+.is-scrolling-up .bottom-nav--up  { opacity: 1; visibility: visible; pointer-events: auto; }
+.is-scrolling-down .bottom-nav--down{ opacity: 1; visibility: visible; pointer-events: auto; }
+.is-scrolling-down .bottom-nav--up  { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* Reduced transparency support */
 @media (prefers-reduced-transparency: reduce){
@@ -590,11 +579,4 @@ pre {
 @media (min-width: 1024px){
   .mobile-glassbar,
   .bottom-nav{ display: none; }
-}
-
-@media (max-width: 768px) {
-  /* Hide the legacy DOWN bar – we use .mobile-glassbar for the down state */
-  .bottom-nav--down { 
-    display: none !important;
-  }
 }
