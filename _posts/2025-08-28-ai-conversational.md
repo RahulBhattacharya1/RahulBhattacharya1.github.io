@@ -49,8 +49,11 @@ gradio>=4.0.0
 torch
 sentence-transformers
 ```
+When building a lightweight conversational planner, I wanted to make setup and deployment as simple as possible. That’s why I created a requirements.txt file to lock in the essential dependencies. This file tells any environment—whether it’s my laptop, a cloud runtime, or Hugging Face Spaces—exactly which Python libraries are needed to run the app.
 
-Optionally, I added a runtime.txt with python-3.11 (or python-3.10) for reproducible builds.
+I kept the list short and purposeful. The first dependency, Gradio (>=4.0.0), is the framework that powers the user interface. It makes it easy to design the Planner and Chat tabs with textboxes, dropdowns, and buttons, while handling state and chat history without much boilerplate code. Next is Torch, which provides the deep learning backend required by modern models. Even though the planner is lightweight, Torch is the foundation that allows the embedding model to run locally. Finally, I included sentence-transformers, the library that gives me access to compact, high-quality embedding models like all-MiniLM-L6-v2. This is what makes the app “smart,” enabling it to interpret natural language and suggest the most relevant focus tip.
+
+By limiting requirements to just these essentials, I ensured the app is easy to install, reproducible, and deployable without unnecessary overhead.
 
 Folder Layout
 -------------
@@ -62,8 +65,11 @@ Just two files were enough:
 ├── app.py
 └── requirements.txt
 ```
+To keep things simple, I structured the entire project with just two files: app.py and requirements.txt. This minimal setup was intentional. The app.py file contains all of the application logic—imports, the embedding model, helper functions, the planner generator, the conversational parser, and finally the Gradio UI. In other words, it’s the single script that defines how both the Planner and Chat tabs work, from parsing natural language to rendering the interface.
 
-If you’re deploying on **Hugging Face Spaces**, set the app file to app.py in the settings.
+The second file, requirements.txt, is equally important. It lists the exact Python dependencies the app needs (gradio, torch, and sentence-transformers). When anyone installs or deploys the project, this file ensures the same libraries and versions are pulled in automatically, making the build consistent across environments.
+
+This minimal layout also makes deployment to Hugging Face Spaces painless. Spaces only needs to see an app.py file to know what to execute, and a requirements.txt file to know what to install. Once uploaded, I just had to set app.py as the app file in the Space settings, and everything worked out of the box. By avoiding extra files and folders, the project stays lightweight, portable, and easy to share.
 
 How It Works (High-Level)
 -------------------------
