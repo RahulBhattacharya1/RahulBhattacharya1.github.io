@@ -489,7 +489,15 @@ fill="#000000" stroke="none">
 
   function show() { overlay.hidden = false; open.setAttribute('aria-expanded', 'true'); }
   function hide() { overlay.hidden = true; open.setAttribute('aria-expanded', 'false'); }
-  open.addEventListener('click', show);
+  
+  open.addEventListener('click', function () {
+    if (overlay.hidden) {
+        show();
+      } else {
+        hide();
+      }
+    });
+
   overlay.addEventListener('click', function (e) {
     if (e.target === overlay || e.target.classList.contains('close-posts')) hide();
   });
