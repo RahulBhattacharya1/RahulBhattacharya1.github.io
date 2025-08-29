@@ -421,21 +421,22 @@ pre {
     display: flex; align-items: center; justify-content: center;
     padding: 10px max(16px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
     pointer-events: none; /* sheet effect container */
+    isolation: isolate;
   }
 
   .mobile-glassbar::before{
     content:""; position: absolute; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom));
     height: 64px; border-radius: 18px;
-    background: rgba(255,255,255,0);  /* set transparency */
+    background: rgba(255,255,255,0.08);  /* set transparency */
     backdrop-filter: saturate(180%) blur(6px);
     -webkit-backdrop-filter: saturate(180%) blur(6px);
-    box-shadow: 0 8px 28px rgba(0,0,0,.18);
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
     pointer-events: none;
   }
 
   .mobile-glassbar .bar-btn{
     pointer-events: auto;
-    -webkit-appearance: none; appearance: none; border: 0; background: rgba(255,255,255,0.1);
+    -webkit-appearance: none; appearance: none; border: 0; background: transparent;
     flex: 1 1 0; min-width: 0;
     position: relative; z-index: 1;
     height: 64px; margin: 0 6px;
@@ -449,7 +450,7 @@ pre {
   }
   .mobile-glassbar .bar-btn:link,
   .mobile-glassbar .bar-btn:visited{ color:#111; text-decoration:none; }
-  .mobile-glassbar .bar-btn:hover{ background: rgba(255,255,255,.2); }  /* Set transparency */
+  .mobile-glassbar .bar-btn:hover{ background: rgba(255,255,255,.1); }  /* Set transparency */
   .mobile-glassbar .bar-btn:active{ transform: translateY(1px); }
 
   .mobile-glassbar .bar-btn svg{
@@ -459,8 +460,8 @@ pre {
   /* Active tab “pill” */
   .mobile-glassbar .bar-btn.is-active{
     color: #f97316; /* orange */
-    background: #fff;
-    box-shadow: 0 6px 16px rgba(0,0,0,.12);
+    background: rgba(255,255,255,0.22);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.10);
   }
 
   /* Posts overlay sheet (unchanged functionality, prettier) */
