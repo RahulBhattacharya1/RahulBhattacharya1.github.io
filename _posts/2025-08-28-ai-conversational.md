@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "My Experience in Building a Conversational AI Morning Planner"
-date: 2025-08-28
+date: 2025-08-28 14:37:33
 categories: [intro]
 tags: [getting-started]
 thumbnail: /assets/images/ai_conversational.webp
