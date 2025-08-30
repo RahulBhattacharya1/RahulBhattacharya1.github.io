@@ -538,23 +538,22 @@ pre {
 .related-grid {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, 96px); /* fixed small cards */
   gap: 6px;
-  max-width: calc(8 * 120px);  /* cap at ~8 items across */
-  margin-left: auto;
-  margin-right: auto;
+  justify-content: center;                         /* keep them close & centered */
 }
 
+.related-card { width: 96px; }                     /* grid item width */
 .related-card a {
   display: block;
   text-decoration: none;
 }
 
 .related-thumb {
-  width: 100%;
-  aspect-ratio: 1 / 1;   /* square */
+  width: 96px;                                      /* small, fixed */
+  height: 96px;                                     /* square */
   object-fit: cover;
   border-radius: 8px;
   display: block;
@@ -567,3 +566,4 @@ pre {
   line-height: 1.25;
   color: #111;
 }
+
