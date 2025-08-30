@@ -632,3 +632,60 @@ pre {
   margin-top: 6px;
 }
 
+/* ── Related Posts: 2-slot cross-fade (scoped) ───────────────────────── */
+.related-posts.fade-rotator-2 .related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* always 2 slots */
+  gap: 12px;
+}
+
+/* Each grid cell becomes a "slot" that stacks cards and cross-fades them */
+.related-posts.fade-rotator-2 .related-slot {
+  position: relative;
+  min-height: 210px;                 /* adjust to your card height */
+  border: 1px solid var(--color-border-default, #e5e7eb);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--color-bg-default, #fff);
+  padding: 8px;
+}
+
+/* Cards stack in a slot; only the active one is visible */
+.related-posts.fade-rotator-2 .related-slot > .related-card {
+  position: absolute;
+  inset: 8px;                        /* accounts for slot padding */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 480ms ease;
+  display: grid;
+  grid-template-columns: 120px 1fr;  /* thumb + text; tweak if needed */
+  gap: 10px;
+  align-items: center;
+}
+
+/* Active card is the one you can see/click */
+.related-posts.fade-rotator-2 .related-slot > .related-card.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Make thumbnails sane in the rotator (override fixed widths above) */
+.related-posts.fade-rotator-2 .related-slot .related-thumb {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Keep 2 slots even on phones (remove if you prefer 1 on mobile) */
+@media (max-width: 640px) {
+  .related-posts.fade-rotator-2 .related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .related-posts.fade-rotator-2 .related-slot { min-height: 180px; padding: 6px; }
+  .related-posts.fade-rotator-2 .related-slot > .related-card {
+    grid-template-columns: 1fr;      /* stack image above title on small screens */
+    inset: 6px;
+  }
+}
