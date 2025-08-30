@@ -612,8 +612,8 @@ pre {
 
 .related-head {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: center;   /* vertically center button with heading */
+  gap: 10px;             /* space between heading and button */
   margin-bottom: 8px;
 }
 .related-head h3 { margin: 0; }
