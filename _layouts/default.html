@@ -574,138 +574,124 @@ fill="#000000" stroke="none">
 })();
 </script>  
 
-<!--Shuffle + Cross-fade Rotator for Related Posts-->
+<!-- Shuffle + 2-Slot Cross-fade Rotator for Related Posts -->
 <script>
 (function () {
-  function fisherYatesShuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
+  function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a; }
 
-  function setupFourUpRotator(section) {
+  function setupTwoSlotRotator(section){
+    if (!section || section.dataset.rotatorInit) return;
+    section.dataset.rotatorInit = "1";
+
     const grid = section.querySelector('.related-grid');
     if (!grid) return;
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Collect all related cards rendered by Liquid (tags/categories union).
     let items = Array.from(grid.children).filter(el => el.classList.contains('related-card'));
     if (items.length === 0) return;
 
-    // Shuffle once
-    items = fisherYatesShuffle(items);
+    // If only 1 item, just show it.
+    if (items.length === 1){
+      grid.innerHTML = '';
+      const slot = document.createElement('div'); slot.className = 'related-slot'; grid.appendChild(slot);
+      const one = items[0]; one.classList.add('is-active'); slot.appendChild(one);
+      section.classList.add('fade-rotator-2');
+      return;
+    }
 
-    // Build 4 slots (or fewer if not enough items)
-    const slotsCount = Math.min(2, items.length);
+    // Pool to rotate (circular); shuffle once for variety.
+    const pool = shuffle(items.slice());
+
+    // Build exactly 2 slots.
     grid.innerHTML = '';
-    const slots = Array.from({ length: slotsCount }, () => {
-      const s = document.createElement('div');
-      s.className = 'related-slot';
-      grid.appendChild(s);
-      return s;
+    const slotsCount = Math.min(2, pool.length);
+    const slots = Array.from({length: slotsCount}, () => {
+      const s = document.createElement('div'); s.className = 'related-slot'; grid.appendChild(s); return s;
     });
 
-    // Make a circular pool (never empty). We will rotate DOM nodes through it.
-    const pool = items.slice(); // keep all cards here always
-
-    // Helper: pick next card that is NOT the one already visible in target slot
-    function nextDifferent(targetSlot) {
-      const active = targetSlot.querySelector('.related-card.is-active');
-      // rotate through pool until we find one that's not the active node
-      for (let i = 0; i < pool.length; i++) {
-        const candidate = pool[0];           // peek
-        if (candidate !== active) {
-          return pool.shift();               // take it
-        }
-        // move to end and continue
+    // Helper: take next card that isn't already active in the target slot.
+    function nextDifferent(slot){
+      const active = slot.querySelector('.related-card.is-active');
+      for (let i=0;i<pool.length;i++){
+        const cand = pool[0];
+        if (cand !== active) return pool.shift();
         pool.push(pool.shift());
       }
-      // worst case (all same), just take first
       return pool.shift();
     }
 
-    function mountCard(slot, newCard) {
+    // Mount with cross-fade and recycle the old card back to pool.
+    function mount(slot, card){
       const old = slot.querySelector('.related-card.is-active');
-      // Place new card on top and fade it in
-      slot.appendChild(newCard);
-      newCard.classList.remove('is-active');
-      newCard.style.opacity = '0';
-      newCard.setAttribute('aria-hidden', 'true');
-      // force reflow to enable transition
-      // eslint-disable-next-line no-unused-expressions
-      newCard.offsetHeight;
-      newCard.classList.add('is-active');
-      newCard.style.opacity = '';
-      newCard.removeAttribute('aria-hidden');
+      slot.appendChild(card);
+      card.classList.remove('is-active');
+      card.style.opacity = '0';
+      card.setAttribute('aria-hidden','true');
+      card.offsetHeight;                 // reflow
+      card.classList.add('is-active');
+      card.style.opacity = '';
+      card.removeAttribute('aria-hidden');
 
-      if (old) {
+      if (old){
         old.classList.remove('is-active');
-        old.setAttribute('aria-hidden', 'true');
+        old.setAttribute('aria-hidden','true');
         old.addEventListener('transitionend', () => {
-          // after fading out, put old back to the END of the pool
           if (old.parentElement === slot) slot.removeChild(old);
           pool.push(old);
-        }, { once: true });
+        }, { once:true });
       } else {
-        // if slot was empty, also recycle the “new” into pool so pool never shrinks
-        pool.push(newCard);
+        pool.push(card);
       }
     }
 
-    // Seed initial 4 (and keep pool circular by pushing back after mount)
-    for (let i = 0; i < slotsCount; i++) {
+    // Seed the two slots.
+    for (let i=0;i<slotsCount;i++){
       const first = pool.shift();
-      mountCard(slots[i], first);
+      mount(slots[i], first);
     }
 
-    // Animate: every 2s, pick a random slot and swap in a different card
+    // Animation loop.
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let visible = false, paused = false, timer = null;
 
-    function tick() {
-      const slotIndex = Math.floor(Math.random() * slotsCount);
-      const next = nextDifferent(slots[slotIndex]);
-      mountCard(slots[slotIndex], next);
+    function tick(){
+      const idx = Math.floor(Math.random()*slotsCount);
+      const next = nextDifferent(slots[idx]);
+      mount(slots[idx], next);
     }
+    function start(){ if (reduced || paused || !visible || timer) return; timer = setInterval(tick, 2000); }
+    function stop(){ if (timer){ clearInterval(timer); timer=null; } }
 
-    function start() {
-      if (reduced || paused || !visible || timer) return;
-      timer = setInterval(tick, 2000);
-    }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-
-    // Only animate when on screen
-    const io = new IntersectionObserver((entries) => {
-      visible = entries.some(e => e.isIntersecting);
+    // Run only when in viewport.
+    const io = new IntersectionObserver((entries)=>{
+      visible = entries.some(e=>e.isIntersecting);
       visible ? start() : stop();
     }, { threshold: 0.25 });
     io.observe(section);
 
-    // Pause on hover/touch
-    section.addEventListener('mouseenter', () => { paused = true; stop(); }, { passive: true });
-    section.addEventListener('mouseleave', () => { paused = false; start(); }, { passive: true });
-    section.addEventListener('touchstart', () => { paused = true; stop(); }, { passive: true });
-    section.addEventListener('touchend',   () => { paused = false; start(); }, { passive: true });
+    // Pause on hover/touch.
+    section.addEventListener('mouseenter', ()=>{ paused=true; stop(); }, {passive:true});
+    section.addEventListener('mouseleave', ()=>{ paused=false; start(); }, {passive:true});
+    section.addEventListener('touchstart', ()=>{ paused=true; stop(); }, {passive:true});
+    section.addEventListener('touchend',   ()=>{ paused=false; start(); }, {passive:true});
 
-    // Keep your Shuffle button working (reshuffles pool order)
-    section.addEventListener('click', (e) => {
+    // Keep your "Shuffle" button working.
+    section.addEventListener('click', (e)=>{
       const btn = e.target.closest('.related-posts .btn');
       if (!btn) return;
-      stop();
-      fisherYatesShuffle(pool);
-      start();
+      stop(); shuffle(pool); start();
     });
 
-    section.classList.add('fade-rotator-4');
+    section.classList.add('fade-rotator-2');
     start();
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.related-posts').forEach(setupFourUpRotator);
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.related-posts').forEach(setupTwoSlotRotator);
   });
 })();
 </script>
-  
+
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya</p>
 </footer>
