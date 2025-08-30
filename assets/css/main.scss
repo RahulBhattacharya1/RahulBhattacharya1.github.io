@@ -545,7 +545,15 @@ pre {
   margin: 0;
 }
 
-.related-card { width: 180px; }
+.related-card { 
+	width: 180px; 
+	opacity: 1;
+  	transition: opacity 0.6s ease; /* smooth fade */
+}
+
+.related-card.is-fading {
+  opacity: 0;
+}
 
 .related-card a {
   display: block;
