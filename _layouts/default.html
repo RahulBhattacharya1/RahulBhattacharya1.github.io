@@ -592,7 +592,15 @@ fill="#000000" stroke="none">
 
     let timer = null, visible = false, pausedByUser = false;
 
-    function tick() { shuffleNodes(grid); }
+    function tick() {
+      const cards = grid.querySelectorAll('.related-card');
+      cards.forEach(el => el.classList.add('is-fading'));
+    
+      setTimeout(() => {
+        shuffleNodes(grid);
+        cards.forEach(el => el.classList.remove('is-fading'));
+      }, 600); // match transition duration
+    }
 
     function start() {
       if (pausedByUser || !visible || timer) return;
