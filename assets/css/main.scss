@@ -632,34 +632,44 @@ pre {
   margin-top: 6px;
 }
 
-/* ── Cross-fade mode for Related Posts ── */
-.related-posts.fade-rotator .related-grid {
-  position: relative;
-  min-height: 230px; /* steady height; adjust to your card height */
-  /* layout inside each card handled on the li itself */
+/* ── 4-up cross-fade for Related Posts ───────────────────────── */
+.related-posts.fade-rotator-4 .related-grid {
+  display: grid; /* keep your grid; columns can be whatever you already set */
+  gap: 12px;
 }
 
-.related-posts.fade-rotator .related-card {
+/* Each cell becomes a slot that can cross-fade cards */
+.related-slot {
+  position: relative;
+  min-height: 210px; /* adjust to your card height */
+  border: 1px solid var(--color-border-default, #e5e7eb);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--color-bg-default, #fff);
+  padding: 8px; /* matches your card padding, if any */
+}
+
+/* Cards stack in a slot; only the active one is shown */
+.related-slot > .related-card {
   position: absolute;
-  inset: 0;
+  inset: 8px;              /* account for slot padding */
   opacity: 0;
   pointer-events: none;
   transition: opacity 480ms ease;
   display: grid;
-  grid-template-columns: 160px 1fr; /* thumb + text */
-  gap: 12px;
+  grid-template-columns: 120px 1fr; /* thumb + text; tweak to taste */
+  gap: 10px;
   align-items: center;
-  padding: 8px; /* matches your card spacing */
 }
 
-.related-posts.fade-rotator .related-card.is-active {
+.related-slot > .related-card.is-active {
   opacity: 1;
   pointer-events: auto;
 }
 
+/* Mobile: 1 column inside card */
 @media (max-width: 640px) {
-  .related-posts.fade-rotator .related-card {
+  .related-slot > .related-card {
     grid-template-columns: 1fr;
   }
 }
-
