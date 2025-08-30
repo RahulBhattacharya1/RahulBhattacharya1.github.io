@@ -209,7 +209,6 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
   {% endfor %}
 {% endif %}
 
-/* Dedup + sort; pull up to 20 so JS has room to rotate */
 {% assign related = related | uniq | sort: "date" | reverse | slice: 0, 20 %}
 
   {% if related != empty %}
