@@ -193,23 +193,21 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
 
 {% if page.collection == "posts" and page.related != false %}
   {% assign pool = site.posts | where_exp: "p", "p.url != page.url" %}
-{% assign related = "" | split: "" %}
+  {% assign related = "" | split: "" %}
 
-{% if page.tags and page.tags != empty %}
-  {% for t in page.tags %}
-    {% assign hits = pool | where_exp: "p", "p.tags contains t" %}
-    {% assign related = related | concat: hits %}
-  {% endfor %}
-{% endif %}
+  {% if page.tags and page.tags != empty %}
+    {% for t in page.tags %}
+      {% assign hits = pool | where_exp: "p", "p.tags contains t" %}
+      {% assign related = related | concat: hits %}
+    {% endfor %}
+  {% elsif page.categories and page.categories != empty %}
+    {% for c in page.categories %}
+      {% assign hits = pool | where_exp: "p", "p.categories contains c" %}
+      {% assign related = related | concat: hits %}
+    {% endfor %}
+  {% endif %}
 
-{% if page.categories and page.categories != empty %}
-  {% for c in page.categories %}
-    {% assign hits = pool | where_exp: "p", "p.categories contains c" %}
-    {% assign related = related | concat: hits %}
-  {% endfor %}
-{% endif %}
-
-{% assign related = related | uniq | sort: "date" | reverse | slice: 0, 20 %}
+  {% assign related = related | uniq | sort: "date" | reverse | slice: 0, 4 %}
 
   {% if related != empty %}
     <section class="related-posts" aria-label="Related Posts">
@@ -574,120 +572,68 @@ fill="#000000" stroke="none">
 })();
 </script>  
 
-<!-- Shuffle + 2-Slot Cross-fade Rotator for Related Posts (safe version) -->
+<!--Shuffle Button for Related Posts-->
 <script>
 (function () {
-  function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a; }
+  function shuffleNodes(list) {
+    const items = Array.from(list.children);
+    if (items.length < 2) return;
+    // Fisher–Yates shuffle
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    items.forEach(el => list.appendChild(el));
+  }
 
-  function setupTwoSlotRotator(section){
-    if (!section || section.dataset.rotatorInit) return;
-    section.dataset.rotatorInit = "1";
-
+  function setupAutoShuffle(section) {
     const grid = section.querySelector('.related-grid');
     if (!grid) return;
 
-    // Collect LIs produced by Liquid (must be direct children)
-    const items = Array.from(grid.children).filter(el => el.classList.contains('related-card'));
-    if (items.length === 0) return;                     // nothing to do
+    let timer = null, visible = false, pausedByUser = false;
 
-    // SAFETY: if <2, **do not touch the DOM** — keep original tiles visible
-    if (items.length < 2){
-      section.classList.remove('fade-rotator-2');       // keep normal grid styling
-      return;
+    function tick() { shuffleNodes(grid); }
+
+    function start() {
+      if (pausedByUser || !visible || timer) return;
+      timer = setInterval(tick, 2000); // 🔁 every 2s
+    }
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
     }
 
-    // Build everything off-DOM first (prevents blank state)
-    const frag = document.createDocumentFragment();
+    // Pause on hover/focus
+    section.addEventListener('mouseenter', function(){ pausedByUser = true; stop(); });
+    section.addEventListener('mouseleave', function(){ pausedByUser = false; start(); });
+    section.addEventListener('focusin',  function(){ pausedByUser = true; stop(); });
+    section.addEventListener('focusout', function(){ pausedByUser = false; start(); });
 
-    // Create exactly 2 slots
-    const pool = shuffle(items.slice());                // rotate original nodes
-    const slotsCount = Math.min(2, pool.length);
-    const slots = Array.from({length: slotsCount}, () => {
-      const s = document.createElement('div');
-      s.className = 'related-slot';
-      frag.appendChild(s);
-      return s;
-    });
-
-    function nextDifferent(slot){
-      const active = slot.querySelector('.related-card.is-active');
-      for (let i=0;i<pool.length;i++){
-        const cand = pool[0];
-        if (cand !== active) return pool.shift();
-        pool.push(pool.shift());
-      }
-      return pool.shift();
-    }
-
-    // Mount with cross-fade (no inline opacity writes that can fight CSS)
-    function mount(slot, card){
-      const old = slot.querySelector('.related-card.is-active');
-      slot.appendChild(card);
-      card.classList.add('is-active');
-      card.removeAttribute('aria-hidden');
-
-      if (old){
-        old.classList.remove('is-active');
-        old.setAttribute('aria-hidden','true');
-        old.addEventListener('transitionend', () => {
-          if (old.parentElement === slot) slot.removeChild(old);
-          pool.push(old);
-        }, { once:true });
-      } else {
-        pool.push(card);
-      }
-    }
-
-    // Seed slots off-DOM
-    for (let i=0;i<slotsCount;i++){
-      const first = pool.shift();
-      mount(slots[i], first);
-    }
-
-    // Only now swap into the live grid (no clear-before-build)
-    grid.replaceChildren(frag);
-    section.classList.add('fade-rotator-2');
-
-    // Animation loop
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let visible = false, paused = false, timer = null;
-
-    function tick(){
-      const idx = Math.floor(Math.random()*slotsCount);
-      const next = nextDifferent(slots[idx]);
-      mount(slots[idx], next);
-    }
-    function start(){ if (reduced || paused || !visible || timer) return; timer = setInterval(tick, 2000); }
-    function stop(){ if (timer){ clearInterval(timer); timer=null; } }
-
-    // Run only when in viewport
-    const io = new IntersectionObserver((entries)=>{
-      visible = entries.some(e=>e.isIntersecting);
-      visible ? start() : stop();
-    }, { threshold: 0.25 });
+    // Only run when visible
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        visible = entry.isIntersecting && entry.intersectionRatio > 0.25;
+        if (visible) start(); else stop();
+      });
+    }, { threshold: [0, 0.25] });
     io.observe(section);
 
-    // Pause on hover/touch
-    section.addEventListener('mouseenter', ()=>{ paused=true; stop(); }, {passive:true});
-    section.addEventListener('mouseleave', ()=>{ paused=false; start(); }, {passive:true});
-    section.addEventListener('touchstart', ()=>{ paused=true; stop(); }, {passive:true});
-    section.addEventListener('touchend',   ()=>{ paused=false; start(); }, {passive:true});
-
-    // Shuffle button
-    section.addEventListener('click', (e)=>{
+    // Manual Shuffle button still works
+    section.addEventListener('click', function (e) {
       const btn = e.target.closest('.related-posts .btn');
       if (!btn) return;
-      stop(); shuffle(pool); start();
+      shuffleNodes(grid);
     });
+
+    // Kick it once immediately
+    tick();
   }
 
-  // Init
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelectorAll('.related-posts').forEach(setupTwoSlotRotator);
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.related-posts').forEach(setupAutoShuffle);
   });
 })();
 </script>
-
+  
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya</p>
 </footer>
