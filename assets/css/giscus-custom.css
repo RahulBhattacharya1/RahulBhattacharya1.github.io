@@ -1,7 +1,7 @@
 :root {
   /* Base text and background */
   --color-fg-default: #111111;
-  --color-bg-default: #ffffff;
+  --color-bg-default: #ff0000;
 
   /* Softer border colors */
   --color-border-default: #e5e7eb;   /* light gray instead of black */
