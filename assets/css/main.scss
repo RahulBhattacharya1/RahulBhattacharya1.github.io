@@ -537,7 +537,7 @@ pre {
 /* ─── Related Posts: left-aligned, hover anim, mobile = 2 items ─── */
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 140px); /* desktop: small, packed tiles */
+  grid-template-columns: repeat(auto-fill, 180px); /* desktop: small, packed tiles */
   gap: 8px;
   justify-content: start;                            /* align under the heading */
   list-style: none;
@@ -545,7 +545,7 @@ pre {
   margin: 0;
 }
 
-.related-card { width: 140px; }
+.related-card { width: 180px; }
 
 .related-card a {
   display: block;
@@ -553,8 +553,8 @@ pre {
 }
 
 .related-thumb {
-  width: 140px;
-  height: 140px;              /* square */
+  width: 180px;
+  /*height: 140px;               square */
   object-fit: cover;
   border-radius: 10px;
   display: block;
