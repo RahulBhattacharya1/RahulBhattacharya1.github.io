@@ -133,13 +133,23 @@ COMMON_TIMEZONES = [
 "Asia/Kolkata","Asia/Singapore","Asia/Tokyo","Australia/Sydney"
 ]
 ```
-Load model and precompute
-=========================
+The first part of the code sets up the foundation for the planner by importing essential libraries and defining key constants. The imports are deliberately lightweight: os, re, random, and textwrap handle system tasks, regex parsing, randomness, and neat formatting. From the standard library, datetime and zoneinfo ensure the app can display time correctly in different user-selected time zones. On top of that, I use Gradio for the user interface and sentence-transformers for embedding-based intelligence.
+
+Next, I defined **FOCUS_TIPS**, a curated list of short, practical reminders that users might find helpful while planning their day—things like Pomodoro breaks, single-tasking, or protecting deep work time. These tips form the “knowledge base” that the AI embedding model will later match against the user’s stated goals.
+
+The **ENERGY_HINTS** dictionary provides context-sensitive suggestions depending on how energized the user feels (Low, Medium, High). This makes the plan more personalized, since productivity advice should adapt to the user’s state.
+
+Finally, COMMON_TIMEZONES is a small set of popular time zones. This ensures users can localize their plan no matter where they are, without scrolling through an overwhelming list of every possible timezone. Together, these constants act as the backbone of the planner’s personalization.
 
 ```python
 _MODEL = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 _TIP_EMB = _MODEL.encode(FOCUS_TIPS, normalize_embeddings=True)
 ```
+At this stage, I load the embedding model and prepare it for fast, repeated use. I chose sentence-transformers/all-MiniLM-L6-v2, a compact but powerful embedding model that strikes a good balance between accuracy and performance. At around 80–90 MB, it’s small enough to run locally or in free-tier environments like Hugging Face Spaces, while still providing high-quality semantic understanding.
+
+Once the model is loaded, I immediately precompute embeddings for the list of **FOCUS_TIPS**. Embeddings are vector representations that capture the meaning of each tip. By computing these vectors just once at startup, I avoid recalculating them every time the user interacts with the app. This drastically improves responsiveness—when a user types in their goals, the app only needs to embed that single query and compare it to the pre-stored tip embeddings, rather than embedding all tips again.
+
+The normalization step (normalize_embeddings=True) ensures that cosine similarity scores are meaningful and consistent across comparisons. With everything preprocessed, the system can instantly suggest the most relevant tip that matches the user’s context or goals. This setup turns a static list of tips into a smart, AI-driven recommendation engine with virtually no runtime overhead.
 
 ### 2) Minimal AI Helper
 
