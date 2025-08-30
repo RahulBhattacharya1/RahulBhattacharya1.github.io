@@ -285,14 +285,15 @@ body{
   gap:16px;
 }
 .related-posts.fade-rotator-2 .related-slot{
-  position:relative;   /* ← anchor absolutely positioned cards */
-  width:300px;         /* match column width */
+  position:relative;   /* anchor for absolute cards */
+  width:300px;         /* match your grid column */
   min-height:210px;
-  padding:8px;
-  border-radius:10px;
   overflow:hidden;
-  background:#fff;     /* optional, remove if you want transparent */
-  border:1px solid #e5e7eb; /* optional frame */
+  /* remove background, border, padding */
+  background:none;
+  border:none;
+  padding:0;
+  border-radius:0;
 }
 /* stack cards and cross-fade */
 .related-posts.fade-rotator-2 .related-slot > .related-card{
