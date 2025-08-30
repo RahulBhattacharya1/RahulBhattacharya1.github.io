@@ -586,15 +586,15 @@ pre {
 /* Mobile: show ONLY 2 related posts, smaller squares */
 @media (max-width: 640px) {
   .related-grid {
-    grid-template-columns: repeat(2, 96px);  /* 2 small fixed columns */
+    grid-template-columns: repeat(2, 120px);  /* 2 small fixed columns */
     gap: 6px;
     justify-content: start;                  /* align left under heading */
   }
 
-  .related-card { width: 96px; }
+  .related-card { width: 120px; }
 
   .related-thumb {
-    width: 96px;
+    width: 120px;
     height: 96px;
     object-fit: cover;
     border-radius: 8px;
@@ -607,6 +607,6 @@ pre {
   }
 
   /* Hide beyond the first 2 posts */
-  /*.related-card:nth-child(n+3) { display: none; }*/
+  .related-card:nth-child(n+3) { display: none; }
 }
 
