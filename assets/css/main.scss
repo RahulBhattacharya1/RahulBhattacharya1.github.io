@@ -1,764 +1,306 @@
 ---
 ---
-/* Desktop: stable size for avatar */
-.sidebar .avatar {
-  display: block;
-  width: 100%;
-  max-width: 250px;   /* adjust 180–240px to taste */
-  border-radius: 8px;
-  margin: 0 auto;
+/* =================== Base / Layout =================== */
+
+/* Avatar */
+.sidebar .avatar{
+  display:block;
+  width:100%;
+  max-width:250px;
+  border-radius:8px;
+  margin:0 auto;
+}
+@media (max-width:768px){
+  .sidebar .avatar{ width:80vw; max-width:none; }
 }
 
-/* Mobile: responsive avatar */
-@media (max-width: 768px) {
-  .sidebar .avatar {
-    width: 80vw;
-    max-width: none;
+/* Typography + page */
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  background:#FEFEFE;
+  line-height:1.4;
+  margin:0; padding:0;
+}
+
+/* Shell */
+.layout-wrapper{
+  display:flex; flex-direction:row; align-items:flex-start; justify-content:flex-start;
+  max-width:100%; margin:0 auto; padding:1.5rem 3rem; gap:2rem; background:#FEFEFE; flex-wrap:nowrap;
+  overflow-x:hidden; /* prevent horizontal scroll */
+}
+@media (min-width:769px){
+  .sidebar{ flex:0 0 260px; }
+  .main-content{ flex:1; }
+}
+.sidebar{ min-width:200px; }
+.main-inner{ width:100%; }
+
+/* Allow flex children to shrink (long code/lines) */
+.main-content,.sidebar,.main-inner,.page__content,.page__main,.page__body,.page__inner-wrap{ min-width:0; }
+
+/* Mobile layout */
+@media (max-width:768px){
+  .layout-wrapper{ flex-direction:column; }
+  .sidebar,.main-content{ width:100%; }
+
+  .page__content,.page__inner-wrap,.page,.layout--single .page,.archive,.post,.page__main,.page__body{
+    width:100%!important; max-width:100%!important; padding:0 1rem!important;
+  }
+  .sidebar__inner{ padding:1rem; }
+  .author__avatar,.author__bio{ text-align:center; }
+}
+
+/* Desktop content width override */
+@media (min-width:769px){
+  .page__inner-wrap,.page,.page__main,.page__content{
+    max-width:100%!important; width:100%!important; padding-left:2rem; padding-right:2rem;
   }
 }
 
-/* Font and smoothing */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  background-color: #FEFEFE;
-  line-height: 1.4;
-  margin: 0;
-  padding: 0;
+/* =================== Post Header + Hero =================== */
+
+.post-header{ margin-bottom:1.5rem; }
+.post-title{ font-family:"Source Serif 4",Georgia,"Times New Roman",serif; font-weight:600; font-size:2rem; line-height:1.2; margin:0 0 .25rem; }
+
+.post-meta{
+  color:#666; font-size:.95rem; margin:0 0 .75rem;
+  display:flex; align-items:center; gap:8px;
 }
 
-/* ──────────────── GLOBAL STYLES ──────────────── */
+.post-hero{ margin:0 0 1rem; }
+.post-hero img{ display:block; width:100%; height:auto; border-radius:8px; }
+.post-hero__caption{ display:block; text-align:center; color:#888; font-size:.95rem; margin-top:.5rem; }
 
-.layout-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;  /* ← changed from space-between to stop right-shift */
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 1.5rem 3rem;
-  background-color: #FEFEFE;
-  gap: 2rem;                    /* provides consistent spacing */
-  flex-wrap: nowrap;
+/* =================== Lists / Cards =================== */
+
+.featured,.posts{ margin-bottom:2rem; }
+.featured h2,.posts h2{ font-family:"Source Serif 4",Georgia,"Times New Roman",serif; font-weight:600; border-bottom:2px solid #ccc; padding-bottom:.5rem; }
+
+.featured ul,.posts ul{ list-style:none; margin:0; padding:0; }
+.post-item{
+  display:flex; gap:1rem; margin-bottom:1.5rem; align-items:flex-start;
 }
-
-@media (min-width: 769px) {
-  .sidebar { flex: 0 0 260px; }  /* fixed 260px column (tweak to 220–300px if you like) */
-  .main-content { flex: 1; }     /* main area takes the remaining space */
+.post-item img{
+  width:160px; height:100px; object-fit:cover; border-radius:8px; flex-shrink:0; display:block;
 }
-.sidebar {
-  /*width: 20%;*/
-  min-width: 200px;
-}
+.post-text{ flex:1; }
 
-.main-content {
-  /*width: 80%;*/
-}
-
-.main-inner {
-  width: 100%;
-}
-
-.featured,
-.posts {
-  margin-bottom: 2rem;
-}
-
-.featured h2,
-.posts h2 {
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 0.5rem;
-}
-
-.post-item {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  align-items: flex-start;
-}
-
-.post-item img {
-  width: 160px;        /* one consistent width */
-  height: 100px;       /* one consistent height */
-  object-fit: cover;   /* crop to fit box, no stretch */
-  border-radius: 8px;
-  flex-shrink: 0;
-  display: block;      /* removes inline-img baseline gap */
-}
-
-.post-text {
-  flex: 1;
-}
-
-/* ──────────────── MOBILE STYLES ──────────────── */
-@media screen and (max-width: 768px) {
-  .layout-wrapper {
-    flex-direction: column;
-  }
-
-  .sidebar,
-  .main-content {
-    width: 100%;
-  }
-
-  .page__content,
-  .page__inner-wrap,
-  .page,
-  .layout--single .page,
-  .archive,
-  .post,
-  .page__main,
-  .page__body {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 1rem !important;
-  }
-
-  .sidebar__inner {
-    padding: 1rem;
-  }
-
-  .author__avatar,
-  .author__bio {
-    text-align: center;
+@media (max-width:768px){
+  .featured .post-item img,.posts .post-item img{
+    width:20vw!important; aspect-ratio:16/9; height:auto;
   }
 }
 
-/* ──────────────── DESKTOP WIDTH OVERRIDE ──────────────── */
-@media screen and (min-width: 769px) {
-  .page__inner-wrap,
-  .page,
-  .page__main,
-  .page__content {
-    max-width: 100% !important;
-    width: 100% !important;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+/* =================== Social Icons (sidebar) =================== */
+
+.sidebar .social-icons{ display:flex; gap:.75rem; margin:.5rem 0 0; padding:0; list-style:none; }
+.sidebar .social-icons a{
+  display:inline-flex; align-items:center; justify-content:center; background:none!important;
+  border-radius:0!important; padding:0!important; transition:transform .15s ease;
+}
+.sidebar .social-icons a svg{ width:24px; height:24px; fill:#666; transition:fill .2s ease; }
+.sidebar .social-icons a:hover svg{ fill:#000!important; transform:translateY(-2px); }
+
+/* =================== Post Body =================== */
+
+.is-post .main-inner{ color:#737373; }
+.is-post .main-inner > p{ text-indent:2em; margin-top:0; }
+.is-post .post-header p,.is-post .post-hero__caption,.is-post .main-inner li p{ text-indent:0; }
+.is-post .main-inner img{ width:75%!important; height:auto; display:block; margin:1rem auto; }
+@media (max-width:768px){ .is-post .main-inner img{ width:100%!important; } }
+
+/* =================== Buttons / Footer =================== */
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.55rem .9rem; border-radius:8px; border:1px solid #e5e5e5; background:#fafafa;
+  font:inherit; cursor:pointer; transition:transform .12s ease, background .2s ease, border-color .2s ease;
+}
+.btn:hover{ background:#f0f0f0; transform:translateY(-1px); }
+.btn:active{ transform:translateY(0); }
+
+.btn--share{
+  background:#1877f2; color:#fff; border:none; font-size:.75rem; padding:2px 8px; line-height:1.2; border-radius:4px; text-decoration:none;
+}
+.btn--share:hover{ background:#145dbf; }
+
+.site-footer{
+  text-align:center; font-size:.9rem; color:#666; padding:2rem 1rem; border-top:1px solid #e5e5e5; margin-top:3rem;
 }
 
-/* Post title + hero image */
-.post-header { margin-bottom: 1.5rem; }
-.post-title  { font-size: 2rem; line-height: 1.2; margin: 0 0 0.25rem; }
+/* =================== Code Blocks =================== */
 
-.post-meta {
-  color: #666;
-  font-size: 0.95rem;
-  margin: 0 0 0.75rem;
+.highlighter-rouge pre,.highlight pre,pre{
+  white-space:pre; overflow-x:auto; max-width:100%; box-sizing:border-box;
+}
+.highlight{
+  background:#f8f8f8; border:0 solid #e5e5e5; border-radius:8px; margin:1.25rem 0; overflow:hidden;
+}
+.highlight .k{ color:#d73a49; }     /* keywords */
+.highlight .nf{ color:#6f42c1; }    /* function names */
+.highlight .nb{ color:#005cc5; }    /* builtins */
+.highlight .s{ color:#032f62; }     /* strings */
+.highlight .c{ color:#6a737d; font-style:italic; } /* comments */
 
-  display: flex;
-  align-items: center;
-  gap: 8px; /* space between date and button */
+.code-header{
+  display:flex; align-items:center; justify-content:space-between; gap:.5rem;
+  background:#f6f8fa; border-bottom:1px solid #e5e5e5; padding:6px 10px; font-size:12.5px; color:#57606a;
+}
+.code-lang{ text-transform:lowercase; letter-spacing:.2px; }
+.code-copy{
+  display:inline-flex; align-items:center; gap:.4rem; padding:3px 8px;
+  font:inherit; font-size:12.5px; color:#57606a; background:#fff; border:1px solid #d0d7de; border-radius:6px; cursor:pointer;
+}
+.code-copy:hover{ background:#f3f4f6; }
+.code-copy:active{ background:#edeff2; }
+.code-copy svg{ width:14px; height:14px; fill:currentColor; }
+
+.highlight pre{
+  margin:0; padding:12px 14px; background:transparent; overflow-x:auto;
+  font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace; font-size:.9rem; line-height:1.5; border-radius:0 0 8px 8px;
 }
 
-.post-hero img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
+/* =================== Mobile Glass Bar & Overlay =================== */
 
-.post-hero {
-  margin: 0 0 1rem;
-}
+[hidden]{ display:none!important; }
 
-.post-hero__caption {
-  display: block;
-  text-align: center;
-  color: #888;         /* light grey */
-  font-size: 0.95rem;
-  margin-top: 0.5rem;  /* sits just below the image */
-}
-
-.sidebar .social-icons {
-  display: flex;
-  gap: 0.75rem;
-  margin: 0.5rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.sidebar .social-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  transition: transform .15s ease;
-}
-
-.sidebar .social-icons a svg {
-  width: 24px;
-  height: 24px;
-  fill: #666;   /* subtle gray */
-  transition: fill 0.2s ease;
-}
-
-/* Monochrome hover */
-.sidebar .social-icons a:hover svg {
-  fill: #000 !important;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .featured .post-item img,
-  .posts .post-item img {
-    width: 20vw !important;
-    aspect-ratio: 16 / 9; /* or 1 / 1 */
-    height: auto;
-  }
-}
-
-/* Remove default UL indent so items align with the header */
-.featured ul,
-.posts ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;              /* or padding-inline-start: 0; */
-}
-
-/* Ensure each list item has no stray left offset */
-.featured .post-item,
-.posts .post-item {
-  margin-left: 0;
-  padding-left: 0;
-}
-
-/* Use Source Serif 4 for headings (Inter already used for body) */
-.post-title,
-.featured h2,
-.posts h2 {
-  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
-  font-weight: 600;
-}
-
-/* Posts: body text color + paragraph indent */
-.is-post .main-inner {
-  color: #737373;            /* post body text color */
-}
-
-/* Indent the first line of each content paragraph */
-.is-post .main-inner > p {
-  text-indent: 2em;          /* ~a “tab” */
-  margin-top: 0;             /* avoid extra jump after the header */
-}
-
-/* Don’t indent meta/captions or list items */
-.is-post .post-header p,
-.is-post .post-hero__caption,
-.is-post .main-inner li p {
-  text-indent: 0;
-}
-
-/* Post body images: 75% on desktop, full-width on mobile */
-.is-post .main-inner img {
-  width: 75% !important;
-  height: auto;
-  display: block;
-  margin: 1rem auto; /* center it */
-}
-
-@media (max-width: 768px) {
-  .is-post .main-inner img {
-    width: 100% !important; /* easier to view on phones */
-  }
-}
-
-/* Sidebar bio text */
-.bio {
-  color: #737373;
-  font-size: 0.9rem;   /* ~14–15px on most browsers */
-  line-height: 1.5;    /* keeps it readable */
-}
-
-/* Generic button + “Share” variant */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: .55rem .9rem;
-  border-radius: 8px;
-  border: 1px solid #e5e5e5;
-  background: #fafafa;
-  font: inherit;
-  cursor: pointer;
-  transition: transform .12s ease, background .2s ease, border-color .2s ease;
-}
-.btn:hover { background: #f0f0f0; transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
-
-.btn--share {
-  background: #1877f2;
-  color: #fff;
-  border: none;
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  line-height: 1.2;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
-.btn--share:hover {
-  background: #145dbf;
-}
-
-.site-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #666;
-  padding: 2rem 1rem;
-  border-top: 1px solid #e5e5e5;
-  margin-top: 3rem;
-}
-
-/* ──────────────── FLEX + CODEBLOCK OVERFLOW FIX ──────────────── */
-
-/* Let flex children shrink so long code lines don't blow out layout */
-.main-content,
-.sidebar,
-.main-inner,
-.page__content,
-.page__main,
-.page__body,
-.page__inner-wrap {
-  min-width: 0;   /* critical: allows shrinking inside flex */
-}
-
-/* Prevent outer flex container from creating horizontal scrollbar */
-.layout-wrapper {
-  overflow-x: hidden;
-}
-
-/* Ensure code blocks scroll horizontally instead of widening the page */
-.highlighter-rouge pre,
-.highlight pre,
-pre {
-  white-space: pre;      /* preserve code formatting */
-  overflow-x: auto;      /* horizontal scroll when needed */
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* ───────── CODE HEADER (GitHub-like) ───────── */
-.highlight {
-  background: #f8f8f8;
-  border: 0px solid #e5e5e5;
-  border-radius: 8px;
-  margin: 1.25rem 0;
-  overflow: hidden;          /* so header rounds with the box */
-}
-.highlight .k { color: #d73a49; } /* keywords like def, if */
-.highlight .nf { color: #6f42c1; } /* function names */
-.highlight .nb { color: #005cc5; } /* built-in names */
-.highlight .s { color: #032f62; } /* strings */
-.highlight .c { color: #6a737d; font-style: italic; } /* comments */
-
-/* header bar */
-.code-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .5rem;
-  background: #f6f8fa;
-  border-bottom: 1px solid #e5e5e5;
-  padding: 6px 10px;
-  font-size: 12.5px;
-  color: #57606a;
-}
-
-/* language label */
-.code-lang {
-  text-transform: lowercase;
-  letter-spacing: .2px;
-}
-
-/* copy button (icon + label) */
-.code-copy {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  padding: 3px 8px;
-  font: inherit;
-  font-size: 12.5px;
-  color: #57606a;
-  background: #ffffff;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.code-copy:hover { background: #f3f4f6; }
-.code-copy:active { background: #edeff2; }
-
-.code-copy svg {
-  width: 14px; height: 14px;
-  fill: currentColor;
-}
-
-/* code area */
-.highlight pre {
-  margin: 0;
-  padding: 12px 14px;
-  background: transparent;
-  overflow-x: auto;
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  border-radius: 0 0 8px 8px; 
-}
-
-/* ── Mobile Glass Bottom Tab Bar (polished) ───────────────────────── */
-[hidden]{display:none!important;}
-
-@media (max-width: 768px) {
-  body{ padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+@media (max-width:768px){
+  body{ padding-bottom:calc(84px + env(safe-area-inset-bottom)); }
 
   .mobile-glassbar{
-    position: fixed; left: 0; right: 0; bottom: 0;
-    z-index: 11000;
-    display: flex; align-items: center; justify-content: center;
-    padding: 10px max(16px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
-    pointer-events: none; /* sheet effect container */
-    isolation: isolate;
+    position:fixed; left:0; right:0; bottom:0; z-index:11000;
+    display:flex; align-items:center; justify-content:center;
+    padding:10px max(16px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-right));
+    pointer-events:none; isolation:isolate;
   }
-
   .mobile-glassbar::before{
-    content:""; position: absolute; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom));
-    height: 64px; border-radius: 18px;
-    background: rgba(255,255,255,0.06);  /* set transparency */
-    backdrop-filter: saturate(180%) blur(6px);
-    -webkit-backdrop-filter: saturate(180%) blur(6px);
-    box-shadow: 0 2px 10px rgba(0,0,0,.08);
-    pointer-events: none;
-    border: 1px solid rgba(255,255,255,0.28);
+    content:""; position:absolute; left:12px; right:12px; bottom:calc(10px + env(safe-area-inset-bottom));
+    height:64px; border-radius:18px; background:rgba(255,255,255,.06);
+    backdrop-filter:saturate(180%) blur(6px); -webkit-backdrop-filter:saturate(180%) blur(6px);
+    box-shadow:0 2px 10px rgba(0,0,0,.08); pointer-events:none; border:1px solid rgba(255,255,255,.28);
   }
-
   .mobile-glassbar .bar-btn{
-    pointer-events: auto;
-    -webkit-appearance: none; appearance: none; border: 0; background: transparent !important;
-    flex: 1 1 0; min-width: 0;
-    position: relative; z-index: 1;
-    height: 64px; margin: 0 6px;
-    border-radius: 14px;
-    display: inline-flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 6px;
-    text-decoration: none; color: #111;
-    font-size: 11.5px; font-weight: 600; line-height: 1;
-    padding: 0 6px;
-    transition: transform .08s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+    pointer-events:auto; appearance:none; border:0; background:transparent!important;
+    flex:1 1 0; min-width:0; position:relative; z-index:1; height:64px; margin:0 6px; border-radius:14px;
+    display:inline-flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    text-decoration:none; color:#111; font-size:11.5px; font-weight:600; line-height:1; padding:0 6px;
+    transition:transform .08s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
   }
-  .mobile-glassbar .bar-btn:link,
-  .mobile-glassbar .bar-btn:visited{ color:#111; text-decoration:none; }
-  .mobile-glassbar .bar-btn:hover{ background: rgba(255,255,255,.06); }  /* Set transparency */
-  .mobile-glassbar .bar-btn:active{ transform: translateY(1px); }
+  .mobile-glassbar .bar-btn:link,.mobile-glassbar .bar-btn:visited{ color:#111; text-decoration:none; }
+  .mobile-glassbar .bar-btn:hover{ background:rgba(255,255,255,.06); }
+  .mobile-glassbar .bar-btn:active{ transform:translateY(1px); }
+  .mobile-glassbar .bar-btn svg{ width:22px; height:22px; display:block; fill:currentColor; }
 
-  .mobile-glassbar .bar-btn svg{
-    width: 22px; height: 22px; display:block; fill: currentColor;
-  }
+  .mobile-glassbar .bar-btn.is-active{ color:#f97316; background:rgba(255,255,255,.14); box-shadow:0 2px 6px rgba(0,0,0,.08); }
 
-  /* Active tab “pill” */
-  .mobile-glassbar .bar-btn.is-active{
-    color: #f97316;
-    background: rgba(255,255,255,0.14);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  }
-
-  /* Posts overlay sheet (unchanged functionality, prettier) */
-  .posts-overlay{ position: fixed; inset:0; background: rgba(0,0,0,.1); z-index: 10020; } /* Background dim on clicking More */
+  .posts-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.1); z-index:10020; }
   .posts-sheet{
-	width: 60%;               /* or max-width: 400px; */
-	max-height: 72vh;
-	overflow: auto;
-    position: absolute; right: 15px; bottom: calc(80px + env(safe-area-inset-bottom));
-    max-height: 72vh; overflow:auto;
-    background: rgba(255,255,255,.75);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border-top-left-radius: 20px; border-top-right-radius: 20px;
-    box-shadow: 0 -18px 30px rgba(0,0,0,.22);
-    padding: 14px 16px calc(18px + env(safe-area-inset-bottom))
-	}
-  .posts-sheet__header{ display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background: transparent; padding-bottom:8px; z-index:1; }
+    width:60%; max-height:72vh; overflow:auto;
+    position:absolute; right:15px; bottom:calc(80px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    border-top-left-radius:20px; border-top-right-radius:20px;
+    box-shadow:0 -18px 30px rgba(0,0,0,.22);
+    padding:14px 16px calc(18px + env(safe-area-inset-bottom));
+  }
+  .posts-sheet__header{ display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:transparent; padding-bottom:8px; z-index:1; }
   .posts-sheet__header h3{ margin:4px 0; font-size:16px; }
-  .close-posts{ appearance:none; border:1px solid rgba(0,0,0,.12); background: transparent; border-radius:10px; padding:6px 10px; }
+  .close-posts{ appearance:none; border:1px solid rgba(0,0,0,.12); background:transparent; border-radius:10px; padding:6px 10px; }
+
   .posts-list{ list-style:none; margin:8px 0 0; padding:0; }
   .posts-list li{ padding:12px 0; border-bottom:1px dashed rgba(0,0,0,.12); }
-    /* Posts overlay list – softer look */
-  .posts-list a {
-    display: block;
-    font-size: 0.95rem;         /* slightly smaller than body */
-    font-weight: 300;           /* thin/slim */
-    color: #555;                /* soft gray */
-    text-decoration: none;
-    padding: 4px 0;
-    transition: color .2s ease;
-  }
-  .posts-list a:active {
-    color: #000;      /* darker while finger is pressing */
-  }
+  .posts-list a{ display:block; font-size:.95rem; font-weight:300; color:#555; text-decoration:none; padding:4px 0; transition:color .2s ease; }
+  .posts-list a:active{ color:#000; }
 }
 
-/* Hide the bar on large screens */
-@media (min-width: 1024px){ .mobile-glassbar{ display:none; } }
+/* Hide glass bar on large screens */
+@media (min-width:1024px){ .mobile-glassbar{ display:none; } }
 
-@media (max-width: 768px) {
-  /* wave container matches your glass pill bounds */
+/* Wave overlay */
+@media (max-width:768px){
   .mobile-glassbar .bar-wave{
-    position: fixed;
-    left: 12px; right: 12px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    height: 64px;
-    border-radius: 18px;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .2s ease;
-    z-index: 11001; /* just above the pill */
+    position:fixed; left:12px; right:12px; bottom:calc(10px + env(safe-area-inset-bottom));
+    height:64px; border-radius:18px; overflow:hidden; pointer-events:none; opacity:0; transition:opacity .2s ease; z-index:11001;
   }
-  .mobile-glassbar.is-waving .bar-wave{ opacity: 1; }
-
-  .mobile-glassbar .bar-wave svg{
-    position: absolute; inset: 0;
-    width: 220%; /* wider so the wave can sweep */
-    height: 100%;
-    transform: translateX(-110%); /* start off-screen left */
-  }
-  .mobile-glassbar.is-waving .bar-wave svg{
-    animation: wave-sweep 900ms ease-out forwards;
-  }
-
-  @keyframes wave-sweep {
-    from { transform: translateX(-110%); }
-    to   { transform: translateX(0%); }
-  }
+  .mobile-glassbar.is-waving .bar-wave{ opacity:1; }
+  .mobile-glassbar .bar-wave svg{ position:absolute; inset:0; width:220%; height:100%; transform:translateX(-110%); }
+  .mobile-glassbar.is-waving .bar-wave svg{ animation:wave-sweep 900ms ease-out forwards; }
+  @keyframes wave-sweep{ from{ transform:translateX(-110%);} to{ transform:translateX(0%);} }
 }
 
-/* ─── Related Posts: left-aligned, hover anim, mobile = 2 items ─── */
-.related-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 180px); /* desktop: small, packed tiles */
-  gap: 8px;
-  justify-content: start;                            /* align under the heading */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+/* =================== Giscus tweak =================== */
+.giscus,.giscus-frame{ display:block; }
+.giscus-frame{ clip-path:inset(46px 0 0 0); }
+.giscus{ margin-top:6px; }
 
-.related-card { width: 180px; }
+/* =================== Related Posts =================== */
 
-.related-card a {
-  display: block;
-  text-decoration: none;
-}
-
-.related-thumb {
-  width: 180px;
-  /*height: 140px;               square */
-  object-fit: cover;
-  border-radius: 10px;
-  display: block;
-  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-  transform-origin: center;
-}
-
-.related-card a:hover .related-thumb,
-.related-card a:focus .related-thumb {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 18px rgba(0,0,0,.14);
-}
-
-.related-title {
-  display: block;
-  margin-top: 6px;
-  font-size: .65rem;
-  line-height: 1.25;
-  color: #737373;
-}
-
-/* Respect reduced-motion users */
-@media (prefers-reduced-motion: reduce) {
-  .related-thumb { transition: none; }
-  .related-card a:hover .related-thumb,
-  .related-card a:focus .related-thumb { transform: none; box-shadow: none; }
-}
-
-/* Mobile: show ONLY 2 related posts, smaller squares */
-@media (max-width: 640px) {
-  .related-grid {
-    grid-template-columns: repeat(2, 120px);  /* 2 small fixed columns */
-    gap: 6px;
-    justify-content: start;                  /* align left under heading */
-  }
-
-  .related-card { width: 120px; }
-
-  .related-thumb {
-    width: 120px;
-    height: 96px;
-    object-fit: cover;
-    border-radius: 8px;
-    display: block;
-  }
-
-  .related-title {
-    font-size: 0.75rem;   /* a bit smaller for mobile */
-    margin-top: 4px;
-  }
-
-	.related-posts:not(.fade-rotator-2) .related-card:nth-child(n+3) { display: none; }
-
-}
-
-.related-head {
-  display: flex;
-  align-items: center;   /* vertically center button with heading */
-  gap: 10px;             /* space between heading and button */
-  margin-bottom: 8px;
-}
-.related-head h3 { margin: 0; }
-
-/* Hide the in-iframe "0 comments" line by cropping the iframe top */
-.giscus, .giscus-frame {
-  display: block;
-}
-.giscus-frame {
-  /* Crop ~22–28px depending on theme; tweak as needed */
-  clip-path: inset(46px 0 0 0);
-}
-
-/* Optional: add a little top margin so the cropped box breathes */
-.giscus {
-  margin-top: 6px;
-}
-
-/* ── Related Posts: 2-slot cross-fade (scoped) ───────────────────────── */
-.related-posts.fade-rotator-2 .related-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* always 2 slots */
-  gap: 12px;
-}
-
-/* Each grid cell becomes a "slot" that stacks cards and cross-fades them */
-.related-posts.fade-rotator-2 .related-slot {
-  position: relative;
-  min-height: 210px;                 /* adjust to your card height */
-  border: 1px solid var(--color-border-default, #e5e7eb);
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--color-bg-default, #fff);
-  padding: 8px;
-}
-
-/* Cards stack in a slot; only the active one is visible */
-.related-posts.fade-rotator-2 .related-slot > .related-card {
-  position: absolute;
-  inset: 8px;                        /* accounts for slot padding */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 480ms ease;
-  display: grid;
-  grid-template-columns: 120px 1fr;  /* thumb + text; tweak if needed */
-  gap: 10px;
-  align-items: center;
-}
-
-/* Active card is the one you can see/click */
-.related-posts.fade-rotator-2 .related-slot > .related-card.is-active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Make thumbnails sane in the rotator (override fixed widths above) */
-.related-posts.fade-rotator-2 .related-slot .related-thumb {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-/* Keep 2 slots even on phones (remove if you prefer 1 on mobile) */
-@media (max-width: 640px) {
-  .related-posts.fade-rotator-2 .related-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-  .related-posts.fade-rotator-2 .related-slot { min-height: 180px; padding: 6px; }
-  .related-posts.fade-rotator-2 .related-slot > .related-card {
-    grid-template-columns: 1fr;      /* stack image above title on small screens */
-    inset: 6px;
-  }
-}
-
-/* ── Related Posts: 2-slot cross-fade (scoped) ───────────────────────── */
-.related-posts.fade-rotator-2 .related-grid{
+/* Default tile grid (non-rotator) */
+.related-grid{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+  grid-template-columns:repeat(auto-fill,180px);
+  gap:8px;
+  justify-content:start;
+  list-style:none; padding:0; margin:0;
+}
+.related-card{ width:180px; }
+.related-card a{ display:block; text-decoration:none; }
+.related-thumb{
+  width:180px; object-fit:cover; border-radius:10px; display:block;
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  transform-origin:center;
+}
+.related-card a:hover .related-thumb,.related-card a:focus .related-thumb{
+  transform:translateY(-2px) scale(1.04);
+  box-shadow:0 8px 18px rgba(0,0,0,.14);
+}
+.related-title{ display:block; margin-top:6px; font-size:.65rem; line-height:1.25; color:#737373; }
+
+.related-head{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.related-head h3{ margin:0; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .related-thumb{ transition:none; }
+  .related-card a:hover .related-thumb,.related-card a:focus .related-thumb{ transform:none; box-shadow:none; }
 }
 
+/* Mobile: show only first 2 tiles when NOT in rotator mode */
+@media (max-width:640px){
+  .related-grid{ grid-template-columns:repeat(2,120px); gap:6px; justify-content:start; }
+  .related-card{ width:120px; }
+  .related-thumb{ width:120px; height:96px; object-fit:cover; border-radius:8px; display:block; }
+  .related-title{ font-size:.75rem; margin-top:4px; }
+  .related-posts:not(.fade-rotator-2) .related-card:nth-child(n+3){ display:none; }
+}
+
+/* ---------- 2-slot cross-fade rotator (scoped) ---------- */
+.related-posts.fade-rotator-2 .related-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;
+}
 .related-posts.fade-rotator-2 .related-slot{
   position:relative;
-  min-height:210px;
-  border:1px solid var(--color-border-default,#e5e7eb);
-  border-radius:10px;
+  min-height:210px;                 /* keeps layout stable while fading */
   overflow:hidden;
-  background:var(--color-bg-default,#fff);
-  padding:8px;
+  /* No border/background -> avoids the “white box” look */
 }
-
-/* cards stack in each slot and cross-fade */
 .related-posts.fade-rotator-2 .related-slot > .related-card{
-  position:absolute;
-  inset:8px;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 480ms ease;
-  display:grid;
-  grid-template-columns:120px 1fr;
-  gap:10px;
-  align-items:center;
+  position:absolute; inset:0;
+  opacity:0; pointer-events:none; transition:opacity 480ms ease;
+  display:grid; grid-template-columns:120px 1fr; gap:10px; align-items:center; padding:8px;
 }
-
-/* active one is visible & clickable */
 .related-posts.fade-rotator-2 .related-slot > .related-card.is-active{
-  opacity:1;
-  pointer-events:auto;
+  opacity:1; pointer-events:auto;
 }
-
-/* thumbnails inside rotator should fill their space */
 .related-posts.fade-rotator-2 .related-slot .related-thumb{
-  width:100%;
-  height:auto;
-  border-radius:8px;
-  object-fit:cover;
+  width:100%; height:auto; border-radius:8px; object-fit:cover;
 }
 
-/* keep 2 slots on phones; stack image over title */
 @media (max-width:640px){
-  .related-posts.fade-rotator-2 .related-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
-  }
-  .related-posts.fade-rotator-2 .related-slot{ min-height:180px; padding:6px; }
-  .related-posts.fade-rotator-2 .related-slot > .related-card{ grid-template-columns:1fr; inset:6px; }
-}
-
-.related-slot {
-  position: relative;
-  width: 180px;       /* same as your card width */
-  height: 140px;      /* match thumbnail height */
-  overflow: hidden;   /* hide stacked cards during fade */
-  border-radius: 10px;
-}
-
-.related-slot .related-card {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-.related-slot .related-card.is-active {
-  opacity: 1;
+  .related-posts.fade-rotator-2 .related-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+  .related-posts.fade-rotator-2 .related-slot{ min-height:180px; }
+  .related-posts.fade-rotator-2 .related-slot > .related-card{ grid-template-columns:1fr; padding:6px; }
 }
