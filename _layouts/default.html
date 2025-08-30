@@ -207,7 +207,7 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
     {% endfor %}
   {% endif %}
 
-  {% assign related = related | uniq | sort: "date" | reverse | slice: 0, 4 %}
+  {% assign related = related | uniq | sort: "date" | reverse | slice: 0, 2 %}
 
   {% if related != empty %}
     <section class="related-posts" aria-label="Related Posts">
@@ -595,7 +595,7 @@ fill="#000000" stroke="none">
     items = fisherYatesShuffle(items);
 
     // Build 4 slots (or fewer if not enough items)
-    const slotsCount = Math.min(4, items.length);
+    const slotsCount = Math.min(2, items.length);
     grid.innerHTML = '';
     const slots = Array.from({ length: slotsCount }, () => {
       const s = document.createElement('div');
