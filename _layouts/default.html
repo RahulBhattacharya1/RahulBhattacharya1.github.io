@@ -191,6 +191,42 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
   {{ content }}
 {% endif %}
 
+{% if page.collection == "posts" and page.related != false %}
+  {% assign pool = site.posts | where_exp: "p", "p.url != page.url" %}
+  {% assign related = "" | split: "" %}
+
+  {% if page.tags and page.tags != empty %}
+    {% for t in page.tags %}
+      {% assign hits = pool | where_exp: "p", "p.tags contains t" %}
+      {% assign related = related | concat: hits %}
+    {% endfor %}
+  {% elsif page.categories and page.categories != empty %}
+    {% for c in page.categories %}
+      {% assign hits = pool | where_exp: "p", "p.categories contains c" %}
+      {% assign related = related | concat: hits %}
+    {% endfor %}
+  {% endif %}
+
+  {% assign related = related | uniq | sort: "date" | reverse | slice: 0, 3 %}
+
+  {% if related != empty %}
+    <section class="related-posts" aria-label="Related Posts">
+      <h3>Related Posts</h3>
+      <ul class="related-grid">
+        {% for p in related %}
+          {% assign img = p.thumbnail | default: '/assets/images/default.jpg' %}
+          <li class="related-card">
+            <a href="{{ p.url | relative_url }}" aria-label="{{ p.title }}">
+              <img class="related-thumb" src="{{ img }}" alt="{{ p.title }}">
+              <span class="related-title">{{ p.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+{% endif %}
+        
 {%- if page.comments != false -%}
 <script src="https://giscus.app/client.js"
   data-repo="RahulBhattacharya1/RahulBhattacharya1.github.io"
