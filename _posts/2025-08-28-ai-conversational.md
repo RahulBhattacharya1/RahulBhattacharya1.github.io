@@ -915,5 +915,3 @@ Closing tips
 *   **Change the blocks** in the Planner to match your daily routine (or remove any line you don’t want).
     
 *   **Speed**: the embedding model is small (~80–90 MB). On first run it downloads once; subsequent launches are faster.
-    
----
