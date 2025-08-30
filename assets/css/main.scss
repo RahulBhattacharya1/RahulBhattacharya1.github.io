@@ -744,3 +744,21 @@ pre {
   .related-posts.fade-rotator-2 .related-slot > .related-card{ grid-template-columns:1fr; inset:6px; }
 }
 
+.related-slot {
+  position: relative;
+  width: 180px;       /* same as your card width */
+  height: 140px;      /* match thumbnail height */
+  overflow: hidden;   /* hide stacked cards during fade */
+  border-radius: 10px;
+}
+
+.related-slot .related-card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.related-slot .related-card.is-active {
+  opacity: 1;
+}
