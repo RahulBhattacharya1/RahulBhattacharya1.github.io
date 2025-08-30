@@ -554,13 +554,14 @@ This dual setup keeps the project flexible: the exact same code works whether yo
 Example Chats
 -------------
 
-**You:** I want to run today**Bot:** Got it! I captured: run. How many minutes are you thinking?
+**You:** I want to run today **Bot:** Got it! I captured: run. How many minutes are you thinking?
 
-**You:** make it 20 minutes, evening, fast only**Bot:** On it! I captured: run • hard • 20 min • in the evening.
+**You:** make it 20 minutes, evening, fast only **Bot:** On it! I captured: run • hard • 20 min • in the evening.
 
-**You:** walk only**Bot:** Sounds good! I captured: walk • hard • 20 min • in the evening.
+**You:** walk only **Bot:** Sounds good! I captured: walk • hard • 20 min • in the evening.
 
-**You:** reset**Bot:** All set to start fresh! What do you feel like doing today? 🙂
+**You:** reset **Bot:** All set to start fresh! What do you feel like doing today? 🙂
+
 To show how the planner feels in practice, I included a few sample conversations. These highlight how the chatbot listens, extracts details, and gently asks for missing information.
 
 In the first example, the user says: “I want to run today.” The bot recognizes the activity (run) but notices that duration and intensity are missing. Instead of making assumptions, it politely follows up with: “How many minutes are you thinking? ⏱️” This demonstrates the incremental way the bot builds a complete plan.
