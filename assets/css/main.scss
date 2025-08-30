@@ -540,10 +540,10 @@ pre {
 .related-grid {
   list-style: none; padding: 0; margin: 0;
   display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
+  gap: 4px;
 }
 .related-card a { display: block; text-decoration: none; 
-width: 120px; /* Thumbnail size */
+width: 140px; /* Thumbnail size */
 }
 .related-thumb {
   width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
