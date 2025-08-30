@@ -632,3 +632,34 @@ pre {
   margin-top: 6px;
 }
 
+/* ── Cross-fade mode for Related Posts ── */
+.related-posts.fade-rotator .related-grid {
+  position: relative;
+  min-height: 230px; /* steady height; adjust to your card height */
+  /* layout inside each card handled on the li itself */
+}
+
+.related-posts.fade-rotator .related-card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 480ms ease;
+  display: grid;
+  grid-template-columns: 160px 1fr; /* thumb + text */
+  gap: 12px;
+  align-items: center;
+  padding: 8px; /* matches your card spacing */
+}
+
+.related-posts.fade-rotator .related-card.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .related-posts.fade-rotator .related-card {
+    grid-template-columns: 1fr;
+  }
+}
+
