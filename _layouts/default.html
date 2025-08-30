@@ -193,21 +193,24 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
 
 {% if page.collection == "posts" and page.related != false %}
   {% assign pool = site.posts | where_exp: "p", "p.url != page.url" %}
-  {% assign related = "" | split: "" %}
+{% assign related = "" | split: "" %}
 
-  {% if page.tags and page.tags != empty %}
-    {% for t in page.tags %}
-      {% assign hits = pool | where_exp: "p", "p.tags contains t" %}
-      {% assign related = related | concat: hits %}
-    {% endfor %}
-  {% elsif page.categories and page.categories != empty %}
-    {% for c in page.categories %}
-      {% assign hits = pool | where_exp: "p", "p.categories contains c" %}
-      {% assign related = related | concat: hits %}
-    {% endfor %}
-  {% endif %}
+{% if page.tags and page.tags != empty %}
+  {% for t in page.tags %}
+    {% assign hits = pool | where_exp: "p", "p.tags contains t" %}
+    {% assign related = related | concat: hits %}
+  {% endfor %}
+{% endif %}
 
-  {% assign related = related | uniq | sort: "date" | reverse | slice: 0, 2 %}
+{% if page.categories and page.categories != empty %}
+  {% for c in page.categories %}
+    {% assign hits = pool | where_exp: "p", "p.categories contains c" %}
+    {% assign related = related | concat: hits %}
+  {% endfor %}
+{% endif %}
+
+/* Dedup + sort; pull up to 20 so JS has room to rotate */
+{% assign related = related | uniq | sort: "date" | reverse | slice: 0, 20 %}
 
   {% if related != empty %}
     <section class="related-posts" aria-label="Related Posts">
