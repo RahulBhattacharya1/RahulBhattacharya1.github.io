@@ -606,8 +606,8 @@ pre {
     margin-top: 4px;
   }
 
-  /* Hide beyond the first 2 posts */
-  .related-card:nth-child(n+3) { display: none; }
+	.related-posts:not(.fade-rotator-2) .related-card:nth-child(n+3) { display: none; }
+
 }
 
 .related-head {
@@ -689,3 +689,58 @@ pre {
     inset: 6px;
   }
 }
+
+/* ── Related Posts: 2-slot cross-fade (scoped) ───────────────────────── */
+.related-posts.fade-rotator-2 .related-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.related-posts.fade-rotator-2 .related-slot{
+  position:relative;
+  min-height:210px;
+  border:1px solid var(--color-border-default,#e5e7eb);
+  border-radius:10px;
+  overflow:hidden;
+  background:var(--color-bg-default,#fff);
+  padding:8px;
+}
+
+/* cards stack in each slot and cross-fade */
+.related-posts.fade-rotator-2 .related-slot > .related-card{
+  position:absolute;
+  inset:8px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 480ms ease;
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:10px;
+  align-items:center;
+}
+
+/* active one is visible & clickable */
+.related-posts.fade-rotator-2 .related-slot > .related-card.is-active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* thumbnails inside rotator should fill their space */
+.related-posts.fade-rotator-2 .related-slot .related-thumb{
+  width:100%;
+  height:auto;
+  border-radius:8px;
+  object-fit:cover;
+}
+
+/* keep 2 slots on phones; stack image over title */
+@media (max-width:640px){
+  .related-posts.fade-rotator-2 .related-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  .related-posts.fade-rotator-2 .related-slot{ min-height:180px; padding:6px; }
+  .related-posts.fade-rotator-2 .related-slot > .related-card{ grid-template-columns:1fr; inset:6px; }
+}
+
