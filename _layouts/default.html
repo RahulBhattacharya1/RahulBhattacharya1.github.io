@@ -590,11 +590,16 @@ fill="#000000" stroke="none">
     let items = Array.from(grid.children).filter(el => el.classList.contains('related-card'));
     if (items.length === 0) return;
 
-    // If only 1 item, just show it.
+    // If only 1 item, just show it (build off-DOM, then swap in).
     if (items.length === 1){
-      grid.innerHTML = '';
-      const slot = document.createElement('div'); slot.className = 'related-slot'; grid.appendChild(slot);
-      const one = items[0]; one.classList.add('is-active'); slot.appendChild(one);
+      const frag = document.createDocumentFragment();
+      const slot = document.createElement('div');
+      slot.className = 'related-slot';
+      const one = items[0];
+      one.classList.add('is-active');
+      slot.appendChild(one);
+      frag.appendChild(slot);
+      grid.replaceChildren(frag);
       section.classList.add('fade-rotator-2');
       return;
     }
@@ -602,11 +607,14 @@ fill="#000000" stroke="none">
     // Pool to rotate (circular); shuffle once for variety.
     const pool = shuffle(items.slice());
 
-    // Build exactly 2 slots.
-    grid.innerHTML = '';
+    // Build exactly 2 slots off-DOM.
+    const frag = document.createDocumentFragment();
     const slotsCount = Math.min(2, pool.length);
     const slots = Array.from({length: slotsCount}, () => {
-      const s = document.createElement('div'); s.className = 'related-slot'; grid.appendChild(s); return s;
+      const s = document.createElement('div');
+      s.className = 'related-slot';
+      frag.appendChild(s);
+      return s;
     });
 
     // Helper: take next card that isn't already active in the target slot.
@@ -644,11 +652,14 @@ fill="#000000" stroke="none">
       }
     }
 
-    // Seed the two slots.
+    // Seed the two slots off-DOM.
     for (let i=0;i<slotsCount;i++){
       const first = pool.shift();
       mount(slots[i], first);
     }
+
+    // Only now replace children in the live grid (prevents blank state).
+    grid.replaceChildren(frag);
 
     // Animation loop.
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
