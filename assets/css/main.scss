@@ -279,13 +279,15 @@ body{
 
 /* ---------- 2-slot cross-fade rotator (scoped) ---------- */
 .related-posts.fade-rotator-2 .related-grid{
-  grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;
+  display: grid;
+  grid-template-columns: repeat(2, 300px); /* fixed width for 2 slots */
+  justify-content: start;                  /* keep them left-aligned */
+  gap: 16px;                               /* space between the two cards */
 }
 .related-posts.fade-rotator-2 .related-slot{
-  position:relative;
-  min-height:210px;                 /* keeps layout stable while fading */
-  overflow:hidden;
-  /* No border/background -> avoids the “white box” look */
+  width: 300px;       /* match the fixed column width */
+  min-height: 210px;  /* keeps height stable */
+  overflow: hidden;
 }
 .related-posts.fade-rotator-2 .related-slot > .related-card{
   position:absolute; inset:0;
