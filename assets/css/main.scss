@@ -540,20 +540,20 @@ pre {
   padding: 0;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 96px); /* fixed small cards */
+  grid-template-columns: repeat(auto-fill, 140px); /* fixed small cards */
   gap: 6px;
   justify-content: center;                         /* keep them close & centered */
 }
 
-.related-card { width: 96px; }                     /* grid item width */
+.related-card { width: 140px; }                     /* grid item width */
 .related-card a {
   display: block;
   text-decoration: none;
 }
 
 .related-thumb {
-  width: 96px;                                      /* small, fixed */
-  height: 96px;                                     /* square */
+  width: 140px;                                      /* small, fixed */
+  height: 140px;                                     /* square */
   object-fit: cover;
   border-radius: 8px;
   display: block;
@@ -564,6 +564,6 @@ pre {
   margin-top: 4px;
   font-size: .85rem;
   line-height: 1.25;
-  color: #111;
+  color: #737373;
 }
 
