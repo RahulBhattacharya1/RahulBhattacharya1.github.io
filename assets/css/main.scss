@@ -543,11 +543,11 @@ pre {
   gap: 12px;
 }
 .related-card a { display: block; text-decoration: none; 
-width: 40px; /* Thumbnail size */
+width: 120px; /* Thumbnail size */
 }
 .related-thumb {
   width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
-  border-radius: 12px; display: block;
+  border-radius: 8px; display: block;
 }
 .related-title {
   display: block; margin-top: 6px;
