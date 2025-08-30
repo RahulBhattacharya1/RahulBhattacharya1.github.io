@@ -534,36 +534,67 @@ pre {
   }
 }
 
-/* ─── Related Posts (2–8 dynamic grid) ─── */
+/* ─── Related Posts: left-aligned, hover anim, mobile = 2 items ─── */
 .related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px); /* desktop: small, packed tiles */
+  gap: 8px;
+  justify-content: start;                            /* align under the heading */
   list-style: none;
   padding: 0;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 140px); /* fixed small cards */
-  gap: 6px;
-  justify-content: center;                         /* keep them close & centered */
+  margin: 0;
 }
 
-.related-card { width: 140px; }                     /* grid item width */
+.related-card { width: 120px; }
+
 .related-card a {
   display: block;
   text-decoration: none;
 }
 
 .related-thumb {
-  width: 140px;                                      /* small, fixed */
-  height: 140px;                                     /* square */
+  width: 120px;
+  height: 120px;              /* square */
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   display: block;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  transform-origin: center;
+}
+
+.related-card a:hover .related-thumb,
+.related-card a:focus .related-thumb {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 18px rgba(0,0,0,.14);
 }
 
 .related-title {
   display: block;
-  margin-top: 4px;
+  margin-top: 6px;
   font-size: .85rem;
   line-height: 1.25;
-  color: #737373;
+  color: #111;
 }
 
+/* Respect reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .related-thumb { transition: none; }
+  .related-card a:hover .related-thumb,
+  .related-card a:focus .related-thumb { transform: none; box-shadow: none; }
+}
+
+/* Mobile: show ONLY 2 related posts and keep them square */
+@media (max-width: 640px) {
+  .related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    justify-content: start;
+  }
+  .related-card { width: auto; }
+  .related-thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;     /* square without fixed pixel height */
+  }
+  .related-card:nth-child(n+3) { display: none; } /* hide beyond the first 2 */
+}
