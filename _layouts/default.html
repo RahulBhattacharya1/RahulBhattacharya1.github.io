@@ -572,64 +572,80 @@ fill="#000000" stroke="none">
 })();
 </script>  
 
-<!--Shuffle Button for Related Posts-->
+<!--Shuffle + Cross-fade Rotator for Related Posts-->
 <script>
 (function () {
-  function shuffleNodes(list) {
-    const items = Array.from(list.children);
-    if (items.length < 2) return;
-    // Fisher–Yates shuffle
-    for (let i = items.length - 1; i > 0; i--) {
+  function fisherYatesShuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [items[i], items[j]] = [items[j], items[i]];
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    items.forEach(el => list.appendChild(el));
+    return arr;
   }
 
-  function setupAutoShuffle(section) {
+  function setupFadeRotator(section) {
     const grid = section.querySelector('.related-grid');
     if (!grid) return;
 
-    let timer = null, visible = false, pausedByUser = false;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function tick() { shuffleNodes(grid); }
+    // Collect items, shuffle once, and re-append to set sequence
+    const items = Array.from(grid.children);
+    if (items.length <= 1) return;
+    fisherYatesShuffle(items).forEach(li => grid.appendChild(li));
+
+    let idx = 0, timer = null, visible = false, pausedByUser = false;
+
+    function show(k) {
+      items.forEach(el => el.classList.remove('is-active'));
+      items[k].classList.add('is-active');
+    }
+
+    function tick() {
+      idx = (idx + 1) % items.length;
+      show(idx);
+    }
 
     function start() {
-      if (pausedByUser || !visible || timer) return;
+      if (reduced || pausedByUser || !visible || timer) return;
       timer = setInterval(tick, 2000); // 🔁 every 2s
     }
     function stop() {
       if (timer) { clearInterval(timer); timer = null; }
     }
 
-    // Pause on hover/focus
-    section.addEventListener('mouseenter', function(){ pausedByUser = true; stop(); });
-    section.addEventListener('mouseleave', function(){ pausedByUser = false; start(); });
-    section.addEventListener('focusin',  function(){ pausedByUser = true; stop(); });
-    section.addEventListener('focusout', function(){ pausedByUser = false; start(); });
-
-    // Only run when visible
+    // Visibility control (only animate when on screen)
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        visible = entry.isIntersecting && entry.intersectionRatio > 0.25;
-        if (visible) start(); else stop();
-      });
-    }, { threshold: [0, 0.25] });
+      visible = entries.some(e => e.isIntersecting);
+      visible ? start() : stop();
+    }, { threshold: 0.25 });
     io.observe(section);
 
-    // Manual Shuffle button still works
-    section.addEventListener('click', function (e) {
+    // Pause on hover/touch
+    section.addEventListener('mouseenter', () => { pausedByUser = true; stop(); }, { passive: true });
+    section.addEventListener('mouseleave', () => { pausedByUser = false; start(); }, { passive: true });
+    section.addEventListener('touchstart', () => { pausedByUser = true; stop(); }, { passive: true });
+    section.addEventListener('touchend',   () => { pausedByUser = false; start(); }, { passive: true });
+
+    // Optional: keep your manual shuffle button working
+    section.addEventListener('click', (e) => {
       const btn = e.target.closest('.related-posts .btn');
       if (!btn) return;
-      shuffleNodes(grid);
+      stop();
+      fisherYatesShuffle(items).forEach(li => grid.appendChild(li));
+      idx = 0; show(idx);
+      start();
     });
 
-    // Kick it once immediately
-    tick();
+    // Activate fade-rotator styles without touching HTML
+    section.classList.add('fade-rotator');
+
+    // Initial render
+    idx = 0; show(idx); start();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.related-posts').forEach(setupAutoShuffle);
+    document.querySelectorAll('.related-posts').forEach(setupFadeRotator);
   });
 })();
 </script>
