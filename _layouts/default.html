@@ -583,38 +583,84 @@ fill="#000000" stroke="none">
     return arr;
   }
 
-  function setupFadeRotator(section) {
+  function setupFourUpRotator(section) {
     const grid = section.querySelector('.related-grid');
     if (!grid) return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let items = Array.from(grid.children).filter(el => el.classList.contains('related-card'));
+    if (items.length === 0) return;
 
-    // Collect items, shuffle once, and re-append to set sequence
-    const items = Array.from(grid.children);
-    if (items.length <= 1) return;
-    fisherYatesShuffle(items).forEach(li => grid.appendChild(li));
+    // Shuffle pool once for variety
+    items = fisherYatesShuffle(items);
 
-    let idx = 0, timer = null, visible = false, pausedByUser = false;
+    // Create 4 slots (or fewer if not enough items)
+    const slotsCount = Math.min(4, items.length);
+    const pool = items.slice(); // rotating pool
+    grid.innerHTML = ''; // we will rebuild grid content as 4 slots
 
-    function show(k) {
-      items.forEach(el => el.classList.remove('is-active'));
-      items[k].classList.add('is-active');
+    const slots = Array.from({ length: slotsCount }, () => {
+      const s = document.createElement('div');
+      s.className = 'related-slot';
+      grid.appendChild(s);
+      return s;
+    });
+
+    // Helper to mount a card into a slot with cross-fade
+    function mountCard(slot, newCard) {
+      newCard.classList.remove('is-active'); // reset
+      newCard.style.opacity = '0';
+      newCard.style.pointerEvents = 'none';
+      newCard.classList.add('related-card'); // ensure class
+      newCard.setAttribute('aria-hidden', 'true');
+      newCard.style.position = ''; // JS may reuse original; CSS will position it
+
+      // Position new on top, fade in, then remove old
+      const old = slot.querySelector('.related-card.is-active');
+      slot.appendChild(newCard);
+      // force reflow so transition will run
+      // eslint-disable-next-line no-unused-expressions
+      newCard.offsetHeight;
+      newCard.classList.add('is-active');
+      newCard.removeAttribute('aria-hidden');
+      newCard.style.opacity = ''; // allow CSS to control
+
+      if (old) {
+        old.classList.remove('is-active');
+        old.setAttribute('aria-hidden', 'true');
+        old.addEventListener('transitionend', () => {
+          // move old to end of pool for reuse
+          if (old.parentElement === slot) slot.removeChild(old);
+          pool.push(old);
+        }, { once: true });
+      }
     }
 
+    // Seed initial 4
+    for (let i = 0; i < slotsCount; i++) {
+      const first = pool.shift();
+      mountCard(slots[i], first);
+    }
+
+    // Animation loop: every 2s, pick a random slot and swap in next pool card
+    let visible = false, pausedByUser = false, timer = null;
+
     function tick() {
-      idx = (idx + 1) % items.length;
-      show(idx);
+      if (pool.length === 0) return;
+      const slotIndex = Math.floor(Math.random() * slotsCount);
+      const next = pool.shift();
+      mountCard(slots[slotIndex], next);
     }
 
     function start() {
       if (reduced || pausedByUser || !visible || timer) return;
-      timer = setInterval(tick, 2000); // 🔁 every 2s
+      timer = setInterval(tick, 2000);
     }
     function stop() {
       if (timer) { clearInterval(timer); timer = null; }
     }
 
-    // Visibility control (only animate when on screen)
+    // Visibility: only animate when on screen
     const io = new IntersectionObserver((entries) => {
       visible = entries.some(e => e.isIntersecting);
       visible ? start() : stop();
@@ -627,25 +673,21 @@ fill="#000000" stroke="none">
     section.addEventListener('touchstart', () => { pausedByUser = true; stop(); }, { passive: true });
     section.addEventListener('touchend',   () => { pausedByUser = false; start(); }, { passive: true });
 
-    // Optional: keep your manual shuffle button working
+    // Optional: keep your manual shuffle button behavior
     section.addEventListener('click', (e) => {
       const btn = e.target.closest('.related-posts .btn');
       if (!btn) return;
       stop();
-      fisherYatesShuffle(items).forEach(li => grid.appendChild(li));
-      idx = 0; show(idx);
+      fisherYatesShuffle(pool);
       start();
     });
 
-    // Activate fade-rotator styles without touching HTML
-    section.classList.add('fade-rotator');
-
-    // Initial render
-    idx = 0; show(idx); start();
+    section.classList.add('fade-rotator-4'); // scope styles
+    start();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.related-posts').forEach(setupFadeRotator);
+    document.querySelectorAll('.related-posts').forEach(setupFourUpRotator);
   });
 })();
 </script>
