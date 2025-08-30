@@ -279,30 +279,59 @@ body{
 
 /* ---------- 2-slot cross-fade rotator (scoped) ---------- */
 .related-posts.fade-rotator-2 .related-grid{
-  display: grid;
-  grid-template-columns: repeat(2, 300px); /* fixed width for 2 slots */
-  justify-content: start;                  /* keep them left-aligned */
-  gap: 16px;                               /* space between the two cards */
+  display:grid;
+  grid-template-columns:repeat(2, 300px); /* compact, fixed columns */
+  justify-content:start;
+  gap:16px;
 }
 .related-posts.fade-rotator-2 .related-slot{
-  width: 300px;       /* match the fixed column width */
-  min-height: 210px;  /* keeps height stable */
-  overflow: hidden;
+  position:relative;   /* ← anchor absolutely positioned cards */
+  width:300px;         /* match column width */
+  min-height:210px;
+  padding:8px;
+  border-radius:10px;
+  overflow:hidden;
+  background:#fff;     /* optional, remove if you want transparent */
+  border:1px solid #e5e7eb; /* optional frame */
 }
+/* stack cards and cross-fade */
 .related-posts.fade-rotator-2 .related-slot > .related-card{
-  position:absolute; inset:0;
-  opacity:0; pointer-events:none; transition:opacity 480ms ease;
-  display:grid; grid-template-columns:120px 1fr; gap:10px; align-items:center; padding:8px;
+  position:absolute;
+  inset:8px;                     /* respect slot padding */
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 480ms ease;
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:10px;
+  align-items:center;
+  width:auto;                    /* ← override any fixed widths */
 }
+/* visible one */
 .related-posts.fade-rotator-2 .related-slot > .related-card.is-active{
-  opacity:1; pointer-events:auto;
+  opacity:1;
+  pointer-events:auto;
 }
 .related-posts.fade-rotator-2 .related-slot .related-thumb{
-  width:100%; height:auto; border-radius:8px; object-fit:cover;
+  width:100%;
+  height:auto;
+  border-radius:8px;
+  object-fit:cover;
 }
 
+/* Mobile */
 @media (max-width:640px){
-  .related-posts.fade-rotator-2 .related-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
-  .related-posts.fade-rotator-2 .related-slot{ min-height:180px; }
-  .related-posts.fade-rotator-2 .related-slot > .related-card{ grid-template-columns:1fr; padding:6px; }
+  .related-posts.fade-rotator-2 .related-grid{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:8px;
+  }
+  .related-posts.fade-rotator-2 .related-slot{
+    width:auto;
+    min-height:180px;
+    padding:6px;
+  }
+  .related-posts.fade-rotator-2 .related-slot > .related-card{
+    grid-template-columns:1fr;   /* image above title */
+    inset:6px;
+  }
 }
