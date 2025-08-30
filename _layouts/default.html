@@ -591,14 +591,12 @@ fill="#000000" stroke="none">
     let items = Array.from(grid.children).filter(el => el.classList.contains('related-card'));
     if (items.length === 0) return;
 
-    // Shuffle pool once for variety
+    // Shuffle once
     items = fisherYatesShuffle(items);
 
-    // Create 4 slots (or fewer if not enough items)
+    // Build 4 slots (or fewer if not enough items)
     const slotsCount = Math.min(4, items.length);
-    const pool = items.slice(); // rotating pool
-    grid.innerHTML = ''; // we will rebuild grid content as 4 slots
-
+    grid.innerHTML = '';
     const slots = Array.from({ length: slotsCount }, () => {
       const s = document.createElement('div');
       s.className = 'related-slot';
@@ -606,61 +604,75 @@ fill="#000000" stroke="none">
       return s;
     });
 
-    // Helper to mount a card into a slot with cross-fade
-    function mountCard(slot, newCard) {
-      newCard.classList.remove('is-active'); // reset
-      newCard.style.opacity = '0';
-      newCard.style.pointerEvents = 'none';
-      newCard.classList.add('related-card'); // ensure class
-      newCard.setAttribute('aria-hidden', 'true');
-      newCard.style.position = ''; // JS may reuse original; CSS will position it
+    // Make a circular pool (never empty). We will rotate DOM nodes through it.
+    const pool = items.slice(); // keep all cards here always
 
-      // Position new on top, fade in, then remove old
+    // Helper: pick next card that is NOT the one already visible in target slot
+    function nextDifferent(targetSlot) {
+      const active = targetSlot.querySelector('.related-card.is-active');
+      // rotate through pool until we find one that's not the active node
+      for (let i = 0; i < pool.length; i++) {
+        const candidate = pool[0];           // peek
+        if (candidate !== active) {
+          return pool.shift();               // take it
+        }
+        // move to end and continue
+        pool.push(pool.shift());
+      }
+      // worst case (all same), just take first
+      return pool.shift();
+    }
+
+    function mountCard(slot, newCard) {
       const old = slot.querySelector('.related-card.is-active');
+      // Place new card on top and fade it in
       slot.appendChild(newCard);
-      // force reflow so transition will run
+      newCard.classList.remove('is-active');
+      newCard.style.opacity = '0';
+      newCard.setAttribute('aria-hidden', 'true');
+      // force reflow to enable transition
       // eslint-disable-next-line no-unused-expressions
       newCard.offsetHeight;
       newCard.classList.add('is-active');
+      newCard.style.opacity = '';
       newCard.removeAttribute('aria-hidden');
-      newCard.style.opacity = ''; // allow CSS to control
 
       if (old) {
         old.classList.remove('is-active');
         old.setAttribute('aria-hidden', 'true');
         old.addEventListener('transitionend', () => {
-          // move old to end of pool for reuse
+          // after fading out, put old back to the END of the pool
           if (old.parentElement === slot) slot.removeChild(old);
           pool.push(old);
         }, { once: true });
+      } else {
+        // if slot was empty, also recycle the “new” into pool so pool never shrinks
+        pool.push(newCard);
       }
     }
 
-    // Seed initial 4
+    // Seed initial 4 (and keep pool circular by pushing back after mount)
     for (let i = 0; i < slotsCount; i++) {
       const first = pool.shift();
       mountCard(slots[i], first);
     }
 
-    // Animation loop: every 2s, pick a random slot and swap in next pool card
-    let visible = false, pausedByUser = false, timer = null;
+    // Animate: every 2s, pick a random slot and swap in a different card
+    let visible = false, paused = false, timer = null;
 
     function tick() {
-      if (pool.length === 0) return;
       const slotIndex = Math.floor(Math.random() * slotsCount);
-      const next = pool.shift();
+      const next = nextDifferent(slots[slotIndex]);
       mountCard(slots[slotIndex], next);
     }
 
     function start() {
-      if (reduced || pausedByUser || !visible || timer) return;
+      if (reduced || paused || !visible || timer) return;
       timer = setInterval(tick, 2000);
     }
-    function stop() {
-      if (timer) { clearInterval(timer); timer = null; }
-    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
 
-    // Visibility: only animate when on screen
+    // Only animate when on screen
     const io = new IntersectionObserver((entries) => {
       visible = entries.some(e => e.isIntersecting);
       visible ? start() : stop();
@@ -668,12 +680,12 @@ fill="#000000" stroke="none">
     io.observe(section);
 
     // Pause on hover/touch
-    section.addEventListener('mouseenter', () => { pausedByUser = true; stop(); }, { passive: true });
-    section.addEventListener('mouseleave', () => { pausedByUser = false; start(); }, { passive: true });
-    section.addEventListener('touchstart', () => { pausedByUser = true; stop(); }, { passive: true });
-    section.addEventListener('touchend',   () => { pausedByUser = false; start(); }, { passive: true });
+    section.addEventListener('mouseenter', () => { paused = true; stop(); }, { passive: true });
+    section.addEventListener('mouseleave', () => { paused = false; start(); }, { passive: true });
+    section.addEventListener('touchstart', () => { paused = true; stop(); }, { passive: true });
+    section.addEventListener('touchend',   () => { paused = false; start(); }, { passive: true });
 
-    // Optional: keep your manual shuffle button behavior
+    // Keep your Shuffle button working (reshuffles pool order)
     section.addEventListener('click', (e) => {
       const btn = e.target.closest('.related-posts .btn');
       if (!btn) return;
@@ -682,7 +694,7 @@ fill="#000000" stroke="none">
       start();
     });
 
-    section.classList.add('fade-rotator-4'); // scope styles
+    section.classList.add('fade-rotator-4');
     start();
   }
 
