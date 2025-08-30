@@ -241,9 +241,9 @@ body{
 /* Default tile grid (non-rotator) */
 .related-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,180px);
+  grid-template-columns: repeat(2, auto);
   gap:8px;
-  justify-content:start;
+  justify-content:flex-start;             /* keep them left aligned */
   list-style:none; padding:0; margin:0;
 }
 .related-card{ width:180px; }
@@ -280,13 +280,13 @@ body{
 /* ---------- 2-slot cross-fade rotator (scoped) ---------- */
 .related-posts.fade-rotator-2 .related-grid{
   display:grid;
-  grid-template-columns:repeat(2, 300px); /* compact, fixed columns */
-  justify-content:start;
-  gap:16px;
+  grid-template-columns:repeat(2, auto);
+  justify-content:flex-start;
+  gap:8px;
 }
 .related-posts.fade-rotator-2 .related-slot{
   position:relative;   /* anchor for absolute cards */
-  width:300px;         /* match your grid column */
+  width:auto;         
   min-height:210px;
   overflow:hidden;
   /* remove background, border, padding */
