@@ -552,7 +552,8 @@ pre {
 }
 
 .related-card.is-fading {
-  opacity: 0;
+	opacity: 0;
+	transition: opacity 1.2s ease-out;  /* fade-in slower */
 }
 
 .related-card a {
