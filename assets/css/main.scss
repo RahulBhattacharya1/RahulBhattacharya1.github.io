@@ -542,7 +542,9 @@ pre {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 12px;
 }
-.related-card a { display: block; text-decoration: none; }
+.related-card a { display: block; text-decoration: none; 
+width: 40px; /* Thumbnail size */
+}
 .related-thumb {
   width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
   border-radius: 12px; display: block;
