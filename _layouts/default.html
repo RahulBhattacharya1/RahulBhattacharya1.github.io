@@ -207,11 +207,12 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
     {% endfor %}
   {% endif %}
 
-  {% assign related = related | uniq | sort: "date" | reverse | slice: 0, 8 %}
+  {% assign related = related | uniq | sort: "date" | reverse | slice: 0, 4 %}
 
   {% if related != empty %}
     <section class="related-posts" aria-label="Related Posts">
       <h3>Related Posts</h3>
+      <button class="related-shuffle" type="button" aria-label="Shuffle related posts">Shuffle</button>
       <ul class="related-grid">
         {% for p in related %}
           {% assign img = p.thumbnail | default: p.image | default: '/assets/images/default.webp' %}
@@ -565,6 +566,30 @@ fill="#000000" stroke="none">
 
   // passive scroll listener
   window.addEventListener('scroll', triggerWave, { passive: true });
+})();
+</script>  
+
+<script>
+(function () {
+  function shuffleNodes(list) {
+    const items = Array.from(list.children);
+    // Fisher–Yates
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    // Re-append in new order
+    items.forEach(el => list.appendChild(el));
+  }
+
+  // Delegate for any related section on the page
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.related-shuffle');
+    if (!btn) return;
+    const section = btn.closest('.related-posts');
+    const grid = section && section.querySelector('.related-grid');
+    if (grid) shuffleNodes(grid);
+  }, { passive: true });
 })();
 </script>  
   
