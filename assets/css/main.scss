@@ -533,3 +533,21 @@ pre {
     to   { transform: translateX(0%); }
   }
 }
+
+/* ───── Related Posts ───── */
+.related-posts { margin-top: 2rem; }
+.related-posts h3 { margin-bottom: .75rem; font-size: 1.1rem; }
+.related-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+.related-card a { display: block; text-decoration: none; }
+.related-thumb {
+  width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+  border-radius: 12px; display: block;
+}
+.related-title {
+  display: block; margin-top: 6px;
+  font-size: .9rem; line-height: 1.3; color: #111;
+}
