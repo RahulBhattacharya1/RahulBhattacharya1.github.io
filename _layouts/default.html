@@ -576,6 +576,8 @@ fill="#000000" stroke="none">
 (function () {
   function shuffleNodes(list) {
     const items = Array.from(list.children);
+    if (items.length < 2) return;
+    // Fisher–Yates shuffle
     for (let i = items.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [items[i], items[j]] = [items[j], items[i]];
@@ -583,14 +585,51 @@ fill="#000000" stroke="none">
     items.forEach(el => list.appendChild(el));
   }
 
-  // Listen for clicks only on .btn inside .related-posts
-  document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.related-posts .btn');
-    if (!btn) return;
-    const section = btn.closest('.related-posts');
-    const grid = section && section.querySelector('.related-grid');
-    if (grid) shuffleNodes(grid);
-  }, { passive: true });
+  function setupAutoShuffle(section) {
+    const grid = section.querySelector('.related-grid');
+    if (!grid) return;
+
+    let timer = null, visible = false, pausedByUser = false;
+
+    function tick() { shuffleNodes(grid); }
+
+    function start() {
+      if (pausedByUser || !visible || timer) return;
+      timer = setInterval(tick, 2000); // 🔁 every 2s
+    }
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    // Pause on hover/focus
+    section.addEventListener('mouseenter', function(){ pausedByUser = true; stop(); });
+    section.addEventListener('mouseleave', function(){ pausedByUser = false; start(); });
+    section.addEventListener('focusin',  function(){ pausedByUser = true; stop(); });
+    section.addEventListener('focusout', function(){ pausedByUser = false; start(); });
+
+    // Only run when visible
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        visible = entry.isIntersecting && entry.intersectionRatio > 0.25;
+        if (visible) start(); else stop();
+      });
+    }, { threshold: [0, 0.25] });
+    io.observe(section);
+
+    // Manual Shuffle button still works
+    section.addEventListener('click', function (e) {
+      const btn = e.target.closest('.related-posts .btn');
+      if (!btn) return;
+      shuffleNodes(grid);
+    });
+
+    // Kick it once immediately
+    tick();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.related-posts').forEach(setupAutoShuffle);
+  });
 })();
 </script>
   
