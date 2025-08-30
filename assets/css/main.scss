@@ -548,7 +548,7 @@ pre {
 .related-card { 
 	width: 180px; 
 	opacity: 1;
-  	transition: opacity 0.6s ease; /* smooth fade */
+  	transition: opacity 0.3s ease; /* fade */
 }
 
 .related-card.is-fading {
