@@ -161,7 +161,15 @@ q_emb = _MODEL.encode(query_text, normalize_embeddings=True)
 scores = util.cos_sim(q_emb, items_emb)[0]
 return int(scores.argmax())
 ```
+The function _ai_pick_best is a compact utility that powers the “intelligence” in the planner. Its job is simple: given a list of precomputed embeddings (such as the FOCUS_TIPS) and a user’s input, it figures out which option best matches the meaning of the query.
 
+The function begins with a quick safeguard: if the input text is empty or only whitespace, it immediately returns None. This avoids unnecessary computation and prevents errors when the user hasn’t typed anything meaningful.
+
+If there is valid input, the function encodes it into an embedding using the same model we loaded earlier (_MODEL). By normalizing the embeddings, we ensure that all comparisons are consistent. Next, it computes cosine similarity between the query embedding and the list of stored embeddings. Cosine similarity is a measure of how close two vectors are in direction, which translates to how similar two pieces of text are in meaning.
+
+Finally, the function returns the index of the highest-scoring match using argmax(). This index corresponds to whichever tip, activity, or energy level is most semantically aligned with the user’s request.
+
+In just a few lines, this helper makes the system context-aware, allowing static lists to feel interactive and personalized.
 ### 3) Planner: Generate a Morning Plan
 
 ```python
@@ -206,7 +214,15 @@ def generate_plan(name, tz, energy, wake_time, primary_goal, secondary_goal, ext
 """
     return textwrap.dedent(greeting + "\n\n" + body).strip()
 ```
+The generate_plan function is the heart of the structured planner tab. It takes in user inputs—such as name, timezone, energy level, wake time, and top priorities—and returns a clean, Markdown-formatted morning plan.
 
+The function starts by setting a random seed based on today’s date, ensuring that any “random” selections (like fallback tips) stay consistent for that day, but vary across different days. It then constructs an intent string by combining the user’s goals and notes. If AI is enabled and there’s meaningful input, the system uses _ai_pick_best to select the most relevant focus tip. Otherwise, it randomly picks a tip from the list.
+
+Next, the function localizes the time using the user’s chosen timezone, giving the plan a personal touch with a timestamped greeting. It then builds a list of activity blocks—wake-up routine, journaling, deep work, secondary goals, breaks, and optional notes. Each block is formatted with friendly icons and Markdown for easy readability.
+
+The output also integrates energy-based guidance from ENERGY_HINTS, so the advice feels adapted to the user’s current state. Finally, everything is combined into a Markdown string that Gradio can render beautifully in the UI.
+
+This makes the planner both structured and personalized, while still lightweight.
 ### 4) Conversational Parsing (Chat)
 
 ```python
