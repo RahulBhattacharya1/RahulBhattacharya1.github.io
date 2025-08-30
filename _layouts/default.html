@@ -211,8 +211,10 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
 
   {% if related != empty %}
     <section class="related-posts" aria-label="Related Posts">
-      <h3>Related Posts</h3>
-      <button class="btn" type="button" aria-label="Shuffle related posts">Shuffle</button>
+      <div class="related-head">
+        <h3>Related Posts</h3>
+        <button class="btn" type="button" aria-label="Shuffle related posts">Shuffle</button>
+      </div>
       <ul class="related-grid">
         {% for p in related %}
           {% assign img = p.thumbnail | default: p.image | default: '/assets/images/default.webp' %}
