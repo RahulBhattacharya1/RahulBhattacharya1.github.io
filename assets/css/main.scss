@@ -548,7 +548,7 @@ pre {
 .related-card { 
 	width: 180px; 
 	opacity: 1;
-  	transition: opacity 0.3s ease; /* fade */
+  	transition: opacity 1s ease; /* fade */
 }
 
 .related-card.is-fading {
@@ -566,7 +566,7 @@ pre {
   object-fit: cover;
   border-radius: 10px;
   display: block;
-  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  transition: transform 2s ease, box-shadow .18s ease, filter .18s ease;
   transform-origin: center;
 }
 
@@ -582,13 +582,6 @@ pre {
   font-size: .65rem;
   line-height: 1.25;
   color: #737373;
-}
-
-/* Respect reduced-motion users */
-@media (prefers-reduced-motion: reduce) {
-  .related-thumb { transition: none; }
-  .related-card a:hover .related-thumb,
-  .related-card a:focus .related-thumb { transform: none; box-shadow: none; }
 }
 
 /* Mobile: show ONLY 2 related posts, smaller squares */
