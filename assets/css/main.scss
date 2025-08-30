@@ -537,7 +537,7 @@ pre {
 /* ─── Related Posts: left-aligned, hover anim, mobile = 2 items ─── */
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 120px); /* desktop: small, packed tiles */
+  grid-template-columns: repeat(auto-fill, 140px); /* desktop: small, packed tiles */
   gap: 8px;
   justify-content: start;                            /* align under the heading */
   list-style: none;
@@ -545,7 +545,7 @@ pre {
   margin: 0;
 }
 
-.related-card { width: 120px; }
+.related-card { width: 140px; }
 
 .related-card a {
   display: block;
@@ -553,7 +553,7 @@ pre {
 }
 
 .related-thumb {
-  width: 120px;
+  width: 140px;
   height: 120px;              /* square */
   object-fit: cover;
   border-radius: 10px;
@@ -571,9 +571,9 @@ pre {
 .related-title {
   display: block;
   margin-top: 6px;
-  font-size: .85rem;
+  font-size: .45rem;
   line-height: 1.25;
-  color: #111;
+  color: #737373;
 }
 
 /* Respect reduced-motion users */
@@ -583,18 +583,30 @@ pre {
   .related-card a:focus .related-thumb { transform: none; box-shadow: none; }
 }
 
-/* Mobile: show ONLY 2 related posts and keep them square */
+/* Mobile: show ONLY 2 related posts, smaller squares */
 @media (max-width: 640px) {
   .related-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    justify-content: start;
+    grid-template-columns: repeat(2, 96px);  /* 2 small fixed columns */
+    gap: 6px;
+    justify-content: start;                  /* align left under heading */
   }
-  .related-card { width: auto; }
+
+  .related-card { width: 96px; }
+
   .related-thumb {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;     /* square without fixed pixel height */
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
   }
-  .related-card:nth-child(n+3) { display: none; } /* hide beyond the first 2 */
+
+  .related-title {
+    font-size: 0.75rem;   /* a bit smaller for mobile */
+    margin-top: 4px;
+  }
+
+  /* Hide beyond the first 2 posts */
+  /*.related-card:nth-child(n+3) { display: none; }*/
 }
+
