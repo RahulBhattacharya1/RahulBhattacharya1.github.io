@@ -610,3 +610,22 @@ pre {
   .related-card:nth-child(n+3) { display: none; }
 }
 
+.related-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.related-head h3 { margin: 0; }
+
+.related-shuffle {
+  font: inherit;
+  padding: 4px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .15s ease, background .15s ease;
+}
+.related-shuffle:hover { background: #f3f4f6; }
+.related-shuffle:active { transform: translateY(1px); }
