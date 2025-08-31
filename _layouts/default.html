@@ -575,6 +575,13 @@ fill="#000000" stroke="none">
 <!--Shuffle Button for Related Posts-->
 <script>
 (function () {
+  // ---- Config: tweak these only ----
+  const FADE_OUT_MS = 700;          // fade-out duration (1 -> 0)
+  const FADE_IN_MS  = 900;          // fade-in duration (0 -> 1)
+  const EASE_OUT    = 'ease-out';
+  const EASE_IN     = 'ease';
+  const AUTOPLAY_MIN = 5000;        // minimum gap between shuffles
+
   function shuffleNodes(list) {
     const items = Array.from(list.children);
     if (items.length < 2) return;
@@ -585,55 +592,63 @@ fill="#000000" stroke="none">
     items.forEach(el => list.appendChild(el));
   }
 
-  function getOpacityDurationMs(el) {
-    const cs = getComputedStyle(el);
-    const props = cs.transitionProperty.split(',').map(s => s.trim());
-    const durs  = cs.transitionDuration.split(',').map(s => s.trim());
-    let idx = props.findIndex(p => p === 'opacity');
-    if (idx < 0) idx = 0;
-    const val = durs[idx] || durs[0] || '0s';
-    const ms  = val.endsWith('ms') ? parseFloat(val) : parseFloat(val) * 1000;
-    return isNaN(ms) || ms < 20 ? 600 : ms;
+  function forceReflow(node) {
+    // Any of these forces layout; this one is cheap & reliable.
+    return node.getBoundingClientRect();
   }
 
   function setupAutoShuffle(section) {
     const grid = section.querySelector('.related-grid');
     if (!grid) return;
 
-    let timer = null, pausedByUser = false;
-    let resumeTimer = null;
+    let timer = null, pausedByUser = false, resumeTimer = null;
     const INACTIVITY_MS = 5000;
+
+    function fadeOut(cards) {
+      // Set explicit transition for OUT phase so CSS can't override it
+      cards.forEach(el => {
+        el.style.transition = `opacity ${FADE_OUT_MS}ms ${EASE_OUT}`;
+        el.classList.add('is-fading'); // drives opacity to 0
+      });
+      forceReflow(grid); // ensure the first cycle animates
+    }
+
+    function fadeIn(cards) {
+      // Switch to IN phase transition, then remove class to go 0 -> 1
+      cards.forEach(el => {
+        el.style.transition = `opacity ${FADE_IN_MS}ms ${EASE_IN}`;
+      });
+      forceReflow(grid);
+      requestAnimationFrame(() => {
+        cards.forEach(el => el.classList.remove('is-fading'));
+        // Clean up inline transition after fade-in completes
+        setTimeout(() => {
+          cards.forEach(el => { el.style.transition = ''; });
+        }, FADE_IN_MS + 20);
+      });
+    }
 
     function tick() {
       const cards = grid.querySelectorAll('.related-card');
       if (!cards.length) return;
 
-      // Fade out
-      cards.forEach(el => el.classList.add('is-fading'));
+      // Phase 1: fade out
+      fadeOut(cards);
 
-      // Force a style/layout flush so first cycle doesn't snap on load
-      grid.getBoundingClientRect();
-
-      // Measure fade-out duration while .is-fading is applied
-      const durOut = getOpacityDurationMs(cards[0]);
-
-      // Swap after fade-out, then fade back in on next frame
+      // Phase 2: swap when fully faded out
       setTimeout(() => {
         shuffleNodes(grid);
-        requestAnimationFrame(() => {
-          cards.forEach(el => el.classList.remove('is-fading'));
-        });
-      }, durOut);
+        // Phase 3: fade in
+        fadeIn(cards);
+      }, FADE_OUT_MS);
     }
 
     function start() {
       if (pausedByUser || timer) return;
-      // Prime one correctly-animated cycle immediately
+      // Run one animated cycle immediately
       tick();
-      // Set cadence long enough to avoid overlap: out + in (+ buffer)
-      const sample = grid.querySelector('.related-card') || grid;
-      const outMs = getOpacityDurationMs(sample);
-      const cadence = Math.max(5000, outMs * 2 + 200);
+      // Ensure interval never overlaps the animation
+      const cadence = Math.max(AUTOPLAY_MIN, FADE_OUT_MS + FADE_IN_MS + 250);
       timer = setInterval(tick, cadence);
     }
 
@@ -643,43 +658,38 @@ fill="#000000" stroke="none">
 
     function scheduleResume() {
       if (resumeTimer) clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(function () {
+      resumeTimer = setTimeout(() => {
         pausedByUser = false;
         start();
       }, INACTIVITY_MS);
     }
 
-    // Pause on hover/focus; resume after inactivity
-    section.addEventListener('mouseenter', function () {
+    // Pause on hover/focus; resume after 5s of inactivity
+    section.addEventListener('mouseenter', () => {
       pausedByUser = true; stop(); if (resumeTimer) clearTimeout(resumeTimer);
     });
-    section.addEventListener('mouseleave', function () {
-      scheduleResume();
-    });
-    section.addEventListener('focusin', function () {
+    section.addEventListener('mouseleave', scheduleResume);
+    section.addEventListener('focusin', () => {
       pausedByUser = true; stop(); if (resumeTimer) clearTimeout(resumeTimer);
     });
-    section.addEventListener('focusout', function () {
-      scheduleResume();
-    });
+    section.addEventListener('focusout', scheduleResume);
 
-    // Manual Shuffle: robust selector
-    section.addEventListener('click', function (e) {
+    // Manual Shuffle (robust selector variants)
+    section.addEventListener('click', (e) => {
       const btn = e.target.closest('#shuffle-related, .shuffle-related, .btn-shuffle, .related-posts .btn');
       if (!btn) return;
       pausedByUser = true;
       stop();
-      tick(); // do an animated shuffle
+      tick(); // reuse same animated sequence
       if (document.activeElement === btn) btn.blur();
       scheduleResume();
       e.preventDefault();
     });
 
-    // Start autoplay
     start();
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.related-posts').forEach(setupAutoShuffle);
   });
 })();
