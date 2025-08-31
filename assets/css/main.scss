@@ -540,6 +540,7 @@ pre {
   grid-template-columns: repeat(auto-fit, 180px); /* desktop: small, packed tiles */
   gap: 8px;
   justify-content: start;
+  column-gap: 8px !important;
   list-style: none;
   padding: 0;
   margin: 0;
