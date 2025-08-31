@@ -263,20 +263,23 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
         <div class="post-taxonomy__row">
           <span class="post-taxonomy__label">Categories:</span>
           <nav class="post-taxonomy__chips" aria-label="Categories">
-            {% for c in page.categories %}
+            {% assign cats = page.categories | uniq | sort %}
+            {% for c in cats %}
               {% assign c_slug = c | slugify %}
-                <a class="chip" href="{{ ('/categories/#' | append: c_slug) | relative_url }}">{{ c }}</a>
+              <a class="chip" href="{{ ('/categories/#' | append: c_slug) | absolute_url }}">{{ c }}</a>
             {% endfor %}
           </nav>
         </div>
       {% endif %}
+
       {% if has_tags %}
         <div class="post-taxonomy__row">
           <span class="post-taxonomy__label">Tags:</span>
           <nav class="post-taxonomy__chips" aria-label="Tags">
-            {% for t in page.tags %}
+            {% assign tags = page.tags | uniq | sort %}
+            {% for t in tags %}
               {% assign t_slug = t | slugify %}
-                <a class="chip" href="{{ ('/tags/#' | append: t_slug) | relative_url }}">{{ t }}</a>
+              <a class="chip" href="{{ ('/tags/#' | append: t_slug) | absolute_url }}">{{ t }}</a>
             {% endfor %}
           </nav>
         </div>
