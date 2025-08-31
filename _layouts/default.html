@@ -254,38 +254,43 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
 {% endif %}
 
 <!-- Post taxonomy (categories & tags) -->
-{% if page.collection == "posts" %}
-  {% assign has_cats = page.categories and page.categories != empty %}
-  {% assign has_tags = page.tags and page.tags != empty %}
-  {% if has_cats or has_tags %}
-    <footer class="post-taxonomy" aria-label="Post categories and tags">
-      {% if has_cats %}
-        <div class="post-taxonomy__row">
-          <span class="post-taxonomy__label">Categories:</span>
-          <nav class="post-taxonomy__chips" aria-label="Categories">
-            {% assign cats = page.categories | uniq | sort %}
-            {% for c in cats %}
-              {% assign c_slug = c | slugify %}
-              <a class="chip" href="{{ ('/categories/#' | append: c_slug) | absolute_url }}">{{ c }}</a>
-            {% endfor %}
-          </nav>
-        </div>
-      {% endif %}
+{% assign has_cats = page.categories and page.categories != empty %}
+{% assign has_tags = page.tags and page.tags != empty %}
 
-      {% if has_tags %}
-        <div class="post-taxonomy__row">
-          <span class="post-taxonomy__label">Tags:</span>
-          <nav class="post-taxonomy__chips" aria-label="Tags">
-            {% assign tags = page.tags | uniq | sort %}
-            {% for t in tags %}
-              {% assign t_slug = t | slugify %}
-              <a class="chip" href="{{ ('/tags/#' | append: t_slug) | absolute_url }}">{{ t }}</a>
-            {% endfor %}
-          </nav>
-        </div>
-      {% endif %}
-    </footer>
-  {% endif %}
+{% if has_cats or has_tags %}
+  <footer class="post-taxonomy" aria-label="Post categories and tags">
+    {% if has_cats %}
+      <div class="post-taxonomy__row">
+        <span class="post-taxonomy__label">Categories:</span>
+        <nav class="post-taxonomy__chips" aria-label="Categories">
+          {% assign cats = page.categories | uniq %}
+          {% for c in cats %}
+            {% assign term = c | to_s | strip %}
+            {% if term != "" %}
+              {% assign slug = term | slugify %}
+              <a class="chip" href="{{ '/categories/#' | append: slug | relative_url }}">{{ term }}</a>
+            {% endif %}
+          {% endfor %}
+        </nav>
+      </div>
+    {% endif %}
+
+    {% if has_tags %}
+      <div class="post-taxonomy__row">
+        <span class="post-taxonomy__label">Tags:</span>
+        <nav class="post-taxonomy__chips" aria-label="Tags">
+          {% assign tgs = page.tags | uniq %}
+          {% for t in tgs %}
+            {% assign term = t | to_s | strip %}
+            {% if term != "" %}
+              {% assign slug = term | slugify %}
+              <a class="chip" href="{{ '/tags/#' | append: slug | relative_url }}">{{ term }}</a>
+            {% endif %}
+          {% endfor %}
+        </nav>
+      </div>
+    {% endif %}
+  </footer>
 {% endif %}
         
 {% if page.collection == "posts" and page.related != false %}
