@@ -643,21 +643,17 @@ pre {
 .related-head h3 { margin: 0; }
 
 /* Related Posts: Mobile */
-@media (max-width: 768px), (hover: none) and (pointer: coarse) {
-  /* Higher specificity than base, and placed after it */
+/* ── Related Posts: force two-up on mobile/touch, even in desktop-mode ── */
+@media (max-width: 980px),
+       (max-device-width: 980px),
+       (hover: none) and (pointer: coarse) {
   section.related-posts .related-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px;
   }
-
-  /* Ensure child cards don’t fight the 1fr tracks */
   section.related-posts .related-card { width: auto !important; }
   section.related-posts .related-card a { display: block; }
-  section.related-posts .related-thumb {
-    width: 100% !important;
-    height: auto;
-    display: block;
-  }
+  section.related-posts .related-thumb { width: 100% !important; height: auto; display: block; }
 }
 
 /* Giscus Comments Box */
