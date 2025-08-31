@@ -545,7 +545,10 @@ pre {
   padding: 0;
   margin: 0;
 }
-
+.related-grid li {
+  padding: 0 !important;
+  border: none !important;
+}
 .related-card { 
 	width: auto; 
 	opacity: 1;   
@@ -563,7 +566,7 @@ pre {
 }
 
 .related-thumb {
-  width: 150px;
+  width: 180px;
   /*height: 140px;               square */
   margin: 0 !important;
   object-fit: cover;
