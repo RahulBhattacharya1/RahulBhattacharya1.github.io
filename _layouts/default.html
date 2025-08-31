@@ -797,15 +797,19 @@ fill="#000000" stroke="none">
 })();
 </script>
 
+  
 <script>
 (function(){
+  const DEFAULT_TAB="about";
   const map={bio:"about",categories:"about",tags:"about"};
+
   const idFromHash=()=> (location.hash||"").replace(/^#/, "").trim() || null;
   const idFromPath=p=>{
-    const m=(p.toLowerCase().match(/\/([a-z-]+)\/?$/)||[])[1]||"about";
+    const m=(p.toLowerCase().match(/\/([a-z0-9_-]+)\/?$/)||[])[1]||DEFAULT_TAB;
     return map[m]||m;
   };
-  const currentId=()=> idFromHash() || idFromPath(location.pathname) || "about";
+  const currentId=()=> idFromHash() || idFromPath(location.pathname) || DEFAULT_TAB;
+
   const activate=id=>{
     document.querySelectorAll(".tab-btn").forEach(b=>{
       const on=b.dataset.tab===id;
@@ -818,17 +822,25 @@ fill="#000000" stroke="none">
       if(on){p.removeAttribute("hidden");}else{p.setAttribute("hidden","hidden");}
     });
   };
+
   document.addEventListener("DOMContentLoaded",()=>{
     activate(currentId());
+
     document.querySelectorAll(".tab-btn").forEach(a=>{
       a.addEventListener("click",e=>{
         e.preventDefault();
-        const id=a.dataset.tab||"about";
+        const id=a.dataset.tab||DEFAULT_TAB;
         activate(id);
+
         const href=a.getAttribute("href")||("#"+id);
-        history.pushState(null,"", href.startsWith("#")?href:("#"+id));
+        if(href.startsWith("#")){
+          history.pushState(null,"",href);
+        }else{
+          setTimeout(()=>{ location.href=href; },300); // keep page navigation (e.g., /skills/)
+        }
       });
     });
+
     window.addEventListener("hashchange",()=>activate(currentId()));
   });
 })();
