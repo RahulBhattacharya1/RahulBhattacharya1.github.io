@@ -539,7 +539,8 @@ pre {
   display: grid;
   grid-template-columns: repeat(auto-fill, 180px); /* desktop: small, packed tiles */
   gap: 8px;
-  justify-content: start;                            /* align under the heading */
+  justify-content: start;
+  justify-items: start;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -587,6 +588,14 @@ pre {
   color: #737373;
 }
 
+.related-head {
+  display: flex;
+  align-items: center;   /* vertically center button with heading */
+  gap: 10px;             /* space between heading and button */
+  margin-bottom: 8px;
+}
+.related-head h3 { margin: 0; }
+
 /* Mobile: show ONLY 2 related posts, smaller squares */
 @media (max-width: 640px) {
   .related-grid {
@@ -613,14 +622,6 @@ pre {
   /* Hide beyond the first 2 posts */
   .related-card:nth-child(n+3) { display: none; }
 }
-
-.related-head {
-  display: flex;
-  align-items: center;   /* vertically center button with heading */
-  gap: 10px;             /* space between heading and button */
-  margin-bottom: 8px;
-}
-.related-head h3 { margin: 0; }
 
 /* Hide the in-iframe "0 comments" line by cropping the iframe top */
 .giscus, .giscus-frame {
