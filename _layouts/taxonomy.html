@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<main class="container">
+  <header class="taxo-head">
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p>{{ page.description }}</p>{% endif %}
+  </header>
+
+  {% assign term = page.term | downcase %}
+  {% if page.taxonomy == "category" %}
+    {% assign filtered = site.posts | where_exp: "p", "p.categories contains term" %}
+  {% elsif page.taxonomy == "tag" %}
+    {% assign filtered = site.posts | where_exp: "p", "p.tags contains term" %}
+  {% endif %}
+
+  {% if filtered and filtered != empty %}
+    <ul class="taxo-list">
+      {% for post in filtered %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <small> — {{ post.date | date: "%b %-d, %Y" }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No posts found for “{{ page.term }}”.</p>
+  {% endif %}
+</main>
+
+<style>
+.taxo-head{margin:1rem 0 1.25rem}
+.taxo-list{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+.taxo-list a{text-decoration:none}
+.taxo-list a:hover{text-decoration:underline}
+</style>
