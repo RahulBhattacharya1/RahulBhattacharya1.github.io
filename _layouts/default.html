@@ -800,64 +800,118 @@ fill="#000000" stroke="none">
   
 <script>
 (function(){
-  const DEFAULT_TAB = "about";
-  // Any of these segments force the "About Me" tab
   const FORCE_ABOUT = new Set(["bio","categories","tags"]);
+  const DEFAULT_TAB = "about";
 
-  function lastSegment(path){
-    const m = (path.toLowerCase().match(/\/([a-z0-9_-]+)\/?$/) || [,""])[1];
-    return m;
-  }
+  // helpers
+  const lastSeg = (p)=> (p.toLowerCase().match(/\/([a-z0-9_-]+)\/?$/)||[,""])[1] || "";
+  const getHash = ()=> (location.hash||"").replace(/^#/,"").trim();
 
-  function currentTabId(){
-    // 1. Hash takes priority if it matches a tab
-    const hash = (location.hash||"").replace(/^#/,"").trim();
-    if(hash && document.getElementById(hash)) return hash;
-
-    // 2. Otherwise derive from path
-    const seg = lastSegment(location.pathname) || DEFAULT_TAB;
-    if(FORCE_ABOUT.has(seg)) return DEFAULT_TAB;
-    return seg;
+  function getKnownTabs(){
+    return new Set(
+      Array.from(document.querySelectorAll(".tab-btn"))
+           .map(b=>b.dataset.tab)
+           .filter(Boolean)
+    );
   }
 
   function activate(id){
     document.querySelectorAll(".tab-btn").forEach(btn=>{
       const on = btn.dataset.tab===id;
-      btn.classList.toggle("active",on);
+      btn.classList.toggle("active", on);
       btn.setAttribute("aria-current", on ? "page" : "false");
     });
     document.querySelectorAll(".tab-panel").forEach(p=>{
       const on = p.id===id;
-      p.classList.toggle("active",on);
-      if(on){p.removeAttribute("hidden");}else{p.setAttribute("hidden","hidden");}
+      p.classList.toggle("active", on);
+      if(on){ p.removeAttribute("hidden"); } else { p.setAttribute("hidden","hidden"); }
     });
   }
 
-  document.addEventListener("DOMContentLoaded",()=>{
-    activate(currentTabId());
+  function boot(){
+    const tabs = getKnownTabs();
+    const seg  = lastSeg(location.pathname);
+    const hash = getHash();
 
-    // Button clicks
+    // Decide which tab to show
+    let initialTab;
+    if (hash && tabs.has(hash)) {
+      initialTab = hash;            // hash is one of the tab ids, honor it
+    } else if (FORCE_ABOUT.has(seg)) {
+      initialTab = DEFAULT_TAB;     // on /categories/ or /tags/ (or /bio/): force About
+    } else if (tabs.has(seg)) {
+      initialTab = seg;             // /skills/, /experience/, etc.
+    } else {
+      initialTab = DEFAULT_TAB;     // fallback
+    }
+
+    activate(initialTab);
+
+    // If hash is NOT a tab (e.g., #getting-started inside tags page), keep About active
+    // but still scroll to the content section with that id if it exists.
+    if (hash && !tabs.has(hash)) {
+      const anchor = document.getElementById(hash);
+      if (anchor) {
+        // slight delay to ensure layout is painted before scrolling
+        setTimeout(()=>{ anchor.scrollIntoView({behavior:"smooth", block:"start"}); }, 60);
+      }
+    }
+
+    // Wire tab buttons
     document.querySelectorAll(".tab-btn").forEach(btn=>{
-      btn.addEventListener("click",e=>{
-        e.preventDefault();
+      btn.addEventListener("click", (e)=>{
         const id = btn.dataset.tab || DEFAULT_TAB;
-        activate(id);
+        const href = btn.getAttribute("href") || "";
 
-        const href = btn.getAttribute("href");
-        if(href){
-          if(href.startsWith("#")){
-            history.pushState(null,"",href);
-          }else{
-            // real navigation to /skills/, /experience/, etc.
-            setTimeout(()=>{ location.href=href; },300);
+        // If href points to a hash AND that hash is a tab id, handle as a tab (no page reload)
+        if (href.startsWith("#")) {
+          const h = href.replace(/^#/,"");
+          if (tabs.has(h)) {
+            e.preventDefault();
+            activate(h);
+            history.pushState(null,"","#"+h);
+            return;
           }
+          // else: it's an on-page anchor (e.g., #getting-started) → let browser handle scroll
+          // no preventDefault here
+        } else if (href) {
+          // Real navigation to /skills/, /experience/, etc. Keep your slight delay
+          e.preventDefault();
+          activate(id);
+          setTimeout(()=>{ location.href = href; }, 300);
+          return;
+        }
+
+        // If no href specified, still treat as a tab button
+        if (!href) {
+          e.preventDefault();
+          activate(id);
+          history.pushState(null,"","#"+id);
         }
       });
     });
 
-    // Back/forward hash changes
-    window.addEventListener("hashchange",()=>activate(currentTabId()));
+    // Back/forward: only react to hash if it matches a tab id; otherwise just keep About visible
+    window.addEventListener("hashchange", ()=>{
+      const tabsNow = getKnownTabs();
+      const h = getHash();
+      if (h && tabsNow.has(h)) {
+        activate(h);
+      } else if (FORCE_ABOUT.has(lastSeg(location.pathname))) {
+        activate(DEFAULT_TAB);
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", boot);
+
+  // If markup is injected after DOMContentLoaded, ensure selection is applied
+  const mo = new MutationObserver(()=>{
+    const anyActive = document.querySelector(".tab-panel.active");
+    const aboutPanel = document.getElementById(DEFAULT_TAB);
+    if (!anyActive && aboutPanel) boot();
   });
+  mo.observe(document.documentElement, {subtree:true, childList:true});
 })();
 </script>
 
