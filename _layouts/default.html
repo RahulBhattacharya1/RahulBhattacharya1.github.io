@@ -585,13 +585,22 @@ fill="#000000" stroke="none">
     items.forEach(el => list.appendChild(el));
   }
 
+  function getOpacityDurationMs(el) {
+    const cs = getComputedStyle(el);
+    const props = cs.transitionProperty.split(',').map(s => s.trim());
+    const durs  = cs.transitionDuration.split(',').map(s => s.trim());
+    let idx = props.findIndex(p => p === 'opacity');
+    if (idx < 0) idx = 0;
+    const val = durs[idx] || durs[0] || '0s';
+    const ms  = val.endsWith('ms') ? parseFloat(val) : parseFloat(val) * 1000;
+    return isNaN(ms) || ms < 20 ? 600 : ms;
+  }
+
   function setupAutoShuffle(section) {
     const grid = section.querySelector('.related-grid');
     if (!grid) return;
 
-    // CHANGE #1: drop 'visible'. It was blocking start().
     let timer = null, pausedByUser = false;
-
     let resumeTimer = null;
     const INACTIVITY_MS = 5000;
 
@@ -599,25 +608,33 @@ fill="#000000" stroke="none">
       const cards = grid.querySelectorAll('.related-card');
       if (!cards.length) return;
 
-      // fade out
+      // Fade out
       cards.forEach(el => el.classList.add('is-fading'));
 
-      const sample = grid.querySelector('.related-card');
-      const dur = parseFloat(
-        getComputedStyle(sample).transitionDuration
-      ) * 1000; // in ms      
+      // Force a style/layout flush so first cycle doesn't snap on load
+      grid.getBoundingClientRect();
+
+      // Measure fade-out duration while .is-fading is applied
+      const durOut = getOpacityDurationMs(cards[0]);
+
+      // Swap after fade-out, then fade back in on next frame
       setTimeout(() => {
         shuffleNodes(grid);
         requestAnimationFrame(() => {
           cards.forEach(el => el.classList.remove('is-fading'));
         });
-      }, dur);
+      }, durOut);
     }
 
     function start() {
-      // CHANGE #2: remove '!visible' guard
       if (pausedByUser || timer) return;
-      timer = setInterval(tick, 5000); // your autoplay cadence
+      // Prime one correctly-animated cycle immediately
+      tick();
+      // Set cadence long enough to avoid overlap: out + in (+ buffer)
+      const sample = grid.querySelector('.related-card') || grid;
+      const outMs = getOpacityDurationMs(sample);
+      const cadence = Math.max(5000, outMs * 2 + 200);
+      timer = setInterval(tick, cadence);
     }
 
     function stop() {
@@ -646,27 +663,20 @@ fill="#000000" stroke="none">
       scheduleResume();
     });
 
-    // CHANGE #3: more forgiving selector for the Shuffle button
+    // Manual Shuffle: robust selector
     section.addEventListener('click', function (e) {
       const btn = e.target.closest('#shuffle-related, .shuffle-related, .btn-shuffle, .related-posts .btn');
       if (!btn) return;
-
       pausedByUser = true;
       stop();
-
-      // do an animated shuffle (keeps fade timing consistent)
-      tick();
-
+      tick(); // do an animated shuffle
       if (document.activeElement === btn) btn.blur();
       scheduleResume();
       e.preventDefault();
     });
 
-    // CHANGE #4: actually start autoplay
+    // Start autoplay
     start();
-
-    // Optional: do one immediate shuffle on load (keep or remove to taste)
-    // tick();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -674,6 +684,7 @@ fill="#000000" stroke="none">
   });
 })();
 </script>
+
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya</p>
