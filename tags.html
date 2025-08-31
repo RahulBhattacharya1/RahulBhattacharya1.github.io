@@ -4,7 +4,7 @@ title: Tags
 permalink: /tags/
 ---
 
-<main class="container">
+<main class="container tag-page">
   <!-- Tags page rendered with the same layout as homepage -->
   <h1>Tags</h1>
 
@@ -16,7 +16,6 @@ permalink: /tags/
     <section id="{{ tag_name | slugify }}" class="post-section">
       <h2 class="section-title">{{ tag_name }}</h2>
 
-      <!-- Reuse homepage list/card classes exactly -->
       <ul class="post-list">
         {% for p in tag_posts %}
           {% assign img = p.thumbnail | default: p.image | default: '/assets/images/default.webp' %}
