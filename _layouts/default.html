@@ -589,32 +589,36 @@ fill="#000000" stroke="none">
     const grid = section.querySelector('.related-grid');
     if (!grid) return;
 
-    let timer = null, visible = false, pausedByUser = false;
+    // CHANGE #1: drop 'visible'. It was blocking start().
+    let timer = null, pausedByUser = false;
 
     let resumeTimer = null;
     const INACTIVITY_MS = 5000;
 
     function tick() {
       const cards = grid.querySelectorAll('.related-card');
-    
+      if (!cards.length) return;
 
+      // fade out
       cards.forEach(el => el.classList.add('is-fading'));
-    
-     
+
+      // swap halfway through your fade (adjust to match your CSS; 1000ms here)
       setTimeout(() => {
         shuffleNodes(grid);
-    
-        
+
+        // let the browser commit the DOM move, then fade back in smoothly
         requestAnimationFrame(() => {
           cards.forEach(el => el.classList.remove('is-fading'));
         });
-      }, 1000); 
+      }, 1000);
     }
 
     function start() {
-      if (pausedByUser || !visible || timer) return;
-      timer = setInterval(tick, 5000);
+      // CHANGE #2: remove '!visible' guard
+      if (pausedByUser || timer) return;
+      timer = setInterval(tick, 5000); // your autoplay cadence
     }
+
     function stop() {
       if (timer) { clearInterval(timer); timer = null; }
     }
@@ -627,7 +631,7 @@ fill="#000000" stroke="none">
       }, INACTIVITY_MS);
     }
 
-    // Pause on hover/focus; resume after 5s of inactivity
+    // Pause on hover/focus; resume after inactivity
     section.addEventListener('mouseenter', function () {
       pausedByUser = true; stop(); if (resumeTimer) clearTimeout(resumeTimer);
     });
@@ -641,19 +645,27 @@ fill="#000000" stroke="none">
       scheduleResume();
     });
 
-    // Manual Shuffle: pause now, shuffle, resume after 5s of no activity
+    // CHANGE #3: more forgiving selector for the Shuffle button
     section.addEventListener('click', function (e) {
-      const btn = e.target.closest('.related-posts .btn');
+      const btn = e.target.closest('#shuffle-related, .shuffle-related, .btn-shuffle, .related-posts .btn');
       if (!btn) return;
+
       pausedByUser = true;
       stop();
-      shuffleNodes(grid);
+
+      // do an animated shuffle (keeps fade timing consistent)
+      tick();
+
       if (document.activeElement === btn) btn.blur();
       scheduleResume();
       e.preventDefault();
     });
 
-    tick();
+    // CHANGE #4: actually start autoplay
+    start();
+
+    // Optional: do one immediate shuffle on load (keep or remove to taste)
+    // tick();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
