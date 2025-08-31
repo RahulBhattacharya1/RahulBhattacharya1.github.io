@@ -5,38 +5,37 @@ permalink: /tags/
 ---
 
 <main class="container">
-<!-- Tags index -->
-<!-- Tags page rendered with the same layout as homepage -->
-<h1>Tags</h1>
+  <!-- Tags page rendered with the same layout as homepage -->
+  <h1>Tags</h1>
 
-{% assign all = site.tags | sort %}
-{% for pair in all %}
-  {% assign tag_name  = pair[0] %}
-  {% assign tag_posts = pair[1] | sort: "date" | reverse %}
+  {% assign all = site.tags | sort %}
+  {% for pair in all %}
+    {% assign tag_name  = pair[0] %}
+    {% assign tag_posts = pair[1] | sort: "date" | reverse %}
 
-  <section id="{{ tag_name | slugify }}" class="tag-section">
-    <h2 class="tag-title">{{ tag_name }}</h2>
+    <section id="{{ tag_name | slugify }}" class="post-section">
+      <h2 class="section-title">{{ tag_name }}</h2>
 
-    <!-- Reuse homepage list/card classes -->
-    <ul class="post-list">
-      {% for p in tag_posts %}
-        {% assign img = p.thumbnail | default: p.image | default: '/assets/images/default.webp' %}
-        <li class="post-card">
-          <a class="post-card__media" href="{{ p.url | relative_url }}" aria-label="{{ p.title }}">
-            <img class="post-thumb" src="{{ img | relative_url }}" alt="" loading="lazy">
-          </a>
-          <div class="post-card__body">
-            <h3 class="post-title">
-              <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
-            </h3>
-            <p class="post-excerpt">{{ p.excerpt | strip_html | truncate: 180 }}</p>
-            <div class="post-meta">
-              <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%b %-d, %Y" }}</time>
+      <!-- Reuse homepage list/card classes exactly -->
+      <ul class="post-list">
+        {% for p in tag_posts %}
+          {% assign img = p.thumbnail | default: p.image | default: '/assets/images/default.webp' %}
+          <li class="post-card">
+            <a class="post-card__media" href="{{ p.url | relative_url }}" aria-label="{{ p.title }}">
+              <img class="post-thumb" src="{{ img | relative_url }}" alt="" loading="lazy">
+            </a>
+            <div class="post-card__body">
+              <h3 class="post-title">
+                <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+              </h3>
+              <p class="post-excerpt">{{ p.excerpt | strip_html | truncate: 180 }}</p>
+              <div class="post-meta">
+                <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%b %-d, %Y" }}</time>
+              </div>
             </div>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </section>
-{% endfor %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
 </main>
