@@ -264,12 +264,12 @@ body {
 /* Subtle breathing effect on the first image inside post body */
 @keyframes subtle-breath {
   0%, 100% {
-    opacity: 0.8;
-    transform: scale(.9);
+    opacity: 0.9;
+    transform: scale(.95);
   }
   50% {
     opacity: 1;
-    transform: scale(1); /* 1% zoom at peak */
+    transform: scale(1);
   }
 }
 
@@ -595,7 +595,7 @@ pre {
   object-fit: cover;
   border-radius: 10px;
   display: block;
-  transition: transform 2s ease, box-shadow .18s ease, filter .18s ease;
+  transition: transform 1s ease, box-shadow .18s ease, filter .18s ease;
   transform-origin: center;
   padding: 0 !important;
   border: 0 !important;
@@ -641,29 +641,22 @@ pre {
 }
 .related-head h3 { margin: 0; }
 
-@media (max-width: 640px) {
-  .related-grid > li:nth-child(n+3) { display: none; } /* keep only first 2 */
-}
 
-/* ── Related Posts: force two-up on mobile ───────────────────────── */
+/* Related Posts: Mobile */
 @media (max-width: 768px) {
   .related-grid {
-    /* two equal columns regardless of available width */
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px; /* a touch tighter on mobile */
+    gap: 10px;
   }
 
-  /* let items fill the 1fr tracks instead of a fixed width */
   .related-card {
     width: auto !important;
   }
 
-  /* ensure the clickable block behaves predictably in the 1fr columns */
   .related-card a {
     display: block;
   }
 
-  /* images already have width:100% in your sheet; keep it explicit */
   .related-posts .related-thumb {
     width: 100% !important;
     height: auto;
@@ -671,16 +664,14 @@ pre {
   }
 }
 
-/* Hide the in-iframe "0 comments" line by cropping the iframe top */
+/* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
 }
 .giscus-frame {
-  /* Crop depending on theme; tweak as needed */
   clip-path: inset(46px 0 0 0);
 }
 
-/* Optional: add a little top margin so the cropped box breathes */
 .giscus {
   margin-top: 6px;
 }
