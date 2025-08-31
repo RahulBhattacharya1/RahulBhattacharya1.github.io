@@ -736,6 +736,34 @@ pre {
   background: #1d4ed8;
 }
 
+/* ── Tabbed bio text styling ── */
+.bio-tabs .tab-content {
+  font-family: "Georgia", serif;   /* change to your preferred font */
+  color: #737373;
+  font-size: 0.9rem;   /* ~14–15px on most browsers */
+  line-height: 1.5;    /* keeps it readable */
+}
+
+.bio-tabs .tab-content h2 {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #2563eb;                  /* accent heading color */
+}
+
+.bio-tabs .tab-content p {
+  margin: 0 0 0.75rem;
+}
+
+.bio-tabs .tab-content ul {
+  margin: 0 0 0.75rem 1.2rem;
+  padding: 0;
+}
+
+.bio-tabs .tab-content li {
+  margin-bottom: 0.4rem;
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
