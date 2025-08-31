@@ -537,7 +537,7 @@ pre {
 /* ─── Related Posts: left-aligned, hover anim, mobile = 2 items ─── */
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 180px); /* desktop: small, packed tiles */
+  grid-template-columns: repeat(auto-fit, 180px); /* desktop: small, packed tiles */
   gap: 8px;
   justify-content: start;
   list-style: none;
