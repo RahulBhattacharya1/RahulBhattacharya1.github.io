@@ -1,0 +1,49 @@
+---
+layout: default
+title: Tags
+permalink: /tags/
+---
+
+<main class="container">
+  <h1>Tags</h1>
+
+  {% assign all_tags = site.posts | map: "tags" | join: "," | split: "," %}
+  {% assign tags = all_tags | uniq | sort %}
+
+  {% if tags == empty %}
+    <p>No tags yet.</p>
+  {% endif %}
+
+  {% for t in tags %}
+    {% assign term = t | strip %}
+    {% if term != "" %}
+      {% assign slug = term | slugify %}
+
+      <section id="{{ slug }}" class="taxo-section" aria-labelledby="tag-{{ slug }}">
+        <h2 id="tag-{{ slug }}">{{ term }}</h2>
+
+        {% assign posts_in_tag = site.posts | where_exp: "p", "p.tags contains term" %}
+        {% if posts_in_tag != empty %}
+          <ul class="taxo-list">
+            {% for post in posts_in_tag %}
+              <li>
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                <small> — {{ post.date | date: "%b %-d, %Y" }}</small>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No posts yet tagged “{{ term }}”.</p>
+        {% endif %}
+      </section>
+    {% endif %}
+  {% endfor %}
+</main>
+
+<style>
+.taxo-section{margin:1.25rem 0 2rem;padding-top:.25rem}
+.taxo-section h2{margin:.25rem 0 .5rem}
+.taxo-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.taxo-list a{text-decoration:none}
+.taxo-list a:hover{text-decoration:underline}
+</style>
