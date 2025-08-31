@@ -643,8 +643,25 @@ pre {
 .related-head h3 { margin: 0; }
 
 /* Related Posts: Mobile */
+/* Keep only first 2 */
 @media (max-width: 640px) {
   .related-grid > li:nth-child(n+3) { display: none; } /* keep only first 2 */
+
+  /* Force two columns and let cards fill the tracks */
+  .related-posts .related-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .related-posts .related-card,
+  .related-posts .related-grid > li { 
+    width: auto !important; /* override the 180px fixed width */
+  }
+  .related-posts .related-thumb {
+    width: 100% !important;
+    height: auto;
+    display: block;
+  }
 }
 
 /* Giscus Comments Box */
