@@ -4,46 +4,37 @@ title: Categories
 permalink: /categories/
 ---
 
-<main class="container">
+<main class="container category-page">
+  <!-- Categories page rendered with the same layout as homepage -->
   <h1>Categories</h1>
 
-  {% assign all_cats = site.posts | map: "categories" | join: "," | split: "," %}
-  {% assign cats = all_cats | uniq | sort %}
+  {% assign all = site.categories | sort %}
+  {% for pair in all %}
+    {% assign cat_name  = pair[0] %}
+    {% assign cat_posts = pair[1] | sort: "date" | reverse %}
 
-  {% if cats == empty %}
-    <p>No categories yet.</p>
-  {% endif %}
+    <section id="{{ cat_name | slugify }}" class="post-section">
+      <h2 class="section-title">{{ cat_name }}</h2>
 
-  {% for c in cats %}
-    {% assign term = c | strip %}
-    {% if term != "" %}
-      {% assign slug = term | slugify %}
-
-      <section id="{{ slug }}" class="taxo-section" aria-labelledby="cat-{{ slug }}">
-        <h2 id="cat-{{ slug }}">{{ term }}</h2>
-
-        {% assign posts_in_cat = site.posts | where_exp: "p", "p.categories contains term" %}
-        {% if posts_in_cat != empty %}
-          <ul class="taxo-list">
-            {% for post in posts_in_cat %}
-              <li>
-                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                <small> — {{ post.date | date: "%b %-d, %Y" }}</small>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No posts yet in “{{ term }}”.</p>
-        {% endif %}
-      </section>
-    {% endif %}
+      <ul class="post-list">
+        {% for p in cat_posts %}
+          {% assign img = p.thumbnail | default: p.image | default: '/assets/images/default.webp' %}
+          <li class="post-card">
+            <a class="post-card__media" href="{{ p.url | relative_url }}" aria-label="{{ p.title }}">
+              <img class="post-thumb" src="{{ img | relative_url }}" alt="" loading="lazy">
+            </a>
+            <div class="post-card__body">
+              <h3 class="post-title">
+                <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+              </h3>
+              <p class="post-excerpt">{{ p.excerpt | strip_html | truncate: 180 }}</p>
+              <div class="post-meta">
+                <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%b %-d, %Y" }}</time>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
   {% endfor %}
 </main>
-
-<style>
-.taxo-section{margin:1.25rem 0 2rem;padding-top:.25rem}
-.taxo-section h2{margin:.25rem 0 .5rem}
-.taxo-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
-.taxo-list a{text-decoration:none}
-.taxo-list a:hover{text-decoration:underline}
-</style>
