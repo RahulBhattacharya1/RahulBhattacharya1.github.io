@@ -578,7 +578,6 @@ fill="#000000" stroke="none">
   function shuffleNodes(list) {
     const items = Array.from(list.children);
     if (items.length < 2) return;
-    // Fisher–Yates shuffle
     for (let i = items.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [items[i], items[j]] = [items[j], items[i]];
@@ -592,31 +591,50 @@ fill="#000000" stroke="none">
 
     let timer = null, visible = false, pausedByUser = false;
 
+    // NEW: inactivity-based resume
+    let resumeTimer = null;
+    const INACTIVITY_MS = 5000;
+
     function tick() {
       const cards = grid.querySelectorAll('.related-card');
       cards.forEach(el => el.classList.add('is-fading'));
-    
       setTimeout(() => {
         shuffleNodes(grid);
         cards.forEach(el => el.classList.remove('is-fading'));
-      }, 600); // match transition duration
+      }, 600);
     }
 
     function start() {
       if (pausedByUser || !visible || timer) return;
-      timer = setInterval(tick, 5000); // 🔁 every 5s
+      timer = setInterval(tick, 5000);
     }
     function stop() {
       if (timer) { clearInterval(timer); timer = null; }
     }
 
-    // Pause on hover/focus
-    section.addEventListener('mouseenter', function(){ pausedByUser = true; stop(); });
-    section.addEventListener('mouseleave', function(){ pausedByUser = false; start(); });
-    section.addEventListener('focusin',  function(){ pausedByUser = true; stop(); });
-    section.addEventListener('focusout', function(){ pausedByUser = false; start(); });
+    function scheduleResume() {
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function () {
+        pausedByUser = false;
+        start();
+      }, INACTIVITY_MS);
+    }
 
-    // Only run when visible
+    // Pause on hover/focus; resume after 5s of inactivity
+    section.addEventListener('mouseenter', function () {
+      pausedByUser = true; stop(); if (resumeTimer) clearTimeout(resumeTimer);
+    });
+    section.addEventListener('mouseleave', function () {
+      scheduleResume();
+    });
+    section.addEventListener('focusin', function () {
+      pausedByUser = true; stop(); if (resumeTimer) clearTimeout(resumeTimer);
+    });
+    section.addEventListener('focusout', function () {
+      scheduleResume();
+    });
+
+    // Visibility control
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         visible = entry.isIntersecting && entry.intersectionRatio > 0.25;
@@ -625,14 +643,18 @@ fill="#000000" stroke="none">
     }, { threshold: [0, 0.25] });
     io.observe(section);
 
-    // Manual Shuffle button still works
+    // Manual Shuffle: pause now, shuffle, resume after 5s of no activity
     section.addEventListener('click', function (e) {
       const btn = e.target.closest('.related-posts .btn');
       if (!btn) return;
+      pausedByUser = true;
+      stop();
       shuffleNodes(grid);
+      if (document.activeElement === btn) btn.blur();
+      scheduleResume();
+      e.preventDefault();
     });
 
-    // Kick it once immediately
     tick();
   }
 
