@@ -651,7 +651,7 @@ pre {
   .related-posts .related-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
+    gap: 15px !important;
   }
   .related-posts .related-card,
   .related-posts .related-grid > li { 
