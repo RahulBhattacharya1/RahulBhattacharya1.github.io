@@ -264,7 +264,7 @@ body {
 /* Subtle breathing effect on the first image inside post body */
 @keyframes subtle-breath {
   0%, 100% {
-    opacity: 0.96;
+    opacity: 0.5;
     transform: scale(1);
   }
   50% {
