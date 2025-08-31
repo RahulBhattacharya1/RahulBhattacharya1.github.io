@@ -6,6 +6,7 @@ permalink: /tags/
 
 <main class="container">
 <!-- Tags index -->
+<!-- Tags page rendered with the same layout as homepage -->
 <h1>Tags</h1>
 
 {% assign all = site.tags | sort %}
@@ -16,35 +17,26 @@ permalink: /tags/
   <section id="{{ tag_name | slugify }}" class="tag-section">
     <h2 class="tag-title">{{ tag_name }}</h2>
 
-    <!-- Reuse your related-* classes to avoid new CSS -->
-    <ul class="related-grid tag-grid">
+    <!-- Reuse homepage list/card classes -->
+    <ul class="post-list">
       {% for p in tag_posts %}
         {% assign img = p.thumbnail | default: p.image | default: '/assets/images/default.webp' %}
-        <li class="related-card">
-          <a class="related-link" href="{{ p.url | relative_url }}" aria-label="{{ p.title }}">
-            <img class="related-thumb" src="{{ img | relative_url }}" alt="">
+        <li class="post-card">
+          <a class="post-card__media" href="{{ p.url | relative_url }}" aria-label="{{ p.title }}">
+            <img class="post-thumb" src="{{ img | relative_url }}" alt="" loading="lazy">
           </a>
-          <div class="related-text">
-            <h3 class="related-title">
+          <div class="post-card__body">
+            <h3 class="post-title">
               <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
             </h3>
-            <p class="related-excerpt">{{ p.excerpt | strip_html | truncate: 180 }}</p>
-            <time class="related-date" datetime="{{ p.date | date_to_xmlschema }}">
-              {{ p.date | date: "%b %-d, %Y" }}
-            </time>
+            <p class="post-excerpt">{{ p.excerpt | strip_html | truncate: 180 }}</p>
+            <div class="post-meta">
+              <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%b %-d, %Y" }}</time>
+            </div>
           </div>
         </li>
       {% endfor %}
     </ul>
   </section>
 {% endfor %}
-
 </main>
-
-<style>
-.taxo-section{margin:1.25rem 0 2rem;padding-top:.25rem}
-.taxo-section h2{margin:.25rem 0 .5rem}
-.taxo-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
-.taxo-list a{text-decoration:none}
-.taxo-list a:hover{text-decoration:underline}
-</style>
