@@ -5,39 +5,40 @@ permalink: /tags/
 ---
 
 <main class="container">
-  <h1>Tags</h1>
+<!-- Tags index -->
+<h1>Tags</h1>
 
-  {% assign all_tags = site.posts | map: "tags" | join: "," | split: "," %}
-  {% assign tags = all_tags | uniq | sort %}
+{% assign all = site.tags | sort %}
+{% for pair in all %}
+  {% assign tag_name  = pair[0] %}
+  {% assign tag_posts = pair[1] | sort: "date" | reverse %}
 
-  {% if tags == empty %}
-    <p>No tags yet.</p>
-  {% endif %}
+  <section id="{{ tag_name | slugify }}" class="tag-section">
+    <h2 class="tag-title">{{ tag_name }}</h2>
 
-  {% for t in tags %}
-    {% assign term = t | strip %}
-    {% if term != "" %}
-      {% assign slug = term | slugify %}
+    <!-- Reuse your related-* classes to avoid new CSS -->
+    <ul class="related-grid tag-grid">
+      {% for p in tag_posts %}
+        {% assign img = p.thumbnail | default: p.image | default: '/assets/images/default.webp' %}
+        <li class="related-card">
+          <a class="related-link" href="{{ p.url | relative_url }}" aria-label="{{ p.title }}">
+            <img class="related-thumb" src="{{ img | relative_url }}" alt="">
+          </a>
+          <div class="related-text">
+            <h3 class="related-title">
+              <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+            </h3>
+            <p class="related-excerpt">{{ p.excerpt | strip_html | truncate: 180 }}</p>
+            <time class="related-date" datetime="{{ p.date | date_to_xmlschema }}">
+              {{ p.date | date: "%b %-d, %Y" }}
+            </time>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endfor %}
 
-      <section id="{{ slug }}" class="taxo-section" aria-labelledby="tag-{{ slug }}">
-        <h2 id="tag-{{ slug }}">{{ term }}</h2>
-
-        {% assign posts_in_tag = site.posts | where_exp: "p", "p.tags contains term" %}
-        {% if posts_in_tag != empty %}
-          <ul class="taxo-list">
-            {% for post in posts_in_tag %}
-              <li>
-                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                <small> — {{ post.date | date: "%b %-d, %Y" }}</small>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No posts yet tagged “{{ term }}”.</p>
-        {% endif %}
-      </section>
-    {% endif %}
-  {% endfor %}
 </main>
 
 <style>
