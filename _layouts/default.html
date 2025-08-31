@@ -602,15 +602,16 @@ fill="#000000" stroke="none">
       // fade out
       cards.forEach(el => el.classList.add('is-fading'));
 
-      // swap halfway through your fade (adjust to match your CSS; 1000ms here)
+      const sample = grid.querySelector('.related-card');
+      const dur = parseFloat(
+        getComputedStyle(sample).transitionDuration
+      ) * 1000; // in ms      
       setTimeout(() => {
         shuffleNodes(grid);
-
-        // let the browser commit the DOM move, then fade back in smoothly
         requestAnimationFrame(() => {
           cards.forEach(el => el.classList.remove('is-fading'));
         });
-      }, 500);
+      }, dur);
     }
 
     function start() {
