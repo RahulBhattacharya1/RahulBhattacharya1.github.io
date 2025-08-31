@@ -552,7 +552,7 @@ pre {
 .related-card { 
 	width: 180px; 
 	opacity: 1;   
-	align-items: start;
+	align-items: stretch;
 	padding: 0 !important;
 	border: 0 !important;
 	perspective: 800px;
@@ -565,7 +565,8 @@ pre {
 }
 
 .related-card a {
-  /*display: block;*/
+  display: block;
+  width: 100%;
   text-decoration: none;
   text-align: left;
 }
@@ -576,11 +577,12 @@ pre {
   margin: 0 !important;
   object-fit: cover;
   border-radius: 10px;
-  /*display: block;*/
+  display: block;
   transition: transform 2s ease, box-shadow .18s ease, filter .18s ease;
   transform-origin: center;
   padding: 0 !important;
   border: 0 !important;
+  margin: 0 !important;
   will-change: transform, box-shadow;
   box-shadow:
     0 2px 4px rgba(0,0,0,.08),
