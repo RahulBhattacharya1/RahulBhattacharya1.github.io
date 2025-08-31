@@ -637,3 +637,24 @@ pre {
   margin-top: 6px;
 }
 
+/* ==== Related Posts: force thumbnails to fill cards, override global img rules ==== */
+.related-posts .related-card { 
+  align-items: stretch; 
+}
+
+.related-posts .related-card a { 
+  display: block; 
+  width: 100%; 
+}
+
+.related-posts img.related-thumb,
+.related-posts .related-thumb {
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  margin: 0 !important;
+  border-radius: 10px;
+}
