@@ -759,7 +759,7 @@ fill="#000000" stroke="none">
 
 <script>
 (function(){
-  const map={};
+  const map={bio: "about"}; /* Shows About Me pane below buttons*/
   const idFromPath=p=>{const m=(p.toLowerCase().match(/\/([a-z-]+)\/$/)||[])[1]||"about";return map[m]||m};
   const activate=id=>{
     document.querySelectorAll(".tab-btn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
