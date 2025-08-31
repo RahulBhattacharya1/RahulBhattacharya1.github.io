@@ -548,12 +548,13 @@ pre {
 .related-card { 
 	width: 180px; 
 	opacity: 1;
-	transition: opacity 0.75s ease;
+	transition: opacity 1000ms ease;
 	will-change: opacity;
 }
 
 .related-card.is-fading {
 	opacity: 0;
+	transition: opacity 1000ms ease-out;
 }
 
 .related-card a {
