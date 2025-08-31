@@ -556,6 +556,8 @@ pre {
 	padding: 0 !important;
 	border: 0 !important;
 	perspective: 800px;
+	display: flex;
+	flex-direction: column;
 }
 
 .related-card.is-fading {
@@ -570,9 +572,9 @@ pre {
 
 .related-thumb {
   width: 100%;
-  /*height: 140px;               square */
+  height: auto;
   margin: 0 !important;
-  /*object-fit: cover;*/
+  object-fit: cover;
   border-radius: 10px;
   /*display: block;*/
   transition: transform 2s ease, box-shadow .18s ease, filter .18s ease;
