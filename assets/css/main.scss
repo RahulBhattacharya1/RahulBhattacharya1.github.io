@@ -259,7 +259,7 @@ body {
   height: auto;
   display: block;
   margin: 1rem auto; /* center it */
-  animation: subtle-breath 8s ease-in-out infinite;
+  animation: subtle-breath 8s ease-in-out infinite !important;
 }
 
 /* Subtle breathing effect on the first image inside post body */
