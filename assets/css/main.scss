@@ -862,6 +862,44 @@ pre {
   .tag-page .post-card__media { width: 100px; height: 75px; }
 }
 
+/* Categories page: same media layout as homepage (scoped) */
+.category-page .post-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+
+.category-page .post-card {
+  display: grid;
+  grid-template-columns: 160px 1fr; /* thumbnail | text */
+  gap: 14px;
+  align-items: start;
+}
+
+.category-page .post-card__media { width: 160px; height: 104px; border-radius: 8px; overflow: hidden; }
+.category-page .post-card__media .post-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ── Category page font adjustments ── */
+.category-page .post-title {
+  font-size: 1rem;
+  line-height: 1.3;
+  margin: 0 0 .35rem;
+}
+
+.category-page .post-excerpt {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #4b5563;
+  margin: 0 0 .25rem;
+}
+
+.category-page .post-meta,
+.category-page .post-date {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+@media (max-width: 640px) {
+  .category-page .post-card { grid-template-columns: 100px 1fr; gap: 10px; }
+  .category-page .post-card__media { width: 100px; height: 75px; }
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
