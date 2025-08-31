@@ -560,7 +560,7 @@ pre {
 }
 
 .related-card a {
-  display: block;
+  /*display: block;*/
   text-decoration: none;
   text-align: left;
 }
@@ -569,9 +569,9 @@ pre {
   width: 180px;
   /*height: 140px;               square */
   margin: 0 !important;
-  object-fit: cover;
+  /*object-fit: cover;*/
   border-radius: 10px;
-  display: block;
+  /*display: block;*/
   transition: transform 2s ease, box-shadow .18s ease, filter .18s ease;
   transform-origin: center;
 }
