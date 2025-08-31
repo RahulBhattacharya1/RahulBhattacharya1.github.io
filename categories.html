@@ -1,0 +1,49 @@
+---
+layout: default
+title: Categories
+permalink: /categories/
+---
+
+<main class="container">
+  <h1>Categories</h1>
+
+  {% assign all_cats = site.posts | map: "categories" | join: "," | split: "," %}
+  {% assign cats = all_cats | uniq | sort %}
+
+  {% if cats == empty %}
+    <p>No categories yet.</p>
+  {% endif %}
+
+  {% for c in cats %}
+    {% assign term = c | strip %}
+    {% if term != "" %}
+      {% assign slug = term | slugify %}
+
+      <section id="{{ slug }}" class="taxo-section" aria-labelledby="cat-{{ slug }}">
+        <h2 id="cat-{{ slug }}">{{ term }}</h2>
+
+        {% assign posts_in_cat = site.posts | where_exp: "p", "p.categories contains term" %}
+        {% if posts_in_cat != empty %}
+          <ul class="taxo-list">
+            {% for post in posts_in_cat %}
+              <li>
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                <small> — {{ post.date | date: "%b %-d, %Y" }}</small>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No posts yet in “{{ term }}”.</p>
+        {% endif %}
+      </section>
+    {% endif %}
+  {% endfor %}
+</main>
+
+<style>
+.taxo-section{margin:1.25rem 0 2rem;padding-top:.25rem}
+.taxo-section h2{margin:.25rem 0 .5rem}
+.taxo-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.taxo-list a{text-decoration:none}
+.taxo-list a:hover{text-decoration:underline}
+</style>
