@@ -259,17 +259,18 @@ body {
   height: auto;
   display: block;
   margin: 1rem auto; /* center it */
+  animation: subtle-breath 8s ease-in-out infinite;
 }
 
 /* Subtle breathing effect on the first image inside post body */
 @keyframes subtle-breath {
   0%, 100% {
     opacity: 0.5;
-    transform: scale(1);
+    transform: scale(.8);
   }
   50% {
     opacity: 1;
-    transform: scale(1.01); /* 1% zoom at peak */
+    transform: scale(1); /* 1% zoom at peak */
   }
 }
 
