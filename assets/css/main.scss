@@ -644,11 +644,14 @@ pre {
 
 
 /* Related Posts: Mobile */
-@media (max-width: 980px) {
-  .related-grid {
+@media (max-width: 768px) {
+  /* higher specificity than the base rule */
+  .related-posts .related-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px;
   }
+  .related-posts .related-card { width: auto !important; }
+}
 
   .related-card {
     width: auto !important;
