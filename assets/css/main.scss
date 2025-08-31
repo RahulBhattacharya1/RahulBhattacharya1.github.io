@@ -594,39 +594,12 @@ pre {
 }
 .related-head h3 { margin: 0; }
 
-/* Mobile: show ONLY 2 related posts, smaller squares */
-@media (max-width: 640px) {
-  .related-grid {
-    grid-template-columns: repeat(2, 120px);  /* 2 small fixed columns */
-    gap: 6px;
-    justify-content: start;                  /* align left under heading */
-  }
-
-  .related-card { width: 120px; }
-
-  .related-thumb {
-    width: 120px;
-    height: 96px;
-    object-fit: cover;
-    border-radius: 8px;
-    display: block;
-  }
-
-  .related-title {
-    font-size: 0.75rem;   /* a bit smaller for mobile */
-    margin-top: 4px;
-  }
-
-  /* Hide beyond the first 2 posts */
-  .related-card:nth-child(n+3) { display: none; }
-}
-
 /* Hide the in-iframe "0 comments" line by cropping the iframe top */
 .giscus, .giscus-frame {
   display: block;
 }
 .giscus-frame {
-  /* Crop ~22–28px depending on theme; tweak as needed */
+  /* Crop depending on theme; tweak as needed */
   clip-path: inset(46px 0 0 0);
 }
 
