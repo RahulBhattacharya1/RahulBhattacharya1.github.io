@@ -572,7 +572,7 @@ pre {
 }
 
 .related-thumb {
-  width: 100%;
+  width: 100% !important;
   height: auto;
   margin: 0 !important;
   object-fit: cover;
@@ -637,7 +637,7 @@ pre {
   margin-top: 6px;
 }
 
-/* ==== Related Posts: force thumbnails to fill cards, override global img rules ==== */
+/* ==== Related Posts: force thumbnails to fill cards, override global img rules ====
 .related-posts .related-card { 
   align-items: stretch; 
 }
@@ -658,3 +658,4 @@ pre {
   margin: 0 !important;
   border-radius: 10px;
 }
+*/
