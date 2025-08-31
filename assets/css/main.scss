@@ -545,13 +545,9 @@ pre {
   margin: 0;
 }
 
-.related-card { 
-	width: 180px; 
-	opacity: 1;
-}
-
-.related-card.is-fading {
-	opacity: 0;
+.related-card {
+  width: 180px;              /* same as thumbnail width */
+  text-align: left;          /* keep text aligned to left edge */
 }
 
 .related-card a {
@@ -561,34 +557,27 @@ pre {
 
 .related-thumb {
   width: 180px;
+  height: 120px;
   object-fit: cover;
   border-radius: 10px;
   display: block;
+  margin: 0 auto 6px;         /* center thumbnail, small gap below */
 
-  /* alignment fix */
-  margin: 0;                /* kill auto-center margins */
-  float: left;              /* ensures it hugs the left edge of the card */
-  
-  /* transition */
-  transition: transform 2s ease, box-shadow .18s ease, filter .18s ease;
-  transform-origin: center;
-
-  /* bevel effect */
+  /* bevel base look */
   border: 1px solid rgba(0,0,0,0.08);
   box-shadow:
-    inset 1px 1px 0 rgba(255,255,255,0.65),   /* highlight top-left */
-    inset -1px -1px 0 rgba(0,0,0,0.12),       /* shadow bottom-right */
-    0 1px 2px rgba(0,0,0,0.12),               /* subtle outer shadow */
-    0 6px 14px rgba(0,0,0,0.06);              /* lift */
+    inset 1px 1px 0 rgba(255,255,255,0.65),
+    inset -1px -1px 0 rgba(0,0,0,0.12),
+    0 1px 2px rgba(0,0,0,0.12),
+    0 6px 14px rgba(0,0,0,0.06);
   background: linear-gradient(145deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05));
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
 }
 
 .related-card a:hover .related-thumb,
 .related-card a:focus .related-thumb {
   transform: translateY(-2px) scale(1.04);
   filter: saturate(1.05);
-
-  /* bevel shadows on hover */
   box-shadow:
     inset 1px 1px 0 rgba(255,255,255,0.7),
     inset -1px -1px 0 rgba(0,0,0,0.14),
@@ -596,12 +585,10 @@ pre {
     0 10px 20px rgba(0,0,0,0.08);
 }
 
-.related-title {
-  display: block;
-  margin-top: 6px;
-  font-size: .65rem;
-  line-height: 1.25;
-  color: #737373;
+.related-card .title {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
 }
 
 /* Mobile: show ONLY 2 related posts, smaller squares */
