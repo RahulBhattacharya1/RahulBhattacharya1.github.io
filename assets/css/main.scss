@@ -591,6 +591,11 @@ pre {
     inset 0 -1px 0 rgba(0,0,0,.12);
 }
 
+.related-posts img.related-thumb,
+.related-posts .related-thumb {
+  width: 100% !important;
+}
+
 /* Hover: lift + slight tilt */
 .related-card a:hover .related-thumb,
 .related-card a:focus .related-thumb {
