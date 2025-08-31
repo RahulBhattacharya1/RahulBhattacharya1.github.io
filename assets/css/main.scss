@@ -477,7 +477,7 @@ pre {
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     border-top-left-radius: 20px; border-top-right-radius: 20px;
     box-shadow: 0 -18px 30px rgba(0,0,0,.22);
-    /*padding: 14px 16px calc(18px + env(safe-area-inset-bottom))*/
+    padding: 14px 16px calc(18px + env(safe-area-inset-bottom))
 	}
   .posts-sheet__header{ display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background: transparent; padding-bottom:8px; z-index:1; }
   .posts-sheet__header h3{ margin:4px 0; font-size:16px; }
