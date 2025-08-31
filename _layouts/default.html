@@ -591,19 +591,24 @@ fill="#000000" stroke="none">
 
     let timer = null, visible = false, pausedByUser = false;
 
-    // NEW: inactivity-based resume
     let resumeTimer = null;
     const INACTIVITY_MS = 5000;
 
     function tick() {
       const cards = grid.querySelectorAll('.related-card');
+    
+
       cards.forEach(el => el.classList.add('is-fading'));
+    
+     
       setTimeout(() => {
         shuffleNodes(grid);
+    
+        
         requestAnimationFrame(() => {
           cards.forEach(el => el.classList.remove('is-fading'));
         });
-      }, 750);
+      }, 1000); 
     }
 
     function start() {
@@ -635,15 +640,6 @@ fill="#000000" stroke="none">
     section.addEventListener('focusout', function () {
       scheduleResume();
     });
-
-    // Visibility control
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        visible = entry.isIntersecting && entry.intersectionRatio > 0.25;
-        if (visible) start(); else stop();
-      });
-    }, { threshold: [0, 0.25] });
-    io.observe(section);
 
     // Manual Shuffle: pause now, shuffle, resume after 5s of no activity
     section.addEventListener('click', function (e) {
