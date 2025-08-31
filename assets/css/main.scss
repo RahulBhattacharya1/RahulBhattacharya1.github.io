@@ -555,6 +555,7 @@ pre {
 	align-items: start;
 	padding: 0 !important;
 	border: 0 !important;
+	perspective: 800px;
 }
 
 .related-card.is-fading {
@@ -568,7 +569,7 @@ pre {
 }
 
 .related-thumb {
-  width: 100px;
+  width: 100%;
   /*height: 140px;               square */
   margin: 0 !important;
   /*object-fit: cover;*/
@@ -578,12 +579,24 @@ pre {
   transform-origin: center;
   padding: 0 !important;
   border: 0 !important;
+  will-change: transform, box-shadow;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.08),
+    0 10px 18px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 0 -1px 0 rgba(0,0,0,.12);
 }
 
+/* Hover: lift + slight tilt */
 .related-card a:hover .related-thumb,
 .related-card a:focus .related-thumb {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 18px rgba(0,0,0,.14);
+  transform: translateY(-6px) scale(1.03) rotateX(2deg) rotateY(-2deg);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.14),
+    0 24px 36px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.6),
+    inset 0 -1px 0 rgba(0,0,0,.14);
+  filter: saturate(1.05) contrast(1.03);
 }
 
 .related-title {
