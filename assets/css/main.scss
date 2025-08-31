@@ -645,6 +645,32 @@ pre {
   .related-grid > li:nth-child(n+3) { display: none; } /* keep only first 2 */
 }
 
+/* ── Related Posts: force two-up on mobile ───────────────────────── */
+@media (max-width: 768px) {
+  .related-grid {
+    /* two equal columns regardless of available width */
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px; /* a touch tighter on mobile */
+  }
+
+  /* let items fill the 1fr tracks instead of a fixed width */
+  .related-card {
+    width: auto !important;
+  }
+
+  /* ensure the clickable block behaves predictably in the 1fr columns */
+  .related-card a {
+    display: block;
+  }
+
+  /* images already have width:100% in your sheet; keep it explicit */
+  .related-posts .related-thumb {
+    width: 100% !important;
+    height: auto;
+    display: block;
+  }
+}
+
 /* Hide the in-iframe "0 comments" line by cropping the iframe top */
 .giscus, .giscus-frame {
   display: block;
