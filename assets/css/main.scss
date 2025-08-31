@@ -692,7 +692,7 @@ pre {
   cursor: pointer;
   transition: background .2s, border-color .2s;
   text-decoration: none;
-  color: #919191;
+  color: #363636;
 }
 
 .tab-btn:last-child {
@@ -708,7 +708,7 @@ pre {
 /* Active state as a filled pill (still compact) */
 .bio-tabs .tab-btn.active{
   background: #fff;
-  border-color: #2563eb;
+  border: 2px solid #ddd;
   font-weight: 600;
   text-decoration: none;
   color: #5E5F5F;
