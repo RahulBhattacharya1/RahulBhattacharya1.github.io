@@ -537,22 +537,23 @@ pre {
 /* ─── Related Posts: left-aligned, hover anim, mobile = 2 items ─── */
 .related-grid {
   display: grid;
-  width:400px; /*grid-template-columns: repeat(auto-fit, 180px) !important; desktop: small, packed tiles */
+  grid-template-columns: repeat(auto-fit, 180px) !important; /*desktop: small, packed tiles */
   gap: 8px;
   justify-content: start;
-  column-gap: 8px !important;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 .related-grid li {
   padding: 0 !important;
-  border: none !important;
+  border: 0 !important;
 }
 .related-card { 
 	width: auto; 
 	opacity: 1;   
 	align-items: start;
+	padding: 0 !important;
+	border: 0 !important;
 }
 
 .related-card.is-fading {
