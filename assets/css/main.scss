@@ -594,6 +594,10 @@ pre {
 }
 .related-head h3 { margin: 0; }
 
+@media (max-width: 640px) {
+  .related-grid > li:nth-child(n+3) { display: none; } /* keep only first 2 */
+}
+
 /* Hide the in-iframe "0 comments" line by cropping the iframe top */
 .giscus, .giscus-frame {
   display: block;
