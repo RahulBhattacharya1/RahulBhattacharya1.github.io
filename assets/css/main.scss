@@ -642,20 +642,6 @@ pre {
 }
 .related-head h3 { margin: 0; }
 
-.related-card {
-	width: auto !important;
-}
-
-.related-card a {
-	display: block;
-}
-
-.related-posts .related-thumb {
-	width: 100% !important;
-	height: auto;
-	display: block;
-}
-
 /* Related Posts: Mobile */
 @media (max-width: 768px), (hover: none) and (pointer: coarse) {
   /* Higher specificity than base, and placed after it */
