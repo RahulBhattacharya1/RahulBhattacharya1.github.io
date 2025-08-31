@@ -253,6 +253,36 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
   {{ content }}
 {% endif %}
 
+<!-- Post taxonomy (categories & tags) -->
+{% if page.collection == "posts" %}
+  {% assign has_cats = page.categories and page.categories != empty %}
+  {% assign has_tags = page.tags and page.tags != empty %}
+  {% if has_cats or has_tags %}
+    <footer class="post-taxonomy" aria-label="Post categories and tags">
+      {% if has_cats %}
+        <div class="post-taxonomy__row">
+          <span class="post-taxonomy__label">Categories:</span>
+          <nav class="post-taxonomy__chips" aria-label="Categories">
+            {% for c in page.categories %}
+              <a class="chip" href="{{ '/categories/#' | append: c | slugify | relative_url }}">{{ c }}</a>
+            {% endfor %}
+          </nav>
+        </div>
+      {% endif %}
+      {% if has_tags %}
+        <div class="post-taxonomy__row">
+          <span class="post-taxonomy__label">Tags:</span>
+          <nav class="post-taxonomy__chips" aria-label="Tags">
+            {% for t in page.tags %}
+              <a class="chip" href="{{ '/tags/#' | append: t | slugify | relative_url }}">{{ t }}</a>
+            {% endfor %}
+          </nav>
+        </div>
+      {% endif %}
+    </footer>
+  {% endif %}
+{% endif %}
+        
 {% if page.collection == "posts" and page.related != false %}
   {% assign pool = site.posts | where_exp: "p", "p.url != page.url" %}
   {% assign related = "" | split: "" %}
