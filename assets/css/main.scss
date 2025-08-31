@@ -561,18 +561,39 @@ pre {
 
 .related-thumb {
   width: 180px;
-  /*height: 140px;               square */
   object-fit: cover;
   border-radius: 10px;
   display: block;
+
+  /* alignment fix */
+  margin: 0;                /* kill auto-center margins */
+  float: left;              /* ensures it hugs the left edge of the card */
+  
+  /* transition */
   transition: transform 2s ease, box-shadow .18s ease, filter .18s ease;
   transform-origin: center;
+
+  /* bevel effect */
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.65),   /* highlight top-left */
+    inset -1px -1px 0 rgba(0,0,0,0.12),       /* shadow bottom-right */
+    0 1px 2px rgba(0,0,0,0.12),               /* subtle outer shadow */
+    0 6px 14px rgba(0,0,0,0.06);              /* lift */
+  background: linear-gradient(145deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05));
 }
 
 .related-card a:hover .related-thumb,
 .related-card a:focus .related-thumb {
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 18px rgba(0,0,0,.14);
+  filter: saturate(1.05);
+
+  /* bevel shadows on hover */
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.7),
+    inset -1px -1px 0 rgba(0,0,0,0.14),
+    0 2px 6px rgba(0,0,0,0.14),
+    0 10px 20px rgba(0,0,0,0.08);
 }
 
 .related-title {
