@@ -692,6 +692,7 @@ pre {
   cursor: pointer;
   transition: background .2s, border-color .2s;
   text-decoration: none;
+  color: #737373;
 }
 
 .tab-btn:last-child {
@@ -701,6 +702,7 @@ pre {
 .tab-btn:hover {
   background: #eee;
   text-decoration: none;
+  color: #000;
 }
 
 /* Active state as a filled pill (still compact) */
@@ -709,6 +711,7 @@ pre {
   border-color: #2563eb;
   font-weight: 600;
   text-decoration: none;
+  color: #000;
 }
 
 /* Keep the content box within the sidebar */
