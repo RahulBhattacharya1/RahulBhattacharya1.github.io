@@ -541,7 +541,8 @@ pre {
   gap: 8px;
   justify-content: start;
   list-style: none;
-  padding: 0;
+  padding: 0 !important;
+  border: 0 !important;
   margin: 0;
 }
 .related-grid li {
@@ -575,6 +576,8 @@ pre {
   /*display: block;*/
   transition: transform 2s ease, box-shadow .18s ease, filter .18s ease;
   transform-origin: center;
+  padding: 0 !important;
+  border: 0 !important;
 }
 
 .related-card a:hover .related-thumb,
