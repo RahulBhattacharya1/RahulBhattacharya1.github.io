@@ -800,48 +800,63 @@ fill="#000000" stroke="none">
   
 <script>
 (function(){
-  const DEFAULT_TAB="about";
-  const map={bio:"about",categories:"about",tags:"about"};
+  const DEFAULT_TAB = "about";
+  // Any of these segments force the "About Me" tab
+  const FORCE_ABOUT = new Set(["bio","categories","tags"]);
 
-  const idFromHash=()=> (location.hash||"").replace(/^#/, "").trim() || null;
-  const idFromPath=p=>{
-    const m=(p.toLowerCase().match(/\/([a-z0-9_-]+)\/?$/)||[])[1]||DEFAULT_TAB;
-    return map[m]||m;
-  };
-  const currentId=()=> idFromHash() || idFromPath(location.pathname) || DEFAULT_TAB;
+  function lastSegment(path){
+    const m = (path.toLowerCase().match(/\/([a-z0-9_-]+)\/?$/) || [,""])[1];
+    return m;
+  }
 
-  const activate=id=>{
-    document.querySelectorAll(".tab-btn").forEach(b=>{
-      const on=b.dataset.tab===id;
-      b.classList.toggle("active",on);
-      b.setAttribute("aria-current", on ? "page" : "false");
+  function currentTabId(){
+    // 1. Hash takes priority if it matches a tab
+    const hash = (location.hash||"").replace(/^#/,"").trim();
+    if(hash && document.getElementById(hash)) return hash;
+
+    // 2. Otherwise derive from path
+    const seg = lastSegment(location.pathname) || DEFAULT_TAB;
+    if(FORCE_ABOUT.has(seg)) return DEFAULT_TAB;
+    return seg;
+  }
+
+  function activate(id){
+    document.querySelectorAll(".tab-btn").forEach(btn=>{
+      const on = btn.dataset.tab===id;
+      btn.classList.toggle("active",on);
+      btn.setAttribute("aria-current", on ? "page" : "false");
     });
     document.querySelectorAll(".tab-panel").forEach(p=>{
-      const on=p.id===id;
+      const on = p.id===id;
       p.classList.toggle("active",on);
       if(on){p.removeAttribute("hidden");}else{p.setAttribute("hidden","hidden");}
     });
-  };
+  }
 
   document.addEventListener("DOMContentLoaded",()=>{
-    activate(currentId());
+    activate(currentTabId());
 
-    document.querySelectorAll(".tab-btn").forEach(a=>{
-      a.addEventListener("click",e=>{
+    // Button clicks
+    document.querySelectorAll(".tab-btn").forEach(btn=>{
+      btn.addEventListener("click",e=>{
         e.preventDefault();
-        const id=a.dataset.tab||DEFAULT_TAB;
+        const id = btn.dataset.tab || DEFAULT_TAB;
         activate(id);
 
-        const href=a.getAttribute("href")||("#"+id);
-        if(href.startsWith("#")){
-          history.pushState(null,"",href);
-        }else{
-          setTimeout(()=>{ location.href=href; },300); // keep page navigation (e.g., /skills/)
+        const href = btn.getAttribute("href");
+        if(href){
+          if(href.startsWith("#")){
+            history.pushState(null,"",href);
+          }else{
+            // real navigation to /skills/, /experience/, etc.
+            setTimeout(()=>{ location.href=href; },300);
+          }
         }
       });
     });
 
-    window.addEventListener("hashchange",()=>activate(currentId()));
+    // Back/forward hash changes
+    window.addEventListener("hashchange",()=>activate(currentTabId()));
   });
 })();
 </script>
