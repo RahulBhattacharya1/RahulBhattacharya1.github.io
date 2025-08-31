@@ -665,25 +665,31 @@ pre {
 
 /* Bio Tabs */
 .bio-tabs {
-  max-width: 800px;
-  margin: 2rem auto;
+  width: 100%;
+  max-width: none;         /* override the 800px cap */
+  margin: 0 0 1rem;        /* no auto-centering; stay inside sidebar */
   font-family: system-ui, sans-serif;
 }
 
-.tab-buttons {
+/* Make the buttons content-sized and allow wrapping if needed */
+.bio-tabs .tab-buttons{
   display: flex;
-  border-bottom: 2px solid #ddd;
+  flex-wrap: wrap;         /* prevents horizontal overflow */
+  gap: 6px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
 }
 
-.tab-btn {
-  flex: 1;
-  padding: 12px;
-  background: #f9f9f9;
-  border: none;
-  border-right: 1px solid #ddd;
+/* Tight, small pills */
+.bio-tabs .tab-btn{
+  flex: 0 0 auto;          /* fit to content, don't stretch */
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s;
+  transition: background .2s, border-color .2s;
 }
 
 .tab-btn:last-child {
@@ -694,26 +700,30 @@ pre {
   background: #eee;
 }
 
-.tab-btn.active {
+/* Active state as a filled pill (still compact) */
+.bio-tabs .tab-btn.active{
   background: #fff;
-  font-weight: bold;
-  border-bottom: 2px solid #2563eb; /* accent color */
+  border-color: #2563eb;
+  font-weight: 600;
 }
 
-.tab-content {
-  padding: 1rem;
+/* Keep the content box within the sidebar */
+.bio-tabs .tab-content{
+  margin-top: 10px;
   background: #fff;
-  border: 1px solid #ddd;
-  border-top: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
 }
 
-.tab-panel {
-  display: none;
-}
+/* Panels toggle */
+.bio-tabs .tab-panel{ display:none; }
+.bio-tabs .tab-panel.active{ display:block; }
 
-.tab-panel.active {
-  display: block;
-}
+/* Optional: prevent long words from pushing width */
+.bio-tabs .tab-panel p,
+.bio-tabs .tab-panel li{ word-wrap: break-word; overflow-wrap: anywhere; }
+
 .resume-link {
   display: inline-block;
   padding: 8px 16px;
