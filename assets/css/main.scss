@@ -773,6 +773,10 @@ pre {
 .post-taxonomy{
   margin: 1.25rem 0 0;
   padding: .75rem 1rem;
+  display: flex;         /* NEW: make categories + tags inline */
+  flex-wrap: wrap;       /* allow wrapping on small screens */
+  align-items: baseline;
+  gap: 1rem;             /* space between categories + tags blocks */
   /*border-top: 1px solid var(--color-border-default, #e5e7eb);*/
   /*background: var(--color-bg-default, #fff);*/
 }
@@ -782,7 +786,7 @@ pre {
   align-items: center;
   flex-wrap: wrap;
   gap: .5rem .5rem;
-  margin-top: .25rem;
+  margin-top: 0;
 }
 
 .post-taxonomy__label{
