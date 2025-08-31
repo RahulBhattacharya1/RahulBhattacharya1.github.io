@@ -644,7 +644,7 @@ pre {
 
 
 /* Related Posts: Mobile */
-@media (max-width: 768px) {
+@media (max-width: 980px) {
   .related-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px;
