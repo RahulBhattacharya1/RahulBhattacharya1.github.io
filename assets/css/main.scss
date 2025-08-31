@@ -261,6 +261,23 @@ body {
   margin: 1rem auto; /* center it */
 }
 
+/* Subtle breathing effect on the first image inside post body */
+@keyframes subtle-breath {
+  0%, 100% {
+    opacity: 0.96;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.01); /* 1% zoom at peak */
+  }
+}
+
+.is-post .main-inner img:first-of-type {
+  animation: subtle-breath 10s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
 @media (max-width: 768px) {
   .is-post .main-inner img {
     width: 100% !important; /* easier to view on phones */
