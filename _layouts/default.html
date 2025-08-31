@@ -600,7 +600,9 @@ fill="#000000" stroke="none">
       cards.forEach(el => el.classList.add('is-fading'));
       setTimeout(() => {
         shuffleNodes(grid);
-        cards.forEach(el => el.classList.remove('is-fading'));
+        requestAnimationFrame(() => {
+          cards.forEach(el => el.classList.remove('is-fading'));
+        });
       }, 750);
     }
 
