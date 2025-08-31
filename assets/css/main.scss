@@ -642,8 +642,7 @@ pre {
 }
 .related-head h3 { margin: 0; }
 
-/* Related Posts: Mobile */
-/* Keep only first 2 */
+/* Related Posts: Mobile - Keep only first 2 */
 @media (max-width: 640px) {
   .related-grid > li:nth-child(n+3) { display: none; } /* keep only first 2 */
 
@@ -662,6 +661,69 @@ pre {
     height: auto;
     display: block;
   }
+}
+
+/* Bio Tabs */
+.bio-tabs {
+  max-width: 800px;
+  margin: 2rem auto;
+  font-family: system-ui, sans-serif;
+}
+
+.tab-buttons {
+  display: flex;
+  border-bottom: 2px solid #ddd;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px;
+  background: #f9f9f9;
+  border: none;
+  border-right: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.tab-btn:last-child {
+  border-right: none;
+}
+
+.tab-btn:hover {
+  background: #eee;
+}
+
+.tab-btn.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #2563eb; /* accent color */
+}
+
+.tab-content {
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+.resume-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.resume-link:hover {
+  background: #1d4ed8;
 }
 
 /* Giscus Comments Box */
