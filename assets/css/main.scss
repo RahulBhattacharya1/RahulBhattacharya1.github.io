@@ -773,6 +773,7 @@ pre {
 .post-taxonomy{
   margin: 1.25rem 0 0;
   padding: .75rem 1rem;
+  justify-content: flex-start;   /* ⬅️ force left alignment */
   display: flex;         /* NEW: make categories + tags inline */
   flex-wrap: wrap;       /* allow wrapping on small screens */
   align-items: baseline;
@@ -783,10 +784,10 @@ pre {
 
 .post-taxonomy__row{
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   gap: .5rem .5rem;
   margin-top: 0;
+  justify-content: flex-start;   /* ⬅️ keep its chips left aligned */
 }
 
 .post-taxonomy__label{
@@ -797,9 +798,10 @@ pre {
 }
 
 .post-taxonomy__chips{
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   gap: .4rem;
+  justify-content: flex-start;   /* ⬅️ align chips left */
 }
 
 .chip{
