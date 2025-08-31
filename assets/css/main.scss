@@ -540,7 +540,6 @@ pre {
   grid-template-columns: repeat(auto-fill, 180px); /* desktop: small, packed tiles */
   gap: 8px;
   justify-content: start;
-  justify-items: start;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -548,10 +547,8 @@ pre {
 
 .related-card { 
 	width: 180px; 
-	opacity: 1;
-	display: flex;             
-	flex-direction: column;    
-	align-items: flex-start;
+	opacity: 1;   
+	align-items: start;
 }
 
 .related-card.is-fading {
@@ -562,13 +559,12 @@ pre {
   display: block;
   text-decoration: none;
   text-align: left;
-  padding-left: 0 !important;
 }
 
 .related-thumb {
   width: 180px;
   /*height: 140px;               square */
-  /*margin: 0 !important;*/
+  margin: 0 !important;
   object-fit: cover;
   border-radius: 10px;
   display: block;
