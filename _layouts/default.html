@@ -758,74 +758,22 @@ fill="#000000" stroke="none">
 </script>
 
 <script>
-(function () {
-  // --- Helpers ---------------------------------------------------------
-  function normalizePath(p){
-    try { 
-      var u = new URL(p, window.location.origin); 
-      var path = u.pathname.toLowerCase();
-      if (!path.endsWith('/')) path += '/';
-      return path;
-    } catch(_) { 
-      return (p || '/').toLowerCase().replace(/(?<!\/)$/, '/'); 
-    }
-  }
-
-  function pickTabFromURL(){
-    var url = new URL(window.location.href);
-    // Priority 1: ?tab=skills
-    var t = (url.searchParams.get('tab') || '').toLowerCase();
-    if (t) return alias(t);
-
-    // Priority 2: #skills
-    var h = (url.hash || '').replace(/^#/, '').toLowerCase();
-    if (h) return alias(h);
-
-    // Priority 3: pathname /skills/
-    var path = normalizePath(url.pathname);
-    var m = path.match(/\/(about|bio|skills|projects|resume|experience)\//i);
-    if (m) return alias(m[1].toLowerCase());
-
-    // Default
-    return 'about';
-  }
-
-  function alias(name){
-    // map alternate slugs to panel ids
-    if (name === 'bio') return 'about';
-    return name;
-  }
-
-  function activateTab(tabId){
-    // Remove any pre-set active classes first
-    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-    document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
-
-    // Activate matching button (by data-tab) and panel (by id)
-    var btn = document.querySelector('.tab-btn[data-tab="'+ tabId +'"]');
-    var panel = document.getElementById(tabId);
-    if (btn) btn.classList.add("active");
-    if (panel) panel.classList.add("active");
-  }
-
-  // --- Initial activation on load -------------------------------------
-  document.addEventListener('DOMContentLoaded', function () {
-    var initial = pickTabFromURL();
-    activateTab(initial);
-  });
-
-  // --- Click: toggle immediately, then navigate after a short delay ----
-  document.querySelectorAll(".tab-btn").forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();  // keep local toggle visible first
-
-      var tabId = link.dataset.tab || 'about';
-      activateTab(tabId);
-
-      // Navigate after a brief delay so user sees the toggle
-      setTimeout(() => {
-        window.location.href = link.getAttribute("href");
-      }, 300);
+(function(){
+  const map={bio:"about",experience:"resume"};
+  const idFromPath=p=>{const m=(p.toLowerCase().match(/\/([a-z-]+)\/$/)||[])[1]||"about";return map[m]||m};
+  const activate=id=>{
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
+    document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("active",p.id===id));
+  };
+  document.addEventListener("DOMContentLoaded",()=>{
+    activate(idFromPath(location.pathname));
+    document.querySelectorAll(".tab-btn").forEach(a=>{
+      a.addEventListener("click",e=>{
+        e.preventDefault();
+        const id=a.dataset.tab||"about";
+        activate(id);
+        setTimeout(()=>{location.href=a.getAttribute("href")},300);
+      });
     });
   });
 })();
