@@ -261,7 +261,7 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
   <footer class="post-taxonomy" aria-label="Post categories and tags">
     {% if has_cats %}
       <div class="post-taxonomy__row">
-        <span class="post-taxonomy__label">Categories:</span>
+        <!--span class="post-taxonomy__label">Categories:</span-->
         <nav class="post-taxonomy__chips" aria-label="Categories">
           {% assign cats = page.categories | uniq %}
           {% for c in cats %}
@@ -277,7 +277,7 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
 
     {% if has_tags %}
       <div class="post-taxonomy__row">
-        <span class="post-taxonomy__label">Tags:</span>
+        <!--span class="post-taxonomy__label">Tags:</span-->
         <nav class="post-taxonomy__chips" aria-label="Tags">
           {% assign tgs = page.tags | uniq %}
           {% for t in tgs %}
