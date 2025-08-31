@@ -644,13 +644,21 @@ pre {
 
 
 /* Related Posts: Mobile */
-@media (max-width: 768px) {
-  /* higher specificity than the base rule */
-  .related-posts .related-grid {
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  /* Higher specificity than base, and placed after it */
+  section.related-posts .related-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px;
   }
-  .related-posts .related-card { width: auto !important; }
+
+  /* Ensure child cards don’t fight the 1fr tracks */
+  section.related-posts .related-card { width: auto !important; }
+  section.related-posts .related-card a { display: block; }
+  section.related-posts .related-thumb {
+    width: 100% !important;
+    height: auto;
+    display: block;
+  }
 }
 
   .related-card {
