@@ -908,6 +908,30 @@ pre {
   .category-page .post-card__media { width: 100px; height: 75px; }
 }
 
+/* ——— Social icons: kill any left indent in the sidebar About tab ——— */
+.sidebar .bio-tabs .tab-panel#about ul.social-icons {
+  padding-left: 0 !important;   /* beats any generic .tab-panel ul rule */
+  margin-left: 0 !important;
+  list-style: none !important;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.sidebar .bio-tabs .tab-panel#about ul.social-icons li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* In case an anchor adds hit-target padding */
+.sidebar .bio-tabs .tab-panel#about ul.social-icons li:first-child a {
+  padding-left: 0 !important;
+}
+
+/* Avoid inline SVG’s inline/whitespace behavior */
+.sidebar .bio-tabs .tab-panel#about ul.social-icons .home svg {
+  display: block;                /* removes inline spacing */
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
