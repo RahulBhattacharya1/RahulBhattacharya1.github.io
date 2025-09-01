@@ -979,6 +979,27 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script>
+(function () {
+  // Duration must match --crack-ms in CSS
+  var DURATION = 320;
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+
+    // Prevent stacking if user mashes repeatedly
+    if (btn.classList.contains('is-cracking')) return;
+    btn.classList.add('is-cracking');
+
+    // Clean up after the animation completes
+    setTimeout(function () {
+      btn.classList.remove('is-cracking');
+    }, DURATION + 30);
+  }, true);
+})();
+</script>
+
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
 </footer>
