@@ -242,6 +242,11 @@ body {
   animation: iconShine 2s linear infinite;
 }
 
+.sidebar .social-icons a::after,
+#social-icons a::after {
+  animation-delay: 0s !important;
+}
+
 @keyframes iconShine {
   to { transform: translateX(120%) skewX(-20deg); }
 }
