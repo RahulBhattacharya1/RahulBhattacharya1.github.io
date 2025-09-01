@@ -827,6 +827,7 @@ fill="#000000" stroke="none">
     }
 
     activate(initialTab);
+    if (initialTab === "about" && window.renderAboutIcons) window.renderAboutIcons();
 
     // If hash is NOT a tab (e.g., #getting-started inside tags page), keep About active
     // but still scroll to the content section with that id if it exists.
@@ -850,6 +851,7 @@ fill="#000000" stroke="none">
           if (tabs.has(h)) {
             e.preventDefault();
             activate(h);
+            if (h === "about" && window.renderAboutIcons) window.renderAboutIcons();
             history.pushState(null,"","#"+h);
             return;
           }
@@ -859,6 +861,7 @@ fill="#000000" stroke="none">
           // Real navigation to /skills/, /experience/, etc. Keep your slight delay
           e.preventDefault();
           activate(id);
+          if (id === "about" && window.renderAboutIcons) window.renderAboutIcons();
           setTimeout(()=>{ location.href = href; }, 300);
           return;
         }
