@@ -214,9 +214,31 @@ body {
 
 /* Monochrome hover */
 .sidebar .social-icons a:hover svg {
-  fill: #000 !important;
+  fill: #000;
   transform: translateY(-2px);
 }
+
+/* Base color */
+.sidebar .social-icons a { color: #6B7280; } /* default neutral */
+
+/* Specific icons */
+.sidebar .social-icons a.home     { color: #2563EB; }
+.sidebar .social-icons a.linkedin { color: #0A66C2; }
+.sidebar .social-icons a.email    { color: #6B7280; }
+.sidebar .social-icons a.github   { color: #181717; }
+.sidebar .social-icons a.rss      { color: #F26522; }
+.sidebar .social-icons a.calendar { color: #059669; }
+
+/* Hover */
+.sidebar .social-icons a.home:hover     { color: #1D4ED8; }
+.sidebar .social-icons a.linkedin:hover { color: #084D91; transform: translateY(-2px);}
+.sidebar .social-icons a.email:hover    { color: #374151; }
+.sidebar .social-icons a.github:hover   { color: #000000; }
+.sidebar .social-icons a.rss:hover      { color: #CC5200; }
+.sidebar .social-icons a.calendar:hover { color: #047857; }
+
+/* Ensure SVGs inherit the link color */
+.sidebar .social-icons a svg { display:block; fill: currentColor; }
 
 /* Icon light-sweep every 2s */
 .sidebar .social-icons a {
