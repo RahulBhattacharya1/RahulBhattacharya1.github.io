@@ -912,9 +912,6 @@ pre {
 .sidebar .bio-tabs .tab-panel#about ul.social-icons {
   padding-left: 0 !important;   /* beats any generic .tab-panel ul rule */
   margin-left: 0 !important;
-  list-style: none !important;
-  display: flex;
-  gap: 0.75rem;
 }
 
 /* Giscus Comments Box */
