@@ -187,6 +187,7 @@ body {
   margin-top: 0.5rem;  /* sits just below the image */
 }
 
+/* ───────── Social Icons (Sidebar) ───────── */
 .sidebar .social-icons {
   display: flex;
   gap: 0.75rem;
@@ -195,27 +196,34 @@ body {
   list-style: none;
 }
 
+/* Kill any accidental left indent on the About tab's list */
+.sidebar .bio-tabs .tab-panel#about ul.social-icons {
+  margin-left: 0;
+}
+
+/* Links: layout, base color, transitions */
 .sidebar .social-icons a {
-  display: inline-flex;
+  position: relative;
+  display: inline-flex;           /* center SVG nicely */
   align-items: center;
   justify-content: center;
+  overflow: hidden;               /* keep sweep inside */
   background: none !important;
   border-radius: 0 !important;
   padding: 0 !important;
-  transition: transform .15s ease;
+  color: #6B7280;                 /* neutral default */
+  transition: color .2s ease, transform .15s ease;
 }
 
+/* SVGs inherit link color */
 .sidebar .social-icons a svg {
   width: 24px;
   height: 24px;
-  fill: #666;   /* subtle gray */
-  transition: fill 0.2s ease;
+  display: block;
+  fill: currentColor;
 }
 
-/* Base color */
-.sidebar .social-icons a { color: #6B7280; } /* default neutral */
-
-/* Specific icons */
+/* Per-icon base colors */
 .sidebar .social-icons a.home     { color: #2563EB; }
 .sidebar .social-icons a.linkedin { color: #0A66C2; }
 .sidebar .social-icons a.email    { color: #6B7280; }
@@ -223,29 +231,19 @@ body {
 .sidebar .social-icons a.rss      { color: #F26522; }
 .sidebar .social-icons a.calendar { color: #059669; }
 
-/* Hover */
-.sidebar .social-icons a.home:hover     { color: #1D4ED8; }
-.sidebar .social-icons a.linkedin:hover { color: #084D91; transform: translateY(-2px);}
-.sidebar .social-icons a.email:hover    { color: #374151; }
-.sidebar .social-icons a.github:hover   { color: #000000; }
-.sidebar .social-icons a.rss:hover      { color: #CC5200; }
-.sidebar .social-icons a.calendar:hover { color: #047857; }
+/* Hover colors + slight lift */
+.sidebar .social-icons a.home:hover     { color: #1D4ED8; transform: translateY(-2px); }
+.sidebar .social-icons a.linkedin:hover { color: #084D91; transform: translateY(-2px); }
+.sidebar .social-icons a.email:hover    { color: #374151; transform: translateY(-2px); }
+.sidebar .social-icons a.github:hover   { color: #000000; transform: translateY(-2px); }
+.sidebar .social-icons a.rss:hover      { color: #CC5200; transform: translateY(-2px); }
+.sidebar .social-icons a.calendar:hover { color: #047857; transform: translateY(-2px); }
 
-/* Ensure SVGs inherit the link color */
-.sidebar .social-icons a svg { display:block; fill: currentColor; }
-
-/* Icon light-sweep every 2s */
-.sidebar .social-icons a {
-  position: relative;
-  display: inline-grid;
-  place-items: center;
-  overflow: hidden;          /* keep sweep inside the icon box */
-}
-
+/* Light sweep every 2s (in sync for all) */
 .sidebar .social-icons a::after {
   content: "";
   position: absolute;
-  inset: -4px;               /* tiny bleed so edges don’t show */
+  inset: -4px; /* slight bleed to avoid edge seams */
   pointer-events: none;
   background: linear-gradient(
     120deg,
@@ -254,22 +252,13 @@ body {
     rgba(255,255,255,0) 70%
   );
   transform: translateX(-120%) skewX(-20deg);
-  mix-blend-mode: screen;     /* brightens without blowing out color */
+  mix-blend-mode: screen;
   animation: iconShine 2s linear infinite;
-}
-
-.sidebar .social-icons a::after,
-#social-icons a::after {
-  animation-delay: 0s !important;
+  animation-delay: 0s; /* no stagger */
 }
 
 @keyframes iconShine {
   to { transform: translateX(120%) skewX(-20deg); }
-}
-
-/* ——— Social icons: kill any left indent in the sidebar About tab ——— */
-.sidebar .bio-tabs .tab-panel#about ul.social-icons {
-  margin-left: 0;
 }
 
 @media (max-width: 768px) {
