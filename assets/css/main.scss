@@ -691,7 +691,7 @@ pre {
   flex: 0 0 auto;          /* fit to content, don't stretch */
   padding: 6px 10px;
   font-size: 0.9rem;
-  background: #D5F7FF;
+  background: #A6C2FF;
   border: 1px solid #ddd;
   border-radius: 8px;
   cursor: pointer;
@@ -705,14 +705,14 @@ pre {
 }
 
 .tab-btn:hover {
-  background: #eee;
+  background: #82A6F7;
   text-decoration: none;
   color: #5E5F5F;
 }
 
 /* Active state as a filled pill (still compact) */
 .bio-tabs .tab-btn.active{
-  background: #fff;
+  background: 2563eb;
   border: 2px solid #ddd;
   font-weight: 600;
   text-decoration: none;
