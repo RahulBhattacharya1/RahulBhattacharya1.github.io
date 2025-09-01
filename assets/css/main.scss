@@ -911,7 +911,6 @@ pre {
 /* ——— Social icons: kill any left indent in the sidebar About tab ——— */
 .sidebar .bio-tabs .tab-panel#about ul.social-icons {
   padding-left: 0 !important;   /* beats any generic .tab-panel ul rule */
-  margin-left: 0 !important;
 }
 
 /* Giscus Comments Box */
