@@ -212,12 +212,6 @@ body {
   transition: fill 0.2s ease;
 }
 
-/* Monochrome hover */
-.sidebar .social-icons a:hover svg {
-  fill: #000;
-  transform: translateY(-2px);
-}
-
 /* Base color */
 .sidebar .social-icons a { color: #6B7280; } /* default neutral */
 
