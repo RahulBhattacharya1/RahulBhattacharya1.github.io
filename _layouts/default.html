@@ -946,7 +946,39 @@ fill="#000000" stroke="none">
   window.addEventListener("pageshow", function(){ restoreFromQuery(); });
 })();
 </script>
-  
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var el = document.getElementById('role');
+  if (!el) return;
+
+  var words = ["scientist", "analyst", "engineer"];
+  var wi = 0, txt = words[wi], n = txt.length, typing = false;
+
+  function tick(){
+    if (!typing && n > 0) {           // backspace
+      n--; el.textContent = txt.slice(0, n);
+      return setTimeout(tick, 70);
+    }
+    if (!typing && n === 0) {         // switch word
+      typing = true;
+      wi = (wi + 1) % words.length;
+      txt = words[wi];
+      return setTimeout(tick, 200);
+    }
+    if (typing && n < txt.length) {   // type forward
+      n++; el.textContent = txt.slice(0, n);
+      return setTimeout(tick, 90);
+    }
+    if (typing && n === txt.length) { // pause at full word
+      typing = false;
+      return setTimeout(tick, 1200);
+    }
+  }
+  tick();
+});
+</script>
+
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
 </footer>
