@@ -922,11 +922,6 @@ pre {
   padding: 0 !important;
 }
 
-/* In case an anchor adds hit-target padding */
-.sidebar .bio-tabs .tab-panel#about ul.social-icons li:first-child a {
-  padding-left: 0 !important;
-}
-
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
