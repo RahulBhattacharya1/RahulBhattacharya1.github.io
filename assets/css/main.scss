@@ -23,7 +23,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background-color: #F2FAFF;
+  background-color: #EEF3FF;
   line-height: 1.4;
   margin: 0;
   padding: 0;
@@ -39,7 +39,7 @@ body {
   max-width: 100%;
   margin: 0 auto;
   padding: 1.5rem 3rem;
-  background-color: #F2FAFF;
+  background-color: #EEF3FF;
   gap: 2rem;                    /* provides consistent spacing */
   flex-wrap: nowrap;
 }
@@ -712,7 +712,7 @@ pre {
 
 /* Active state as a filled pill (still compact) */
 .bio-tabs .tab-btn.active{
-  background: 2563eb;
+  background: #2563eb;
   border: 2px solid #ddd;
   font-weight: 600;
   text-decoration: none;
