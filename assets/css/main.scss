@@ -86,23 +86,27 @@
 @keyframes ds-spin     { to { transform: rotate(360deg); } }
 @keyframes ds-spin-rev { to { transform: rotate(-360deg); } }
 
-/* typing caret that doesn't affect layout width */
+/* caret that never shifts vertically when the word is empty */
 .type-cursor{
   position: relative;
+  display: inline-block;   /* so ::after can be positioned */
   white-space: nowrap;
-  display: inline-block;
+  line-height: 1em;        /* lock box height to font-size */
+  min-height: 1em;         /* keep height even when empty */
 }
+
 .type-cursor::after{
   content: "";
   position: absolute;
-  right: -1px;           /* sits flush at end of the word */
-  top: 0;
-  height: 1em;           /* match line height */
-  width: 1px;            /* caret width */
+  right: -1px;             /* sits flush at the word end */
+  top: 0;                  /* anchor to the top of the 1em box */
+  width: 1px;              /* caret width */
+  height: 1em;             /* exactly the text height */
   background: currentColor;
   animation: cursorBlink 1s steps(1) infinite;
   pointer-events: none;
 }
+
 @keyframes cursorBlink { 50% { opacity: 0; } }
 
 /* ─── Base font + smoothing ─── */
