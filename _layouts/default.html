@@ -915,6 +915,42 @@ fill="#000000" stroke="none">
 })();
 </script>
 
+<script>
+(function () {
+  function saveScroll(targetHref) {
+    try {
+      var pathOnly = targetHref.replace(location.origin, "");
+      sessionStorage.setItem("scrollRestore",
+        JSON.stringify({ path: pathOnly.replace(/#.*$/, ""), y: window.scrollY }));
+    } catch (e) {}
+  }
+
+  // Capture clicks on the tab buttons that go to real pages
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest('a.tab-btn[href^="/"]');
+    if (!a) return;
+    saveScroll(a.getAttribute("href"));
+  }, true); // capture so it runs even if another handler preventsDefault
+
+  // On the next page, restore the saved scroll position (then clear it)
+  function restoreScroll() {
+    try {
+      var raw = sessionStorage.getItem("scrollRestore");
+      if (!raw) return;
+      var data = JSON.parse(raw) || {};
+      if ((data.path || "") === location.pathname) {
+        requestAnimationFrame(function () {
+          window.scrollTo(0, (data.y|0));
+        });
+      }
+      sessionStorage.removeItem("scrollRestore");
+    } catch (e) {}
+  }
+
+  // pageshow fires on normal loads and BFCache restores
+  window.addEventListener("pageshow", restoreScroll);
+})();
+</script>
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya</p>
