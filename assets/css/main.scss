@@ -17,6 +17,89 @@
   }
 }
 
+/* Round avatar */
+.sidebar .avatar {
+  display: block;
+  width: 100%;
+  max-width: 250px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+/* Frame that hosts the spark ring */
+.sidebar .avatar-frame {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  /* Optional: center it */
+  margin: 0 auto 0.75rem;
+}
+
+/* ── Doctor-Strange–style spark ring ──
+   ::before = bright rotating arc (glow)
+   ::after  = ember specks rotating slower (depth) */
+.sidebar .avatar-frame::before,
+.sidebar .avatar-frame::after {
+  content: "";
+  position: absolute;
+  inset: -8px;                 /* ring thickness outward */
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: screen;      /* light over anything */
+}
+
+/* Bright arc + glow */
+.sidebar .avatar-frame::before {
+  /* donut mask so only the ring shows */
+  -webkit-mask: radial-gradient(closest-side, transparent 74%, #000 76%);
+          mask: radial-gradient(closest-side, transparent 74%, #000 76%);
+  /* fiery arc with gaps */
+  background: conic-gradient(
+    from 0deg,
+    rgba(255,180,60,0) 0deg,
+    rgba(255,200,80,.95) 20deg,
+    rgba(255,120,0,.9) 40deg,
+    rgba(255,180,60,0) 60deg,
+    rgba(255,180,60,0) 120deg,
+    rgba(255,200,80,.95) 140deg,
+    rgba(255,120,0,.9) 160deg,
+    rgba(255,180,60,0) 180deg,
+    rgba(255,180,60,0) 240deg,
+    rgba(255,200,80,.95) 260deg,
+    rgba(255,120,0,.9) 280deg,
+    rgba(255,180,60,0) 300deg,
+    rgba(255,180,60,0) 360deg
+  );
+  filter:
+    blur(1.2px)
+    drop-shadow(0 0 6px #ffb703)
+    drop-shadow(0 0 14px #ff7b00);
+  animation: ds-spin 2.2s linear infinite;
+}
+
+/* Ember specks layer */
+.sidebar .avatar-frame::after {
+  -webkit-mask: radial-gradient(closest-side, transparent 73%, #000 76%);
+          mask: radial-gradient(closest-side, transparent 73%, #000 76%);
+  background:
+    radial-gradient(2px 2px at 12% 18%, rgba(255,210,120,.95), transparent 60%),
+    radial-gradient(2px 2px at 44% 8%,  rgba(255,170,70,.9),  transparent 60%),
+    radial-gradient(2px 2px at 78% 22%, rgba(255,200,90,.9),  transparent 60%),
+    radial-gradient(2px 2px at 26% 74%, rgba(255,160,60,.9),  transparent 60%),
+    radial-gradient(2px 2px at 68% 66%, rgba(255,200,90,.9),  transparent 60%);
+  filter:
+    blur(.2px)
+    drop-shadow(0 0 5px rgba(255,180,80,.9));
+  animation: ds-spin-rev 4.4s linear infinite;
+  opacity: .95;
+}
+
+/* Spins */
+@keyframes ds-spin     { to { transform: rotate(360deg); } }
+@keyframes ds-spin-rev { to { transform: rotate(-360deg); } }
+
 /* Font and smoothing */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
