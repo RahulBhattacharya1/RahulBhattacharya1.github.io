@@ -48,6 +48,7 @@ body {
   .sidebar { flex: 0 0 260px; }  /* fixed 260px column (tweak to 220–300px if you like) */
   .main-content { flex: 1; }     /* main area takes the remaining space */
 }
+
 .sidebar {
   /*width: 20%;*/
   min-width: 200px;
@@ -215,6 +216,34 @@ body {
 .sidebar .social-icons a:hover svg {
   fill: #000 !important;
   transform: translateY(-2px);
+}
+
+/* Icon light-sweep every 2s */
+.sidebar .social-icons a {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  overflow: hidden;          /* keep sweep inside the icon box */
+}
+
+.sidebar .social-icons a::after {
+  content: "";
+  position: absolute;
+  inset: -4px;               /* tiny bleed so edges don’t show */
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 30%,
+    rgba(255,255,255,.65) 50%,
+    rgba(255,255,255,0) 70%
+  );
+  transform: translateX(-120%) skewX(-20deg);
+  mix-blend-mode: screen;     /* brightens without blowing out color */
+  animation: iconShine 2s linear infinite;
+}
+
+@keyframes iconShine {
+  to { transform: translateX(120%) skewX(-20deg); }
 }
 
 /* ——— Social icons: kill any left indent in the sidebar About tab ——— */
