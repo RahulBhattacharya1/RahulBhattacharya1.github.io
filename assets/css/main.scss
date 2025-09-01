@@ -692,7 +692,7 @@ pre {
   padding: 6px 10px;
   font-size: 0.9rem;
   background: #A6C2FF;
-  border: 1px solid #ddd;
+  border: 1px solid #80A8FF;
   border-radius: 8px;
   cursor: pointer;
   transition: background .2s, border-color .2s;
@@ -707,16 +707,16 @@ pre {
 .tab-btn:hover {
   background: #82A6F7;
   text-decoration: none;
-  color: #5E5F5F;
+  color: #fff;
 }
 
 /* Active state as a filled pill (still compact) */
 .bio-tabs .tab-btn.active{
   background: #2563eb;
-  border: 2px solid #ddd;
+  border: 2px solid #0442CA;
   font-weight: 600;
   text-decoration: none;
-  color: #5E5F5F;
+  color: #fff;
 }
 
 /* Keep the content box within the sidebar */
