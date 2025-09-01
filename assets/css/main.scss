@@ -142,7 +142,7 @@ body {
 /* Post title + hero image */
 .post-header { margin-bottom: 1.5rem; }
 .post-title  { font-size: 2rem; line-height: 1.2; margin: 0 0 0.25rem;
-	text-decoration: none;}
+	text-decoration: none !important;}
 
 .post-title a:hover {
   text-decoration: underline;
