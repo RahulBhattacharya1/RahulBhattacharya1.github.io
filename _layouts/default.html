@@ -29,9 +29,11 @@
 
 <script>
 (function () {
-  function inject() {
-    var el = document.getElementById("social-icons");
-    if (!el || el.children.length) return;
+  // Expose a function we can call when the About tab becomes active.
+  // It will only populate once.
+  window.renderAboutIcons = function () {
+    var el = document.getElementById("social-icons"); // lives INSIDE #about tab
+    if (!el || el.dataset.populated === "1") return;
     el.innerHTML = `
       <li>
         <a class="home" href="/" aria-label="Home">
@@ -114,16 +116,8 @@ c0 86 3 159 6 162 8 9 118 -2 226 -22z m104 -715 c43 -18 102 -72 124 -114 84
         </a>
       </li>
     `;
-  }
-
-  var ric = window.requestIdleCallback;
-  if (typeof ric === "function") {
-    ric(inject, { timeout: 2000 });
-  } else if (document.readyState === "complete") {
-    inject();
-  } else {
-    window.addEventListener("load", inject);
-  }
+    el.dataset.populated = "1";
+  };
 })();
 </script>
       
