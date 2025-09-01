@@ -697,7 +697,7 @@ pre {
   cursor: pointer;
   transition: background .2s, border-color .2s;
   text-decoration: none;
-  color: #363636;
+  color: #fff;
 }
 
 .tab-btn:last-child {
@@ -707,7 +707,7 @@ pre {
 .tab-btn:hover {
   background: #5180E8;
   text-decoration: none;
-  color: #fff;
+  color: #FFC907;
 }
 
 /* Active state as a filled pill (still compact) */
