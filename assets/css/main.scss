@@ -691,7 +691,7 @@ pre {
   flex: 0 0 auto;          /* fit to content, don't stretch */
   padding: 6px 10px;
   font-size: 0.9rem;
-  background: #A6C2FF;
+  background: #4B7EEE;
   border: 1px solid #80A8FF;
   border-radius: 8px;
   cursor: pointer;
@@ -705,9 +705,9 @@ pre {
 }
 
 .tab-btn:hover {
-  background: #5180E8;
+  background: #336EEE;
   text-decoration: none;
-  color: #FFC907;
+  color: #fff;
 }
 
 /* Active state as a filled pill (still compact) */
