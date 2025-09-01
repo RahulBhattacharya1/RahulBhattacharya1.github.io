@@ -141,7 +141,13 @@ body {
 
 /* Post title + hero image */
 .post-header { margin-bottom: 1.5rem; }
-.post-title  { font-size: 2rem; line-height: 1.2; margin: 0 0 0.25rem; }
+.post-title  { font-size: 2rem; line-height: 1.2; margin: 0 0 0.25rem;
+	text-decoration: none;}
+
+.post-title a:hover {
+  text-decoration: underline;
+  color: #2563eb;
+}
 
 .post-meta {
   color: #666;
@@ -227,7 +233,6 @@ body {
   padding-left: 0;
 }
 
-/* Use Source Serif 4 for headings (Inter already used for body) */
 .post-title,
 .featured h2,
 .posts h2 {
