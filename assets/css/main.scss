@@ -927,9 +927,9 @@ pre {
   padding-left: 0 !important;
 }
 
-/* Avoid inline SVG’s inline/whitespace behavior */
+/* Avoid inline SVG’s inline/whitespace behavior 
 .sidebar .bio-tabs .tab-panel#about ul.social-icons .home svg {
-  display: block;                /* removes inline spacing */
+  display: block;                removes inline spacing */
 }
 
 /* Giscus Comments Box */
