@@ -880,6 +880,8 @@ pre {
   font-size: 1rem;
   line-height: 1.3;
   margin: 0 0 .35rem;
+  font-weight: inherit; /* use same weight */
+  font-family: inherit; /* use global stack */
 }
 
 .category-page .post-excerpt {
