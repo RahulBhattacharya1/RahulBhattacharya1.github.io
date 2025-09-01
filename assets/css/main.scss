@@ -86,22 +86,21 @@
 @keyframes ds-spin     { to { transform: rotate(360deg); } }
 @keyframes ds-spin-rev { to { transform: rotate(-360deg); } }
 
-/* caret that never shifts vertically when the word is empty */
+/* caret aligned to text baseline */
 .type-cursor{
   position: relative;
-  display: inline-block;   /* so ::after can be positioned */
+  display: inline-block;
   white-space: nowrap;
-  line-height: 1em;        /* lock box height to font-size */
-  min-height: 1em;         /* keep height even when empty */
+  line-height: inherit;   /* use the paragraph's line height */
 }
 
 .type-cursor::after{
   content: "";
   position: absolute;
-  right: -1px;             /* sits flush at the word end */
-  top: 0;                  /* anchor to the top of the 1em box */
-  width: 1px;              /* caret width */
-  height: 1em;             /* exactly the text height */
+  right: -1px;            /* sits at word end */
+  bottom: 0;              /* baseline anchor */
+  width: 1px;
+  height: 1em;            /* matches font size */
   background: currentColor;
   animation: cursorBlink 1s steps(1) infinite;
   pointer-events: none;
