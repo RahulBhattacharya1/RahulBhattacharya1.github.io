@@ -917,38 +917,55 @@ fill="#000000" stroke="none">
 
 <script>
 (function () {
-  function saveScroll(targetHref) {
-    try {
-      var pathOnly = targetHref.replace(location.origin, "");
-      sessionStorage.setItem("scrollRestore",
-        JSON.stringify({ path: pathOnly.replace(/#.*$/, ""), y: window.scrollY }));
-    } catch (e) {}
-  }
-
-  // Capture clicks on the tab buttons that go to real pages
+  // 1) On click: navigate with "?y=<scrollY>" appended so the next page knows where to restore.
   document.addEventListener("click", function (e) {
-    var a = e.target.closest('a.tab-btn[href^="/"]');
+    var a = e.target.closest('a.tab-btn[href]');
     if (!a) return;
-    saveScroll(a.getAttribute("href"));
-  }, true); // capture so it runs even if another handler preventsDefault
 
-  // On the next page, restore the saved scroll position (then clear it)
-  function restoreScroll() {
+    // Build an absolute URL for robustness (handles relative/absolute/having query already)
+    var url = new URL(a.getAttribute("href"), location.href);
     try {
-      var raw = sessionStorage.getItem("scrollRestore");
-      if (!raw) return;
-      var data = JSON.parse(raw) || {};
-      if ((data.path || "") === location.pathname) {
-        requestAnimationFrame(function () {
-          window.scrollTo(0, (data.y|0));
-        });
-      }
-      sessionStorage.removeItem("scrollRestore");
-    } catch (e) {}
+      url.searchParams.set("y", String(window.scrollY|0));
+      e.preventDefault();          // stop the default jumpy nav
+      location.href = url.toString();
+    } catch (err) {
+      // In worst case, fall back to default nav
+    }
+  }, true);
+
+  // 2) On load: if "?y=…" is present, restore scroll *after* layout settles.
+  function restoreFromQuery() {
+    var url = new URL(location.href);
+    var y = parseInt(url.searchParams.get("y") || "", 10);
+    if (isNaN(y)) return;
+
+    // Avoid smooth scroll fighting with us
+    var prev = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+
+    var attempt = 0;
+    var maxAttempts = 12; // ~600ms with 50ms steps
+    (function tick(){
+      requestAnimationFrame(function(){
+        window.scrollTo(0, y);
+        if (++attempt < maxAttempts) setTimeout(tick, 50);
+        else {
+          document.documentElement.style.scrollBehavior = prev || "";
+          // clean the URL (remove ?y=) without reloading
+          url.searchParams.delete("y");
+          history.replaceState(null, "", url.toString());
+        }
+      });
+    })();
   }
 
-  // pageshow fires on normal loads and BFCache restores
-  window.addEventListener("pageshow", restoreScroll);
+  // Run on normal load and BFCache restores
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    restoreFromQuery();
+  } else {
+    document.addEventListener("DOMContentLoaded", restoreFromQuery);
+  }
+  window.addEventListener("pageshow", function(){ restoreFromQuery(); });
 })();
 </script>
   
