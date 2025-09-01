@@ -182,7 +182,6 @@ body {
   display: flex;
   gap: 0.75rem;
   margin: 0;
-  margin-left: 0;
   padding: 0;
   list-style: none;
 }
@@ -208,6 +207,11 @@ body {
 .sidebar .social-icons a:hover svg {
   fill: #000 !important;
   transform: translateY(-2px);
+}
+
+/* ——— Social icons: kill any left indent in the sidebar About tab ——— */
+.sidebar .bio-tabs .tab-panel#about ul.social-icons {
+  margin-left: 0;
 }
 
 @media (max-width: 768px) {
