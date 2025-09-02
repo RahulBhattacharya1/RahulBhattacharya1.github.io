@@ -182,6 +182,14 @@ body {
   animation: tiltBase 3s ease-in-out infinite;
 }
 
+@keyframes tiltBase{
+  0%   { transform: rotateX(0deg) rotateY(0deg) scale(1.00); }
+  25%  { transform: rotateX(10deg) rotateY(-10deg) scale(1.00); }
+  50%  { transform: rotateX(0deg) rotateY(0deg) scale(1.00); }
+  75%  { transform: rotateX(-10deg) rotateY(10deg) scale(1.00); }
+  100% { transform: rotateX(0deg) rotateY(0deg) scale(1.00); }
+}
+
 .post-text {
   flex: 1;
 }
