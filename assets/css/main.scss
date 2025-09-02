@@ -504,9 +504,9 @@ body {
 /* ── Fix inline icons ONLY on mobile ── */
 @media (max-width: 640px) {
   /* keep small icons inline (won’t trigger big gaps) */
-  .post-content img.inline-icon,
-  .post-content .inline-icon,
-  .post-content svg.inline-icon {
+  .post-content img.inl-icon,
+  .post-content .inl-icon,
+  .post-content svg.inl-icon {
     display: inline-block !important;
     width: 1em !important;
     height: 1em !important;
@@ -518,7 +518,7 @@ body {
   }
 
   /* regular images in the article still behave as blocks */
-  .post-content img:not(.inline-icon) {
+  .post-content img:not(.inl-icon) {
     display: block;
     max-width: 100% !important;
     height: auto !important;
