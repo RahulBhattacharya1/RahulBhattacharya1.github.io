@@ -1093,6 +1093,46 @@ pre {
   100% { transform: rotateX(0deg) rotateY(0deg) scale(1.05); }
 }
 
+/* ─── LOCK THE BEVEL IN (high specificity + all states) ─── */
+.featured .post-item img,
+.posts    .post-item img,
+.post-item.post-item img {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.90),
+    inset 0 -2px 4px rgba(0,0,0,0.32),
+    inset 0 0 0 1px rgba(0,0,0,0.14) !important;
+  clip-path: inset(0 round 8px);
+}
+
+/* When list item is hovered/focused, keep the same bevel */
+.featured .post-item:hover img,
+.posts    .post-item:hover  img,
+.featured .post-item:focus-within img,
+.posts    .post-item:focus-within  img,
+.featured .post-item a:hover img,
+.posts    .post-item a:hover  img,
+.featured .post-item a:focus img,
+.posts    .post-item a:focus  img,
+.post-item.post-item:hover img {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.90),
+    inset 0 -2px 4px rgba(0,0,0,0.32),
+    inset 0 0 0 1px rgba(0,0,0,0.14) !important;
+  clip-path: inset(0 round 8px);
+}
+
+/* Mobile: if you resize thumbnails, keep bevel there too */
+@media (max-width: 768px){
+  .featured .post-item img,
+  .posts    .post-item img {
+    /* your size rules (20vw / aspect-ratio) stay as-is */
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.92),
+      inset 0 -3px 6px rgba(0,0,0,0.34),
+      inset 0 0 0 1px rgba(0,0,0,0.16) !important;
+  }
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
