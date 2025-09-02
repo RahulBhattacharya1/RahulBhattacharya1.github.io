@@ -1073,6 +1073,7 @@ pre {
 
 .post-item:hover img{
   animation: tiltHover 3s ease-in-out infinite;
+  clip-path: inset(0 round 8px);          /* ensure mask still applied during hover anim */
 }
 
 @keyframes tiltBase{
