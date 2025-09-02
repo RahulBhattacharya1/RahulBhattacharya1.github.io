@@ -1130,6 +1130,22 @@ pre {
   100% { transform: rotateX(0deg)   rotateY(0deg)    translateZ(0); }
 }
 
+/* ── Preserve Featured/Blog list layout sizes ───────────────────────────── */
+/* Keep thumbnails 160×100 next to the text, no wrapping */
+.post-item .thumb { width: 160px; flex: 0 0 160px; }
+
+.post-item .thumb img{
+  width: 160px !important;
+  height: 100px !important;
+  object-fit: cover;
+  display: block;
+  /* keep the 3D animation properties from earlier */
+  backface-visibility: hidden;
+  transform-origin: center;
+  will-change: transform, box-shadow;
+}
+.post-text { flex: 1 1 auto; }  /* text area stays to the right */
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
