@@ -1056,36 +1056,69 @@ pre {
 .post-item {
   transform-style: preserve-3d;
   position: relative;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+  perspective: 1000px;
 }
 
+/* Thumbnail image */
 .post-item img {
   width: 160px;
   height: 100px;
   object-fit: cover;
   border-radius: 8px;
   flex-shrink: 0;
+  display: block;
 
   backface-visibility: hidden;
   transform-origin: center;
   will-change: transform, box-shadow;
 
-  /* Always tilting */
-  animation: tiltPulse 3s ease-in-out infinite;
+  /* Only keep inset (bevel-like) shadows on the image itself */
   box-shadow:
-    0 8px 20px rgba(0,0,0,.25),
-    0 3px 10px rgba(0,0,0,.14),
     inset 0 2px 2px rgba(255,255,255,.55),
     inset 0 -3px 6px rgba(0,0,0,.25);
 
+  animation: tiltPulse 3s ease-in-out infinite;
   position: relative;
   z-index: 1;
 }
 
-/* Bevel overlay */
+/* Outer drop shadow layer — stays behind the image only */
+.post-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Big soft drop shadows */
+  box-shadow:
+    0 18px 32px rgba(0,0,0,.28),
+    0 8px 16px rgba(0,0,0,.16);
+
+  /* Prevent bleeding into text (clip right edge) */
+  clip-path: inset(-24px 0 -36px -24px round 8px);
+
+  /* Follow tilt motion */
+  transform-origin: center;
+  animation: shadowFollow 3s ease-in-out infinite;
+}
+
+/* Bevel highlight overlay */
 .post-item::after {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 100px;
   border-radius: 8px;
   pointer-events: none;
   background: linear-gradient(
@@ -1099,16 +1132,13 @@ pre {
   z-index: 2;
 }
 
+/* Hover: stronger tilt + scale */
 .post-item:hover img {
   animation: tiltPulseHover 3s ease-in-out infinite;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.3),
-    0 8px 18px rgba(0,0,0,.18),
-    inset 0 2px 2px rgba(255,255,255,.6),
-    inset 0 -3px 6px rgba(0,0,0,.3);
+  transform: scale(1.05);
 }
 
-/* Stronger idle tilt */
+/* Base tilt animation */
 @keyframes tiltPulse {
   0%   { transform: rotateX(0deg) rotateY(0deg) scale(1.0); }
   25%  { transform: rotateX(10deg) rotateY(-10deg) scale(1.0); }
@@ -1117,13 +1147,22 @@ pre {
   100% { transform: rotateX(0deg) rotateY(0deg) scale(1.0); }
 }
 
-/* Even bigger hover tilt */
+/* Stronger tilt on hover */
 @keyframes tiltPulseHover {
   0%   { transform: rotateX(0deg) rotateY(0deg) scale(1.05); }
   25%  { transform: rotateX(14deg) rotateY(-14deg) scale(1.05); }
   50%  { transform: rotateX(0deg) rotateY(0deg) scale(1.05); }
   75%  { transform: rotateX(-14deg) rotateY(14deg) scale(1.05); }
   100% { transform: rotateX(0deg) rotateY(0deg) scale(1.05); }
+}
+
+/* Shadow follows the same tilt rhythm */
+@keyframes shadowFollow {
+  0%   { transform: rotateX(0deg) rotateY(0deg); }
+  25%  { transform: rotateX(10deg) rotateY(-10deg); }
+  50%  { transform: rotateX(0deg) rotateY(0deg); }
+  75%  { transform: rotateX(-10deg) rotateY(10deg); }
+  100% { transform: rotateX(0deg) rotateY(0deg); }
 }
 
 /* Giscus Comments Box */
