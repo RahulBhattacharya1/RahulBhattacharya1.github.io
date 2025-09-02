@@ -794,7 +794,7 @@ pre {
 /* ─── Related Posts: left-aligned, hover anim, mobile = 2 items ─── */
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  grid-template-columns: repeat(3, 1fr);
   gap: 5px;
   justify-content: start;
   list-style: none;
