@@ -486,11 +486,19 @@ body {
 }
 
 /* Post body images: 75% on desktop, full-width on mobile */
-.is-post .main-inner img {
+.is-post .main-inner img:not(.inl-icon) {
   width: 75% !important;
   height: auto;
   display: block;
   margin: 1rem auto; /* center it */
+}
+
+.inl-icon {
+  display: inline-block !important;
+  width: auto !important;
+  height: 1em !important;
+  vertical-align: -0.15em;
+  margin-left: .15em !important;
 }
 
 /* Subtle breathing effect on the first image inside post body */
