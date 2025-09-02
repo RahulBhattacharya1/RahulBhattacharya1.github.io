@@ -795,7 +795,7 @@ pre {
 .related-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
-  gap: 15px;
+  gap: 5px;
   justify-content: start;
   list-style: none;
   padding: 0 !important;
