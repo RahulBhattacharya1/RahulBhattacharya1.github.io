@@ -908,7 +908,7 @@ pre {
   font-size: .7rem;
   line-height: 1.25;
   color: #737373;
-  padding: 0 8px;   /* add left/right breathing room */
+  padding: 0;
 }
 
 .related-head {
@@ -918,6 +918,11 @@ pre {
   margin-bottom: 20px;
 }
 .related-head h3 { margin: 0; }
+
+.related-posts .related-card a {
+  padding-inline: 6px;   /* both image + title get the same inset */
+  box-sizing: border-box;
+}
 
 /* Related Posts: Mobile - Keep only first 2 */
 @media (max-width: 640px) {
