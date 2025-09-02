@@ -183,8 +183,8 @@ body {
 
 /* 1) The image stays put, but we "cut" a tiny triangle during the curl */
 .post-item img{
-  width:100%;
-  height:auto;
+  width:160px;
+  height:100px;
   object-fit:cover;
   border-radius:8px;
   display:block;
