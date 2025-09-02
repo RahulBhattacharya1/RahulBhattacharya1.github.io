@@ -25,7 +25,7 @@ And to make it smarter, I added a compact embedding model that picks a **relevan
     style="width:100%;height:820px;border:0;border-radius:12px;overflow:hidden">
   </iframe>
   <noscript>
-    <p><a href="https://huggingface.co/spaces/RahulBhattacharya/ZenRise">Open ZenRise</a></p>
+    <p><a href="https://huggingface.co/spaces/RahulBhattacharya/Rahuls_Morning_Planner">Open ZenRise</a></p>
   </noscript>
 </div>
 
