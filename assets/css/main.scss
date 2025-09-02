@@ -1054,10 +1054,8 @@ pre {
 }
 
 .post-item {
-  perspective: 1000px;
   transform-style: preserve-3d;
   position: relative;
-  display: inline-block;
 }
 
 .post-item img {
@@ -1066,7 +1064,6 @@ pre {
   object-fit: cover;
   border-radius: 8px;
   flex-shrink: 0;
-  display: block;
 
   backface-visibility: hidden;
   transform-origin: center;
