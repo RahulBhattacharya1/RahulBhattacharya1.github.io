@@ -180,19 +180,22 @@ body {
   flex-shrink: 0;
   display: block;
 
-  /* page-turn effect */
-  transform-origin: top right;     /* pivot from top-right corner */
+  /* page corner effect */
+  transform-origin: top right;
   backface-visibility: hidden;
-  animation: pageTurn 4s ease-in-out infinite;
+  animation: cornerCurl 4s ease-in-out infinite;
 }
 
-/* keyframes: corner lifts and returns */
-@keyframes pageTurn {
-  0%   { transform: rotateY(0deg) skewY(0deg) scale(1); }
-  25%  { transform: rotateY(-15deg) skewY(-3deg) scale(1.01); } /* corner lifting */
-  50%  { transform: rotateY(0deg) skewY(0deg) scale(1); }       /* flat again */
-  75%  { transform: rotateY(-10deg) skewY(-2deg) scale(1.005); }/* smaller lift */
-  100% { transform: rotateY(0deg) skewY(0deg) scale(1); }
+@keyframes cornerCurl {
+  0%, 85%, 100% {
+    transform: rotateX(0deg) rotateY(0deg) skewY(0deg) scale(1);
+  }
+  90% {
+    transform: rotateX(-12deg) rotateY(-8deg) skewY(-3deg) scale(1.02);
+  }
+  95% {
+    transform: rotateX(0deg) rotateY(0deg) skewY(0deg) scale(1);
+  }
 }
 
 .post-text {
