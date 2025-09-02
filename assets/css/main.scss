@@ -172,66 +172,84 @@ body {
   align-items: flex-start;
 }
 
-/* Keep the image static */
+/* ---- Realistic top-right page curl (📄) every 4s ---- */
+.post-item{ position: relative; }
+
+/* tune once here */
+.post-item{
+  --curl: 26px;     /* corner flap size */
+  --dur:  4s;       /* one cycle = 4s */
+}
+
+/* 1) The image stays put, but we "cut" a tiny triangle during the curl */
 .post-item img{
   width:160px;
   height:100px;
   object-fit:cover;
   border-radius:8px;
   display:block;
-  /* remove any previous animation on the IMG */
-  animation: none !important;
-  transform: none !important;
+
+  /* keep corners crisp while masking */
+  clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+  animation: imgCornerCut var(--dur) linear infinite;
 }
 
-/* We’ll animate only a tiny corner overlay */
-.post-item{
-  position: relative;  /* anchor for the corner */
-}
-
-/* ── Page-curl corner (desktop: image is 160×100) ── */
+/* 2) The flap that peels up (top-right only) */
 .post-item::after{
   content:"";
   position:absolute;
   top:0;
-  left: calc(160px - 28px);   /* 28px square tucked into top-right */
-  width:28px; height:28px;
-  border-top-right-radius:6px;
+  left: calc(160px - var(--curl)); /* sit at image’s top-right */
+  width:var(--curl);
+  height:var(--curl);
   pointer-events:none;
 
-  /* shape the patch as a corner triangle */
+  /* triangle shape that covers the corner */
   clip-path: polygon(0 0, 100% 0, 100% 100%);
+  border-top-right-radius: 6px;
 
-  /* front/back shading for a paper-like fold */
-  background:
-    linear-gradient(135deg,
-      rgba(255,255,255,0.95) 0%,
-      rgba(255,255,255,0.75) 40%,
-      rgba(230,230,230,0.65) 70%,
-      rgba(210,210,210,0.5) 100%);
-  box-shadow: 0 6px 10px rgba(0,0,0,.18);
+  /* paper look: transparent & soft, not a solid patch */
+  background: linear-gradient(135deg,
+              rgba(255,255,255,.92) 0%,
+              rgba(255,255,255,.75) 40%,
+              rgba(230,230,230,.55) 75%,
+              rgba(210,210,210,.40) 100%);
+  box-shadow:
+    0 6px 10px rgba(0,0,0,.18),     /* drop shadow while lifted */
+    inset -1px 1px 0 rgba(255,255,255,.35), /* tiny rim highlight */
+    inset  0 -1px 2px rgba(0,0,0,.15);
 
   transform-origin: top right;
-  animation: cornerCurl4s 4s ease-in-out infinite;
+  animation: flapLift var(--dur) ease-in-out infinite;
+  opacity: 0;  /* hidden when flat */
 }
 
-/* The curl motion: a quick peel near the end of each 4s loop */
-@keyframes cornerCurl4s{
-  0%, 85%, 100% {
-    transform: rotateX(0deg) rotateY(0deg) translateZ(0);
-    opacity: .0;                      /* mostly invisible while flat */
+/* Image corner "cut" – only while the flap is up */
+@keyframes imgCornerCut{
+  /* flat most of the time */
+  0%, 84%, 100% {
+    clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
   }
-  89% {
-    transform: rotateX(-35deg) rotateY(-15deg) translateZ(2px);
-    opacity: 1;                       /* show curl at peak */
+  /* remove a small triangle from the top-right during the curl */
+  88% {
+    clip-path: polygon(
+      0 0, calc(100% - var(--curl)) 0, 100% var(--curl),
+      100% 100%, 0 100%
+    );
   }
-  93% {
-    transform: rotateX(-15deg) rotateY(-8deg) translateZ(1px);
-    opacity: .9;
+  92% {
+    clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
   }
 }
 
-/* ── MOBILE: your thumbnails become width:20vw, 16:9 ── */
+/* The flap lift motion (quick peel, then back down) */
+@keyframes flapLift{
+  0%, 84%, 100% { transform: rotateX(0) rotateY(0); opacity: 0; }
+  88%          { transform: rotateX(-48deg) rotateY(-18deg) translateZ(1px); opacity: .95; }
+  92%          { transform: rotateX(-18deg) rotateY(-8deg)  translateZ(0);   opacity: .65; }
+}
+
+/* ---- Mobile: width changes to 20vw, so reposition flap ---- */
 @media (max-width: 768px){
   .featured .post-item img,
   .posts    .post-item img{
@@ -239,13 +257,12 @@ body {
     aspect-ratio: 16 / 9;
     height: auto;
   }
-
-  /* move the corner to the new top-right (20vw wide image) */
+  /* move the flap to the new top-right */
   .post-item::after{
-    left: calc(20vw - 28px);
-    /* keep the same size/animation for the corner */
+    left: calc(20vw - var(--curl));
   }
 }
+
 
 .post-text {
   flex: 1;
