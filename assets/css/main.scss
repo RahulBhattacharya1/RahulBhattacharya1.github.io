@@ -891,23 +891,43 @@ pre {
 .related-head h3 { margin: 0; }
 
 /* Related Posts: Mobile - Keep only first 2 */
+/* ─── Related Posts: Mobile (<=640px) ─── */
 @media (max-width: 640px) {
-  .related-grid > li:nth-child(n+3) { display: none; } /* keep only first 2 */
+  /* show only first 2 */
+  .related-grid > li:nth-child(n+3) {
+    display: none !important;
+  }
 
-  /* Force two columns and let cards fill the tracks */
+  /* force exactly 2 columns side by side */
   .related-posts .related-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
-    gap: 15px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important; /* adjust spacing between cards */
+    padding: 0 !important;
+    margin: 0 !important;
   }
+
+  /* let cards fill their grid tracks */
   .related-posts .related-card,
-  .related-posts .related-grid > li { 
-    width: auto !important; /* override the 180px fixed width */
+  .related-posts .related-grid > li {
+    width: auto !important;
   }
+
+  /* uniform thumbnails with 4:3 ratio */
   .related-posts .related-thumb {
     width: 100% !important;
-    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 8px;
     display: block;
+  }
+
+  /* add some breathing room for titles */
+  .related-posts .related-title {
+    padding: 0 6px;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    line-height: 1.3;
   }
 }
 
