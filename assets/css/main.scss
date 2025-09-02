@@ -848,7 +848,7 @@ pre {
   width: 100%;
   text-decoration: none;
   text-align: left;
-  padding: 0 8px;   /* add left/right breathing room */
+  /*padding: 0 8px;    add left/right breathing room */
 }
 
 .related-thumb {
@@ -885,7 +885,7 @@ pre {
 }
 
 /* tighten the space between cards on desktop */
-.related-posts .related-grid { gap: 6px !important; }     /* try 4–10px */
+.related-posts .related-grid { gap: 0px !important; }     /* try 4–10px */
 
 /* make sure no hidden margins add to that gap */
 .related-posts .related-grid > li { margin: 0 !important; }
@@ -920,7 +920,7 @@ pre {
 .related-head h3 { margin: 0; }
 
 .related-posts .related-card a {
-  padding-inline: 6px;   /* both image + title get the same inset */
+  /*padding-inline: 6px;    both image + title get the same inset */
   box-sizing: border-box;
 }
 
@@ -957,7 +957,7 @@ pre {
 
   /* add some breathing room for titles */
   .related-posts .related-title {
-    padding: 0 6px;
+    padding: 0;
     margin-top: 8px;
     font-size: 0.75rem;
     line-height: 1.3;
