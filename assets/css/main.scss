@@ -891,7 +891,6 @@ pre {
 .related-head h3 { margin: 0; }
 
 /* Related Posts: Mobile - Keep only first 2 */
-/* ─── Related Posts: Mobile (<=640px) ─── */
 @media (max-width: 640px) {
   /* show only first 2 */
   .related-grid > li:nth-child(n+3) {
@@ -913,10 +912,10 @@ pre {
     width: auto !important;
   }
 
-  /* uniform thumbnails with 4:3 ratio */
+  /* uniform thumbnails with 16:9 ratio */
   .related-posts .related-thumb {
     width: 100% !important;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 8px;
     display: block;
