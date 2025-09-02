@@ -1053,98 +1053,81 @@ pre {
   .category-page .post-card__media { width: 100px; height: 75px; }
 }
 
-/* ── Home thumbnails: soft 3D bevel + gentle tilt ───────────────────────── */
-
-.post-item .thumb{
-  position: relative;
-  display: block;
-  border-radius: 14px;     /* keep your rounded look */
-  overflow: hidden;        /* so the bevel overlay stays clipped */
-  perspective: 900px;      /* give child img some depth */
+.post-item {
+  perspective: 1000px;
   transform-style: preserve-3d;
+  position: relative;
+  display: inline-block;
 }
 
-/* Subtle bevel/shine overlay */
-.post-item .thumb::after{
+.post-item img {
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: block;
+
+  backface-visibility: hidden;
+  transform-origin: center;
+  will-change: transform, box-shadow;
+
+  /* Always tilting */
+  animation: tiltPulse 3s ease-in-out infinite;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.25),
+    0 3px 10px rgba(0,0,0,.14),
+    inset 0 2px 2px rgba(255,255,255,.55),
+    inset 0 -3px 6px rgba(0,0,0,.25);
+
+  position: relative;
+  z-index: 1;
+}
+
+/* Bevel overlay */
+.post-item::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: inherit;
+  border-radius: 8px;
   pointer-events: none;
-  /* soft highlight top-left → shadow bottom-right */
   background: linear-gradient(
-    130deg,
-    rgba(255,255,255,.22) 0%,
-    rgba(255,255,255,.10) 28%,
-    rgba(0,0,0,.06) 75%,
-    rgba(0,0,0,.10) 100%
+    145deg,
+    rgba(255,255,255,0.55) 0%,
+    rgba(255,255,255,0.25) 30%,
+    rgba(0,0,0,0.25) 70%,
+    rgba(0,0,0,0.45) 100%
   );
-  mix-blend-mode: screen;
+  mix-blend-mode: overlay;
+  z-index: 2;
 }
 
-/* The image gets the 3D tilt + lift */
-.post-item .thumb img{
-  display: block;
-  width: 100%;
-  height: auto;
-  backface-visibility: hidden;
-  transform-origin: center;
-  will-change: transform, box-shadow;
-  border-radius: inherit;
-
-  /* base shadow */
+.post-item:hover img {
+  animation: tiltPulseHover 3s ease-in-out infinite;
   box-shadow:
-    0 6px 16px rgba(0,0,0,.16),
-    0 2px 6px rgba(0,0,0,.08);
-
-  /* gentle auto tilt */
-  animation: homeThumbTilt 12s ease-in-out infinite;
+    0 20px 40px rgba(0,0,0,.3),
+    0 8px 18px rgba(0,0,0,.18),
+    inset 0 2px 2px rgba(255,255,255,.6),
+    inset 0 -3px 6px rgba(0,0,0,.3);
 }
 
-/* Hover/focus: slightly stronger lift and pause the auto tilt */
-.post-item .thumb:hover img,
-.post-item .thumb:focus img{
-  animation-play-state: paused;
-  transform: translateY(-4px) rotateX(2.2deg) rotateY(-2.4deg) scale(1.02);
-  box-shadow:
-    0 14px 28px rgba(0,0,0,.20),
-    0 6px 12px rgba(0,0,0,.10);
+/* Stronger idle tilt */
+@keyframes tiltPulse {
+  0%   { transform: rotateX(0deg) rotateY(0deg) scale(1.0); }
+  25%  { transform: rotateX(10deg) rotateY(-10deg) scale(1.0); }
+  50%  { transform: rotateX(0deg) rotateY(0deg) scale(1.0); }
+  75%  { transform: rotateX(-10deg) rotateY(10deg) scale(1.0); }
+  100% { transform: rotateX(0deg) rotateY(0deg) scale(1.0); }
 }
 
-/* Desync the animation so all cards don't tilt together */
-.featured .post-item:nth-child(2n) .thumb img { animation-delay: .8s; }
-.featured .post-item:nth-child(3n) .thumb img { animation-delay: 1.6s; }
-.featured .post-item:nth-child(5n) .thumb img { animation-delay: 2.4s; }
-
-.posts .post-item:nth-child(2n) .thumb img    { animation-delay: .6s; }
-.posts .post-item:nth-child(3n) .thumb img    { animation-delay: 1.2s; }
-.posts .post-item:nth-child(5n) .thumb img    { animation-delay: 1.8s; }
-
-/* Keyframes for gentle rocking/tilt */
-@keyframes homeThumbTilt{
-  0%   { transform: rotateX(0deg)   rotateY(0deg)    translateZ(0); }
-  20%  { transform: rotateX(1.2deg) rotateY(-2deg)   translateZ(1px); }
-  40%  { transform: rotateX(-1.2deg)rotateY(2deg)    translateZ(1px); }
-  60%  { transform: rotateX(1deg)   rotateY(1.2deg)  translateZ(1px); }
-  80%  { transform: rotateX(-.8deg) rotateY(-1.4deg) translateZ(1px); }
-  100% { transform: rotateX(0deg)   rotateY(0deg)    translateZ(0); }
+/* Even bigger hover tilt */
+@keyframes tiltPulseHover {
+  0%   { transform: rotateX(0deg) rotateY(0deg) scale(1.05); }
+  25%  { transform: rotateX(14deg) rotateY(-14deg) scale(1.05); }
+  50%  { transform: rotateX(0deg) rotateY(0deg) scale(1.05); }
+  75%  { transform: rotateX(-14deg) rotateY(14deg) scale(1.05); }
+  100% { transform: rotateX(0deg) rotateY(0deg) scale(1.05); }
 }
-
-/* ── Preserve Featured/Blog list layout sizes ───────────────────────────── */
-/* Keep thumbnails 160×100 next to the text, no wrapping */
-.post-item .thumb { width: 160px; flex: 0 0 160px; }
-
-.post-item .thumb img{
-  width: 160px !important;
-  height: 100px !important;
-  object-fit: cover;
-  display: block;
-  /* keep the 3D animation properties from earlier */
-  backface-visibility: hidden;
-  transform-origin: center;
-  will-change: transform, box-shadow;
-}
-.post-text { flex: 1 1 auto; }  /* text area stays to the right */
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
