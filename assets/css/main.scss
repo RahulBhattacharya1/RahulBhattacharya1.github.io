@@ -884,6 +884,12 @@ pre {
   width: 100% !important;
 }
 
+/* tighten the space between cards on desktop */
+.related-posts .related-grid { gap: 6px !important; }     /* try 4–10px */
+
+/* make sure no hidden margins add to that gap */
+.related-posts .related-grid > li { margin: 0 !important; }
+
 /* Hover: lift + slight tilt */
 .related-card a:hover .related-thumb,
 .related-card a:focus .related-thumb {
