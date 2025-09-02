@@ -172,29 +172,78 @@ body {
   align-items: flex-start;
 }
 
-.post-item img {
-  width: 160px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  flex-shrink: 0;
-  display: block;
-
-  /* page corner effect */
-  transform-origin: top right;
-  backface-visibility: hidden;
-  animation: cornerCurl 4s ease-in-out infinite;
+/* Keep the image static */
+.post-item img{
+  width:160px;
+  height:100px;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+  /* remove any previous animation on the IMG */
+  animation: none !important;
+  transform: none !important;
 }
 
-@keyframes cornerCurl {
+/* We’ll animate only a tiny corner overlay */
+.post-item{
+  position: relative;  /* anchor for the corner */
+}
+
+/* ── Page-curl corner (desktop: image is 160×100) ── */
+.post-item::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left: calc(160px - 28px);   /* 28px square tucked into top-right */
+  width:28px; height:28px;
+  border-top-right-radius:6px;
+  pointer-events:none;
+
+  /* shape the patch as a corner triangle */
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+
+  /* front/back shading for a paper-like fold */
+  background:
+    linear-gradient(135deg,
+      rgba(255,255,255,0.95) 0%,
+      rgba(255,255,255,0.75) 40%,
+      rgba(230,230,230,0.65) 70%,
+      rgba(210,210,210,0.5) 100%);
+  box-shadow: 0 6px 10px rgba(0,0,0,.18);
+
+  transform-origin: top right;
+  animation: cornerCurl4s 4s ease-in-out infinite;
+}
+
+/* The curl motion: a quick peel near the end of each 4s loop */
+@keyframes cornerCurl4s{
   0%, 85%, 100% {
-    transform: rotateX(0deg) rotateY(0deg) skewY(0deg) scale(1);
+    transform: rotateX(0deg) rotateY(0deg) translateZ(0);
+    opacity: .0;                      /* mostly invisible while flat */
   }
-  90% {
-    transform: rotateX(-12deg) rotateY(-8deg) skewY(-3deg) scale(1.02);
+  89% {
+    transform: rotateX(-35deg) rotateY(-15deg) translateZ(2px);
+    opacity: 1;                       /* show curl at peak */
   }
-  95% {
-    transform: rotateX(0deg) rotateY(0deg) skewY(0deg) scale(1);
+  93% {
+    transform: rotateX(-15deg) rotateY(-8deg) translateZ(1px);
+    opacity: .9;
+  }
+}
+
+/* ── MOBILE: your thumbnails become width:20vw, 16:9 ── */
+@media (max-width: 768px){
+  .featured .post-item img,
+  .posts    .post-item img{
+    width: 20vw !important;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  /* move the corner to the new top-right (20vw wide image) */
+  .post-item::after{
+    left: calc(20vw - 28px);
+    /* keep the same size/animation for the corner */
   }
 }
 
