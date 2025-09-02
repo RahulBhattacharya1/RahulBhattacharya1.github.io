@@ -794,7 +794,7 @@ pre {
 /* ─── Related Posts: left-aligned, hover anim, mobile = 2 items ─── */
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 180px) !important; /*desktop: small, packed tiles */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
   gap: 15px;
   justify-content: start;
   list-style: none;
@@ -807,7 +807,7 @@ pre {
   border: 0 !important;
 }
 .related-card { 
-	width: 180px; 
+	width: auto;
 	opacity: 1;   
 	align-items: stretch;
 	padding: 0 !important;
