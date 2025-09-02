@@ -795,7 +795,6 @@ pre {
 .related-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
   justify-content: start;
   list-style: none;
   padding: 0 !important;
