@@ -182,9 +182,9 @@ body {
 }
 
 /* 1) The image stays put, but we "cut" a tiny triangle during the curl */
-.home .post-item img{
-  width:160px;
-  height:100px;
+.post-item img{
+  width:100%;
+  height:auto;
   object-fit:cover;
   border-radius:8px;
   display:block;
@@ -195,7 +195,7 @@ body {
 }
 
 /* 2) The flap that peels up (top-right only) */
-.home .post-item::after{
+.post-item::after{
   content:"";
   position:absolute;
   top:0;
