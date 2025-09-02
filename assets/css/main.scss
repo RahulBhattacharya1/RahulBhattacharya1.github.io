@@ -501,6 +501,32 @@ body {
   margin-left: .15em !important;
 }
 
+/* ── Fix inline icons ONLY on mobile ── */
+@media (max-width: 640px) {
+  /* keep small icons inline (won’t trigger big gaps) */
+  .post-content img.inline-icon,
+  .post-content .inline-icon,
+  .post-content svg.inline-icon {
+    display: inline-block !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.15em;
+    margin: 0 .2em !important;
+    border: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* regular images in the article still behave as blocks */
+  .post-content img:not(.inline-icon) {
+    display: block;
+    max-width: 100% !important;
+    height: auto !important;
+    width: auto !important;     /* cancels any global 20vw/100% widths */
+    margin: 1rem 0 !important;
+  }
+}
+
 /* Subtle breathing effect on the first image inside post body */
 @keyframes subtle-breath {
   0%, 100% {
