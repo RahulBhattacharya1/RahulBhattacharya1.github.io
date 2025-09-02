@@ -501,12 +501,11 @@ body {
   margin-left: .15em !important;
 }
 
-/* ── Fix inline icons ONLY on mobile ── */
-@media (max-width: 640px) {
-  /* keep small icons inline (won’t trigger big gaps) */
-  .post-content img.inl-icon,
-  .post-content .inl-icon,
-  .post-content svg.inl-icon {
+/* ── Mobile: fix inl-icon images ── */
+@media (max-width: 768px) {
+  /* keep inl-icon images inline and small */
+  .is-post .main-inner img.inl-icon,
+  .is-post .main-inner svg.inl-icon {
     display: inline-block !important;
     width: 1em !important;
     height: 1em !important;
@@ -517,13 +516,11 @@ body {
     box-shadow: none !important;
   }
 
-  /* regular images in the article still behave as blocks */
-  .post-content img:not(.inl-icon) {
-    display: block;
-    max-width: 100% !important;
+  /* normal post images still full width */
+  .is-post .main-inner img:not(.inl-icon) {
+    display: block !important;
+    width: 100% !important;
     height: auto !important;
-    width: auto !important;     /* cancels any global 20vw/100% widths */
-    margin: 1rem 0 !important;
   }
 }
 
