@@ -897,7 +897,7 @@ pre {
   /* Force two columns and let cards fill the tracks */
   .related-posts .related-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
     gap: 15px !important;
   }
   .related-posts .related-card,
