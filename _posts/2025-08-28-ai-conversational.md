@@ -16,18 +16,9 @@ I wanted to build something lightweight yet useful—a conversational morning pl
 
 And to make it smarter, I added a compact embedding model that picks a **relevant focus tip** for my goals. No API keys, no heavy infrastructure.
 
-<div class="hf-embed" markdown="1">
-  <iframe
-    src="https://huggingface.co/spaces/RahulBhattacharya/Rahuls_Morning_Planner/?__theme=light"
-    title="ZenRise on Hugging Face Spaces"
-    loading="lazy"
-    allow="camera; microphone; clipboard-read; clipboard-write; fullscreen; autoplay"
-    style="width:100%;height:820px;border:0;border-radius:12px;overflow:hidden">
-  </iframe>
-  <noscript>
-    <p><a href="https://huggingface.co/spaces/RahulBhattacharya/Rahuls_Morning_Planner">Open Rahul's AI Morning Planner</a></p>
-  </noscript>
-</div>
+<iframe
+	src="https://rahulbhattacharya-rahuls-morning-planner.hf.space"
+style="width:100%;height:820px;border:0;border-radius:12px;overflow:hidden"></iframe>
 
 Demo Goals
 ----------
