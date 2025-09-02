@@ -925,60 +925,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<script>
-(function () {
-  // 1) On click: for .tab-btn, let the crack anim play, then navigate with "?y=<scrollY>"
-  document.addEventListener("click", function (e) {
-    var a = e.target.closest('a.tab-btn[href]');
-    if (!a) return;
-
-    e.preventDefault();
-
-    // add ?y=<scrollY> to the target URL
-    var url = new URL(a.getAttribute("href"), location.href);
-    try { url.searchParams.set("y", String(window.scrollY|0)); } catch (err) {}
-
-    // trigger the crack effect class if not already set
-    if (!a.classList.contains('is-cracking')) a.classList.add('is-cracking');
-
-    // wait for the CSS animation to show (match --crack-ms in CSS)
-    setTimeout(function(){
-      location.href = url.toString();
-    }, 340); // ~320ms animation + tiny buffer
-  }, true);
-
-  // 2) On load: restore scroll from ?y=… (unchanged)
-  function restoreFromQuery() {
-    var url = new URL(location.href);
-    var y = parseInt(url.searchParams.get("y") || "", 10);
-    if (isNaN(y)) return;
-
-    var prev = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = "auto";
-
-    var attempt = 0, maxAttempts = 12;
-    (function tick(){
-      requestAnimationFrame(function(){
-        window.scrollTo(0, y);
-        if (++attempt < maxAttempts) setTimeout(tick, 50);
-        else {
-          document.documentElement.style.scrollBehavior = prev || "";
-          url.searchParams.delete("y");
-          history.replaceState(null, "", url.toString());
-        }
-      });
-    })();
-  }
-
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-    restoreFromQuery();
-  } else {
-    document.addEventListener("DOMContentLoaded", restoreFromQuery);
-  }
-  window.addEventListener("pageshow", function(){ restoreFromQuery(); });
-})();
-</script>
-
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
 </footer>
