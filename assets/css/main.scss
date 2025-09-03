@@ -1000,7 +1000,7 @@ pre {
   /*font-weight: 600;*/
 
   color: #fff;
-  background: #2a7f9d;         /* teal/blue */
+  background: #4B7EEE;         /* teal/blue */
   border: none;
   border-radius: 9999px;       /* pill shape */
 
@@ -1016,6 +1016,7 @@ pre {
 
 /* make sure our :hover beats the generic .tab-btn:hover rule below */
 .bio-tabs .tab-btn:hover{
+  background: #336EEE;
   transform: translateY(-1px);
   box-shadow:
     0 10px 18px rgba(0,0,0,.24),
@@ -1033,7 +1034,7 @@ pre {
 /* active tab stays filled, a touch darker */
 .bio-tabs .tab-btn.active{
   font-weight: 600;
-  background: #236f89;
+  background: #2563eb;
   color: #fff;
 }
 
