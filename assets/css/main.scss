@@ -402,6 +402,12 @@ body {
   fill: currentColor;
 }
 
+.sidebar .social-icons a img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 /* Per-icon base colors */
 .sidebar .social-icons a.home     { color: #2563EB; }
 .sidebar .social-icons a.email    { color: #6B7280; }
