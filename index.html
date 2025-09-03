@@ -14,7 +14,7 @@ title: "Rahul's Portfolio"
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 250 }}</p>
+            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 200 }}</p>
           </div>
         </li>
       {%- endif -%}
@@ -33,7 +33,7 @@ title: "Rahul's Portfolio"
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 300 }}</p>
+            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 200 }}</p>
           </div>
         </li>
       {% endfor %}
