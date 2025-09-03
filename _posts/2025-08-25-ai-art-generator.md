@@ -3,8 +3,8 @@ layout: default
 title: "The Future of Art Is Here — And I Built It with AI"
 date: 2025-08-25 18:22:33
 categories: [ai]
-tags: [chat,bot,nlp]
-thumbnail: /assets/images/ai_conversational.webp
+tags: [ai,art,stable diffusion]
+thumbnail: /assets/images/ai_art_generator.webp
 featured: true
 ---
 
