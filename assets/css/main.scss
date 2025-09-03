@@ -993,10 +993,11 @@ pre {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  margin-bottom: 8px;
 
-  padding: 2px 2px;          /* roomier, like the sample */
+  padding: 2px 6px;          /* roomier, like the sample */
   font-size: 0.95rem;
-  font-weight: 600;
+  /*font-weight: 600;*/
 
   color: #fff;
   background: #2a7f9d;         /* teal/blue */
@@ -1031,6 +1032,7 @@ pre {
 
 /* active tab stays filled, a touch darker */
 .bio-tabs .tab-btn.active{
+  font-weight: 600;
   background: #236f89;
   color: #fff;
 }
