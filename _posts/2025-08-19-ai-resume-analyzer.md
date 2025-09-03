@@ -4,7 +4,6 @@ title: "Building My AI Resume Analyzer with Gradio + Transformers"
 date: 2025-08-25 18:22:00
 thumbnail: /assets/images/resume.webp
 categories: [ai]
-tags: [transformer]
 featured: true
 ---
 
