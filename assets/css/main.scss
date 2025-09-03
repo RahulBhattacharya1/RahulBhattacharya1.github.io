@@ -908,7 +908,7 @@ pre {
   font-size: .7rem;
   line-height: 1.25;
   color: #737373;
-  padding: 0;
+  padding-inline: 2px !important; /* tighter than 6px */
 }
 
 .related-head {
