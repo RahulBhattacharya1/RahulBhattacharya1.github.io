@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "The Future of Art Is Here — And I Built It with AI"
+title: "I am Turning Imagination into Images Using AI"
 date: 2025-08-25 18:22:33
 categories: [ai]
 tags: [ai,art,stable diffusion]
