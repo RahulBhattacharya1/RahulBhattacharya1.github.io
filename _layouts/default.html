@@ -7,13 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--meta name="description" content="{{ page.description | default: site.description | escape }}"-->
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-  <style>
-    .sidebar .social-icons a svg{width:24px;height:24px;display:block;visibility:hidden;}
-  </style>
-  <link rel="preload"
+
+  <style>body{visibility:hidden}</style>
+  <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet';document.body.style.visibility='visible'">
+
+      <!--link rel="preload"
         href="{{ '/assets/css/main.css' | relative_url }}"
         as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
+        onload="this.onload=null;this.rel='stylesheet'"-->
   <noscript>
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   </noscript>
