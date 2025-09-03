@@ -1237,6 +1237,66 @@ pre {
   .category-page .post-card__media { width: 100px; height: 75px; }
 }
 
+/* Slideshow layout: stack on mobile, side-by-side on desktop */
+.slideshows{
+  display: grid;
+  grid-template-columns: 1fr;   /* mobile: one per row */
+  gap: 20px;
+}
+
+@media (min-width: 1024px){
+  .slideshows{
+    grid-template-columns: 1fr 1fr; /* desktop: two per row */
+  }
+}
+
+/* Each slideshow fills available width and keeps a stable height (no CLS) */
+.slideshow-container{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  aspect-ratio: 16/9;           /* adjust if your certs are taller/wider */
+  background: #f0f0f0;          /* placeholder color before image loads */
+  box-shadow: 0 4px 20px rgba(0,0,0,.2);
+}
+
+/* Slides only show one at a time; images cover the frame */
+.slides{ display: none; width: 100%; height: 100%; }
+.slides img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Optional soft fade for transitions */
+.fade{ animation: fadeEffect .6s; }
+@keyframes fadeEffect{ from {opacity:.4} to {opacity:1} }
+
+/* In-image arrow controls (kept inside the frame) */
+.slideshow-container .prev,
+.slideshow-container .next{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: rgba(0,0,0,.45);
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slideshow-container .prev{ left: 10px; }
+.slideshow-container .next{ right: 10px; }
+.slideshow-container .prev:hover,
+.slideshow-container .next:hover{ background: rgba(0,0,0,.7); }
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
