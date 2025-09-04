@@ -1262,7 +1262,39 @@ pre {
 }
 
 /* Slides only show one at a time; images cover the frame */
-.slides{ display: none; width: 100%; height: 100%; }
+/* Make each slide a clean, edge-to-edge box */
+.slides {
+  display: none;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Critical: anchor must fill the slide */
+.slides > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* Now the image can truly cover the frame */
+.slides > a > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none !important;
+  object-fit: cover;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
 
 .slideshow-container .slides img{
   display:block;
