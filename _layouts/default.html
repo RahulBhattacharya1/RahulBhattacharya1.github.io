@@ -364,7 +364,7 @@
     return null;
   }
 
-  var RE = /\b(data|import|from|the|I)\b/gi;
+  var RE = /\b(data|import|python|databricks|azure)\b/gi;
 
   function walk(node) {
     for (var child = node.firstChild; child; child = child.nextSibling) {
