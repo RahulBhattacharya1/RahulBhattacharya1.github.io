@@ -1299,7 +1299,11 @@ pre {
   animation: none !important;
   transform: none !important;
 }
-.slideshow-container img{ vertical-align:middle; }
+.slideshow-container img{ 
+	vertical-align:middle;
+	width: 100% !important;
+	height: 100% !important;
+}
 
 /* Fade transition */
 .fade{ animation: fadeEffect .6s; }
