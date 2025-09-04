@@ -1336,6 +1336,13 @@ pre {
 .slideshow-container .prev:hover,
 .slideshow-container .next:hover{ background:rgba(0,0,0,.7); }
 
+/* Lock the slideshow height on mobile to stop reflow jumps */
+@media (max-width: 768px){
+  .slideshow-container{
+    min-height: 240px;
+  }
+}
+
 /* Mobile: make role buttons a swipeable tab bar */
 @media (max-width: 768px) {
 
@@ -1352,6 +1359,8 @@ pre {
     padding: 8px 12px;
     margin: 0 -12px;                  /* edge-to-edge feel */
     scrollbar-width: none;            /* hide scrollbar (Firefox) */
+	position: static;
+    top: auto;
   }
   .role-menu::-webkit-scrollbar { display: none; } /* hide scrollbar (WebKit) */
 
