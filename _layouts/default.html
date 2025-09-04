@@ -342,20 +342,22 @@
   
 <script>
 (function () {
-  var root = document.querySelector('.main-inner');
+  // Root to process (fallback to body if your theme changes wrappers)
+  var root = document.querySelector('.main-inner') || document.body;
   if (!root) return;
 
-  var SKIP = new Set(['A','CODE','PRE','KBD','SAMP','SCRIPT','STYLE','TEXTAREA','BUTTON','SVG','FIGCAPTION']);
+  // Elements we never traverse into
+  var SKIP = new Set(['A','CODE','PRE','KBD','SAMP','SCRIPT','STYLE','TEXTAREA','BUTTON','SVG','FIGCAPTION','IFRAME']);
 
-  // Link rules
+  // ----- RULES: update these as you like -----
   function linkFor(word) {
     var w = word.toLowerCase();
-    if (w === 'data') return 'https://www.google.com/';
+    if (w === 'data')   return 'https://www.google.com/';
     if (w === 'import') return 'https://www.facebook.com/';
     return null;
   }
 
-  // Icon rules (append after the word, not a link)
+  // Return an icon URL to append after the word (non-link case)
   function iconFor(word) {
     var w = word.toLowerCase();
     if (w === 'python')     return '/assets/icons/python.svg';
@@ -364,11 +366,16 @@
     return null;
   }
 
+  // Words to detect (case-insensitive, whole word)
   var RE = /\b(data|import|python|databricks|azure)\b/gi;
 
+  // ----- ICONIZER CORE -----
+
+  // Walk the DOM starting at `node`, replacing matched text with link+text or text+icon.
   function walk(node) {
     for (var child = node.firstChild; child; child = child.nextSibling) {
       if (child.nodeType === 3) {
+        // Text node
         var text = child.nodeValue;
         if (!RE.test(text)) continue;
 
@@ -382,15 +389,22 @@
           var iconSrc = iconFor(match);
 
           if (url) {
+            // Link case: wrap the matched word in <a>, no icon added here
             var a = document.createElement('a');
             a.href = url;
             a.textContent = match;
             a.rel = 'noopener';
             a.target = '_blank';
+            a.setAttribute('data-iconized', '1'); // prevent reprocessing inside
             frag.appendChild(a);
           } else {
-            // plain word node
-            frag.appendChild(document.createTextNode(match));
+            // Plain word + optional icon
+            // Wrap the word in a span and mark as iconized so we don't duplicate on re-runs
+            var span = document.createElement('span');
+            span.textContent = match;
+            span.setAttribute('data-iconized', '1');
+            frag.appendChild(span);
+
             if (iconSrc) {
               var img = document.createElement('img');
               img.src = iconSrc;
@@ -399,6 +413,7 @@
               img.style.height = '1em';
               img.style.verticalAlign = '-0.15em';
               img.style.marginLeft = '.15em';
+              // Mark the container span as iconized; the img itself won’t be reprocessed anyway
               frag.appendChild(img);
             }
           }
@@ -410,13 +425,53 @@
         if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
         child.parentNode.replaceChild(frag, child);
 
-      } else if (child.nodeType === 1 && !SKIP.has(child.tagName)) {
+      } else if (child.nodeType === 1) {
+        // Element node: skip certain tags or anything already iconized
+        if (SKIP.has(child.tagName)) continue;
+        if (child.getAttribute && child.getAttribute('data-iconized') === '1') continue;
         walk(child);
       }
     }
   }
 
-  walk(root);
+  // Public function: run iconizer on a target subtree (or the whole root)
+  function runIconizer(target) {
+    var start = target || root;
+
+    // Before walking, clear data-iconized inside the target, because you may be replacing
+    // text dynamically and want fresh processing. We only clear marks *within* the target.
+    if (start.querySelectorAll) {
+      start.querySelectorAll('[data-iconized="1"]').forEach(function(el){
+        el.removeAttribute('data-iconized');
+      });
+    }
+    walk(start);
+  }
+
+  // Run once on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ runIconizer(root); });
+  } else {
+    runIconizer(root);
+  }
+
+  // Expose to other scripts (e.g., call after changing #role-summary text)
+  window.runWordIconizer = runIconizer;
+
+  // Optional: automatically re-apply when any text changes under .main-inner
+  // Helpful if other components swap content without calling the function.
+  var observer = new MutationObserver(function (muts) {
+    for (var i = 0; i < muts.length; i++) {
+      var t = muts[i].target;
+      // Only react to character data changes or added nodes
+      if (muts[i].type === 'characterData' || (muts[i].type === 'childList' && muts[i].addedNodes.length)) {
+        var el = (t && t.nodeType === 1) ? t : (t && t.parentNode ? t.parentNode : root);
+        // Avoid re-iconizing the entire page on tiny changes; limit to local subtree
+        runIconizer(el);
+      }
+    }
+  });
+  observer.observe(root, { subtree: true, childList: true, characterData: true });
 })();
 </script>
 
