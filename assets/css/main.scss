@@ -1237,62 +1237,67 @@ pre {
   .category-page .post-card__media { width: 100px; height: 75px; }
 }
 
-/* One slideshow layout across all devices — stay within content column */
-.slideshows{
-  display: block;
-  width: 100%;
-  max-width: 100%;
+/* === Role-based slideshow system === */
+
+/* Layout: vertical menu + slideshow area */
+.role-gallery{
+  display:grid;
+  grid-template-columns: 180px 1fr;
+  gap:16px;
+  align-items:start;
+}
+@media (max-width: 768px){
+  .role-gallery{ grid-template-columns: 1fr; }
 }
 
-/* Slideshow frame (height grows with image) */
+/* Vertical role menu */
+.role-menu{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  position:sticky;
+  top:0;
+}
+.role-btn{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  font-weight:600;
+  cursor:pointer;
+}
+.role-btn:hover{ background:#f5f5f5; }
+.role-btn.active{
+  border-color:#3b82f6;
+  background:#eff6ff;
+}
+
+/* Slideshow area */
+.role-slideshows{ width:100%; }
+
+/* Slideshow frame */
 .slideshow-container{
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 10px;
-  background: transparent;
-  box-shadow: 0 4px 20px rgba(0,0,0,.2);
-  aspect-ratio: auto;          /* let height follow content */
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  border-radius:10px;
+  background:transparent;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+  aspect-ratio:auto; /* let height grow with image */
 }
-
-/* Each slide fills container width and can grow in height */
-.slides{
-  display: none;               /* JS toggles to block */
-  width: 100%;
-  height: auto;                /* allow vertical growth */
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Anchor fills the slide box */
-.slides > a{
-  display: block;
-  width: 100%;
-  height: auto;                /* follow image height */
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-}
-
-/* Image shows fully (no crop), expands right, height grows as needed */
+.slides{ display:none; width:100%; height:auto; margin:0; padding:0; }
+.slides > a{ display:block; width:100%; height:auto; margin:0; padding:0; border:0; }
 .slides > a > img{
-  display: block;
-  width: 100%;
-  height: auto;                /* preserve aspect ratio */
-  max-width: 100% !important;  /* stay within column width */
-  object-fit: contain;         /* show the whole certificate */
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  animation: none !important;
-  transform: none !important;
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain; /* full doc visible */
+  margin:0; padding:0; border:0; border-radius:0; box-shadow:none; background:transparent;
 }
-
-/* Avoid baseline gap */
-.slideshow-container img{ vertical-align: middle; }
+.slideshow-container img{ vertical-align:middle; }
 
 /* Fade transition */
 .fade{ animation: fadeEffect .6s; }
@@ -1301,24 +1306,24 @@ pre {
 /* Arrows */
 .slideshow-container .prev,
 .slideshow-container .next{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 10px;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1;
-  color: #fff;
-  background: rgba(0,0,0,.45);
-  border-radius: 50%;
-  border: 0;
-  cursor: pointer;
-  user-select: none;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  padding:10px;
+  font-size:22px;
+  font-weight:700;
+  line-height:1;
+  color:#fff;
+  background:rgba(0,0,0,.45);
+  border-radius:50%;
+  border:0;
+  cursor:pointer;
+  user-select:none;
 }
 .slideshow-container .prev{ left:10px; }
 .slideshow-container .next{ right:10px; }
 .slideshow-container .prev:hover,
-.slideshow-container .next:hover{ background: rgba(0,0,0,.7); }
+.slideshow-container .next:hover{ background:rgba(0,0,0,.7); }
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
