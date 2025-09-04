@@ -1237,48 +1237,50 @@ pre {
   .category-page .post-card__media { width: 100px; height: 75px; }
 }
 
-/* One slideshow layout across all devices */
+/* One slideshow layout across all devices — stay within content column */
 .slideshows{
   display: block;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Slideshow frame */
+/* Slideshow frame (height grows with image) */
 .slideshow-container{
   position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: 10px;
-  aspect-ratio: auto;
   background: transparent;
   box-shadow: 0 4px 20px rgba(0,0,0,.2);
+  aspect-ratio: auto;          /* let height follow content */
 }
 
-/* Each slide is a full box the image can fill */
+/* Each slide fills container width and can grow in height */
 .slides{
-  display: none;  /* JS toggles to block */
+  display: none;               /* JS toggles to block */
   width: 100%;
-  height: 100%;
+  height: auto;                /* allow vertical growth */
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* Anchor must fill the slide */
+/* Anchor fills the slide box */
 .slides > a{
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;                /* follow image height */
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
 }
 
-/* Image fills the slide (choose one of cover/contain) */
+/* Image shows fully (no crop), expands right, height grows as needed */
 .slides > a > img{
   display: block;
   width: 100%;
-  height: 100%;
-  max-width: none !important;
-  object-fit: cover;   /* use 'contain' if you prefer full doc visible with letterbox */
+  height: auto;                /* preserve aspect ratio */
+  max-width: 100% !important;  /* stay within column width */
+  object-fit: contain;         /* show the whole certificate */
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
@@ -1288,9 +1290,11 @@ pre {
   animation: none !important;
   transform: none !important;
 }
+
+/* Avoid baseline gap */
 .slideshow-container img{ vertical-align: middle; }
 
-/* Fade */
+/* Fade transition */
 .fade{ animation: fadeEffect .6s; }
 @keyframes fadeEffect{ from{opacity:.4} to{opacity:1} }
 
