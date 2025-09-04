@@ -458,20 +458,6 @@
   // Expose to other scripts (e.g., call after changing #role-summary text)
   window.runWordIconizer = runIconizer;
 
-  // Optional: automatically re-apply when any text changes under .main-inner
-  // Helpful if other components swap content without calling the function.
-  var observer = new MutationObserver(function (muts) {
-    for (var i = 0; i < muts.length; i++) {
-      var t = muts[i].target;
-      // Only react to character data changes or added nodes
-      if (muts[i].type === 'characterData' || (muts[i].type === 'childList' && muts[i].addedNodes.length)) {
-        var el = (t && t.nodeType === 1) ? t : (t && t.parentNode ? t.parentNode : root);
-        // Avoid re-iconizing the entire page on tiny changes; limit to local subtree
-        runIconizer(el);
-      }
-    }
-  });
-  observer.observe(root, { subtree: true, childList: true, characterData: true });
 })();
 </script>
 
