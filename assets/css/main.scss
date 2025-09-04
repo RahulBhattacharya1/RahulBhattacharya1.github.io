@@ -1278,6 +1278,9 @@ pre {
   box-shadow:none !important;
   background: transparent !important;
   max-width:none !important;   /* ignore global max-width for post images */
+
+  animation: none !important;
+  transform: none !important;
 }
 
 /* Optional soft fade for transitions */
