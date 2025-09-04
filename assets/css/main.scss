@@ -1253,10 +1253,10 @@ pre {
 /* Each slideshow fills available width and keeps a stable height (no CLS) */
 .slideshow-container{
   position: relative;
-  height: auto;
+  height: 100%;
   overflow: hidden;
   border-radius: 10px;
-  /* aspect-ratio: 16/9;   adjust if your certs are taller/wider */
+  aspect-ratio: 16/9;   /*adjust if your certs are taller/wider */
   background: transparent;            /* no grey box */
   box-shadow: 0 4px 20px rgba(0,0,0,.2);
 }
@@ -1267,8 +1267,8 @@ pre {
 .slideshow-container .slides img{
   display:block;
   width:100%;
-  height:auto;
-  object-fit:contain;
+  height:100%;
+  object-fit:cover;
 
   /* override theme defaults that add spacing/frames */
   margin:0 !important;
