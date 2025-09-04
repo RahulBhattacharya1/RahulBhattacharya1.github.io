@@ -1299,10 +1299,10 @@ pre {
   animation: none !important;
   transform: none !important;
 }
-.slideshow-container img{ 
-	vertical-align:middle;
-	width: 100% !important;
-	height: 100% !important;
+
+.is-post .main-inner .slideshow-container img {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Fade transition */
