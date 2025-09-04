@@ -1296,6 +1296,8 @@ pre {
   height:auto;
   object-fit:contain; /* full doc visible */
   margin:0; padding:0; border:0; border-radius:0; box-shadow:none; background:transparent;
+  animation: none !important;
+  transform: none !important;
 }
 .slideshow-container img{ vertical-align:middle; }
 
