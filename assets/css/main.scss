@@ -126,6 +126,14 @@ body {
   padding: 0;
 }
 
+/* Mobile: let the page background show */
+@media (max-width: 768px) {
+  .bio-tabs .tab-content { background: rgba(255,255,255,.92); } /* softer card */
+  .page__content,
+  .page__inner-wrap,
+  .main-inner { background: transparent !important; }
+}
+
 #xp-dec {
   color: #BFD6F3;
 }
