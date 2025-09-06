@@ -3,7 +3,7 @@ layout: default
 title: "Enterprise Impacts by Role"
 date: 2025-09-06 13:45
 permalink: /enterprise-impacts-role/
-thumbnail: /assets/images/impacts-cover.webp
+thumbnail: /assets/images/impacts.webp
 hide_thumbnail_in_body: true
 comments: false
 share: false
