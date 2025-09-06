@@ -14,7 +14,13 @@ title: "Rahul's Portfolio"
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+            <p style="color: #737373">
+              {% if post.custom_snippet and post.custom_snippet_text %}
+                {{ post.custom_snippet_text }}
+              {% else %}
+                {{ post.excerpt | strip_html | truncate: 200 }}
+              {% endif %}
+            </p>
           </div>
         </li>
       {%- endif -%}
@@ -33,7 +39,13 @@ title: "Rahul's Portfolio"
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+            <p style="color: #737373">
+              {% if post.custom_snippet and post.custom_snippet_text %}
+                {{ post.custom_snippet_text }}
+              {% else %}
+                {{ post.excerpt | strip_html | truncate: 200 }}
+              {% endif %}
+            </p>
           </div>
         </li>
       {% endfor %}
@@ -45,7 +57,13 @@ title: "Rahul's Portfolio"
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-            <p style="color: #737373">{{ post.excerpt | strip_html | truncate: 300 }}</p>
+            <p style="color: #737373">
+              {% if post.custom_snippet and post.custom_snippet_text %}
+                {{ post.custom_snippet_text }}
+              {% else %}
+                {{ post.excerpt | strip_html | truncate: 300 }}
+              {% endif %}
+            </p>
           </div>
         </li>
       {% endfor %}
