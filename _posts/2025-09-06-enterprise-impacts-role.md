@@ -8,6 +8,7 @@ hide_thumbnail_in_body: true
 comments: false
 share: false
 hide_date: true
+featured: true
 ---
 
 {::nomarkdown}
