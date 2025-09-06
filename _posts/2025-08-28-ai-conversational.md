@@ -5,7 +5,6 @@ date: 2025-08-25 14:37:33
 categories: [ai]
 tags: [chat,bot,nlp]
 thumbnail: /assets/images/ai_conversational.webp
-featured: true
 ---
 I wanted to build something lightweight yet useful—a conversational morning planner that runs locally and feels personal. The idea was simple:
 
