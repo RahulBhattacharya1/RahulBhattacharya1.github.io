@@ -16,8 +16,8 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
 
 {::nomarkdown}
 <!-- ===== HERO ===== -->
-<section class="impacts-hero">
-  <div class="impacts-hero__inner">
+<section class="impactful-hero">
+  <div class="impactful-hero__inner">
     <h1>My Real-World Enterprise Impacts</h1>
     <p>Role-based case studies from retail, healthcare, and finance with measurable outcomes. All data anonymized.</p>
   </div>
@@ -189,11 +189,6 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
 {:/nomarkdown}
 
 <style>
-/* ---------- HERO ---------- */
-.impacts-hero{ background:linear-gradient(135deg,#0b4dbf,#1182d6); color:#fff; border-radius:12px; margin:0 0 1rem }
-.impacts-hero__inner{ padding:2rem 1.25rem; text-align:center; max-width:980px; margin:0 auto }
-.impacts-hero h1{ margin:.2rem 0 .6rem; font-size:2rem; line-height:1.2 }
-.impacts-hero p{ margin:0; opacity:.95 }
 
 /* ---------- ROLES (left menu + panels) ---------- */
 .role-gallery.impacts{ align-items:start }
