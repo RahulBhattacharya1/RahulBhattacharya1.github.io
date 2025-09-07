@@ -248,22 +248,74 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
   border: 1px solid #eef2f7;
   padding: 1rem;
 }
+/* ===== Flow grid: 3-up on desktop, 2-up tablet, hidden on phones (keep your rule) */
 .flow-grid{
   display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;            /* space between cards */
   position: relative;
-  z-index: 1; /* above arrows */
+  z-index: 1;              /* keep above the arrows */
 }
+@media (max-width: 1000px){
+  .flow-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ===== Card look to match your screenshot */
 .flow-card{
-  border: 1px solid #e8eef6;
-  border-radius: 12px;
   background: #fff;
-  padding: .9rem 1rem;
-  box-shadow: 0 1px 8px rgba(20,35,70,.06);
+  border: 1px solid #e6ecfb;                 /* subtle blue edge */
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 6px 24px rgba(21,42,93,.06); /* airy shadow */
 }
-.flow-card h4{ margin:.1rem 0 .35rem; font-size: 1rem; }
-.flow-card .meta{ color:#6b7280; font-size: .9rem; }
+
+/* Top line (dates/location) in blue, bold */
+.flow-card .meta-top{
+  margin: 0 0 .35rem 0;
+  color: #1e40af;                             /* blue */
+  font-weight: 700;
+  font-size: .98rem;
+}
+
+/* Role title line: strong, dark */
+.flow-card h4{
+  margin: 0 0 .35rem 0;
+  font-size: 1.05rem;
+  color: #111827;
+  font-weight: 700;
+}
+
+/* Description: normal gray */
+.flow-card p{
+  margin: 0 0 .6rem 0;
+  color: #374151;
+  line-height: 1.45;
+}
+
+/* Pills to match screenshot */
+.flow-card .pill{
+  display: inline-block;
+  margin: .3rem .4rem 0 0;
+  padding: .18rem .55rem;
+  font-size: .82rem;
+  color: #1f2d4d;
+  background: #f8fbff;
+  border: 1px solid #e5ecfb;
+  border-radius: 999px;
+}
+
+/* Optional: tighten anchor color inside top line */
+.flow-card .meta-top a{ color:#1e40af; text-decoration: none; }
+
+/* Keep the arrow underlay subtle (from your last change) */
+.flow-svg .path-stroke{
+  fill: none;
+  stroke: #c9d6ee;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  marker-end: url(#arrow-head);
+}
 .pill{
   display:inline-block; margin:.25rem .35rem 0 0; padding:.15rem .5rem;
   border:1px solid #e3e9f3; border-radius:999px; font-size:.8rem; color:#475569;
@@ -275,15 +327,6 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
 }
 .flow-svg .arrow{ stroke:#c9d6ee; stroke-width:2; fill:none; }
 .flow-svg .node { fill:#e8f1ff; stroke:#bcd0f5; }
-
-.flow-svg .path-stroke{
-  fill: none;                          /* remove black fill */
-  stroke: url(#flow-grad);             /* or a color like #c9d6ee */
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  marker-end: url(#arrow-head);
-}
   
 /* ===== Desktop-only visuals (hide heavy graphic on phones) ===== */
 @media (max-width: 768px){
