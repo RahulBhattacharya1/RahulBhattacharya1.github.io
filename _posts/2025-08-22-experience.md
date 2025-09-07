@@ -198,7 +198,19 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
 /* ---------- ROLES (left menu + panels) ---------- */
 .role-gallery.impacts{ align-items:start }
 .role-menu{ position:sticky; top:1rem; align-self:start; display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem }
-.role-btn{ padding:.6rem .8rem; border:1px solid #dbe3f0; border-radius:.6rem; background:#fff; cursor:pointer; transition:background .15s, transform .05s }
+.role-btn{
+  display:inline-flex;      /* make pills size to content */
+  flex:0 0 auto;            /* don’t grow/shrink to 100% */
+  width:auto;               /* override any global width */
+  white-space:nowrap;       /* keep label on one line   */
+  padding:.6rem .8rem;
+  border:1px solid #dbe3f0;
+  border-radius:.6rem;
+  background:#fff;
+  cursor:pointer;
+  transition:background .15s, transform .05s;
+}
+
 .role-btn.active{ background:#eef5ff; border-color:#b7d2ff }
 .role-btn:active{ transform: translateY(1px) }
 .role-summary{ display:block; margin:.25rem 0 .5rem; color:#4b5563 }
