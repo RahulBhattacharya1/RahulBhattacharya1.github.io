@@ -397,12 +397,15 @@
     if (w === 'azure')      return '/assets/icons/azure.svg';
     if (w === 'epm')     return '/assets/icons/oracle.svg';
     if (w === 'power bi') return '/assets/icons/powerbi.svg';
-    if (w === 'tableau')      return '/assets/icons/tableau.svg';    
+    if (w === 'tableau')      return '/assets/icons/tableau.svg';
+    if (w === 'adf')      return '/assets/icons/azure.svg';
+    if (w === 'numpy')     return '/assets/icons/numpy.svg';
+    if (w === 'hugging face')      return '/assets/icons/huggingface.svg';       
     return null;
   }
 
   // Words to detect (case-insensitive, whole word)
-  var RE = /\b(data|import|python|databricks|azure|epm|power bi|tableau)\b/gi;
+  var RE = /\b(data|import|python|databricks|azure|epm|power bi|tableau|adf|numpy|hugging face)\b/gi;
 
   // ----- ICONIZER CORE -----
 
