@@ -181,7 +181,7 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
       <h3>Oct 2017 – Feb 2022 · Deerfield, IL</h3>
       <h4>Data Analytics & EPM Lead — Walgreens (TCS)</h4>
       <p>Financial models for OKRs; forecasting; resolved ~75% process issues.</p>
-      <div class="meta"><span class="pill">EPM</span><span class="pill">Forecasting</span></div>
+      <div class="meta"><span class="pill">EPM</span><span class="pill">Numpy</span></div>
     </article>
     <article class="flow-card">
       <h3>Jun 2013 – Sep 2017 · Deerfield, IL</h3>
