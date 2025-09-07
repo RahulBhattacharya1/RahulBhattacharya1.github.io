@@ -209,6 +209,10 @@
               {% endif %}
               {% if page.share != false %}
                 <a id="share-btn" class="btn btn--share" href="#" aria-label="Share this post">Share</a>
+                <!-- Edit Post link (hidden by default) -->
+                <a class="chip edit-post"
+                   href="https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/edit/main/{{ page.path }}"
+                   style="display:none">✏️ Edit Post</a>
               {% endif %}
             </p>
           </header>
@@ -255,11 +259,7 @@
               {% assign slug = term | slugify %}
               <a class="chip" href="{{ '/categories/#' | append: slug | relative_url }}">{{ term }}</a>
             {% endif %}
-          {% endfor %}
-            <!-- Edit Post link (hidden by default) -->
-            <a class="chip edit-post"
-               href="https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/edit/main/{{ page.path }}"
-               style="display:none">✏️ Edit Post</a>          
+          {% endfor %}          
         </nav>
       </div>
     {% endif %}
@@ -275,11 +275,7 @@
               {% assign slug = term | slugify %}
               <a class="chip" href="{{ '/tags/#' | append: slug | relative_url }}">{{ term }}</a>
             {% endif %}
-          {% endfor %}
-            <!-- Edit Post link (hidden by default) -->
-            <a class="chip edit-post"
-               href="https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/edit/main/{{ page.path }}"
-               style="display:none">✏️ Edit Post</a> 
+          {% endfor %} 
         </nav>
       </div>
     {% endif %}
