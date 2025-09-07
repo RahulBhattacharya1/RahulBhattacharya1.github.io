@@ -3,7 +3,7 @@ layout: default
 title: "My AI Text to Slide Generator"
 date: 2021-09-06 14:12:43
 categories: [ai]
-tags: [ai,art,stable diffusion]
+tags: [python,streamlit,openai]
 thumbnail: /assets/images/ai_text_to_slides.webp
 ---
 
