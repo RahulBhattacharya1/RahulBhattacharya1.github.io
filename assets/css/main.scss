@@ -1347,6 +1347,12 @@ pre {
   }
 }
 
+/* ---------- Posts Hero Banners and Title ---------- */
+.impactful-hero{ background:linear-gradient(135deg,#0b4dbf,#1182d6); color:#fff; border-radius:12px; margin:0 0 1rem }
+.impactful-hero__inner{ padding:2rem 1.25rem; text-align:center; max-width:980px; margin:0 auto }
+.impactful-hero h1{ margin:.2rem 0 .6rem; font-size:2rem; line-height:1.2 }
+.impactful-hero p{ margin:0; opacity:.95 }
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
