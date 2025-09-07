@@ -4,7 +4,6 @@ title: "Building My AI Resume Analyzer with Gradio + Transformers"
 date: 2025-08-25 18:22:00
 thumbnail: /assets/images/resume.webp
 categories: [ai]
-featured: true
 ---
 
 I recently built Rahul’s AI Resume Analyzer, a tool that compares a resume against a job description and highlights missing keywords while measuring semantic fit. Let me walk you through the code that powers it.
