@@ -183,6 +183,24 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
       <p>Financial models for OKRs; forecasting; resolved ~75% process issues.</p>
       <div class="meta"><span class="pill">EPM</span><span class="pill">Forecasting</span></div>
     </article>
+    <article class="flow-card">
+      <h3>Oct 2017 – Feb 2022 · Deerfield, IL</h3>
+      <h4>Data Analytics & EPM Lead — Walgreens (TCS)</h4>
+      <p>Financial models for OKRs; forecasting; resolved ~75% process issues.</p>
+      <div class="meta"><span class="pill">EPM</span><span class="pill">Forecasting</span></div>
+    </article>
+    <article class="flow-card">
+      <h3>Oct 2017 – Feb 2022 · Deerfield, IL</h3>
+      <h4>Data Analytics & EPM Lead — Walgreens (TCS)</h4>
+      <p>Financial models for OKRs; forecasting; resolved ~75% process issues.</p>
+      <div class="meta"><span class="pill">EPM</span><span class="pill">Forecasting</span></div>
+    </article>
+    <article class="flow-card">
+      <h3>Oct 2017 – Feb 2022 · Deerfield, IL</h3>
+      <h4>Data Analytics & EPM Lead — Walgreens (TCS)</h4>
+      <p>Financial models for OKRs; forecasting; resolved ~75% process issues.</p>
+      <div class="meta"><span class="pill">EPM</span><span class="pill">Forecasting</span></div>
+    </article>    
     <!-- Add older roles as needed -->
   </div>
 </section>
