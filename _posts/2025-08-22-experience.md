@@ -27,7 +27,7 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
 <span id="role-summary" class="role-summary" aria-live="polite">Explore impacts by role.</span>
 <br/>Choose a role:<br/><br/>
 
-<div class="role-gallery impacts">
+<div class="role-gallery">
   <nav class="role-menu" aria-label="Choose a role">
     <button class="role-btn active" data-role="analyst" aria-current="page">Data Analyst</button>
     <button class="role-btn" data-role="scientist">Data Scientist</button>
@@ -189,66 +189,106 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
 {:/nomarkdown}
 
 <style>
-/* ---------- HERO ---------- */
-.impacts-hero{ background:linear-gradient(135deg,#0b4dbf,#1182d6); color:#fff; border-radius:12px; margin:0 0 1rem }
-.impacts-hero__inner{ padding:2rem 1.25rem; text-align:center; max-width:980px; margin:0 auto }
-.impacts-hero h1{ margin:.2rem 0 .6rem; font-size:2rem; line-height:1.2 }
-.impacts-hero p{ margin:0; opacity:.95 }
+/* ─────────────────────────────────────────────
+   Experience page (scoped, no global duplicates)
+   ───────────────────────────────────────────── */
 
-/* ---------- ROLES (left menu + panels) ---------- */
-.role-gallery.impacts{ align-items:start }
-.role-menu{ position:sticky; top:1rem; align-self:start; display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem }
-.role-btn{
-  display:inline-flex;      /* make pills size to content */
-  flex:0 0 auto;            /* don’t grow/shrink to 100% */
-  width:auto;               /* override any global width */
-  white-space:nowrap;       /* keep label on one line   */
-  padding:.6rem .8rem;
-  border:1px solid #dbe3f0;
-  border-radius:.6rem;
-  background:#fff;
-  cursor:pointer;
-  transition:background .15s, transform .05s;
+/* ===== Hero ===== */
+.impacts-hero{
+  margin: 0 0 1.5rem 0;
+  background: linear-gradient(135deg,#eef4ff 0%,#f7fbff 40%,#ffffff 100%);
+  border: 1px solid #e6eefb;
+  border-radius: 14px;
+}
+.impacts-hero__inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+.impacts-hero__inner h1{
+  margin: 0 0 .5rem 0;
+  font-size: clamp(1.4rem, 3.2vw, 2rem);
+  line-height: 1.2;
+}
+.impacts-hero__inner p{
+  margin: 0;
+  color: #4a5668;
 }
 
-.role-btn.active{ background:#eef5ff; border-color:#b7d2ff }
-.role-btn:active{ transform: translateY(1px) }
-.role-summary{ display:block; margin:.25rem 0 .5rem; color:#4b5563 }
+/* ===== Accordion (Experience-only content) ===== */
+.role-accordion{ display: grid; gap: .65rem; }
+.acc-item{
+  border: 1px solid #e7edf6;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+.acc-head{ display:block; margin:0; padding:0; background:transparent; border:0; }
+.acc-btn{
+  /* Full-width header button for accordion; do NOT style .role-btn here */
+  display: flex; align-items: flex-start; gap: .4rem;
+  width: 100%;
+  padding: .9rem 1rem;
+  background: transparent; border:0; cursor:pointer;
+  font-weight: 600; color:#39475a; text-align:left;
+}
+.acc-btn:focus-visible{ outline: 2px solid #7aa2ff; outline-offset: 2px; border-radius: 8px; }
+.acc-meta{ color:#64748b; font-weight: 500; font-size: .9rem; }
+.acc-panel[hidden]{ display:none; }
+.acc-body{ padding: .75rem 1rem 1rem; color:#374151; }
 
-/* Accordion */
-.role-accordion{ display:grid; gap:.6rem }
-.acc-item{ border:1px solid #e5e7eb; border-radius:12px; background:#fff; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,.03) }
-.acc-head{ display:block }
-.acc-btn{ display:flex; flex-direction:column; align-items:flex-start; gap:.25rem; width:100%; padding:1rem; font-weight:650; color:#343a40; text-align:left; border:0; background:linear-gradient(#fafbfc,#f6f8fb) }
-.acc-btn:focus{ outline:2px solid #e3ecff; outline-offset:2px }
-.acc-meta{ font-size:.82rem; font-weight:400; color:#6b7280 }
-.acc-panel[hidden]{ display:none }
-.acc-body{ padding:.75rem 1rem 1rem }
-.acc-body details{ margin:.35rem 0; border-left:3px solid #e5e7eb; padding:.25rem .75rem; background:#fafafa; border-radius:0 6px 6px 0 }
-.acc-body summary{ cursor:pointer; user-select:none }
-.acc-body ul{ margin:.35rem 0 .25rem 1.1rem }
-.mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }
+/* ===== Arrow-flow layout (desktop/tablet only) ===== */
+.experience-flow{
+  position: relative;
+  margin: 1rem 0 2rem;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #eef2f7;
+  padding: 1rem;
+}
+.flow-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 1rem;
+  position: relative;
+  z-index: 1; /* above arrows */
+}
+.flow-card{
+  border: 1px solid #e8eef6;
+  border-radius: 12px;
+  background: #fff;
+  padding: .9rem 1rem;
+  box-shadow: 0 1px 8px rgba(20,35,70,.06);
+}
+.flow-card h4{ margin:.1rem 0 .35rem; font-size: 1rem; }
+.flow-card .meta{ color:#6b7280; font-size: .9rem; }
+.pill{
+  display:inline-block; margin:.25rem .35rem 0 0; padding:.15rem .5rem;
+  border:1px solid #e3e9f3; border-radius:999px; font-size:.8rem; color:#475569;
+}
 
-/* ---------- EXPERIENCE FLOW ---------- */
-/* Hide the visual on small screens to avoid cramping; remove if you want it visible */
-@media (max-width: 900px){ .experience-flow{ display:none } }
+/* Arrow layer (SVG or canvas you place absolutely inside .experience-flow) */
+.flow-svg{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+}
+.flow-svg .arrow{ stroke:#c9d6ee; stroke-width:2; fill:none; }
+.flow-svg .node { fill:#e8f1ff; stroke:#bcd0f5; }
 
-.experience-flow{ position:relative; margin:2rem auto 2.5rem; max-width:1100px }
-.flow-svg{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0 }
-.flow-grid{ position:relative; display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:22px; align-items:stretch; z-index:1 }
-.flow-card{ background:#fff; border:1px solid #e8eaf0; border-radius:14px; padding:16px; box-shadow:0 8px 24px rgba(20,24,62,.06); transition:transform .18s, box-shadow .18s, border-color .18s }
-.flow-card:hover,.flow-card:focus-within{ transform:translateY(-2px); border-color:#d7dbe8; box-shadow:0 12px 28px rgba(20,24,62,.09) }
-.flow-card h3{ margin:0 0 6px; font-size:.95rem; font-weight:700; color:#0b4dbf }
-.flow-card h4{ margin:0 0 8px; font-size:1.02rem; font-weight:700; color:#1e293b }
-.flow-card p{ margin:0; color:#475569; font-size:.92rem; line-height:1.4 }
-.meta{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px }
-.pill{ font-size:.74rem; font-weight:600; padding:4px 8px; border-radius:999px; color:#0b4dbf; background:linear-gradient(180deg,#eff6ff,#e7f3ff); border:1px solid #cfe3ff }
+/* ===== Desktop-only visuals (hide heavy graphic on phones) ===== */
+@media (max-width: 768px){
+  .experience-flow{ display:none; }
+}
 
-/* Flow stroke + nodes */
-.path-stroke{ stroke:url(#flow-grad); stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; fill:none; marker-end:url(#arrow-head); animation:pathDraw 1.2s ease-out both }
-@keyframes pathDraw{ from{ stroke-dasharray:1 1000; opacity:0 } to{ stroke-dasharray:1000 0; opacity:1 } }
-.node{ fill:#fff; stroke:#1e88e5; stroke-width:2.2; r:4.2 }
+/* ===== Utilities specific to this page ===== */
+.role-summary{ display:block; margin:.25rem 0 1rem; color:#475569; }
+
+/* Note:
+   - We intentionally do NOT style .role-menu or .role-btn here.
+   - Those are defined in your site/global CSS and already work on Skills.
+   - Make sure the wrapper is: <div class="role-gallery"> (no extra "impacts" class).
+*/
 </style>
+
 
 <script>
 /* ===== Role UI ===== */
