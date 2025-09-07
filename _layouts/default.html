@@ -256,6 +256,10 @@
               <a class="chip" href="{{ '/categories/#' | append: slug | relative_url }}">{{ term }}</a>
             {% endif %}
           {% endfor %}
+            <!-- Edit Post link (hidden by default) -->
+            <a class="chip edit-post"
+               href="https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/edit/main/{{ page.path }}"
+               style="display:none">          
         </nav>
       </div>
     {% endif %}
@@ -272,6 +276,10 @@
               <a class="chip" href="{{ '/tags/#' | append: slug | relative_url }}">{{ term }}</a>
             {% endif %}
           {% endfor %}
+            <!-- Edit Post link (hidden by default) -->
+            <a class="chip edit-post"
+               href="https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/edit/main/{{ page.path }}"
+               style="display:none">
         </nav>
       </div>
     {% endif %}
@@ -1097,6 +1105,20 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   frame();
 })();
+</script>
+
+<script>
+document.addEventListener('keydown', function (e) {
+  var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+  var combo = (isMac && e.metaKey && e.key.toLowerCase() === 'e')
+           || (!isMac && e.ctrlKey && e.key.toLowerCase() === 'e');
+  if (!combo) return;
+
+  document.querySelectorAll('.edit-post').forEach(function(a){
+    var s = a.style;
+    s.display = (s.display === 'none' || !s.display) ? 'inline-block' : 'none';
+  });
+});
 </script>
   
 <footer class="site-footer">
