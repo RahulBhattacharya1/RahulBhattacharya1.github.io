@@ -14,6 +14,7 @@ custom_snippet: true
 custom_snippet_text: "Role-based case studies with measurable outcomes from healthcare, retail, and finance."
 ---
 
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 {::nomarkdown}
 <section class="impacts-hero">
   <div class="impacts-hero__inner">
@@ -419,4 +420,318 @@ activateRole("analyst");
   .role-menu{ position:static }
   .impacts-hero h1{ font-size:1.6rem }
 }
+
+:root{
+  --flow-stroke: #1976d2;
+  --flow-stroke-2: #00bcd4;
+  --card-bg: #fff;
+  --card-border: #e8eaf0;
+  --card-shadow: 0 8px 24px rgba(20, 24, 62, .06);
+  --ink-1:#0b4dbf; --ink-2:#1e293b; --ink-3:#475569;
+}
+
+/* Optional: hide on phones for your site. In W3 Tryit, keep visible. */
+/* @media (max-width: 900px){ .experience-flow{ display:none } } */
+
+body{ margin:0; font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:#f6f8fc; color:#111; }
+
+/* ===== Container ===== */
+.experience-flow{
+  position: relative;
+  margin: 28px auto 36px;
+  max-width: 1100px;
+  padding: 8px 10px 6px;
+}
+
+/* ===== SVG underlay ===== */
+.flow-svg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  /* allow the gradient to show under cards */
+  z-index:0;
+}
+
+/* ===== Grid ===== */
+.flow-grid{
+  position:relative;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px 22px;
+  align-items:stretch;
+  z-index:1; /* above SVG */
+}
+
+/* ===== Cards ===== */
+.flow-card{
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:14px;
+  padding:16px 16px 14px;
+  box-shadow:var(--card-shadow);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  backdrop-filter: saturate(110%);
+}
+.flow-card:hover, .flow-card:focus-within{
+  transform: translateY(-2px);
+  border-color:#d7dbe8;
+  box-shadow: 0 12px 28px rgba(20,24,62,.09);
+}
+.flow-card h3{
+  margin:0 0 6px;
+  font-size:.95rem;
+  font-weight:700;
+  letter-spacing:.02em;
+  color:var(--ink-1);
+}
+.flow-card h4{
+  margin:0 0 8px;
+  font-size:1.02rem;
+  font-weight:700;
+  color:var(--ink-2);
+}
+.flow-card p{
+  margin:0;
+  color:var(--ink-3);
+  font-size:.92rem;
+  line-height:1.4;
+}
+
+/* Tiny pills for skills line (optional) */
+.meta{
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;
+}
+.pill{
+  font-size:.74rem; font-weight:600; letter-spacing:.01em;
+  padding:4px 8px; border-radius:999px; color:#0b4dbf;
+  background:linear-gradient(180deg, #eff6ff, #e7f3ff);
+  border:1px solid #cfe3ff;
+}
+
+/* ===== Path animation ===== */
+.path-stroke{
+  stroke:url(#flow-grad);
+  stroke-width:3.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
+  marker-end:url(#arrow-head);
+  animation: pathDraw 1.6s ease-out 0s 1 both;
+}
+@keyframes pathDraw{
+  from{ stroke-dasharray:1 1000; stroke-dashoffset:0; opacity:.0 }
+  to  { stroke-dasharray:1000 0; stroke-dashoffset:0; opacity:1 }
+}
+
+/* Node dots on top of path */
+.node{
+  fill:#ffffff;
+  stroke:#1e88e5;
+  stroke-width:2.2;
+  r:4.2;
+}
+
+/* Reduce density on very narrow screens (if you decide to keep visible) */
+@media (max-width:640px){
+  .flow-grid{ grid-template-columns: 1fr; gap:16px; }
+}
 </style>
+</head>
+<body>
+
+<section class="experience-flow" id="experience-flow">
+  <!-- Arrow underlay -->
+  <svg class="flow-svg" id="flow-svg" aria-hidden="true"></svg>
+
+  <!-- Cards (resume-sourced) -->
+  <div class="flow-grid" id="flow-grid">
+
+    <article class="flow-card">
+      <h3>Dec 2024 – Present · Deerfield, IL</h3>
+      <h4>Senior Data Scientist — Walgreens (TCS)</h4>
+      <p>Built Databricks time-series forecasting for scheduling; automated pipelines with Azure Data Factory; modular Python components; external signal integration; improved scheduling efficiency via automation.</p>
+      <div class="meta">
+        <span class="pill">Python</span><span class="pill">Databricks</span><span class="pill">ADF</span><span class="pill">PySpark</span>
+      </div>
+    </article>
+
+    <article class="flow-card">
+      <h3>Jul 2023 – Nov 2024 · Chicago, IL</h3>
+      <h4>Sr. Data Analyst & Technical Architect — UnitedHealthcare (TCS)</h4>
+      <p>Designed BI with healthcare KPIs; migrated 50%+ Tableau reports to interactive Power BI; built SSIS interfaces and SQL Agent jobs; optimized SQL and dashboard performance across units.</p>
+      <div class="meta">
+        <span class="pill">Power BI</span><span class="pill">Tableau</span><span class="pill">SQL Server</span><span class="pill">SSIS</span>
+      </div>
+    </article>
+
+    <article class="flow-card">
+      <h3>Jul 2022 – May 2023 · Chicago, IL</h3>
+      <h4>Data Analytics Lead — Bombardier (TCS)</h4>
+      <p>Streamlined financial data landscape; set metrics for aero ops in Databricks; led cross-dept analytics design; pandas/NumPy analyses; Python ETL from CSVs to DBs for leadership insights.</p>
+      <div class="meta">
+        <span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Databricks</span>
+      </div>
+    </article>
+
+    <article class="flow-card">
+      <h3>Mar 2022 – Jun 2022 · Chicago, IL</h3>
+      <h4>Data Analyst & Data Governance Lead — Galderma (TCS)</h4>
+      <p>Built ops data reconciliation and Databricks packages; automated Power BI KPI reporting reducing manual work 25%+; enabled experimentation culture and trained team on analytics best practices.</p>
+      <div class="meta">
+        <span class="pill">Data Governance</span><span class="pill">Power BI</span><span class="pill">Databricks</span>
+      </div>
+    </article>
+
+    <article class="flow-card">
+      <h3>Oct 2017 – Feb 2022 · Deerfield, IL</h3>
+      <h4>Data Analytics & EPM Lead — Walgreens (TCS)</h4>
+      <p>Built financial models for KPI/OKR measurement; predictive analysis and forecasting; resolved ~75% process issues; log analytics in Python; executive dashboards; availability improvements via Ab Initio + Unix.</p>
+      <div class="meta">
+        <span class="pill">EPM</span><span class="pill">Forecasting</span><span class="pill">Tableau</span><span class="pill">ODI</span>
+      </div>
+    </article>
+
+    <article class="flow-card">
+      <h3>Jun 2013 – Sep 2017 · Deerfield, IL</h3>
+      <h4>MDM & Analytics Lead — Walgreens (TCS)</h4>
+      <p>Implemented Oracle DRM for GL and finance data; ODI/PLSQL/OBIEE integrations; real-time data quality monitoring; designed system enhancements with 30+ stakeholders; actionable KPI visualizations.</p>
+      <div class="meta">
+        <span class="pill">Oracle DRM</span><span class="pill">MDM</span><span class="pill">OBIEE</span>
+      </div>
+    </article>
+
+    <article class="flow-card">
+      <h3>Oct 2011 – May 2013 · Kolkata, India</h3>
+      <h4>Sr. Data Analyst & Report Developer — Experian (TCS)</h4>
+      <p>DW/ETL with Informatica & OBIEE; Unix/Windows batch orchestration; PLSQL; reduced downtime ~70% driving material revenue savings; performance trend analytics for ops KPIs.</p>
+      <div class="meta">
+        <span class="pill">Informatica</span><span class="pill">OBIEE</span><span class="pill">PLSQL</span>
+      </div>
+    </article>
+
+    <article class="flow-card">
+      <h3>Nov 2010 – Sep 2011 · Kolkata, India</h3>
+      <h4>Data Analyst & Report Developer — Experian (TCS)</h4>
+      <p>Parameterized infrastructure for credit-risk workloads; DAC/PLSQL; automated data quality monitoring and anomaly detection; standardized dev practices across business units.</p>
+      <div class="meta">
+        <span class="pill">ETL</span><span class="pill">Unix</span><span class="pill">PLSQL</span>
+      </div>
+    </article>
+
+    <article class="flow-card">
+      <h3>Dec 2009 – Oct 2010 · Kolkata, India</h3>
+      <h4>Oracle Database Administrator — Toyota Financial Services (TCS)</h4>
+      <p>Implemented Oracle VPD for role-based security for 1,000+ report users; configured record/field-level access; refined access-control roles and processes.</p>
+      <div class="meta">
+        <span class="pill">Oracle DBA</span><span class="pill">Security</span><span class="pill">PL/SQL</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<script>
+/*
+  Flow path renderer:
+  - Computes card centers row-by-row
+  - Draws a snake path with smooth bends
+  - Adds animated gradient stroke and node dots
+  - Reflows on resize and content changes
+*/
+(function(){
+  const grid = document.getElementById('flow-grid');
+  const svg  = document.getElementById('flow-svg');
+  if(!grid || !svg) return;
+
+  const debounce = (fn, ms=120)=>{ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; };
+
+  function drawFlow(){
+    const cards = Array.from(grid.querySelectorAll('.flow-card'));
+    if (!cards.length) return;
+
+    // Size SVG to grid bounds
+    const r = grid.getBoundingClientRect();
+    const w = Math.ceil(r.width);
+    const h = Math.ceil(r.height);
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+
+    // SVG defs: gradient + arrow head
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="flow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="${getComputedStyle(document.documentElement).getPropertyValue('--flow-stroke').trim()||'#1976d2'}"/>
+          <stop offset="100%" stop-color="${getComputedStyle(document.documentElement).getPropertyValue('--flow-stroke-2').trim()||'#00bcd4'}"/>
+        </linearGradient>
+        <marker id="arrow-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="${getComputedStyle(document.documentElement).getPropertyValue('--flow-stroke-2').trim()||'#00bcd4'}"></path>
+        </marker>
+      </defs>
+    `;
+
+    // Gather centers relative to grid
+    const pts = cards.map(el=>{
+      const cr = el.getBoundingClientRect();
+      return { x: (cr.left - r.left) + cr.width/2, y: (cr.top - r.top) + cr.height/2 };
+    });
+
+    // Group by rows using y proximity
+    const rows = [];
+    const rowThresh = 44;
+    pts.forEach(p=>{
+      let row = rows.find(rr => Math.abs(rr.y - p.y) < rowThresh);
+      if (!row){ row = { y:p.y, pts:[] }; rows.push(row); }
+      row.pts.push(p);
+    });
+    rows.sort((a,b)=>a.y-b.y);
+    rows.forEach(row => row.pts.sort((a,b)=>a.x-b.x));
+
+    // Build the snake path (L->R then R->L, etc.)
+    let d = '';
+    const nodes = []; // for dots
+    rows.forEach((row, i)=>{
+      const leftToRight = (i % 2 === 0);
+      const ordered = leftToRight ? row.pts : row.pts.slice().reverse();
+
+      ordered.forEach((p, j)=>{
+        const x = Math.round(p.x), y = Math.round(p.y);
+        nodes.push({x,y});
+        if (i === 0 && j === 0) d += `M ${x} ${y} `;
+        else d += `L ${x} ${y} `;
+      });
+
+      const next = rows[i+1];
+      if (next){
+        const last = ordered[ordered.length-1];
+        const nextDirLeftToRight = ((i+1) % 2 === 0);
+        const nextFirst = nextDirLeftToRight ? next.pts[0] : next.pts.slice().reverse()[0];
+
+        const midY = (last.y + nextFirst.y) / 2;
+        const ctlX = last.x;
+        d += `Q ${Math.round(ctlX)} ${Math.round(midY)} ${Math.round(nextFirst.x)} ${Math.round(nextFirst.y)} `;
+      }
+    });
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('class','path-stroke');
+    path.setAttribute('d', d.trim());
+    svg.appendChild(path);
+
+    // Node dots
+    nodes.forEach(n=>{
+      const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('class','node');
+      c.setAttribute('cx', Math.round(n.x));
+      c.setAttribute('cy', Math.round(n.y));
+      c.setAttribute('r', 4.2);
+      svg.appendChild(c);
+    });
+  }
+
+  const run = debounce(drawFlow, 60);
+  window.addEventListener('load', run);
+  window.addEventListener('resize', run);
+  new ResizeObserver(run).observe(grid);
+})();
+</script>
