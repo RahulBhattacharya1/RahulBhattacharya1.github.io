@@ -196,10 +196,12 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
 /* ===== Hero ===== */
 .impacts-hero{
   margin: 0 0 1.5rem 0;
-  background: linear-gradient(135deg,#eef4ff 0%,#f7fbff 40%,#ffffff 100%);
+  background-color: #eef4ff; /* fallback */
+  background-image: linear-gradient(135deg,#eef4ff 0%,#f1f7ff 45%,#ffffff 100%);
   border: 1px solid #e6eefb;
   border-radius: 14px;
 }
+
 .impacts-hero__inner{
   max-width: 1100px;
   margin: 0 auto;
@@ -274,6 +276,15 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
 .flow-svg .arrow{ stroke:#c9d6ee; stroke-width:2; fill:none; }
 .flow-svg .node { fill:#e8f1ff; stroke:#bcd0f5; }
 
+.flow-svg .path-stroke{
+  fill: none;                          /* remove black fill */
+  stroke: url(#flow-grad);             /* or a color like #c9d6ee */
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  marker-end: url(#arrow-head);
+}
+  
 /* ===== Desktop-only visuals (hide heavy graphic on phones) ===== */
 @media (max-width: 768px){
   .experience-flow{ display:none; }
