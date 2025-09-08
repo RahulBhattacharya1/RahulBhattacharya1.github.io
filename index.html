@@ -70,72 +70,219 @@ title: "Rahul's Portfolio"
 .posts-header .page-btn.is-disabled{opacity:.45;pointer-events:none;background:linear-gradient(135deg,#bbb,#999)}
 .posts-header .page-status{padding:3px 8px;font-size:.9rem;font-weight:700;color:#0b1020;border-radius:999px;background:linear-gradient(180deg,#fff,#f6f7fb);border:1px solid rgba(15,23,42,.08)}
 
-/* Horizontal scroller */
-.post-strip{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;margin:0;list-style:none;padding:0 .25rem .5rem}
-.post-strip>.post-item{flex:0 0 var(--card-w,300px);scroll-snap-align:start}
-.post-strip::-webkit-scrollbar{height:6px}
-.post-strip::-webkit-scrollbar-thumb{background:#ccc;border-radius:999px}
-
-/* Post card layout fix */
-.post-strip .post-item {
-  display: flex;
-  flex-direction: column;   /* stack image then text */
-  align-items: stretch;
-  max-width: 200px;         /* keep cards tidy */
+/* Premium feel: tighter cards + edge fades + nicer snap */
+.post-strip{
+  display:flex;
+  gap:.75rem;
+  overflow-x:auto;
+  overflow-y:hidden;
+  margin:0;
+  list-style:none;
+  padding:0 .25rem .75rem;
+  scroll-snap-type:x proximity;      /* softer snap */
+  scroll-behavior: auto;             /* JS will handle easing */
+  -webkit-overflow-scrolling: touch;
+  mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
 }
 
-.post-strip .post-item .thumb {
-  display: block;
-  flex: 0 0 auto;
-  margin-bottom: .6rem;     /* space between image and text */
+.post-strip > .post-item{
+  flex:0 0 var(--card-w,300px);
+  scroll-snap-align:start;
+  scroll-snap-stop: normal;
 }
 
-.post-strip .post-item .post-text {
-  flex: 1 1 auto;           /* let text occupy below image */
-  display: flex;
-  flex-direction: column;
-}
+/* slimmer scrollbar */
+.post-strip::-webkit-scrollbar{ height:6px }
+.post-strip::-webkit-scrollbar-thumb{ background:#cfd2da; border-radius:999px }
 
-.post-strip .post-item .post-text a {
-  margin-bottom: .4rem;
-}
-
-.post-strip .post-item .post-text p {
-  flex: 1 1 auto;
-  margin: 0;
-  font-size: .9rem;
-  line-height: 1.4;
-  color: #555;
-}
   
 </style>
 
 <script>
 (function(){
-  if(window.__inlineHorizInit) return; window.__inlineHorizInit=true;
-  const strip=document.querySelector('#post-strip'); if(!strip) return;
-  const pager=document.querySelector('.posts-header .pagination'); if(!pager) return;
-  function parseHTML(html){const t=document.createElement('template');t.innerHTML=html;return t.content}
-  function fetchPage(url){return fetch(url,{credentials:'same-origin'}).then(r=>r.text())}
-  function updatePagers(doc){
-    const src=doc.querySelector('.posts-header .pagination');
-    if(src&&pager){pager.innerHTML=src.innerHTML}
+  if (window.__inlineHorizPremium) return;
+  window.__inlineHorizPremium = true;
+
+  var section = document.querySelector('section.posts');
+  if (!section) return;
+
+  var strip = section.querySelector('#post-strip');
+  var pager = section.querySelector('.posts-header .pagination');
+  if (!strip || !pager) return;
+
+  // ---- helpers --------------------------------------------------------------
+  function parseHTML(html){
+    var t = document.createElement('template');
+    t.innerHTML = html;
+    return t.content;
   }
-  function append(dir){
-    const link=pager.querySelector(dir==1?'.next:not(.is-disabled)':'.prev:not(.is-disabled)');
-    if(!link||!link.getAttribute('href')) return;
-    fetchPage(link.getAttribute('href')).then(html=>{
-      const doc=parseHTML(html);
-      const cards=doc.querySelectorAll('#post-strip li.post-item');
-      if(dir==1) cards.forEach(li=>strip.appendChild(li));
-      else Array.from(cards).reverse().forEach(li=>strip.prepend(li));
-      updatePagers(doc);
+  function fetchPage(url){
+    return fetch(url, { credentials:'same-origin' }).then(function(r){ return r.text(); });
+  }
+  function updatePagers(doc){
+    var src = doc.querySelector('.posts-header .pagination');
+    if (src && pager){ pager.innerHTML = src.innerHTML; }
+  }
+
+  // ---- premium glide engine (kinetic + snap) --------------------------------
+  var rafId = 0, vx = 0, lastT = 0, isWheelAnimating = false, isDragging = false;
+  var dragStartX = 0, dragScrollX = 0, lastX = 0;
+
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+  function glideTo(target, ms){
+    var start = strip.scrollLeft;
+    var delta = target - start;
+    var dur = Math.max(180, Math.min(ms || 520, 800));
+    var t0 = performance.now();
+
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(function step(ts){
+      var p = Math.min(1, (ts - t0) / dur);
+      var e = easeOutCubic(p);
+      strip.scrollLeft = start + delta * e;
+      if (p < 1) rafId = requestAnimationFrame(step);
     });
   }
-  pager.addEventListener('click',e=>{
-    const a=e.target.closest('a.page-btn'); if(!a||a.classList.contains('is-disabled')) return;
-    e.preventDefault(); append(a.classList.contains('next')?1:-1);
-    strip.scrollBy({left:(a.classList.contains('next')?1:-1)*Math.round(strip.clientWidth*0.9),behavior:'smooth'});
+
+  function nearestSnapX(){
+    var cards = strip.querySelectorAll(':scope > .post-item');
+    if (!cards.length) return strip.scrollLeft;
+
+    // pick the card whose left edge is closest to current scroll
+    var best = 0, bestDist = Infinity, x = strip.scrollLeft;
+    cards.forEach ? cards.forEach(check) : Array.prototype.forEach.call(cards, check);
+
+    function check(el){
+      var left = el.offsetLeft;
+      var d = Math.abs(left - x);
+      if (d < bestDist){ bestDist = d; best = left; }
+    }
+    return best;
+  }
+
+  function settleSnap(){
+    glideTo(nearestSnapX(), 420);
+  }
+
+  // wheel kinetic handling
+  strip.addEventListener('wheel', function(e){
+    // Treat vertical wheels as horizontal too for desktop mice
+    var dx = (Math.abs(e.deltaX) > Math.abs(e.deltaY)) ? e.deltaX : e.deltaY;
+    // Ignore tiny jitter
+    if (Math.abs(dx) < 1) return;
+    e.preventDefault();
+
+    isWheelAnimating = true;
+    vx += dx * 0.9;            // accumulate velocity
+    if (!rafId) momentumTick(); // start RAF if not running
+  }, { passive:false });
+
+  function momentumTick(ts){
+    var now = ts || performance.now();
+    var dt = lastT ? (now - lastT) : 16;
+    lastT = now;
+
+    // advance
+    strip.scrollLeft += vx;
+    // friction
+    vx *= 0.92;
+
+    // stop condition
+    if (Math.abs(vx) < 0.15){
+      vx = 0; lastT = 0; isWheelAnimating = false;
+      rafId = 0;
+      settleSnap();
+      return;
+    }
+    rafId = requestAnimationFrame(momentumTick);
+  }
+
+  // drag-to-scroll (desktop)
+  strip.addEventListener('mousedown', function(e){
+    isDragging = true;
+    strip.classList.add('dragging');
+    dragStartX = e.clientX;
+    dragScrollX = strip.scrollLeft;
+    lastX = e.clientX;
+    cancelAnimationFrame(rafId); vx = 0; isWheelAnimating = false;
   });
+
+  window.addEventListener('mousemove', function(e){
+    if (!isDragging) return;
+    var dx = e.clientX - lastX;
+    lastX = e.clientX;
+    strip.scrollLeft = dragScrollX - (e.clientX - dragStartX);
+    // keep a bit of velocity for momentum on release
+    vx = -dx;
+  });
+
+  window.addEventListener('mouseup', function(){
+    if (!isDragging) return;
+    isDragging = false;
+    strip.classList.remove('dragging');
+    // kick momentum if there is velocity
+    if (Math.abs(vx) > 0.2){
+      if (!rafId) momentumTick();
+    }else{
+      settleSnap();
+    }
+  });
+
+  // snap on resize (keeps cards aligned)
+  window.addEventListener('resize', function(){ settleSnap(); });
+
+  // ---- pagination interception + infinite feel --------------------------------
+  function append(dir){
+    var a = pager.querySelector(dir === 1 ? '.next:not(.is-disabled)' : '.prev:not(.is-disabled)');
+    if (!a || !a.getAttribute('href')) return;
+
+    var href = a.getAttribute('href');
+    fetchPage(href).then(function(html){
+      var doc = parseHTML(html);
+      var cards = doc.querySelectorAll('section.posts ul li.post-item');
+      if (!cards || !cards.length) return;
+
+      if (dir === 1){
+        cards.forEach(function(li){ strip.appendChild(li); });
+      }else{
+        var firstBefore = strip.firstElementChild;
+        var leftBefore = firstBefore ? firstBefore.getBoundingClientRect().left : 0;
+        Array.from(cards).reverse().forEach(function(li){ strip.prepend(li); });
+        if(firstBefore){
+          var leftAfter = firstBefore.getBoundingClientRect().left;
+          strip.scrollLeft += (leftAfter - leftBefore);
+        }
+      }
+      updatePagers(doc);
+      // nudge by ~one viewport with eased glide
+      var step = Math.round(strip.clientWidth * 0.9);
+      glideTo(strip.scrollLeft + (dir === 1 ? step : -step), 520);
+    });
+  }
+
+  pager.addEventListener('click', function(e){
+    var a = e.target.closest('a.page-btn');
+    if (!a || a.classList.contains('is-disabled')) return;
+    e.preventDefault();
+    append(a.classList.contains('next') ? 1 : -1);
+  }, { capture:true });
+
+  // optional: auto-append when near end for infinite feel
+  var tail = document.createElement('div');
+  tail.style.flex = '0 0 1px';
+  strip.appendChild(tail);
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && !isDragging && !isWheelAnimating){
+          append(1);
+        }
+      });
+    }, { root: strip, rootMargin: '0px 800px 0px 0px' });
+    io.observe(tail);
+  }
 })();
 </script>
+
