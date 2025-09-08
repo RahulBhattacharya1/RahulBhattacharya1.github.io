@@ -158,4 +158,55 @@ title: "Rahul's Portfolio"
   }
 }
 
+/* ===== Premium Pagination — Mobile ===== */
+@media (max-width: 640px){
+  .pagination.premium{
+    /* compact spacing and wrapping */
+    gap: .6rem;
+    flex-wrap: wrap;
+    margin: 18px auto;
+    padding: 0  max(12px, env(safe-area-inset-left)) max(8px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right));
+  }
+
+  /* Larger touch targets, readable type */
+  .pagination .page-btn{
+    flex: 1 1 calc(50% - .4rem);
+    justify-content: center;
+    min-height: 48px;
+    padding: .75rem 1rem;
+    font-size: 1rem;
+  }
+
+  /* Center the chevrons neatly */
+  .pagination .prev .chev{ margin-right:.25rem; }
+  .pagination .next .chev{ margin-left:.25rem; }
+
+  /* Status pill on its own row */
+  .pagination .page-status{
+    order: 3;
+    width: 100%;
+    text-align: center;
+    padding: .7rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+/* Ultra-narrow phones: stack buttons vertically */
+@media (max-width: 360px){
+  .pagination .page-btn{
+    flex-basis: 100%;
+  }
+}
+
+/* Keyboard focus: visible and elegant */
+.pagination .page-btn:focus-visible,
+.pagination .page-status:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.9),
+    0 0 0 5px rgba(106, 92, 255, .45);
+  border-radius: 999px;
+}
+
 </style>
