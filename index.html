@@ -112,7 +112,7 @@ title: "Rahul's Portfolio"
 
 <script>
 (function(){
-  if (window.__stableStripInit) return; window.__stableStripInit = true;
+  if (window.__stableStripFix_v2) return; window.__stableStripFix_v2 = true;
 
   var section = document.querySelector('section.posts');
   if (!section) return;
@@ -120,7 +120,6 @@ title: "Rahul's Portfolio"
   var pager = section.querySelector('.posts-header .pagination');
   if (!strip || !pager) return;
 
-  // Helpers
   function parseHTML(html){ var t=document.createElement('template'); t.innerHTML=html; return t.content; }
   function fetchPage(url){ return fetch(url,{credentials:'same-origin'}).then(function(r){ return r.text(); }); }
   function updatePagers(doc){
@@ -128,10 +127,38 @@ title: "Rahul's Portfolio"
     if (src && pager) pager.innerHTML = src.innerHTML;
   }
 
-  // Guard against double actions while fetching
+  // --- precise paging helpers -------------------------------------------------
+  function gapPx(){
+    var g = getComputedStyle(strip).gap || "0";
+    return parseFloat(g) || 0;
+  }
+  function cardWidth(){
+    var first = strip.querySelector(':scope > .post-item');
+    return first ? first.getBoundingClientRect().width + gapPx() : 320;
+  }
+  function pageStep(){                       // number of whole cards per "page"
+    var w = strip.clientWidth + gapPx();
+    return Math.max(1, Math.floor(w / cardWidth()));
+  }
+  function indexAtScroll(){                  // index of the leftmost fully-visible-or-next card
+    var x = strip.scrollLeft;
+    var kids = strip.querySelectorAll(':scope > .post-item');
+    for (var i=0;i<kids.length;i++){
+      if (kids[i].offsetLeft >= x - 1) return i;
+    }
+    return kids.length - 1;
+  }
+  function scrollToIndex(idx){
+    var kids = strip.querySelectorAll(':scope > .post-item');
+    idx = Math.max(0, Math.min(kids.length-1, idx));
+    var el = kids[idx];
+    if (el) strip.scrollTo({ left: el.offsetLeft, behavior: 'smooth' });
+  }
+
+  // Guard against double fetch
   var busy = false;
 
-  // Append/prepend, then scroll directly to the first newly added card
+  // Append/prepend exactly one page and land on the first new card
   function loadAndGo(dir){
     if (busy) return; busy = true;
 
@@ -139,71 +166,71 @@ title: "Rahul's Portfolio"
     if (!link || !link.getAttribute('href')){ busy = false; return; }
 
     var href = link.getAttribute('href');
-
-    // Temporarily disable both buttons during fetch
     pager.querySelectorAll('a.page-btn').forEach(function(a){ a.classList.add('is-disabled'); });
+
+    var beforeCount = strip.querySelectorAll(':scope > .post-item').length;
 
     fetchPage(href).then(function(html){
       var doc = parseHTML(html);
-      var newCards = doc.querySelectorAll('section.posts ul li.post-item');
-      if (!newCards.length){ return; }
+      var incoming = doc.querySelectorAll('section.posts ul li.post-item');
+      if (!incoming.length) return;
 
       if (dir === 1){
-        // append at the end
-        newCards.forEach(function(li){ strip.appendChild(li); });
-        // scroll to first newly appended card
-        var firstNew = newCards[0];
-        if (firstNew) strip.scrollTo({ left: firstNew.offsetLeft, behavior: 'smooth' });
-      } else {
-        // remember the first current card to preserve visual position
+        // Append all, then scroll to the first of the *new* ones
+        incoming.forEach(function(li){ strip.appendChild(li); });
+        scrollToIndex(beforeCount);                     // exact first new card
+      }else{
+        // Prepend while preserving current visual position, then land at last of newly added block
         var firstBefore = strip.firstElementChild;
         var leftBefore = firstBefore ? firstBefore.getBoundingClientRect().left : 0;
 
-        // prepend in original order (so list stays chronological)
-        Array.from(newCards).forEach(function(li){ strip.prepend(li); });
+        Array.from(incoming).forEach(function(li){ strip.prepend(li); });
 
-        // compensate scroll so content doesn't jump left
         if (firstBefore){
           var leftAfter = firstBefore.getBoundingClientRect().left;
-          strip.scrollLeft += (leftAfter - leftBefore);
+          strip.scrollLeft += (leftAfter - leftBefore); // cancel jump
         }
-
-        // scroll to the last of the newly prepended cards (top of the new set)
-        var lastNew = strip.querySelectorAll('li.post-item')[newCards.length - 1];
-        if (lastNew) strip.scrollTo({ left: lastNew.offsetLeft, behavior: 'smooth' });
+        var newCount = incoming.length;
+        scrollToIndex(newCount - 1);                    // exact last of the new block
       }
       updatePagers(doc);
-    }).catch(function(){ /* swallow */ })
-      .finally(function(){
-        busy = false;
-        // Re-enable buttons according to updated markup
-        // (updatePagers replaced the innerHTML, so no manual toggles here)
-      });
+    }).catch(function(){})
+      .finally(function(){ busy = false; });
   }
 
-  // Intercept pager clicks
+  // Clicks: enabled → fetch one page; disabled → local jump to start/end
   pager.addEventListener('click', function(e){
     var a = e.target.closest('a.page-btn');
     if (!a) return;
+    e.preventDefault();
 
-    // If disabled, use it as a navigation helper (no network):
-    if (a.classList.contains('is-disabled')) {
-      e.preventDefault();
-      if (a.classList.contains('prev')) {
-        // Disabled "Newer" → jump to start
-        strip.scrollTo({ left: 0, behavior: 'smooth' });
-      } else if (a.classList.contains('next')) {
-        // Optional: Disabled "Older" → jump to very end
-        var maxRight = strip.scrollWidth - strip.clientWidth;
-        strip.scrollTo({ left: maxRight, behavior: 'smooth' });
+    if (a.classList.contains('is-disabled')){
+      if (a.classList.contains('prev')){
+        // Disabled "Newer" → jump to first card
+        scrollToIndex(0);
+      }else if (a.classList.contains('next')){
+        // Disabled "Older" → jump to last page-aligned block
+        var kids = strip.querySelectorAll(':scope > .post-item').length;
+        var step = pageStep();
+        var lastStart = Math.max(0, kids - step);
+        scrollToIndex(lastStart);
       }
       return;
     }
 
-    // Normal enabled case (load the next/prev page, then scroll)
-    e.preventDefault();
+    // Enabled links: move exactly one page via fetch
     loadAndGo(a.classList.contains('next') ? 1 : -1);
   }, { capture:true });
 
+  // Optional: keyboard support (ArrowLeft/Right to page)
+  strip.addEventListener('keydown', function(ev){
+    if (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft') return;
+    ev.preventDefault();
+    var step = pageStep();
+    var base = indexAtScroll();
+    scrollToIndex(base + (ev.key === 'ArrowRight' ? step : -step));
+  });
+  strip.setAttribute('tabindex','0'); // focusable for keyboard paging
 })();
 </script>
+
