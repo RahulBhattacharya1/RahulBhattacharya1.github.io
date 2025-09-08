@@ -1120,38 +1120,44 @@ window.addEventListener("load", function () {
     }
   }
 
-  var editBtn = document.createElement("a");
-  editBtn.className = "tab-btn";
-  editBtn.href = "https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/edit/main/{{ page.path }}";
-  editBtn.textContent = "Edit";
-  editBtn.style.display = "none"; // hidden at start
+  var editBtn, newBtn, created = false;
+  var visible = false;
 
-  var newBtn = document.createElement("a");
-  newBtn.className = "tab-btn";
-  newBtn.href = "https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/new/main/_posts";
-  newBtn.textContent = "New";
-  newBtn.style.display = "none"; // hidden at start
+  function createButtons() {
+    if (created) return;
 
-  // Copy look from existing tab
-  copyComputedStyles(ref, editBtn);
-  copyComputedStyles(ref, newBtn);
+    editBtn = document.createElement("a");
+    editBtn.className = "tab-btn";
+    editBtn.href = "https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/edit/main/{{ page.path }}";
+    editBtn.textContent = "Edit";
 
-  newBtn.style.position = "fixed";
-  newBtn.style.top = "12px";
-  newBtn.style.right = "12px";
-  newBtn.style.zIndex = "1000";
+    newBtn = document.createElement("a");
+    newBtn.className = "tab-btn";
+    newBtn.href = "https://github.com/RahulBhattacharya1/RahulBhattacharya1.github.io/new/main/_posts";
+    newBtn.textContent = "New";
 
-  editBtn.style.position = "fixed";
-  editBtn.style.top = "12px";
-  editBtn.style.zIndex = "1000";
+    copyComputedStyles(ref, editBtn);
+    copyComputedStyles(ref, newBtn);
 
-  document.body.appendChild(newBtn);
-  document.body.appendChild(editBtn);
+    newBtn.style.position = "fixed";
+    newBtn.style.top = "12px";
+    newBtn.style.right = "12px";
+    newBtn.style.zIndex = "1000";
 
-  requestAnimationFrame(function () {
-    var w = Math.ceil(newBtn.getBoundingClientRect().width || 72);
-    editBtn.style.right = (12 + w + 8) + "px";
-  });
+    editBtn.style.position = "fixed";
+    editBtn.style.top = "12px";
+    editBtn.style.zIndex = "1000";
+
+    document.body.appendChild(newBtn);
+    document.body.appendChild(editBtn);
+
+    requestAnimationFrame(function () {
+      var w = Math.ceil(newBtn.getBoundingClientRect().width || 72);
+      editBtn.style.right = (12 + w + 8) + "px";
+    });
+
+    created = true;
+  }
 
   // Cmd/Ctrl+E toggles visibility
   document.addEventListener("keydown", function (e) {
@@ -1162,12 +1168,18 @@ window.addEventListener("load", function () {
 
     e.preventDefault();
 
-    var visible = newBtn.style.display !== "none";
-    newBtn.style.display = visible ? "none" : "inline-block";
-    editBtn.style.display = visible ? "none" : "inline-block";
+    if (!created) {
+      createButtons();
+      visible = true;
+    } else {
+      visible = !visible;
+      newBtn.style.display = visible ? "inline-block" : "none";
+      editBtn.style.display = visible ? "inline-block" : "none";
+    }
   });
 });
 </script>
+
 
   
 <footer class="site-footer">
