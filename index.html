@@ -32,13 +32,16 @@ title: "Rahul's Portfolio"
   <div class="posts-header">
     <h2>Blog Posts</h2>
     {% if paginator %}
-    <nav class="pagination premium">
-      <a class="page-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}" href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
+    <nav class="pagination premium" aria-label="Pagination">
+      <a class="page-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
+         href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
       <span class="page-status">{{ paginator.page }}/{{ paginator.total_pages }}</span>
-      <a class="page-btn next{% unless paginator.next_page %} is-disabled{% endunless %}" href="{{ paginator.next_page_path | relative_url }}">Older →</a>
+      <a class="page-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
+         href="{{ paginator.next_page_path | relative_url }}">Older →</a>
     </nav>
     {% endif %}
   </div>
+
   <ul id="post-strip" class="post-strip">
     {% for post in paginator.posts %}
       <li class="post-item">
@@ -61,8 +64,8 @@ title: "Rahul's Portfolio"
 </section>
 
 <style>
-/* Slim premium pagination */
-.posts-header{display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem;border-bottom:2px solid #ddd;margin-bottom:1.4rem;}
+/* ───────── Posts header pagination (unchanged look) ───────── */
+.posts-header{display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem;border-bottom:2px solid #ddd;margin-bottom:1.4rem}
 .posts-header h2{margin-bottom:6px;font-size:1.4rem;font-weight:700;line-height:1.2}
 .posts-header .pagination{display:flex;align-items:flex-end;gap:.5rem;white-space:nowrap;margin-bottom:6px}
 .posts-header .page-btn{padding:4px 10px;font-size:.9rem;font-weight:600;line-height:1;border-radius:999px;background:linear-gradient(135deg,#a78bfa,#7c6ff6);color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 6px 18px rgba(124,111,246,.28);transition:transform .16s ease,box-shadow .16s ease}
@@ -70,8 +73,9 @@ title: "Rahul's Portfolio"
 .posts-header .page-btn.is-disabled{opacity:.45;pointer-events:none;background:linear-gradient(135deg,#bbb,#999)}
 .posts-header .page-status{padding:3px 8px;font-size:.9rem;font-weight:700;color:#0b1020;border-radius:999px;background:linear-gradient(180deg,#fff,#f6f7fb);border:1px solid rgba(15,23,42,.08)}
 
-/* Premium feel: tighter cards + edge fades + nicer snap */
+/* ───────── Horizontal strip: robust + premium, no jitters ───────── */
 .post-strip{
+  --card-w: 300px;
   display:flex;
   gap:.75rem;
   overflow-x:auto;
@@ -79,221 +83,111 @@ title: "Rahul's Portfolio"
   margin:0;
   list-style:none;
   padding:0 .25rem .75rem;
-  scroll-snap-type:x proximity;      /* softer snap */
-  scroll-behavior: auto;             /* JS will handle easing */
-  -webkit-overflow-scrolling: touch;
+  scroll-snap-type:x mandatory;        /* strict snap: no drift */
+  scroll-behavior:smooth;              /* native smooth (stable) */
+  -webkit-overflow-scrolling:touch;
   mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
 }
-
 .post-strip > .post-item{
-  flex:0 0 var(--card-w,300px);
+  flex:0 0 var(--card-w);
   scroll-snap-align:start;
-  scroll-snap-stop: normal;
 }
 
-/* slimmer scrollbar */
-.post-strip::-webkit-scrollbar{ height:6px }
-.post-strip::-webkit-scrollbar-thumb{ background:#cfd2da; border-radius:999px }
+/* Stacked card so snippet occupies space under image */
+.post-strip .post-item{display:flex;flex-direction:column;align-items:stretch;max-width:var(--card-w)}
+.post-strip .post-item .thumb{display:block;flex:0 0 auto;margin-bottom:.6rem}
+.post-strip .post-item .post-text{flex:1 1 auto;display:flex;flex-direction:column}
+.post-strip .post-item .post-text a{margin-bottom:.4rem}
+.post-strip .post-item .post-text p{flex:1 1 auto;margin:0;font-size:.9rem;line-height:1.4;color:#555}
 
-  
+/* Slimmer scrollbar */
+.post-strip::-webkit-scrollbar{height:6px}
+.post-strip::-webkit-scrollbar-thumb{background:#cfd2da;border-radius:999px}
+
+/* Compact on mobile */
+@media (max-width:640px){
+  .post-strip{--card-w: 240px}
+}
 </style>
 
 <script>
 (function(){
-  if (window.__inlineHorizPremium) return;
-  window.__inlineHorizPremium = true;
+  if (window.__stableStripInit) return; window.__stableStripInit = true;
 
   var section = document.querySelector('section.posts');
   if (!section) return;
-
   var strip = section.querySelector('#post-strip');
   var pager = section.querySelector('.posts-header .pagination');
   if (!strip || !pager) return;
 
-  // ---- helpers --------------------------------------------------------------
-  function parseHTML(html){
-    var t = document.createElement('template');
-    t.innerHTML = html;
-    return t.content;
-  }
-  function fetchPage(url){
-    return fetch(url, { credentials:'same-origin' }).then(function(r){ return r.text(); });
-  }
+  // Helpers
+  function parseHTML(html){ var t=document.createElement('template'); t.innerHTML=html; return t.content; }
+  function fetchPage(url){ return fetch(url,{credentials:'same-origin'}).then(function(r){ return r.text(); }); }
   function updatePagers(doc){
     var src = doc.querySelector('.posts-header .pagination');
-    if (src && pager){ pager.innerHTML = src.innerHTML; }
+    if (src && pager) pager.innerHTML = src.innerHTML;
   }
 
-  // ---- premium glide engine (kinetic + snap) --------------------------------
-  var rafId = 0, vx = 0, lastT = 0, isWheelAnimating = false, isDragging = false;
-  var dragStartX = 0, dragScrollX = 0, lastX = 0;
+  // Guard against double actions while fetching
+  var busy = false;
 
-  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+  // Append/prepend, then scroll directly to the first newly added card
+  function loadAndGo(dir){
+    if (busy) return; busy = true;
 
-  function glideTo(target, ms){
-    var start = strip.scrollLeft;
-    var delta = target - start;
-    var dur = Math.max(180, Math.min(ms || 520, 800));
-    var t0 = performance.now();
+    var link = pager.querySelector(dir === 1 ? '.next:not(.is-disabled)' : '.prev:not(.is-disabled)');
+    if (!link || !link.getAttribute('href')){ busy = false; return; }
 
-    cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(function step(ts){
-      var p = Math.min(1, (ts - t0) / dur);
-      var e = easeOutCubic(p);
-      strip.scrollLeft = start + delta * e;
-      if (p < 1) rafId = requestAnimationFrame(step);
-    });
-  }
+    var href = link.getAttribute('href');
 
-  function nearestSnapX(){
-    var cards = strip.querySelectorAll(':scope > .post-item');
-    if (!cards.length) return strip.scrollLeft;
+    // Temporarily disable both buttons during fetch
+    pager.querySelectorAll('a.page-btn').forEach(function(a){ a.classList.add('is-disabled'); });
 
-    // pick the card whose left edge is closest to current scroll
-    var best = 0, bestDist = Infinity, x = strip.scrollLeft;
-    cards.forEach ? cards.forEach(check) : Array.prototype.forEach.call(cards, check);
-
-    function check(el){
-      var left = el.offsetLeft;
-      var d = Math.abs(left - x);
-      if (d < bestDist){ bestDist = d; best = left; }
-    }
-    return best;
-  }
-
-  function settleSnap(){
-    glideTo(nearestSnapX(), 420);
-  }
-
-  // wheel kinetic handling
-  strip.addEventListener('wheel', function(e){
-    // Treat vertical wheels as horizontal too for desktop mice
-    var dx = (Math.abs(e.deltaX) > Math.abs(e.deltaY)) ? e.deltaX : e.deltaY;
-    // Ignore tiny jitter
-    if (Math.abs(dx) < 1) return;
-    e.preventDefault();
-
-    isWheelAnimating = true;
-    vx += dx * 0.9;            // accumulate velocity
-    if (!rafId) momentumTick(); // start RAF if not running
-  }, { passive:false });
-
-  function momentumTick(ts){
-    var now = ts || performance.now();
-    var dt = lastT ? (now - lastT) : 16;
-    lastT = now;
-
-    // advance
-    strip.scrollLeft += vx;
-    // friction
-    vx *= 0.92;
-
-    // stop condition
-    if (Math.abs(vx) < 0.15){
-      vx = 0; lastT = 0; isWheelAnimating = false;
-      rafId = 0;
-      settleSnap();
-      return;
-    }
-    rafId = requestAnimationFrame(momentumTick);
-  }
-
-  // drag-to-scroll (desktop)
-  strip.addEventListener('mousedown', function(e){
-    isDragging = true;
-    strip.classList.add('dragging');
-    dragStartX = e.clientX;
-    dragScrollX = strip.scrollLeft;
-    lastX = e.clientX;
-    cancelAnimationFrame(rafId); vx = 0; isWheelAnimating = false;
-  });
-
-  window.addEventListener('mousemove', function(e){
-    if (!isDragging) return;
-    var dx = e.clientX - lastX;
-    lastX = e.clientX;
-    strip.scrollLeft = dragScrollX - (e.clientX - dragStartX);
-    // keep a bit of velocity for momentum on release
-    vx = -dx;
-  });
-
-  window.addEventListener('mouseup', function(){
-    if (!isDragging) return;
-    isDragging = false;
-    strip.classList.remove('dragging');
-    // kick momentum if there is velocity
-    if (Math.abs(vx) > 0.2){
-      if (!rafId) momentumTick();
-    }else{
-      settleSnap();
-    }
-  });
-
-  // snap on resize (keeps cards aligned)
-  window.addEventListener('resize', function(){ settleSnap(); });
-
-  // ---- pagination interception + infinite feel --------------------------------
-  function append(dir){
-    var a = pager.querySelector(dir === 1 ? '.next:not(.is-disabled)' : '.prev:not(.is-disabled)');
-    if (!a || !a.getAttribute('href')) return;
-
-    var href = a.getAttribute('href');
     fetchPage(href).then(function(html){
       var doc = parseHTML(html);
-      var cards = doc.querySelectorAll('section.posts ul li.post-item');
-      if (!cards || !cards.length) return;
+      var newCards = doc.querySelectorAll('section.posts ul li.post-item');
+      if (!newCards.length){ return; }
 
       if (dir === 1){
-        cards.forEach(function(li){ strip.appendChild(li); });
-      }else{
+        // append at the end
+        newCards.forEach(function(li){ strip.appendChild(li); });
+        // scroll to first newly appended card
+        var firstNew = newCards[0];
+        if (firstNew) strip.scrollTo({ left: firstNew.offsetLeft, behavior: 'smooth' });
+      } else {
+        // remember the first current card to preserve visual position
         var firstBefore = strip.firstElementChild;
         var leftBefore = firstBefore ? firstBefore.getBoundingClientRect().left : 0;
-        Array.from(cards).reverse().forEach(function(li){ strip.prepend(li); });
-        if(firstBefore){
+
+        // prepend in original order (so list stays chronological)
+        Array.from(newCards).forEach(function(li){ strip.prepend(li); });
+
+        // compensate scroll so content doesn't jump left
+        if (firstBefore){
           var leftAfter = firstBefore.getBoundingClientRect().left;
           strip.scrollLeft += (leftAfter - leftBefore);
         }
+
+        // scroll to the last of the newly prepended cards (top of the new set)
+        var lastNew = strip.querySelectorAll('li.post-item')[newCards.length - 1];
+        if (lastNew) strip.scrollTo({ left: lastNew.offsetLeft, behavior: 'smooth' });
       }
       updatePagers(doc);
-      // nudge by ~one viewport with eased glide
-      if (dir === 1) {
-        // scroll to the first newly appended card
-        var firstNew = cards[0];
-        if (firstNew) {
-          glideTo(firstNew.offsetLeft, 520);
-        }
-      } else {
-        // scroll to the last of the newly prepended cards
-        var lastNew = cards[cards.length - 1];
-        if (lastNew) {
-          glideTo(lastNew.offsetLeft, 520);
-        }
-      }
-    });
+    }).catch(function(){ /* swallow */ })
+      .finally(function(){
+        busy = false;
+        // Re-enable buttons according to updated markup
+        // (updatePagers replaced the innerHTML, so no manual toggles here)
+      });
   }
 
+  // Intercept pager clicks
   pager.addEventListener('click', function(e){
     var a = e.target.closest('a.page-btn');
     if (!a || a.classList.contains('is-disabled')) return;
     e.preventDefault();
-    append(a.classList.contains('next') ? 1 : -1);
+    loadAndGo(a.classList.contains('next') ? 1 : -1);
   }, { capture:true });
 
-  // optional: auto-append when near end for infinite feel
-  var tail = document.createElement('div');
-  tail.style.flex = '0 0 1px';
-  strip.appendChild(tail);
-
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting && !isDragging && !isWheelAnimating){
-          append(1);
-        }
-      });
-    }, { root: strip, rootMargin: '0px 800px 0px 0px' });
-    io.observe(tail);
-  }
 })();
 </script>
-
