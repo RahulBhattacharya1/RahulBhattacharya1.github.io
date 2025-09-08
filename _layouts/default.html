@@ -1108,12 +1108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  var ua = navigator.userAgent;
-
-  // Only on your macOS UA case
-  if (!ua.includes("Mac OS X 10_15_7")) return;
-
+window.addEventListener("load", function () {
   var ref = document.querySelector(".tab-buttons .tab-btn");
   if (!ref) return;
 
@@ -1137,6 +1132,7 @@ document.addEventListener("DOMContentLoaded", function () {
   newBtn.textContent = "New";
   newBtn.style.display = "none"; // hidden at start
 
+  // Copy look from existing tab
   copyComputedStyles(ref, editBtn);
   copyComputedStyles(ref, newBtn);
 
@@ -1157,7 +1153,7 @@ document.addEventListener("DOMContentLoaded", function () {
     editBtn.style.right = (12 + w + 8) + "px";
   });
 
-  // Shortcut: ⌘E / Ctrl+E toggles visibility of top-right buttons
+  // Cmd/Ctrl+E toggles visibility
   document.addEventListener("keydown", function (e) {
     var isMac = navigator.platform.toUpperCase().includes("MAC");
     var combo = (isMac && e.metaKey && e.key.toLowerCase() === "e")
