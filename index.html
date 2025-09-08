@@ -92,15 +92,14 @@ title: "Rahul's Portfolio"
 
 <style>
   /* Keep "Blog Posts" on one line */
-
-
-
+.posts-header h2{
+  white-space:nowrap;          /* don't wrap "Blog Posts" */
+  margin:0;                    /* avoid extra vertical space */
+  line-height:1.2;
+}
 
 /* Ensure the buttons don't push the title to wrap awkwardly */
-.posts-header .tab-buttons{
-  flex:0 0 auto;               /* don't let it stretch */
-  gap:.5rem;                   /* tighten if needed */
-}
+
 
 /* Align the header row neatly with About-style buttons */
 .posts-header{
