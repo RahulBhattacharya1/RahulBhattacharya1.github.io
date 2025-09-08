@@ -75,6 +75,39 @@ title: "Rahul's Portfolio"
 .post-strip>.post-item{flex:0 0 var(--card-w,300px);scroll-snap-align:start}
 .post-strip::-webkit-scrollbar{height:6px}
 .post-strip::-webkit-scrollbar-thumb{background:#ccc;border-radius:999px}
+
+/* Post card layout fix */
+.post-strip .post-item {
+  display: flex;
+  flex-direction: column;   /* stack image then text */
+  align-items: stretch;
+  max-width: 300px;         /* keep cards tidy */
+}
+
+.post-strip .post-item .thumb {
+  display: block;
+  flex: 0 0 auto;
+  margin-bottom: .6rem;     /* space between image and text */
+}
+
+.post-strip .post-item .post-text {
+  flex: 1 1 auto;           /* let text occupy below image */
+  display: flex;
+  flex-direction: column;
+}
+
+.post-strip .post-item .post-text a {
+  margin-bottom: .4rem;
+}
+
+.post-strip .post-item .post-text p {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: .9rem;
+  line-height: 1.4;
+  color: #555;
+}
+  
 </style>
 
 <script>
