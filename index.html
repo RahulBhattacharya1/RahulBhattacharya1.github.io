@@ -256,8 +256,19 @@ title: "Rahul's Portfolio"
       }
       updatePagers(doc);
       // nudge by ~one viewport with eased glide
-      var step = Math.round(strip.clientWidth * 0.9);
-      glideTo(strip.scrollLeft + (dir === 1 ? step : -step), 520);
+      if (dir === 1) {
+        // scroll to the first newly appended card
+        var firstNew = cards[0];
+        if (firstNew) {
+          glideTo(firstNew.offsetLeft, 520);
+        }
+      } else {
+        // scroll to the last of the newly prepended cards
+        var lastNew = cards[cards.length - 1];
+        if (lastNew) {
+          glideTo(lastNew.offsetLeft, 520);
+        }
+      }
     });
   }
 
