@@ -31,17 +31,20 @@ title: "Rahul's Portfolio"
 <section class="posts">
   <div class="posts-header">
     <h2>Blog Posts</h2>
+
     {% if paginator %}
-      <nav class="pagination" aria-label="Pagination">
+    <!-- Header pager using the About-style buttons -->
+    <nav class="pagination" aria-label="Pagination">
+      <div class="tab-buttons pager-buttons">
         <a class="tab-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
            href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
-      
-        <span class="page-status">{{ paginator.page }}/{{ paginator.total_pages }}</span>
-      
+
+        <span class="tab-btn page-status">{{ paginator.page }}/{{ paginator.total_pages }}</span>
+
         <a class="tab-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
            href="{{ paginator.next_page_path | relative_url }}">Older →</a>
-      </nav>
-
+      </div>
+    </nav>
     {% endif %}
   </div>
 
@@ -69,96 +72,81 @@ title: "Rahul's Portfolio"
 </section>
 
 {% if paginator %}
-<nav class="pagination premium" role="navigation" aria-label="Pagination">
-  <a class="page-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
-     href="{{ paginator.previous_page_path | relative_url }}"><span class="chev">←</span><span>Newer</span></a>
+<!-- Footer pager also using About-style buttons -->
+<nav class="pagination" role="navigation" aria-label="Pagination">
+  <div class="tab-buttons pager-buttons">
+    <a class="tab-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
+       href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
 
-  <span class="page-status">Page <strong>{{ paginator.page }}</strong> of <strong>{{ paginator.total_pages }}</strong></span>
+    <span class="tab-btn page-status">Page {{ paginator.page }} / {{ paginator.total_pages }}</span>
 
-  <a class="page-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
-     href="{{ paginator.next_page_path | relative_url }}"><span>Older</span><span class="chev">→</span></a>
+    <a class="tab-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
+       href="{{ paginator.next_page_path | relative_url }}">Older →</a>
+  </div>
 </nav>
 {% endif %}
 
 <style>
-/* Pagination look (unchanged) */
-.pagination.premium{--accent:#6a5cff;--accent-2:#9f6bff;--txt:#0b1020;display:flex;justify-content:center;align-items:center;gap:1rem;margin:28px 0;padding:0 .5rem;font:500 .95rem/1.2 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-.pagination .page-status{padding:.55rem .9rem;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.65));color:var(--txt);border:1px solid rgba(17,24,39,.08);box-shadow:0 6px 18px rgba(15,23,42,.08) inset,0 4px 14px rgba(15,23,42,.06)}
-.pagination .page-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border-radius:999px;text-decoration:none;color:#fff;position:relative;background:linear-gradient(135deg,var(--accent),var(--accent-2));border:1px solid rgba(255,255,255,.25);box-shadow:0 8px 24px rgba(106,92,255,.35),0 1px 0 rgba(255,255,255,.4) inset,0 -1px 0 rgba(0,0,0,.08) inset;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
-.pagination .page-btn:hover{transform:translateY(-2px)}
-.pagination .page-btn.is-disabled{opacity:.55} /* keep clickable for helper if you want */
-.pagination .chev{font-weight:700}
-
-/* Header inline pagination */
-.posts-header{display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem;border-bottom:2px solid #ddd;padding-bottom:0;margin-bottom:1.4rem}
-.posts-header h2{margin-bottom:8px;font-size:1.4rem;font-weight:700;line-height:1.2}
-.posts-header .pagination{display:flex;align-items:flex-end;gap:.5rem;white-space:nowrap;margin-bottom:6px}
-.posts-header .page-btn{padding:4px 10px;font-size:.9rem;font-weight:600;line-height:1;border-radius:999px;background:linear-gradient(135deg,#a78bfa,#7c6ff6);color:#fff;border:1px solid rgba(255,255,255,.35)}
-
-/* Card strip — now static grid width, with fade transitions on replace */
-.post-strip{
-  display:flex;
-  gap:.75rem;
-  overflow:hidden; /* no scrollbar since we swap pages via fade */
-  margin:0;
-  list-style:none;
-  padding:0 .25rem .75rem;
-  transition: opacity .24s ease, transform .24s ease;
-  opacity:1;
+/* Align the header row neatly with About-style buttons */
+.posts-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:.75rem;border-bottom:2px solid #ddd;margin-bottom:1.2rem
 }
-.post-strip.fade-out{ opacity:0; transform: translateY(4px); }
-.post-strip.fade-in{ opacity:1; transform: translateY(0); }
+.posts-header h2{margin:0 0 .4rem 0;font-size:1.4rem;font-weight:700;line-height:1.2}
+.pagination{display:flex;justify-content:flex-end}
+.pager-buttons{display:flex;align-items:center;gap:.6rem}
+.pager-buttons .tab-btn.is-disabled{opacity:.55}
 
-.post-strip > .post-item{ flex:0 0 var(--card-w,180px); }
+/* If your theme’s .tab-btn needs inline-block for the status, keep this */
+.tab-btn.page-status{pointer-events:none}
 
+/* Card strip — static grid width with fade transitions */
+.post-strip{
+  display:flex;gap:.75rem;overflow:hidden;margin:0;list-style:none;
+  padding:0 .25rem .75rem;transition:opacity .24s ease, transform .24s ease;opacity:1;
+}
+.post-strip.fade-out{opacity:0;transform:translateY(4px)}
+.post-strip.fade-in{opacity:1;transform:translateY(0)}
+.post-strip > .post-item{flex:0 0 var(--card-w,300px)}
 /* Stacked card so snippet fills under image */
 .post-strip .post-item{display:flex;flex-direction:column;align-items:stretch;max-width:var(--card-w,300px)}
 .post-strip .post-item .thumb{display:block;flex:0 0 auto;margin-bottom:.6rem}
 .post-strip .post-item .post-text{flex:1 1 auto;display:flex;flex-direction:column}
 .post-strip .post-item .post-text a{margin-bottom:.4rem}
 .post-strip .post-item .post-text p{flex:1 1 auto;margin:0;font-size:.9rem;line-height:1.4;color:#555}
-
-/* Mobile card width */
-@media (max-width:640px){ .post-strip > .post-item{ flex-basis:240px } }
+@media (max-width:640px){ .post-strip > .post-item{flex-basis:240px} }
 </style>
 
 <script>
+/* Fade pager (no horizontal scroll) — uses About-style .tab-btn buttons */
 (function(){
-  if (window.__fadePagerInit) return; window.__fadePagerInit = true;
+  if (window.__fadeTabsPager) return; window.__fadeTabsPager = true;
 
   var section = document.querySelector('section.posts');
   if (!section) return;
 
   var strip  = section.querySelector('#post-strip');
-  var pagers = Array.from(document.querySelectorAll('nav.pagination.premium'));
+  var pagers = Array.from(document.querySelectorAll('nav.pagination .pager-buttons'));
   if (!strip || pagers.length === 0) return;
 
-  function parseHTML(html){
-    var t=document.createElement('template'); t.innerHTML=html; return t.content;
-  }
-  function fetchPage(url){
-    return fetch(url,{credentials:'same-origin'}).then(function(r){ return r.text(); });
-  }
+  function parseHTML(html){ var t=document.createElement('template'); t.innerHTML=html; return t.content; }
+  function fetchPage(url){ return fetch(url,{credentials:'same-origin'}).then(function(r){ return r.text(); }); }
+
   function syncPagersFrom(doc){
-    var srcNavs = doc.querySelectorAll('nav.pagination.premium');
-    // copy first source nav into all local pagers
-    var src = srcNavs[0];
-    if (!src) return;
-    pagers.forEach(function(p){ p.innerHTML = src.innerHTML; });
+    var srcNav = doc.querySelector('nav.pagination .pager-buttons');
+    if (!srcNav) return;
+    pagers.forEach(function(p){ p.innerHTML = srcNav.innerHTML; });
   }
 
   var busy = false;
   function fadeSwap(newLis, newDoc){
-    // fade out
     strip.classList.add('fade-out');
-    // after CSS transition (~240ms), replace content and fade in
     setTimeout(function(){
       strip.innerHTML = '';
       newLis.forEach(function(li){ strip.appendChild(li); });
       syncPagersFrom(newDoc);
       strip.classList.remove('fade-out');
-      // ensure reflow before fade-in (optional but safer)
-      void strip.offsetWidth;
+      void strip.offsetWidth;               // reflow
       strip.classList.add('fade-in');
       setTimeout(function(){ strip.classList.remove('fade-in'); }, 260);
       busy = false;
@@ -167,22 +155,14 @@ title: "Rahul's Portfolio"
 
   function handle(dir){
     if (busy) return;
-    // find an enabled link from any pager
-    var link = null;
-    for (var i=0;i<pagers.length;i++){
-      var a = pagers[i].querySelector(dir===1?'.next':' .prev');
-      if (!a) a = pagers[i].querySelector(dir===1?'.next':' .prev'); // safeguard
-    }
-    // safer: search by selector each time
-    link = (dir===1
-      ? document.querySelector('nav.pagination.premium .next')
-      : document.querySelector('nav.pagination.premium .prev'));
 
-    if (!link || !link.getAttribute('href') || link.classList.contains('is-disabled')) return;
+    var link = document.querySelector(dir===1
+      ? 'nav.pagination .tab-btn.next:not(.is-disabled)'
+      : 'nav.pagination .tab-btn.prev:not(.is-disabled)');
+    if (!link || !link.getAttribute('href')) return;
 
     busy = true;
-    // visually disable all buttons during transition
-    pagers.forEach(function(p){ p.querySelectorAll('a.page-btn').forEach(function(a){ a.classList.add('is-disabled'); }); });
+    pagers.forEach(function(p){ p.querySelectorAll('.tab-btn').forEach(function(a){ a.classList.add('is-disabled'); }); });
 
     fetchPage(link.getAttribute('href')).then(function(html){
       var doc = parseHTML(html);
@@ -192,18 +172,16 @@ title: "Rahul's Portfolio"
     }).catch(function(){ busy=false; });
   }
 
-  // Delegate click for all current/future pagers
+  // Delegate clicks for any .tab-btn in pagers
   document.addEventListener('click', function(e){
-    var a = e.target.closest('nav.pagination.premium a.page-btn');
+    var a = e.target.closest('nav.pagination .tab-btn');
     if (!a) return;
     e.preventDefault();
 
     if (a.classList.contains('is-disabled')){
-      // optional helper: disabled prev -> jump to start; disabled next -> jump to end
-      if (a.classList.contains('prev')){ strip.scrollLeft = 0; }
+      // helper behavior (optional): disabled prev → no-op; disabled next → no-op
       return;
     }
-
     if (a.classList.contains('next')) handle(1);
     else if (a.classList.contains('prev')) handle(-1);
   }, true);
