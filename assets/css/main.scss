@@ -126,6 +126,14 @@ body {
   padding-bottom: 0.5rem;
 }*/
 
+
+/* Ensure the buttons don't push the title to wrap awkwardly */
+.posts-header .tab-buttons{
+  flex:0 0 auto;               /* don't let it stretch */
+  /*gap:.5rem;                    tighten if needed */
+}
+
+
 .post-item {
   display: flex;
   gap: 1rem;
