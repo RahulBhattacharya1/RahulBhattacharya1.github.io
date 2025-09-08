@@ -34,12 +34,14 @@ title: "Rahul's Portfolio"
 
     {% if paginator %}
     <!-- Header pager using the About-style buttons -->
-      <nav class="pagination" aria-label="Pagination">
-        <div class="tab-buttons pager-buttons">
+      <nav class="pagination bio-tabs" aria-label="Pagination">
+        <div class="tab-buttons">
           <a class="tab-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
              href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
       
-          <span class="tab-btn page-status">{{ paginator.page }}/{{ paginator.total_pages }}</span>
+          <span class="tab-btn active" style="pointer-events:none; cursor:default;">
+            {{ paginator.page }}/{{ paginator.total_pages }}
+          </span>
       
           <a class="tab-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
              href="{{ paginator.next_page_path | relative_url }}">Older →</a>
