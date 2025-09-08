@@ -43,194 +43,166 @@ title: "Rahul's Portfolio"
   </div>
 
   <ul id="post-strip" class="post-strip">
-    {% for post in paginator.posts %}
-      <li class="post-item">
-        <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-          <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}" alt="{{ post.title }}" loading="lazy">
-        </a>
-        <div class="post-text">
-          <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-          <p style="color: #737373">
-            {% if post.custom_snippet and post.custom_snippet_text %}
-              {{ post.custom_snippet_text }}
-            {% else %}
-              {{ post.excerpt | strip_html | truncate: 200 }}
-            {% endif %}
-          </p>
-        </div>
-      </li>
-    {% endfor %}
+    {% if paginator %}
+      {% for post in paginator.posts %}
+        <li class="post-item">
+          <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+            <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}" alt="{{ post.title }}" loading="lazy">
+          </a>
+          <div class="post-text">
+            <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
+            <p style="color: #737373">
+              {% if post.custom_snippet and post.custom_snippet_text %}
+                {{ post.custom_snippet_text }}
+              {% else %}
+                {{ post.excerpt | strip_html | truncate: 200 }}
+              {% endif %}
+            </p>
+          </div>
+        </li>
+      {% endfor %}
+    {% endif %}
   </ul>
 </section>
 
-<style>
-/* ───────── Posts header pagination (unchanged look) ───────── */
-.posts-header{display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem;border-bottom:2px solid #ddd;margin-bottom:1.4rem}
-.posts-header h2{margin-bottom:6px;font-size:1.4rem;font-weight:700;line-height:1.2}
-.posts-header .pagination{display:flex;align-items:flex-end;gap:.5rem;white-space:nowrap;margin-bottom:6px}
-.posts-header .page-btn{padding:4px 10px;font-size:.9rem;font-weight:600;line-height:1;border-radius:999px;background:linear-gradient(135deg,#a78bfa,#7c6ff6);color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 6px 18px rgba(124,111,246,.28);transition:transform .16s ease,box-shadow .16s ease}
-.posts-header .page-btn:hover{transform:translateY(-1px)}
-.posts-header .page-btn.is-disabled{opacity:.45;background:linear-gradient(135deg,#bbb,#999)}
-.posts-header .page-status{padding:3px 8px;font-size:.9rem;font-weight:700;color:#0b1020;border-radius:999px;background:linear-gradient(180deg,#fff,#f6f7fb);border:1px solid rgba(15,23,42,.08)}
+{% if paginator %}
+<nav class="pagination premium" role="navigation" aria-label="Pagination">
+  <a class="page-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
+     href="{{ paginator.previous_page_path | relative_url }}"><span class="chev">←</span><span>Newer</span></a>
 
-/* ───────── Horizontal strip: robust + premium, no jitters ───────── */
+  <span class="page-status">Page <strong>{{ paginator.page }}</strong> of <strong>{{ paginator.total_pages }}</strong></span>
+
+  <a class="page-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
+     href="{{ paginator.next_page_path | relative_url }}"><span>Older</span><span class="chev">→</span></a>
+</nav>
+{% endif %}
+
+<style>
+/* Pagination look (unchanged) */
+.pagination.premium{--accent:#6a5cff;--accent-2:#9f6bff;--txt:#0b1020;display:flex;justify-content:center;align-items:center;gap:1rem;margin:28px 0;padding:0 .5rem;font:500 .95rem/1.2 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.pagination .page-status{padding:.55rem .9rem;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.65));color:var(--txt);border:1px solid rgba(17,24,39,.08);box-shadow:0 6px 18px rgba(15,23,42,.08) inset,0 4px 14px rgba(15,23,42,.06)}
+.pagination .page-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border-radius:999px;text-decoration:none;color:#fff;position:relative;background:linear-gradient(135deg,var(--accent),var(--accent-2));border:1px solid rgba(255,255,255,.25);box-shadow:0 8px 24px rgba(106,92,255,.35),0 1px 0 rgba(255,255,255,.4) inset,0 -1px 0 rgba(0,0,0,.08) inset;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.pagination .page-btn:hover{transform:translateY(-2px)}
+.pagination .page-btn.is-disabled{opacity:.55} /* keep clickable for helper if you want */
+.pagination .chev{font-weight:700}
+
+/* Header inline pagination */
+.posts-header{display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem;border-bottom:2px solid #ddd;padding-bottom:0;margin-bottom:1.4rem}
+.posts-header h2{margin-bottom:8px;font-size:1.4rem;font-weight:700;line-height:1.2}
+.posts-header .pagination{display:flex;align-items:flex-end;gap:.5rem;white-space:nowrap;margin-bottom:6px}
+.posts-header .page-btn{padding:4px 10px;font-size:.9rem;font-weight:600;line-height:1;border-radius:999px;background:linear-gradient(135deg,#a78bfa,#7c6ff6);color:#fff;border:1px solid rgba(255,255,255,.35)}
+
+/* Card strip — now static grid width, with fade transitions on replace */
 .post-strip{
-  --card-w: 300px;
   display:flex;
   gap:.75rem;
-  overflow-x:auto;
-  overflow-y:hidden;
+  overflow:hidden; /* no scrollbar since we swap pages via fade */
   margin:0;
   list-style:none;
   padding:0 .25rem .75rem;
-  scroll-snap-type:x mandatory;        /* strict snap: no drift */
-  scroll-behavior:smooth;              /* native smooth (stable) */
-  -webkit-overflow-scrolling:touch;
-  mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+  transition: opacity .24s ease, transform .24s ease;
+  opacity:1;
 }
-.post-strip > .post-item{
-  flex:0 0 var(--card-w);
-  scroll-snap-align:start;
-}
+.post-strip.fade-out{ opacity:0; transform: translateY(4px); }
+.post-strip.fade-in{ opacity:1; transform: translateY(0); }
 
-/* Stacked card so snippet occupies space under image */
-.post-strip .post-item{display:flex;flex-direction:column;align-items:stretch;max-width:var(--card-w)}
+.post-strip > .post-item{ flex:0 0 var(--card-w,300px); }
+
+/* Stacked card so snippet fills under image */
+.post-strip .post-item{display:flex;flex-direction:column;align-items:stretch;max-width:var(--card-w,300px)}
 .post-strip .post-item .thumb{display:block;flex:0 0 auto;margin-bottom:.6rem}
 .post-strip .post-item .post-text{flex:1 1 auto;display:flex;flex-direction:column}
 .post-strip .post-item .post-text a{margin-bottom:.4rem}
 .post-strip .post-item .post-text p{flex:1 1 auto;margin:0;font-size:.9rem;line-height:1.4;color:#555}
 
-/* Slimmer scrollbar */
-.post-strip::-webkit-scrollbar{height:6px}
-.post-strip::-webkit-scrollbar-thumb{background:#cfd2da;border-radius:999px}
-
-/* Compact on mobile */
-@media (max-width:640px){
-  .post-strip{--card-w: 240px}
-}
+/* Mobile card width */
+@media (max-width:640px){ .post-strip > .post-item{ flex-basis:240px } }
 </style>
 
 <script>
 (function(){
-  if (window.__stableStripFix_v2) return; window.__stableStripFix_v2 = true;
+  if (window.__fadePagerInit) return; window.__fadePagerInit = true;
 
   var section = document.querySelector('section.posts');
   if (!section) return;
-  var strip = section.querySelector('#post-strip');
-  var pager = section.querySelector('.posts-header .pagination');
-  if (!strip || !pager) return;
 
-  function parseHTML(html){ var t=document.createElement('template'); t.innerHTML=html; return t.content; }
-  function fetchPage(url){ return fetch(url,{credentials:'same-origin'}).then(function(r){ return r.text(); }); }
-  function updatePagers(doc){
-    var src = doc.querySelector('.posts-header .pagination');
-    if (src && pager) pager.innerHTML = src.innerHTML;
-  }
+  var strip  = section.querySelector('#post-strip');
+  var pagers = Array.from(document.querySelectorAll('nav.pagination.premium'));
+  if (!strip || pagers.length === 0) return;
 
-  // --- precise paging helpers -------------------------------------------------
-  function gapPx(){
-    var g = getComputedStyle(strip).gap || "0";
-    return parseFloat(g) || 0;
+  function parseHTML(html){
+    var t=document.createElement('template'); t.innerHTML=html; return t.content;
   }
-  function cardWidth(){
-    var first = strip.querySelector(':scope > .post-item');
-    return first ? first.getBoundingClientRect().width + gapPx() : 320;
+  function fetchPage(url){
+    return fetch(url,{credentials:'same-origin'}).then(function(r){ return r.text(); });
   }
-  function pageStep(){                       // number of whole cards per "page"
-    var w = strip.clientWidth + gapPx();
-    return Math.max(1, Math.floor(w / cardWidth()));
-  }
-  function indexAtScroll(){                  // index of the leftmost fully-visible-or-next card
-    var x = strip.scrollLeft;
-    var kids = strip.querySelectorAll(':scope > .post-item');
-    for (var i=0;i<kids.length;i++){
-      if (kids[i].offsetLeft >= x - 1) return i;
-    }
-    return kids.length - 1;
-  }
-  function scrollToIndex(idx){
-    var kids = strip.querySelectorAll(':scope > .post-item');
-    idx = Math.max(0, Math.min(kids.length-1, idx));
-    var el = kids[idx];
-    if (el) strip.scrollTo({ left: el.offsetLeft, behavior: 'smooth' });
+  function syncPagersFrom(doc){
+    var srcNavs = doc.querySelectorAll('nav.pagination.premium');
+    // copy first source nav into all local pagers
+    var src = srcNavs[0];
+    if (!src) return;
+    pagers.forEach(function(p){ p.innerHTML = src.innerHTML; });
   }
 
-  // Guard against double fetch
   var busy = false;
-
-  // Append/prepend exactly one page and land on the first new card
-  function loadAndGo(dir){
-    if (busy) return; busy = true;
-
-    var link = pager.querySelector(dir === 1 ? '.next:not(.is-disabled)' : '.prev:not(.is-disabled)');
-    if (!link || !link.getAttribute('href')){ busy = false; return; }
-
-    var href = link.getAttribute('href');
-    pager.querySelectorAll('a.page-btn').forEach(function(a){ a.classList.add('is-disabled'); });
-
-    var beforeCount = strip.querySelectorAll(':scope > .post-item').length;
-
-    fetchPage(href).then(function(html){
-      var doc = parseHTML(html);
-      var incoming = doc.querySelectorAll('section.posts ul li.post-item');
-      if (!incoming.length) return;
-
-      if (dir === 1){
-        // Append all, then scroll to the first of the *new* ones
-        incoming.forEach(function(li){ strip.appendChild(li); });
-        scrollToIndex(beforeCount);                     // exact first new card
-      }else{
-        // Prepend while preserving current visual position, then land at last of newly added block
-        var firstBefore = strip.firstElementChild;
-        var leftBefore = firstBefore ? firstBefore.getBoundingClientRect().left : 0;
-
-        Array.from(incoming).forEach(function(li){ strip.prepend(li); });
-
-        if (firstBefore){
-          var leftAfter = firstBefore.getBoundingClientRect().left;
-          strip.scrollLeft += (leftAfter - leftBefore); // cancel jump
-        }
-        var newCount = incoming.length;
-        scrollToIndex(newCount - 1);                    // exact last of the new block
-      }
-      updatePagers(doc);
-    }).catch(function(){})
-      .finally(function(){ busy = false; });
+  function fadeSwap(newLis, newDoc){
+    // fade out
+    strip.classList.add('fade-out');
+    // after CSS transition (~240ms), replace content and fade in
+    setTimeout(function(){
+      strip.innerHTML = '';
+      newLis.forEach(function(li){ strip.appendChild(li); });
+      syncPagersFrom(newDoc);
+      strip.classList.remove('fade-out');
+      // ensure reflow before fade-in (optional but safer)
+      void strip.offsetWidth;
+      strip.classList.add('fade-in');
+      setTimeout(function(){ strip.classList.remove('fade-in'); }, 260);
+      busy = false;
+    }, 260);
   }
 
-  // Clicks: enabled → fetch one page; disabled → local jump to start/end
-  pager.addEventListener('click', function(e){
-    var a = e.target.closest('a.page-btn');
+  function handle(dir){
+    if (busy) return;
+    // find an enabled link from any pager
+    var link = null;
+    for (var i=0;i<pagers.length;i++){
+      var a = pagers[i].querySelector(dir===1?'.next':' .prev');
+      if (!a) a = pagers[i].querySelector(dir===1?'.next':' .prev'); // safeguard
+    }
+    // safer: search by selector each time
+    link = (dir===1
+      ? document.querySelector('nav.pagination.premium .next')
+      : document.querySelector('nav.pagination.premium .prev'));
+
+    if (!link || !link.getAttribute('href') || link.classList.contains('is-disabled')) return;
+
+    busy = true;
+    // visually disable all buttons during transition
+    pagers.forEach(function(p){ p.querySelectorAll('a.page-btn').forEach(function(a){ a.classList.add('is-disabled'); }); });
+
+    fetchPage(link.getAttribute('href')).then(function(html){
+      var doc = parseHTML(html);
+      var cards = doc.querySelectorAll('section.posts ul li.post-item');
+      if (!cards.length){ busy = false; return; }
+      fadeSwap(Array.from(cards), doc);
+    }).catch(function(){ busy=false; });
+  }
+
+  // Delegate click for all current/future pagers
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('nav.pagination.premium a.page-btn');
     if (!a) return;
     e.preventDefault();
 
     if (a.classList.contains('is-disabled')){
-      if (a.classList.contains('prev')){
-        // Disabled "Newer" → jump to first card
-        scrollToIndex(0);
-      }else if (a.classList.contains('next')){
-        // Disabled "Older" → jump to last page-aligned block
-        var kids = strip.querySelectorAll(':scope > .post-item').length;
-        var step = pageStep();
-        var lastStart = Math.max(0, kids - step);
-        scrollToIndex(lastStart);
-      }
+      // optional helper: disabled prev -> jump to start; disabled next -> jump to end
+      if (a.classList.contains('prev')){ strip.scrollLeft = 0; }
       return;
     }
 
-    // Enabled links: move exactly one page via fetch
-    loadAndGo(a.classList.contains('next') ? 1 : -1);
-  }, { capture:true });
-
-  // Optional: keyboard support (ArrowLeft/Right to page)
-  strip.addEventListener('keydown', function(ev){
-    if (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft') return;
-    ev.preventDefault();
-    var step = pageStep();
-    var base = indexAtScroll();
-    scrollToIndex(base + (ev.key === 'ArrowRight' ? step : -step));
-  });
-  strip.setAttribute('tabindex','0'); // focusable for keyboard paging
+    if (a.classList.contains('next')) handle(1);
+    else if (a.classList.contains('prev')) handle(-1);
+  }, true);
 })();
 </script>
-
