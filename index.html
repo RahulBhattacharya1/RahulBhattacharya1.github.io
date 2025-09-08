@@ -72,13 +72,90 @@ title: "Rahul's Portfolio"
 </section>
 
 {% if paginator %}
-<nav class="pagination">
+<nav class="pagination premium" role="navigation" aria-label="Pagination">
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | relative_url }}">Newer</a>
+    <a class="page-btn prev" rel="prev" href="{{ paginator.previous_page_path | relative_url }}">
+      <span class="chev">←</span><span>Newer</span>
+    </a>
+  {% else %}
+    <span class="page-btn is-disabled prev"><span class="chev">←</span><span>Newer</span></span>
   {% endif %}
-  <span>Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+
+  <span class="page-status" aria-live="polite">
+    Page <strong>{{ paginator.page }}</strong> of <strong>{{ paginator.total_pages }}</strong>
+  </span>
+
   {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | relative_url }}">Older</a>
+    <a class="page-btn next" rel="next" href="{{ paginator.next_page_path | relative_url }}">
+      <span>Older</span><span class="chev">→</span>
+    </a>
+  {% else %}
+    <span class="page-btn is-disabled next"><span>Older</span><span class="chev">→</span></span>
   {% endif %}
 </nav>
 {% endif %}
+
+<style>
+  /* ===== Premium Pagination ===== */
+.pagination.premium{
+  --accent: #6a5cff;           /* tweak to your brand */
+  --accent-2: #9f6bff;
+  --txt: #0b1020;
+  --muted: #6b7280;
+  display:flex; justify-content:center; align-items:center; gap:1rem;
+  margin:28px 0; padding:0 .5rem; font:500 0.95rem/1.2 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.pagination .page-status{
+  padding:.55rem .9rem; border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
+  color:var(--txt); border:1px solid rgba(17,24,39,.08);
+  box-shadow:0 6px 18px rgba(15,23,42,.08) inset, 0 4px 14px rgba(15,23,42,.06);
+}
+
+.pagination .page-btn{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.6rem 1rem; border-radius:999px; text-decoration:none;
+  color:#fff; position:relative; isolation:isolate;
+  background:
+    linear-gradient(135deg, var(--accent), var(--accent-2));
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:
+    0 8px 24px rgba(106, 92, 255, .35),
+    0 1px 0 rgba(255,255,255,.4) inset,
+    0 -1px 0 rgba(0,0,0,.08) inset;
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  backdrop-filter:saturate(160%) blur(6px);
+  -webkit-backdrop-filter:saturate(160%) blur(6px);
+}
+
+.pagination .page-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 14px 32px rgba(106, 92, 255, .45),
+    0 1px 0 rgba(255,255,255,.5) inset,
+    0 -1px 0 rgba(0,0,0,.1) inset;
+  filter:brightness(1.03);
+}
+
+.pagination .page-btn:active{ transform:translateY(0); }
+
+.pagination .page-btn.is-disabled{
+  cursor:not-allowed; opacity:.55; filter:grayscale(.18);
+  background:linear-gradient(135deg, #b4b8c7, #9aa1b2);
+  box-shadow:none;
+  color:rgba(255,255,255,.9);
+}
+
+.pagination .chev{ font-weight:700; transform:translateY(-.5px); }
+
+/* Light/Dark polish */
+@media (prefers-color-scheme: dark){
+  .pagination .page-status{
+    background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+    color:#e5e7eb; border-color:rgba(255,255,255,.08);
+    box-shadow:0 6px 18px rgba(0,0,0,.25) inset, 0 4px 14px rgba(0,0,0,.45);
+  }
+}
+
+</style>
