@@ -221,7 +221,7 @@ title: "Rahul's Portfolio"
 /* ===== Blog Posts Heading with Pagination (Slim Premium) ===== */
 .posts-header{
   display:flex;
-  align-items:center;
+  align-items:flex-end;          /* aligns heading baseline with line */
   justify-content:space-between;
   gap:.75rem;
   border-bottom:2px solid #ddd;   /* full underline */
@@ -231,9 +231,10 @@ title: "Rahul's Portfolio"
 
 .posts-header h2{
   margin:0;
-  min-width:0;          /* prevents title from forcing wrap */
+  padding:0;                     /* remove any extra padding */
   font-size:1.4rem;
   font-weight:700;
+  line-height:1.2;               /* reduce vertical space */
 }
 
 /* Inline pagination on the same line */
