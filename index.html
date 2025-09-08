@@ -115,6 +115,27 @@ title: "Rahul's Portfolio"
 .post-strip .post-item .post-text a{margin-bottom:.4rem}
 .post-strip .post-item .post-text p{flex:1 1 auto;margin:0;font-size:.9rem;line-height:1.4;color:#555}
 @media (max-width:640px){ .post-strip > .post-item{flex-basis:240px} }
+
+/* Make pagination buttons look like About Me tab buttons */
+.pagination .tab-btn{
+  display:inline-block;
+  padding:.45rem .9rem;
+  border-radius:999px;
+  text-decoration:none;            /* remove underline */
+  color:inherit;                   /* avoid purple visited color */
+  background:rgba(0,0,0,.04);
+  border:1px solid rgba(0,0,0,.08);
+  font-weight:600;
+}
+.pagination .tab-btn:hover{
+  text-decoration:none;
+  background:rgba(0,0,0,.06);
+}
+.pagination .tab-btn.is-disabled{
+  opacity:.55;
+  pointer-events:none;             /* optional */
+}
+
 </style>
 
 <script>
