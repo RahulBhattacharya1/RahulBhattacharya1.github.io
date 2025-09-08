@@ -29,7 +29,20 @@ title: "Rahul's Portfolio"
 </section>
 
 <section class="posts">
-  <h2>Blog Posts</h2>
+  <div class="posts-header">
+    <h2>Blog Posts</h2>
+    {% if paginator %}
+    <nav class="pagination premium">
+      {% if paginator.previous_page %}
+        <a class="page-btn prev" href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
+      {% endif %}
+      <span class="page-status">{{ paginator.page }}/{{ paginator.total_pages }}</span>
+      {% if paginator.next_page %}
+        <a class="page-btn next" href="{{ paginator.next_page_path | relative_url }}">Older →</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </div>
   <ul>
     {% if paginator %}
       {% for post in paginator.posts %}
@@ -203,6 +216,28 @@ title: "Rahul's Portfolio"
   }
 
   .pagination .chev{ font-weight: 700; }
+}
+
+  /* ===== Blog Posts Heading with Pagination ===== */
+.posts-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1rem;
+  gap:1rem;
+}
+
+.posts-header h2{
+  margin:0;
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* keep your premium pagination styles */
+.posts-header .pagination{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
 }
 
 </style>
