@@ -218,26 +218,71 @@ title: "Rahul's Portfolio"
   .pagination .chev{ font-weight: 700; }
 }
 
-  /* ===== Blog Posts Heading with Pagination ===== */
+/* ===== Blog Posts Heading with Pagination (Slim Premium) ===== */
 .posts-header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
   margin-bottom:1rem;
-  gap:1rem;
 }
-
 .posts-header h2{
   margin:0;
+  min-width:0;          /* prevents title from forcing wrap */
   font-size:1.4rem;
   font-weight:700;
 }
 
-/* keep your premium pagination styles */
+/* Inline pagination on the same line */
 .posts-header .pagination{
+  flex:0 0 auto;        /* don’t stretch */
   display:flex;
   align-items:center;
-  gap:.6rem;
+  gap:.5rem;
+  white-space:nowrap;   /* keeps all in one row */
 }
+
+/* Slim premium buttons */
+.posts-header .page-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  padding:4px 10px;
+  font-size:.9rem;
+  font-weight:600;
+  line-height:1;
+  border-radius:999px;
+  background:linear-gradient(135deg,#a78bfa,#7c6ff6);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow:
+    0 6px 18px rgba(124,111,246,.28),
+    0 1px 0 rgba(255,255,255,.45) inset,
+    0 -1px 0 rgba(0,0,0,.08) inset;
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.posts-header .page-btn:hover{ transform:translateY(-1px); }
+.posts-header .page-btn:active{ transform:translateY(0); }
+
+/* Slim counter pill */
+.posts-header .page-status{
+  padding:3px 8px;
+  font-size:.9rem;
+  font-weight:700;
+  line-height:1;
+  color:#0b1020;
+  border-radius:999px;
+  background:linear-gradient(180deg,#fff,#f6f7fb);
+  border:1px solid rgba(15,23,42,.08);
+  box-shadow:0 2px 6px rgba(15,23,42,.08) inset, 0 2px 8px rgba(15,23,42,.06);
+}
+
+/* Compact on mobile */
+@media (max-width:640px){
+  .posts-header{ gap:.5rem; }
+  .posts-header .page-btn{ padding:3px 8px; font-size:.88rem; }
+  .posts-header .page-status{ padding:2px 6px; font-size:.88rem; }
+}
+
 
 </style>
