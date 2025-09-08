@@ -75,20 +75,41 @@ title: "Rahul's Portfolio"
 
 {% if paginator %}
 <!-- Footer pager also using About-style buttons -->
-<nav class="pagination" role="navigation" aria-label="Pagination">
-  <div class="tab-buttons pager-buttons">
-    <a class="tab-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
-       href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
-
-    <span class="tab-btn page-status">Page {{ paginator.page }} / {{ paginator.total_pages }}</span>
-
-    <a class="tab-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
-       href="{{ paginator.next_page_path | relative_url }}">Older →</a>
-  </div>
-</nav>
+      <nav class="pagination bio-tabs" aria-label="Pagination">
+        <div class="tab-buttons">
+          <a class="tab-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
+             href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
+      
+          <span class="tab-btn active" style="pointer-events:none; cursor:default;">
+            {{ paginator.page }}/{{ paginator.total_pages }}
+          </span>
+      
+          <a class="tab-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
+             href="{{ paginator.next_page_path | relative_url }}">Older →</a>
+        </div>
+      </nav>
 {% endif %}
 
 <style>
+  /* Keep "Blog Posts" on one line */
+.posts-header{
+  display:flex;
+  align-items:center;          /* center baseline */
+  justify-content:space-between;
+}
+
+.posts-header h2{
+  white-space:nowrap;          /* don't wrap "Blog Posts" */
+  margin:0;                    /* avoid extra vertical space */
+  line-height:1.2;
+}
+
+/* Ensure the buttons don't push the title to wrap awkwardly */
+.posts-header .tab-buttons{
+  flex:0 0 auto;               /* don't let it stretch */
+  gap:.5rem;                   /* tighten if needed */
+}
+
 /* Align the header row neatly with About-style buttons */
 .posts-header{
   display:flex;align-items:flex-end;justify-content:space-between;
@@ -96,8 +117,6 @@ title: "Rahul's Portfolio"
 }
 .posts-header h2{margin:0 0 .4rem 0;font-size:1.4rem;font-weight:700;line-height:1.2}
 .pagination{display:flex;justify-content:flex-end}
-.pager-buttons{display:flex;align-items:center;gap:.6rem}
-.pager-buttons .tab-btn.is-disabled{opacity:.55}
 
 /* If your theme’s .tab-btn needs inline-block for the status, keep this */
 .tab-btn.page-status{pointer-events:none}
