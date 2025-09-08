@@ -70,7 +70,7 @@ title: "Rahul's Portfolio"
 .posts-header .pagination{display:flex;align-items:flex-end;gap:.5rem;white-space:nowrap;margin-bottom:6px}
 .posts-header .page-btn{padding:4px 10px;font-size:.9rem;font-weight:600;line-height:1;border-radius:999px;background:linear-gradient(135deg,#a78bfa,#7c6ff6);color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 6px 18px rgba(124,111,246,.28);transition:transform .16s ease,box-shadow .16s ease}
 .posts-header .page-btn:hover{transform:translateY(-1px)}
-.posts-header .page-btn.is-disabled{opacity:.45;pointer-events:none;background:linear-gradient(135deg,#bbb,#999)}
+.posts-header .page-btn.is-disabled{opacity:.45;background:linear-gradient(135deg,#bbb,#999)}
 .posts-header .page-status{padding:3px 8px;font-size:.9rem;font-weight:700;color:#0b1020;border-radius:999px;background:linear-gradient(180deg,#fff,#f6f7fb);border:1px solid rgba(15,23,42,.08)}
 
 /* ───────── Horizontal strip: robust + premium, no jitters ───────── */
@@ -184,7 +184,23 @@ title: "Rahul's Portfolio"
   // Intercept pager clicks
   pager.addEventListener('click', function(e){
     var a = e.target.closest('a.page-btn');
-    if (!a || a.classList.contains('is-disabled')) return;
+    if (!a) return;
+
+    // If disabled, use it as a navigation helper (no network):
+    if (a.classList.contains('is-disabled')) {
+      e.preventDefault();
+      if (a.classList.contains('prev')) {
+        // Disabled "Newer" → jump to start
+        strip.scrollTo({ left: 0, behavior: 'smooth' });
+      } else if (a.classList.contains('next')) {
+        // Optional: Disabled "Older" → jump to very end
+        var maxRight = strip.scrollWidth - strip.clientWidth;
+        strip.scrollTo({ left: maxRight, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    // Normal enabled case (load the next/prev page, then scroll)
     e.preventDefault();
     loadAndGo(a.classList.contains('next') ? 1 : -1);
   }, { capture:true });
