@@ -119,71 +119,66 @@ title: "Rahul's Portfolio"
 
 <script>
 (function(){
-  if (window.__fadePager_v3) return; window.__fadePager_v3 = true;
+  if (window.__fadePager_v4) return; window.__fadePager_v4 = true;
 
   var section = document.querySelector('section.posts');
   var strip   = section && section.querySelector('#post-strip');
   var pagers  = Array.from(document.querySelectorAll('nav.pagination'));
   if (!section || !strip || !pagers.length) return;
 
-  // ---- helpers
   function parseHTML(html){ var t=document.createElement('template'); t.innerHTML=html; return t.content; }
-  function fetchPage(url){ return fetch(url,{credentials:'same-origin'}).then(function(r){ return r.text(); }); }
-
-  // Copy the pagination (from fetched doc) into ALL local pagers
+  function fetchPage(url){ return fetch(url,{credentials:'same-origin'}).then(r=>r.text()); }
   function syncPagersFrom(doc){
     var src = doc.querySelector('nav.pagination');
     if (!src) return;
-    pagers.forEach(function(p){ p.innerHTML = src.innerHTML; });
+    pagers.forEach(p=>{ p.innerHTML = src.innerHTML; });
   }
 
-  // Fade swap the cards
   var busy = false;
   function fadeSwap(newLis, newDoc){
     strip.classList.add('fade-out');
     setTimeout(function(){
       strip.innerHTML = '';
-      newLis.forEach(function(li){ strip.appendChild(li); });
+      newLis.forEach(li=>strip.appendChild(li));
       syncPagersFrom(newDoc);
       strip.classList.remove('fade-out');
-      void strip.offsetWidth;                 // reflow
+      void strip.offsetWidth;
       strip.classList.add('fade-in');
-      setTimeout(function(){ strip.classList.remove('fade-in'); }, 260);
+      setTimeout(()=>strip.classList.remove('fade-in'), 260);
       busy = false;
     }, 260);
   }
 
   function handle(dir){
     if (busy) return;
-
-    // dir: +1 = Older, -1 = Newer
-    var sel = dir === 1 ? '.next' : '.prev';
-    var link = document.querySelector('nav.pagination ' + sel);
+    var link = document.querySelector('nav.pagination ' + (dir===1?'.next':'.prev'));
     if (!link || link.classList.contains('is-disabled')) return;
-    var href = link.getAttribute('href');
-    if (!href) return;
+    var href = link.getAttribute('href'); if (!href) return;
 
     busy = true;
-    // visually disable all buttons during swap
-    pagers.forEach(function(p){ p.querySelectorAll('a,button').forEach(function(a){ a.classList.add('is-disabled'); }); });
+    pagers.forEach(p=>p.querySelectorAll('a,button').forEach(a=>a.classList.add('is-disabled')));
 
-    fetchPage(href).then(function(html){
+    fetchPage(href).then(html=>{
       var doc = parseHTML(html);
       var cards = doc.querySelectorAll('section.posts ul li.post-item');
-      if (!cards.length){ busy = false; return; }
+      if (!cards.length){ busy=false; return; }
       fadeSwap(Array.from(cards), doc);
-    }).catch(function(){ busy=false; });
+    }).catch(()=>{ busy=false; });
   }
 
-  // Delegate clicks on ANY pagination (header/footer)
+  // IMPORTANT: stop other global click handlers (like your tab-btn ?y appender)
   document.addEventListener('click', function(e){
     var a = e.target.closest('nav.pagination a');
     if (!a) return;
-    e.preventDefault();
 
-    if (a.classList.contains('prev')) return handle(-1);
-    if (a.classList.contains('next')) return handle(1);
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();   // <- blocks the global a.tab-btn handler
+
+    if (a.classList.contains('prev')) handle(-1);
+    else if (a.classList.contains('next')) handle(1);
   }, true);
 })();
 </script>
+
 
