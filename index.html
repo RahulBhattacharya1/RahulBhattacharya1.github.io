@@ -32,13 +32,16 @@ title: "Rahul's Portfolio"
   <div class="posts-header">
     <h2>Blog Posts</h2>
     {% if paginator %}
-    <nav class="pagination premium" aria-label="Pagination">
-      <a class="tab-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
-         href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
-      <span class="page-status">{{ paginator.page }}/{{ paginator.total_pages }}</span>
-      <a class="tab-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
-         href="{{ paginator.next_page_path | relative_url }}">Older →</a>
-    </nav>
+      <nav class="pagination" aria-label="Pagination">
+        <a class="tab-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
+           href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
+      
+        <span class="page-status">{{ paginator.page }}/{{ paginator.total_pages }}</span>
+      
+        <a class="tab-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
+           href="{{ paginator.next_page_path | relative_url }}">Older →</a>
+      </nav>
+
     {% endif %}
   </div>
 
