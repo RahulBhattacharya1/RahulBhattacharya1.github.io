@@ -1361,27 +1361,7 @@ pre {
 .impactful-hero h1{ margin:.2rem 0 .6rem; font-size:2rem; line-height:1.2 }
 .impactful-hero p{ margin:0; opacity:.95 }
 
-/* Fade container */
-.post-strip{
-  display:flex; gap:.75rem; overflow:hidden; margin:0; list-style:none;
-  padding:0 .25rem .75rem;
-  transition: opacity .24s ease, transform .24s ease;
-  opacity:1;
-}
-.post-strip.fade-out{ opacity:0; transform:translateY(4px); }
-.post-strip.fade-in { opacity:1; transform:translateY(0); }
 
-/* Stacked cards so snippet fills under image */
-.post-strip > .post-item{ flex:0 0 var(--card-w,300px); }
-.post-strip .post-item{ display:flex; flex-direction:column; max-width:var(--card-w,300px); }
-.post-strip .post-item .thumb{ margin-bottom:.6rem; }
-.post-strip .post-item .post-text{ display:flex; flex-direction:column; flex:1 1 auto; }
-.post-strip .post-item .post-text a{ margin-bottom:.4rem; }
-.post-strip .post-item .post-text p{ margin:0; line-height:1.4; font-size:.9rem; color:#555; }
-
-.posts-header nav.pagination.bio-tabs .tab-btn.active {
-	letter-spacing: 0.3em;
-}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
