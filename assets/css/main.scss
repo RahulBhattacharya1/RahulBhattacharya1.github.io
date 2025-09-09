@@ -1411,6 +1411,33 @@ pre {
   }
 }
 
+/* Mobile profile layout */
+@media (max-width: 768px) {
+  .sidebar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;                /* space between photo and text */
+    padding-top: 1rem;        /* space above photo */
+  }
+
+  .sidebar .avatar-frame {
+    flex: 0 0 50%;            /* shrink to 50% of container */
+    max-width: 50%;
+  }
+
+  .sidebar .avatar-frame img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+
+  .sidebar h2,
+  .sidebar .bio-tabs {
+    flex: 1;                  /* let text/bio take remaining space */
+  }
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
