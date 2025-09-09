@@ -1422,8 +1422,8 @@ pre {
   }
 
   .sidebar .avatar-frame {
-    flex: 0 0 50%;            /* shrink to 50% of container */
-    max-width: 50%;
+    flex: 0 0 30%;            /* shrink to 50% of container */
+    max-width: 30%;
   }
 
   .sidebar .avatar-frame img {
@@ -1519,10 +1519,35 @@ pre {
 @media (max-width: 768px) {
   /* Balanced left/right padding that respects iPhone safe areas */
   :root{
-    --gutter-l: max(1px, env(safe-area-inset-left));
-    --gutter-r: max(1px, env(safe-area-inset-right));
+    --gutter-l: max(2px, env(safe-area-inset-left));
+    --gutter-r: max(2px, env(safe-area-inset-right));
+  }
+  .layout-wrapper,
+  .main-content,
+  .main-inner,
+  .sidebar,
+  .bio-tabs {
+    box-sizing: border-box;
+    padding-left: var(--gutter-l) !important;
+    padding-right: var(--gutter-r) !important;
+    max-width: 100%;
   }
 
+  /* Ensure float layout doesn’t create “phantom” width */
+  .sidebar::after { content: ""; display: block; clear: both; }
+
+  /* Tabs/text must be allowed to shrink/wrap within container */
+  .bio-tabs,
+  .bio-tabs .tab-buttons { max-width: 100%; overflow: hidden; }
+  .bio-tabs .tab-buttons { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+  .bio-tabs .tab-btn { flex: 0 1 auto; max-width: 100%; white-space: normal; }
+
+  /* Safety for long words/links/icons that can push width */
+  .bio-tabs, .tab-panel, .tab-panel * {
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
 
 }
 
