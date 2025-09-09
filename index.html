@@ -195,50 +195,38 @@ title: "Rahul's Portfolio"
   .featured-strip{ grid-template-columns: 1fr; }
 }
 
+
+/* Mobile: when .is-stacked is present on section.posts, stack the blog cards */
 @media (max-width: 720px) {
-  #post-strip {
+  section.posts.is-stacked #post-strip {
     display: flex !important;
     flex-direction: column !important;
     gap: 16px !important;
-
-    /* kill horizontal strip behaviors from main.css */
     overflow: visible !important;
     white-space: normal !important;
     scroll-snap-type: none !important;
-    grid: none !important;                /* cancels any grid layout */
-    -webkit-overflow-scrolling: auto !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
-
-  #post-strip > li.post-item {
-    display: flex !important;
-    align-items: flex-start;
-    gap: 12px;
+  section.posts.is-stacked #post-strip > li.post-item {
+    display: grid !important;
+    grid-template-columns: 150px 1fr !important;
+    gap: 12px !important;
     width: 100% !important;
-    min-width: 0 !important;              /* cancel any fixed/min width */
-    margin: 0 !important;
-    position: static !important;          /* cancel any absolute positioning */
-    transform: none !important;           /* cancel any translate hacks */
+    min-width: 0 !important;
   }
-
-  #post-strip > li.post-item .thumb {
-    flex: 0 0 150px !important;           /* 130–170px works well */
-    max-width: 150px !important;
-  }
-  #post-strip > li.post-item .thumb img {
+  section.posts.is-stacked #post-strip > li.post-item .thumb img {
     width: 150px !important;
     height: 100px !important;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    display: block !important;
   }
-
-  #post-strip > li.post-item .post-text {
-    flex: 1 1 auto !important;
+  section.posts.is-stacked #post-strip > li.post-item .post-text {
     min-width: 0 !important;
   }
 }
+
 </style>
 
 <script>
