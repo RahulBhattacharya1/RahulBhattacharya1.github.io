@@ -267,7 +267,7 @@ title: "Rahul's Portfolio"
   if (!strip || !pager) return;
 
   var items = Array.from(strip.querySelectorAll('li.post-item'));
-  var pageSize = 2;  // show 2 featured posts at a time
+  var pageSize = 2;                                   // 2 cards per page
   var totalPages = Math.max(1, Math.ceil(items.length / pageSize));
   var cur = 1;
 
@@ -275,8 +275,10 @@ title: "Rahul's Portfolio"
   var next = pager.querySelector('.next');
   var counter = pager.querySelector('.tab-btn.active');
 
+  var busy = false;                                   // ← guard during fade
+
   function render(){
-    // fade out, swap slice, fade in (mirrors blog’s behavior)
+    busy = true;
     strip.classList.add('fade-out');
     setTimeout(function(){
       items.forEach(el => el.style.display = 'none');
@@ -288,30 +290,41 @@ title: "Rahul's Portfolio"
       next.classList.toggle('is-disabled', cur >= totalPages);
 
       strip.classList.remove('fade-out');
-      void strip.offsetWidth;      // force reflow
+      void strip.offsetWidth;                         // reflow
       strip.classList.add('fade-in');
-      setTimeout(()=>strip.classList.remove('fade-in'), 260);
+      setTimeout(function(){
+        strip.classList.remove('fade-in');
+        busy = false;
+      }, 260);
     }, 260);
   }
 
   function go(delta){
+    if (busy) return;                                 // ← ignore while animating
     var target = cur + delta;
     if (target < 1 || target > totalPages) return;
     cur = target;
     render();
   }
 
-  pager.addEventListener('click', function(e){
-    var a = e.target.closest('a.tab-btn');
-    if (!a || a.classList.contains('is-disabled')) return;
+  // Capture-phase handler that *blocks* any other global .tab-btn listeners
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('.featured-pager a.tab-btn');
+    if (!a) return;
+
     e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();                     // ← hard stop others
+
+    if (a.classList.contains('is-disabled')) return;
     if (a.classList.contains('prev')) go(-1);
     else if (a.classList.contains('next')) go(1);
-  }, true);
+  }, true);                                           // ← capture
 
   render(); // initial paint
 })();
 </script>
+
 
 
 
