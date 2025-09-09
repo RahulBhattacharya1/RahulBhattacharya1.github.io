@@ -1460,6 +1460,43 @@ pre {
   }
 }
 
+/* Mobile: make Blog Posts match Featured (stacked cards) */
+@media (max-width: 720px) {
+  /* kill the side-scroll behavior */
+  .post-strip { 
+    display: grid !important;
+    grid-template-columns: 1fr;     /* one card per row */
+    gap: 14px 18px;
+    overflow: visible !important;
+    white-space: normal !important;
+    scroll-snap-type: none !important;
+  }
+
+  /* same media-card layout as Featured */
+  .post-strip .post-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .post-strip .thumb { flex: 0 0 auto; display: block; }
+  .post-strip .thumb img {
+    width: 170px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .post-strip .post-text { flex: 1 1 auto; min-width: 0; }
+  .post-strip .post-text p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0;
+    color: #555;
+  }
+}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
