@@ -5,6 +5,7 @@ date: 2025-08-28 18:22:33
 categories: [ai]
 tags: [ai,art,stable diffusion]
 thumbnail: /assets/images/ai_art_generator.webp
+featured: true
 ---
 
 I recently created a Hugging Face Space called **Rahul’s AI Art Generator**, which lets anyone turn simple text prompts into beautiful AI-generated images. It’s built with **Gradio** for the user interface and **Stable Diffusion** for the image generation model. Let me walk you through how it works and what’s happening behind the scenes.
