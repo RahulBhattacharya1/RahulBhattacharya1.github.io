@@ -37,6 +37,14 @@ title: "Rahul's Portfolio"
                 {{ post.excerpt | strip_html | truncate: 70 }}
               {% endif %}
             </p>
+            <div class="post-links">
+              {% if post.demo_link %}
+                <a class="demo-link" href="{{ post.demo_link }}" target="_blank" rel="noopener">Live Demo</a>
+              {% endif %}
+              {% if post.github_link %}
+                <a class="github-link" href="{{ post.github_link }}" target="_blank" rel="noopener">GitHub</a>
+              {% endif %}
+            </div>
           </div>
         </li>
       {%- endif -%}
@@ -84,6 +92,14 @@ title: "Rahul's Portfolio"
                 {{ post.excerpt | strip_html | truncate: 200 }}
               {% endif %}
             </p>
+            <div class="post-links">
+              {% if post.demo_link %}
+                <a class="demo-link" href="{{ post.demo_link }}" target="_blank" rel="noopener">Live Demo</a>
+              {% endif %}
+              {% if post.github_link %}
+                <a class="github-link" href="{{ post.github_link }}" target="_blank" rel="noopener">GitHub</a>
+              {% endif %}
+            </div>
           </div>
         </li>
       {% endfor %}
