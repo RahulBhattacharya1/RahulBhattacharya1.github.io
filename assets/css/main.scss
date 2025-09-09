@@ -1477,6 +1477,46 @@ pre {
   .sidebar > * { min-width: 0; }
 }
 
+/* Mobile: wrap bio text around the photo, then full width below */
+@media (max-width: 768px) {
+  .sidebar {                /* container that holds the avatar + bio tabs */
+    display: block;         /* go back to normal flow so floats work */
+    padding-top: 12px;
+  }
+
+  /* Float the avatar so text flows around it */
+  .sidebar .avatar-frame {
+    float: left;
+    width: 45%;             /* ~50% photo; tweak 40–50% as you like */
+    margin: 6px 12px 8px 0; /* gutter around the circle */
+    shape-outside: circle(50%);
+    clip-path: circle(50%); /* visually clip to a circle to match shape-outside */
+  }
+  .sidebar .avatar-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 50%;
+  }
+
+  /* Ensure the bio/tabs can wrap and don't force overflow */
+  .bio-tabs {
+    overflow: hidden;   /* creates a new BFC so it clears the float at the end */
+    min-width: 0;
+  }
+  .bio-tabs .tab-buttons {
+    display: flex;
+    flex-wrap: wrap;    /* let buttons wrap beside/under the photo */
+    gap: 8px;
+    max-width: 100%;
+  }
+  .bio-tabs .tab-btn {
+    white-space: normal;     /* allow multi-line labels if needed */
+    min-width: 0;
+  }
+}
+
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
