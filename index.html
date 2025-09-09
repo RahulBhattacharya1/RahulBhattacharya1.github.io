@@ -75,11 +75,16 @@ title: "Rahul's Portfolio"
 
 <style>
   /* Tighten space between underline and buttons in header */
+.posts-header { padding-bottom: 0; }
 
+.posts-header .bio-tabs,
+.posts-header .pagination { margin: 0; }           /* remove bottom margin */
 
-.posts-header .tab-buttons .tab-btn { 
-  margin-bottom: 0;                                  /* kill the 8px bottom margin */
+.posts-header .tab-buttons { 
+  gap: .5rem;                                       /* optional: tighter pill spacing */
+  align-items: flex-end; 
 }
+
 
   /* Keep "Blog Posts" on one line */
 .posts-header h2{
