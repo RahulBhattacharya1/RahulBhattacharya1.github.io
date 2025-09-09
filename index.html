@@ -370,6 +370,25 @@ title: "Rahul's Portfolio"
 })();
 </script>
 
+<script>
+(function(){
+  if (!matchMedia("(max-width: 720px)").matches) return;
+  var ul = document.getElementById("post-strip");
+  if (!ul) return;
+  ul.style.display = "block";
+  ul.style.whiteSpace = "normal";
+  ul.style.overflowX = "visible";
+  ul.querySelectorAll("li.post-item").forEach(function(li){
+    li.style.display = "grid";
+    li.style.gridTemplateColumns = "150px 1fr";
+    li.style.gap = "12px";
+    li.style.width = "100%";
+    li.style.minWidth = "0";
+    var img = li.querySelector(".thumb img");
+    if (img){ img.style.width = "150px"; img.style.height = "100px"; img.style.objectFit = "cover"; img.style.borderRadius = "10px"; }
+  });
+})();
+</script>
 
 
 
