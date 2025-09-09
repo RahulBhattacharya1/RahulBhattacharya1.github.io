@@ -39,7 +39,9 @@ title: "Rahul's Portfolio"
           <a class="tab-btn prev{% unless paginator.previous_page %} is-disabled{% endunless %}"
              href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
       
-          <span class="tab-btn active" style="pointer-events:none; cursor:default; background:#D2E2FD; color:#01068B;">
+          <span class="tab-btn active" style="pointer-events:none; 
+            cursor:default; background:#D2E2FD; color:#01068B;
+            letter-spacing: 0.15em;">
             {{ paginator.page }}/{{ paginator.total_pages }}
           </span>
       
