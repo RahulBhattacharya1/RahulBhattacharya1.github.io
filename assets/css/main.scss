@@ -1381,8 +1381,8 @@ pre {
 @media (max-width: 768px) {
   /* safe gutters + no sideways scroll */
   :root {
-    --gutter-l: max(2px, env(safe-area-inset-left));
-    --gutter-r: max(2px, env(safe-area-inset-right));
+    --gutter-l: max(5px, env(safe-area-inset-left));
+    --gutter-r: max(5px, env(safe-area-inset-right));
   }
   html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
