@@ -1519,8 +1519,8 @@ pre {
 @media (max-width: 768px) {
   /* Balanced left/right padding that respects iPhone safe areas */
   :root{
-    --gutter-l: max(12px, env(safe-area-inset-left));
-    --gutter-r: max(12px, env(safe-area-inset-right));
+    --gutter-l: max(1px, env(safe-area-inset-left));
+    --gutter-r: max(1px, env(safe-area-inset-right));
   }
 
   .layout-wrapper,
