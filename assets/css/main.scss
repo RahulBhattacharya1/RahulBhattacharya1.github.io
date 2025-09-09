@@ -1460,36 +1460,45 @@ pre {
   }
 }
 
-/* Mobile: make Blog Posts match Featured (stacked cards) */
+/* Mobile: Blog Posts stacked like Featured */
 @media (max-width: 720px) {
-  /* kill the side-scroll behavior */
   .post-strip { 
-    display: grid !important;
-    grid-template-columns: 1fr;     /* one card per row */
-    gap: 14px 18px;
+    display: flex !important;
+    flex-direction: column !important;  /* stack vertically */
+    gap: 16px;
     overflow: visible !important;
     white-space: normal !important;
     scroll-snap-type: none !important;
   }
 
-  /* same media-card layout as Featured */
   .post-strip .post-item {
     display: flex;
     align-items: flex-start;
     gap: 12px;
     width: 100%;
+    margin: 0;
+  }
+
+  .post-strip .thumb {
+    flex: 0 0 120px;                 /* thumbnail column */
+  }
+  .post-strip .thumb img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .post-strip .post-text {
+    flex: 1;
     min-width: 0;
   }
-
-  .post-strip .thumb { flex: 0 0 auto; display: block; }
-  .post-strip .thumb img {
-    width: 170px;
-    height: 110px;
-    object-fit: cover;
-    border-radius: 10px;
+  .post-strip .post-text strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1rem;
   }
-
-  .post-strip .post-text { flex: 1 1 auto; min-width: 0; }
   .post-strip .post-text p {
     font-size: 0.85rem;
     line-height: 1.4;
@@ -1497,6 +1506,7 @@ pre {
     color: #555;
   }
 }
+
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
