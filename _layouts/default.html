@@ -211,6 +211,16 @@
                 <a id="share-btn" class="btn btn--share" href="#" aria-label="Share this post">Share</a>
                 <!-- Edit Post link (hidden by default) -->
               {% endif %}
+              {% if page.demo_link or page.github_link %}
+              <div class="post-cta">
+                {% if page.demo_link %}
+                  <a class="btn-cta" href="{{ page.demo_link }}" target="_blank" rel="noopener">Live Demo</a>
+                {% endif %}
+                {% if page.github_link %}
+                  <a class="btn-cta" href="{{ page.github_link }}" target="_blank" rel="noopener">GitHub</a>
+                {% endif %}
+              </div>
+              {% endif %}
             </p>
           </header>
         {% endunless %}
