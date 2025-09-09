@@ -5,6 +5,8 @@ date: 2022-09-06 19:18:53
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/ai_rock_paper_scissor.webp
+demo_link: https://rahuls-ai-rock-paper-scisor.streamlit.app/
+github_link: https://github.com/RahulBhattacharya1/ai_rock_paper_scissor
 ---
 
 This post explains every part of the attached `app.py`, block by block, and clarifies how configuration, limits, offline and OpenAI logic, and UI all fit together.
