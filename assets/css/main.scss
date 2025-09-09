@@ -1460,52 +1460,60 @@ pre {
   }
 }
 
-/* Mobile: Blog Posts stacked like Featured */
+/* Mobile: make Blog Posts stack exactly like Featured */
 @media (max-width: 720px) {
-  .post-strip { 
+  /* kill horizontal-strip behaviors */
+  section.posts .post-strip {
     display: flex !important;
-    flex-direction: column !important;  /* stack vertically */
-    gap: 16px;
+    flex-direction: column !important;
+    gap: 16px !important;
     overflow: visible !important;
     white-space: normal !important;
     scroll-snap-type: none !important;
+    -webkit-overflow-scrolling: auto !important;
+    grid-auto-flow: unset !important; /* in case it was set elsewhere */
   }
 
-  .post-strip .post-item {
-    display: flex;
+  /* ensure each li can shrink and doesn't enforce a min-width */
+  section.posts .post-strip .post-item {
+    display: flex !important;
     align-items: flex-start;
     gap: 12px;
-    width: 100%;
-    margin: 0;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
   }
 
-  .post-strip .thumb {
-    flex: 0 0 120px;                 /* thumbnail column */
+  /* media on the left, text on the right */
+  section.posts .post-strip .thumb {
+    flex: 0 0 150px !important;    /* tweak: 130–170px */
+    max-width: 150px !important;
   }
-  .post-strip .thumb img {
-    width: 120px;
-    height: 90px;
+  section.posts .post-strip .thumb img {
+    width: 150px !important;
+    height: 100px !important;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
     display: block;
   }
 
-  .post-strip .post-text {
-    flex: 1;
-    min-width: 0;
+  section.posts .post-strip .post-text {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
   }
-  .post-strip .post-text strong {
+  section.posts .post-strip .post-text strong {
     display: block;
     margin-bottom: 4px;
     font-size: 1rem;
   }
-  .post-strip .post-text p {
-    font-size: 0.85rem;
+  section.posts .post-strip .post-text p {
+    font-size: .85rem;
     line-height: 1.4;
     margin: 0;
     color: #555;
   }
 }
+
 
 
 /* Giscus Comments Box */
