@@ -32,7 +32,7 @@ title: "Rahul's Portfolio"
               {% if post.custom_snippet and post.custom_snippet_text %}
                 {{ post.custom_snippet_text }}
               {% else %}
-                {{ post.excerpt | strip_html | truncate: 20 }}
+                {{ post.excerpt | strip_html | truncate: 30 }}
               {% endif %}
             </p>
           </div>
