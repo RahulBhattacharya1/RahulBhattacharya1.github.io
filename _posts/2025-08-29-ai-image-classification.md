@@ -5,6 +5,8 @@ date: 2025-08-29 23:37:33
 categories: [ai]
 tags: [ai,art,classification]
 thumbnail: /assets/images/ai_image_classifier.webp
+demo_link: https://rahulbhattacharya-rahuls-image-classifier.hf.space/
+github_link: https://github.com/RahulBhattacharya1/ai_image_classification
 featured: true
 ---
 
