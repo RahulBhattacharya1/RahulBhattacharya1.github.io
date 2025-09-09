@@ -142,36 +142,50 @@ title: "Rahul's Portfolio"
 
 .pagination{display:flex;justify-content:flex-end}
   
-/* Featured: media-card layout (image left, text right) */
-.featured-strip { 
+
+
+/* Featured: 2 cards per row; each card is image-left + text-right */
+.featured-strip{
   list-style:none; margin:0; padding:0;
-  display:flex; flex-direction:column; gap:.9rem;
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr)); /* two side-by-side items */
+  gap: 14px 18px;  /* row gap, column gap */
 }
-.featured-strip .post-item { 
-  display:flex; align-items:center; gap:12px;
-}
-.featured-strip .post-item .thumb { flex:0 0 auto; display:block; }
-.featured-strip .post-item .thumb img { 
-  width:170px; height:100px; object-fit:cover; border-radius:10px;
-}
-.featured-strip .post-item .post-text { flex:1 1 auto; min-width:0; }
-.featured-strip .post-item .post-text .title { display:inline-block; margin-bottom:.25rem; }
-.featured-strip .post-item .post-text .snippet { margin:0; }
 
-/* Featured fade (match blog’s .post-strip classes) */
-.featured-strip { 
-  transition: opacity .24s ease, transform .24s ease; opacity:1; 
+/* Each card: media layout */
+.featured-strip .post-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  width:100%;
 }
-.featured-strip.fade-out { opacity:0; transform:translateY(4px); }
-.featured-strip.fade-in  { opacity:1; transform:translateY(0); }
 
-/* Optional: tiny spacing around “1/2” */
-.featured .pagination.bio-tabs .tab-btn.active { letter-spacing: .15em; }
-
-/* Optional: distinct colors for Featured counter */
-.featured .pagination.bio-tabs .tab-btn.active {
-  background:#01068B; color:#D2E2FD; font-weight:800; border-color:currentColor;
+/* Image block */
+.featured-strip .post-item .thumb{ flex:0 0 auto; display:block; }
+.featured-strip .post-item .thumb img{
+  width:170px;              /* adjust if you want wider image */
+  height:110px;
+  object-fit:cover;
+  border-radius:10px;
 }
+
+/* Text block */
+.featured-strip .post-item .post-text{ flex:1 1 auto; min-width:0; }
+.featured-strip .post-item .post-text .title{ display:inline-block; margin-bottom:.25rem; }
+.featured-strip .post-item .post-text .snippet{ margin:0; color:#555; }
+
+/* Same fade as blog */
+.featured-strip{
+  transition: opacity .24s ease, transform .24s ease; opacity:1;
+}
+.featured-strip.fade-out{ opacity:0; transform:translateY(4px); }
+.featured-strip.fade-in { opacity:1; transform:translateY(0); }
+
+/* Responsive: stack to 1 column on small screens */
+@media (max-width: 720px){
+  .featured-strip{ grid-template-columns: 1fr; }
+}
+
 
 </style>
 
