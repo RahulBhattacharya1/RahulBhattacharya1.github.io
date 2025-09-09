@@ -202,13 +202,13 @@ title: "Rahul's Portfolio"
 
   var section = document.querySelector('section.posts');
   var strip   = section && section.querySelector('#post-strip');
-  var pagers  = Array.from(document.querySelectorAll('nav.pagination'));
+  var pagers  = Array.from(section.querySelectorAll('nav.pagination'));
   if (!section || !strip || !pagers.length) return;
 
   function parseHTML(html){ var t=document.createElement('template'); t.innerHTML=html; return t.content; }
   function fetchPage(url){ return fetch(url,{credentials:'same-origin'}).then(r=>r.text()); }
   function syncPagersFrom(doc){
-    var src = doc.querySelector('nav.pagination');
+    var src = doc.querySelector('section.posts nav.pagination');
     if (!src) return;
     pagers.forEach(p=>{ p.innerHTML = src.innerHTML; });
   }
@@ -230,7 +230,7 @@ title: "Rahul's Portfolio"
 
   function handle(dir){
     if (busy) return;
-    var link = document.querySelector('nav.pagination ' + (dir===1?'.next':'.prev'));
+    var link = section.querySelector('nav.pagination ' + (dir===1?'.next':'.prev'));
     if (!link || link.classList.contains('is-disabled')) return;
     var href = link.getAttribute('href'); if (!href) return;
 
@@ -247,7 +247,7 @@ title: "Rahul's Portfolio"
 
   // IMPORTANT: stop other global click handlers (like your tab-btn ?y appender)
   document.addEventListener('click', function(e){
-    var a = e.target.closest('nav.pagination a');
+    var a = e.target.closest('section.posts nav.pagination a');
     if (!a) return;
 
     e.preventDefault();
