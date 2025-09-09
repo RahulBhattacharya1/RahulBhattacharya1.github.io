@@ -1377,120 +1377,39 @@ pre {
 .post-strip .post-item .post-text p{flex:1 1 auto;margin:0;font-size:.9rem;line-height:1.4;color:#555}
 @media (max-width:640px){ .post-strip > .post-item{flex-basis:240px} }
 
-/* Mobile: occupy full width */
+/* ===== Mobile layout (unified + lean) ===== */
 @media (max-width: 768px) {
-  .layout-wrapper,
-  .sidebar,
-  .main-content,
-  .main-inner {
-    max-width: 100% !important;
-    width: 100% !important;
+  /* safe gutters + no sideways scroll */
+  :root {
+    --gutter-l: max(12px, env(safe-area-inset-left));
+    --gutter-r: max(12px, env(safe-area-inset-right));
   }
-  .layout-wrapper {
-    padding: 0 .5rem !important;  /* or 0 if you truly want edge-to-edge */
-    gap: 1rem;                     /* optional: tighter spacing when stacked */
-  }
-  body {
-    overflow-x: hidden;
-  }
-}
-
-/* Mobile: truly full-bleed */
-@media (max-width: 768px) {
   html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
-  /* kill centering + gutters that cap width */
+  .layout-wrapper,
   .main-content,
-  .main-inner {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    max-width: none !important; /* neutralize any fixed cap */
-    width: 100% !important;
-  }
-}
-
-/* Mobile profile layout */
-@media (max-width: 768px) {
+  .main-inner,
   .sidebar {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 1rem;                /* space between photo and text */
-    padding-top: 1rem;        /* space above photo */
+    box-sizing: border-box;
+    padding-left: var(--gutter-l);
+    padding-right: var(--gutter-r);
+    max-width: 100%;
   }
 
-  .sidebar .avatar-frame {
-    flex: 0 0 30%;            /* shrink to 50% of container */
-    max-width: 30%;
-  }
-
-  .sidebar .avatar-frame img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-  }
-
-  .sidebar h2,
-  .sidebar .bio-tabs {
-    flex: 1;                  /* let text/bio take remaining space */
-  }
-}
-/* Mobile: photo left (50%), name+bio right */
-@media (max-width: 768px) {
-  .sidebar {                         /* lives in default layout */
-    display: grid;                   /* two-column layout on mobile */
-    grid-template-columns: 1fr 1fr;  /* ~50% / 50% */
-    align-items: start;
-    column-gap: 12px;
-    padding-top: 12px;               /* space above photo */
-  }
-
-  .sidebar .avatar-frame {           /* the photo wrapper */
-    grid-column: 1;
-    width: 100%;
-    max-width: none;
-    margin: 0;
-  }
-  .sidebar .avatar-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .sidebar h2 {                      /* your name */
-    grid-column: 2;
-    margin: 0 0 .5rem;
-    font-size: clamp(1.25rem, 5vw, 1.6rem);
-  }
-
-  .bio-tabs {                        /* tabs + About content */
-    grid-column: 2;
-    margin: 0;
-    min-width: 0;                    /* allow wrapping; prevent overflow */
-  }
-  .bio-tabs .tab-buttons { flex-wrap: wrap; }
-  .bio-tabs .tab-panel { min-width: 0; }
-
-  /* safety: ensure nothing forces horizontal scroll */
-  .sidebar > * { min-width: 0; }
-}
-
-/* Mobile: wrap bio text around the photo, then full width below */
-@media (max-width: 768px) {
-  .sidebar {                /* container that holds the avatar + bio tabs */
-    display: block;         /* go back to normal flow so floats work */
+  /* Stack order: photo -> name -> tabs/content */
+  .sidebar {                 /* lives in default layout */
+    display: block;          /* no grid/flex/float for clean stacking */
     padding-top: 12px;
   }
 
-  /* Float the avatar so text flows around it */
-  .sidebar .avatar-frame {
-    float: left;
-    width: 45%;             /* ~50% photo; tweak 40–50% as you like */
-    margin: 6px 12px 8px 0; /* gutter around the circle */
-    shape-outside: circle(50%);
-    clip-path: circle(50%); /* visually clip to a circle to match shape-outside */
+  .sidebar .avatar-frame {   /* profile photo wrapper */
+    float: none;
+    display: block;
+    width: 56%;              /* ~50% look (tweak 48–60%) */
+    max-width: 320px;
+    margin: 8px auto 10px;   /* top spacing + center */
+    clip-path: circle(50%);
+    -webkit-clip-path: circle(50%);
   }
   .sidebar .avatar-frame img {
     width: 100%;
@@ -1499,56 +1418,45 @@ pre {
     border-radius: 50%;
   }
 
-  /* Ensure the bio/tabs can wrap and don't force overflow */
+  .sidebar h2 {              /* your name UNDER the photo */
+    text-align: center;
+    margin: 0 0 8px;
+    font-size: clamp(1.25rem, 5vw, 1.6rem);
+  }
+
+  /* Bio/tabs: wrap nicely, no overflow */
   .bio-tabs {
-    overflow: hidden;   /* creates a new BFC so it clears the float at the end */
+    margin: 0 auto;
+    max-width: 100%;
+    overflow: hidden;        /* contain internals; prevents phantom width */
     min-width: 0;
   }
   .bio-tabs .tab-buttons {
     display: flex;
-    flex-wrap: wrap;    /* let buttons wrap beside/under the photo */
+    flex-wrap: wrap;
     gap: 8px;
+    justify-content: center; /* center buttons under the name */
     max-width: 100%;
+    min-width: 0;
   }
   .bio-tabs .tab-btn {
-    white-space: normal;     /* allow multi-line labels if needed */
+    white-space: normal;
     min-width: 0;
-  }
-}
-/* Mobile: symmetrical gutters + no horizontal overflow */
-@media (max-width: 768px) {
-  /* Balanced left/right padding that respects iPhone safe areas */
-  :root{
-    --gutter-l: max(2px, env(safe-area-inset-left));
-    --gutter-r: max(2px, env(safe-area-inset-right));
-  }
-  .layout-wrapper,
-  .main-content,
-  .main-inner,
-  .sidebar,
-  .bio-tabs {
-    box-sizing: border-box;
-    padding-left: var(--gutter-l) !important;
-    padding-right: var(--gutter-r) !important;
-    max-width: 100%;
+    flex: 0 1 auto;
   }
 
-  /* Ensure float layout doesn’t create “phantom” width */
-  .sidebar::after { content: ""; display: block; clear: both; }
-
-  /* Tabs/text must be allowed to shrink/wrap within container */
-  .bio-tabs,
-  .bio-tabs .tab-buttons { max-width: 100%; overflow: hidden; }
-  .bio-tabs .tab-buttons { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
-  .bio-tabs .tab-btn { flex: 0 1 auto; max-width: 100%; white-space: normal; }
-
-  /* Safety for long words/links/icons that can push width */
-  .bio-tabs, .tab-panel, .tab-panel * {
+  /* Long words/icons never push past the right edge */
+  .bio-tabs, .bio-tabs * {
     min-width: 0;
-    word-wrap: break-word;
     overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
+  /* Keep post sections aligned with the same gutters */
+  .featured, .posts-header, .posts-grid, .related-posts {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 
