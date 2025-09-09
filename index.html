@@ -196,37 +196,32 @@ title: "Rahul's Portfolio"
 }
 
 
-/* Mobile: when .is-stacked is present on section.posts, stack the blog cards */
+
 @media (max-width: 720px) {
-  section.posts.is-stacked #post-strip {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    overflow: visible !important;
-    white-space: normal !important;
-    scroll-snap-type: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  section.posts.is-stacked #post-strip > li.post-item {
-    display: grid !important;
-    grid-template-columns: 150px 1fr !important;
-    gap: 12px !important;
+  /* Match Featured’s resets: no bullets, no UL insets */
+  #post-strip{
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;         /* removes the built-in UL left padding */
     width: 100% !important;
-    min-width: 0 !important;
+    max-width: none !important;
   }
-  section.posts.is-stacked #post-strip > li.post-item .thumb img {
-    width: 150px !important;
-    height: 100px !important;
-    object-fit: cover !important;
-    border-radius: 10px !important;
-    display: block !important;
+
+  /* Make each card truly full-width */
+  #post-strip > li.post-item{
+    margin: 0 !important;          /* kill any li side margins */
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
-  section.posts.is-stacked #post-strip > li.post-item .post-text {
-    min-width: 0 !important;
+
+  /* Safety: no stray overflows from children */
+  #post-strip, #post-strip *{
+    box-sizing: border-box;
+    max-width: 100%;
   }
 }
-
+  
 </style>
 
 <script>
