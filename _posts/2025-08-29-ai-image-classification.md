@@ -5,6 +5,7 @@ date: 2025-08-29 23:37:33
 categories: [ai]
 tags: [ai,art,classification]
 thumbnail: /assets/images/ai_image_classifier.webp
+featured: true
 ---
 
 I’ve built and deployed an **image classifier** on [Hugging Face Spaces](https://rahulbhattacharya-rahuls-image-classifier.hf.space) that lets you upload a picture and get predictions in real time. This project combines **PyTorch**, **Torchvision models**, and **Gradio** to create a smooth end-to-end pipeline — from training a custom model to deploying it with an interactive UI.
