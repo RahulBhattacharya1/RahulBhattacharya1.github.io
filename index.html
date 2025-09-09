@@ -74,6 +74,42 @@ title: "Rahul's Portfolio"
 </section>
 
 <style>
+  /* --- Pager: make the counter bold on initial render --- */
+.posts-header .bio-tabs .tab-btn.active {
+  font-weight: 700;                 /* bold 1/2 on page load */
+  background: var(--pager-active-bg, #eef4ff);
+  color: var(--pager-active-fg, #0b57d0);
+  border-color: currentColor;
+}
+
+/* Optional: unify base + hover so pills feel consistent */
+.posts-header .bio-tabs .tab-btn {
+  font-weight: 600;
+  border: 1px solid #d0d7de;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+/* Disabled edge buttons (when no previous/next) */
+.posts-header .bio-tabs .tab-btn.is-disabled {
+  opacity: .45;
+  pointer-events: none;
+}
+
+/* --- Easy color theming via CSS variables --- */
+/* Set these wherever you prefer (global :root or scoped to the posts header) */
+.posts-header .bio-tabs {
+  --pager-active-bg: #ffe9cc; /* change this to your desired background */
+  --pager-active-fg: #8a3d00; /* and this to your desired text color */
+}
+
+/* If you meant the WHOLE pager bar’s background: */
+.posts-header nav.pagination {
+  background: #f7f7f7;      /* customize */
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+
   /* Tighten space between underline and buttons in header */
 
 .posts-header .bio-tabs,
