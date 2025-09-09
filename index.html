@@ -4,17 +4,31 @@ title: "Rahul's Portfolio"
 ---
 
 <section class="featured">
-  <h2>Featured</h2>
-  <ul>
+  <div class="posts-header">
+    <h2>Featured</h2>
+
+    <!-- Featured pager (same look as Blog pager) -->
+    <nav class="pagination bio-tabs featured-pager" aria-label="Featured Pagination">
+      <div class="tab-buttons">
+        <a class="tab-btn prev is-disabled" href="#">← Newer</a>
+        <span class="tab-btn active" style="pointer-events:none;cursor:default;">1/1</span>
+        <a class="tab-btn next is-disabled" href="#">Older →</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Render ALL featured items once; JS will show 2 at a time with fade -->
+  <ul id="featured-strip" class="featured-strip">
     {%- for post in site.posts -%}
       {%- if post.featured == true -%}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}" alt="{{ post.title }}" loading="lazy">
+            <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}"
+                 alt="{{ post.title }}" loading="lazy">
           </a>
           <div class="post-text">
-            <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-            <p style="color: #737373">
+            <a class="title" href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
+            <p class="snippet" style="color:#737373">
               {% if post.custom_snippet and post.custom_snippet_text %}
                 {{ post.custom_snippet_text }}
               {% else %}
@@ -128,6 +142,36 @@ title: "Rahul's Portfolio"
 
 .pagination{display:flex;justify-content:flex-end}
   
+/* Featured: media-card layout (image left, text right) */
+.featured-strip { 
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:.9rem;
+}
+.featured-strip .post-item { 
+  display:flex; align-items:center; gap:12px;
+}
+.featured-strip .post-item .thumb { flex:0 0 auto; display:block; }
+.featured-strip .post-item .thumb img { 
+  width:170px; height:100px; object-fit:cover; border-radius:10px;
+}
+.featured-strip .post-item .post-text { flex:1 1 auto; min-width:0; }
+.featured-strip .post-item .post-text .title { display:inline-block; margin-bottom:.25rem; }
+.featured-strip .post-item .post-text .snippet { margin:0; }
+
+/* Featured fade (match blog’s .post-strip classes) */
+.featured-strip { 
+  transition: opacity .24s ease, transform .24s ease; opacity:1; 
+}
+.featured-strip.fade-out { opacity:0; transform:translateY(4px); }
+.featured-strip.fade-in  { opacity:1; transform:translateY(0); }
+
+/* Optional: tiny spacing around “1/2” */
+.featured .pagination.bio-tabs .tab-btn.active { letter-spacing: .15em; }
+
+/* Optional: distinct colors for Featured counter */
+.featured .pagination.bio-tabs .tab-btn.active {
+  background:#01068B; color:#D2E2FD; font-weight:800; border-color:currentColor;
+}
 
 </style>
 
@@ -194,5 +238,59 @@ title: "Rahul's Portfolio"
   }, true);
 })();
 </script>
+
+<script>
+(function(){
+  var strip = document.getElementById('featured-strip');
+  var pager = document.querySelector('.featured-pager');
+  if (!strip || !pager) return;
+
+  var items = Array.from(strip.querySelectorAll('li.post-item'));
+  var pageSize = 2;  // show 2 featured posts at a time
+  var totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+  var cur = 1;
+
+  var prev = pager.querySelector('.prev');
+  var next = pager.querySelector('.next');
+  var counter = pager.querySelector('.tab-btn.active');
+
+  function render(){
+    // fade out, swap slice, fade in (mirrors blog’s behavior)
+    strip.classList.add('fade-out');
+    setTimeout(function(){
+      items.forEach(el => el.style.display = 'none');
+      var start = (cur - 1) * pageSize;
+      items.slice(start, start + pageSize).forEach(el => el.style.display = '');
+
+      counter.textContent = cur + '/' + totalPages;
+      prev.classList.toggle('is-disabled', cur <= 1);
+      next.classList.toggle('is-disabled', cur >= totalPages);
+
+      strip.classList.remove('fade-out');
+      void strip.offsetWidth;      // force reflow
+      strip.classList.add('fade-in');
+      setTimeout(()=>strip.classList.remove('fade-in'), 260);
+    }, 260);
+  }
+
+  function go(delta){
+    var target = cur + delta;
+    if (target < 1 || target > totalPages) return;
+    cur = target;
+    render();
+  }
+
+  pager.addEventListener('click', function(e){
+    var a = e.target.closest('a.tab-btn');
+    if (!a || a.classList.contains('is-disabled')) return;
+    e.preventDefault();
+    if (a.classList.contains('prev')) go(-1);
+    else if (a.classList.contains('next')) go(1);
+  }, true);
+
+  render(); // initial paint
+})();
+</script>
+
 
 
