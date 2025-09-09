@@ -1514,6 +1514,40 @@ pre {
   }
 }
 
+/* Mobile: force Blog Posts to stack like Featured */
+@media (max-width: 720px) {
+  #post-strip {
+    display: block !important;
+    overflow-x: visible !important;
+    white-space: normal !important;
+    scroll-snap-type: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    transform: none !important;
+  }
+
+  #post-strip > li.post-item {
+    display: grid !important;
+    grid-template-columns: 150px 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    float: none !important;
+    position: static !important;
+  }
+
+  #post-strip > li.post-item .thumb img {
+    width: 150px !important;
+    height: 100px !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    display: block !important;
+  }
+
+  #post-strip > li.post-item .post-text {
+    min-width: 0 !important;
+  }
+}
 
 
 /* Giscus Comments Box */
