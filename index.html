@@ -295,6 +295,19 @@ title: "Rahul's Portfolio"
     flex: 1;
   }
 }
+@media (max-width: 720px) {
+  section.posts .post-strip {
+    gap: 8px !important;   /* was 16px, reduce vertical spacing */
+  }
+
+  section.posts .post-strip .post-item {
+    margin-bottom: 4px !important;  /* ensure no extra large gaps */
+  }
+
+  section.posts .post-strip .post-text p {
+    margin-bottom: 0.4rem !important; /* tighten text block spacing */
+  }
+}
 
 </style>
 
