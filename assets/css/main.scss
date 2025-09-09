@@ -1377,6 +1377,21 @@ pre {
 .post-strip .post-item .post-text p{flex:1 1 auto;margin:0;font-size:.9rem;line-height:1.4;color:#555}
 @media (max-width:640px){ .post-strip > .post-item{flex-basis:240px} }
 
+/* Mobile: occupy full width */
+@media (max-width: 768px) {
+  .layout-wrapper,
+  .sidebar,
+  .main-content,
+  .main-inner {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
