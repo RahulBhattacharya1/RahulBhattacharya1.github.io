@@ -1437,6 +1437,45 @@ pre {
     flex: 1;                  /* let text/bio take remaining space */
   }
 }
+/* Mobile: photo left (50%), name+bio right */
+@media (max-width: 768px) {
+  .sidebar {                         /* lives in default layout */
+    display: grid;                   /* two-column layout on mobile */
+    grid-template-columns: 1fr 1fr;  /* ~50% / 50% */
+    align-items: start;
+    column-gap: 12px;
+    padding-top: 12px;               /* space above photo */
+  }
+
+  .sidebar .avatar-frame {           /* the photo wrapper */
+    grid-column: 1;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  .sidebar .avatar-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .sidebar h2 {                      /* your name */
+    grid-column: 2;
+    margin: 0 0 .5rem;
+    font-size: clamp(1.25rem, 5vw, 1.6rem);
+  }
+
+  .bio-tabs {                        /* tabs + About content */
+    grid-column: 2;
+    margin: 0;
+    min-width: 0;                    /* allow wrapping; prevent overflow */
+  }
+  .bio-tabs .tab-buttons { flex-wrap: wrap; }
+  .bio-tabs .tab-panel { min-width: 0; }
+
+  /* safety: ensure nothing forces horizontal scroll */
+  .sidebar > * { min-width: 0; }
+}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
