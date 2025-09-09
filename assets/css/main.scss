@@ -1392,6 +1392,22 @@ pre {
   }
 }
 
+/* Mobile: truly full-bleed */
+@media (max-width: 768px) {
+  html, body { margin: 0; padding: 0; overflow-x: hidden; }
+
+  /* kill centering + gutters that cap width */
+  .main-content,
+  .main-inner {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: none !important; /* neutralize any fixed cap */
+    width: 100% !important;
+  }
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
