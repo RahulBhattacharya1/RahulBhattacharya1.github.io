@@ -238,6 +238,34 @@ title: "Rahul's Portfolio"
   }
 }
   
+/* Mobile: stack Blog Posts vertically like Featured */
+@media (max-width: 720px) {
+  section.posts .post-strip {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    scroll-snap-type: none !important;
+    -webkit-overflow-scrolling: auto !important;
+    grid-auto-flow: unset !important;
+  }
+
+  section.posts .post-strip .post-item {
+    display: flex !important;        /* image left, text right */
+    align-items: flex-start;
+    gap: 12px;
+    width: 100% !important;
+    min-width: 0 !important;         /* defeats horizontal strip min-widths */
+    margin: 0 !important;
+  }
+
+  section.posts .post-strip .thumb {
+    flex: 0 0 150px !important;
+    max-width: 150px !important;
+  }
+}
+
 </style>
 
 <script>
