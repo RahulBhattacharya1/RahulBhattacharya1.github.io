@@ -1379,6 +1379,13 @@ pre {
 .post-strip .post-item .post-text a{ margin-bottom:.4rem; }
 .post-strip .post-item .post-text p{ margin:0; line-height:1.4; font-size:.9rem; color:#555; }
 
+/* Pager override: wins on first load */
+.posts-header nav.pagination.bio-tabs .tab-btn.active {
+  background:#D2E2FD;  /* your new bg */
+  color:#01068B;       /* your new text color */
+  font-weight:800;
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
