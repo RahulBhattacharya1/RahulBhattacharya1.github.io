@@ -1,17 +1,40 @@
-(function(){
-  // --- seeded hash + PRNG for per-post parameters (no library needed) ---
-  function hash32(str){
+/* Faux Likes — reusable, backend-free, monotonic, +1 per browser */
+(function () {
+  // ---------- Config (tweak without touching the rest) ----------
+  const CFG = {
+    selector: ".btn--like",   // buttons to auto-init
+    attrId: "data-like-id",   // per-post id (slug/url)
+    attrPub: "data-like-pub", // YYYY-MM-DD publish date
+    showCount: true,          // hide by setting false
+    tickMs: 60000,            // gentle within-day tick
+    storagePrefix: "faux-like:",
+    clampMonotonic: true,     // never show lower than last seen
+    // Growth configuration (deterministic per post)
+    startMin: 12, startMax: 120,     // inclusive-ish range for start
+    gpdMin: 0.8, gpdMax: 6.2,        // growth per day
+    useUTC: false,                   // set true for the same day boundary worldwide
+    // Optional: fixed growth override, e.g., 2.6
+    fixedGrowthPerDay: null          // number | null
+  };
+
+  // ---------- Utilities ----------
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $all(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
+  function escNum(s) { return parseInt(String(s).replace(/[^\d]/g, "") || "0", 10) || 0; }
+  function fmt(n) { return Number(n).toLocaleString(); }
+  function sk(id, suffix) { return CFG.storagePrefix + id + (suffix ? (":" + suffix) : ""); }
+  function getLS(k, d = "0") { try { return localStorage.getItem(k) ?? d; } catch { return d; } }
+  function setLS(k, v) { try { localStorage.setItem(k, String(v)); } catch {} }
+
+  // FNV-like hash + mulberry32 PRNG (deterministic)
+  function hash32(str) {
     let h = 2166136261 >>> 0;
-    for (let i = 0; i < str.length; i++){
-      h ^= str.charCodeAt(i);
-      h = Math.imul(h, 16777619);
-    }
-    // final avalanche
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
     h += h << 13; h ^= h >>> 7; h += h << 3; h ^= h >>> 17; h += h << 5;
     return h >>> 0;
   }
-  function mulberry32(seed){
-    return function(){
+  function mulberry32(seed) {
+    return function () {
       let t = seed += 0x6D2B79F5;
       t = Math.imul(t ^ (t >>> 15), t | 1);
       t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
@@ -19,94 +42,91 @@
     };
   }
 
-  // Deterministic, non-decreasing baseline based on publish date + now
-  function computeBaseline(id, pubISO, now){
-    const nowMs = now.getTime();
-    const pub = new Date(pubISO + "T00:00:00Z"); // day precision
+  // ---------- Baseline model (monotonic over time) ----------
+  function dayStartMs(d) {
+    if (CFG.useUTC) return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  }
+
+  function baselineFor(id, pubISO, now) {
+    if (!pubISO) return 0;
+    const pub = CFG.useUTC ? new Date(pubISO + "T00:00:00Z") : new Date(pubISO);
     if (isNaN(pub)) return 0;
-    const ageDays = Math.max(0, (nowMs - pub.getTime()) / 86400000);
 
-    // Seeded params per post
+    const ageDays = Math.max(0, (now.getTime() - pub.getTime()) / 86400000);
+
+    // Per-post deterministic params
     const seed = hash32(id + "|" + pubISO);
-    const rnd = mulberry32(seed);
+    const rnd  = mulberry32(seed);
 
-    // Start between 12..120
-    const start = 12 + Math.floor(rnd() * 109);
+    const start = CFG.startMin + Math.floor(rnd() * (CFG.startMax - CFG.startMin + 1));
+    const gpd   = (CFG.fixedGrowthPerDay != null)
+      ? CFG.fixedGrowthPerDay
+      : (CFG.gpdMin + rnd() * (CFG.gpdMax - CFG.gpdMin));
 
-    // Growth between 0.8..6.2 per day
-    const gpd = 0.8 + rnd() * 5.4;
-
-    // Smooth intra-day growth so numbers tick during the day but never fall
-    const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-    const fracDay = Math.max(0, (nowMs - dayStart) / 86400000); // 0..1 within the day
-
-    const val = start + gpd * (Math.floor(ageDays) + Math.min(1, fracDay));
-    return Math.floor(val); // monotonic across time
+    // Smooth within-day growth (still non-decreasing after floor)
+    const frac = Math.max(0, (now.getTime() - dayStartMs(now)) / 86400000);
+    const val  = start + gpd * (Math.floor(ageDays) + Math.min(1, frac));
+    return Math.floor(val);
   }
 
-  // Local +1 on click (one per browser) to give a “reactive” feel
-  function storageKey(id){ return "faux-like:" + id; }
-  function getLocalClicks(id){
-    try { return parseInt(localStorage.getItem(storageKey(id)) || "0", 10); }
-    catch(e){ return 0; }
-  }
-  function setLocalClicks(id, n){
-    try { localStorage.setItem(storageKey(id), String(n)); } catch(e){}
-  }
-  function isAlreadyLiked(id){ return getLocalClicks(id) > 0; }
-
-  function format(n){ return n.toLocaleString(undefined); }
-
-  function initButton(btn){
-    const id = btn.getAttribute("data-id") || "";
-    const pub = btn.getAttribute("data-pub") || "";
+  // ---------- Per-button logic ----------
+  function initButton(btn) {
+    const id  = btn.getAttribute(CFG.attrId) || "";
+    const pub = btn.getAttribute(CFG.attrPub) || "";
     if (!id || !pub) return;
 
-    const countEl = btn.querySelector(".like-count");
-    const now = new Date();
+    const countEl = $(".count", btn);
+    if (!countEl && CFG.showCount) return;
 
-    const baseline = computeBaseline(id, pub, now);
-    const local = getLocalClicks(id);
-    const total = baseline + local;
+    const likedKey = sk(id, "liked");
+    const maxKey   = sk(id, "maxShown");
 
-    if (countEl) countEl.textContent = format(total);
-    if (local > 0){
+    const getLocal = () => escNum(getLS(likedKey, "0"));
+    const setLocal = v  => setLS(likedKey, v);
+    const getMax   = () => escNum(getLS(maxKey, "0"));
+    const setMax   = v  => setLS(maxKey, v);
+
+    const apply = (n) => {
+      const val = CFG.clampMonotonic ? Math.max(n, getMax()) : n;
+      if (CFG.showCount) countEl.textContent = val > 0 ? fmt(val) : "";
+      if (CFG.clampMonotonic && val > getMax()) setMax(val);
+    };
+
+    // First paint
+    const now  = new Date();
+    const base = baselineFor(id, pub, now);
+    const loc  = getLocal();
+    apply(base + loc);
+
+    if (loc > 0) { btn.classList.add("liked"); btn.setAttribute("aria-pressed", "true"); }
+
+    // Click = one local +1 per browser
+    btn.addEventListener("click", () => {
+      if (getLocal() > 0) return;
+      setLocal(1);
       btn.classList.add("liked");
       btn.setAttribute("aria-pressed", "true");
-    }
-
-    // On click: apply a single local +1 (per browser)
-    btn.addEventListener("click", ()=>{
-      if (isAlreadyLiked(id)) return;
-      const cur = parseInt((countEl?.textContent || "0").replace(/[^\d]/g,"") || "0", 10);
-      const next = cur + 1;
-      if (countEl) countEl.textContent = format(next);
-      setLocalClicks(id, 1);
-      btn.classList.add("liked");
-      btn.setAttribute("aria-pressed", "true");
-      // Optional micro animation
-      btn.style.transform = "translateY(-1px) scale(1.02)";
-      setTimeout(()=>{ btn.style.transform = ""; }, 120);
+      apply(baselineFor(id, pub, new Date()) + 1);
     });
+
+    // Gentle within-day tick; never decreases
+    if (CFG.tickMs > 0) {
+      setInterval(() => {
+        const b = baselineFor(id, pub, new Date());
+        apply(b + getLocal());
+      }, CFG.tickMs);
+    }
   }
 
-  document.addEventListener("DOMContentLoaded", function(){
-    document.querySelectorAll(".like-btn").forEach(initButton);
+  // ---------- Auto-init ----------
+  document.addEventListener("DOMContentLoaded", () => {
+    $all(CFG.selector).forEach(initButton);
   });
 
-  // Optional: periodic tick during session (still monotonic)
-  setInterval(()=>{
-    const now = new Date();
-    document.querySelectorAll(".like-btn").forEach(btn=>{
-      const id = btn.getAttribute("data-id") || "";
-      const pub = btn.getAttribute("data-pub") || "";
-      const countEl = btn.querySelector(".like-count");
-      if (!id || !pub || !countEl) return;
-      const base = computeBaseline(id, pub, now);
-      const local = getLocalClicks(id);
-      const shown = parseInt((countEl.textContent||"0").replace(/[^\d]/g,""), 10) || 0;
-      const next = Math.max(shown, base + local); // never decrease
-      if (next !== shown) countEl.textContent = next.toLocaleString(undefined);
-    });
-  }, 60 * 1000);
+  // Optional: expose a tiny API if you ever need manual init
+  window.FauxLikes = {
+    initAll: () => $all(CFG.selector).forEach(initButton),
+    config: CFG
+  };
 })();
