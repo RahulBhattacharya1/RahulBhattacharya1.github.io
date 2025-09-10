@@ -1,0 +1,342 @@
+---
+layout: default
+title: "Rahul's Projects"
+date: 2025-08-22
+thumbnail: /assets/images/doc.webp
+permalink: /projects/
+hide_thumbnail_in_body: true
+comments: false
+share: false
+hide_date: true
+hide_top_title: true
+---
+
+{::nomarkdown}
+<!-- ===== HERO ===== -->
+<section class="impactful-hero">
+  <div class="impactful-hero__inner">
+    <h1>Projects That Made an Impact</h1>
+    <p>Case studies and prototypes across analytics, data engineering, and AI — solving real problems with measurable outcomes.</p>
+  </div>
+</section>
+
+<span id="role-summary" class="role-summary" aria-live="polite">
+  Explore Rahul's role-based projects.
+</span>
+<br/>
+Choose a role:
+<br/><br/>
+
+<div class="role-gallery">
+  <!-- Left: your existing vertical / mobile-swipeable role menu -->
+  <nav class="role-menu" aria-label="Choose a role">
+    <button class="role-btn active" data-role="analyst" aria-current="page">Data Analyst</button>
+    <button class="role-btn" data-role="scientist">Data Scientist</button>
+    <button class="role-btn" data-role="engineer">Data Engineer</button>
+    <button class="role-btn" data-role="aiml">AI / ML Engineer</button>
+    <button class="role-btn" data-role="genai">NLP / Gen AI Specialist</button>
+    <button class="role-btn" data-role="businessanalyst">Business Analyst</button>
+  </nav>
+
+  <!-- Right: keep the same container class you already style -->
+  <section class="role-slideshows">
+    <!-- Analyst (default visible) -->
+    <div class="role-accordion" id="panel-analyst">
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-analyst-1" id="acc-analyst-1-label">
+            Retail Sales Trend Dashboard
+            <span class="acc-meta">SQL · Power BI · A/B</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-analyst-1" role="region" aria-labelledby="acc-analyst-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Weekly revenue, conversion, and cohort retention from clickstream + orders.</p>
+            <details><summary>S · Situation</summary><p>Conflicting KPIs across teams.</p></details>
+            <details><summary>T · Task</summary><p>Single source of truth dashboard.</p></details>
+            <details><summary>A · Action</summary><p>SQL windows, semantic model, drilldowns.</p></details>
+            <details><summary>R · Result</summary><p>Reporting time cut 6h → 30m.</p></details>
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-analyst-2" id="acc-analyst-2-label">
+            Subscription Churn Analysis
+            <span class="acc-meta">Python · SQL · Cohorts</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-analyst-2" role="region" aria-labelledby="acc-analyst-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Cohorts + survival curves to find churn drivers and segments.</p>
+            <details><summary>S · Situation</summary><p>Churn +4pp in Q2.</p></details>
+            <details><summary>T · Task</summary><p>Prioritize save-offers.</p></details>
+            <details><summary>A · Action</summary><p>KM curves; cohort SQL; insights deck.</p></details>
+            <details><summary>R · Result</summary><p>12% churn reduction in pilot.</p></details>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Scientist -->
+    <div class="role-accordion" id="panel-scientist" hidden>
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-scientist-1" id="acc-scientist-1-label">
+            Demand Forecasting with Gradient Boosting
+            <span class="acc-meta">Python · XGBoost · MLflow</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-scientist-1" role="region" aria-labelledby="acc-scientist-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Promo/price/holiday features improved SKU forecasts.</p>
+            <details><summary>S</summary><p>Naive baseline under-forecast promos.</p></details>
+            <details><summary>T</summary><p>+15% MAPE lift on long tail.</p></details>
+            <details><summary>A</summary><p>Lags/rolls; Optuna; MLflow.</p></details>
+            <details><summary>R</summary><p>MAPE +21%; holding cost −8%.</p></details>
+          </div>
+        </div>
+      </article>
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-scientist-2" id="acc-scientist-2-label">
+            Image Classification Transfer Learning
+            <span class="acc-meta">PyTorch · ResNet · MLOps</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-scientist-2" role="region" aria-labelledby="acc-scientist-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Fine-tuned ResNet50; shipped inference API.</p>
+            <details><summary>S</summary><p>Manual QC slow.</p></details>
+            <details><summary>T</summary><p>>90% precision.</p></details>
+            <details><summary>A</summary><p>Augmentations; AMP; TTA.</p></details>
+            <details><summary>R</summary><p>92% precision; review time −70%.</p></details>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Engineer -->
+    <div class="role-accordion" id="panel-engineer" hidden>
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-engineer-1" id="acc-engineer-1-label">
+            Delta Lake ELT Orchestration
+            <span class="acc-meta">Databricks · ADF · PySpark</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-engineer-1" role="region" aria-labelledby="acc-engineer-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Bronze–silver–gold with CDC + tests.</p>
+            <details><summary>S</summary><p>Nightly ETL delays.</p></details>
+            <details><summary>T</summary><p>Incremental ELT.</p></details>
+            <details><summary>A</summary><p>MergeInto, watermark, DQ checks.</p></details>
+            <details><summary>R</summary><p>24h → 30m latency.</p></details>
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-engineer-2" id="acc-engineer-2-label">
+            Cost-Optimized Batch Processing
+            <span class="acc-meta">Spark · Autoscaling · Monitoring</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-engineer-2" role="region" aria-labelledby="acc-engineer-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Tuning + lineage + alerting.</p>
+            <details><summary>S</summary><p>Month-end cost spikes.</p></details>
+            <details><summary>T</summary><p>Cut cost, keep SLAs.</p></details>
+            <details><summary>A</summary><p>AQE, Z-Order, autoscaling.</p></details>
+            <details><summary>R</summary><p>−30% cost; 99.9% reliability.</p></details>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- AI/ML -->
+    <div class="role-accordion" id="panel-aiml" hidden>
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-aiml-1" id="acc-aiml-1-label">
+            Real-time Anomaly Detection
+            <span class="acc-meta">Streaming · Isolation Forest</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-aiml-1" role="region" aria-labelledby="acc-aiml-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Payments anomaly detection with explainable alerts.</p>
+            <details><summary>S</summary><p>Fraud review lag.</p></details>
+            <details><summary>T</summary><p><2 min detection.</p></details>
+            <details><summary>A</summary><p>Sliding windows; IForest + rules.</p></details>
+            <details><summary>R</summary><p>FP −35%; p95 <60s.</p></details>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Gen AI -->
+    <div class="role-accordion" id="panel-genai" hidden>
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-genai-1" id="acc-genai-1-label">
+            RAG Knowledge Assistant
+            <span class="acc-meta">NLP · Vector DB · Eval</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-genai-1" role="region" aria-labelledby="acc-genai-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Retrieval-augmented Q&A with guardrails & evals.</p>
+            <details><summary>S</summary><p>Docs scattered.</p></details>
+            <details><summary>T</summary><p>Grounded answers with citations.</p></details>
+            <details><summary>A</summary><p>Chunking, hybrid search, rerank.</p></details>
+            <details><summary>R</summary><p>Search time −80%.</p></details>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Business Analyst -->
+    <div class="role-accordion" id="panel-businessanalyst" hidden>
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-ba-1" id="acc-ba-1-label">
+            Pricing Strategy Playbook
+            <span class="acc-meta">Workshops · SQL · Dashboards</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-ba-1" role="region" aria-labelledby="acc-ba-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> Stakeholder workshops + KPI tracking.</p>
+            <details><summary>S</summary><p>Margin compression.</p></details>
+            <details><summary>T</summary><p>Elasticities & test plan.</p></details>
+            <details><summary>A</summary><p>Discovery → dashboards.</p></details>
+            <details><summary>R</summary><p>+3% margin in pilot.</p></details>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+
+
+
+<script>
+  // Optional per-role summary text
+  const ROLE_SUMMARIES = {
+    analyst: "Projects focused on SQL, dashboards, and experimentation.",
+    scientist: "Projects focused on modeling, features, and evaluation.",
+    engineer: "Projects focused on pipelines, orchestration, and reliability.",
+    aiml: "Projects focused on streaming detection and platform ops.",
+    genai: "Projects focused on RAG, evaluation, and guardrails.",
+    businessanalyst: "Projects focused on discovery, KPIs, and alignment."
+  };
+  const summaryEl = document.getElementById("role-summary");
+
+  function setSummary(role){
+    if(!summaryEl) return;
+    summaryEl.textContent = ROLE_SUMMARIES[role] || "Explore Rahul's role-based projects.";
+    if (window.runWordIconizer) window.runWordIconizer(summaryEl);
+  }
+
+  function activateRole(role){
+    document.querySelectorAll(".role-btn").forEach(btn => {
+      const on = btn.dataset.role === role;
+      btn.classList.toggle("active", on);
+      btn.setAttribute("aria-current", on ? "page" : "false");
+    });
+    // Keep your .role-slideshows container; just toggle panels inside it
+    document.querySelectorAll(".role-slideshows .role-accordion").forEach(p => p.hidden = true);
+    const panel = document.getElementById(`panel-${role}`);
+    if(panel) panel.hidden = false;
+    setSummary(role);
+  }
+
+  // One-open-at-a-time accordion behavior within a role panel
+  function wireAccordion(container){
+    container.addEventListener("click", (e) => {
+      const btn = e.target.closest(".acc-btn");
+      if(!btn) return;
+      const panelId = btn.getAttribute("aria-controls");
+      const panel = document.getElementById(panelId);
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+
+      // Close all in this container
+      container.querySelectorAll(".acc-btn[aria-expanded='true']").forEach(b => b.setAttribute("aria-expanded","false"));
+      container.querySelectorAll(".acc-panel").forEach(p => p.hidden = true);
+
+      // Open selected if it was closed
+      if(!expanded){
+        btn.setAttribute("aria-expanded","true");
+        panel.hidden = false;
+        if (window.runWordIconizer) window.runWordIconizer(panel);
+      }
+    });
+  }
+
+  // Wire up role buttons using your existing classes
+  document.querySelectorAll(".role-btn").forEach(btn =>
+    btn.addEventListener("click", () => activateRole(btn.dataset.role))
+  );
+
+  // Wire accordions (per visible/hidden role panel)
+  document.querySelectorAll(".role-accordion").forEach(wireAccordion);
+
+  // Default role
+  activateRole("analyst");
+</script>
+
+<style>
+/* Tiny, namespaced accordion styles; keeps your existing layout CSS intact */
+  .role-accordion{ display:grid; gap:.5rem }
+  .acc-item{ border:1px solid #e5e7eb; border-radius:10px; background:#fff; overflow:hidden }
+ 
+/* ===== Accordion ===== */
+
+/* Header wrapper (use with <span class="acc-head">). Safe no-op for <h3> items. */
+.acc-head{
+  display:block; margin:0; padding:0; border:0; background:transparent; box-shadow:none;
+}
+  
+/* Stack title (button text) on top and skills underneath */
+.acc-btn{
+  display: flex;
+  flex-direction: column;   /* vertical layout */
+  align-items: flex-start;  /* left-align both lines */
+  gap: .25rem;              /* space between title and skills */
+  box-sizing: border-box;
+  width: 100%;
+  padding: .9rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color:#4A4A4A;
+  text-align: left !important;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.acc-btn:focus{ outline:1px solid #E9E9E9; outline-offset:2px }
+
+/* Skills line below the title; allow wrapping; no ellipsis */
+.acc-meta{
+  align-self: flex-start;   /* keep flush-left under the title */
+  margin: 0;                /* remove left margin from earlier grid setup */
+  font-size: .8rem;        /* a bit smaller than title */
+  font-weight: 300;
+  color: #6b7280;
+  white-space: normal;      /* wrap as needed */
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* Panel and body */
+.acc-panel[hidden]{ display:none }
+.acc-body{ padding:.25rem 1rem 1rem }
+.acc-body details{ margin:.3rem 0; border-left:3px solid #e5e7eb; padding:.25rem .75rem }
+.acc-body summary{ cursor:pointer }
+
+</style>
+{:/nomarkdown}
