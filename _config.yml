@@ -21,6 +21,11 @@ plugins:
 paginate: 4
 paginate_path: "/page:num"
 
+collections:
+  pages:
+    output: true
+    permalink: /:name/
+
 timezone: "America/Chicago"
 future: false
 markdown: kramdown
