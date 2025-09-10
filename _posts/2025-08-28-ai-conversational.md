@@ -1,10 +1,12 @@
 ---
 layout: default
-title: "My Experience in Building a Conversational AI Morning Planner"
+title: "Creating my Conversational AI Planner"
 date: 2025-08-25 14:37:33
 categories: [ai]
 tags: [chat,bot,nlp]
 thumbnail: /assets/images/ai_conversational.webp
+demo_link: https://huggingface.co/spaces/RahulBhattacharya/Rahuls_Morning_Planner
+github_link: https://github.com/RahulBhattacharya1/ai_conversational_planner
 featured: true
 ---
 I wanted to build something lightweight yet useful—a conversational morning planner that runs locally and feels personal. The idea was simple:
