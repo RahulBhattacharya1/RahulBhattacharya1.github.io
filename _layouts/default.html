@@ -212,15 +212,27 @@
                 <!-- Edit Post link (hidden by default) -->
               {% endif %}
               {% if page.demo_link or page.github_link %}
-              <div class="post-cta">
-                {% if page.demo_link %}
-                  <a class="btn-cta" href="{{ page.demo_link }}" target="_blank" rel="noopener">Live Demo</a>
-                {% endif %}
-                {% if page.github_link %}
-                  <a class="btn-cta" href="{{ page.github_link }}" target="_blank" rel="noopener">GitHub</a>
-                {% endif %}
-              </div>
+                <span class="post-cta">
+                  {% if page.demo_link %}
+                    <a class="btn-cta" href="{{ page.demo_link }}" target="_blank" rel="noopener">Live Demo</a>
+                  {% endif %}
+                  {% if page.github_link %}
+                    <a class="btn-cta" href="{{ page.github_link }}" target="_blank" rel="noopener">GitHub</a>
+                  {% endif %}
+                </span>
               {% endif %}
+              <!-- Like: inline with date -->
+              <span class="like-wrap">
+                <button class="like-btn"
+                        data-id="{{ page.url | slugify }}"
+                        data-pub="{{ page.date | date: '%Y-%m-%d' }}"
+                        aria-label="Like this post"
+                        aria-pressed="false">
+                  <span class="like-heart" aria-hidden="true">♥</span>
+                  <span class="like-text">Like</span>
+                  <span class="like-count">0</span>
+                </button>
+              </span>
             </p>
           </header>
         {% endunless %}
@@ -1190,7 +1202,7 @@ window.addEventListener("load", function () {
 });
 </script>
 
-
+<script defer src="{{ '/assets/js/faux-likes.js' | relative_url }}"></script>
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
