@@ -310,8 +310,9 @@ body {
   display: flex;
   align-items: center;
   gap: 8px; /* space between date and button */
+  flex-wrap: wrap;
 }
-
+   
 .post-hero img {
   display: block;
   width: 100%;
@@ -1460,6 +1461,22 @@ pre {
   }
 }
 
+
+.like-wrap { display: inline-block; }
+
+/* Button styles you provided */
+.like-btn{
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.35rem .6rem; border:1px solid #ddd; border-radius:999px;
+  background:#fff; cursor:pointer; font:inherit; line-height:1;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+.like-btn:hover{ background:#f7f7f7; }
+.like-btn:active{ transform: translateY(1px); }
+.like-btn.liked{ border-color:#f2b3c0; background:#ffe9ee; }
+
+.like-heart{ font-size:1rem; transform:translateY(-1px); }
+.like-count{ font-variant-numeric: tabular-nums; min-width:1.4em; text-align:right; }
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
