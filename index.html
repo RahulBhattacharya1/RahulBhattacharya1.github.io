@@ -313,11 +313,11 @@ title: "Rahul's Portfolio"
 
 <script>
 (function(){
-  if (window.__fadePager_v4) return; window.__fadePager_v4 = true;
+  if (window.__fadePager_v5) return; window.__fadePager_v5 = true;
 
   var section = document.querySelector('section.posts');
   var strip   = section && section.querySelector('#post-strip');
-  var pagers  = Array.from(section.querySelectorAll('nav.pagination'));
+  var pagers  = Array.from(section ? section.querySelectorAll('nav.pagination') : []);
   if (!section || !strip || !pagers.length) return;
 
   function parseHTML(html){ var t=document.createElement('template'); t.innerHTML=html; return t.content; }
@@ -328,7 +328,86 @@ title: "Rahul's Portfolio"
     pagers.forEach(p=>{ p.innerHTML = src.innerHTML; });
   }
 
+  function selNextFrom(doc){
+    var a = doc.querySelector('section.posts nav.pagination .next');
+    return (a && !a.classList.contains('is-disabled')) ? a.getAttribute('href') : null;
+  }
+  function selPrevFrom(doc){
+    var a = doc.querySelector('section.posts nav.pagination .prev');
+    return (a && !a.classList.contains('is-disabled')) ? a.getAttribute('href') : null;
+  }
+
+  function computeColumns(){
+    var first = strip.querySelector('li.post-item');
+    if (!first) return 1;
+    var r = first.getBoundingClientRect();
+    var cs = getComputedStyle(strip);
+    var gap = parseFloat(cs.columnGap || cs.gap || 0) || 0;
+    var cardW = r.width;
+    var contW = strip.clientWidth;
+    return Math.max(1, Math.floor((contW + gap) / (cardW + gap)));
+  }
+
+  function cardKey(li){
+    var a = li.querySelector('.thumb, a[href]');
+    return a ? a.getAttribute('href') : Math.random().toString(36);
+  }
+
+  function getCardsFrom(url){
+    if (!url) return Promise.resolve({doc:null,cards:[]});
+    return fetchPage(url).then(html=>{
+      var doc   = parseHTML(html);
+      var cards = Array.from(doc.querySelectorAll('section.posts ul li.post-item'));
+      return {doc:doc, cards:cards};
+    });
+  }
+
+  // Top up: try next pages, then previous pages, until we fill the row
+  function topUpRow(seedDoc){
+    var need = computeColumns() - strip.children.length;
+    if (need <= 0) return Promise.resolve();
+
+    var seen = new Set(Array.from(strip.children).map(cardKey));
+    var nextHref = selNextFrom(seedDoc || document);
+    var prevHref = selPrevFrom(seedDoc || document);
+
+    function take(cards, howMany){
+      var taken = [];
+      for (var i=0;i<cards.length && taken.length<howMany;i++){
+        var k = cardKey(cards[i]);
+        if (seen.has(k)) continue;
+        seen.add(k);
+        taken.push(cards[i]);
+      }
+      taken.forEach(li=>strip.appendChild(li));
+      return howMany - taken.length;
+    }
+
+    function fillForward(rem){
+      if (rem <= 0 || !nextHref) return Promise.resolve(rem);
+      return getCardsFrom(nextHref).then(({doc,cards})=>{
+        rem = take(cards, rem);
+        nextHref = doc ? selNextFrom(doc) : null;
+        return (rem>0 && nextHref) ? fillForward(rem) : rem;
+      }).catch(()=>rem);
+    }
+
+    function fillBackward(rem){
+      if (rem <= 0 || !prevHref) return Promise.resolve(rem);
+      return getCardsFrom(prevHref).then(({doc,cards})=>{
+        // from prev page take from the END so we don’t just re-show its first items
+        cards = cards.slice().reverse();
+        rem = take(cards, rem);
+        prevHref = doc ? selPrevFrom(doc) : null;
+        return (rem>0 && prevHref) ? fillBackward(rem) : rem;
+      }).catch(()=>rem);
+    }
+
+    return fillForward(need).then(fillBackward).then(()=>{ /* done */ });
+  }
+
   var busy = false;
+
   function fadeSwap(newLis, newDoc){
     strip.classList.add('fade-out');
     setTimeout(function(){
@@ -338,8 +417,11 @@ title: "Rahul's Portfolio"
       strip.classList.remove('fade-out');
       void strip.offsetWidth;
       strip.classList.add('fade-in');
-      setTimeout(()=>strip.classList.remove('fade-in'), 260);
-      busy = false;
+
+      topUpRow(newDoc).finally(function(){
+        setTimeout(()=>strip.classList.remove('fade-in'), 260);
+        busy = false;
+      });
     }, 260);
   }
 
@@ -360,86 +442,26 @@ title: "Rahul's Portfolio"
     }).catch(()=>{ busy=false; });
   }
 
-  // Read the "next" href from a document (server page) or current DOM
-  function getNextHrefFrom(doc){
-    var a = doc && doc.querySelector('section.posts nav.pagination .next');
-    return (a && !a.classList.contains('is-disabled')) ? a.getAttribute('href') : null;
-  }
-
-  // How many cards fit in one row?
-  function computeColumns(){
-    var first = strip.querySelector('li.post-item');
-    if (!first) return 1;
-    var r = first.getBoundingClientRect();
-    var gap = parseFloat(getComputedStyle(strip).columnGap || getComputedStyle(strip).gap || 0) || 0;
-    var cardW = r.width;
-    var contW = strip.clientWidth;
-    var cols = Math.max(1, Math.floor((contW + gap) / (cardW + gap)));
-    return cols;
-  }
-
-  // Append extra cards from following pages until the current row is filled.
-  function topUpRow(seedDoc){
-    var want = computeColumns() - strip.children.length;
-    if (want <= 0) return Promise.resolve();
-    var nextHref = getNextHrefFrom(seedDoc || document);
-    if (!nextHref) return Promise.resolve();
-
-    function hop(href, need){
-      if (!href || need <= 0) return Promise.resolve();
-      return fetchPage(href).then(html=>{
-        var doc   = parseHTML(html);
-        var cards = Array.from(doc.querySelectorAll('section.posts ul li.post-item'));
-        // append up to 'need'
-        cards.slice(0, need).forEach(li => strip.appendChild(li));
-        // compute remaining need and next link
-        var stillNeed = Math.max(0, need - cards.length);
-        var next = getNextHrefFrom(doc);
-        if (stillNeed > 0 && next) return hop(next, stillNeed);
-      }).catch(()=>{ /* ignore fetch errors */ });
-    }
-
-    return hop(nextHref, want);
-  }
-
-  // Hook into your existing fadeSwap so it fills the row after swapping
-  var _fadeSwap = fadeSwap; // keep original
-  fadeSwap = function(newLis, newDoc){
-    strip.classList.add('fade-out');
-    setTimeout(function(){
-      strip.innerHTML = '';
-      newLis.forEach(li=>strip.appendChild(li));
-      syncPagersFrom(newDoc);
-      strip.classList.remove('fade-out');
-      void strip.offsetWidth;
-      strip.classList.add('fade-in');
-
-      // NEW: fill remaining space with cards from next pages
-      topUpRow(newDoc).finally(function(){
-        setTimeout(()=>strip.classList.remove('fade-in'), 260);
-        busy = false;
-      });
-    }, 260);
-  };
-
-  // Also top-up on the first paint (page load)
-  window.addEventListener('load', function(){
-    // Give layout a tick to measure widths correctly
-    setTimeout(function(){ topUpRow(document); }, 50);
-  });
-  
-  // IMPORTANT: stop other global click handlers (like your tab-btn ?y appender)
+  // Pager clicks
   document.addEventListener('click', function(e){
     var a = e.target.closest('section.posts nav.pagination a');
     if (!a) return;
-
     e.preventDefault();
     e.stopPropagation();
-    e.stopImmediatePropagation();   // <- blocks the global a.tab-btn handler
-
+    e.stopImmediatePropagation();
     if (a.classList.contains('prev')) handle(-1);
     else if (a.classList.contains('next')) handle(1);
   }, true);
+
+  // First paint + resize top-up
+  window.addEventListener('load', function(){ setTimeout(function(){ topUpRow(document); }, 50); });
+  var rAF, lastW = 0;
+  window.addEventListener('resize', function(){
+    if (strip.clientWidth === lastW) return;
+    lastW = strip.clientWidth;
+    if (rAF) cancelAnimationFrame(rAF);
+    rAF = requestAnimationFrame(function(){ topUpRow(document); });
+  });
 })();
 </script>
 
