@@ -5,6 +5,8 @@ date: 2021-09-06 14:12:43
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/ai_text_to_slides.webp
+demo_link: https://rahuls-ai-text-to-slide.streamlit.app/
+github_link: https://github.com/RahulBhattacharya1/ai_text_to_slide
 ---
 
 This project turns free-form text into a branded slide deck using **Streamlit**, **OpenAI**, or an offline rule-based generator, and converts the result into a downloadable PowerPoint using `python-pptx`.
