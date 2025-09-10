@@ -209,8 +209,19 @@
               {% endif %}
               {% if page.share != false %}
                 <a id="share-btn" class="btn btn--share" href="#" aria-label="Share this post">Share</a>
-                <!-- Edit Post link (hidden by default) -->
               {% endif %}
+              <a id="share-btn" class="btn btn--share" href="#" aria-label="Share this post">Share</a>
+              <button
+                class="btn btn--share btn--like"
+                type="button"
+                data-like-id="{{ page.url | slugify }}"
+                data-like-pub="{{ page.date | date: '%Y-%m-%d' }}"
+                aria-label="Like this post"
+                aria-pressed="false">
+                <span class="icon">♥</span>
+                <span class="label">Like</span>
+                <span class="count"></span>
+              </button>
               {% if page.demo_link or page.github_link %}
                 <span class="post-cta">
                   {% if page.demo_link %}
@@ -221,18 +232,6 @@
                   {% endif %}
                 </span>
               {% endif %}
-              <!-- Like: inline with date -->
-              <span class="like-wrap">
-                <button class="like-btn"
-                        data-id="{{ page.url | slugify }}"
-                        data-pub="{{ page.date | date: '%Y-%m-%d' }}"
-                        aria-label="Like this post"
-                        aria-pressed="false">
-                  <span class="like-heart" aria-hidden="true">♥</span>
-                  <span class="like-text">Like</span>
-                  <span class="like-count">0</span>
-                </button>
-              </span>
             </p>
           </header>
         {% endunless %}
