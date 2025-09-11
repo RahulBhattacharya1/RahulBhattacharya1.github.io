@@ -1462,21 +1462,25 @@ pre {
 }
 
 
-/* Shared palette (optional) */
+/* Shared palette */
 :root{
-  --btn-share-bg:  #f4f7ff;
-  --btn-share-border: #cfd8ff;
-  --btn-like-bg:   #DC9E0C;   /* Like = distinct bg */
-  --btn-like-border:#C88F0A;
+  --btn-share-bg:    #f4f7ff;
+  --btn-share-border:#cfd8ff;
+
+  /* LIKE palette (light pink pill, readable pink text) */
+  --like-bg:   #ffe8f0;   /* background */
+  --like-bd:   #f5b3c8;   /* border */
+  --like-fg:   #d61f69;   /* text/icon (good contrast) */
 }
 
-/* Like button: minimal + symmetric with Share */
+/* Like button: symmetric with Share, different colors */
 .btn--like{
   display:inline-flex;
   align-items:center;
   gap:.35rem;
-  background: var(--btn-like-bg, #DC9E0C);
-  border-color: var(--btn-like-border, #C88F0A);
+  background: var(--like-bg);
+  border-color: var(--like-bd);
+  color: var(--like-fg);
 }
 .btn--like .icon{ font-size:.95em; line-height:1; }
 .btn--like .count{ min-width:2ch; font-variant-numeric:tabular-nums; }
@@ -1484,6 +1488,16 @@ pre {
 .btn--like:hover{ filter:brightness(0.98); }
 .btn--like:active{ transform:translateY(1px); }
 .btn--like.liked{ filter:saturate(1.05) brightness(1.02); }
+
+/* Heart fill behavior (requires inline SVG with class="heart") */
+.btn--like .heart{
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.btn--like.liked .heart{
+  fill: currentColor;  /* stays filled after click */
+}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
