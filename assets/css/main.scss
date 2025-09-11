@@ -557,6 +557,13 @@ body {
   text-decoration: none;
 }
 
+/* Share count number formatting */
+.btn--share .count{
+  min-width: 2ch;
+  font-variant-numeric: tabular-nums;
+  margin-left: .35rem;
+}
+
 .btn--share:hover {
   background: #145dbf;
 }
