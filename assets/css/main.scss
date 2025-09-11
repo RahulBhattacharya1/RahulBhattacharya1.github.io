@@ -1535,6 +1535,13 @@ pre {
 .featured-strip .post-text .icon-links a::after{content:none!important;display:none!important}
 .featured-strip .post-text .icon-links img{display:block;transform:none!important}
 
+/* Nuke corner/hover effects just for Featured icons */
+.featured-strip .post-text .btn-cta{
+  position:static!important; background:none!important; box-shadow:none!important; transform:none!important;
+}
+.featured-strip .post-text .btn-cta::before,
+.featured-strip .post-text .btn-cta::after{content:none!important; display:none!important}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
