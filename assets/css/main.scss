@@ -1481,6 +1481,13 @@ pre {
   background: var(--like-bg);
   border-color: var(--like-bd);
   color: var(--like-fg);
+	
+  border: none;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  line-height: 1.2;
+  border-radius: 4px;
+  text-decoration: none;
 }
 .btn--like .icon{ font-size:.95em; line-height:1; }
 .btn--like .count{ min-width:2ch; font-variant-numeric:tabular-nums; }
