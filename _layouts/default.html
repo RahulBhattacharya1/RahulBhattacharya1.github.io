@@ -208,7 +208,15 @@
                 </span>
               {% endif %}
               {% if page.share != false %}
-                <a id="share-btn" class="btn btn--share" href="#" aria-label="Share this post">Share</a>
+                <a id="share-btn"
+                   class="btn btn--share"
+                   href="#"
+                   data-share-id="{{ page.url | slugify }}"
+                   data-share-pub="{{ page.date | date: '%Y-%m-%d' }}"
+                   aria-label="Share this post">
+                  <span class="label">Share</span>
+                  <span class="count"></span>
+                </a>
               {% endif %}
               <button
                 class="btn btn--like"
@@ -1206,6 +1214,7 @@ window.addEventListener("load", function () {
 </script>
 
 <script defer src="{{ '/assets/js/faux-likes.js' | relative_url }}"></script>
+<script defer src="/assets/js/faux-share-count.js"></script>
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
