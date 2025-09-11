@@ -1528,6 +1528,19 @@ pre {
   fill: currentColor;  /* stays filled after click */
 }
 
+.featured-strip .post-text .icon-links {
+  display: flex;
+  align-items: center;
+  gap: 0px;             /* space between icons */
+  margin-top: 4px;      /* small spacing below snippet */
+}
+
+.featured-strip .post-text .icon-links img {
+  /*height: 16px;
+  width: 16px;*/
+  display: block;
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
