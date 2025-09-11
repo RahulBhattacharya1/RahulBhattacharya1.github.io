@@ -1502,7 +1502,7 @@ pre {
   background:var(--like-bg);
   border-color:var(--like-bd);
   color:var(--like-fg);
-  filter:brightness(0.98);          /* optional subtle hover */
+  /*filter:brightness(0.98);           optional subtle hover */
 }
 
 /* Heart fill behavior (requires inline SVG with class="heart") */
