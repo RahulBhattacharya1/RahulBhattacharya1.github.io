@@ -1528,18 +1528,12 @@ pre {
   fill: currentColor;  /* stays filled after click */
 }
 
-.featured-strip .post-text .icon-links {
-  display: flex;
-  align-items: center;
-  gap: 2px;             /* space between icons */
-  margin-top: 4px;      /* small spacing below snippet */
-}
-
-.featured-strip .post-text .icon-links img {
-  /*height: 16px;
-  width: 16px;*/
-  display: block;
-}
+/* one-line row + kill corner/hover only for icon links */
+.featured-strip .post-text .icon-links{display:flex;align-items:center;gap:2px;margin-top:4px}
+.featured-strip .post-text .icon-links a{position:static!important;background:none!important;box-shadow:none!important;transform:none!important}
+.featured-strip .post-text .icon-links a::before,
+.featured-strip .post-text .icon-links a::after{content:none!important;display:none!important}
+.featured-strip .post-text .icon-links img{display:block;transform:none!important}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
