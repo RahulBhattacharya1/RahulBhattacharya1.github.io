@@ -3,7 +3,7 @@ layout: default
 title: "My own AI Model for Sentiment Analysis"
 date: 2025-09-09 17:24:32
 categories: [ai]
-tags: [python,streamlit,bert]
+tags: [python,streamlit,bert,self-trained]
 thumbnail: /assets/images/ai_rock_paper_scissor.webp
 demo_link: https://rahuls-ai-sentiment-analysis.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_sentiment_analysis
