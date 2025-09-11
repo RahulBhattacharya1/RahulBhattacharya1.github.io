@@ -312,6 +312,12 @@ body {
   gap: 8px; /* space between date and button */
   flex-wrap: wrap;
 }
+
+.post-meta .post-cta {
+  display: inline-flex;   /* line up with Share / Like */
+  align-items: center;    /* vertically align icons */
+  gap: 6px;               /* small gap between multiple icons */
+}
    
 .post-hero img {
   display: block;
