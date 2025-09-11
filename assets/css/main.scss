@@ -1535,15 +1535,15 @@ pre {
 .featured-strip .post-text .icon-links a::after{content:none!important;display:none!important}
 .featured-strip .post-text .icon-links img{display:block;transform:none!important}
 
-/* Disable page curl on icons */
-.icon-links .btn-cta {
+/* cancel curl for icons */
+.icon-links img {
   animation: none !important;
-  -webkit-animation: none !important;
+  clip-path: none !important;
 }
 
-.icon-links .btn-cta::before,
-.icon-links .btn-cta::after {
+.icon-links::after {
   content: none !important;
+  animation: none !important;
 }
 
 /* Giscus Comments Box */
