@@ -1482,7 +1482,7 @@ pre {
   border-color: var(--like-bd);
   color: var(--like-fg);
 	
-  border: none;
+  border: 1px;
   font-size: 0.75rem;
   padding: 2px 8px;
   line-height: 1.2;
@@ -1492,9 +1492,18 @@ pre {
 .btn--like .icon{ font-size:.95em; line-height:1; }
 .btn--like .count{ min-width:2ch; font-variant-numeric:tabular-nums; }
 
-.btn--like:hover{ filter:brightness(0.98); }
-.btn--like:active{ transform:translateY(1px); }
+.btn.btn--like:active{ transform:translateY(1px); }
 .btn--like.liked{ filter:saturate(1.05) brightness(1.02); }
+
+.btn.btn--like:hover,
+.btn.btn--like:focus,
+.btn.btn--like:focus-visible,
+.btn.btn--like:active{
+  background:var(--like-bg);
+  border-color:var(--like-bd);
+  color:var(--like-fg);
+  filter:brightness(0.98);          /* optional subtle hover */
+}
 
 /* Heart fill behavior (requires inline SVG with class="heart") */
 .btn--like .heart{
