@@ -378,28 +378,6 @@
     </main>
   </div>
 
-  <script>
-    (function () {
-      var btn = document.getElementById('share-btn');
-      if (!btn) return;
-      var url = "{{ page.url | absolute_url }}";
-      var title = "{{ page.title | escape }}";
-
-      btn.addEventListener('click', function () {
-        if (navigator.share) {
-          navigator.share({ title: title, url: url }).catch(function(){});
-        } else if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(url).then(function(){ btn.textContent = 'Link copied'; setTimeout(function(){ btn.textContent='Share'; }, 1200); });
-        } else {
-          var ta = document.createElement('textarea');
-          ta.value = url; document.body.appendChild(ta); ta.select();
-          try { document.execCommand('copy'); btn.textContent='Link copied'; setTimeout(function(){ btn.textContent='Share'; }, 1200); } catch(e){}
-          document.body.removeChild(ta);
-        }
-      });
-    })();
-  </script>
-
 {% if page.collection == "posts" %}
   
 <script>
