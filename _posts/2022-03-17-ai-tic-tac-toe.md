@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "My Virtual AI Powered Tic Tac Toe"
-date: 2021-12-17 11:21:45
+date: 2022-03-17 11:21:45
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/ai_rock_paper_scissor.webp
