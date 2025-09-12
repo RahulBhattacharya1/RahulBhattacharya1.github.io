@@ -4,7 +4,7 @@ title: "My Exciting AI Trip Planner"
 date: 2021-10-12 20:28:21
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/trip.webp
 demo_link: https://rahuls-ai-trip-planner.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_trip_planner
 featured: true
