@@ -4,7 +4,7 @@ title: "Enhancing my AI Text Summarizer"
 date: 2022-05-22 09:34:43
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/text_summarizer.webp
 demo_link: https://huggingface.co/spaces/RahulBhattacharya/RahulsTextSummarizer
 github_link: https://github.com/RahulBhattacharya1/ai_text_summarizer
 featured: true
