@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Enhancing my AI Summarizer"
+title: "Enhancing my AI Text Summarizer"
 date: 2022-05-22 09:34:43
 categories: [ai]
 tags: [python,streamlit,openai]
