@@ -4,7 +4,7 @@ title: "Building my own AI Financial Guide"
 date: 2021-12-18 14:25:12
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/financial.webp
 demo_link: https://rahuls-ai-financial-mentor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_financial_mentor
 featured: true
