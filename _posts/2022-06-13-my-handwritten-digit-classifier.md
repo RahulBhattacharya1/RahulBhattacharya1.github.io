@@ -4,7 +4,7 @@ title: "Building my AI Handwritten Digit Classifier"
 date: 2022-06-13 21:24:33
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/classifier2.webp
 demo_link: https://rahuls-ai-mnist-digit-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_mnist_digit_classifier
 featured: true
