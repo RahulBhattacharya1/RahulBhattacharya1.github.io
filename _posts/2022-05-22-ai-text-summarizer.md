@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Enhancing my AI Summarizer"
-date: 2022-01-01 08:22:12
+date: 2022-05-22 09:34:43
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/ai_rock_paper_scissor.webp
