@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Creating own AI News Topic Classifier"
-date: 2022-03-17 18:32:51
+date: 2022-06-13 21:24:33
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
 thumbnail: /assets/images/ai_rock_paper_scissor.webp
