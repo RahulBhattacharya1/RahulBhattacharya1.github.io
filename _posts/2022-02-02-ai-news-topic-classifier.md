@@ -5,8 +5,8 @@ date: 2022-02-02 15:22:41
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
 thumbnail: /assets/images/ai_rock_paper_scissor.webp
-demo_link: https://rahuls-ai-sentiment-analysis.streamlit.app/
-github_link: https://github.com/RahulBhattacharya1/ai_sentiment_analysis
+demo_link: https://rahuls-ai-news-topic-classifier.streamlit.app/
+github_link: https://github.com/RahulBhattacharya1/ai-news-topic-classifier
 featured: true
 ---
 
