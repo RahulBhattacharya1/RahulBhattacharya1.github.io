@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "My own AI Model for Sentiment Analysis"
-date: 2025-09-09 17:24:32
+date: 2025-05-09 12:23:49
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
 thumbnail: /assets/images/ai_rock_paper_scissor.webp
