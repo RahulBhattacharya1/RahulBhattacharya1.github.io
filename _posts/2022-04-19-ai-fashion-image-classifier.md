@@ -20,7 +20,6 @@ app.py
 infer.py
 requirements.txt
 train.py
-checkpoints/fashion_cnn.pt
 models/fashion_cnn.pt
 ```
 
@@ -424,10 +423,6 @@ files.download("models/fashion_cnn.pt")
 This documentation file tracks instructions, notes, and project background.
 
 ## Assets and binary files
-
-## `checkpoints/fashion_cnn.pt`
-
-This is a binary or non-text asset of size ~2168027 bytes. It is tracked so the application can run end to end.
 
 ## `models/fashion_cnn.pt`
 
