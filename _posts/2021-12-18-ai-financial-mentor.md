@@ -10,7 +10,9 @@ github_link: https://github.com/RahulBhattacharya1/ai_financial_mentor
 featured: true
 ---
 
-I built a financial mentor app in Streamlit. It makes short and clear suggestions. It can run with OpenAI or in an offline mode. The offline mode is helpful during demos. I wrote the code to be simple and predictable.
+It started with a simple thought that kept circling in my head: why do everyday financial choices feel so complicated? Deciding whether to tuck money away, invest it, or just spend a little extra often seems harder than it should be. I wondered what it would feel like if a small voice could cut through the noise and just say, “Here’s a clear step forward.” Not a lecture, not a spreadsheet—just something short and useful. That curiosity stuck with me, and before long it turned into the spark for building something of my own. I wanted a mentor in my pocket, and if it didn’t exist, I’d try to make it.
+
+I ended up building a financial mentor app in Streamlit. The whole design centers on making suggestions that are brief, clear, and actionable. It can run with OpenAI powering it or switch into an offline mode, which I found especially handy for demos where reliability matters more than fancy features. I wrote the code to stay simple and predictable, so anyone could look at it and immediately grasp how it works. The goal wasn’t to overwhelm with complexity but to offer something that feels approachable and consistent. What began as a small idea in my head became a working tool that gives people the quick guidance I once wished I had.
 
 # What this app does at a glance
 The app takes a goal, a horizon, and a risk level. It also takes an income range. It calls OpenAI and asks for JSON advice, or falls back to a rule list. It keeps track of usage and cost so I stay within a budget. It shows nice two column cards with clean text.
