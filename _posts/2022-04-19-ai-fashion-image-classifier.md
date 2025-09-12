@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Creating own AI News Topic Classifier"
+title: "Creating my own AI Fashion Image Classifier"
 date: 2022-03-17 14:10:23
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
