@@ -4,7 +4,7 @@ title: "Building my AI Powered UPSC Mock Exams"
 date: 2025-09-09 21:18:53
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/upsc.webp
 demo_link: https://rahuls-upsc-mock-test.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/upsc_mock_test
 featured: true
