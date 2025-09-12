@@ -10,7 +10,9 @@ github_link: https://github.com/RahulBhattacharya1/ai_sentiment_analyzer
 featured: true
 ---
 
-This post walks through my IMDB sentiment analysis app. I train a movie review classifier on IMDB. It uses the Transformers library for model and training. It wraps everything in a Gradio interface for the web. It also pushes the trained model to the Hugging Face Hub.
+The idea first struck me while scrolling through movie reviews late at night. Some comments felt spot on, others were wildly off, and I found myself wishing there were a way to instantly sense the overall tone without reading through every word. That moment made me imagine a tool that could act like a sharp set of eyes, quietly classifying whether a review was positive or negative. It didn’t need to argue or explain—it just needed to capture the sentiment hidden in the text. From that passing thought, the seed of a project was planted. What started as idle curiosity turned into my IMDB sentiment analysis app.
+
+This app trains a movie review classifier on the IMDB dataset, giving it a solid foundation in recognizing how opinions take shape in text. I leaned on the Transformers library to handle both the model and the training process, which kept the heavy lifting efficient and modern. To make the experience accessible, I wrapped everything in a Gradio interface so anyone could interact with it directly from the web without setup struggles. Once the model was trained, I pushed it to the Hugging Face Hub so it could live beyond my machine and be reused by others. The project blends practical engineering with a touch of creativity, turning a simple thought about reviews into a working application.
 
 ## Requirements I Used
 Below is the exact requirements file I used. These versions work well together. They support training and the web UI. They also support pushing to the Hub.
