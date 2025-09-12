@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Building My AI Resume Analyzer with Gradio + Transformers"
-date: 2025-08-25 18:22:00
+title: "Building My AI Resume Analyzer"
+date: 2025-07-19 15:54:21
 thumbnail: /assets/images/resume.webp
 categories: [ai]
 demo_link: https://huggingface.co/spaces/RahulBhattacharya/Rahuls_AI_Resume_Analyzer
