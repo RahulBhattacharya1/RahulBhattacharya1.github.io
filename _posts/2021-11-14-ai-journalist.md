@@ -4,7 +4,7 @@ title: "Making my AI Journalist"
 date: 2021-11-14 12:45:32
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/journalist.webp
 demo_link: https://rahuls-ai-journalist.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_journalist
 featured: true
