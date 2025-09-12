@@ -12,10 +12,6 @@ featured: true
 
 I built a Streamlit app that can plan trips with attractions and hikes. It works in two modes: offline and AI-powered using OpenAI. It also enforces usage limits to keep costs safe.
 
-In this post I show every code block. I paste the code and then explain in clear sentences what it does. I expand every helper and function so the breakdown is complete.
-
-
-
 ## Prelude (imports and setup)
 
 
@@ -1069,4 +1065,4 @@ The Hike dataclass stores trail details such as name, difficulty, distance, and 
 
 ## Conclusion
 
-I described every block of the project and expanded each function and helper. This breakdown shows how all pieces connect to make a full trip planner. The design keeps the app reliable and extendable while making usage safe and predictable.
+This shows how all pieces connect to make a full trip planner. The design keeps the app reliable and extendable while making usage safe and predictable.
