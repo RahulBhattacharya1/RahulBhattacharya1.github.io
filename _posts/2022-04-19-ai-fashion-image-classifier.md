@@ -4,7 +4,7 @@ title: "Creating my own AI Fashion Image Classifier"
 date: 2022-03-17 14:10:23
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/fashion_image_classifier.webp
 demo_link: https://rahuls-ai-fashion-image-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_fashion_image_classifier
 featured: true
