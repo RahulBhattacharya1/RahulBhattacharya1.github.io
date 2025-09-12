@@ -4,7 +4,7 @@ title: "Creating own AI News Topic Classifier"
 date: 2022-02-02 15:22:41
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/classifier.webp
 demo_link: https://rahuls-ai-news-topic-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-news-topic-classifier
 featured: true
