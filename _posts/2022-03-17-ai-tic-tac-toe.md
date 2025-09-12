@@ -4,7 +4,7 @@ title: "My Virtual AI Powered Tic Tac Toe"
 date: 2022-03-17 11:21:45
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/tictactoe.webp
 demo_link: https://rahuls-ai-tic-tac-toe.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_tic_tac_toe
 featured: true
