@@ -4,7 +4,7 @@ title: "Creating my AI Tourism Forecasting App"
 date: 2025-03-07 13:46:39
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/tourism.webp
 demo_link: https://rahuls-ai-tourism-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_tourism_forecasting
 featured: true
