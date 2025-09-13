@@ -346,6 +346,17 @@ title: "Rahul's Portfolio"
     max-width: 100% !important;
   }
 
+  /* Featured: allow pager JS to hide non-current items */
+  #featured-strip .post-item {
+    display: flex;                 /* no !important */
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+
   /* optional: keep thumbnails consistent (square) */
   :root { --mobile-thumb: 110px; }  /* adjust to 120–140px if desired */
 
