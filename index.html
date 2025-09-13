@@ -228,51 +228,7 @@ title: "Rahul's Portfolio"
 .featured-strip.fade-out{ opacity:0; transform:translateY(4px); }
 .featured-strip.fade-in { opacity:1; transform:translateY(0); }
 
-/* MOBILE ONLY: tighten spacing between blog cards */
-@media (max-width: 720px) {
-  /* list container */
-  section.posts .post-strip{
-    display:flex !important;
-    flex-direction:column !important;
-    gap:8px !important;            /* single source of vertical spacing */
-    margin:0 !important;
-    padding:0 !important;
-    list-style:none !important;
-    overflow:visible !important;
-    white-space:normal !important;
-    scroll-snap-type:none !important;
-  }
 
-  /* each card */
-  section.posts .post-strip .post-item{
-    display:flex !important;
-    flex-direction:row !important; /* image left, text right */
-    align-items:flex-start !important;
-    gap:6px !important; /* gap between thumbnail and post title */
-    margin:0 !important;           /* remove extra bottom margin */
-    padding:0 !important;
-  }
-
-  /* text block spacing */
-  section.posts .post-strip .post-text p{
-    margin:0.3rem 0 0 !important;  /* small, consistent */
-    line-height:1.4 !important;
-  }
-
-  /* Make each card truly full-width */
-  #post-strip > li.post-item{
-    margin: 0 !important;          /* kill any li side margins */
-    padding: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-.post-strip .post-item .thumb{margin-bottom:0rem}
-.post-strip .post-item .post-text a{margin-bottom:0}
-.post-strip .post-item .post-text p{font-size:.8rem;line-height:1.4;color:#555}
-
-  
-}
 
 /* MOBILE: neutralize main.scss card constraints that create gaps */
 @media (max-width: 720px) {
