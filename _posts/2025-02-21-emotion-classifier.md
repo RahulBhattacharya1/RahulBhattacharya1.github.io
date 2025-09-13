@@ -5,8 +5,8 @@ date: 2025-09-09 21:18:53
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/tictactoe.webp
-demo_link: https://rahuls-upsc-mock-test.streamlit.app/
-github_link: https://github.com/RahulBhattacharya1/upsc_mock_test
+demo_link: https://rahuls-ai-emotion-classifier.streamlit.app/
+github_link: https://github.com/RahulBhattacharya1/ai_emotion_classifier
 featured: true
 ---
 
