@@ -25,8 +25,17 @@ title: "Rahul's Portfolio"
       {%- if post.featured == true -%}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}"
-                 alt="{{ post.title }}" loading="lazy">
+            <picture>
+              {% if post.thumbnail_mobile %}
+                <source srcset="{{ post.thumbnail_mobile | relative_url }}" media="(max-width: 767px)">
+              {% endif %}
+              {% if post.thumbnail %}
+                <source srcset="{{ post.thumbnail | relative_url }}" media="(min-width: 768px)">
+              {% endif %}
+              <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}"
+                   alt="{{ post.title }}" loading="lazy">
+            </picture>
+
           </a>
           <div class="post-text">
             <a class="title" href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
