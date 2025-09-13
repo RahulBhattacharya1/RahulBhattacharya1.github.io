@@ -248,7 +248,7 @@ title: "Rahul's Portfolio"
   .post-strip > .post-item{
     flex: 1 1 auto !important;             /* was flex: 0 0 var(--card-w,180px) */
     max-width: 100% !important;
-    gap:6px !important; /* gap between thumbnail and post title */
+    gap:8px !important; /* gap between thumbnail and post title */
   }
 
   /* Make each card row-style (image left, text right) full-width */
@@ -257,7 +257,7 @@ title: "Rahul's Portfolio"
     flex-direction: row !important;        /* was column */
     align-items: flex-start !important;
     max-width: 100% !important;            /* was var(--card-w,180px) */
-    margin: 0 !important;
+    margin: 0 0 2px 0 !important;
     padding: 0 !important;
   }
 
@@ -285,10 +285,8 @@ title: "Rahul's Portfolio"
 
   /* Also neutralize the 640px flex-basis=240px rule from main.scss */
   .post-strip > .post-item{ flex-basis: auto !important; }
-}
 
 /* MOBILE ONLY: make blog thumbnails perfect 1:1 squares */
-@media (max-width: 720px) {
 
   /* choose your square size once */
   :root { --mobile-thumb: 110px; }   /* try 120–140px if you want larger */
