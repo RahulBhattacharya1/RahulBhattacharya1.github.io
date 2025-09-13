@@ -287,6 +287,43 @@ title: "Rahul's Portfolio"
   .post-strip > .post-item{ flex-basis: auto !important; }
 }
 
+/* MOBILE ONLY: make blog thumbnails perfect 1:1 squares */
+@media (max-width: 720px) {
+
+  /* choose your square size once */
+  :root { --mobile-thumb: 110px; }   /* try 120–140px if you want larger */
+
+  /* the thumbnail column */
+  section.posts .post-strip .thumb{
+    flex: 0 0 var(--mobile-thumb) !important;
+    width: var(--mobile-thumb) !important;
+    max-width: var(--mobile-thumb) !important;
+  }
+
+  /* ensure the <picture> wrapper conforms to the square */
+  section.posts .post-strip .thumb picture{
+    display: block !important;
+    width: var(--mobile-thumb) !important;
+    height: var(--mobile-thumb) !important;
+  }
+
+  /* force the <img> to fill the square and crop neatly */
+  section.posts .post-strip .thumb img{
+    display: block !important;
+    width: var(--mobile-thumb) !important;
+    height: var(--mobile-thumb) !important;
+    max-width: none !important;        /* override any global img max-width */
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;      /* clean crop */
+    border-radius: 10px;               /* keep your rounded look */
+  }
+
+  /* let text take the rest of the row */
+  section.posts .post-strip .post-text{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+}
 
 </style>
 
