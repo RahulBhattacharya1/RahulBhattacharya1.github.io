@@ -3,6 +3,7 @@ layout: default
 title: "Building My AI Resume Analyzer"
 date: 2025-07-19 15:54:21
 thumbnail: /assets/images/resume.webp
+thumbnail_mobile: /assets/images/resume_sq.webp
 categories: [ai]
 demo_link: https://huggingface.co/spaces/RahulBhattacharya/Rahuls_AI_Resume_Analyzer
 github_link: https://github.com/RahulBhattacharya1/ai_resume_analyzer
