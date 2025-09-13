@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Strengthening my AI Movie Rating Predictor"
-date: 2025-09-09 21:18:53
+date: 2025-01-16 07:22:31
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/tictactoe.webp
