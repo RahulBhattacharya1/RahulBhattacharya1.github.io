@@ -260,6 +260,20 @@ title: "Rahul's Portfolio"
   }
 }
 
+@media (max-width: 720px) {
+  /* shrink thumbnail so text has room */
+  section.posts .post-strip .thumb {
+    flex: 0 0 100px !important;  /* was 170px */
+    max-width: 100px !important;
+  }
+
+  /* allow text to fill the rest */
+  section.posts .post-strip .post-text {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;     /* prevents squishing */
+  }
+}
+
 </style>
 
 <script>
