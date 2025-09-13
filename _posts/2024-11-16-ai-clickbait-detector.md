@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Building my AI Powered UPSC Mock Exams"
+title: "My AI Headline Clickbait Detector"
 date: 2024-11-16 10:22:51
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/tictactoe.webp
-demo_link: https://rahuls-upsc-mock-test.streamlit.app/
-github_link: https://github.com/RahulBhattacharya1/upsc_mock_test
+demo_link: https://rahuls-ai-headline-clickbait-detector.streamlit.app/
+github_link: https://github.com/RahulBhattacharya1/ai_headline_clickbait_detector
 featured: true
 ---
 
