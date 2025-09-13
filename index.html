@@ -234,7 +234,7 @@ title: "Rahul's Portfolio"
 @media (max-width: 720px) {
 
   /* Let the list be a vertical stack with controlled spacing */
-  .featured-strip .post-strip{
+   .post-strip{
     display: flex !important;
     flex-direction: column !important;
     gap: 8px !important;
@@ -321,6 +321,71 @@ title: "Rahul's Portfolio"
     flex: 1 1 auto !important;
     min-width: 0 !important;
   }
+
+  /* MOBILE: make Featured stack vertically like Posts */
+  /* same container behavior for both lists */
+  #post-strip,
+  #featured-strip {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;        /* set to 2px if you want tighter spacing */
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  /* row layout for cards (image left, text right) */
+  #featured-strip .post-item,
+  #post-strip .post-item {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* optional: keep thumbnails consistent (square) */
+  :root { --mobile-thumb: 110px; }  /* adjust to 120–140px if desired */
+
+  #featured-strip .thumb,
+  #post-strip .thumb {
+    flex: 0 0 var(--mobile-thumb) !important;
+    max-width: var(--mobile-thumb) !important;
+    width: var(--mobile-thumb) !important;
+  }
+
+  #featured-strip .thumb picture,
+  #post-strip .thumb picture {
+    display: block !important;
+    width: var(--mobile-thumb) !important;
+    height: var(--mobile-thumb) !important;
+  }
+
+  #featured-strip .thumb img,
+  #post-strip .thumb img {
+    display: block !important;
+    width: var(--mobile-thumb) !important;
+    height: var(--mobile-thumb) !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    border-radius: 10px;
+  }
+
+  #featured-strip .post-text,
+  #post-strip .post-text {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  /* compact body copy */
+  #featured-strip .post-text p,
+  #post-strip .post-text p {
+    margin: 0.3rem 0 0 !important;
+    line-height: 1.4 !important;
+  }
+
 }
 
 </style>
