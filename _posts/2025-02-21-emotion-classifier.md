@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Creating my AI Powered Emotion Classifier"
-date: 2025-09-09 21:18:53
+date: 2025-02-21 09:11:46
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/tictactoe.webp
