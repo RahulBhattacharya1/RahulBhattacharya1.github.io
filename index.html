@@ -274,6 +274,61 @@ title: "Rahul's Portfolio"
   
 }
 
+/* MOBILE: neutralize main.scss card constraints that create gaps */
+@media (max-width: 720px) {
+
+  /* Let the list be a vertical stack with controlled spacing */
+  .post-strip{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;                 /* overrides main.scss bottom padding */
+    list-style: none !important;
+    overflow: visible !important;
+  }
+
+  /* Override the fixed card width/basis from main.scss */
+  .post-strip > .post-item{
+    flex: 1 1 auto !important;             /* was flex: 0 0 var(--card-w,180px) */
+    max-width: 100% !important;
+  }
+
+  /* Make each card row-style (image left, text right) full-width */
+  .post-strip .post-item{
+    display: flex !important;
+    flex-direction: row !important;        /* was column */
+    align-items: flex-start !important;
+    max-width: 100% !important;            /* was var(--card-w,180px) */
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Tighten media/text spacing */
+  .post-strip .post-item .thumb{
+    flex: 0 0 110px !important;            /* give text room */
+    max-width: 110px !important;
+    margin: 0 !important;                  /* kills .6rem bottom margin from SCSS */
+  }
+
+  .post-strip .post-item .post-text{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .post-strip .post-item .post-text a{
+    margin-bottom: 0.2rem !important;      /* was .4rem in SCSS */
+  }
+
+  .post-strip .post-item .post-text p{
+    margin: 0.3rem 0 0 !important;
+    line-height: 1.4 !important;
+    font-size: .9rem !important;
+  }
+
+  /* Also neutralize the 640px flex-basis=240px rule from main.scss */
+  .post-strip > .post-item{ flex-basis: auto !important; }
+}
 
 
 </style>
