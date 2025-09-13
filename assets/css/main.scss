@@ -1546,6 +1546,58 @@ pre {
   animation: none !important;
 }
 
+/* ---- Blog list: consistent, tight spacing (desktop + mobile) ---- */
+
+section.posts .post-strip {
+  display: flex;
+  flex-direction: column;
+  /* Single source of truth for vertical spacing between cards */
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+section.posts .post-strip .post-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;     /* space between thumbnail and text */
+  margin: 0;     /* kill extra margins that create tall gaps */
+  padding: 0;
+}
+
+/* Thumbnail sizing that won’t force extra height */
+section.posts .post-strip .thumb {
+  flex: 0 0 170px;
+  max-width: 170px;
+}
+section.posts .post-strip .thumb img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Text block spacing kept tight */
+section.posts .post-strip .post-text p {
+  margin: 0.35rem 0 0;   /* small, consistent */
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+/* Mobile: slightly smaller thumb; keep ONE definition only */
+@media (max-width: 720px) {
+  section.posts .post-strip { gap: 8px; }
+
+  section.posts .post-strip .thumb {
+    flex: 0 0 130px;
+    max-width: 130px;
+  }
+  section.posts .post-strip .post-item { gap: 10px; }
+  section.posts .post-strip .post-text p { margin-top: 0.3rem; }
+}
+
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
