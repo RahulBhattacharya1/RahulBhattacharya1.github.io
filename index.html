@@ -435,6 +435,32 @@ title: "Rahul's Portfolio"
   .author-avatar{ width:15px; height:15px; }
 }
 
+/* Author row — force tiny circle and prevent theme image rules from scaling it */
+.post-text .author-meta{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:6px;
+  font-size:.8rem;
+  color:#6b7280;
+}
+
+.post-text .author-meta .author-avatar{
+  width:18px !important;
+  height:18px !important;
+  border-radius:50% !important;
+  object-fit:cover !important;
+  display:inline-block !important;
+  flex:0 0 18px;            /* reserve tiny fixed space */
+  margin:0;                 /* neutralize any global img margins */
+  vertical-align:middle;
+}
+
+/* optional: slightly smaller on very small phones */
+@media (max-width: 480px){
+  .post-text .author-meta{ font-size:.76rem; gap:5px; }
+  .post-text .author-meta .author-avatar{ width:16px !important; height:16px !important; flex-basis:16px; }
+}
 
 </style>
 
