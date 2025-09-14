@@ -150,3 +150,54 @@ body {
 
 /* 7) Don’t clamp outer glow: only hide accidental horizontal scroll, not shadows */
 html, body, .mobile-profile{ overflow-x:hidden; }
+
+/* --- Premium look fixes (append at end) --- */
+
+/* More room so the rim + glow can breathe */
+.mobile-profile { padding: 0 22px; }
+
+/* Stop header squeeze; let CTA wrap under on very small screens */
+.mobile-profile .card{
+  grid-template-columns: 68px 1fr;
+  gap: 18px;
+  padding: 20px;
+  /* Keep rounded-corner clipping for content, but fake the outer glow with filters */
+  /* (works despite overflow:hidden) */
+  filter:
+    drop-shadow(0 14px 28px rgba(2,6,23,.12))
+    drop-shadow(0 0 22px rgba(139,92,246,.22))
+    drop-shadow(0 0 28px rgba(96,165,250,.18))
+    drop-shadow(0 0 34px rgba(236,72,153,.16));
+  transform: translateZ(0); /* smoother animations */
+}
+
+/* Thicker animated rim so it’s visible on-device as in W3 editor */
+.mobile-profile .card::before{
+  padding: 4px;          /* was ~2.5px */
+  opacity: 1;
+  background-size: 250% 100%, 100% 100%; /* stronger sweep */
+}
+
+/* On very narrow widths, move CTA below the title */
+@media (max-width: 420px){
+  .mobile-profile .act{
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 4px;
+  }
+}
+
+/* Give inner blocks the same airy feel you saw in the demo */
+.mobile-profile .stats{ gap: 14px; }
+.mobile-profile .micro{
+  box-shadow: 0 12px 30px rgba(2,6,23,.08), 0 1px 0 rgba(255,255,255,.8) inset;
+}
+
+/* Ensure animations actually run when allowed */
+@media (prefers-reduced-motion: no-preference){
+  .mobile-profile .avatar-wrap{ animation: float 5.5s ease-in-out infinite; }
+  .mobile-profile .card::before{ animation: sheen 6s ease-in-out infinite; }
+}
+
+/* Small bug: make sure Projects tab displays */
+.mobile-profile #tab-projects:checked ~ .tab-panels #panel-projects{ display:block; }
