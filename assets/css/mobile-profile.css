@@ -91,55 +91,6 @@ mobile-profile #tab-projects:checked ~ .tab-panels #panel-projects{ display:bloc
   white-space: nowrap !important;
 }
 
-/* Keep the mount and section inside the viewport */
-#mobile-profile-root { max-width: 100%; overflow-x: hidden; }
-.mobile-profile      { max-width: 100%; overflow-x: hidden; }
-
-/* Make the card layout box respect the viewport width */
-.mobile-profile .card{
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Rim/gradient can cause sub-pixel overflow on some devices—hide it */
-html, body { overflow-x: hidden; }
-
-/* Optional: slightly tighten horizontal padding on very small screens */
-@media (max-width: 720px){
-  .mobile-profile.stage { padding-left: 12px; padding-right: 12px; }
-  .mobile-profile .tab-controls{ overflow:auto; scrollbar-width:none; }
-  .mobile-profile .tab-controls::-webkit-scrollbar{ display:none; }
-}
-
-/* 1) Contain width + padding */
-.mobile-profile{
-  box-sizing: border-box;         /* include padding in width */
-  padding-left: 16px;             /* was var(--pad) = 28px */
-  padding-right: 16px;
-  max-width: 100vw;               /* hard stop at viewport edge */
-}
-
-/* 2) Ensure the grid can shrink without pushing overflow */
-.mobile-profile .card{
-  width: 100%;
-  box-sizing: border-box;
-  grid-template-columns: 68px minmax(0,1fr) auto; /* allow middle to shrink */
-}
-.mobile-profile .card > div:nth-of-type(2){
-  min-width: 0;                    /* let text wrap instead of forcing width */
-}
-.mobile-profile .act{
-  max-width: 100%;
-  white-space: nowrap;             /* keep the label tidy */
-}
-
-/* 3) Safety rails on the mount */
-#mobile-profile-root{ max-width:100vw; overflow-x:hidden; }
-
-/* 4) Optional: tighter edge padding on very small screens */
-@media (max-width: 480px){
-  .mobile-profile{ padding-left: 12px; padding-right: 12px; }
-}
 
 #mobile-profile-root,
 .mobile-profile,
