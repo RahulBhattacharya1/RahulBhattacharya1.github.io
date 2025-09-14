@@ -15,7 +15,7 @@
   const root = document.getElementById("mobile-profile-root");
   if (!root) return;
   try {
-    const res = await fetch("/partials/mobile-profile.html", { credentials: "same-origin" });
+    const res = await fetch("/mobile-profile.html", { credentials: "same-origin" });
     if (!res.ok) return;
     const html = await res.text();
     root.innerHTML = html;
