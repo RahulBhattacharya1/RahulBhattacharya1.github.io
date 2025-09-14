@@ -106,3 +106,47 @@ body {
 }
 
 
+/* 1) Give the card more breathing room and space for the rim/glow */
+.mobile-profile { padding: 0 22px; }
+.mobile-profile .card{
+  grid-template-columns: 68px 1fr;   /* stop squeezing the title next to the button */
+  gap: 18px;
+  padding: 20px;                     /* a touch more inner room */
+  transform: translateZ(0);          /* promote to GPU for smoother anims */
+}
+
+/* 2) Thicker animated rim + soft ambient glow so it doesn’t look flat */
+.mobile-profile .card::before{
+  padding: 4px;                      /* was ~2.5px; makes the rim pop */
+  opacity: 1;
+}
+.mobile-profile .card::after{
+  /* soft halo outside the card to match the left preview */
+  content:"";
+  position:absolute; inset:-16px; border-radius:22px;
+  background: radial-gradient(60% 60% at 15% 0%,
+              rgba(139,92,246,.28), rgba(96,165,250,.22) 40%, rgba(236,72,153,.18) 70%, transparent 80%);
+  filter: blur(16px);
+  z-index:-1;                         /* sits behind the card */
+}
+
+/* 3) Make micro cards & stats breathe a bit more */
+.mobile-profile .stats{ gap:14px; }
+.mobile-profile .micro{ box-shadow: 0 12px 30px rgba(2,6,23,.08), 0 1px 0 rgba(255,255,255,.8) inset; }
+
+/* 4) Keep the CTA but stop it from cramping the title on very narrow screens */
+@media (max-width: 420px){
+  .mobile-profile .act{ grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+}
+
+/* 5) Ensure animations actually run (some stacks freeze them without this) */
+@media (prefers-reduced-motion: no-preference){
+  .mobile-profile .avatar-wrap{ animation: float 5.5s ease-in-out infinite; }
+  .mobile-profile .card::before{ animation: sheen 6s ease-in-out infinite; }
+}
+
+/* 6) Fix a tiny selector typo so Projects tab can show its panel */
+.mobile-profile #tab-projects:checked ~ .tab-panels #panel-projects{ display:block; }
+
+/* 7) Don’t clamp outer glow: only hide accidental horizontal scroll, not shadows */
+html, body, .mobile-profile{ overflow-x:hidden; }
