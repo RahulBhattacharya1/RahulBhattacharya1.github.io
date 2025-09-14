@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Enhancing my Student Performance Predictor"
+title: "Building my AI Water Quality Predictor"
 date: 2024-04-22 09:16:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/wafer.webp
-demo_link: https://rahuls-ai-student-performance.streamlit.app/
-github_link: https://github.com/RahulBhattacharya1/ai_student_performance
+demo_link: https://rahuls-ai-indian-water.streamlit.app/
+github_link: https://github.com/RahulBhattacharya1/ai_indian_water
 featured: true
 ---
 
