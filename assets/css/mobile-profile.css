@@ -4,7 +4,7 @@
 
 /* Component scope + design tokens */
 .mobile-profile{
-  --pad:28px; --ink:#1e293b;
+  --pad:8px; --ink:#1e293b;
   --sub:#5b6b82; --muted:#6b7280;
   --line:#e6e1d9; --bg:#ffffff; --radius:22px;
   --v:#8b5cf6; --b:#60a5fa; --p:#ec4899;
