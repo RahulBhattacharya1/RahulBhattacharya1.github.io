@@ -46,6 +46,10 @@ title: "Rahul's Portfolio"
                 {{ post.excerpt | strip_html | truncate: 70 }}
               {% endif %}
             </p>
+            <div class="author-meta">
+              <img src="/assets/images/avatar.webp" alt="Rahul" class="author-avatar">
+              <span class="author-name">Rahul Bhattacharya</span>
+            </div>
             <div class="icon-links">
               {% if post.demo_link %}
                 <a class="btn-cta" href="{{ post.demo_link }}" target="_blank" rel="noopener">
