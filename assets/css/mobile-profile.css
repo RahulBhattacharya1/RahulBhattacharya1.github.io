@@ -1,27 +1,54 @@
-:root{
-  --pad:28px; --ink:#1e293b; --sub:#5b6b82; --muted:#6b7280;
-  --line:#e6e1d9; --bg:#ffffff; --radius:22px; --v:#8b5cf6; --b:#60a5fa; --p:#ec4899;
+/* =========================
+   Mobile Profile (scoped)
+   ========================= */
+
+/* Component scope + design tokens */
+.mobile-profile{
+  --pad:28px; --ink:#1e293b;
+  --sub:#5b6b82; --muted:#6b7280;
+  --line:#e6e1d9; --bg:#ffffff; --radius:22px;
+  --v:#8b5cf6; --b:#60a5fa; --p:#ec4899;
+
+  color:var(--ink);
+  /* optional: this padding matches the demo stage spacing */
+  padding: var(--pad);
 }
 
-/* Scope to .mobile-profile so nothing leaks */
-.mobile-profile { width:100%; max-width:1080px; margin:0 auto; padding:var(--pad) }
+/* Local reset */
+.mobile-profile *{ box-sizing: border-box; }
 
-/* Keyframes kept minimal */
-@keyframes sheen { 0%{background-position:-200% 0,0 0} 60%{background-position:200% 0,0 0} 100%{background-position:200% 0,0 0} }
-@keyframes spin { to{ transform:rotate(360deg) } }
-@keyframes float { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-1px) } }
-@keyframes reveal { 0%{ opacity:0; transform:translateY(8px) } 100%{ opacity:1; transform:translateY(0) } }
-@keyframes ctaBreath { 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.03) } }
+/* Container similar to .stage in demo */
+.mobile-profile .stage{ width:100%; max-width:1080px; margin:0 auto; }
 
-/* Card and children (subset of your original, mobile-first) */
+/* Hide the expand/collapse checkbox only in this component */
+.mobile-profile #satinA{ position:absolute; left:-9999px }
+
+/* ========= Keyframes (scoped names) ========= */
+@keyframes mp-sheen { 0%{background-position:-200% 0,0 0} 60%{background-position:200% 0,0 0} 100%{background-position:200% 0,0 0} }
+@keyframes mp-spin { to{ transform:rotate(360deg) } }
+@keyframes mp-float { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-1px) } }
+@keyframes mp-reveal { 0%{ opacity:0; transform:translateY(8px) } 100%{ opacity:1; transform:translateY(0) } }
+@keyframes mp-ctaBreath { 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.03) } }
+
+/* ========= Card ========= */
 .mobile-profile .card{
-  position:relative; border-radius:18px; overflow:hidden;
-  background: radial-gradient(120% 140% at 10% 0%, #fff 0%, #fff 40%, #f8fafc 100%);
+  position:relative; border-radius:var(--radius); overflow:hidden; will-change:transform;
+  background:
+    radial-gradient(120% 140% at 10% 0%, #fff 0%, #fff 40%, #f8fafc 100%),
+    conic-gradient(from 200deg at 80% 20%, rgba(255,255,255,.0), rgba(255,255,255,.14), rgba(255,255,255,0) 60%);
   border:1px solid var(--line);
-  padding:18px;
-  display:grid; grid-template-columns:68px 1fr auto; gap:14px; align-items:center;
-  box-shadow: 0 16px 44px rgba(2,6,23,.12), inset 0 1px 0 rgba(255,255,255,.85);
+  padding:24px;
+  display:grid; grid-template-columns:92px 1fr auto; gap:20px; align-items:center;
+  box-shadow:
+    0 16px 44px rgba(2,6,23,.12),
+    0 2px 6px rgba(2,6,23,.05),
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset 0 -6px 20px rgba(2,6,23,.05);
+  transition: box-shadow .45s ease, transform .45s cubic-bezier(.2,.8,.2,1), background .6s ease;
 }
+.mobile-profile .card:hover{ transform:translateY(-8px); box-shadow:0 28px 80px rgba(2,6,23,.18), 0 6px 18px rgba(2,6,23,.08) }
+
+/* Chromatic rim */
 .mobile-profile .card::before{
   content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; padding:2.5px;
   background:
@@ -29,129 +56,203 @@
     linear-gradient(120deg,var(--v),var(--b),var(--p)) border-box;
   -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor; mask-composite:exclude; opacity:.9;
-  background-size:200% 100%,100% 100%; animation:sheen 6s ease-in-out infinite;
+  background-size:200% 100%,100% 100%; animation:mp-sheen 6s ease-in-out infinite; transition:opacity .4s ease, padding .2s ease;
 }
-.mobile-profile .avatar-wrap{ width:68px; height:68px; border-radius:18px; position:relative; display:grid; place-items:center; animation:float 5.5s ease-in-out infinite }
-.mobile-profile .avatar{ width:100%; height:100%; border-radius:16px; object-fit:cover; display:block }
+.mobile-profile .card:hover::before{ opacity:1; padding:4px }
 
-.mobile-profile h2{ margin:0; font-size:1.22rem; font-weight:600; color:#223048 }
-.mobile-profile .sub{ margin:.35rem 0 0; color:var(--sub); font-size:.96rem }
+/* Micro-texture */
+.mobile-profile .card::after{
+  content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background:
+    radial-gradient(1px 1px at 15% 25%, rgba(0,0,0,.02) 0 99%, transparent 100%),
+    radial-gradient(1px 1px at 55% 65%, rgba(0,0,0,.018) 0 99%, transparent 100%);
+  mix-blend-mode:multiply;
+}
 
+/* ========= Avatar ========= */
+.mobile-profile .avatar-wrap{
+  position:relative; width:74px; height:74px; border-radius:18px;
+  display:grid; place-items:center; isolation:isolate;
+  transform:translateZ(0); animation:mp-float 5.5s ease-in-out infinite;
+  transition:transform .35s ease;
+}
+.mobile-profile .card:hover .avatar-wrap{ transform:translateZ(0) translateY(-2px) }
+.mobile-profile .avatar-wrap::before{
+  content:""; position:absolute; inset:-6px; border-radius:20px; z-index:0;
+  background:conic-gradient(from 160deg,var(--v),var(--b),var(--p),var(--v));
+  filter:blur(6px); opacity:.42; transition:filter .35s ease, opacity .35s ease, transform .6s ease;
+}
+.mobile-profile .card:hover .avatar-wrap::before{ opacity:.55; filter:blur(8px); animation:mp-spin 10s linear infinite }
+.mobile-profile .avatar-wrap::after{
+  content:""; position:absolute; left:-12px; right:-12px; bottom:-12px; height:18px; z-index:-1;
+  background:radial-gradient(60% 100% at 50% 0%,
+      rgba(139,92,246,.30) 0%,
+      rgba(96,165,250,.28) 35%,
+      rgba(236,72,153,.24) 65%,
+      rgba(15,23,42,.14) 100%);
+  filter:blur(12px); mix-blend-mode:multiply; opacity:.9;
+  transition:filter .35s ease, opacity .35s ease, left .35s ease, right .35s ease, bottom .35s ease, height .35s ease;
+}
+.mobile-profile .card:hover .avatar-wrap::after{ left:-10px; right:-10px; bottom:-10px; height:16px; filter:blur(11px); opacity:.95 }
+.mobile-profile .avatar{
+  width:100%; height:100%; border-radius:16px; object-fit:cover; display:block; z-index:1;
+  box-shadow:0 10px 22px rgba(2,6,23,.18), 0 1px 0 rgba(255,255,255,.9) inset;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.mobile-profile .card:hover .avatar{ transform:translateY(-1px); box-shadow:0 16px 30px rgba(2,6,23,.22), 0 1px 0 rgba(255,255,255,.95) inset }
+
+/* ========= Text ========= */
+.mobile-profile h2{
+  margin:0; font-size:1.38rem; font-weight:600; line-height:1.28; letter-spacing:.1px;
+  color:#223048; transition:color .3s ease, letter-spacing .3s ease, opacity .3s ease;
+}
+.mobile-profile .card:hover h2{ letter-spacing:.15px; color:#202c44 }
+.mobile-profile .sub{ margin:.35rem 0 0; color:var(--sub); font-size:.96rem; font-weight:400; transition:color .3s ease, opacity .3s ease }
+.mobile-profile .card:hover .sub{ color:#51627b }
+
+/* ========= CTA ========= */
 .mobile-profile .act{
   justify-self:end; align-self:start; cursor:pointer; user-select:none;
-  padding:8px 12px; border-radius:12px; border:1px solid var(--line); background:#fafafa;
-  font-weight:500; font-size:.92rem; letter-spacing:.15px; position:relative; overflow:hidden;
-  animation:ctaBreath 3.6s ease-in-out infinite;
+  padding:9px 15px; border-radius:12px; border:1px solid var(--line); background:#fafafa;
+  font-weight:500; font-size:.92rem; letter-spacing:.15px;
+  transition:box-shadow .25s ease, background .25s ease, transform .2s ease, color .25s ease;
+  box-shadow:0 1px 0 rgba(2,6,23,.04), 0 8px 18px rgba(2,6,23,.06), inset 0 1px 0 rgba(255,255,255,.9);
+  animation:mp-ctaBreath 3.6s ease-in-out infinite; position:relative; overflow:hidden;
+}
+.mobile-profile .act:after{
+  content:""; position:absolute; left:12px; right:12px; bottom:8px; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(0,0,0,.12), transparent);
+  transform:scaleX(0); transform-origin:center; transition:transform .35s ease;
+}
+.mobile-profile .card:hover .act{ background:#ffffff; transform:translateY(-1px) }
+.mobile-profile .card:hover .act:after{ transform:scaleX(1) }
+
+/* ========= Panel (expand) ========= */
+.mobile-profile .panel{
+  grid-column:1/-1; max-height:0; overflow:hidden; opacity:0; transform:translateY(-10px);
+  transition:max-height .6s ease, opacity .6s ease, transform .6s ease;
+}
+.mobile-profile .panel .box{
+  border:1px solid #ece7ff80;
+  background:
+    radial-gradient(140% 120% at 0% 0%, #ffffff 0%, #fafafa 65%, #f6f6f6 100%);
+  border-radius:14px; padding:16px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.85), inset 0 -5px 16px rgba(2,6,23,.05);
 }
 
-/* Panel */
-.mobile-profile .panel{ grid-column:1/-1; max-height:0; overflow:hidden; opacity:0; transform:translateY(-10px); transition:max-height .6s ease, opacity .6s ease, transform .6s ease }
-.mobile-profile #satinA:checked ~ .card .panel{ max-height:900px; opacity:1; transform:translateY(0) }
-
-/* Tabs, micro cards, etc. (minimal copy to render) */
-.mobile-profile .tab-controls{ display:flex; gap:6px; border-bottom:1px solid #ecebf7; padding:4px; border-radius:10px; background:#fff }
-.mobile-profile .tab-controls label{ padding:8px 12px; border-radius:10px; cursor:pointer; font-size:.92rem; font-weight:600; color:#4a5873 }
-.mobile-profile .tab-panels{ padding-top:12px }
-.mobile-profile .tab-panel{ display:none; animation:reveal .28s ease-out both }
-.mobile-profile #tab-about:checked ~ .tab-panels #panel-about,
-.mobile-profile #tab-impact:checked ~ .tab-panels #panel-impact,
-mobile-profile #tab-projects:checked ~ .tab-panels #panel-projects{ display:block }
-
-.mobile-profile .inside{ display:grid; gap:14px }
-.mobile-profile .micro{ position:relative; border-radius:14px; padding:14px; background:#ffffff; border:1px solid #ecebf7; box-shadow:0 10px 28px rgba(2,6,23,.06), 0 1px 0 rgba(255,255,255,.7) inset }
-.mobile-profile .row{ display:flex; align-items:flex-start; gap:10px; padding:9px 0 }
-.mobile-profile .ico{ width:18px; height:18px; flex:0 0 18px; border-radius:6px; display:grid; place-items:center; background:linear-gradient(140deg,var(--v),var(--b)); color:#fff; font-size:.78rem; font-weight:600 }
-.mobile-profile .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px }
-.mobile-profile .chip{ font-size:.82rem; padding:6px 10px; border-radius:999px; border:1px solid #e8e7f6; background:#fff }
-.mobile-profile .stats{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px }
-.mobile-profile .stat{ border:1px solid #ecebf7; border-radius:12px; padding:10px 12px; background:#ffffff }
-.mobile-profile .bar{ height:8px; border-radius:999px; background:#eef2ff; overflow:hidden; position:relative }
-.mobile-profile .fill{ height:100%; width:0; background:linear-gradient(90deg,var(--v),var(--b),var(--p)); border-radius:inherit; transition:width .9s cubic-bezier(.2,.8,.2,1) }
-
-/* Radios */
-.mobile-profile .visually-hidden{
+/* ========= Tabs ========= */
+.mobile-profile .tabs{ display:block }
+.mobile-profile .tabs .visually-hidden{
   position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0);
   white-space:nowrap; border:0;
 }
+.mobile-profile .tab-controls{
+  position:relative; display:flex; gap:10px; border-bottom:1px solid #ecebf7; padding:4px;
+  border-radius:10px; background:#fff; box-shadow:0 1px 0 rgba(255,255,255,.9) inset;
+}
+.mobile-profile .tab-controls label{
+  position:relative; padding:8px 12px; border-radius:10px; cursor:pointer; user-select:none;
+  font-size:.92rem; font-weight:600; color:#4a5873; transition:color .2s ease, transform .2s ease;
+  outline-offset:4px;
+}
+.mobile-profile .tab-controls label:hover{ transform:translateY(-1px) }
+.mobile-profile .tab-controls label::after{
+  content:""; position:absolute; left:10px; right:10px; bottom:-6px; height:2px; border-radius:999px;
+  background:linear-gradient(90deg,var(--v),var(--b),var(--p)); transform:scaleX(0); transition:transform .25s ease;
+  transform-origin:center;
+}
 
-/* Activate fills when expanded */
+/* radio-driven tab state (scoped) */
+.mobile-profile #tab-about:checked ~ .tab-controls label[for="tab-about"],
+.mobile-profile #tab-impact:checked ~ .tab-controls label[for="tab-impact"],
+.mobile-profile #tab-projects:checked ~ .tab-controls label[for="tab-projects"]{ color:#1f2b44 }
+
+.mobile-profile #tab-about:checked ~ .tab-controls label[for="tab-about"]::after,
+.mobile-profile #tab-impact:checked ~ .tab-controls label[for="tab-impact"]::after,
+.mobile-profile #tab-projects:checked ~ .tab-controls label[for="tab-projects"]::after{ transform:scaleX(1) }
+
+.mobile-profile .tab-panels{ padding-top:12px }
+.mobile-profile .tab-panel{ display:none; animation:mp-reveal .28s ease-out both }
+.mobile-profile #tab-about:checked   ~ .tab-panels #panel-about{ display:block }
+.mobile-profile #tab-impact:checked  ~ .tab-panels #panel-impact{ display:block }
+.mobile-profile #tab-projects:checked~ .tab-panels #panel-projects{ display:block }
+
+/* ========= Inner Cards ========= */
+.mobile-profile .inside{ display:grid; gap:14px }
+.mobile-profile .micro{
+  position:relative; border-radius:14px; padding:14px; background:#ffffff;
+  border:1px solid #ecebf7;
+  box-shadow:0 10px 28px rgba(2,6,23,.06), 0 1px 0 rgba(255,255,255,.7) inset;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.mobile-profile .micro:hover{ transform:translateY(-2px); box-shadow:0 16px 44px rgba(2,6,23,.10) }
+.mobile-profile .micro::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; pointer-events:none;
+  background:linear-gradient(120deg, var(--v), var(--b), var(--p));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; opacity:.5;
+}
+.mobile-profile .micro h3{ margin:0 0 .35rem 0; font-size:1.02rem; line-height:1.25; letter-spacing:.2px; color:#223048 }
+.mobile-profile .row{ display:flex; align-items:flex-start; gap:10px; padding:9px 0 }
+.mobile-profile .row + .row{ border-top:1px dashed #e9e6f5 }
+.mobile-profile .ico{
+  width:18px; height:18px; flex:0 0 18px; border-radius:6px; display:grid; place-items:center;
+  background:linear-gradient(140deg,var(--v),var(--b)); color:#fff; font-size:.78rem; font-weight:600;
+  box-shadow:0 6px 14px rgba(99,102,241,.28);
+}
+.mobile-profile .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px }
+.mobile-profile .chip{
+  font-size:.82rem; padding:6px 10px; border-radius:999px; border:1px solid #e8e7f6; background:#fff;
+  box-shadow:0 8px 16px rgba(2,6,23,.05), 0 1px 0 rgba(255,255,255,.8) inset;
+}
+.mobile-profile .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px }
+.mobile-profile .stat{
+  border:1px solid #ecebf7; border-radius:12px; padding:10px 12px; background:#ffffff;
+  box-shadow:0 6px 16px rgba(2,6,23,.05), 0 1px 0 rgba(255,255,255,.8) inset;
+}
+.mobile-profile .k{ font-weight:700; letter-spacing:.2px; font-size:1.06rem; color:#1f2b44 }
+.mobile-profile .t{ color:var(--muted); font-size:.8rem; margin-top:2px }
+.mobile-profile .progress{ display:grid; gap:8px; margin-top:8px }
+.mobile-profile .pitem{ display:grid; gap:6px }
+.mobile-profile .bar{
+  height:8px; border-radius:999px; background:#eef2ff; overflow:hidden; position:relative;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.mobile-profile .fill{
+  height:100%; width:0;
+  background:linear-gradient(90deg,var(--v),var(--b),var(--p));
+  box-shadow:0 6px 16px rgba(99,102,241,.25) inset;
+  border-radius:inherit; transition:width .9s cubic-bezier(.2,.8,.2,1);
+}
+.mobile-profile .actions{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap }
+.mobile-profile .btn{
+  padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:#fff; font-size:.9rem; font-weight:500;
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 8px 16px rgba(2,6,23,.06);
+  transition:transform .2s ease, box-shadow .3s ease;
+}
+.mobile-profile .btn:hover{ transform:translateY(-1px); box-shadow:0 14px 28px rgba(2,6,23,.10) }
+
+/* ========= Expand effects ========= */
+.mobile-profile #satinA:checked ~ .card{
+  transform:translateY(-10px);
+  box-shadow:0 30px 84px rgba(2,6,23,.2), 0 10px 24px rgba(2,6,23,.08);
+}
+.mobile-profile #satinA:checked ~ .card .panel{ max-height:900px; opacity:1; transform:translateY(0) }
+.mobile-profile #satinA:checked ~ .card .panel .box{ animation:mp-reveal .38s ease-out both }
 .mobile-profile #satinA:checked ~ .card .fill{ width:var(--w, 0%) }
 
-/* Hide the expand/collapse checkbox only in the mobile include */
-.mobile-profile #satinA{
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  margin: -1px !important;
-  padding: 0 !important;
-  border: 0 !important;
-  clip: rect(0 0 0 0) !important;
-  clip-path: inset(50%) !important;
-  overflow: hidden !important;
-  white-space: nowrap !important;
+/* ========= A11y / Motion ========= */
+.mobile-profile .card:has(.act:focus-visible){ outline:2px solid #c7d2fe; outline-offset:3px }
+@media (prefers-reduced-motion:reduce){
+  .mobile-profile *{ animation:none!important; transition:none!important }
 }
 
-#mobile-profile-root,
-.mobile-profile,
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
+/* ========= Responsive ========= */
+@media (max-width:720px){
+  .mobile-profile .card{ grid-template-columns:68px 1fr auto; gap:14px; padding:18px; border-radius:18px }
+  .mobile-profile .avatar-wrap{ width:68px; height:68px }
+  .mobile-profile h2{ font-size:1.22rem }
+  .mobile-profile .stats{ grid-template-columns:1fr 1fr }
+  .mobile-profile .tab-controls{ gap:6px; overflow:auto; scrollbar-width:none }
+  .mobile-profile .tab-controls::-webkit-scrollbar{ display:none }
 }
-
-.mobile-profile {
-  box-sizing: border-box;
-  padding: 0 16px; /* or smaller padding for mobile */
-}
-
-
-/* --- Premium look fixes (append at end) --- */
-
-/* More room so the rim + glow can breathe */
-.mobile-profile { padding: 0 22px; }
-
-/* Stop header squeeze; let CTA wrap under on very small screens */
-.mobile-profile .card{
-  grid-template-columns: 68px 1fr;
-  gap: 18px;
-  padding: 20px;
-  /* Keep rounded-corner clipping for content, but fake the outer glow with filters */
-  /* (works despite overflow:hidden) */
-  filter:
-    drop-shadow(0 14px 28px rgba(2,6,23,.12))
-    drop-shadow(0 0 22px rgba(139,92,246,.22))
-    drop-shadow(0 0 28px rgba(96,165,250,.18))
-    drop-shadow(0 0 34px rgba(236,72,153,.16));
-  transform: translateZ(0); /* smoother animations */
-}
-
-/* Thicker animated rim so it’s visible on-device as in W3 editor */
-.mobile-profile .card::before{
-  padding: 4px;          /* was ~2.5px */
-  opacity: 1;
-  background-size: 250% 100%, 100% 100%; /* stronger sweep */
-}
-
-/* On very narrow widths, move CTA below the title */
-@media (max-width: 420px){
-  .mobile-profile .act{
-    grid-column: 1 / -1;
-    justify-self: start;
-    margin-top: 4px;
-  }
-}
-
-/* Give inner blocks the same airy feel you saw in the demo */
-.mobile-profile .stats{ gap: 14px; }
-.mobile-profile .micro{
-  box-shadow: 0 12px 30px rgba(2,6,23,.08), 0 1px 0 rgba(255,255,255,.8) inset;
-}
-
-/* Ensure animations actually run when allowed */
-@media (prefers-reduced-motion: no-preference){
-  .mobile-profile .avatar-wrap{ animation: float 5.5s ease-in-out infinite; }
-  .mobile-profile .card::before{ animation: sheen 6s ease-in-out infinite; }
-}
-
-/* Small bug: make sure Projects tab displays */
-.mobile-profile #tab-projects:checked ~ .tab-panels #panel-projects{ display:block; }
