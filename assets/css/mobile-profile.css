@@ -76,3 +76,38 @@ mobile-profile #tab-projects:checked ~ .tab-panels #panel-projects{ display:bloc
 
 /* Activate fills when expanded */
 .mobile-profile #satinA:checked ~ .card .fill{ width:var(--w, 0%) }
+
+/* Hide the expand/collapse checkbox only in the mobile include */
+.mobile-profile #satinA{
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+/* Keep the mount and section inside the viewport */
+#mobile-profile-root { max-width: 100%; overflow-x: hidden; }
+.mobile-profile      { max-width: 100%; overflow-x: hidden; }
+
+/* Make the card layout box respect the viewport width */
+.mobile-profile .card{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Rim/gradient can cause sub-pixel overflow on some devices—hide it */
+html, body { overflow-x: hidden; }
+
+/* Optional: slightly tighten horizontal padding on very small screens */
+@media (max-width: 720px){
+  .mobile-profile.stage { padding-left: 12px; padding-right: 12px; }
+  .mobile-profile .tab-controls{ overflow:auto; scrollbar-width:none; }
+  .mobile-profile .tab-controls::-webkit-scrollbar{ display:none; }
+}
+
