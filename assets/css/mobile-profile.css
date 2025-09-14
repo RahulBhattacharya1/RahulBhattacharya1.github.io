@@ -91,6 +91,18 @@ mobile-profile #tab-projects:checked ~ .tab-panels #panel-projects{ display:bloc
   white-space: nowrap !important;
 }
 
+#mobile-profile-root,
+.mobile-profile,
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.mobile-profile {
+  box-sizing: border-box;
+  padding: 0 16px; /* or smaller padding for mobile */
+}
 
 
 /* --- Premium look fixes (append at end) --- */
