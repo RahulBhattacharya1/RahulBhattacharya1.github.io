@@ -49,12 +49,12 @@ title: "Rahul's Portfolio"
             <div class="icon-links">
               {% if post.demo_link %}
                 <a class="btn-cta" href="{{ post.demo_link }}" target="_blank" rel="noopener">
-                  <img src="/assets/icons/play.svg" alt="Play Icon" style="height:17px; width: 17px !important; vertical-align:-0.46em; margin:0 2px 0 0;">
+                  <img src="/assets/icons/play.svg" alt="Play Icon" style="height:17px; width: 17px !important; vertical-align:-0.26em; margin:0 2px 0 0;">
                 </a>
               {% endif %}
               {% if post.github_link %}
                 <a class="btn-cta" href="{{ post.github_link }}" target="_blank" rel="noopener">
-                  <img src="/assets/icons/github.svg" alt="Github Icon" style="height:16px; width: 16px; vertical-align:-0.35em; margin:0 2px 0 0;">
+                  <img src="/assets/icons/github.svg" alt="Github Icon" style="height:16px; width: 16px !important; vertical-align:-0.35em; margin:0 2px 0 0;">
                 </a>
               {% endif %}
             </div>
@@ -118,15 +118,18 @@ title: "Rahul's Portfolio"
               <img src="/assets/images/avatar.webp" alt="Rahul" class="author-avatar">
               <span class="author-name">Rahul Bhattacharya</span>
             </div>
-            <div class="post-links">
+            <div class="icon-links">
               {% if post.demo_link %}
-                <a class="demo-link" href="{{ post.demo_link }}" target="_blank" rel="noopener">Live Demo</a>
+                <a class="btn-cta" href="{{ post.demo_link }}" target="_blank" rel="noopener">
+                  <img src="/assets/icons/play.svg" alt="Play Icon" style="height:17px; width: 17px !important; vertical-align:-0.26em; margin:0 2px 0 0;">
+                </a>
               {% endif %}
               {% if post.github_link %}
-                <a class="github-link" href="{{ post.github_link }}" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn-cta" href="{{ post.github_link }}" target="_blank" rel="noopener">
+                  <img src="/assets/icons/github.svg" alt="Github Icon" style="height:16px; width: 16px !important; vertical-align:-0.35em; margin:0 2px 0 0;">
+                </a>
               {% endif %}
-            </div>
-            <div class="post-stats">
+              <span class="post-stats">
               <button
                 class="btn btn--like btn--like--mini"
                 type="button"
@@ -143,8 +146,8 @@ title: "Rahul's Portfolio"
                 </span>
                 <span class="count"></span>
               </button>
+            </span>
             </div>
-
 
           </div>
         </li>
@@ -446,33 +449,6 @@ title: "Rahul's Portfolio"
   }
 
   #featured-strip .post-item[style*="display: none"] { display: none !important; }
-
-  /* the row that holds the Live Demo / GitHub icons */
-  .icon-links{
-    display:flex;
-    align-items:center;   /* prevent stretch */
-    gap:8px;
-    flex-wrap:wrap;
-  }
-
-  /* each icon link */
-  .icon-links a{
-    display:inline-flex;  /* keep icon + label tight */
-    align-items:center;
-    gap:6px;
-    flex:0 0 auto;        /* don't grow */
-    width:auto;           /* override any width:100% */
-    padding:0;
-    line-height:1.1;
-  }
-
-  /* the svg icons themselves */
-  .icon-links svg{
-    width:18px;
-    height:18px;
-    aspect-ratio:1 / 1;
-    flex:0 0 auto;
-  }
   
 }
 
