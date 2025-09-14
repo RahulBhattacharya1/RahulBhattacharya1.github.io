@@ -107,7 +107,7 @@ title: "Rahul's Portfolio"
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
-            <p style="color: #737373">
+            <p class = "snippet" style="color: #737373">
               {% if post.custom_snippet and post.custom_snippet_text %}
                 {{ post.custom_snippet_text }}
               {% else %}
@@ -237,6 +237,8 @@ title: "Rahul's Portfolio"
 
 /* MOBILE: neutralize main.scss card constraints that create gaps */
 @media (max-width: 720px) {
+
+  #post-strip .post-text .snippet{ display:none !important; }
 
   /* Let the list be a vertical stack with controlled spacing */
    .post-strip{
