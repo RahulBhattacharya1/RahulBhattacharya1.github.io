@@ -4,7 +4,7 @@ title: "Creating my AI Semiconductor Wafer Defect Classification App"
 date: 2025-09-14 15:43:29
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/upsc.webp
+thumbnail: /assets/images/wafer.webp
 demo_link: https://rahuls-ai-semiconductor-defect-classification.streamlit.app/Model_Analysis
 github_link: https://github.com/RahulBhattacharya1/semiconductor_defect_classification
 featured: true
