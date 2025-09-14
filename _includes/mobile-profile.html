@@ -1,0 +1,127 @@
+<div class="stage mobile-profile">
+  <input id="satinA" type="checkbox" aria-hidden="true">
+  <div class="card">
+    <div class="avatar-wrap" aria-hidden="true">
+      <img class="avatar" src="https://raw.githubusercontent.com/RahulBhattacharya1/RahulBhattacharya1.github.io/refs/heads/main/assets/images/avatar.webp" alt="Rahul Bhattacharya">
+    </div>
+    <div>
+      <h2>Rahul Bhattacharya</h2>
+      <div class="sub">AI Engineer • Optimization • ML Systems</div>
+    </div>
+    <label class="act" for="satinA" aria-controls="profile-panel" aria-expanded="false">Read more</label>
+
+    <div id="profile-panel" class="panel" role="region" aria-label="More about Rahul">
+      <div class="box">
+        <div class="tabs">
+          <input class="visually-hidden" type="radio" id="tab-about"   name="tabs" checked>
+          <input class="visually-hidden" type="radio" id="tab-impact"  name="tabs">
+          <input class="visually-hidden" type="radio" id="tab-projects" name="tabs">
+
+          <div class="tab-controls" role="tablist" aria-label="Sections">
+            <label role="tab" for="tab-about"    id="tabbtn-about"    aria-controls="panel-about"    tabindex="0">About</label>
+            <label role="tab" for="tab-impact"   id="tabbtn-impact"   aria-controls="panel-impact"   tabindex="0">Impact</label>
+            <label role="tab" for="tab-projects" id="tabbtn-projects" aria-controls="panel-projects" tabindex="0">Projects</label>
+          </div>
+
+          <div class="tab-panels">
+            <section id="panel-about" role="tabpanel" aria-labelledby="tabbtn-about" class="tab-panel">
+              <div class="inside">
+                <div class="micro">
+                  <h3>Focus Areas</h3>
+                  <div class="row">
+                    <div class="ico">ML</div>
+                    <div>
+                      <div style="font-weight:600">Predictive systems</div>
+                      <div style="color:var(--muted); font-size:.9rem">Reliable models with measurable business impact.</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="ico">OP</div>
+                    <div>
+                      <div style="font-weight:600">Optimization</div>
+                      <div style="color:var(--muted); font-size:.9rem">Integer programming and scheduling at scale.</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="ico">DX</div>
+                    <div>
+                      <div style="font-weight:600">Dev experience</div>
+                      <div style="color:var(--muted); font-size:.9rem">Clean interfaces, robust deployment, crisp docs.</div>
+                    </div>
+                  </div>
+                  <div class="chips">
+                    <span class="chip">Gurobi</span>
+                    <span class="chip">PyTorch</span>
+                    <span class="chip">Databricks</span>
+                    <span class="chip">Hugging Face</span>
+                  </div>
+                  <div class="actions">
+                    <a class="btn" href="/about.html" aria-label="Open full About page">View Full About Page</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="panel-impact" role="tabpanel" aria-labelledby="tabbtn-impact" class="tab-panel">
+              <div class="inside">
+                <div class="micro">
+                  <h3>Impact</h3>
+                  <div class="stats">
+                    <div class="stat"><div class="k">97.4%</div><div class="t">SLA Adherence</div></div>
+                    <div class="stat"><div class="k">-22%</div><div class="t">Ops Cost</div></div>
+                    <div class="stat"><div class="k">+31%</div><div class="t">Throughput</div></div>
+                  </div>
+                  <div class="progress">
+                    <div class="pitem">
+                      <div style="display:flex; justify-content:space-between; font-size:.86rem">
+                        <span style="color:#223048; font-weight:600">Model Quality</span><span style="color:var(--muted)">AUC 0.93</span>
+                      </div>
+                      <div class="bar"><div class="fill" style="--w:93%"></div></div>
+                    </div>
+                    <div class="pitem">
+                      <div style="display:flex; justify-content:space-between; font-size:.86rem">
+                        <span style="color:#223048; font-weight:600">Schedule Feasibility</span><span style="color:var(--muted)">98%</span>
+                      </div>
+                      <div class="bar"><div class="fill" style="--w:98%"></div></div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <a class="btn" href="/impact.html" aria-label="Open full Impact page">See Full Impact Page</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="panel-projects" role="tabpanel" aria-labelledby="tabbtn-projects" class="tab-panel">
+              <div class="inside">
+                <div class="micro">
+                  <h3>Selected Projects</h3>
+                  <div class="row">
+                    <div class="ico">SC</div>
+                    <div>
+                      <div style="font-weight:600">Store Scheduling</div>
+                      <div style="color:var(--muted); font-size:.9rem">Mixed-integer model with preference and compliance constraints.</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="ico">RX</div>
+                    <div>
+                      <div style="font-weight:600">Pharmacy Forecasting</div>
+                      <div style="color:var(--muted); font-size:.9rem">Time-series with exogenous features for labor planning.</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <a class="btn" href="/projects.html" aria-label="Open full Projects page">Explore Full Project List</a>
+                    <a class="btn" href="/portfolio.html" aria-label="Open portfolio page">Portfolio</a>
+                    <a class="btn" href="/resume.pdf"  aria-label="Open resume PDF">Resume</a>
+                    <a class="btn" href="/contact.html" aria-label="Open contact page">Contact</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div><!-- /.tab-panels -->
+        </div><!-- /.tabs -->
+      </div>
+    </div><!-- /.panel -->
+  </div><!-- /.card -->
+</div><!-- /.stage -->
