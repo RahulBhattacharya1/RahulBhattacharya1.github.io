@@ -447,36 +447,31 @@ title: "Rahul's Portfolio"
 
   #featured-strip .post-item[style*="display: none"] { display: none !important; }
 
-    /* The small row that holds Live Demo / GitHub */
-  .post-actions, .post-meta, .post-links {
-    display: flex;
-    align-items: center;     /* stop stretch */
-    gap: 8px;
-    flex-wrap: wrap;
+  /* the row that holds the Live Demo / GitHub icons */
+  .icon-links{
+    display:flex;
+    align-items:center;   /* prevent stretch */
+    gap:8px;
+    flex-wrap:wrap;
   }
 
-  /* Don’t let each item grow to full width */
-  .post-actions a,
-  .post-actions button,
-  .post-meta a,
-  .post-links a {
-    display: inline-flex;    /* keeps icon+label tight */
-    align-items: center;
-    gap: 6px;
-    flex: 0 0 auto;          /* no flex-grow */
-    width: auto;             /* kill width:100% from mobile styles */
-    padding: 0;              /* if your buttons had padding */
-    line-height: 1.1;
+  /* each icon link */
+  .icon-links a{
+    display:inline-flex;  /* keep icon + label tight */
+    align-items:center;
+    gap:6px;
+    flex:0 0 auto;        /* don't grow */
+    width:auto;           /* override any width:100% */
+    padding:0;
+    line-height:1.1;
   }
 
-  /* Force fixed-size icons */
-  .post-actions svg,
-  .post-meta svg,
-  .post-links svg {
-    width: 18px;
-    height: 18px;
-    aspect-ratio: 1 / 1;
-    flex: 0 0 auto;
+  /* the svg icons themselves */
+  .icon-links svg{
+    width:18px;
+    height:18px;
+    aspect-ratio:1 / 1;
+    flex:0 0 auto;
   }
   
 }
