@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Enhancing my Student Performance Predictor"
+title: "Enhancing my AI Student Performance Predictor"
 date: 2024-05-19 08:41:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
