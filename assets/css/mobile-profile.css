@@ -140,3 +140,18 @@ html, body { overflow-x: hidden; }
 @media (max-width: 480px){
   .mobile-profile{ padding-left: 12px; padding-right: 12px; }
 }
+
+#mobile-profile-root,
+.mobile-profile,
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.mobile-profile {
+  box-sizing: border-box;
+  padding: 0 16px; /* or smaller padding for mobile */
+}
+
+
