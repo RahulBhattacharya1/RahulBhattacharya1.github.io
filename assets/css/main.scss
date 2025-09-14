@@ -961,6 +961,12 @@ pre {
   font-family: system-ui, sans-serif;
 }
 
+@media (max-width: 720px) {
+  .bio-tabs {
+    display: none !important;
+  }
+}
+
 /* Pill buttons */
 .bio-tabs .tab-btn{
   display: inline-flex;
