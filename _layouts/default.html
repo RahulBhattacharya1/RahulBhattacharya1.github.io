@@ -1195,6 +1195,12 @@ window.addEventListener("load", function () {
 });
 </script>
 
+<script type="module">
+  if (window.matchMedia("(max-width: 720px)").matches) {
+    import("/assets/js/mobile-profile.js");
+  }
+</script>
+  
 <script defer src="{{ '/assets/js/faux-likes.js' | relative_url }}"></script>
 <script defer src="/assets/js/faux-share-count.js"></script>
   
