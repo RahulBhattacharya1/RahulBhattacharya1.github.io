@@ -2,7 +2,8 @@
 (function () {
   // ---- config ----
   const CFG = {
-    selector: "#share-btn[data-share-id], .btn--share[data-share-id]",
+    // make one script handle post-page pill + all minis
+    selector: "#share-btn[data-share-id], .btn--share[data-share-id], .share-btn[data-share-id]",
     startMin: 10, startMax: 90,       // initial range
     gpdMin: 0.6, gpdMax: 4.0,         // growth per day
     tickMs: 60000,                    // gentle within-day tick
