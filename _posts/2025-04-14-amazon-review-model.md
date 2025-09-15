@@ -10,7 +10,7 @@ github_link: https://github.com/RahulBhattacharya1/ai_amazon_star_predictor
 featured: true
 ---
 
-I built a small, practical project that predicts Amazon review stars from plain text. The idea came after reading a long review that felt like a clear four but saw a two on the page. That mismatch nudged me to measure how words map to ratings and then wrap the pipeline in a simple app. This post explains the repository in depth, the choices I made, and how everything fits when deployed on my GitHub + Streamlit workflow.
+I built a small, practical project that predicts Amazon review stars from plain text. The idea came after reading a long review that felt like a clear four but saw a two on the page. That mismatch nudged me to measure how words map to ratings and then wrap the pipeline in a simple app. This post explains the repository in depth, the choices I made, and how everything fits when deployed on my GitHub + Streamlit workflow. Dataset used [here](https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset).
 
 ## Repository Map
 
