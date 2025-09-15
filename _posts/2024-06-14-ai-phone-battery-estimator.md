@@ -12,7 +12,7 @@ featured: true
 
 It started from a moment of frustration. While researching phones online, I realized that battery capacity was often hidden in long specification sheets. Many times, the listed features like RAM or screen refresh rate were clear, but the actual battery capacity was not always highlighted. I imagined a tool that could predict the battery capacity from other known specifications. This thought gave birth to the project I am describing here.
 
-The experience made me think about how specifications we see every day could tell a deeper story. A screen size is not just a number, it drives energy consumption. A chipset family does not just shape performance, it influences efficiency. These connections between hardware details inspired me to build a model that could estimate the unseen number: the battery capacity. That is the central idea behind this project.
+The experience made me think about how specifications we see every day could tell a deeper story. A screen size is not just a number, it drives energy consumption. A chipset family does not just shape performance, it influences efficiency. These connections between hardware details inspired me to build a model that could estimate the unseen number: the battery capacity. That is the central idea behind this project. Dataset used [here](https://www.kaggle.com/datasets/sulthonaqthoris/mobile-phone-specifications-dataset).
 
 ---
 
