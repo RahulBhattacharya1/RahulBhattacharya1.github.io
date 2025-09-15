@@ -12,7 +12,7 @@ featured: true
 
 It started with a moment of curiosity while looking at a dataset of student records. I wondered if there was a simple way to estimate how students might perform in mathematics if I only had some details about their study habits, attendance, and classroom engagement. The thought lingered for days until I decided to turn it into a small project. The goal was clear: take raw attributes about a student, feed them into a model, and let the application produce an estimated math score.
 
-This project was not just about predicting a number. It was about building something practical from end to end. I wanted to train a model, save it, describe its schema, and then create a web interface where anyone could enter values and see predictions instantly. The experience taught me how every part of the pipeline fits together: the data definition, the trained model, and the application that serves predictions. What follows is a detailed technical breakdown of every file, code block, and helper that makes the system work.
+This project was not just about predicting a number. It was about building something practical from end to end. I wanted to train a model, save it, describe its schema, and then create a web interface where anyone could enter values and see predictions instantly. The experience taught me how every part of the pipeline fits together: the data definition, the trained model, and the application that serves predictions. What follows is a detailed technical breakdown of every file, code block, and helper that makes the system work. Dataset used [here](https://www.kaggle.com/datasets/nabeelqureshitiii/student-performance-dataset).
 
 ---
 
