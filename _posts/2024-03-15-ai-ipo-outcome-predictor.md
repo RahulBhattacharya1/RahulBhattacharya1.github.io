@@ -12,7 +12,7 @@ featured: true
 
 Sometimes inspiration comes from unexpected places. I once found myself reading news articles about companies planning to go public, and I kept wondering which of these would perform well. The market reports offered opinions but lacked structured analysis. That gap gave me the idea of creating a tool where IPO details could be entered and predictions generated instantly.
 
-This idea grew into a full project. I trained a machine learning model on IPO data and deployed it with Streamlit. The app became interactive, easy to test, and shareable on GitHub Pages. In this post I will break down every file, every code block, and every helper that made the project work.
+This idea grew into a full project. I trained a machine learning model on IPO data and deployed it with Streamlit. The app became interactive, easy to test, and shareable on GitHub Pages. In this post I will break down every file, every code block, and every helper that made the project work. Dataset used [here](https://www.kaggle.com/datasets/karanammithul/ipo-data-india-2010-2025).
 
 ---
 
