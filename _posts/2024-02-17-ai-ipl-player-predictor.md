@@ -10,9 +10,9 @@ github_link: https://github.com/RahulBhattacharya1/ai_ipl_players
 featured: true
 ---
 
-There are times when an idea refuses to fade until it finds an outlet. Mine began when I was reading through cricket player statistics late one night. The rows of averages, strike rates, and boundary counts made me think about patterns hidden in plain sight. It struck me that these numbers, if combined with the right tools, could tell me much more than surface-level performance. I wanted to know if a machine learning model could interpret those values and provide predictions in a structured way. That id...
+There are times when an idea refuses to fade until it finds an outlet. Mine began when I was reading through cricket player statistics late one night. The rows of averages, strike rates, and boundary counts made me think about patterns hidden in plain sight. It struck me that these numbers, if combined with the right tools, could tell me much more than surface-level performance. I wanted to know if a machine learning model could interpret those values and provide predictions in a structured way.
 
-I also knew that keeping such an idea locked in a notebook would not be enough. I wanted it to be visible, interactive, and accessible. Streamlit provided exactly that. With minimal effort, I could build a browser app to input player details and receive predictions instantly. This blog is a record of how I turned that thought into a working web app. The post is detailed, with breakdowns of every file and every block of code. My aim is to make the path clear enough for anyone to follow and replicate.
+I also knew that keeping such an idea locked in a notebook would not be enough. I wanted it to be visible, interactive, and accessible. Streamlit provided exactly that. With minimal effort, I could build a browser app to input player details and receive predictions instantly. This blog is a record of how I turned that thought into a working web app. The post is detailed, with breakdowns of every file and every block of code. My aim is to make the path clear enough for anyone to follow and replicate. Dataset used [here](https://www.kaggle.com/datasets/prashantsharma3006/ipl-players-dataset).
 
 
 ## Project Structure
