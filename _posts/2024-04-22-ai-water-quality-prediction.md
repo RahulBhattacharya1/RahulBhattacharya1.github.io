@@ -12,7 +12,7 @@ featured: true
 
 It started with a simple thought while pouring a glass of water one late evening. The clarity of the water looked fine, but I wondered what invisible details could be hidden in that liquid. Access to clean water is something I never take lightly, and the idea of using machine learning to check water quality seemed both practical and exciting. That is how I began this small project, where I built an application that predicts water potability using trained models.
 
-This project was not born in a laboratory. It came from daily life, where questions about safety and quality occur naturally. I wanted to see if I could take publicly available datasets, train a predictive model, and then wrap it all in an application that could be easily shared. The result was this project, built with Streamlit, Python, and a machine learning model saved in joblib format. What follows is a complete breakdown of every file, every block of code, and how each piece helps form the working system.
+This project was not born in a laboratory. It came from daily life, where questions about safety and quality occur naturally. I wanted to see if I could take publicly available datasets, train a predictive model, and then wrap it all in an application that could be easily shared. The result was this project, built with Streamlit, Python, and a machine learning model saved in joblib format. What follows is a complete breakdown of every file, every block of code, and how each piece helps form the working system. Dataset used [here](https://www.kaggle.com/datasets/rishabchitloor/indian-water-quality-data-2021-2023).
 
 ---
 
