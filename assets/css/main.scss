@@ -1552,6 +1552,28 @@ pre {
   animation: none !important;
 }
 
+/* Share icon-only mini button (pairs with Like mini) */
+.share-btn.share-btn--mini{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  border:0;
+  background:transparent;
+  padding:0;
+  line-height:1;
+  cursor:pointer;
+  color:#6b7280; /* default muted */
+}
+.share-btn.share-btn--mini .icon svg{ width:14px; height:auto; }
+.share-btn.share-btn--mini .count{
+  font-size:.85rem;
+  color:inherit;
+  min-width:2ch;
+  font-variant-numeric:tabular-nums;
+}
+
+/* Fill the share glyph blue after a successful share */
+.share-btn.shared{ color:#2563eb; }
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
