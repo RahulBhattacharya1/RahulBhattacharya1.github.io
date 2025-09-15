@@ -13,7 +13,7 @@ featured: true
 
 The idea for this project came to me after seeing how unpredictable medical costs can be. I once compared bills from two similar cases and noticed the charges were very different. That led me to think about how a prediction system could help people plan better. Instead of relying on vague estimates, I wanted to design something that gave direct predictions based on real factors. The more I thought about it, the clearer it became that a small web application could make this possible. I decided to use Streamlit to bring this idea to life.
 
-This project became both a technical experiment and a personal journey. I had never tried to turn a trained model into a full interactive tool before. The goal was to keep things simple, so anyone could try it without needing special setup. All the user had to do was open a browser and fill out a form. Behind the scenes, the model would do the heavy lifting. What follows is a complete breakdown of how I built this project, the files I uploaded to GitHub, and how each block of code works together.
+This project became both a technical experiment and a personal journey. I had never tried to turn a trained model into a full interactive tool before. The goal was to keep things simple, so anyone could try it without needing special setup. All the user had to do was open a browser and fill out a form. Behind the scenes, the model would do the heavy lifting. What follows is a complete breakdown of how I built this project, the files I uploaded to GitHub, and how each block of code works together. Dataset used [here](https://www.kaggle.com/datasets/mirichoi0218/insurance).
 
 ---
 
