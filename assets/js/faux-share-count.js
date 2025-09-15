@@ -1,6 +1,6 @@
-/* Faux Share Count — monotonic baseline + local +1 on successful share/copy */
+/* Faux Share Count — unified & synced across layout and index minis */
 (function () {
-  // ---- config (tweak if you want a different pace than Like) ----
+  // ---- config ----
   const CFG = {
     selector: "#share-btn[data-share-id], .share-btn[data-share-id]",
     startMin: 10, startMax: 90,       // initial range
@@ -8,6 +8,18 @@
     tickMs: 60000,                    // gentle within-day tick
     useUTC: false                     // flip true for a global day boundary
   };
+
+  // ---- tiny view registry so all buttons for the same id stay in sync ----
+  const SHARE_REGISTRY = new Map(); // id -> Set<applyFn>
+  function registerShareView(id, applyFn){
+    if (!SHARE_REGISTRY.has(id)) SHARE_REGISTRY.set(id, new Set());
+    SHARE_REGISTRY.get(id).add(applyFn);
+  }
+  function broadcastShareCount(id, n){
+    const set = SHARE_REGISTRY.get(id);
+    if (!set) return;
+    for (const fn of set) fn(n);
+  }
 
   // ---- utils ----
   function escNum(s){ return parseInt(String(s).replace(/[^\d]/g,"")||"0",10)||0; }
@@ -31,7 +43,7 @@
       : new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
   }
 
-  // different seed suffix so Like/Share baselines don't match
+  // deterministic, gentle growth
   function baselineFor(id, pubISO, now){
     if(!pubISO) return 0;
     const pub = CFG.useUTC ? new Date(pubISO+"T00:00:00Z") : new Date(pubISO);
@@ -44,24 +56,24 @@
     const gpd   = CFG.gpdMin + rnd()*(CFG.gpdMax - CFG.gpdMin);
 
     const frac = Math.max(0, (now.getTime() - dayStartMs(now))/86400000);
-    return Math.floor(start + gpd*(Math.floor(ageDays) + Math.min(1, frac)));
+    return Math.max(0, Math.floor(start + ageDays * gpd + frac * (gpd/2)));
   }
 
-  function storageKey(id){ return "faux-share:"+id; }
+  function storageKey(id){ return "share.local." + id; }
   function getLocal(id){ try{return parseInt(localStorage.getItem(storageKey(id))||"0",10);}catch{return 0;} }
   function setLocal(id,v){ try{localStorage.setItem(storageKey(id), String(v));}catch{} }
 
   async function doShare(url, title){
     // Prefer native share if available
     if (navigator.share) {
-      try { await navigator.share({ title, url }); return true; } catch { return false; }
+      try { await navigator.share({ title, url }); return true; } catch { /* canceled or blocked */ }
     }
     // Fallback: copy to clipboard
     try {
       await navigator.clipboard.writeText(url);
       return true;
     } catch {
-      // ultra-fallback
+      // ultra-fallback for older browsers
       const ta = document.createElement("textarea");
       ta.value = url; document.body.appendChild(ta); ta.select();
       const ok = document.execCommand("copy"); document.body.removeChild(ta);
@@ -78,30 +90,43 @@
     const now = new Date();
     const base = baselineFor(id, pub, now);
     const local = getLocal(id);
-    const apply = n => { countEl.textContent = n>0 ? fmt(n) : ""; };
 
-    apply(base + local);
+    // local apply + register in the sync bus
+    const apply = n => { countEl.textContent = n > 0 ? fmt(n) : ""; };
+    registerShareView(id, apply);
 
-    // gentle tick
+    // initial paint + broadcast so duplicates mirror this value
+    const initial = base + local;
+    apply(initial);
+    broadcastShareCount(id, initial);
+
+    // gentle tick (keeps “live” feel) — also broadcast updates
     if (CFG.tickMs > 0) {
       setInterval(()=>{
         const b = baselineFor(id, pub, new Date());
         const displayed = escNum(countEl.textContent);
         const next = Math.max(displayed, b + getLocal(id));
-        if (next !== displayed) apply(next);
+        if (next !== displayed) {
+          apply(next);
+          broadcastShareCount(id, next);
+        }
       }, CFG.tickMs);
     }
 
-    // click handler
+    // click handler — share/copy; first success per browser adds +1; sync to all
     btn.addEventListener("click", async (e)=>{
       e.preventDefault();
       const url = btn.getAttribute("data-url") || window.location.href;
       const ok = await doShare(url, document.title);
       if (!ok) return;
+
       if (getLocal(id) > 0) return;      // only first share per browser
       setLocal(id, 1);
-      apply(baselineFor(id, pub, new Date()) + 1);
-      btn.classList.add("shared");       // optional hook if you want a style change
+
+      const newVal = baselineFor(id, pub, new Date()) + 1;
+      apply(newVal);
+      broadcastShareCount(id, newVal);
+      btn.classList.add("shared");       // style hook (turns icon blue)
     }, { passive:false });
   }
 
