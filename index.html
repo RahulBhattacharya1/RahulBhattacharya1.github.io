@@ -567,6 +567,41 @@ title: "Rahul's Portfolio"
   align-items:center;
 }
 
+  /* Base style for share button: border only, transparent background */
+.btn--share.btn--share--mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1.5px solid #2563eb; /* blue border */
+  border-radius: 4px;
+  background: transparent;
+  padding: 2px 4px;
+  line-height: 1;
+  cursor: pointer;
+  color: #2563eb; /* icon stroke same blue */
+}
+
+/* Share count style — same as like count */
+.btn--share.btn--share--mini .count {
+  font-size: .85rem;
+  color: #6b7280; /* same muted gray as like count */
+}
+
+/* When shared, button is filled blue */
+.btn--share.btn--share--mini.shared {
+  background: #2563eb;   /* fill with blue */
+  color: #ffffff;        /* make icon white on fill */
+  border-color: #2563eb; /* keep same border */
+}
+
+/* Ensure SVG inside follows currentColor */
+.btn--share.btn--share--mini .icon svg {
+  width: 14px;
+  height: auto;
+  display: block;
+  fill: currentColor;  /* takes text color */
+}
+
 </style>
 
 <script>
