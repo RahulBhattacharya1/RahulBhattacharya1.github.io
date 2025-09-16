@@ -567,8 +567,9 @@ title: "Rahul's Portfolio"
   align-items:center;
 }
 
-/* Share button: no border, transparent background */
-.btn--share.btn--share--mini {
+/* Share button: no border, no background */
+.btn--share.btn--share--mini,
+.share-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -580,27 +581,30 @@ title: "Rahul's Portfolio"
   color: #2563eb; /* base blue */
 }
 
-/* Icon sizing */
-.btn--share.btn--share--mini .icon svg {
-  width: 14px;
-  height: auto;
-  display: block;
-  fill: none;               /* outline only */
-  stroke: currentColor;     /* blue outline */
-  stroke-width: 2;
-}
-
-/* Count — match like button color */
-.btn--share.btn--share--mini .count {
+/* Share count — same as Like count */
+.btn--share.btn--share--mini .count,
+.share-btn .count {
   font-size: .85rem;
-  color: #6b7280;
+  color: #6b7280; /* muted gray */
 }
 
-/* Shared state: arrow filled blue */
-.btn--share.btn--share--mini.shared .icon svg {
-  fill: #2563eb;   /* solid blue fill */
-  stroke: #2563eb; /* stroke same as fill */
+/* Arrow outline by default */
+.btn--share.btn--share--mini .icon svg path,
+.share-btn .icon svg path {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
+
+/* Arrow filled when shared */
+.btn--share.btn--share--mini.shared .icon svg path,
+.share-btn.shared .icon svg path {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
 
 </style>
 
