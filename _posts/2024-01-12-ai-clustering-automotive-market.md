@@ -10,7 +10,7 @@ github_link: https://github.com/RahulBhattacharya1/ai-clustering-automotive-mark
 featured: true
 ---
 
-I once spent hours comparing vehicle prices on different websites. I was curious why some models seemed overpriced while others followed smoother trends. That curiosity turned into frustration when I realized I had no clear way to see patterns across thousands of models. I wanted to know if certain groups of vehicles behaved similarly. The idea of creating clusters of car models based on their price behavior started forming in my mind.
+I once spent hours comparing vehicle prices on different websites. I was curious why some models seemed overpriced while others followed smoother trends. That curiosity turned into frustration when I realized I had no clear way to see patterns across thousands of models. I wanted to know if certain groups of vehicles behaved similarly. The idea of creating clusters of car models based on their price behavior started forming in my mind. Dataset used [here](https://www.kaggle.com/datasets/jockeroika/cars-dataset).
 
 That was the starting point for this project. I imagined a tool that could take historical pricing data, extract meaningful features, and then show me groups of models that behaved in similar ways. This project became an experiment in clustering, visualization, and learning to connect data science workflows into something interactive. Below, I will walk through every file and every function that makes this project possible.
 
