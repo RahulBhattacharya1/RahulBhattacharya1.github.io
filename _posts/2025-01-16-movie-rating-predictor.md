@@ -4,7 +4,7 @@ title: "Strengthening my AI Movie Rating Predictor"
 date: 2025-01-16 07:22:31
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/tictactoe.webp
+thumbnail: /assets/images/movie_rating.webp
 demo_link: https://rahuls-ai-movie-rating-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_movie_rating_predictor
 featured: true
