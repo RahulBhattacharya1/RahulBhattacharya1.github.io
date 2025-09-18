@@ -4,13 +4,13 @@ title: "Creating my AI Powered Emotion Classifier"
 date: 2025-02-21 09:11:46
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/tictactoe.webp
+thumbnail: /assets/images/emotion.webp
 demo_link: https://rahuls-ai-emotion-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_emotion_classifier
 featured: true
 ---
 
-I built a small emotion classifier which reads text and predicts the emotion label.
+I built a emotion classifier which reads text and predicts the emotion label.
 
 ## Repository Structure
 
