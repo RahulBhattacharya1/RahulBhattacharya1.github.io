@@ -4,7 +4,7 @@ title: "Creating my Fake News Detector"
 date: 2024-08-23 12:34:19
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/tictactoe.webp
+thumbnail: /assets/images/news.webp
 demo_link: https://rahuls-ai-fake-news-detector.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_fake_news_detector
 featured: true
