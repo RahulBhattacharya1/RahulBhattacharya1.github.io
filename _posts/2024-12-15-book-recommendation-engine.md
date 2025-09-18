@@ -4,7 +4,7 @@ title: "Creating my AI Book Recommendation Engine"
 date: 2024-12-15 09:46:21
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/tictactoe.webp
+thumbnail: /assets/images/book.webp
 demo_link: https://rahuls-ai-book-recommendation-engine.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_book_recommendation_engine
 featured: true
