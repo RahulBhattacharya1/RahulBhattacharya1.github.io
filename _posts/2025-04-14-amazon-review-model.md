@@ -4,7 +4,7 @@ title: "Training my Amazon Review Stars Model"
 date: 2025-04-14 10:12:27
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/tictactoe.webp
+thumbnail: /assets/images/amazon_review.webp
 demo_link: https://rahuls-ai-amazon-star-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_amazon_star_predictor
 featured: true
