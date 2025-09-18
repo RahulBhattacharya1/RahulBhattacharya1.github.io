@@ -4,7 +4,7 @@ title: "Building my AI Spam Email Classifier"
 date: 2024-09-14 16:31:25
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/tictactoe.webp
+thumbnail: /assets/images/email.webp
 demo_link: https://rahuls-ai-spam-email-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_spam_email_classifier
 featured: true
