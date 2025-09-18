@@ -4,7 +4,7 @@ title: "My AI Headline Clickbait Detector"
 date: 2024-11-16 10:22:51
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/tictactoe.webp
+thumbnail: /assets/images/headline.webp
 demo_link: https://rahuls-ai-headline-clickbait-detector.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_headline_clickbait_detector
 featured: true
