@@ -4,7 +4,7 @@ title: "Creating my AI SMS Sentiment Classifier"
 date: 2024-10-10 14:23:51
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/tictactoe.webp
+thumbnail: /assets/images/sms.webp
 demo_link: https://rahuls-ai-sms-sentiment-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_sms_sentiment_classifier
 featured: true
