@@ -4,7 +4,7 @@ title: "Building my Insurance Cost Predictor App"
 date: 2024-07-21 11:35:27
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/wafer.webp
+thumbnail: /assets/images/insurance.webp
 demo_link: https://rahuls-ai-insurance-model.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_insurance_model
 featured: true
