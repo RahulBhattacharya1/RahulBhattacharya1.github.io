@@ -5,6 +5,7 @@ date: 2025-09-09 21:18:53
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/upsc.webp
+thumbnail_mobile: /assets/images/upsc_sq.webp
 demo_link: https://rahuls-upsc-mock-test.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/upsc_mock_test
 featured: true
