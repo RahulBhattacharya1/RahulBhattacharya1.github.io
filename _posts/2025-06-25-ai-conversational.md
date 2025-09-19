@@ -5,6 +5,7 @@ date: 2025-06-25 20:43:52
 categories: [ai]
 tags: [chat,bot,nlp]
 thumbnail: /assets/images/ai_conversational.webp
+thumbnail_mobile: /assets/images/ai_conversational_sq.webp
 demo_link: https://huggingface.co/spaces/RahulBhattacharya/Rahuls_Morning_Planner
 github_link: https://github.com/RahulBhattacharya1/ai_conversational_planner
 featured: true
