@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "How I built my AI Rock Paper Scissor Game"
-date: 2025-09-08 19:18:53
+date: 2022-09-08 19:18:53
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/ai_rock_paper_scissor.webp
