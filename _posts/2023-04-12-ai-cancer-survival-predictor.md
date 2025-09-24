@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Building my AI Cancer Survival Predictor"
-date: 2023-05-11 11:43:26
+date: 2023-04-12 18:22:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/resume.webp
