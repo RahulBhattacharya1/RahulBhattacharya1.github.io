@@ -14,6 +14,7 @@ I remember visiting a local supermarket one weekend and noticing how some shelve
 
 Later, while reflecting on that visit, I realized that many retailers struggle with balancing supply and demand. Forecasting sales is not only about numbers but about improving customer trust and operational efficiency. I wanted to build something practical that could turn data into insights. That thought gave birth to my project: a **Retail Sales Forecasting App** using Python, Streamlit, and machine learning. In this blog I will walk through every file, every function, and every helper that I had to design and upload into my GitHub repository to make the app run smoothly.
 
+---
 
 ## requirements.txt
 
@@ -366,6 +367,7 @@ This block handled additional logic in the application. It connected different s
 
 By combining Python, Streamlit, and a pre-trained model, I built a forecasting app that helps retail teams plan inventory more effectively. Every file I uploaded to GitHub had a purpose. The requirements file pinned dependencies. The schema file documented the model's expectations. The pickle file held the model itself. The app.py script tied everything together into an accessible tool. Building this taught me that good machine learning projects are not just about models but about thoughtful engineering, clear structure, and usability. Anyone reading this can now follow my steps, clone the repository, and deploy their own sales forecasting tool.
 
-###Additional Reflection:
+
+### Additional Reflection:
 
 In this project I learned how important it is to document every function and helper. A well documented project does not confuse future contributors. The code blocks show that even small helpers like compute_features have a major impact. Without them predictions would not align with training. By writing this blog I also realized that sharing thought process is as valuable as sharing code. Readers benefit not only from running the app but also from understanding the reasoning behind each design choice. In this project I learned how important it is to document every function and helper. A well documented project does not confuse future contributors. The code blocks show that even small helpers like compute_features have a major impact. Without them predictions would not align with training. By writing this blog I also realized that sharing thought process is as valuable as sharing code. Readers benefit not only from running the app but also from understanding the reasoning behind each design choice.
