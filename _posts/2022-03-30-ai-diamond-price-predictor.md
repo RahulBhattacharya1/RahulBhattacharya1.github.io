@@ -344,7 +344,7 @@ Professionals in training programs can fork the repository. They can modify pipe
 
 ---
 
-## Reflection
+## Perspectives
 
 When I built this project, I expected to learn about model pipelines and Streamlit deployment. What I did not expect was how it would change my perspective on data science. It showed me that machine learning is not only about accuracy metrics but also about communication and trust. Every decision—from choosing imputers to designing the interface—affects how others perceive the results. I learned that transparency is as important as technical performance.
 
@@ -352,7 +352,7 @@ The broader lesson is that tools like this can extend beyond their technical bou
 
 ---
 
-## Reflections: Long-Term Views of the Project
+## Reflections on the Project
 
 ### Sustainability of Predictive Systems
 
@@ -372,7 +372,7 @@ Working on this project taught me that data is not just numbers. Each feature—
 
 ---
 
-## Use Cases: Expanding the Vision
+## Use Cases of the Vision
 
 ### Academic Research in Economics
 
@@ -396,7 +396,7 @@ Individuals planning major purchases could use this tool. They could enter attri
 
 ---
 
-## Closing Reflections
+## Conclusion
 
 At its heart, this project is about clarity. It is about turning data into insight and using insight to reduce confusion. It is about building trust through transparency. The lessons extend beyond diamonds. They apply to how we build systems, how we communicate results, and how we use technology to empower people. I believe that is why this project matters—not just as code but as a philosophy for how data science can serve society.
 
