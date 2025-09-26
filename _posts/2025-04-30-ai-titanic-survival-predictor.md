@@ -42,7 +42,7 @@ This file is deceptively small but deeply important. Streamlit created the UI. S
 
 ---
 
-## app.py Explained Thoroughly
+## app.py Details
 
 ### Imports
 
