@@ -170,7 +170,7 @@ These lessons extend to larger projects as well. Building in a modular and repro
 
 ### Why Streamlit
 
-Choosing Streamlit was intentional. Many frameworks exist for building interfaces, but Streamlit balances simplicity with power. It allows data scientists to move quickly from a notebook-style workflow to a deployed app. The ability to define inputs in one line and outputs in another makes it perfect for projects like this. In this context, Streamlit gave me slider and number input widgets without writing HTML or JavaScript. This saved time and let me focus on the predictive logic instead of the fr...
+Choosing Streamlit was intentional. Many frameworks exist for building interfaces, but Streamlit balances simplicity with power. It allows data scientists to move quickly from a notebook-style workflow to a deployed app. The ability to define inputs in one line and outputs in another makes it perfect for projects like this. In this context, Streamlit gave me slider and number input widgets without writing HTML or JavaScript.
 
 ### Why Pandas
 
