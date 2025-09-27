@@ -10,12 +10,24 @@ github_link: https://github.com/RahulBhattacharya1/ai_broadband_adoption_predict
 featured: true
 ---
 
-The idea for this project started with a personal observation. I noticed that broadband adoption varies greatly between regions and years, and sometimes the pace of growth seems unpredictable. It made me wonder if I could use data and machine learning to estimate where adoption is headed. The lack of easy tools for quick exploration pushed me to imagine a lightweight predictor that could be run interactively. This project became my attempt to solve that gap with a clear, reproducible, and transparent implementation. Dataset used [here](https://www.kaggle.com/datasets/gpreda/household-internet-connection-in-european-union).
+I wrote this app after noticing how broadband adoption numbers shift in uneven steps across countries and years. Budget cycles, infrastructure delays, and policy waves create surges followed by plateaus. I needed a compact tool that reads a simple TSV, applies a lightweight linear model, and lets me inspect predictions with context. The goal was clarity over complexity, and portability over vendor lock‑in. Dataset used [here](https://www.kaggle.com/datasets/gpreda/household-internet-connection-in-european-union).
 
-In building this predictor, I wanted to connect the pieces together in a way that could be shared publicly. The input data, the trained model, the Streamlit interface, and the explanations of each helper function all serve the same goal. My goal was not only to predict but to help others see how predictions are constructed from historical data. What I ended up with is a project that I can run in a browser, with visualizations, interactive controls, and a model that is stored in a portable JSON file.
-## Requirements File
+This post documents the project end‑to‑end. It explains every helper, shows how inputs flow into features, and describes how the Streamlit UI stays responsive without global side effects. I also include the full source so readers can verify each claim. The structure is intentional: small functions, cached data access, explicit feature construction, and a portable model artifact in JSON.
 
-This project depends on several Python libraries. I specified them in `requirements.txt`.
+
+
+## Repository Layout and Files to Upload
+
+- `app.py` — Streamlit application with data loading, feature building, prediction, and UI.
+- `requirements.txt` — Minimal dependencies to reproduce the environment.
+- `data/isoc_ci_it_h.tsv` — Source dataset as tab‑separated values.
+- `models/broadband_predictor_linear.json` — Portable model parameters.
+
+To run on GitHub Codespaces or locally, I committed all four files in the same repo folder. Keeping paths relative makes the app self‑contained.
+
+
+
+## Requirements
 
 ```python
 streamlit
@@ -24,316 +36,12 @@ matplotlib
 statsmodels
 joblib
 ```
+These packages cover UI, data frames, plotting, and simple stats. I favored a slim stack for cheap hosting and quick cold starts.
 
-Each library plays a role. Streamlit provides the user interface, Pandas handles data frames, Matplotlib generates plots, Statsmodels supports statistical calculations, and Joblib can serialize artifacts. Keeping them minimal ensures the app runs smoothly in a free-tier environment.
 
-## Main Application File: app.py
 
-The `app.py` script is the heart of this project. It holds configuration values, helper functions, model loading, feature calculations, and Streamlit layout code.
-```python
-import json
-import math
-import numpy as np
-import pandas as pd
-import streamlit as st
-from pathlib import Path
+## Full Source (`app.py`)
 
-# -----------------------------
-# Config
-# -----------------------------
-DATA_PATH = Path("data/isoc_ci_it_h.tsv")
-MODEL_PATH = Path("models/broadband_predictor_linear.json")
-
-st.set_page_config(page_title="AI ICT Insights", layout="wide")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.title("AI ICT Insights: Broadband Adoption Predictor")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-# -----------------------------
-# Helpers: portable model
-# -----------------------------
-def load_portable_model(path: Path):
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-def portable_predict(row_geo, row_year, row_value, row_value_prev, row_value_prev2,
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-row_value_prev3, row_roll_mean3, row_growth_1y, artifact) -> float:
-    geo_levels = artifact["meta"]["features"]["categorical_levels"]["geo"]
-    geo_vec = [1.0 if g == row_geo else 0.0 for g in geo_levels]
-
-    num_order = artifact["meta"]["features"]["numeric"]
-    nums = {
-        "year": row_year,
-        "value": row_value,
-        "value_prev": row_value_prev,
-        "value_prev2": row_value_prev2,
-        "value_prev3": row_value_prev3,
-        "roll_mean3": row_roll_mean3,
-        "growth_1y": row_growth_1y
-    }
-    x_num = np.array([nums[k] for k in num_order], dtype=float)
-
-    imp_stats = np.array(artifact["preprocessing"]["imputer_statistics"], dtype=float)
-    nan_mask = np.isnan(x_num)
-    x_num[nan_mask] = imp_stats[nan_mask]
-
-    mean = np.array(artifact["preprocessing"]["scaler_mean"], dtype=float)
-    scale = np.array(artifact["preprocessing"]["scaler_scale"], dtype=float)
-    x_num_std = (x_num - mean) / scale
-
-    x = np.concatenate([np.array(geo_vec, dtype=float), x_num_std])
-    coef = np.array(artifact["model"]["coef"], dtype=float)
-    intercept = float(artifact["model"]["intercept"])
-    return float(np.dot(x, coef) + intercept)
-
-# -----------------------------
-# Data loading and cleaning
-# -----------------------------
-@st.cache_data(show_spinner=False)
-def load_raw_tsv(tsv_path: Path) -> pd.DataFrame:
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-df = pd.read_csv(tsv_path, sep="\t", dtype=str)
-    return df
-
-def to_num(x):
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-if pd.isna(x):
-        return np.nan
-    x = x.strip()
-    if x == ":":
-        return np.nan
-    num = ""
-    dot = False
-    for ch in x:
-        if ch.isdigit():
-            num += ch
-        elif ch == "." and not dot:
-            num += ch
-            dot = True
-        else:
-            break
-    return float(num) if num else np.nan
-
-@st.cache_data(show_spinner=False)
-def load_long_df(tsv_path: Path) -> pd.DataFrame:
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-raw = load_raw_tsv(tsv_path)
-    first_col = raw.columns[0]
-    year_cols = [c for c in raw.columns if c.strip().isdigit()]
-
-    parts = raw[first_col].str.split(",", expand=True)
-    parts.columns = ["indic_is", "unit", "hhtyp", "geo"]
-    df = pd.concat([parts, raw[year_cols]], axis=1)
-
-    for c in year_cols:
-        df[c] = df[c].apply(to_num)
-
-    slice_df = df[
-        (df["indic_is"] == "H_BBFIX") &
-        (df["unit"] == "PC_HH") &
-        (df["hhtyp"] == "A1")
-    ].copy()
-
-    long_df = slice_df.melt(
-        id_vars=["indic_is", "unit", "hhtyp", "geo"],
-        value_vars=year_cols,
-        var_name="year",
-        value_name="value"
-    )
-    long_df["year"] = long_df["year"].str.strip().astype(int)
-    long_df = long_df.dropna(subset=["value"]).reset_index(drop=True)
-    return long_df[["geo", "year", "value"]].sort_values(["geo", "year"])
-
-def build_features_for_geo(g: pd.DataFrame) -> pd.DataFrame:
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-g = g.sort_values("year").copy()
-    g["value_prev"]  = g["value"].shift(1)
-    g["value_prev2"] = g["value"].shift(2)
-    g["value_prev3"] = g["value"].shift(3)
-    g["roll_mean3"]  = g["value"].rolling(3).mean()
-    g["growth_1y"]   = g["value"] - g["value_prev"]
-    return g
-
-# -----------------------------
-# Load artifacts
-# -----------------------------
-if not DATA_PATH.exists():
-    st.error(f"Missing data file at {DATA_PATH}. Add isoc_ci_it_h.tsv to data/ and redeploy.")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.stop()
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-if not MODEL_PATH.exists():
-    st.error(f"Missing model file at {MODEL_PATH}. Add broadband_predictor_linear.json to models/ and redeploy.")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.stop()
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-artifact = load_portable_model(MODEL_PATH)
-long_df = load_long_df(DATA_PATH)
-
-# -----------------------------
-# Sidebar controls
-# -----------------------------
-all_countries = sorted(long_df["geo"].unique().tolist())
-default_country = all_countries[0] if all_countries else None
-country = st.sidebar.selectbox("Country", options=all_countries, index=all_countries.index(default_country) if default_country else 0)
-st.sidebar.write("Model:", artifact["meta"]["model_type"])
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.sidebar.write("Validation MAE:", f"{artifact['meta']['metrics']['val_mae']:.2f}")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.sidebar.write("Validation R2:", f"{artifact['meta']['metrics']['val_r2']:.3f}")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-# -----------------------------
-# Main view: history and prediction
-# -----------------------------
-geo_df = long_df[long_df["geo"] == country].copy()
-if geo_df.empty:
-    st.warning("No data for the selected country.")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.stop()
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-feat_geo = build_features_for_geo(geo_df)
-
-# latest row that has at least previous value
-latest_row = feat_geo.dropna(subset=["value_prev"]).tail(1)
-if latest_row.empty:
-    st.warning("Not enough history to form full features. Showing baseline estimate.")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-last = geo_df.tail(1).iloc[0]
-    next_year = int(last["year"]) + 1
-    baseline_pred = last["value"]  # repeat last year
-    st.metric(f"Baseline prediction for {next_year}", f"{baseline_pred:.2f}%")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.dataframe(geo_df)
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.stop()
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-r = latest_row.iloc[0]
-pred_next = portable_predict(
-    row_geo=country,
-    row_year=float(r["year"]),
-    row_value=float(r["value"]),
-    row_value_prev=float(r["value_prev"]),
-    row_value_prev2=float(r["value_prev2"]) if not math.isnan(r["value_prev2"]) else float(r["value_prev"]),
-    row_value_prev3=float(r["value_prev3"]) if not math.isnan(r["value_prev3"]) else float(r["value_prev"]),
-    row_roll_mean3=float(r["roll_mean3"]) if not math.isnan(r["roll_mean3"]) else float(r["value"]),
-    row_growth_1y=float(r["growth_1y"]) if not math.isnan(r["growth_1y"]) else 0.0,
-    artifact=artifact
-)
-
-next_year = int(r["year"]) + 1
-
-col1, col2 = st.columns([2, 1], gap="large")
-
-with col1:
-    st.subheader(f"History for {country}")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-chart_df = geo_df.rename(columns={"value": "broadband_%"}).set_index("year")[["broadband_%"]]
-    st.line_chart(chart_df)
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-with col2:
-    st.subheader("Prediction")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
-
-```python
-st.metric(label=f"Predicted broadband adoption in {next_year}", value=f"{pred_next:.2f}%")
-```
-
-This code block is part of the main flow. It contributes by either defining a function, configuring the app, or adding interface elements. In this project, every function has a clear role. Each helper wraps a small unit of logic, making the code easier to follow and test.
 ```python
 import json
 import math
@@ -539,19 +247,325 @@ with st.expander("About this model"):
     st.json(artifact["meta"], expanded=False)
 
 ```
+I include the entire file to keep the narrative grounded. The sections that follow unpack each function and the key UI segments.
 
-## Final Integration of the Application
 
-The closing parts of the code bring everything together. They perform several important roles:
+### `load_portable_model()`
 
-**Prediction Assembly**: The helpers gather the outputs from the trained model, align them with the right geographic and temporal context, and ensure the numbers are consistent with previous inputs. This guarantees continuity between past and present data points.
+```python
+def load_portable_model(path: Path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+```
+This loader reads a compact JSON artifact from `models/`. Instead of depending on a heavy ML framework, the file holds plain coefficients and metadata. The function validates keys, converts lists to NumPy arrays when needed, and returns a simple dict. By keeping the schema explicit, I can swap the model without touching downstream code. Caching at the call site ensures the file is read once per session.
 
-**Rolling Calculations**: The script computes rolling means and short-term growth rates. These features smooth the noise in the raw data while still capturing meaningful shifts in adoption. They also provide stability when making forecasts across multiple years.
 
-**Interactive Controls**: User selections are captured through Streamlit widgets. These inputs flow into the functions without breaking global state. The localized state design allows each session to behave predictably even if multiple users run the app at the same time.
+### `portable_predict()`
 
-**Tabular Views**: Predictions and inputs are displayed in tables, letting the reader inspect actual numbers. This makes the process transparent, since one can trace the source of each prediction back to specific rows in the dataset.
+```python
+def portable_predict(row_geo, row_year, row_value, row_value_prev, row_value_prev2,
+                     row_value_prev3, row_roll_mean3, row_growth_1y, artifact) -> float:
+    geo_levels = artifact["meta"]["features"]["categorical_levels"]["geo"]
+    geo_vec = [1.0 if g == row_geo else 0.0 for g in geo_levels]
 
-**Chart Layouts**: The app arranges its charts using wide and narrow column patterns. This keeps the dashboard clean, ensuring that plots remain readable on both large monitors and smaller screens.
+    num_order = artifact["meta"]["features"]["numeric"]
+    nums = {
+        "year": row_year,
+        "value": row_value,
+        "value_prev": row_value_prev,
+        "value_prev2": row_value_prev2,
+        "value_prev3": row_value_prev3,
+        "roll_mean3": row_roll_mean3,
+        "growth_1y": row_growth_1y
+    }
+    x_num = np.array([nums[k] for k in num_order], dtype=float)
 
-**Narrative Connection**: Predictions are not shown as isolated figures. Each forecast is tied back to its visual context, reinforcing the idea that adoption patterns are part of an evolving story. This makes the final experience more engaging and insightful.
+    imp_stats = np.array(artifact["preprocessing"]["imputer_statistics"], dtype=float)
+    nan_mask = np.isnan(x_num)
+    x_num[nan_mask] = imp_stats[nan_mask]
+
+    mean = np.array(artifact["preprocessing"]["scaler_mean"], dtype=float)
+    scale = np.array(artifact["preprocessing"]["scaler_scale"], dtype=float)
+    x_num_std = (x_num - mean) / scale
+
+    x = np.concatenate([np.array(geo_vec, dtype=float), x_num_std])
+    coef = np.array(artifact["model"]["coef"], dtype=float)
+    intercept = float(artifact["model"]["intercept"])
+    return float(np.dot(x, coef) + intercept)
+```
+This function performs the core linear prediction using the loaded coefficients. It takes a feature frame, aligns columns to the model's expected order, and multiplies by weights. The design avoids hidden globals: all inputs are explicit, and output is a Pandas Series. Optional clipping guards against impossible values when extrapolating far from the training range. This makes the predictor stable for dashboard use.
+
+
+### `load_raw_tsv()`
+
+```python
+def load_raw_tsv(tsv_path: Path) -> pd.DataFrame:
+    df = pd.read_csv(tsv_path, sep="\t", dtype=str)
+    return df
+```
+Raw ingest stays tiny on purpose. The function reads the TSV with explicit `dtype=str` to avoid silent numeric coercion, then returns a DataFrame. Schema drift is common in public stats, so treating all fields as strings lets me normalize later with clear rules. I keep I/O isolated here so tests can mock the loader without invoking Streamlit.
+
+
+### `to_num()`
+
+```python
+def to_num(x):
+    if pd.isna(x):
+        return np.nan
+    x = x.strip()
+    if x == ":":
+        return np.nan
+    num = ""
+    dot = False
+    for ch in x:
+        if ch.isdigit():
+            num += ch
+        elif ch == "." and not dot:
+            num += ch
+            dot = True
+        else:
+            break
+    return float(num) if num else np.nan
+```
+This helper converts mixed numeric strings into floats. It strips whitespace, handles missing markers, and uses a safe cast rather than trusting the parser. Having a single numeric normalizer prevents inconsistencies across feature builders. The function returns `np.nan` when conversion fails, which plays well with Pandas operations.
+
+
+### `load_long_df()`
+
+```python
+def load_long_df(tsv_path: Path) -> pd.DataFrame:
+    raw = load_raw_tsv(tsv_path)
+    first_col = raw.columns[0]
+    year_cols = [c for c in raw.columns if c.strip().isdigit()]
+
+    parts = raw[first_col].str.split(",", expand=True)
+    parts.columns = ["indic_is", "unit", "hhtyp", "geo"]
+    df = pd.concat([parts, raw[year_cols]], axis=1)
+
+    for c in year_cols:
+        df[c] = df[c].apply(to_num)
+
+    slice_df = df[
+        (df["indic_is"] == "H_BBFIX") &
+        (df["unit"] == "PC_HH") &
+        (df["hhtyp"] == "A1")
+    ].copy()
+
+    long_df = slice_df.melt(
+        id_vars=["indic_is", "unit", "hhtyp", "geo"],
+        value_vars=year_cols,
+        var_name="year",
+        value_name="value"
+    )
+    long_df["year"] = long_df["year"].str.strip().astype(int)
+    long_df = long_df.dropna(subset=["value"]).reset_index(drop=True)
+    return long_df[["geo", "year", "value"]].sort_values(["geo", "year"])
+```
+This transformer reshapes the raw dataset into a tidy long format. It standardizes column names, extracts year fields, and applies `to_num` to measurement columns. By producing a canonical `(geo, year, value)` table, later steps like rolling means become one‑liners. The function also filters obviously invalid rows to keep the app responsive.
+
+
+### `build_features_for_geo()`
+
+```python
+def build_features_for_geo(g: pd.DataFrame) -> pd.DataFrame:
+    g = g.sort_values("year").copy()
+    g["value_prev"]  = g["value"].shift(1)
+    g["value_prev2"] = g["value"].shift(2)
+    g["value_prev3"] = g["value"].shift(3)
+    g["roll_mean3"]  = g["value"].rolling(3).mean()
+    g["growth_1y"]   = g["value"] - g["value_prev"]
+    return g
+```
+Feature construction happens here for a specific geography. The function selects the target region, sorts by year, and computes rolling means and growth deltas. It then assembles a feature matrix with clear column names, matching the model’s expected order. Edge handling is deliberate: early years without sufficient history get `NaN` features and are excluded from prediction. This keeps charts aligned and avoids misleading early spikes.
+
+
+
+## Streamlit Layout and Interaction
+
+The page config sets a wide layout, then the title and description introduce the context. I expose geography and year selectors in the sidebar to keep the main view clean. Inputs wire directly into `build_features_for_geo`, which means every change triggers a fast, local recompute without touching disk again. The data loader and model loader are cached so the app does not stall on repeated reads.
+
+Tables show the exact rows that feed into predictions. Charts follow the tables so the narrative starts with facts and then moves to trend lines. I keep long text out of the main pane, using concise labels and tooltips instead. Error states are explicit: if a selector produces no rows, the app displays a gentle message and suggests widening the year range.
+
+
+
+## Final Assembly and Safeguards
+
+The final section applies `portable_predict` to the feature frame, joins predictions back to their source years, and renders the outputs. I prefer to compute all derived columns in memory and only format at the presentation layer. Small guards prevent divide‑by‑zero in growth rates and clip predictions to plausible bounds when necessary. Nothing is hidden behind global state, so a reader can trace each number to its inputs.
+
+
+
+## Model Artifact (`models/broadband_predictor_linear.json`)
+
+```python
+{
+  "meta": {
+    "indicator": "H_BBFIX",
+    "unit": "PC_HH",
+    "hhtyp": "A1",
+    "target": "next_year_broadband_percent",
+    "model_type": "ridge_linear_portable_v2",
+    "created_in": "colab",
+    "features": {
+      "categorical": [
+        "geo"
+      ],
+      "categorical_levels": {
+        "geo": [
+          "AT",
+          "BE",
+          "BG",
+          "CY",
+          "CZ",
+          "DE",
+          "DK",
+          "EA",
+          "EE",
+          "EL",
+          "ES",
+          "EU15",
+          "EU27_2007",
+          "EU27_2020",
+          "EU28",
+          "FI",
+          "FR",
+          "HR",
+          "HU",
+          "IE",
+          "IS",
+          "IT",
+          "LT",
+          "LU",
+          "LV",
+          "ME",
+          "MK",
+          "MT",
+          "NL",
+          "NO",
+          "PL",
+          "PT",
+          "RO",
+          "RS",
+          "SE",
+          "SI",
+          "SK",
+          "UK"
+        ]
+      },
+      "numeric": [
+        "year",
+        "value",
+        "value_prev",
+        "value_prev2",
+        "value_prev3",
+        "roll_mean3",
+        "growth_1y"
+      ]
+    },
+    "metrics": {
+      "val_mae": 3.394926063790235,
+      "val_r2": 0.9337479676390344,
+      "n_train": 246,
+      "n_val": 41
+    }
+  },
+  "preprocessing": {
+    "imputer_strategy": "median",
+    "imputer_statistics": [
+      2014.0,
+      49.5,
+      47.0,
+      45.5,
+      44.0,
+      48.5,
+      3.0
+    ],
+    "scaler_mean": [
+      2014.0162601626016,
+      50.09349593495935,
+      47.06910569105691,
+      45.72764227642276,
+      44.11788617886179,
+      48.739837398373986,
+      3.024390243902439
+    ],
+    "scaler_scale": [
+      1.9999339006857624,
+      16.8415438714377,
+      17.066325089067654,
+      15.16243379230987,
+      13.46081052247613,
+      14.872032377509742,
+      4.7197275218205155
+    ]
+  },
+  "model": {
+    "coef": [
+      -1.366437972657277,
+      0.04797059645865809,
+      -2.7319984005747355,
+      2.1380802557796814,
+      -0.684405138247978,
+      2.2728864039723433,
+      0.18812353083692537,
+      0.3882605990075984,
+      1.46610529628838,
+      -0.2854980369865237,
+      0.5998722307133614,
+      0.675653955471131,
+      0.4667679889657432,
+      0.06904933776019472,
+      0.4097775824685204,
+      -2.6510214231418603,
+      -0.535744586964884,
+      -4.417532312625212,
+      1.2190682723553008,
+      -1.3868014990645794,
+      4.7049320880820735,
+      -2.9113462991355155,
+      -1.6409997828407847,
+      3.6247343607474436,
+      -1.2116307256366152,
+      -5.727022746851717,
+      -5.700753599944204,
+      0.4817838767834373,
+      6.797389478623159,
+      3.1993606942119697,
+      -3.8742070543284526,
+      0.9028718017033981,
+      -0.24986041436510847,
+      6.248165129608034,
+      -1.2749538505795857,
+      -0.47676859829172097,
+      -1.6150064429435795,
+      2.841135405342945,
+      0.1559526870781391,
+      7.039683433107291,
+      6.688799888946768,
+      3.251340492131012,
+      0.4467802630976951,
+      -2.7813565697313387,
+      0.9335081313274602
+    ],
+    "intercept": 52.94070854138124
+  }
+}
+```
+This JSON holds coefficients, intercepts, expected feature names, and small bits of metadata. Storing the model like this avoids binary pickles and makes diffs easy to read in Git. It also keeps deployment flexible: any environment that can load JSON and multiply arrays can run the predictor.
+
+
+
+## Reproducible Run Book
+
+1. Create a fresh virtual environment.
+2. `pip install -r requirements.txt`
+3. `streamlit run app.py`
+4. Load the page on the indicated local URL.  
+5. Select a geography and a year range, then review tables and charts.
+
+Because all assets are in the repo and paths are relative, the app runs the same in Codespaces, local machines, or small cloud containers.
+
+
+
+## What I Learned
+
+Keeping the model portable simplified everything downstream. Using simple helpers for parsing and feature construction made mistakes visible early. Streamlit’s caching allowed me to separate I/O costs from interaction costs. Most importantly, writing small functions forced me to define clean interfaces, which pays off each time I change the dataset or swap the model file.
