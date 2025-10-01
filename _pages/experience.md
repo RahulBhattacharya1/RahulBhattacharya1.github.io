@@ -134,10 +134,10 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
         <div class="acc-panel" id="acc-scientist-1" role="region" aria-labelledby="acc-scientist-1-label" hidden>
           <div class="acc-body">
             <p><strong>Summary:</strong> Modular time-series pipelines with automated refresh and seasonality.</p>
-            <details><summary>S</summary><p>Manual, reactive scheduling across thousands of stores.</p></details>
-            <details><summary>T</summary><p>Stabilize forecasts and reduce manual corrections.</p></details>
-            <details><summary>A</summary><p>Feature engineering; hierarchical models; ADF triggers; staffing constraints.</p></details>
-            <details open><summary>R</summary>
+            <details><summary>S · Situation</summary><p>Manual, reactive scheduling across thousands of stores.</p></details>
+            <details><summary>T · Task</summary><p>Stabilize forecasts and reduce manual corrections.</p></details>
+            <details><summary>A · Action</summary><p>Feature engineering; hierarchical models; ADF triggers; staffing constraints.</p></details>
+            <details open><summary>R · Result</summary>
               <ul>
                 <li><span class="kpi" data-target="30">0</span>% reduction in manual intervention</li>
                 <li>Improved stability; fewer late corrections</li>
@@ -147,6 +147,87 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
           </div>
         </div>
       </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-scientist-2" id="acc-scientist-2-label">
+            UnitedHealth Group – Healthcare Cost Regression Model
+            <span class="acc-meta">Python · SQL · Regression Analysis · Healthcare Analytics</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-scientist-2" role="region" aria-labelledby="acc-scientist-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I built a regression model to identify the strongest predictors of healthcare costs, providing stakeholders with clear KPIs and actionable insights that improved decision-making around cost management.</p>
+            <details><summary>S · Situation</summary><p>UnitedHealth Group faced rising healthcare costs without clear visibility into the primary drivers. Leadership relied on fragmented reporting, which made it difficult to prioritize interventions. Existing KPIs were broad and lacked specificity.</p></details>
+            <details><summary>T · Task</summary><p>I needed to create a data science solution that could explain cost variance across patients, identify the most significant contributing factors, and suggest new KPIs for monitoring. This required careful statistical validation to gain executive trust.</p></details>
+            <details><summary>A · Action</summary><p>I developed a regression model using large patient datasets. The analysis revealed that age, frequency of doctor visits, and pre-existing conditions accounted for the majority of cost variance. I created new KPIs around these drivers and visualized the findings in clear, stakeholder-friendly reports. I presented results directly to leadership, bypassing delays in KPI approvals.</p></details>
+            <details open><summary>R · Result</summary><p>The model explained ~<span class="kpi" data-target="66">0</span>% of cost variance and reduced reporting complexity by <span class="kpi" data-target="57">0</span>%. Leadership adopted the new KPIs, which improved cost forecasting accuracy by over <span class="kpi" data-target="60">0</span>%. My work influenced key budget allocation decisions and helped establish predictive modeling as part of UnitedHealth’s analytics strategy.</p>
+            </details>
+            <p><strong>Stack:</strong> Python, SQL Server, SSIS, Tableau</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-scientist-3" id="acc-scientist-3-label">
+            Walgreens – Predictive Alerts & Insights in BI Apps
+            <span class="acc-meta">Python · Time Series Forecasting · SQL · Statistical Modeling</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-scientist-3" role="region" aria-labelledby="acc-scientist-3-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I designed and deployed a predictive alert system within Walgreens BI applications to forecast operational issues, reducing unexpected disruptions and improving response times.</p>
+            <details><summary>S · Situation</summary><p>Walgreens experienced recurring issues in BI application data loads. Failures were usually detected only after problems escalated, resulting in delayed reporting and user frustration. The lack of proactive detection created inefficiencies across multiple business units.</p></details>
+            <details><summary>T · Task</summary><p>I was tasked with improving the reliability of BI applications. Initially, the scope was limited to fixing load issues, but I recognized the opportunity to introduce predictive analytics to anticipate failures before they caused downstream problems.</p></details>
+            <details><summary>A · Action</summary><p>I applied time-series forecasting models to historical load data to identify recurring failure patterns. I created a predictive alert mechanism that flagged likely failures and provided insights to system administrators. The solution was embedded directly into existing BI apps, ensuring seamless adoption without requiring additional platforms.</p></details>
+            <details open><summary>R · Result</summary><p>Prediction accuracy reached ~<span class="kpi" data-target="62">0</span>%, allowing teams to act on alerts proactively. Report delays were reduced by <span class="kpi" data-target="55">0</span>%, and end-user satisfaction increased significantly. The system became a model for predictive monitoring in other Walgreens applications.</p>
+            </details>
+            <p><strong>Stack:</strong> Statistical Analysis, Python, PL/SQL, Unix</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-scientist-4" id="acc-scientist-4-label">
+            Experian – Sales Insight Regression for EMEA & APAC
+            <span class="acc-meta">Python · Regression Analysis · SQL · Market Analytics</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-scientist-4" role="region" aria-labelledby="acc-scientist-4-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I implemented regression models within Experian’s Sales Insight platform to analyze customer behavior across EMEA and APAC regions, providing leadership with more accurate forecasting and improved customer segmentation.</p>
+            <details><summary>S · Situation</summary><p>Experian needed to improve sales forecasting and customer analysis across EMEA and APAC. Existing reporting tools were descriptive but failed to uncover deep relationships between customer factors and revenue outcomes.</p></details>
+            <details><summary>T · Task</summary><p>My task was to apply advanced analytics to customer data, identify meaningful drivers of sales, and generate insights that could be used to improve regional sales strategies.</p></details>
+            <details><summary>A · Action</summary><p>I built regression models that linked customer demographics, engagement frequency, and product mix to revenue outcomes. I collaborated with business stakeholders in both regions to ensure the models reflected local realities. The results were translated into actionable reports with prototypes of improved KPIs.</p></details>
+            <details open><summary>R · Result</summary><p>The regression models improved forecast accuracy by ~<span class="kpi" data-target="60">0</span>% compared to prior methods. Regional managers used the insights to refine customer targeting strategies, which led to an estimated <span class="kpi" data-target="55">0</span>% improvement in campaign ROI. Leadership adopted the regression framework as a standard part of sales insight reporting.</p>
+            </details>
+            <p><strong>Stack:</strong> Python, Informatica, PL/SQL, Statistical Analysis</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-scientist-5" id="acc-scientist-5-label">
+            Bombardier – Databricks KPI Creation via Analytics
+            <span class="acc-meta">Databricks · Python · SQL · KPI Development · Data Governance</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-scientist-5" role="region" aria-labelledby="acc-scientist-5-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I leveraged Databricks to design actionable KPIs for Bombardier after analyzing stakeholder needs and aligning reporting with business OKRs, significantly improving governance and decision-making.</p>
+            <details><summary>S · Situation</summary><p>Bombardier’s teams lacked consistent KPIs and struggled with fragmented governance across data sources. Stakeholders had different interpretations of the same metrics, leading to confusion and inefficient decision-making.</p></details>
+            <details><summary>T · Task</summary><p>I was tasked with creating standardized KPIs that aligned with organizational OKRs and addressed the pain points of each team. I needed to balance diverse stakeholder requirements while ensuring governance compliance.</p></details>
+            <details><summary>A · Action</summary><p>I met with stakeholders across teams to understand reporting needs and existing gaps. Using Databricks, I processed large volumes of operational and financial data to derive consistent KPIs. I validated these with stakeholders through prototypes and refined them iteratively to ensure adoption.</p></details>
+            <details open><summary>R · Result</summary><p>Adoption of new KPIs improved reporting accuracy by ~<span class="kpi" data-target="59">0</span>%. Teams reduced metric-related disputes by over <span class="kpi" data-target="65">0</span>%, improving trust in analytics. Leadership highlighted the initiative as a cornerstone for data governance maturity.</p>
+            </details>
+            <p><strong>Stack:</strong> Python, Databricks, SQL, Data Governance</p>
+          </div>
+        </div>
+      </article>
+      
     </div>
 
     <!-- ========= Engineer ========= -->
@@ -161,10 +242,10 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
         <div class="acc-panel" id="acc-engineer-1" role="region" aria-labelledby="acc-engineer-1-label" hidden>
           <div class="acc-body">
             <p><strong>Summary:</strong> Bronze→Silver→Gold with CDC, data quality tests, and SLAs.</p>
-            <details><summary>S</summary><p>Nightly delays; missed SLAs.</p></details>
-            <details><summary>T</summary><p>Incremental ELT with reliability and lineage.</p></details>
-            <details><summary>A</summary><p>Auto Loader; MergeInto; watermarking; expectations; monitoring.</p></details>
-            <details open><summary>R</summary>
+            <details><summary>S · Situation</summary><p>Nightly delays; missed SLAs.</p></details>
+            <details><summary>T · Task</summary><p>Incremental ELT with reliability and lineage.</p></details>
+            <details><summary>A · Action</summary><p>Auto Loader; MergeInto; watermarking; expectations; monitoring.</p></details>
+            <details open><summary>R · Result</summary>
               <ul>
                 <li>Latency 24h → <span class="mono">30m</span></li>
                 <li>On-time delivery at peaks</li>
