@@ -20,49 +20,6 @@ hide_top_title: true
   </div>
 </section>
 
-<style>
-  details { border: 1px solid #e5e7eb; border-radius: 8px; padding: .75rem 1rem; margin: .75rem 0; background:#fff; }
-  details[open] { box-shadow: 0 2px 10px rgba(0,0,0,.05); }
-  summary { cursor: pointer; font-weight: 600; outline: none; }
-  summary::-webkit-details-marker { display: none; }
-  summary::after { content:"▾"; float:right; transition: transform .2s ease; }
-  details[open] summary::after { transform: rotate(180deg); }
-  details > div { margin-top: .75rem; }
-
-  /* Locker form – left aligned, premium look, B/W button */
-  #login-form { margin-top: 1.25rem; max-width: 520px; }
-  #login-form p { margin: 0 0 .5rem 0; }
-  #passwordInput {
-    width: 100%;
-    padding: .75rem 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: .5rem;
-    font-size: 1rem;
-    outline: none;
-    transition: box-shadow .2s, border-color .2s;
-  }
-  #passwordInput:focus {
-    border-color: #717172;
-    box-shadow: 0 0 0 3px rgba(0,0,0,.08);
-  }
-  #login-form button {
-    margin-top: .75rem;
-    padding: .6rem 1.1rem;
-    font-weight: 600;
-    border-radius: .5rem;
-    border: 1px solid #A8A8A8;
-    background: #717172;
-    color: #fff;
-    cursor: pointer;
-    transition: filter .15s ease, background .15s ease, color .15s ease;
-  }
-  #login-form button:hover { filter: brightness(0.9); }
-  #login-form button:active { filter: brightness(0.8); }
-  #error-msg { margin-top: .5rem; color: #dc2626; }
-</style>
-
-
-
 <!-- About | Bold-Preserving Animation -->
 <section class="about-rich">
   <div class="about-wrap">
@@ -95,7 +52,7 @@ hide_top_title: true
 </section>
 
 <style>
-.about-wrap{max-width:880px;margin:0 auto;padding:3.5rem 1.25rem;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.about-wrap{max-width:880px;margin:0 auto;padding:.5rem 1.25rem;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 .headline{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:0 0 1.25rem;background:linear-gradient(90deg,#6aa7ff,#b388ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .about-animated p{font-size:1.08rem;line-height:1.8;margin:0 0 1.05rem 0;opacity:0;transform:translateY(16px)}
 .about-animated p.reveal{animation:rise .85s cubic-bezier(.21,.98,.6,.99) forwards}
