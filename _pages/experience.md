@@ -44,20 +44,16 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
         <span class="acc-head">
           <button class="acc-btn" aria-expanded="false" aria-controls="acc-analyst-1" id="acc-analyst-1-label">
             UHG — BI Modernization (Tableau → Power BI)
-            <span class="acc-meta">SQL Server · Power BI (RLS/DAX) · SSIS/SQL Agent</span>
+            <span class="acc-meta">Power BI · Tableau · Microsoft 365 · Cost Optimization</span>
           </button>
         </span>
         <div class="acc-panel" id="acc-analyst-1" role="region" aria-labelledby="acc-analyst-1-label" hidden>
           <div class="acc-body">
-            <p><strong>Summary:</strong> Migrated static Tableau reports to interactive Power BI with a governed KPI layer.</p>
-            <details><summary>S · Situation</summary><p>Leadership needed fast, trusted clinical/pharmacy KPIs; legacy reports were static and slow.</p></details>
-            <details><summary>T · Task</summary><p>Deliver a governed model with RLS, standardized metrics, and quick drilldowns.</p></details>
-            <details><summary>A · Action</summary><p>Star schema; calc groups; incremental refresh; query tuning; SSIS ingestion; SQL Agent scheduling.</p></details>
-            <details open><summary>R · Result</summary>
-              <ul>
-                <li><span class="kpi" data-target="50">0</span>%+ Tableau views migrated</li>
-                <li>Significantly faster dashboard loads; higher exec adoption</li>
-              </ul>
+            <p><strong>Summary:</strong> I led the migration of reporting from Tableau to Power BI, reducing licensing costs while introducing faster and more flexible reporting prototypes.</p>
+            <details><summary>S · Situation</summary><p>UnitedHealth Group was heavily invested in Tableau, but licensing was expensive, and performance optimizations were not yielding significant improvements. End users were dependent on Tableau despite Microsoft 365 already providing Power BI licenses at no extra cost.</p></details>
+            <details><summary>T · Task</summary><p>I needed to prove the value of Power BI by quickly creating prototypes that stakeholders would accept. The challenge was to drive cultural change and overcome resistance to moving away from an established tool.</p></details>
+            <details><summary>A · Action</summary><p>I created rapid prototypes in Power BI to showcase interactive visuals, improved usability, and integration with existing Microsoft systems. I presented side-by-side comparisons showing both speed improvements and cost savings. I gradually migrated core reports while ensuring consistency of metrics across both platforms during the transition.</p></details>
+            <details open><summary>R · Result</summary><p>Licensing costs were reduced by approximately $5<span class="kpi" data-target="500">0</span>K annually, since Power BI came bundled with Microsoft 365. Report delivery time improved by ~<span class="kpi" data-target="61">0</span>%, increasing stakeholder adoption. Leadership shifted to Power BI as the primary reporting platform, establishing a long-term reporting strategy.</p>
             </details>
             <p><strong>Stack:</strong> Power BI, SQL Server, DAX, SSIS, Tableau</p>
           </div>
