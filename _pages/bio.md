@@ -27,7 +27,9 @@ hide_top_title: true
     <!-- Put your EXACT formatted text below inside <template>. 
          You may include <strong>, <em>, links, and emojis. -->
     <template id="about-source">
-      <p>Hi there ✨, I’m <strong>Rahul Bhattacharya</strong> — a builder, dreamer, and relentless explorer at the intersection of <strong>data, AI, and business transformation</strong>. For me, data has never just been rows and columns; it’s a living story - one that, when told well, can shift strategies, unlock growth, and change how entire organizations move forward.</p>
+      <p>Hi there ✨, I’m <strong>Rahul Bhattacharya</strong> — a builder, dreamer, and relentless explorer at the intersection of <strong>data, AI, and business transformation</strong>.</p>
+      
+      <p>For me, data has never just been rows and columns; it’s a living story - one that, when told well, can shift strategies, unlock growth, and change how entire organizations move forward.</p>
 
       <p>Over the last decade, I’ve had the privilege of shaping that story at companies like <strong>Walgreens, Experian, Toyota Financial Services, Galderma, UnitedHealth Group, and Bombardier</strong>. In each role, I’ve found not just problems to fix, but opportunities to reimagine what’s possible:</p>
 
