@@ -53,7 +53,7 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
             <details><summary>S · Situation</summary><p>UnitedHealth Group was heavily invested in Tableau, but licensing was expensive, and performance optimizations were not yielding significant improvements. End users were dependent on Tableau despite Microsoft 365 already providing Power BI licenses at no extra cost.</p></details>
             <details><summary>T · Task</summary><p>I needed to prove the value of Power BI by quickly creating prototypes that stakeholders would accept. The challenge was to drive cultural change and overcome resistance to moving away from an established tool.</p></details>
             <details><summary>A · Action</summary><p>I created rapid prototypes in Power BI to showcase interactive visuals, improved usability, and integration with existing Microsoft systems. I presented side-by-side comparisons showing both speed improvements and cost savings. I gradually migrated core reports while ensuring consistency of metrics across both platforms during the transition.</p></details>
-            <details open><summary>R · Result</summary><p>Licensing costs were reduced by approximately $5<span class="kpi" data-target="500">0</span>K annually, since Power BI came bundled with Microsoft 365. Report delivery time improved by ~<span class="kpi" data-target="61">0</span>%, increasing stakeholder adoption. Leadership shifted to Power BI as the primary reporting platform, establishing a long-term reporting strategy.</p>
+            <details open><summary>R · Result</summary><p>Licensing costs were reduced by approximately $<span class="kpi" data-target="500">0</span>K annually, since Power BI came bundled with Microsoft 365. Report delivery time improved by ~<span class="kpi" data-target="61">0</span>%, increasing stakeholder adoption. Leadership shifted to Power BI as the primary reporting platform, establishing a long-term reporting strategy.</p>
             </details>
             <p><strong>Stack:</strong> Power BI, SQL Server, DAX, SSIS, Tableau</p>
           </div>
@@ -63,25 +63,41 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
       <article class="acc-item">
         <span class="acc-head">
           <button class="acc-btn" aria-expanded="false" aria-controls="acc-analyst-2" id="acc-analyst-2-label">
-            Retail KPI & Cohort Analytics
-            <span class="acc-meta">SQL · Power BI · Experimentation</span>
+            Hyatt BI Apps Performance Analysis
+            <span class="acc-meta">SQL · Data Modeling · ETL Loads · Reporting</span>
           </button>
         </span>
         <div class="acc-panel" id="acc-analyst-2" role="region" aria-labelledby="acc-analyst-2-label" hidden>
           <div class="acc-body">
-            <p><strong>Summary:</strong> Unified revenue, conversion, and retention with SSoT metrics and drilldowns.</p>
-            <details><summary>S</summary><p>Conflicting metrics across teams led to slow decisions.</p></details>
-            <details><summary>T</summary><p>Single source of truth with cohorts and A/B readouts.</p></details>
-            <details><summary>A</summary><p>Window functions; cohorts; documented KPI contracts; semantic model.</p></details>
-            <details open><summary>R</summary>
-              <ul>
-                <li>Report assembly time cut from 6h → <span class="mono">30m</span></li>
-                <li>Consistent KPIs improved trust and adoption</li>
-              </ul>
+            <p><strong>Summary:</strong> I improved reporting performance at Hyatt by introducing data archiving and incremental load strategies, which reduced slowness in BI applications and improved end-user adoption.</p>
+            <details><summary>S</summary><p>Hyatt’s BI apps were suffering from slowness caused by large historical datasets. Every report query scanned years of data, making even simple dashboards slow to load. Users were dissatisfied and adoption was dropping.</p></details>
+            <details><summary>T</summary><p>I needed to redesign the load process so reports would run faster while keeping historical data accessible. The solution had to balance speed with accuracy and not risk data integrity.</p></details>
+            <details><summary>A</summary><p>I proposed and implemented an archiving mechanism for historical data, paired with incremental loading for new data. This allowed queries to focus only on recent periods by default, while archived data could still be accessed if needed. I also restructured indexes to reduce query time further.</p></details>
+            <details open><summary>R</summary><p>Report execution time improved by ~<span class="kpi" data-target="58">0</span>%, cutting average load times nearly in half. BI adoption increased as reports became usable in daily operations. Leadership appreciated that the solution preserved access to all historical data without compromising performance.</p>
             </details>
           </div>
         </div>
       </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-analyst-3" id="acc-analyst-3-label">
+            UnitedHealth Group – Healthcare Cost Analysis
+            <span class="acc-meta">SQL · Regression Analysis · KPI Discovery · Data Visualization</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-analyst-2" role="region" aria-labelledby="acc-analyst-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I developed a regression-based cost analysis model for UnitedHealth Group that identified the top drivers of healthcare expenses and introduced new KPIs for leadership review.</p>
+            <details><summary>S</summary><p>Healthcare cost drivers were not fully understood by leadership, leading to generic strategies that did not address high-impact areas. Large datasets were collected, but insights were scattered and inconclusive. Managers were reluctant to approve new KPIs without formal validation.</p></details>
+            <details><summary>T</summary><p>My responsibility was to analyze healthcare data, identify the most significant factors driving costs, and present actionable KPIs that could be adopted by stakeholders. I had to accomplish this without formal approval channels for new metric definitions.</p></details>
+            <details><summary>A</summary><p>I applied regression analysis on large healthcare datasets to identify key variables affecting costs. The model highlighted age, doctor visits, and pre-existing conditions as the top three drivers. I then designed new KPIs to measure these factors and built clear reports to present them directly to leadership, even without manager approval.</p></details>
+            <details open><summary>R</summary><p>The model explained cost variance with ~<span class="kpi" data-target="65">0</span>% accuracy and directly influenced budget decisions. Reporting turnaround time was reduced by <span class="kpi" data-target="55">0</span>%, allowing faster decisions. Leadership adopted the new KPIs, which improved planning accuracy and built trust in data-driven decision making.</p>
+            </details>
+          </div>
+        </div>
+      </article>
+      
     </div>
 
     <!-- ========= Scientist ========= -->
