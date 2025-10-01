@@ -20,26 +20,6 @@ hide_top_title: true
   </div>
 </section>
 
-Hi there ✨, I'm **Rahul Bhattacharya** --- a builder, dreamer, and relentless explorer at the intersection of **data, AI, and business transformation**. For me, data has never just been rows and columns; it's a living story - one that, when told well, can shift strategies, unlock growth, and change how entire organizations move forward.
-
-Over the last decade, I've had the privilege of shaping that story at companies like **Walgreens, Experian, Toyota Financial Services, Galderma, UnitedHealth Group, and Bombardier**. In each role, I've found not just problems to fix, but opportunities to reimagine what's possible:
-- Cutting reporting downtime by more than **70%** through automation ⚡
-- Leading a migration from **Tableau to Power BI**, saving millions while giving teams faster, sharper insights 💡
-- Building predictive models that turned hindsight into foresight - so leaders could see tomorrow's challenges today 🔮
-- Designing KPIs and frameworks that united global teams from **EMEA to APAC to North America** 🌍
-
-But numbers, though powerful, are only part of the story. What excites me most is the **thrill of the future**: a future where AI doesn't just answer questions, it anticipates them; where dashboards don't just report, they advise; where decision-makers everywhere can move with confidence because their systems whisper the truth before it's visible.
-
-My philosophy is simple: **problems are signals**. Some tell you to wait and observe, others demand immediate action. The art is knowing the difference, and the joy is in solving them in ways that inspire trust.
-
-Outside of my enterprise work, I've built a portfolio of **AI/ML projects** - from resume analyzers to trip planners, from defect classifiers to sentiment tools. Each one is both an experiment and a gift: a way to test ideas, share knowledge, and invite others into the excitement of this journey.
-
-Looking ahead, I see the next 20 years not just as a career, but as an **adventure**: one where AI becomes the nervous system of every business, where insights move at the speed of thought, and where I can help shape the tools that will power decisions for a generation. 🚀
-
-If you're here as a recruiter, a hiring manager, or simply a curious explorer - welcome. You're not just seeing what I've built; you're stepping into the vision I'm building toward. The best part? The most thrilling chapters are still to come. 🌌
-
-
-
 <style>
   details { border: 1px solid #e5e7eb; border-radius: 8px; padding: .75rem 1rem; margin: .75rem 0; background:#fff; }
   details[open] { box-shadow: 0 2px 10px rgba(0,0,0,.05); }
@@ -110,8 +90,23 @@ If you're here as a recruiter, a hiring manager, or simply a curious explorer - 
     </iframe>
   </div>
 
-
-
-
-
 {:/nomarkdown}
+
+Hi there ✨, I'm **Rahul Bhattacharya** --- a builder, dreamer, and relentless explorer at the intersection of **data, AI, and business transformation**. For me, data has never just been rows and columns; it's a living story - one that, when told well, can shift strategies, unlock growth, and change how entire organizations move forward.
+
+Over the last decade, I've had the privilege of shaping that story at companies like **Walgreens, Experian, Toyota Financial Services, Galderma, UnitedHealth Group, and Bombardier**. In each role, I've found not just problems to fix, but opportunities to reimagine what's possible:
+- Cutting reporting downtime by more than **70%** through automation ⚡
+- Leading a migration from **Tableau to Power BI**, saving millions while giving teams faster, sharper insights 💡
+- Building predictive models that turned hindsight into foresight - so leaders could see tomorrow's challenges today 🔮
+- Designing KPIs and frameworks that united global teams from **EMEA to APAC to North America** 🌍
+
+But numbers, though powerful, are only part of the story. What excites me most is the **thrill of the future**: a future where AI doesn't just answer questions, it anticipates them; where dashboards don't just report, they advise; where decision-makers everywhere can move with confidence because their systems whisper the truth before it's visible.
+
+My philosophy is simple: **problems are signals**. Some tell you to wait and observe, others demand immediate action. The art is knowing the difference, and the joy is in solving them in ways that inspire trust.
+
+Outside of my enterprise work, I've built a portfolio of **AI/ML projects** - from resume analyzers to trip planners, from defect classifiers to sentiment tools. Each one is both an experiment and a gift: a way to test ideas, share knowledge, and invite others into the excitement of this journey.
+
+Looking ahead, I see the next 20 years not just as a career, but as an **adventure**: one where AI becomes the nervous system of every business, where insights move at the speed of thought, and where I can help shape the tools that will power decisions for a generation. 🚀
+
+If you're here as a recruiter, a hiring manager, or simply a curious explorer - welcome. You're not just seeing what I've built; you're stepping into the vision I'm building toward. The best part? The most thrilling chapters are still to come. 🌌
+
