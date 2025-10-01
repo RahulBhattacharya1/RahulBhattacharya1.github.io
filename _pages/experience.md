@@ -86,7 +86,7 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
             <span class="acc-meta">SQL · Regression Analysis · KPI Discovery · Data Visualization</span>
           </button>
         </span>
-        <div class="acc-panel" id="acc-analyst-2" role="region" aria-labelledby="acc-analyst-2-label" hidden>
+        <div class="acc-panel" id="acc-analyst-3" role="region" aria-labelledby="acc-analyst-3-label" hidden>
           <div class="acc-body">
             <p><strong>Summary:</strong> I developed a regression-based cost analysis model for UnitedHealth Group that identified the top drivers of healthcare expenses and introduced new KPIs for leadership review.</p>
             <details><summary>S</summary><p>Healthcare cost drivers were not fully understood by leadership, leading to generic strategies that did not address high-impact areas. Large datasets were collected, but insights were scattered and inconclusive. Managers were reluctant to approve new KPIs without formal validation.</p></details>
