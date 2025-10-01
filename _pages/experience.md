@@ -70,11 +70,12 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
         <div class="acc-panel" id="acc-analyst-2" role="region" aria-labelledby="acc-analyst-2-label" hidden>
           <div class="acc-body">
             <p><strong>Summary:</strong> I improved reporting performance at Hyatt by introducing data archiving and incremental load strategies, which reduced slowness in BI applications and improved end-user adoption.</p>
-            <details><summary>S</summary><p>Hyatt’s BI apps were suffering from slowness caused by large historical datasets. Every report query scanned years of data, making even simple dashboards slow to load. Users were dissatisfied and adoption was dropping.</p></details>
-            <details><summary>T</summary><p>I needed to redesign the load process so reports would run faster while keeping historical data accessible. The solution had to balance speed with accuracy and not risk data integrity.</p></details>
-            <details><summary>A</summary><p>I proposed and implemented an archiving mechanism for historical data, paired with incremental loading for new data. This allowed queries to focus only on recent periods by default, while archived data could still be accessed if needed. I also restructured indexes to reduce query time further.</p></details>
-            <details open><summary>R</summary><p>Report execution time improved by ~<span class="kpi" data-target="58">0</span>%, cutting average load times nearly in half. BI adoption increased as reports became usable in daily operations. Leadership appreciated that the solution preserved access to all historical data without compromising performance.</p>
+            <details><summary>S · Situation</summary><p>Hyatt’s BI apps were suffering from slowness caused by large historical datasets. Every report query scanned years of data, making even simple dashboards slow to load. Users were dissatisfied and adoption was dropping.</p></details>
+            <details><summary>T · Task</summary><p>I needed to redesign the load process so reports would run faster while keeping historical data accessible. The solution had to balance speed with accuracy and not risk data integrity.</p></details>
+            <details><summary>A · Action</summary><p>I proposed and implemented an archiving mechanism for historical data, paired with incremental loading for new data. This allowed queries to focus only on recent periods by default, while archived data could still be accessed if needed. I also restructured indexes to reduce query time further.</p></details>
+            <details open><summary>R · Result</summary><p>Report execution time improved by ~<span class="kpi" data-target="58">0</span>%, cutting average load times nearly in half. BI adoption increased as reports became usable in daily operations. Leadership appreciated that the solution preserved access to all historical data without compromising performance.</p>
             </details>
+            <p><strong>Stack:</strong> Oracle SQL, PL/SQL, Informatica, OBIEE</p>            
           </div>
         </div>
       </article>
@@ -89,11 +90,32 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
         <div class="acc-panel" id="acc-analyst-3" role="region" aria-labelledby="acc-analyst-3-label" hidden>
           <div class="acc-body">
             <p><strong>Summary:</strong> I developed a regression-based cost analysis model for UnitedHealth Group that identified the top drivers of healthcare expenses and introduced new KPIs for leadership review.</p>
-            <details><summary>S</summary><p>Healthcare cost drivers were not fully understood by leadership, leading to generic strategies that did not address high-impact areas. Large datasets were collected, but insights were scattered and inconclusive. Managers were reluctant to approve new KPIs without formal validation.</p></details>
-            <details><summary>T</summary><p>My responsibility was to analyze healthcare data, identify the most significant factors driving costs, and present actionable KPIs that could be adopted by stakeholders. I had to accomplish this without formal approval channels for new metric definitions.</p></details>
-            <details><summary>A</summary><p>I applied regression analysis on large healthcare datasets to identify key variables affecting costs. The model highlighted age, doctor visits, and pre-existing conditions as the top three drivers. I then designed new KPIs to measure these factors and built clear reports to present them directly to leadership, even without manager approval.</p></details>
-            <details open><summary>R</summary><p>The model explained cost variance with ~<span class="kpi" data-target="65">0</span>% accuracy and directly influenced budget decisions. Reporting turnaround time was reduced by <span class="kpi" data-target="55">0</span>%, allowing faster decisions. Leadership adopted the new KPIs, which improved planning accuracy and built trust in data-driven decision making.</p>
+            <details><summary>S · Situation</summary><p>Healthcare cost drivers were not fully understood by leadership, leading to generic strategies that did not address high-impact areas. Large datasets were collected, but insights were scattered and inconclusive. Managers were reluctant to approve new KPIs without formal validation.</p></details>
+            <details><summary>T · Task</summary><p>My responsibility was to analyze healthcare data, identify the most significant factors driving costs, and present actionable KPIs that could be adopted by stakeholders. I had to accomplish this without formal approval channels for new metric definitions.</p></details>
+            <details><summary>A · Action</summary><p>I applied regression analysis on large healthcare datasets to identify key variables affecting costs. The model highlighted age, doctor visits, and pre-existing conditions as the top three drivers. I then designed new KPIs to measure these factors and built clear reports to present them directly to leadership, even without manager approval.</p></details>
+            <details open><summary>R · Result</summary><p>The model explained cost variance with ~<span class="kpi" data-target="65">0</span>% accuracy and directly influenced budget decisions. Reporting turnaround time was reduced by <span class="kpi" data-target="55">0</span>%, allowing faster decisions. Leadership adopted the new KPIs, which improved planning accuracy and built trust in data-driven decision making.</p>
             </details>
+            <p><strong>Stack:</strong> Power BI, Statistical Analysis, Cluster Analysis</p>            
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-analyst-4" id="acc-analyst-4-label">
+            Walgreens Loyalty Data Quality Load Automation
+            <span class="acc-meta">SQL · Oracle BI Apps · Data Governance · Automation</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-analyst-4" role="region" aria-labelledby="acc-analyst-4-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I automated a loyalty program data quality process that repeatedly caused extended downtime during month-end reporting. The solution reduced downtime drastically and introduced reliable fallback mechanisms.</p>
+            <details><summary>S · Situation</summary><p>Walgreens’ loyalty data load process was prone to repeated failures, requiring multiple reloads. During month-end, these failures caused downtime of nearly seven hours, delaying reports and frustrating business users. Teams hesitated to allow changes to standard processes, even though system reliability was suffering.</p></details>
+            <details><summary>T · Task</summary><p>My task was to improve load reliability, cut downtime, and deliver a rollback option to ensure business continuity. I needed to balance automation with safeguards, since leadership had concerns about unintended disruptions.</p></details>
+            <details><summary>A · Action</summary><p>I created an automated data quality detection and reload mechanism with backup and rollback features. The automation checked data integrity before release, reduced dependency on manual reloads, and ensured rapid recovery if needed. I also documented the process clearly so that stakeholders felt comfortable approving it without waiting for top-down approvals.</p></details>
+            <details open><summary>R · Result</summary><p>Downtime was reduced by <span class="kpi" data-target="80">0</span>%, from seven hours to three hours during month-end. Data quality improved by ~<span class="kpi" data-target="67">0</span>%, boosting stakeholder confidence. The rollback feature ensured zero business disruption, and adoption spread across other month-end processes.</p>
+            </details>
+            <p><strong>Stack:</strong> Oracle SQL, Unix, MDBMS, Hyperion</p>            
           </div>
         </div>
       </article>
