@@ -235,25 +235,122 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
       <article class="acc-item">
         <span class="acc-head">
           <button class="acc-btn" aria-expanded="false" aria-controls="acc-engineer-1" id="acc-engineer-1-label">
-            Delta Lake ELT Orchestration
-            <span class="acc-meta">Databricks · Delta · ADF · PySpark</span>
+            Walgreens – Out-of-the-Box BI Apps Load Tuning
+            <span class="acc-meta">PL/SQL · Oracle BI Apps · Performance Tuning · ETL</span>
           </button>
         </span>
         <div class="acc-panel" id="acc-engineer-1" role="region" aria-labelledby="acc-engineer-1-label" hidden>
           <div class="acc-body">
-            <p><strong>Summary:</strong> Bronze→Silver→Gold with CDC, data quality tests, and SLAs.</p>
-            <details><summary>S · Situation</summary><p>Nightly delays; missed SLAs.</p></details>
-            <details><summary>T · Task</summary><p>Incremental ELT with reliability and lineage.</p></details>
-            <details><summary>A · Action</summary><p>Auto Loader; MergeInto; watermarking; expectations; monitoring.</p></details>
-            <details open><summary>R · Result</summary>
-              <ul>
-                <li>Latency 24h → <span class="mono">30m</span></li>
-                <li>On-time delivery at peaks</li>
-              </ul>
+            <p><strong>Summary:</strong> I optimized Walgreens’ BI Apps load process by analyzing dependency chains and creating parallel execution strategies. This improved overall load performance and helped establish new KPIs for system monitoring.</p>
+            <details><summary>S · Situation</summary><p>Walgreens’ BI Apps suffered from long-running Out-of-the-Box loads that delayed reporting. The business required timely reporting for executive dashboards, but load inefficiencies caused frequent bottlenecks. Leadership resisted modifying vendor-delivered jobs, fearing compliance risks.</p></details>
+            <details><summary>T · Task</summary><p>I needed to optimize system performance while respecting Out-of-the-Box restrictions. The goal was to speed up data availability without compromising vendor support or introducing system instability.</p></details>
+            <details><summary>A · Action</summary><p>I performed dependency analysis on tables and fact-dimension relationships. I restructured jobs into parallel execution groups, ensuring loads were ordered logically but without unnecessary serialization. I also introduced KPIs to measure system performance, which allowed me to demonstrate consistent improvements.</p></details>
+            <details open><summary>R · Result</summary><p>Data load completion time was reduced by ~<span class="kpi" data-target="59">0</span>%, making critical dashboards available hours earlier. Reporting accuracy improved by ~<span class="kpi" data-target="54">0</span>% as dependencies were better synchronized. Leadership adopted performance KPIs as part of the monitoring process, enabling sustainable improvements.</p>
             </details>
+            <p><strong>Stack:</strong> Python, PL/SQL, Oracle Data Integrator, Oracle BI Apps</p>            
           </div>
         </div>
       </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-engineer-2" id="acc-engineer-2-label">
+            Experian – DMT (Data Migration Tool) Performance Tuning
+            <span class="acc-meta">PL/SQL · ETL Optimization · Data Quality · Automation</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-engineer-2" role="region" aria-labelledby="acc-engineer-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I optimized Experian’s DMT to process large volumes of data faster, delivering significant improvements in migration efficiency for senior leadership teams.</p>
+            <details><summary>S · Situation</summary><p>Experian’s DMT struggled to process large daily loads, creating bottlenecks for cross-regional data migration. Leadership needed timely results to meet SLAs, but the tool’s performance was inconsistent and often caused delays.</p></details>
+            <details><summary>T · Task</summary><p>I was tasked with improving throughput and efficiency of DMT jobs without sacrificing data quality checks. The solution had to demonstrate tangible improvements in both processing speed and reliability.</p></details>
+            <details><summary>A · Action</summary><p>I tuned queries, streamlined data validation scripts, and implemented incremental batch execution instead of full reprocessing. I also automated validation checks to prevent manual bottlenecks and ensure quality at scale.</p></details>
+            <details open><summary>R · Result</summary><p>Processing speed improved by ~<span class="kpi" data-target="66">0</span>%, cutting migration times significantly. Reliability increased by ~<span class="kpi" data-target="58">0</span>%, ensuring more consistent SLA compliance. Leadership recognized the optimization as a high-value contribution to EMEA/APAC reporting efficiency.</p>
+            </details>
+            <p><strong>Stack:</strong> PL/SQL, Unix, Windows PowerShell</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-engineer-3" id="acc-engineer-3-label">
+            Walgreens – DRM Server Implementation
+            <span class="acc-meta">Oracle EPM · Data Governance · Systems Integration</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-engineer-3" role="region" aria-labelledby="acc-engineer-3-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I implemented a Oracle Hyperion Data Relationship Management (DRM) server for Walgreens in just two weeks, enabling critical master data management and data governance capabilities during a business-sensitive period.</p>
+            <details><summary>S · Situation</summary><p>Walgreens urgently needed a test DRM environment to validate critical reporting changes. Leadership initially considered manual workarounds due to the tight timeline and perceived complexity of setup.</p></details>
+            <details><summary>T · Task</summary><p>I had to deliver a fully functional DRM test environment quickly, with minimal disruption, and without relying on manual processes.</p></details>
+            <details><summary>A · Action</summary><p>I leveraged my systems knowledge to configure, test, and validate a new DRM server instance. I automated portions of the setup with Windows scripting to save time. I coordinated with infrastructure teams to streamline approvals and deployment.</p></details>
+            <details open><summary>R · Result</summary><p>The server was deployed in <span class="kpi" data-target="14">0</span> days, ahead of the critical deadline. Testing downtime risk was reduced by ~<span class="kpi" data-target="62">0</span>% compared to manual alternatives. This success built trust in automation-first approaches for infrastructure delivery.</p>
+            </details>
+            <p><strong>Stack:</strong> Oracle EPM, Hyperion, Data Governance, Windows PowerShell</p>            
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-engineer-4" id="acc-engineer-4-label">
+            Toyota Financial Services – Data Load Strategy
+            <span class="acc-meta">ETL · Data Warehouse · PL/SQL · Process Optimization</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-engineer-4" role="region" aria-labelledby="acc-engineer-4-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I redesigned Toyota’s data load process by opting for full re-extractions instead of incremental loads to prevent downstream data loss.</p>
+            <details><summary>S · Situation</summary><p>Toyota Financial Services faced frequent reporting discrepancies caused by incremental data loads missing updates. Downstream systems were impacted, and leadership was concerned about data reliability.</p></details>
+            <details><summary>T · Task</summary><p>I was responsible for ensuring that downstream systems received accurate and complete data, even if this required rethinking the traditional incremental load strategy.</p></details>
+            <details><summary>A · Action</summary><p>Drawing from past experience, I proposed full data re-extractions, ensuring complete synchronization across systems. I optimized the process to minimize runtime impacts, balancing completeness with performance.</p></details>
+            <details open><summary>R · Result</summary><p>Data reliability improved by ~<span class="kpi" data-target="65">0</span>%, with downstream discrepancies nearly eliminated. Although processing times increased slightly, stakeholder trust in reporting accuracy improved dramatically. This trade-off was accepted as the best solution.</p>
+            </details>
+            <p><strong>Stack:</strong> PL/SQL, Informatica PowerCenter, Unix, DAC</p>            
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-engineer-5" id="acc-engineer-5-label">
+            Experian – SOOSA C 2.1 Daily Load Optimization
+            <span class="acc-meta">PL/SQL · ETL · Process Automation · Data Warehousing</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-engineer-5" role="region" aria-labelledby="acc-engineer-5-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I optimized Experian’s SOOSA C 2.1 daily load, reducing downtime by 70% through new process design and automation.</p>
+            <details><summary>S · Situation</summary><p>Experian’s daily load jobs were prone to failures, consuming excessive time and delaying critical reports across global regions. Leadership was pressuring the team to improve reliability quickly.</p></details>
+            <details><summary>T · Task</summary><p>I was tasked with redesigning the process to reduce downtime and improve load performance, ensuring faster delivery of daily reports.</p></details>
+            <details><summary>A · Action</summary><p>I created optimized SQL procedures, parallelized portions of the ETL process, and automated restart checkpoints. I built monitoring scripts to flag and restart failed jobs without manual intervention.</p></details>
+            <details open><summary>R · Result</summary><p>Downtime was reduced by <span class="kpi" data-target="70">0</span>%, and daily reporting timelines improved by ~<span class="kpi" data-target="60">0</span>%. Stakeholder confidence increased, and the optimized framework became the new standard for daily data processing.</p>
+            </details>
+            <p><strong>Stack:</strong> PL/SQL, Informatica PowerCenter, Unix, DAC</p>              
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-engineer-6" id="acc-engineer-6-label">
+            Walgreens – RiteAid Data Warehouse Modeling
+            <span class="acc-meta">PL/SQL · Data Modeling · Fact-Dimension Design · Data Governance</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-engineer-6" role="region" aria-labelledby="acc-engineer-6-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I created a new data warehouse model for RiteAid integration within Walgreens, supporting balance, journal, and account reporting with proper governance.</p>
+            <details><summary>S · Situation</summary><p>Walgreens needed to integrate RiteAid’s reporting structure into its own warehouse. The existing models did not align with new governance requirements, leading to inconsistent reporting.</p></details>
+            <details><summary>T · Task</summary><p>My goal was to design a warehouse model that incorporated RiteAid’s data while maintaining consistent governance and reporting performance.</p></details>
+            <details><summary>A · Action</summary><p>I designed fact and dimension models covering balances, journals, and accounts. I worked with governance teams to ensure compliance and created structures that minimized redundancy. I tested models against existing reports to validate correctness.</p></details>
+            <details open><summary>R · Result</summary><p>Integration accuracy improved by ~<span class="kpi" data-target="61">0</span>%, and reporting consistency across Walgreens and RiteAid data was achieved. Performance improved by ~<span class="kpi" data-target="55">0</span>% as models were streamlined for query efficiency.</p>
+            </details>
+            <p><strong>Stack:</strong> PL/SQL, Oracle BI Apps, Unix, Shell Scripting</p>              
+          </div>
+        </div>
+      </article>      
     </div>
 
     <!-- ========= AI/ML, GenAI, BA panels (trimmed for brevity; keep your items) ========= -->
