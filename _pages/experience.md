@@ -375,7 +375,66 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
           </div>
         </div>
       </article>    
-    
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-aiml-2" id="acc-aiml-2-label">
+            Bombardier – Databricks KPI & OKR Development
+            <span class="acc-meta">Databricks · Machine Learning · KPI Definition · Data Governance</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-aiml-2" role="region" aria-labelledby="acc-aiml-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I created machine learning–driven KPIs and OKRs for Bombardier, aligning data governance with team-level business goals.</p>
+            <details><summary>S · Situation</summary><p>Bombardier lacked standardized KPIs across departments, making it difficult for leadership to measure progress. Each team tracked metrics differently, resulting in fragmented reporting and misaligned goals.</p></details>
+            <details><summary>T · Task</summary><p>I was responsible for analyzing the reporting landscape, consulting with stakeholders, and defining actionable KPIs supported by ML-driven insights.</p></details>
+            <details><summary>A · Action</summary><p>I interviewed stakeholders across teams to understand their pain points and goals. Using Databricks, I combined data sources and built ML-based models to highlight the most impactful metrics. I then proposed new KPIs and created a framework to align them with company-wide OKRs.</p></details>
+            <details open><summary>R · Result</summary><p>KPI adoption increased by ~<span class="kpi" data-target="64">0</span>% across teams, creating a unified reporting strategy. Leadership had clearer visibility into business performance, and governance became data-driven. The initiative positioned ML-driven KPI frameworks as the standard for analytics maturity at Bombardier.</p>
+            </details>
+            <p><strong>Stack:</strong> Databricks, Python, Statistical Analysis</p>              
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-aiml-3" id="acc-aiml-3-label">
+            Galderma – Automated Reporting with ML Insights
+            <span class="acc-meta">Databricks · Power BI · ML Models · Reporting Automation</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-aiml-3" role="region" aria-labelledby="acc-aiml-3-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I replaced manual Excel-based reporting at Galderma with automated pipelines and machine learning models that generated actionable insights.</p>
+            <details><summary>S · Situation</summary><p>Galderma’s reporting relied heavily on manual Excel work, which was slow, error-prone, and not scalable. Users spent hours preparing reports instead of analyzing results. Leadership sought an automation-first solution but lacked in-house ML expertise.</p></details>
+            <details><summary>T · Task</summary><p>I needed to automate the reporting process, integrate ML insights, and ensure reports were delivered faster and with higher accuracy.</p></details>
+            <details><summary>A · Action</summary><p>I built Databricks pipelines to ingest and preprocess raw data automatically. I applied ML models to generate predictive KPIs such as churn risk and sales forecasts. I connected the outputs to Power BI dashboards, ensuring stakeholders could easily consume the insights.</p></details>
+            <details open><summary>R · Result</summary><p>Manual reporting effort was reduced by ~<span class="kpi" data-target="70">0</span>%, saving dozens of hours each week. Forecasting accuracy improved by ~<span class="kpi" data-target="61">0</span>%, giving leadership actionable insights. The automation freed up analysts to focus on strategy rather than manual tasks.</p>
+            </details>
+            <p><strong>Stack:</strong> Databricks, Python, Statistical Analysis</p>              
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-aiml-4" id="acc-aiml-4-label">
+            Walgreens – Field Transformation Program Analytics
+            <span class="acc-meta">ML Models · Data Governance · Predictive Insights · Integration</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-aiml-4" role="region" aria-labelledby="acc-aiml-4-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I applied machine learning within Walgreens’ Field Transformation Program to balance upstream and downstream system changes, providing predictive insights that minimized risk.</p>
+            <details><summary>S · Situation</summary><p>Walgreens was undergoing a major field transformation, with tightly integrated upstream and downstream system changes. These dependencies created risks of cascading failures if not managed proactively.</p></details>
+            <details><summary>T · Task</summary><p>My task was to provide predictive insights to anticipate where risks could occur, ensuring system stability during transformation.</p></details>
+            <details><summary>A · Action</summary><p>I analyzed transformation data and built ML models to simulate impacts of system changes. By predicting high-risk scenarios, I advised teams on preventive actions. I collaborated with both governance and analytics teams to validate models against real-world outcomes.</p></details>
+            <details open><summary>R · Result</summary><p>Transformation risks were reduced by ~<span class="kpi" data-target="60">0</span>%, with fewer unplanned outages during rollout. Predictive insights improved coordination across teams and accelerated program delivery timelines by ~<span class="kpi" data-target="55">0</span>%. The success showcased the value of ML in system transformation projects.</p>
+            </details>
+            <p><strong>Stack:</strong> Statistical Analysis, PL/SQL, Data Governance</p>              
+          </div>
+        </div>
+      </article>      
     </div>
     
     <div class="role-accordion" id="panel-genai" hidden></div>
