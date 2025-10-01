@@ -354,7 +354,30 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
     </div>
 
     <!-- ========= AI/ML, GenAI, BA panels (trimmed for brevity; keep your items) ========= -->
-    <div class="role-accordion" id="panel-aiml" hidden></div>
+    <div class="role-accordion" id="panel-aiml" hidden>
+    
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-aiml-1" id="acc-aiml-1-label">
+            Walgreens – Predictive Alerts & Insights in BI Apps
+            <span class="acc-meta">PL/SQL · Python · Time-Series Forecasting · BI Integration</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-aiml-1" role="region" aria-labelledby="acc-aiml-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I transformed a recurring load issue into a predictive analytics opportunity, building forecasting models that enabled proactive alerts and actionable insights in Walgreens’ BI applications.</p>
+            <details><summary>S · Situation</summary><p>Walgreens BI teams faced frequent reporting delays due to data load failures. Stakeholders only requested fixes to stabilize the load, but this reactive approach left the business exposed to recurring risks. Leadership hesitated to approve predictive solutions because of concerns about model reliability.</p></details>
+            <details><summary>T · Task</summary><p>I had to stabilize the immediate reporting issue while exploring predictive models that could forecast both failures and business trends. The challenge was to prove value quickly and minimize perceived risk.</p></details>
+            <details><summary>A · Action</summary><p>I developed time-series forecasting models using Python and SQL to detect anomalies and predict future failures. I integrated predictive alerts directly into BI dashboards, enabling business users to see both risks and forward-looking metrics. I also iteratively refined models to reduce false positives, gaining confidence from end users.</p></details>
+            <details open><summary>R · Result</summary><p>The solution reduced reporting disruptions by ~<span class="kpi" data-target="66">0</span>%, preventing multiple critical outages. Business teams began using predictive dashboards to anticipate issues and plan actions. This success demonstrated that predictive analytics could be embedded directly in operational BI systems.</p>
+            </details>
+            <p><strong>Stack:</strong> Statistical Analysis, PL/SQL, Python, Unix</p>              
+          </div>
+        </div>
+      </article>    
+    
+    </div>
+    
     <div class="role-accordion" id="panel-genai" hidden></div>
     <div class="role-accordion" id="panel-businessanalyst" hidden></div>
   </section>
