@@ -527,23 +527,103 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
     
       <article class="acc-item">
         <span class="acc-head">
-          <button class="acc-btn" aria-expanded="false" aria-controls="acc-aiml-1" id="acc-aiml-1-label">
-            Walgreens – Predictive Alerts & Insights in BI Apps
-            <span class="acc-meta">PL/SQL · Python · Time-Series Forecasting · BI Integration</span>
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-businessanalyst-1" id="acc-businessanalyst-1-label">
+            Walgreens – FAH Load Quality Detection & Stakeholder Alignment
+            <span class="acc-meta">SQL · Oracle BI Apps · Data Governance · Stakeholder Management</span>
           </button>
         </span>
-        <div class="acc-panel" id="acc-aiml-1" role="region" aria-labelledby="acc-aiml-1-label" hidden>
+        <div class="acc-panel" id="acc-businessanalyst-1" role="region" aria-labelledby="acc-businessanalyst-1-label" hidden>
           <div class="acc-body">
-            <p><strong>Summary:</strong> I transformed a recurring load issue into a predictive analytics opportunity, building forecasting models that enabled proactive alerts and actionable insights in Walgreens’ BI applications.</p>
-            <details><summary>S · Situation</summary><p>Walgreens BI teams faced frequent reporting delays due to data load failures. Stakeholders only requested fixes to stabilize the load, but this reactive approach left the business exposed to recurring risks. Leadership hesitated to approve predictive solutions because of concerns about model reliability.</p></details>
-            <details><summary>T · Task</summary><p>I had to stabilize the immediate reporting issue while exploring predictive models that could forecast both failures and business trends. The challenge was to prove value quickly and minimize perceived risk.</p></details>
-            <details><summary>A · Action</summary><p>I developed time-series forecasting models using Python and SQL to detect anomalies and predict future failures. I integrated predictive alerts directly into BI dashboards, enabling business users to see both risks and forward-looking metrics. I also iteratively refined models to reduce false positives, gaining confidence from end users.</p></details>
-            <details open><summary>R · Result</summary><p>The solution reduced reporting disruptions by ~<span class="kpi" data-target="66">0</span>%, preventing multiple critical outages. Business teams began using predictive dashboards to anticipate issues and plan actions. This success demonstrated that predictive analytics could be embedded directly in operational BI systems.</p>
+            <p><strong>Summary:</strong> I resolved data quality challenges in Walgreens’ Financial Accounting Hub (FAH) by balancing technical optimization with stakeholder concerns, building trust while delivering automation.</p>
+            <details><summary>S · Situation</summary><p>Walgreens’ FAH Out-of-the-Box load produced reporting discrepancies. Leadership resisted modifications to vendor-delivered jobs, fearing compliance risks. Business teams needed accurate reports but were frustrated with delays and quality issues.</p></details>
+            <details><summary>T · Task</summary><p>I was tasked with improving reporting accuracy while addressing resistance to change. I needed to deliver improvements without creating conflict or violating vendor agreements.</p></details>
+            <details><summary>A · Action</summary><p>I designed a complementary load process that operated in parallel, validating data quality without modifying the original vendor jobs. I framed the solution as a non-intrusive safeguard, not a replacement. I presented prototypes to stakeholders and positioned the project as risk-free, ensuring their buy-in.</p></details>
+            <details open><summary>R · Result</summary><p>Reporting accuracy improved by ~<span class="kpi" data-target="63">0</span>%. Month-end report preparation time dropped from six hours to less than two. Stakeholder adoption was strong, as the compromise respected vendor constraints while still achieving automation goals.</p>
             </details>
-            <p><strong>Stack:</strong> Statistical Analysis, PL/SQL, Python, Unix</p>              
+            <p><strong>Stack:</strong> PL/SQL, Oracle Data Integrator, Oracle BI Apps</p>              
           </div>
         </div>
       </article> 
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-businessanalyst-2" id="acc-businessanalyst-2-label">
+            UnitedHealth Group – Power BI Migration Advocacy
+            <span class="acc-meta">Power BI · Tableau · Microsoft 365 · Cost Strategy</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-businessanalyst-2" role="region" aria-labelledby="acc-businessanalyst-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I led a major reporting transformation at UHG by advocating for Power BI over Tableau, overcoming resistance through prototypes and financial justification.</p>
+            <details><summary>S · Situation</summary><p>Stakeholders were committed to Tableau despite its high licensing costs and limited optimization potential. Power BI was already available through Microsoft 365 licenses but sat unused. Leadership feared disruption from a full migration.</p></details>
+            <details><summary>T · Task</summary><p>I needed to prove that Power BI was a viable replacement for Tableau, both technically and financially. My role was to manage stakeholder concerns, secure buy-in, and present a vision for the migration.</p></details>
+            <details><summary>A · Action</summary><p>I created rapid Power BI prototypes showing side-by-side comparisons with Tableau. I demonstrated improved usability, faster refresh times, and seamless integration with existing systems. I emphasized cost savings of roughly $15 per user per month, multiplied across thousands of licenses.</p></details>
+            <details open><summary>R · Result</summary><p>Leadership approved the migration. Licensing costs dropped by ~<span class="kpi" data-target="65">0</span>%, saving nearly $<span class="kpi" data-target="500">0</span>K annually. Stakeholder adoption grew quickly, with report delivery time improving by ~<span class="kpi" data-target="61">0</span>%. I successfully shifted organizational culture toward Power BI as the strategic reporting platform.</p>
+            </details>
+            <p><strong>Stack:</strong> Power BI, Tableau, SQL Server, Python</p>              
+          </div>
+        </div>
+      </article> 
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-businessanalyst-3" id="acc-businessanalyst-3-label">
+            Walgreens – MDBMS Cube Decision Trade-Offs
+            <span class="acc-meta">BI Apps · Data Warehousing · Stakeholder Management</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-businessanalyst-3" role="region" aria-labelledby="acc-businessanalyst-3-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I guided Walgreens’ reporting teams through a trade-off decision, balancing optimal technical solutions with business timelines and stakeholder priorities.</p>
+            <details><summary>S · Situation</summary><p>Walgreens requested a new cube design for MDBMS reporting. While the optimal solution was to create a fresh cube, leadership insisted on modifying existing cubes to save time. This created risk of slowness as cube size expanded.</p></details>
+            <details><summary>T · Task</summary><p>My responsibility was to ensure stakeholders understood the trade-offs and commit to a solution aligned with both technical feasibility and business urgency.</p></details>
+            <details><summary>A · Action</summary><p>I presented side-by-side comparisons of cube strategies, including estimated performance impacts. I explained that modifying existing cubes would risk slowness but respected the business timeline. I gained agreement to proceed with modifications while documenting performance risks.</p></details>
+            <details open><summary>R · Result</summary><p>Stakeholders adopted the modified cube solution. Performance impact was partially mitigated by query optimization, reducing slowness by ~<span class="kpi" data-target="55">0</span>%. Most importantly, business timelines were met without conflict, and leadership trusted me as a balanced advisor.</p>
+            </details>
+            <p><strong>Stack:</strong> Oracle BI Apps, PL/SQL, Hyperion</p>              
+          </div>
+        </div>
+      </article> 
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-businessanalyst-4" id="acc-businessanalyst-4-label">
+            Bombardier – Cross-Team KPI Governance Alignment
+            <span class="acc-meta">Databricks · KPI Framework · Stakeholder Collaboration</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-businessanalyst-4" role="region" aria-labelledby="acc-businessanalyst-4-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I drove stakeholder alignment at Bombardier by consolidating fragmented reporting practices into a unified KPI governance framework.</p>
+            <details><summary>S · Situation</summary><p>Teams across Bombardier tracked metrics differently, leading to misaligned goals and conflicting reporting outputs. Leadership needed a common framework to evaluate performance but struggled to gain consensus.</p></details>
+            <details><summary>T · Task</summary><p>My task was to bridge team silos, identify common ground, and define KPIs that could satisfy multiple departments.</p></details>
+            <details><summary>A · Action</summary><p>I organized workshops with stakeholders to surface pain points and goals. I mapped common themes and proposed unified KPIs that addressed multiple needs. Using Databricks, I built data pipelines that supported these KPIs, ensuring technical scalability alongside governance.</p></details>
+            <details open><summary>R · Result</summary><p>Consensus adoption of the unified KPIs reached ~<span class="kpi" data-target="68">0</span>% across departments. Reporting conflicts decreased significantly, and leadership gained consistent visibility across teams. The project improved trust and created a governance template for future KPI initiatives.</p>
+            </details>
+            <p><strong>Stack:</strong> Databricks, Python, Data Mining</p>              
+          </div>
+        </div>
+      </article> 
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-businessanalyst-5" id="acc-businessanalyst-5-label">
+            Walgreens – SLA Issue Resolution & Trust-Building
+            <span class="acc-meta">ETL · BI Apps · Cross-Team Collaboration · Incident Management</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-businessanalyst-5" role="region" aria-labelledby="acc-businessanalyst-5-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I resolved a persistent SLA reporting failure at Walgreens by collaborating directly with technical teams and rebuilding trust through hands-on problem-solving.</p>
+            <details><summary>S · Situation</summary><p>A special character handling issue caused Walgreens’ SLA reporting system to fail intermittently. Teams defaulted to manual extraction as a workaround, but no one attempted a permanent fix. Leadership was frustrated, and trust in IT support was declining.</p></details>
+            <details><summary>T · Task</summary><p>I needed to own the issue, identify the root cause, and build a permanent fix that stakeholders could trust. The solution had to balance vendor restrictions with practical reliability.</p></details>
+            <details><summary>A · Action</summary><p>I engaged multiple teams to trace the failure source, analyzed data lineage, and designed a custom load process to handle problematic cases. Since vendor jobs could not be altered, I created an external complementary process. I worked alongside technical teams directly, showing commitment beyond managerial alignment.</p></details>
+            <details open><summary>R · Result</summary><p>System stability improved by ~<span class="kpi" data-target="66">0</span>%, with manual extractions eliminated. SLA compliance improved across multiple reporting cycles. Most importantly, stakeholder trust was rebuilt as they saw me personally take ownership of resolving the issue.</p>
+            </details>
+            <p><strong>Stack:</strong> PL/SQL, Oracle Data Integrator, Oracle BI Apps</p>              
+          </div>
+        </div>
+      </article>       
     </div>
       
   </section>
