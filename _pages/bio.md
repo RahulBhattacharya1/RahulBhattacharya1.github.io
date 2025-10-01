@@ -79,6 +79,199 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<!-- Desktop: keep your existing bio layout here -->
+<div id="bio-desktop">
+  <!-- Your current desktop HTML stays here unchanged -->
+  <!-- e.g., the blue hero bar, paragraphs, bullets, etc. -->
+</div>
+
+<!-- Mobile Tabs (shown only on small screens) -->
+<section id="bio-mobile" class="m-tabs" hidden>
+  <nav class="m-tablist" role="tablist" aria-label="Profile sections">
+    <button class="m-tab is-active" role="tab" aria-selected="true" aria-controls="panel-about" id="tab-about" data-tab="about">About Me</button>
+    <button class="m-tab" role="tab" aria-selected="false" aria-controls="panel-skills" id="tab-skills" data-tab="skills">Skills</button>
+    <button class="m-tab" role="tab" aria-selected="false" aria-controls="panel-exp" id="tab-exp" data-tab="experience">Experience</button>
+  </nav>
+
+  <div class="m-panels">
+    <article id="panel-about" class="m-panel" role="tabpanel" aria-labelledby="tab-about"></article>
+    <article id="panel-skills" class="m-panel" role="tabpanel" aria-labelledby="tab-skills" hidden></article>
+    <article id="panel-exp" class="m-panel" role="tabpanel" aria-labelledby="tab-exp" hidden></article>
+  </div>
+</section>
+
+<style>
+/* --- Layout visibility --- */
+#bio-desktop { display:block; }
+#bio-mobile { display:none; }
+@media (max-width: 768px){
+  #bio-desktop { display:none; }
+  #bio-mobile { display:block; }
+}
+
+/* --- Mobile tabs styling --- */
+.m-tabs { padding: 0 1rem 2rem; }
+.m-tablist {
+  position: sticky; top: 0; z-index: 5;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem;
+  padding: .75rem 0; background: transparent;
+}
+.m-tab {
+  appearance: none; border: 1px solid rgba(0,0,0,.12);
+  background: rgba(0,0,0,.03);
+  padding: .6rem .8rem; border-radius: 10px;
+  font: 600 0.95rem/1.1 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.m-tab.is-active {
+  border-color: rgba(0,0,0,.18);
+  background: linear-gradient(90deg, #6aa7ff22, #b388ff22);
+}
+
+.m-panels { margin-top: .5rem; }
+.m-panel { padding: .5rem 0 0; }
+.m-panel p { margin: 0 0 1rem 0; line-height: 1.7; }
+.m-panel ul { padding-left: 1.25rem; }
+
+/* Light/dark friendly borders */
+@media (prefers-color-scheme: dark){
+  .m-tab { border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.04); }
+  .m-tab.is-active { border-color: rgba(255,255,255,.26); }
+}
+</style>
+
+<script>
+(function(){
+  // URLs to load
+  const routes = {
+    about: "/",                             // your About lives on this page or root
+    skills: "https://rahulbhattacharya1.github.io/skills/",
+    experience: "https://rahulbhattacharya1.github.io/experience/"
+  };
+
+  // Content selectors to extract from those pages
+  const candidateSelectors = [
+    "main .post-content",
+    "article.post .post-content",
+    "main article",
+    "main",
+    ".page-content",
+    "#main"
+  ];
+
+  // Cache loaded HTML fragments
+  const cache = new Map();
+
+  // Elements
+  const mobile = document.getElementById("bio-mobile");
+  const aboutPanel = document.getElementById("panel-about");
+  const skillsPanel = document.getElementById("panel-skills");
+  const expPanel = document.getElementById("panel-exp");
+  const tabs = Array.from(document.querySelectorAll(".m-tab"));
+  const panels = {
+    about: aboutPanel,
+    skills: skillsPanel,
+    experience: expPanel
+  };
+
+  // Show mobile section on small screens (CSS handles, but unhide attribute for a11y)
+  const mq = window.matchMedia("(max-width: 768px)");
+  function toggleHidden(){
+    mobile.hidden = !mq.matches;
+  }
+  toggleHidden();
+  mq.addEventListener("change", toggleHidden);
+
+  // Load extractor
+  async function loadSection(key){
+    if (cache.has(key)) return cache.get(key);
+
+    // If "about" is this page, clone visible desktop content (first render only)
+    if (key === "about" && location.pathname.includes("/bio")) {
+      const clone = document.getElementById("bio-desktop")?.cloneNode(true) || document.body.cloneNode(false);
+      // Try to grab the main rich area from your desktop bio
+      const mainCopy = clone.querySelector(".post-content, main, article, .content") || clone;
+      cache.set("about", mainCopy.innerHTML);
+      return mainCopy.innerHTML;
+    }
+
+    const res = await fetch(routes[key], { credentials: "same-origin" });
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+
+    let found = "";
+    for (const sel of candidateSelectors){
+      const el = doc.querySelector(sel);
+      if (el && el.innerHTML.trim()) { found = el.innerHTML; break; }
+    }
+    // Fallback to body if no selector matched
+    if (!found) found = (doc.body && doc.body.innerHTML) ? doc.body.innerHTML : "<p>Content not found.</p>";
+
+    cache.set(key, found);
+    return found;
+  }
+
+  // Activate a tab
+  async function activate(key, push=true){
+    // tabs ARIA
+    tabs.forEach(btn => {
+      const active = btn.dataset.tab === key;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-selected", String(active));
+      // manage panels visibility
+      const panel = panels[btn.dataset.tab];
+      if (panel){
+        panel.hidden = !active;
+      }
+    });
+
+    // Load and inject if empty
+    const panel = panels[key];
+    if (panel && !panel.dataset.loaded){
+      panel.innerHTML = "<p>Loading…</p>";
+      const html = await loadSection(key);
+      panel.innerHTML = html;
+      panel.dataset.loaded = "true";
+    }
+
+    // sync URL hash
+    if (push){
+      const url = new URL(location.href);
+      url.hash = "tab=" + key;
+      history.replaceState(null, "", url);
+    }
+  }
+
+  // Tab clicks + keyboard
+  tabs.forEach(btn => {
+    btn.addEventListener("click", () => activate(btn.dataset.tab));
+    btn.addEventListener("keydown", e => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const i = tabs.indexOf(btn);
+      const next = e.key === "ArrowRight" ? (i+1) % tabs.length : (i-1+tabs.length) % tabs.length;
+      tabs[next].focus();
+      activate(tabs[next].dataset.tab);
+    });
+  });
+
+  // Initial tab from hash/query
+  function getInitialTab(){
+    const h = (location.hash || "").replace(/^#/, "");
+    const params = new URLSearchParams(h.includes("=") ? h : "");
+    const fromHash = params.get("tab");
+    const fromQuery = new URLSearchParams(location.search).get("tab");
+    return (fromHash || fromQuery || "about").toLowerCase();
+  }
+
+  // Boot
+  activate(getInitialTab(), false);
+})();
+</script>
+
+<noscript>
+  <!-- Fallback for no-JS: show a simple list of links -->
+  <p><a href="/">About Me</a> · <a href="/skills/">Skills</a> · <a href="/experience/">Experience</a></p>
+</noscript>
 
 
   <div class="emf-frame">
