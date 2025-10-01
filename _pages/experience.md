@@ -353,7 +353,7 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
       </article>      
     </div>
 
-    <!-- ========= AI/ML, GenAI, BA panels (trimmed for brevity; keep your items) ========= -->
+    <!-- ========= AI/ML ========= -->
     <div class="role-accordion" id="panel-aiml" hidden>
     
       <article class="acc-item">
@@ -437,8 +437,115 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
       </article>      
     </div>
     
-    <div class="role-accordion" id="panel-genai" hidden></div>
-    <div class="role-accordion" id="panel-businessanalyst" hidden></div>
+    <!-- ========= GenAI ========= -->
+    <div class="role-accordion" id="panel-genai" hidden>
+    
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-genai-1" id="acc-genai-1-label">
+            UnitedHealth Group – KPI Generation & Report Prototypes
+            <span class="acc-meta">Python · NLP · KPI Automation · Data Visualization</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-genai-1" role="region" aria-labelledby="acc-genai-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I proposed and delivered new KPIs for UnitedHealth Group by analyzing stakeholder requests and converting textual requirements into structured, data-driven metrics.</p>
+            <details><summary>S · Situation</summary><p>Product owners often described their needs in natural language, requesting “better insights” without clear definitions. Traditional BI processes failed to capture these requirements efficiently, leading to long delays in reporting improvements.</p></details>
+            <details><summary>T · Task</summary><p>I had to interpret ambiguous requirements, define precise KPIs, and build rapid prototypes that aligned with leadership’s intent, even without formal approvals.</p></details>
+            <details><summary>A · Action</summary><p>I used text-mining and classification techniques to parse stakeholder feedback, extracting common themes. I mapped those into quantifiable KPIs such as “member engagement by visit type” and “condition-specific cost ratios.” I then rapidly built prototypes in Python and BI tools to visualize the new KPIs.</p></details>
+            <details open><summary>R · Result</summary><p>Stakeholder satisfaction improved by ~<span class="kpi" data-target="62">0</span>%, as prototypes directly matched their intent and reduced adhoc data request counts. KPI adoption increased across multiple product lines, reducing report development cycles by ~<span class="kpi" data-target="57">0</span>%. The project demonstrated how NLP-driven requirement analysis could accelerate insight creation.</p>
+            </details>
+            <p><strong>Stack:</strong> Python, NLP, Statistical Analysis, Power BI</p>              
+          </div>
+        </div>
+      </article>   
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-genai-2" id="acc-genai-2-label">
+            Galderma – Stakeholder KPI Creation through Data Narratives
+            <span class="acc-meta">Databricks · Power BI · Text-to-Metric Translation · Data Storytelling</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-genai-2" role="region" aria-labelledby="acc-genai-2-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I collaborated with Galderma stakeholders to translate raw narratives about business challenges into fresh KPIs, enabling more actionable reporting.</p>
+            <details><summary>S · Situation</summary><p>Stakeholders described problems in narrative form, such as “our reporting doesn’t reflect treatment-level outcomes.” These narratives rarely translated into clear data fields, leaving gaps in reporting.</p></details>
+            <details><summary>T · Task</summary><p>My job was to bridge the gap between unstructured stakeholder input and structured KPI design, while ensuring dashboards reflected real-world business meaning.</p></details>
+            <details><summary>A · Action</summary><p>I applied text-based clustering to stakeholder inputs to group common pain points. I then transformed those clusters into structured KPIs, validated by subject matter experts. Using Databricks pipelines, I automated data collection for these KPIs and built Power BI dashboards to present them.</p></details>
+            <details open><summary>R · Result</summary><p>KPI relevance improved by ~<span class="kpi" data-target="65">0</span>%, ensuring reports answered real stakeholder concerns. Dashboard usage increased by ~<span class="kpi" data-target="52">0</span>% as leaders recognized their input reflected in metrics. This effort strengthened trust in data-driven storytelling across the organization.</p>
+            </details>
+            <p><strong>Stack:</strong> Databricks, Python, Power BI</p>              
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-genai-3" id="acc-genai-3-label">
+            Hyatt – Text-to-KPI Performance Enhancement
+            <span class="acc-meta">SQL · Text Mining · Prototype Dashboards · Data Analysis</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-genai-3" role="region" aria-labelledby="acc-genai-3-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I introduced new KPIs at Hyatt by mining performance review notes and transforming qualitative observations into structured metrics.</p>
+            <details><summary>S · Situation</summary><p>Hyatt’s reporting relied on traditional KPIs, but managers often documented observations in free-text fields that were never analyzed. These unstructured notes contained valuable insights but went unused.</p></details>
+            <details><summary>T · Task</summary><p>I needed to extract themes from text data and design KPIs that reflected operational issues, improving the richness of reporting dashboards.</p></details>
+            <details><summary>A · Action</summary><p>I performed text mining on review notes to identify recurring topics, such as “check-in delays” and “room readiness.” I translated these into structured KPIs, then built prototype dashboards to visualize the new metrics. I validated the KPIs with managers to ensure they aligned with observed challenges.</p></details>
+            <details open><summary>R · Result</summary><p>Reporting coverage expanded by ~<span class="kpi" data-target="60">0</span>%, incorporating previously ignored operational signals. Dashboard refresh cycles were ~<span class="kpi" data-target="55">0</span>% faster since structured KPIs simplified aggregation. Leadership recognized the dashboards as more actionable and holistic.</p>
+            </details>
+            <p><strong>Stack:</strong> Python, Data Mining, Dashboards</p>              
+          </div>
+        </div>
+      </article>
+
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-genai-4" id="acc-genai-4-label">
+            Walgreens – Automated Data Quality Narratives
+            <span class="acc-meta">Python · NLP · Data Quality · Automation</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-genai-4" role="region" aria-labelledby="acc-genai-4-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I automated data quality reporting at Walgreens by generating textual narratives alongside dashboards, helping leadership interpret issues faster.</p>
+            <details><summary>S · Situation</summary><p>Data quality reports were highly technical, full of metrics but lacking context. Business stakeholders struggled to interpret whether a flagged issue was critical or negligible. This delayed decision-making and reduced trust in reporting.</p></details>
+            <details><summary>T · Task</summary><p>My goal was to generate plain-language narratives that summarized data quality checks, highlighting only the most important issues and suggesting next actions.</p></details>
+            <details><summary>A · Action</summary><p>I built an NLP-driven module that generated short narratives for each data quality check, e.g., “Loyalty transactions dropped by 15% this week, likely due to system downtime.” I integrated these summaries into BI dashboards so that executives could read them alongside charts.</p></details>
+            <details open><summary>R · Result</summary><p>Stakeholder comprehension improved by ~<span class="kpi" data-target="67">0</span>%, measured through feedback surveys. Decision-making latency decreased by ~<span class="kpi" data-target="56">0</span>%, as executives no longer had to consult technical teams for interpretation. The feature became a template for narrative reporting in other departments.</p>
+            </details>
+            <p><strong>Stack:</strong> Python, NLP, Data Visualization, Power BI</p>              
+          </div>
+        </div>
+      </article>      
+    </div>
+    
+    
+    <!-- ========= Business Analyst ========= -->
+    <div class="role-accordion" id="panel-businessanalyst" hidden>
+    
+      <article class="acc-item">
+        <span class="acc-head">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-aiml-1" id="acc-aiml-1-label">
+            Walgreens – Predictive Alerts & Insights in BI Apps
+            <span class="acc-meta">PL/SQL · Python · Time-Series Forecasting · BI Integration</span>
+          </button>
+        </span>
+        <div class="acc-panel" id="acc-aiml-1" role="region" aria-labelledby="acc-aiml-1-label" hidden>
+          <div class="acc-body">
+            <p><strong>Summary:</strong> I transformed a recurring load issue into a predictive analytics opportunity, building forecasting models that enabled proactive alerts and actionable insights in Walgreens’ BI applications.</p>
+            <details><summary>S · Situation</summary><p>Walgreens BI teams faced frequent reporting delays due to data load failures. Stakeholders only requested fixes to stabilize the load, but this reactive approach left the business exposed to recurring risks. Leadership hesitated to approve predictive solutions because of concerns about model reliability.</p></details>
+            <details><summary>T · Task</summary><p>I had to stabilize the immediate reporting issue while exploring predictive models that could forecast both failures and business trends. The challenge was to prove value quickly and minimize perceived risk.</p></details>
+            <details><summary>A · Action</summary><p>I developed time-series forecasting models using Python and SQL to detect anomalies and predict future failures. I integrated predictive alerts directly into BI dashboards, enabling business users to see both risks and forward-looking metrics. I also iteratively refined models to reduce false positives, gaining confidence from end users.</p></details>
+            <details open><summary>R · Result</summary><p>The solution reduced reporting disruptions by ~<span class="kpi" data-target="66">0</span>%, preventing multiple critical outages. Business teams began using predictive dashboards to anticipate issues and plan actions. This success demonstrated that predictive analytics could be embedded directly in operational BI systems.</p>
+            </details>
+            <p><strong>Stack:</strong> Statistical Analysis, PL/SQL, Python, Unix</p>              
+          </div>
+        </div>
+      </article> 
+    </div>
+      
   </section>
 </div>
 
