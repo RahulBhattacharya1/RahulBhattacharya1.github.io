@@ -59,6 +59,19 @@ hide_top_title: true
 .about-animated p{font-size:1.08rem;line-height:1.8;margin:0 0 1.05rem 0;opacity:0;transform:translateY(16px)}
 .about-animated p.reveal{animation:rise .85s cubic-bezier(.21,.98,.6,.99) forwards}
 @keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+@media (max-width: 768px){
+  #bio-mobile.m-tabs { padding: 0 !important; }
+  #bio-mobile .m-panels,
+  #bio-mobile .m-panel { margin: 0 !important; padding: 0 !important; }
+  #bio-mobile .m-panel iframe {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 0;
+  }
+}
+
 </style>
 
 <script>
