@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 (function(){
   // URLs to load
   const routes = {
-    about: "/",                             // your About lives on this page or root
+    about: "/about-me-embed/",                             // your About lives on this page or root
     skills: "/skills-embed/",
     experience: "/experience-embed/"
   };
