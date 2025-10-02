@@ -563,6 +563,6 @@ He has worked as:
   activateRole("analyst");
 </script>
 
-
+{% include skills-body.html %}
 
 {:/nomarkdown}
