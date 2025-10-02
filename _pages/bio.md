@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const routes = {
     about: "/",                             // your About lives on this page or root
     skills: "/skills-embed/",
-    experience: "https://rahulbhattacharya1.github.io/experience/"
+    experience: "/experience-embed/"
   };
 
   // Content selectors to extract from those pages
