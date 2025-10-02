@@ -256,3 +256,36 @@
   .mobile-profile .tab-controls{ gap:6px; overflow:auto; scrollbar-width:none }
   .mobile-profile .tab-controls::-webkit-scrollbar{ display:none }
 }
+
+/* Make whole card clickable, hide the old pill */
+.mobile-profile .card { position: relative; }
+
+/* Invisible overlay that covers the card when the panel is collapsed */
+.mobile-profile .act-overlay{
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  text-indent: -9999px;          /* hide any text for safety */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Remove the old pill styling entirely for overlay */
+.mobile-profile .act-overlay:after{ display: none; }
+
+/* When expanded, disable the overlay so tabs/buttons inside the panel are clickable */
+.mobile-profile #satinA:checked ~ .card .act-overlay{
+  pointer-events: none;
+}
+
+/* Optional: if any legacy .act styles conflict, neutralize them */
+.mobile-profile .act{
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
