@@ -211,36 +211,60 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Activate a tab
-  async function activate(key, push=true){
-    // tabs ARIA
-    tabs.forEach(btn => {
-      const active = btn.dataset.tab === key;
-      btn.classList.toggle("is-active", active);
-      btn.setAttribute("aria-selected", String(active));
-      // manage panels visibility
-      const panel = panels[btn.dataset.tab];
-      if (panel){
-        panel.hidden = !active;
-      }
-    });
+async function activate(key, push = true) {
+  tabs.forEach(btn => {
+    const active = btn.dataset.tab === key;
+    btn.classList.toggle("is-active", active);
+    btn.setAttribute("aria-selected", String(active));
+    panels[btn.dataset.tab].hidden = !active;
+  });
 
-    // Load and inject if empty
-    const panel = panels[key];
-    if (panel && !panel.dataset.loaded){
-      panel.innerHTML = "<p>Loading…</p>";
-      const html = await loadSection(key);
-      panel.innerHTML = html;
+  const panel = panels[key];
+
+  if (key === "about") {
+    // keep existing About Me behavior
+    if (!panel.dataset.loaded) {
+      const clone = document.getElementById("bio-desktop")?.cloneNode(true);
+      const mainCopy = clone?.querySelector(".post-content, main, article, .content") || clone || document.body;
+      panel.innerHTML = mainCopy.innerHTML;
       panel.dataset.loaded = "true";
     }
+  } else {
+    // Skills and Experience: use iframe embed
+    if (!panel.dataset.loaded) {
+      panel.innerHTML = "";
+      const frame = document.createElement("iframe");
+      frame.src = routes[key];
+      frame.title = key + " section";
+      frame.loading = "lazy";
+      frame.style.width = "100%";
+      frame.style.border = "0";
+      frame.style.minHeight = "70vh";
 
-    // sync URL hash
-    if (push){
-      const url = new URL(location.href);
-      url.hash = "tab=" + key;
-      history.replaceState(null, "", url);
+      frame.addEventListener("load", () => {
+        try {
+          const doc = frame.contentDocument || frame.contentWindow.document;
+          const resize = () => {
+            frame.style.height = Math.max(600, doc.body.scrollHeight) + "px";
+          };
+          resize();
+          new MutationObserver(resize).observe(doc.body, { childList: true, subtree: true });
+          window.addEventListener("resize", resize);
+        } catch(e){}
+      });
+
+      panel.appendChild(frame);
+      panel.dataset.loaded = "true";
     }
   }
 
+  if (push) {
+    const url = new URL(location.href);
+    url.hash = "tab=" + key;
+    history.replaceState(null, "", url);
+  }
+}
+  
   // Tab clicks + keyboard
   tabs.forEach(btn => {
     btn.addEventListener("click", () => activate(btn.dataset.tab));
