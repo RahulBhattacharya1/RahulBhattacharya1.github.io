@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // URLs to load
   const routes = {
     about: "/",                             // your About lives on this page or root
-    skills: "https://rahulbhattacharya1.github.io/skills/",
+    skills: "/skills-embed/",
     experience: "https://rahulbhattacharya1.github.io/experience/"
   };
 
