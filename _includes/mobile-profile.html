@@ -1,14 +1,17 @@
 <div class="stage mobile-profile">
-  <input id="satinA" type="checkbox" aria-hidden="true">
-  <div class="card">
-    <label class="act" for="satinA" aria-controls="profile-panel" aria-expanded="false"></label>    
+  <!-- 1) Hidden checkbox controls expand/collapse -->
+  <input id="satinA" class="mp-toggle" type="checkbox" aria-hidden="true">
+
+  <!-- 2) The WHOLE CARD is now the label (clickable block) -->
+  <label class="card mp-card" for="satinA" aria-controls="profile-panel" aria-expanded="false" aria-label="Toggle profile">
     <div class="avatar-wrap" aria-hidden="true">
-      <img class="avatar" src="https://raw.githubusercontent.com/RahulBhattacharya1/RahulBhattacharya1.github.io/refs/heads/main/assets/images/avatar.webp" alt="Rahul Bhattacharya">
+      <img class="avatar" src="/assets/images/avatar.webp" alt="Rahul Bhattacharya">
     </div>
-    <div>
+    <div class="mp-copy">
       <h2>Rahul Bhattacharya</h2>
       <div class="sub">AI Engineer • Optimization • ML Systems</div>
     </div>
+  </label>
 
     <div id="profile-panel" class="panel" role="region" aria-label="More about Rahul">
       <div class="box">
