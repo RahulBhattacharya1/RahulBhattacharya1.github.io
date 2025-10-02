@@ -1,5 +1,6 @@
 <!-- About | Bold-Preserving Animation -->
-<section class="about-rich">
+<div id="bio-desktop">
+  <section class="about-rich">
   <div class="about-wrap">
     
     <!-- Put your EXACT formatted text below inside <template>. 
@@ -53,28 +54,30 @@
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const tpl = document.getElementById('about-source');
-  const target = document.getElementById('about-animated');
-
-  // Clone all template nodes so original HTML (including <strong>, links, emojis) is preserved
+// Reusable animation used by desktop and mobile panel
+function animateFromTemplate(tplId, targetSelector) {
+  const tpl = document.getElementById(tplId);
+  const target = typeof targetSelector === 'string'
+    ? document.querySelector(targetSelector)
+    : targetSelector;
+  if (!tpl || !target) return;
+  // fresh render
+  target.innerHTML = '';
   const frag = tpl.content.cloneNode(true);
   const nodes = Array.from(frag.querySelectorAll('p'));
-
-  // Append and animate, preserving innerHTML (keeps bold)
   nodes.forEach((p, i) => {
     const clone = p.cloneNode(true);
     target.appendChild(clone);
     setTimeout(() => clone.classList.add('reveal'), i * 450);
   });
+}
+// Desktop animation render
+document.addEventListener('DOMContentLoaded', () => {
+  animateFromTemplate('about-source', '#about-animated');
 });
 </script>
 
-<!-- Desktop: keep your existing bio layout here -->
-<div id="bio-desktop">
-  <!-- Your current desktop HTML stays here unchanged -->
-  <!-- e.g., the blue hero bar, paragraphs, bullets, etc. -->
-</div>
+</div> <!-- end #bio-desktop -->
 
 <!-- Mobile Tabs (shown only on small screens) -->
 <section id="bio-mobile" class="m-tabs" hidden>
@@ -213,12 +216,14 @@ async function activate(key, push = true) {
   const panel = panels[key];
 
   if (key === "about") {
-    // keep existing About Me behavior
     if (!panel.dataset.loaded) {
-      const clone = document.getElementById("bio-desktop")?.cloneNode(true);
-      const mainCopy = clone?.querySelector(".post-content, main, article, .content") || clone || document.body;
-      panel.innerHTML = mainCopy.innerHTML;
-      panel.dataset.loaded = "true";
+      // Build a fresh container and animate from the same <template>
+      panel.innerHTML =
+        '<section class="about-rich"><div class="about-wrap">' +
+        '<div id="about-animated-mobile" class="about-animated"></div>' +
+        '</div></section>';
+      animateFromTemplate('about-source', '#about-animated-mobile');
+      panel.dataset.loaded = 'true';
     }
   } else {
     // Skills and Experience: use iframe embed
