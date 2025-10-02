@@ -289,3 +289,45 @@
   box-shadow: none;
   padding: 0;
 }
+
+/* === Mobile Profile: optimized expand/click === */
+
+/* 1) Hide the checkbox accessibly */
+.mobile-profile .mp-toggle { position:absolute; left:-9999px; }
+
+/* 2) The whole visible card is a <label> (mp-card) */
+.mobile-profile .mp-card {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 20px;
+}
+
+/* 3) Collapse the panel by default */
+.mobile-profile .panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height .35s ease, opacity .35s ease, transform .35s ease;
+}
+
+/* 4) Expand when the checkbox is checked (sibling, not descendant) */
+.mobile-profile .mp-toggle:checked ~ .panel {
+  max-height: 1200px;   /* adjust if your content is taller */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 5) Optional flourish for inner content on first reveal */
+.mobile-profile .mp-toggle:checked ~ .panel .box {
+  animation: mp-reveal .28s ease-out both;
+}
+
+/* 6) Remove obsolete overlay + CTA bits to reduce paint & conflicts */
+.mobile-profile .act,
+.mobile-profile .act-overlay,
+.mobile-profile .act-overlay:after { display: none !important; }
+
+/* 7) If you kept the older .card hover/shine stack, avoid double transforms */
+.mobile-profile .mp-card:hover { transform: translateY(-8px); }
