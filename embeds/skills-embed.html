@@ -1,0 +1,27 @@
+---
+layout: null
+permalink: /skills-embed/
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Load your site CSS compiled from assets/css/main.scss -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <!-- If your theme actually outputs /assets/main.css, swap the href above to '/assets/main.css' -->
+
+<style>
+  body { margin: 0; padding: 0; }                /* no side padding */
+  main.page-content { padding: 0; margin: 0; max-width: 100%; }
+</style>
+
+</head>
+<body>
+  <main class="page-content">
+    {% include skills-body.html %}
+  </main>
+</body>
+</html>
