@@ -20,6 +20,6 @@ hide_top_title: true
   </div>
 </section>
 
-{% include skills-embed.html %}
+{% include skills-body.html %}
 
 {:/nomarkdown}
