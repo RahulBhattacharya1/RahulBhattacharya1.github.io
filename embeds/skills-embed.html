@@ -14,9 +14,34 @@ permalink: /skills-embed/
   <!-- If your theme actually outputs /assets/main.css, swap the href above to '/assets/main.css' -->
 
 <style>
-  body { margin: 0; padding: 0; }                /* no side padding */
-  main.page-content { padding: 0; margin: 0; max-width: 100%; }
+  html, body { margin: 0; padding: 0; }
+  body { overflow-x: hidden; }
+
+  /* Nuke side gutters & width caps from common wrappers in your theme */
+  main.page-content,
+  .page-content,
+  .post-content,
+  .content,
+  .wrapper,
+  .container,
+  .post,
+  article,
+  section {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Ensure the include root itself has no gutters */
+  #skills-body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 </style>
+
 
 </head>
 <body>
