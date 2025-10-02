@@ -691,6 +691,9 @@ custom_snippet_text: "Role-based case studies with measurable outcomes from heal
     <!-- Add older roles as needed -->
   </div>
 </section>
+
+{% include experience-body.html %}
+
 {:/nomarkdown}
 
 <style>
