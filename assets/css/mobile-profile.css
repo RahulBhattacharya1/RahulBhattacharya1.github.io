@@ -345,8 +345,3 @@
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Animate progress bars only after the panel is open */
-.mobile-profile #satinA:checked ~ #profile-panel .fill {
-  width: var(--w, 0%);
-}
