@@ -4,7 +4,7 @@ title: "Creating my AI NYC Airbnb Price Predictor"
 date: 2024-11-29 10:25:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/airbnb.webp
 demo_link: https://rahuls-ai-airbnb-price-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_airbnb_price_prediction
 featured: true
