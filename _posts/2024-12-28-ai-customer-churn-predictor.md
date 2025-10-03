@@ -4,7 +4,7 @@ title: "Building my AI Customer Response Predictor"
 date: 2024-12-28 10:16:47
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/customer.webp
 demo_link: https://rahuls-ai-customer-churn-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_customer_churn_predictor
 featured: true
