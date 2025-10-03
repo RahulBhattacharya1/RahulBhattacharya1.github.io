@@ -4,7 +4,7 @@ title: "Creating my AI F1 Race Outcome Predictor"
 date: 2025-01-04 10:11:45
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/f1.webp
 demo_link: https://rahuls-ai-f1-race-outcome-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_f1_race_outcome_predictor
 featured: true
