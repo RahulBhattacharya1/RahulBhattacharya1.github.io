@@ -4,7 +4,7 @@ title: "Building my AI Wine Quality Classifier"
 date: 2024-10-25 11:14:23
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/wine.webp
 demo_link: https://rahuls-ai-wine-quality-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_wine_quality_classifier
 featured: true
