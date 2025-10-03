@@ -4,7 +4,7 @@ title: "Building my AI Power Plant Capacity Predictor"
 date: 2024-06-02 10:27:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/plant.webp
 demo_link: https://rahuls-ai-power-plant-capacity-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_power_plant_capacity_predictor
 featured: true
