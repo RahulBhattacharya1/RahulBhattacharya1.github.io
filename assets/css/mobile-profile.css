@@ -237,9 +237,11 @@
   transform:translateY(-10px);
   box-shadow:0 30px 84px rgba(2,6,23,.2), 0 10px 24px rgba(2,6,23,.08);
 }
-.mobile-profile #satinA:checked ~ .card .panel{ max-height:900px; opacity:1; transform:translateY(0) }
-.mobile-profile #satinA:checked ~ .card .panel .box{ animation:mp-reveal .38s ease-out both }
-.mobile-profile #satinA:checked ~ .card .fill{ width:var(--w, 0%) }
+
+.mobile-profile #satinA:checked ~ #profile-panel{ max-height:900px; opacity:1; transform:translateY(0) }
+.mobile-profile #satinA:checked ~ #profile-panel .box{ animation:mp-reveal .38s ease-out both }
+.mobile-profile #satinA:checked ~ #profile-panel .fill{ width:var(--w, 0%) }
+
 
 /* ========= A11y / Motion ========= */
 .mobile-profile .card:has(.act:focus-visible){ outline:2px solid #c7d2fe; outline-offset:3px }
