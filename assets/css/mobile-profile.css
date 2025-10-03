@@ -251,6 +251,10 @@
 @media (prefers-reduced-motion:reduce){
   .mobile-profile *{ animation:none!important; transition:none!important }
 }
+@media (prefers-reduced-motion:reduce){
+  /* Keep other animations off, but allow bar width to animate */
+  .mobile-profile .fill{ transition:width .9s cubic-bezier(.2,.8,.2,1) !important; }
+}
 
 /* ========= Responsive ========= */
 @media (max-width:720px){
