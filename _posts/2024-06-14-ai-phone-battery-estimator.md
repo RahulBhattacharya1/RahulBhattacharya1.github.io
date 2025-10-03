@@ -4,7 +4,7 @@ title: "Creating my Phone Battery Estimator"
 date: 2024-06-14 09:22:06
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/wafer.webp
+thumbnail: /assets/images/battery.webp
 demo_link: https://rahuls-ai-phone-battery.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_phone_battery
 featured: true
