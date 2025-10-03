@@ -4,7 +4,7 @@ title: "Building my AI Book Rating Predictor"
 date: 2025-02-04 17:32:45
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/book_rating.webp
 demo_link: https://rahuls-ai-book-rating-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_book_rating_predictor
 featured: true
