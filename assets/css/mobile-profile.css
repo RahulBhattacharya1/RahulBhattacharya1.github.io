@@ -240,8 +240,12 @@
 
 .mobile-profile #satinA:checked ~ #profile-panel{ max-height:900px; opacity:1; transform:translateY(0) }
 .mobile-profile #satinA:checked ~ #profile-panel .box{ animation:mp-reveal .38s ease-out both }
-.mobile-profile #satinA:checked ~ #profile-panel .fill{ width:var(--w, 0%) }
 
+/* Fill only when the panel is open AND the Impact tab is selected */
+.mobile-profile #satinA:checked ~ #profile-panel
+#tab-impact:checked ~ .tab-panels #panel-impact .fill {
+  width: var(--w, 0%);
+}
 
 /* ========= A11y / Motion ========= */
 .mobile-profile .card:has(.act:focus-visible){ outline:2px solid #c7d2fe; outline-offset:3px }
