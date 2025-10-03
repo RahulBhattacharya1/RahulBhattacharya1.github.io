@@ -4,7 +4,7 @@ title: "Building my AI IPO Outcome Predictor"
 date: 2024-03-15 10:12:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/wafer.webp
+thumbnail: /assets/images/ipo.webp
 demo_link: https://rahuls-ai-initial-public-offering.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_initial_public_offering
 featured: true
