@@ -1381,6 +1381,12 @@ pre {
 .impactful-hero h1{ margin:.2rem 0 .6rem; font-size:2rem; line-height:1.2 }
 .impactful-hero p{ margin:0; opacity:.95 }
 
+@media (max-width: 768px) {
+  .impactful-hero {
+    display: none !important;
+  }
+}
+
 /* Card strip — static grid width with fade transitions */
 .post-strip{
   display:flex;gap:.75rem;overflow:hidden;margin:0;list-style:none;
