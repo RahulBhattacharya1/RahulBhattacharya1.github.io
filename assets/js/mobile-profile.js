@@ -20,11 +20,15 @@
     const html = await res.text();
     root.innerHTML = html;
 
-    // Optional: lightweight behaviors that the partial expects
+    // Optional: lightweight behaviors — keep ARIA in sync with the new structure
     const toggle = root.querySelector("#satinA");
-    const act = root.querySelector("label.act");
-    if (toggle && act) {
-      const sync = () => act.setAttribute("aria-expanded", String(toggle.checked));
+    const card  = root.querySelector('label.mp-card[for="satinA"]') || root.querySelector('label[for="satinA"]');
+    const panel = root.querySelector("#profile-panel");
+    if (toggle && card) {
+      const sync = () => {
+        card.setAttribute("aria-expanded", String(toggle.checked));
+        if (panel) panel.setAttribute("aria-hidden", String(!toggle.checked));
+      };
       toggle.addEventListener("change", sync);
       sync();
     }
