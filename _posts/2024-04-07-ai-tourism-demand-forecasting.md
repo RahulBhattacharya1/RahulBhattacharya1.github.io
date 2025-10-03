@@ -4,7 +4,7 @@ title: "Creating my AI Tourism Demand Forecasting App"
 date: 2024-04-07 12:36:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/tourism.webp
 demo_link: https://rahuls-ai-tourism-demand-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_tourism_demand_forecasting
 featured: true
