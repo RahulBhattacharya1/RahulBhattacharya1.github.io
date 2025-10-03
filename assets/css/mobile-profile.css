@@ -246,16 +246,6 @@
   width: var(--w, 0%);
 }
 
-/* ========= A11y / Motion ========= */
-.mobile-profile .card:has(.act:focus-visible){ outline:2px solid #c7d2fe; outline-offset:3px }
-@media (prefers-reduced-motion:reduce){
-  .mobile-profile *{ animation:none!important; transition:none!important }
-}
-@media (prefers-reduced-motion:reduce){
-  /* Keep other animations off, but allow bar width to animate */
-  .mobile-profile .fill{ transition:width .9s cubic-bezier(.2,.8,.2,1) !important; }
-}
-
 /* ========= Responsive ========= */
 @media (max-width:720px){
   .mobile-profile .card{ grid-template-columns:68px 1fr auto; gap:14px; padding:18px; border-radius:18px }
