@@ -4,7 +4,7 @@ title: "Building my AI Reddit Post Popularity Predictor"
 date: 2025-08-12 10:45:16
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/reddit.webp
 demo_link: https://rahuls-ai-reddit-post-popularity-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_reddit_post_popularity_predictor
 featured: true
