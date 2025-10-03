@@ -4,7 +4,7 @@ title: "Building my AI Railway Accident Trend Predictor"
 date: 2024-05-03 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/railway.webp
 demo_link: https://rahuls-ai-accident-trend-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_accident_trend_prediction
 featured: true
