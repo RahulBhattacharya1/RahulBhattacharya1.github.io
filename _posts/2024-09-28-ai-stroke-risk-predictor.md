@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Building my AI Brain Tumor Detector"
+title: "Building my AI Stroke Risk Predictor"
 date: 2024-09-28 18:23:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
