@@ -222,7 +222,7 @@
   height:100%; width:0;
   background:linear-gradient(90deg,var(--v),var(--b),var(--p));
   box-shadow:0 6px 16px rgba(99,102,241,.25) inset;
-  border-radius:inherit; transition:width .9s cubic-bezier(.2,.8,.2,1);
+  border-radius:inherit; transition:width 4s cubic-bezier(.2,.8,.2,1);
 }
 .mobile-profile .actions{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap }
 .mobile-profile .btn{
