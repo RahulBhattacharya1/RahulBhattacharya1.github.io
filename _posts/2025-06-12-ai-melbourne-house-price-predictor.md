@@ -4,7 +4,7 @@ title: "Building my AI Melbourne House Price Predictor"
 date: 2025-06-12 14:27:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/melbourne.webp
 demo_link: https://rahuls-ai-melbourne-house-price-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_melbourne_house_price_predictor
 featured: true
