@@ -4,7 +4,7 @@ title: "Creating my AI Coffee Sales Forecasting App"
 date: 2025-09-27 10:33:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/coffee.webp
 demo_link: https://rahuls-ai-coffee-forecast.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_coffee_forecast
 ---
