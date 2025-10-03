@@ -4,7 +4,7 @@ title: "Building my AI Fire Extinguisher Predictor"
 date: 2025-05-28 10:21:17
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/fire.webp
 demo_link: https://rahuls-ai-fire-extinguisher-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_fire_extinguisher_prediction
 featured: true
