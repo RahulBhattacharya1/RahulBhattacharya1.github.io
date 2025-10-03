@@ -241,9 +241,8 @@
 .mobile-profile #satinA:checked ~ #profile-panel{ max-height:900px; opacity:1; transform:translateY(0) }
 .mobile-profile #satinA:checked ~ #profile-panel .box{ animation:mp-reveal .38s ease-out both }
 
-/* Fill only when the panel is open AND the Impact tab is selected */
-.mobile-profile #satinA:checked ~ #profile-panel
-#tab-impact:checked ~ .tab-panels #panel-impact .fill {
+/* Fill only when the panel is open AND the Impact tab is selected (order-agnostic) */
+.mobile-profile #satinA:checked ~ #profile-panel:has(#tab-impact:checked) #panel-impact .fill {
   width: var(--w, 0%);
 }
 
