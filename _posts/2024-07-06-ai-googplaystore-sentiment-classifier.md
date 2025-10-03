@@ -4,7 +4,7 @@ title: "Building my AI Google Play Review Sentiment Classifier"
 date: 2024-07-06 10:22:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/play.webp
 demo_link: https://rahuls-ai-googplaystore-sentiment-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_googleplaystore_sentiment_classifier
 featured: true
