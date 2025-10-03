@@ -4,7 +4,7 @@ title: "Building my AI Rain Predictor"
 date: 2025-03-28 10:16:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/rain.webp
 demo_link: https://rahuls-ai-rain-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_rain_prediction
 featured: true
