@@ -4,7 +4,7 @@ title: "Creating my AI Water Potability Classifier"
 date: 2025-07-02 13:28:49
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/potability.webp
 demo_link: https://rahuls-ai-water-potability-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_water_potability_classifier
 featured: true
