@@ -4,7 +4,7 @@ title: "Enhancing my AI Student Performance Predictor"
 date: 2024-05-19 08:41:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/wafer.webp
+thumbnail: /assets/images/student.webp
 demo_link: https://rahuls-ai-student-performance.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_student_performance
 featured: true
