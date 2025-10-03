@@ -4,7 +4,7 @@ title: "Building my AI Broadband Adoption Predictor"
 date: 2024-03-02 14:27:53
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/broadband.webp
 demo_link: https://rahuls-ai-broadband-adoption-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_broadband_adoption_predictor
 featured: true
