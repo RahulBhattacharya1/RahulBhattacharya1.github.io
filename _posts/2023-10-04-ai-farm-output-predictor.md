@@ -4,7 +4,7 @@ title: "Building my AI Farm Output Predictor"
 date: 2023-10-04 16:29:15
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/farm.webp
 demo_link: https://rahuls-ai-farm-output-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_farm_output_predictor
 featured: true
