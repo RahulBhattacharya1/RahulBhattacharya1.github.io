@@ -4,7 +4,7 @@ title: "Building my AI Stroke Risk Predictor"
 date: 2024-09-28 18:23:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/stroke.webp
 demo_link: https://rahuls-ai-stroke-risk-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_stroke_risk_predictor
 featured: true
