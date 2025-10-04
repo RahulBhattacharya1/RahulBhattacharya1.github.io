@@ -1,0 +1,81 @@
+  :root{
+    --fab-size: 60px;
+    --fab-grad: linear-gradient(145deg,#f5faff 0%, #eef6ff 45%, #f2fbff 100%);
+    --fab-border: rgba(130, 170, 255, 0.55);
+    --fab-shadow: 0 10px 22px rgba(100, 150, 255, 0.20), 0 4px 10px rgba(0,0,0,0.06);
+    --fab-hover-glow: 0 0 0 10px rgba(180, 210, 255, 0.20);
+
+    --menu-bg: rgba(255,255,255,0.66);
+    --menu-border: rgba(160, 195, 255, 0.65);
+    --menu-shadow: 0 10px 24px rgba(150, 185, 255, 0.18), 0 2px 8px rgba(0,0,0,0.04);
+
+    --ring-colors: conic-gradient(from 0deg, #ff9fd6, #ffd6a5, #9fd6ff, #ff9fd6);
+    --timing: cubic-bezier(.22,1.61,.36,1);
+  }
+
+  html, body { height:100%; margin:0; background:#ffffff; font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+
+  /* ===== FAB ===== */
+  .fab{
+    position:fixed; bottom:20px; left:20px;
+    width:var(--fab-size); height:var(--fab-size);
+    border-radius:999px; display:grid; place-items:center;
+    font-size:28px; background:var(--fab-grad);
+    border:1px solid var(--fab-border);
+    box-shadow:var(--fab-shadow);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    cursor:pointer; z-index:1000; overflow:hidden; isolation:isolate;
+    opacity:0; transform:scale(.4) rotate(-16deg); visibility:hidden;
+  }
+  .fab::before{
+    content:""; position:absolute; inset:-4px; border-radius:50%;
+    background: var(--ring-colors);
+    animation: spin 4s linear infinite;
+    z-index:-1;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 12px), black 100%);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 12px), black 100%);
+  }
+  .fab::after{
+    content:""; position:absolute; inset:-8px; border-radius:50%;
+    box-shadow: 0 0 28px 10px rgba(150,190,255,0.35);
+    animation: pulse 3.2s ease-in-out infinite;
+    z-index:-2;
+  }
+  .fab-emoji{ display:inline-block; line-height:1; }
+  .fab:hover{ transform: translateY(-1px) scale(1.05); box-shadow: var(--fab-shadow), var(--fab-hover-glow); }
+  .fab:active{ transform: translateY(0) scale(0.98); }
+  .fab.reveal{ visibility:visible; animation: fab-pop 900ms var(--timing) forwards; }
+  .fab.settled{ opacity:1!important; transform:scale(1) rotate(0)!important; visibility:visible!important; }
+  .fab.settled .fab-emoji{ animation: breathe 3.6s ease-in-out 400ms infinite; transform-origin: 50% 60%; }
+
+  @keyframes fab-pop{ 0%{opacity:0; transform:scale(.4) rotate(-16deg);} 60%{opacity:1; transform:scale(1.18) rotate(6deg);} 85%{transform:scale(.96) rotate(-3deg);} 100%{transform:scale(1) rotate(0);} }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+  @keyframes pulse{ 0%,100%{ opacity:.55; transform:scale(1); } 50%{ opacity:1; transform:scale(1.08); } }
+  @keyframes breathe{ 0%,100%{ transform: scale(1) translateY(0);} 50%{ transform: scale(1.06) translateY(-1px);} }
+
+  /* ===== Menu ===== */
+  .fab-menu{
+    position: fixed;
+    bottom: calc(20px + var(--fab-size) + 14px);
+    left: 24px;
+    display: flex; flex-direction: column; gap: 12px;
+    pointer-events: none;
+  }
+  .menu-item{
+    display:grid; grid-template-columns:36px auto; gap:10px; align-items:center;
+    padding:10px 14px; min-width:210px; border-radius:16px;
+    background:var(--menu-bg); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border:1px solid var(--menu-border); box-shadow:var(--menu-shadow);
+    text-decoration:none; color:#333; transform:translateY(8px); opacity:0;
+    transition: transform .55s var(--timing), opacity .55s ease;
+  }
+  .menu-item:hover{ transform:translateY(-2px); background: rgba(255,255,255,0.78); border-color: rgba(130, 170, 255, 0.85); }
+  .menu-icon{ width:36px; height:36px; border-radius:12px; display:grid; place-items:center; background: linear-gradient(145deg,#eef5ff 0%, #eaf3ff 100%); border: 1px solid rgba(150, 190, 255, 0.8); font-size:18px; }
+  .menu-text{ display:grid; gap:2px; }
+  .menu-title{ font-size:15px; font-weight:600; }
+  .menu-caption{ font-size:12px; color:#5a6a7a; }
+
+  .fab-menu.show{ pointer-events:auto; }
+  .fab-menu.show .menu-item{ opacity:1; transform:translateY(0); }
+  .submenu{ margin-left:52px; display:none; flex-direction:column; gap:8px; }
+  .submenu.show{ display:flex; }
