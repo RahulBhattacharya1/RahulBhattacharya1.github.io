@@ -4,7 +4,7 @@ title: "Creating my AI Income Predictor"
 date: 2023-06-23 19:14:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/income.webp
 demo_link: https://rahuls-ai-income-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_income_prediction
 featured: true
