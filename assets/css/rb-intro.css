@@ -149,3 +149,41 @@ body.rb-home-dark {
   background: linear-gradient(180deg, #0a1020 0%, #0a0f1a 40%, #070c16 100%);
   color: #e8ecff;
 }
+
+/* ==== Cinematic tagline effect ==== */
+.rb-tag{
+  position: relative;
+  color:#b9ccff;             /* looks great on your dark intro */
+  opacity:.95;
+}
+
+/* fade-up + defocus-to-crisp + letter-spacing settle */
+.rb-tag.rb-cine{
+  --dur: 900ms;
+  animation: rb-tag-cine var(--dur) cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes rb-tag-cine{
+  0%   { opacity:0; transform: translateY(10px); filter: blur(6px); letter-spacing:.08em; }
+  60%  { opacity:1; transform: translateY(0);   filter: blur(0.5px); }
+  100% { opacity:1; transform: translateY(0);   filter: blur(0); letter-spacing:.01em; }
+}
+
+/* subtle light sweep across the text */
+.rb-tag.rb-cine::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.28) 8%, transparent 16%);
+  transform: translateX(-120%);
+  animation: rb-sheen 1.1s ease-out 120ms both;
+  pointer-events:none;
+  mix-blend-mode: screen;
+}
+@keyframes rb-sheen{
+  to { transform: translateX(120%); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .rb-tag.rb-cine,
+  .rb-tag.rb-cine::after{ animation: none !important; }
+}
