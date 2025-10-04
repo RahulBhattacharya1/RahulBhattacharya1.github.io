@@ -1611,6 +1611,47 @@ pre {
   flex-wrap: nowrap;               /* don't wrap unless absolutely needed */
 }
 
+/* Row stays a single line, left-aligned */
+.post-header .post-meta-actions{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center;
+  justify-content:flex-start !important;
+  gap:8px;                 /* spacing between Share/Like and the icon cluster */
+  flex-wrap:nowrap;
+}
+
+/* Kill stray margins some themes add to children */
+.post-header .post-meta-actions > *{
+  margin:0 !important;
+  flex:0 0 auto;
+}
+
+/* Make the last two icons behave as ONE tight cluster */
+.post-header .post-meta-actions .post-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;                 /* tighter spacing between the two icons */
+  margin-left:4px;         /* small offset from the Like button */
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+
+/* Ensure the icon links don’t expand or stack */
+.post-header .post-meta-actions .post-cta a{
+  display:inline-flex !important;
+  width:auto !important;
+  line-height:0;
+}
+
+/* Normalize the SVG/IMG so they sit like glyphs (no extra gaps) */
+.post-header .post-meta-actions .post-cta img,
+.post-header .post-meta-actions .post-cta svg{
+  display:block;
+  height:1.4em;            /* keep your current size */
+  margin:0;                /* remove leftover inline margins */
+  vertical-align:middle;   /* safe baseline alignment */
+}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
