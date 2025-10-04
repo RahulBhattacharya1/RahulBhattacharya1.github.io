@@ -251,20 +251,17 @@
                   <span class="count"></span>
                 </button>
               
-                {% if page.demo_link or page.github_link %}
-                  <span class="post-cta">
-                    {% if page.demo_link %}
-                      <a class="btn-cta" href="{{ page.demo_link }}" target="_blank" rel="noopener">
-                        <img src="/assets/icons/play.svg" alt="Play Icon" style="height:1.6em !important; vertical-align:-0.46em; margin:1px 2px 0 0;">
-                      </a>
-                    {% endif %}
-                    {% if page.github_link %}
-                      <a class="btn-cta" href="{{ page.github_link }}" target="_blank" rel="noopener">
-                        <img src="/assets/icons/github.svg" alt="Github Icon" style="height:1.4em !important; vertical-align:-0.25em; margin:0 2px 0 0;">
-                      </a>
-                    {% endif %}
-                  </span>
+                {% if page.demo_link %}
+                  <a class="btn-cta" href="{{ page.demo_link }}" target="_blank" rel="noopener">
+                    <img src="/assets/icons/play.svg" alt="Play Icon" style="height:1.6em !important; vertical-align:-0.46em; margin:1px 2px 0 0;">
+                  </a>
                 {% endif %}
+                {% if page.github_link %}
+                  <a class="btn-cta" href="{{ page.github_link }}" target="_blank" rel="noopener">
+                    <img src="/assets/icons/github.svg" alt="Github Icon" style="height:1.4em !important; vertical-align:-0.25em; margin:0 2px 0 0;">
+                  </a>
+                {% endif %}
+
               </div>
 
           </header>
