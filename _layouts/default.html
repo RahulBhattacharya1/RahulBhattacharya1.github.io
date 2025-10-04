@@ -270,10 +270,10 @@
 
         {% if page.collection == "posts" %}
           {% assign synopsis = page.synopsis | default: content | strip_html | truncatewords: 50 %}
-          <div class="synopsis-card">
-            <h3>Synopsis</h3>
-            <p>{{ synopsis }}</p>
-          </div>
+            <div class="synopsis-card">
+              <span class="synopsis-label">Synopsis:</span>
+              {{ page.synopsis | default: content | strip_html | truncatewords: 50 }}
+            </div>
         {% endif %}
 
           {% assign thumb = page.thumbnail | default: page.image | default: '/assets/images/default.webp' %}
