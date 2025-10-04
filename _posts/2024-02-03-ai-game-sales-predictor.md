@@ -4,7 +4,7 @@ title: "Building my AI Game Sales Predictor"
 date: 2024-02-03 18:39:22
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/game_sales.webp
 demo_link: https://rahuls-ai-game-sales-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_game_sales_predictor
 featured: true
