@@ -1691,50 +1691,44 @@ pre {
 }
 
 
-/* Post meta — force Live Demo & GitHub to EXACTLY match Share/Like chips */
-.post-header .post-meta-actions .btn.btn--demo,
-.post-header .post-meta-actions .btn.btn--github {
-  /* kill global link styles inside the row */
-  text-decoration: none !important;
-
-  /* identical chip geometry (match your Share/Like) */
+/* Align Demo / GitHub with Like / Share chip geometry */
+.post-header .post-meta-actions .btn--demo,
+.post-header .post-meta-actions .btn--github {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  padding: 2px 8px;      /* same as Share/Like */
-  height: 24px;          /* set to your Share/Like computed height if different */
-  line-height: 1;        /* avoids extra vertical gain from anchors */
-  border-radius: 999px;  /* pill like Share/Like */
-  font-size: 0.85rem;    /* match Share/Like */
-  font-weight: 500;      /* match Share/Like */
-  border-width: 1px;
-  border-style: solid;
-  vertical-align: middle; /* align with the Like <button> */
+
+  padding: 2px 8px;       /* match Like/Share */
+  line-height: 1.15;
+  height: 24px;           /* same as Like */
+  border-radius: 999px;   /* pill */
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  vertical-align: middle;
+  text-decoration: none !important; /* prevent underline */
 }
 
-/* colors only (keep your theme) */
-.post-header .post-meta-actions .btn.btn--demo {
+/* Colors */
+.post-header .post-meta-actions .btn--demo {
   background: #1a8917;
-  color: #fff;
   border-color: #1a8917;
-}
-.post-header .post-meta-actions .btn.btn--demo:hover,
-.post-header .post-meta-actions .btn.btn--demo:focus-visible { filter: brightness(0.92); }
-
-.post-header .post-meta-actions .btn.btn--github {
-  background: #333;       /* or #24292f for GH brand */
   color: #fff;
-  border-color: #333;
 }
-.post-header .post-meta-actions .btn.btn--github:hover,
-.post-header .post-meta-actions .btn.btn--github:focus-visible { filter: brightness(0.92); }
+.post-header .post-meta-actions .btn--demo:hover {
+  filter: brightness(0.92);
+}
 
-/* make sure the text inside doesn’t change height */
-.post-header .post-meta-actions .btn.btn--demo .label,
-.post-header .post-meta-actions .btn.btn--github .label {
-  line-height: 1;         /* prevents extra “taller” feel on anchor chips */
+.post-header .post-meta-actions .btn--github {
+  background: #333;       /* or #24292f for GH brand */
+  border-color: #333;
+  color: #fff;
 }
+.post-header .post-meta-actions .btn--github:hover {
+  filter: brightness(0.92);
+}
+
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
