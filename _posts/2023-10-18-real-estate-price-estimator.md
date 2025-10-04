@@ -4,7 +4,7 @@ title: "Enhancing my AI Real Estate Price Estimator"
 date: 2023-10-18 14:26:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/amazon_review.webp
+thumbnail: /assets/images/real_estate.webp
 demo_link: https://rahuls-ai-property-price-estimator.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_property_price_estimator
 featured: true
