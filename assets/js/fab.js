@@ -26,7 +26,7 @@ function closeMenu() {
 }
 function restartAutoClose() {
   clearTimeout(hideTimeout);
-  hideTimeout = setTimeout(closeMenu, 5000);
+  hideTimeout = setTimeout(closeMenu, 10000);
 }
 
 // Toggle main menu
