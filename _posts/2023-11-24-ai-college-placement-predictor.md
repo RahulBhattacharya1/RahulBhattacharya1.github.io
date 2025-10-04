@@ -4,7 +4,7 @@ title: "Building my AI College Placement Predictor"
 date: 2023-11-24 17:31:22
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/amazon_review.webp
+thumbnail: /assets/images/college.webp
 demo_link: https://rahuls-ai-college-placement.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-college-placement
 featured: true
