@@ -25,6 +25,8 @@
   <meta name="google-site-verification" content="phK51fCKPn6sIPAzfAV8Wt2Sl9vSNwNYG-hhqGZZNIc" />
   <meta name="msvalidate.01" content="1908349FC738ED79A1E0A1704A8F8171" />
 
+  <link rel="stylesheet" href="{{ '/assets/css/fab.css' | relative_url }}">
+
 </head>
 <body{% if page.collection == "posts" %} class="is-post"{% endif %}>
   <div class="layout-wrapper">
@@ -1208,6 +1210,7 @@ window.addEventListener("load", function () {
   
 <script defer src="{{ '/assets/js/faux-likes.js' | relative_url }}"></script>
 <script defer src="/assets/js/faux-share-count.js"></script>
+<script src="{{ '/assets/js/fab.js' | relative_url }}"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -1222,6 +1225,8 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+
+{% include fab.html %}
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
