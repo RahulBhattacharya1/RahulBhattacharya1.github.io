@@ -4,7 +4,7 @@ title: "Creating my AI Automotive Market Clustering"
 date: 2024-01-12 21:14:53
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/wafer.webp
+thumbnail: /assets/images/automotive.webp
 demo_link: https://rahuls-ai-clustering-automotive-market.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-clustering-automotive-market
 featured: true
