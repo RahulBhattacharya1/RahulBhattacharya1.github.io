@@ -100,3 +100,52 @@ body.rb-intro-lock{ overflow:hidden; }
   .rb-stroke, .rb-bar i, .rb-intro{ animation:none !important; transition:none !important; }
   .rb-intro{ --rb-reveal:130% }
 }
+
+/* Premium dark theme for intro + homepage */
+.rb-intro {
+  background: radial-gradient(1200px 600px at 50% 0%, #121929 0%, #0b1120 45%, #070c18 100%);
+}
+
+/* Typography colors tuned for dark */
+.rb-name { /* gradient text is already bright; keep as-is */ }
+.rb-tag { color: #b9ccff; opacity: .95; }
+.rb-label { color: #c7d2ff; }
+.rb-num { color: #dfe7ff; }
+
+/* Bars tuned for dark */
+.rb-bar {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(180,200,255,0.20);
+  box-shadow: inset 0 0 14px rgba(90,130,255,.16);
+}
+.rb-bar i {
+  background: linear-gradient(90deg, #5ba8ff, #7cc7ff);
+  box-shadow: 0 0 16px rgba(110,170,255,.35);
+}
+.rb-pct { color: #e6eeff; }
+
+/* Buttons on dark */
+.rb-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(160,190,255,.28);
+  color: #dbe6ff;
+}
+.rb-btn.primary {
+  background: linear-gradient(180deg, #3f8cff, #69b3ff);
+  color: #041024;
+  border-color: transparent;
+  box-shadow: 0 10px 26px rgba(80,150,255,.28);
+}
+.rb-btn:focus { outline: 2px solid rgba(120,170,255,.55); }
+
+/* Thin straight line version (if you're using it) */
+.rb-stroke {
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px rgba(120,170,255,.18));
+}
+
+/* Make the homepage (under the overlay) dark as well */
+body.rb-home-dark {
+  background: linear-gradient(180deg, #0a1020 0%, #0a0f1a 40%, #070c16 100%);
+  color: #e8ecff;
+}
