@@ -4,7 +4,7 @@ title: "Creating my AI Asylum Application Trends"
 date: 2024-01-27 09:23:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/asylum.webp
 demo_link: https://rahuls-ai-asylum-trend-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_asylum_trend_forecasting
 featured: true
