@@ -4,7 +4,7 @@ title: "My AI Soccer Players Injury Prediction"
 date: 2023-09-13 21:32:54
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/amazon_review.webp
+thumbnail: /assets/images/soccer.webp
 demo_link: https://rahuls-ai-players-risk-predict.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_players_risk_predict
 featured: true
