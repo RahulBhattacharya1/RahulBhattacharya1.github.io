@@ -4,7 +4,7 @@ title: "Creating my AI IPL Player Predictor"
 date: 2024-02-17 11:34:52
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/wafer.webp
+thumbnail: /assets/images/ipl_player.webp
 demo_link: https://rahuls-ai-ipl-players.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_ipl_players
 featured: true
