@@ -245,6 +245,36 @@ body {
   font-feature-settings: "tnum" 1;      /* fallback for tabular numerals */
 }
 
+/* Tiny author avatar only in the post header meta */
+.post-meta .avatar-frame {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0;              /* in case the big frame adds padding */
+  border: 2px solid #cfe8ff; /* optional subtle ring; remove if not wanted */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 28px;          /* prevent flex from stretching it */
+}
+
+.post-meta .avatar-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* perfect circle crop */
+  display: block;
+}
+
+/* Tidy author name/date next to it */
+.post-meta .author-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+  margin-left: 4px;
+}
+
+
 .post-meta .post-cta {
   display: inline-flex;   /* line up with Share / Like */
   align-items: center;    /* vertically align icons */
