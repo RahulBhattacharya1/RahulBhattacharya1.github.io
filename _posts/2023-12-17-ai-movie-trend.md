@@ -4,7 +4,7 @@ title: "Creating my AI Movie Trends Explorer"
 date: 2023-12-17 11:27:46
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/amazon_review.webp
+thumbnail: /assets/images/movie.webp
 demo_link: https://rahuls-ai-movie-trends.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-movie-trends
 featured: true
