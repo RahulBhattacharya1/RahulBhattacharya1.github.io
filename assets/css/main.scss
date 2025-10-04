@@ -1502,49 +1502,40 @@ pre {
   fill: currentColor;  /* stays filled after click */
 }
 
-/* 1) Kill underline coming from global a:hover rules in this row */
+/* Kill underline coming from global a:hover rules in this row */
 .post-header .post-meta-actions a.btn,
 .post-header .post-meta-actions a.btn:hover,
 .post-header .post-meta-actions a.btn:focus {
   text-decoration: none !important;
 }
 
-/* 2) Make Live Demo / GitHub match Share/Like chip geometry */
+/* Fallback: scope to the same row and copy *only* geometry */
 .post-header .post-meta-actions .btn--demo,
 .post-header .post-meta-actions .btn--github {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-
-  /* match chip size */
+  /* match Share/Like chip metrics */
   padding: 2px 8px;
   line-height: 1.15;
-  height: 24px;              /* ensures identical height */
-  border-radius: 999px;      /* pill to match Share/Like */
-  font-weight: 500;          /* typical chip weight */
+  height: 24px;          /* set to your Share/Like chip height if different */
+  border-radius: 999px;  /* pill like Share/Like */
+  font-weight: 500;
+  border: 1px solid transparent;
 }
 
-/* keep the fills you chose */
-.post-header .post-meta-actions .btn--demo {
-  background: #1a8917;
-  color: #fff;
-  border: 1px solid #1a8917;
-}
+/* Colors only */
+.post-header .post-meta-actions .btn--demo   { background:#1a8917; border-color:#1a8917; color:#fff; }
+.post-header .post-meta-actions .btn--github { background:#333;    border-color:#333;    color:#fff; }
+
 .post-header .post-meta-actions .btn--demo:hover,
-.post-header .post-meta-actions .btn--demo:focus-visible {
-  filter: brightness(0.92);
-}
-
-.post-header .post-meta-actions .btn--github {
-  background: #333;
-  color: #fff;
-  border: 1px solid #333;
-}
+.post-header .post-meta-actions .btn--demo:focus-visible,
 .post-header .post-meta-actions .btn--github:hover,
 .post-header .post-meta-actions .btn--github:focus-visible {
   filter: brightness(0.92);
 }
+
 
 
 
