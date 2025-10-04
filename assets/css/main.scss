@@ -1540,6 +1540,36 @@ pre {
 }
 .share-btn.shared{ color:#2563eb; }
 
+
+/* Author avatar: fix square-inside-circle on desktop */
+.post-header .post-meta .avatar-frame {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;       /* kill inline gap that can show edges */
+  background: transparent;
+}
+
+/* Nuke any global img/avatar rules in this context */
+.post-header .post-meta .avatar-frame img,
+.post-header .post-meta .avatar-frame .avatar {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;  /* override any global 4/8px radii */
+  object-fit: cover;
+  display: block;
+}
+
+/* Optional: tiny left spacing after the avatar */
+.post-header .post-meta .author-name { margin-left: 6px; }
+
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
