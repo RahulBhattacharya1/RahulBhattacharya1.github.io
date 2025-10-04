@@ -1730,8 +1730,9 @@ pre {
   display: inline;
   font-weight: 700;
   color: #2a4e9a;
-  margin-right: 0.4rem;
-  white-space: nowrap;
+  margin: 0;                 /* remove margin gap */
+  padding-right: 0.25rem;    /* tiny controlled space */
+  white-space: nowrap;       /* keep “Synopsis:” on the same line */
 }
 
 /* subtle blue inner edge for a premium rim */
