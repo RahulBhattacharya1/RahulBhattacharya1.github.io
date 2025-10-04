@@ -1702,28 +1702,35 @@ pre {
 }
 
 
+/* --- Synopsis Card --- */
 .synopsis-card {
+  display: flex;
+  align-items: baseline;        /* keep header and text aligned nicely */
   background: #f9fbff;
   border: 1px solid rgba(150, 180, 255, 0.35);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  margin: 1.5rem 0;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;       /* tighter padding */
+  margin: 1rem 0 1.25rem;       /* less vertical gap */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #333;
 }
 
 .synopsis-card h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.1rem;
+  margin: 0;
+  margin-right: 0.6rem;         /* space between header and text */
+  font-size: 0.95rem;
   font-weight: 600;
   color: #2a4e9a;
+  flex-shrink: 0;               /* keep "Synopsis" fixed size */
 }
 
 .synopsis-card p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: #333;
+  margin: 0;                    /* remove top/bottom gap */
+  flex: 1;                      /* fill remaining inline space */
 }
+
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
