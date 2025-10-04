@@ -79,3 +79,13 @@
   .fab-menu.show .menu-item{ opacity:1; transform:translateY(0); }
   .submenu{ margin-left:52px; display:none; flex-direction:column; gap:8px; }
   .submenu.show{ display:flex; }
+
+/* TEMP: visibility litmus */
+.fab{
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+  z-index:99999 !important;
+  outline:1px dashed rgba(0,0,0,.15); /* temp trace */
+}
+
