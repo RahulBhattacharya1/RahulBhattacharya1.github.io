@@ -4,7 +4,7 @@ title: "Building my AI Sales Revenue Predictor"
 date: 2023-07-27 12:33:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/sales.webp
 demo_link: https://rahuls-ai-sales-revenue-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_sales_revenue_predictor
 ---
