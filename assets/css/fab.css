@@ -147,3 +147,13 @@
 .fab.pressed::before{ filter: brightness(0.92) saturate(1.05); }
 .fab:active::after,
 .fab.pressed::after{ opacity: 0.6; transform: scale(0.96); } /* a touch stronger on press */
+
+/* --- Global Bottom-Right Override --- */
+.fab {
+  left: auto !important;
+  right: 20px !important;
+}
+.fab-menu {
+  left: auto !important;
+  right: 24px !important;
+}
