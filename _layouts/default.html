@@ -26,9 +26,15 @@
   <meta name="msvalidate.01" content="1908349FC738ED79A1E0A1704A8F8171" />
 
   <link rel="stylesheet" href="{{ '/assets/css/fab.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/rb-intro.css' | relative_url }}">
 
 </head>
 <body{% if page.collection == "posts" %} class="is-post"{% endif %}>
+
+{% if page.url == "/" %}
+  {% include rb-intro.html %}
+{% endif %}
+  
   <div class="layout-wrapper">
     <div id="mobile-profile-root"></div>
     <aside class="sidebar">
@@ -1114,6 +1120,10 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+
+{% if page.url == "/" %}
+  <script defer src="{{ '/assets/js/rb-intro.js' | relative_url }}"></script>
+{% endif %}
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
