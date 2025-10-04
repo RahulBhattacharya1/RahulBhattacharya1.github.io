@@ -4,7 +4,7 @@ title: "Creating my AI Economic Crisis Detector"
 date: 2023-08-24 16:54:23
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/crisis.webp
 demo_link: https://rahuls-ai-employment-gdp.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_employment_gdp
 featured: true
