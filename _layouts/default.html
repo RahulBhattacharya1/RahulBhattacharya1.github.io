@@ -1093,6 +1093,27 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
 
 {% include fab.html %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var card = document.querySelector('.synopsis-card');
+  if (!card) return;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    card.style.opacity = '1';
+    card.style.transform = 'none';
+    card.style.filter = 'none';
+    return;
+  }
+
+  // allow CSS to apply initial hidden state, then reveal
+  requestAnimationFrame(function () {
+    // slight delay so it feels intentional and premium
+    setTimeout(function(){ card.classList.add('is-revealed'); }, 60);
+  });
+});
+</script>
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
