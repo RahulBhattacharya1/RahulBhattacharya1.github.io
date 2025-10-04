@@ -11,6 +11,33 @@
   var actions = document.getElementById('rbActions');
   var btnGo   = document.getElementById('rbContinueBtn');
 
+  /* ==== Tagline variations + cinematic load ==== */
+  var TAGLINES = [
+    "Designing Precision AI for Real-World Impact",
+    "Turning Complex Data into Clear Decisions",
+    "Scaling Models from Notebook to Production",
+    "Building Reliable ML Systems End-to-End",
+    "Engineering Intelligence that Ships Value"
+  ];
+  var tagEl = document.getElementById('rbTag');
+
+  function pickTagline(){
+    // Random each load (change to sequential if you prefer)
+    var i = Math.floor(Math.random()*TAGLINES.length);
+    return TAGLINES[i];
+  }
+  function playTagline(){
+    if (!tagEl) return;
+    tagEl.textContent = pickTagline();
+    // retrigger animation every time overlay shows
+    tagEl.classList.remove('rb-cine');
+    // force reflow
+    void tagEl.offsetWidth;
+    tagEl.classList.add('rb-cine');
+  }
+  playTagline();
+  /* ============================================ */
+
   function animateBar(row){
     return new Promise(function(resolve){
       var pctEl = row.querySelector('.rb-pct');
