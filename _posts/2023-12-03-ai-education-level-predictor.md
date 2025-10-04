@@ -4,7 +4,7 @@ title: "Building my AI Education Level Predictor"
 date: 2023-12-03 10:19:25
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/education.webp
 demo_link: https://rahuls-ai-education-level-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_education_level_predictor
 featured: true
