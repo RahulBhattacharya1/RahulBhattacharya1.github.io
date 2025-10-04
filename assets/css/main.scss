@@ -1601,6 +1601,19 @@ pre {
 }
 
 
+.post-meta-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;   /* even spacing */
+  flex-wrap: nowrap; /* prevent wrapping on small screens */
+}
+
+.post-meta-actions a.btn-cta img {
+  display: inline-block;
+  height: 1.4em;
+  margin: 0 2px 0 0;
+  vertical-align: -0.25em;
+}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
