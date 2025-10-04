@@ -236,6 +236,15 @@ body {
   flex-wrap: wrap;
 }
 
+.post-meta .post-date {
+  font-size: 0.82em;           /* smaller than the meta line */
+  color: #6b7280;              /* a touch softer */
+  line-height: 1.2;            /* crisp vertical rhythm */
+  letter-spacing: 0.01em;      /* subtle micro-tracking helps numerals */
+  font-variant-numeric: tabular-nums;   /* align digits neatly */
+  font-feature-settings: "tnum" 1;      /* fallback for tabular numerals */
+}
+
 .post-meta .post-cta {
   display: inline-flex;   /* line up with Share / Like */
   align-items: center;    /* vertically align icons */
