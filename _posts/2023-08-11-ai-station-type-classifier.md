@@ -4,7 +4,7 @@ title: "Building my AI Station Type Classifier"
 date: 2023-08-11 13:27:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/station.webp
 demo_link: https://rahuls-ai-station-type-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_station_type_classifier
 featured: true
