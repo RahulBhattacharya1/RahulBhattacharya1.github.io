@@ -1569,6 +1569,25 @@ pre {
 /* Optional: tiny left spacing after the avatar */
 .post-header .post-meta .author-name { margin-left: 6px; }
 
+.post-header .post-meta-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:.4rem;
+}
+
+/* small, perfectly round avatar in meta */
+.post-meta-author .avatar-frame{
+  width:28px; height:28px; border-radius:50%; overflow:hidden;
+  display:inline-flex; align-items:center; justify-content:center; flex:0 0 28px;
+}
+.post-meta-author .avatar-frame img{ width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
+
+.post-meta-author .author-name{ font-weight:600; font-size:.9rem; margin-left:4px; }
+.post-meta-author .post-date{ font-size:.82em; color:#666; line-height:1.2; }
+.post-meta-actions{ gap:10px; }
+
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
