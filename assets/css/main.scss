@@ -1702,6 +1702,29 @@ pre {
 }
 
 
+.synopsis-card {
+  background: #f9fbff;
+  border: 1px solid rgba(150, 180, 255, 0.35);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.synopsis-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2a4e9a;
+}
+
+.synopsis-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #333;
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
