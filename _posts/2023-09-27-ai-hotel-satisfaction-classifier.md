@@ -4,7 +4,7 @@ title: "Creating my AI Hotel Satisfaction Predictor"
 date: 2023-09-27 10:56:29
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/hotel.webp
 demo_link: https://rahuls-ai-hotel-satisfaction-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_hotel_satisfaction_classifier
 featured: true
