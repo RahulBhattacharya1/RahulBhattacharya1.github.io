@@ -1,25 +1,9 @@
 // assets/js/rb-intro.js
 (function(){
-  var STORAGE_KEY = "rb_intro_v1_dismissed";
-  var DISMISS_TTL_DAYS = 365; // set to null to never show again after first dismiss
-
-  function ttlValid(saved){
-    if (!DISMISS_TTL_DAYS) return true;
-    try{
-      var obj = JSON.parse(saved); // {t: epochMs}
-      if (!obj || !obj.t) return false;
-      var ms = DISMISS_TTL_DAYS*24*60*60*1000;
-      return (Date.now() - obj.t) < ms;
-    }catch(e){ return false; }
-  }
-
   var intro = document.getElementById('rbIntro');
   if (!intro) return;
 
-  var flag = localStorage.getItem(STORAGE_KEY);
-  var shouldShow = !flag || !ttlValid(flag);
-  if (!shouldShow) return;
-
+  // Always show on page load
   document.body.classList.add('rb-intro-lock');
   intro.classList.add('show');
 
@@ -62,7 +46,6 @@
         document.body.classList.remove('rb-intro-lock');
       }, 900);
     }, 900);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({t: Date.now()}));
   }
 
   btnGo && btnGo.addEventListener('click', dismiss);
