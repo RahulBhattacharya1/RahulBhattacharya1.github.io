@@ -1586,7 +1586,20 @@ pre {
 
 .post-meta-author .author-name{ font-weight:600; font-size:.9rem; margin-left:4px; }
 .post-meta-author .post-date{ font-size:.82em; color:#666; line-height:1.2; }
-.post-meta-actions{ gap:10px; }
+
+.post-meta-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;        /* even space between all buttons and icons */
+  flex-wrap: wrap;  /* let them wrap gracefully only on small screens */
+}
+
+.post-meta-actions .btn-cta {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
 
 
 /* Giscus Comments Box */
