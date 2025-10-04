@@ -1611,30 +1611,6 @@ pre {
   flex-wrap: nowrap;               /* don't wrap unless absolutely needed */
 }
 
-/* prevent mobile “full-width buttons” pattern */
-.post-header .post-meta-actions .btn,
-.post-header .post-meta-actions .btn-cta{
-  display:inline-flex !important;
-  width:auto !important;
-  flex:0 0 auto;
-  align-items:center;
-  line-height:0;
-  padding:0;                       /* icons don’t need padding */
-}
-
-/* icons behave like tight glyphs */
-.post-header .post-meta-actions .btn-cta img{
-  display:block;
-  height:1.4em;
-  margin:0 2px 0 0;
-  vertical-align:-0.25em;
-}
-
-/* OPTIONAL: if your theme forces columns under a breakpoint, hard-pin it */
-@media (max-width: 600px){
-  .post-header .post-meta-actions{ flex-direction: row !important; }
-}
-
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
