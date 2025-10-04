@@ -116,3 +116,34 @@
   .submenu{ margin-left:52px; display:none; flex-direction:column; gap:8px; }
   .submenu.show{ display:flex; }
 
+/* --- Match FAB face to menu transparency --- */
+.fab{
+  /* Same glass level as menu items */
+  background: var(--menu-bg) !important;  /* rgba(255,255,255,0.66) by your :root */
+  border: 0 !important;                   /* keep the border line removed */
+  box-shadow: var(--fab-shadow);          /* keep your existing blue glow */
+}
+
+/* --- Make the ring less transparent (more solid than the FAB face) --- */
+/* Spinning conic band */
+.fab::before{
+  opacity: 0.92;            /* was implicit 1; set explicitly more solid than 0.66 face */
+}
+
+/* Under-glow strength (increase alpha vs before) */
+.fab::after{
+  /* was 0 0 28px 10px rgba(150,190,255,0.35) */
+  box-shadow: 0 0 28px 10px rgba(150,190,255,0.55);
+}
+
+/* Keep your tactile press/hover behavior (if you added a 'pressed' helper in JS, this mirrors it) */
+.fab:hover{
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: var(--fab-shadow), var(--fab-hover-glow);
+}
+.fab:active,
+.fab.pressed{ transform: translateY(1px) scale(0.97); }
+.fab:active::before,
+.fab.pressed::before{ filter: brightness(0.92) saturate(1.05); }
+.fab:active::after,
+.fab.pressed::after{ opacity: 0.6; transform: scale(0.96); } /* a touch stronger on press */
