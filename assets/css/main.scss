@@ -1501,29 +1501,25 @@ pre {
 }
 .share-btn.shared{ color:#2563eb; }
 
-/* Apply premium bevel only to index images */
+
+
+/* Force bevel effect to survive inline overrides */
 .featured-strip .post-item .thumb img,
 .post-strip .post-item .thumb img {
-  border-radius: 12px;
+  border-radius: 12px !important;
+  background: #fff !important;
+  display: block !important;
 
-  /* Raised feel */
   filter:
     drop-shadow(0 10px 24px rgba(0,0,0,0.18))
-    drop-shadow(0 4px 12px rgba(0,0,0,0.10));
+    drop-shadow(0 4px 12px rgba(0,0,0,0.10)) !important;
 
-  /* Inner bevel edge */
   box-shadow:
     inset 3px 3px 6px rgba(0,0,0,0.25),
     inset -3px -3px 6px rgba(255,255,255,0.95),
-    0 0 6px rgba(255,255,255,0.5) inset;
+    0 0 6px rgba(255,255,255,0.5) inset !important;
 }
 
-/* Optional hover lift */
-.featured-strip .post-item .thumb img:hover,
-.post-strip .post-item .thumb img:hover {
-  transform: translateY(-2px);
-  transition: transform .18s ease;
-}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
