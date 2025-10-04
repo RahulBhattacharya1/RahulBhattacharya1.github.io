@@ -1502,35 +1502,50 @@ pre {
   fill: currentColor;  /* stays filled after click */
 }
 
-/* Demo + GitHub buttons — match Share/Like chip style */
-.btn--demo,
-.btn--github {
+/* 1) Kill underline coming from global a:hover rules in this row */
+.post-header .post-meta-actions a.btn,
+.post-header .post-meta-actions a.btn:hover,
+.post-header .post-meta-actions a.btn:focus {
+  text-decoration: none !important;
+}
+
+/* 2) Make Live Demo / GitHub match Share/Like chip geometry */
+.post-header .post-meta-actions .btn--demo,
+.post-header .post-meta-actions .btn--github {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2px 8px;          /* same as Share/Like */
-  font-size: 0.85rem;        /* same text size */
-  line-height: 1.4;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  box-sizing: border-box;
+
+  /* match chip size */
+  padding: 2px 8px;
+  line-height: 1.15;
+  height: 24px;              /* ensures identical height */
+  border-radius: 999px;      /* pill to match Share/Like */
+  font-weight: 500;          /* typical chip weight */
 }
 
-/* Demo button fill */
-.btn--demo {
+/* keep the fills you chose */
+.post-header .post-meta-actions .btn--demo {
   background: #1a8917;
   color: #fff;
-  border-color: #1a8917;
+  border: 1px solid #1a8917;
 }
-.btn--demo:hover { filter: brightness(0.92); }
+.post-header .post-meta-actions .btn--demo:hover,
+.post-header .post-meta-actions .btn--demo:focus-visible {
+  filter: brightness(0.92);
+}
 
-/* GitHub button fill */
-.btn--github {
+.post-header .post-meta-actions .btn--github {
   background: #333;
   color: #fff;
-  border-color: #333;
+  border: 1px solid #333;
 }
-.btn--github:hover { filter: brightness(0.92); }
+.post-header .post-meta-actions .btn--github:hover,
+.post-header .post-meta-actions .btn--github:focus-visible {
+  filter: brightness(0.92);
+}
+
 
 
 /* one-line row + kill corner/hover only for icon links */
