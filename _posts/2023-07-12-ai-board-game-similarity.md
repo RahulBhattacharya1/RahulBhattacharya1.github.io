@@ -4,7 +4,7 @@ title: "Building my AI Board Game Similarity Explorer"
 date: 2023-07-12 20:11:42
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/board_game.webp
 demo_link: https://rahuls-ai-boardgame-embedding-map.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_boardgame_embedding_map
 featured: true
