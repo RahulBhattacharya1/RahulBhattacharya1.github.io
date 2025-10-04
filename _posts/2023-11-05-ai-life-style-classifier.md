@@ -4,7 +4,7 @@ title: "Creating my AI Lifestyle Classifier"
 date: 2023-11-05 07:36:44
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/lifestyle.webp
 demo_link: https://rahuls-ai-life-style-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_lifestyle_classifier
 featured: true
