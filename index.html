@@ -24,8 +24,7 @@ title: "Rahul's Portfolio"
       {%- if post.featured == true -%}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <div class="rbx-bevel rbx-bevel--raised">
-              <span class="rbx-sweep"></span>
+            <div class="rbx-bevel rbx-bevel--raised">              
               <picture>
               {% if post.thumbnail_mobile %}
                 <source srcset="{{ post.thumbnail_mobile | relative_url }}" media="(max-width: 767px)">
@@ -36,6 +35,7 @@ title: "Rahul's Portfolio"
               <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}"
                    alt="{{ post.title }}" loading="lazy">
             </picture>
+              <span class="rbx-sweep"></span>
             </div>
 
           </a>
@@ -151,7 +151,6 @@ title: "Rahul's Portfolio"
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
             <div class="rbx-bevel rbx-bevel--raised">
-              <span class="rbx-sweep"></span>
               <picture>
               {% if post.thumbnail_mobile %}
                 <source srcset="{{ post.thumbnail_mobile | relative_url }}" media="(max-width: 767px)">
@@ -162,6 +161,7 @@ title: "Rahul's Portfolio"
               <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}"
                    alt="{{ post.title }}" loading="lazy">
             </picture>
+              <span class="rbx-sweep"></span>
             </div>
           </a>
           <div class="post-text">
