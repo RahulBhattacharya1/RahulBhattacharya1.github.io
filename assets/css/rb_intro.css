@@ -107,3 +107,31 @@
   #rbx-rotating-caption, .rbx-bar-fill{ transition:none; }
   .rbx-bar-fill::after{ animation:none; }
 }
+
+/* --- Progress bars: better mobile layout --- */
+
+/* Tablet and down: shrink name/pct so bar gets more room */
+@media (max-width: 768px){
+  .rbx-skill-name{ flex: 0 0 160px; }
+  .rbx-skill-pct { flex: 0 0 42px; }
+  .rbx-skills{ max-width: 96vw; }   /* let container breathe */
+}
+
+/* Small phones: stack to 2 rows so the bar is full width */
+@media (max-width: 480px){
+  .rbx-skill{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "name pct"
+      "bar  bar";
+    row-gap: 6px;
+    column-gap: 10px;
+  }
+  .rbx-skill-name{ grid-area: name; min-width: 0; }
+  .rbx-skill-pct { grid-area: pct;  text-align: right; }
+  .rbx-bar       { grid-area: bar;  width: 100%; }
+}
+
+/* Ensure the bar can truly expand */
+.rbx-bar{ width: 100%; min-width: 0; }
