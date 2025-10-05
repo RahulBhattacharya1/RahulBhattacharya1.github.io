@@ -72,14 +72,6 @@ body.rb-intro-lock{ overflow:hidden; }
 .rb-num{ font-size: clamp(18px, 4vw, 28px); font-weight:700; color:#dfe7ff; margin-bottom:4px; }
 .rb-label{ font-size: clamp(12px, 2.6vw, 14px); color:#c7d2ff; }
 
-/* ===== Optional signature line (if present) ===== */
-.rb-signature{ position:absolute; left:50%; top:22%; transform:translateX(-50%); width:min(760px, 88vw); }
-.rb-signature svg{ width:100%; height:auto; display:block; }
-.rb-stroke{
-  stroke:url(#rb-g); stroke-width:2; fill:none; stroke-linecap:round;
-  filter: drop-shadow(0 0 4px rgba(120,170,255,.18));
-}
-
 /* ===== Loaders (rows) ===== */
 .rb-loaders{
   position:absolute; left:50%; top:48%;
@@ -110,7 +102,7 @@ body.rb-intro-lock{ overflow:hidden; }
 .rb-bar i{
   position:absolute;
   left:0; top:0; bottom:0;
-  width:0; /* JS animates to NN% */
+  width:0; /* JS animates to NN% 
   background: linear-gradient(90deg, #5ba8ff, #7cc7ff);
   box-shadow: 0 0 16px rgba(110,170,255,.35);
   transition: width .9s cubic-bezier(.2,.7,.2,1);
