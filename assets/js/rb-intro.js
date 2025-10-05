@@ -1,5 +1,9 @@
-// 200 rotating taglines (your list exactly as given)
-var TAGLINES = [
+
+(function(){
+  // === Config ===
+  const RB_INTRO_INTERVAL_MS = 2600;   // time each line is visible
+  const RB_INTRO_FADE_MS = 450;        // must match CSS transition
+  const RB_INTRO_TAGLINES = [
   "Accelerated 120+ Databricks notebooks delivering 40% faster data pipelines",
   "Optimized Azure Data Factory jobs saving 1,200+ compute hours annually",
   "Built 250+ complex Python projects reducing manual processes by 65%",
@@ -207,72 +211,60 @@ var TAGLINES = [
   "Delivered predictive dashboards increasing stakeholder trust by 35%"
 ];
 
-// Rotator options
-var RB_ROTATOR_INTERVAL_MS = 2600;   // time each line is visible
-var RB_ROTATOR_FADE_MS = 450;        // must match CSS transition ~ .45s
-
-function startTaglineRotation(){
-  var el = document.getElementById("rb-rotating-tagline");
-  if(!el || !Array.isArray(TAGLINES) || TAGLINES.length === 0) return;
-
-  // Start at a deterministic but non-zero index for freshness
-  var i = (TAGLINES.length > 1) ? 1 : 0;
-
-  function showNext(){
-    // fade out
-    el.classList.add("rb-fade-out");
-    // swap text after fade-out completes
-    setTimeout(function(){
-      el.textContent = TAGLINES[i];
-      el.classList.remove("rb-fade-out");
-      el.classList.add("rb-fade-in");
-
-      // remove rb-fade-in after paint so the next cycle can reuse it
-      setTimeout(function(){ el.classList.remove("rb-fade-in"); }, RB_ROTATOR_FADE_MS + 20);
-
-      i = (i + 1) % TAGLINES.length;
-    }, RB_ROTATOR_FADE_MS);
+  // === Internal helpers ===
+  function rbIntroFillSkillBars(){
+    document.querySelectorAll(".skill .bar div").forEach(bar => {
+      const v = bar.getAttribute("data-value");
+      if(v) bar.style.width = v + "%";
+    });
   }
 
-  // advance every interval
-  var timer = setInterval(showNext, RB_ROTATOR_INTERVAL_MS);
+  function rbIntroStartTaglineRotation(){
+    const el = document.getElementById("rb-rotating-tagline");
+    if(!el || RB_INTRO_TAGLINES.length === 0) return;
 
-  // pause on hover/focus for readability
-  el.addEventListener("mouseenter", function(){ clearInterval(timer); });
-  el.addEventListener("mouseleave", function(){ timer = setInterval(showNext, RB_ROTATOR_INTERVAL_MS); });
-  el.addEventListener("focus", function(){ clearInterval(timer); }, true);
-  el.addEventListener("blur", function(){ timer = setInterval(showNext, RB_ROTATOR_INTERVAL_MS); }, true);
-}
+    let i = 0;
+    function showNext(){
+      el.classList.add("rb-fade-out");
+      setTimeout(() => {
+        el.textContent = RB_INTRO_TAGLINES[i];
+        el.classList.remove("rb-fade-out");
+        el.classList.add("rb-fade-in");
+        setTimeout(() => el.classList.remove("rb-fade-in"), RB_INTRO_FADE_MS + 20);
+        i = (i + 1) % RB_INTRO_TAGLINES.length;
+      }, RB_INTRO_FADE_MS);
+    }
 
-// Animate skill bars on load
-function fillSkillBars(){
-  document.querySelectorAll(".skill .bar div").forEach(function(bar){
-    var v = bar.getAttribute("data-value");
-    if(v) bar.style.width = v + "%";
+    let timer = setInterval(showNext, RB_INTRO_INTERVAL_MS);
+    el.addEventListener("mouseenter", () => clearInterval(timer));
+    el.addEventListener("mouseleave", () => { timer = setInterval(showNext, RB_INTRO_INTERVAL_MS); });
+    el.addEventListener("focus", () => clearInterval(timer), true);
+    el.addEventListener("blur", () => { timer = setInterval(showNext, RB_INTRO_INTERVAL_MS); }, true);
+  }
+
+  function rbIntroSetupDismissal(){
+    const banner = document.querySelector(".rb-intro");
+    const continueBtn = document.querySelector(".btn.primary");
+    if (!banner || !continueBtn) return;
+
+    // Prevent scrolling while banner is open
+    document.body.style.overflow = "hidden";
+
+    continueBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      banner.classList.add("rb-hide");
+      setTimeout(() => {
+        banner.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }, 280); // match CSS transition
+    }, { once: true });
+  }
+
+  // === Init ===
+  document.addEventListener("DOMContentLoaded", () => {
+    rbIntroFillSkillBars();
+    rbIntroStartTaglineRotation();
+    rbIntroSetupDismissal();
   });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  // animate skill bars + start subtitle rotator
-  fillSkillBars();
-  startTaglineRotation();
-
-  // lock page scroll while banner is visible
-  document.body.style.overflow = "hidden";
-
-  const banner = document.querySelector(".rb-intro");
-  const continueBtn = document.querySelector(".btn.primary");
-  if (!banner || !continueBtn) return;
-
-  continueBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    // optional fade-out if you add the CSS below
-    banner.classList.add("rb-hide");
-    // after the fade, remove it and restore scroll
-    setTimeout(() => {
-      banner.classList.add("hidden");   // display:none; in your CSS
-      document.body.style.overflow = "auto";
-    }, 280); // match CSS transition
-  }, { once: true });
-});
+})();
 
