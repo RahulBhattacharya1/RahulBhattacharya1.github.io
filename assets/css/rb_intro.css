@@ -1,205 +1,121 @@
+/* === Core vars === */
 :root{
   --rbx-bg:#0a0f1c;
   --rbx-blue1:#0b66ff;
   --rbx-blue2:#1ea7ff;
   --rbx-ink:#e9eef8;
+
+  /* metrics + bars (lean) */
+  --metric-label-size: clamp(0.68rem, 0.95vw, 0.84rem);
+  --skill-name-size:  clamp(0.72rem, 0.95vw, 0.88rem);
+  --pct-size:         clamp(0.68rem, 0.9vw, 0.82rem);
+  --bar-h:            3px;
+  --bar-gap:          6px;
+  --track:            rgba(255,255,255,0.10);
+  --track-edge:       rgba(255,255,255,0.22);
+  --fill-start:       #66a7ff;
+  --fill-end:         #2c74ff;
 }
 
-/* Fullscreen overlay */
+/* === Fullscreen intro overlay === */
 .rbx-intro-overlay{
   position:fixed; inset:0; z-index:9999;
-  background: rgba(10,15,28,0.7);  /* 92% opaque */
-  backdrop-filter: blur(14px);       /* optional: soft blur for premium feel */
+  background: rgba(10,15,28,0.7);
+  backdrop-filter: blur(14px);
   display:flex; align-items:center; justify-content:center;
-  padding:40px 16px;
-  overflow:auto;
+  padding:40px 16px; overflow:auto;
   opacity:1; transition:opacity .28s ease;
 }
 .rbx-intro-overlay.rbx-fade-out{ opacity:0; }
 .rbx-intro-overlay.rbx-hidden{ display:none; }
-
 .rbx-intro-wrap{ width:min(1080px,100%); text-align:center; color:var(--rbx-ink); }
 
-/* Scope to the intro area so other titles aren't affected */
-.rbx-intro-overlay .rbx-title {
-  margin: 0;
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  font-size: clamp(2rem, 4.5vw, 3rem);
-  font-weight: 700;
-  font-variant: small-caps;
-  letter-spacing: 1.5px;
-  line-height: 1.12;
-  position: relative;
+/* === Premium title with animated underline (center 50%) === */
+.rbx-intro-overlay .rbx-title{
+  margin:0 0 20px; display:inline-block; position:relative;
+  font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;
+  font-size:clamp(2rem,4.5vw,3rem);
+  font-weight:700; font-variant:small-caps; letter-spacing:1.5px; line-height:1.12;
 
-  display:inline-block;          /* needed for a local underline */
-  margin-bottom: 20px;           /* pushes caption down so no overlap */
+  background:linear-gradient(120deg,#f9f295 0%,#fff 25%,#d4af37 50%,#fff 75%,#f9f295 100%);
+  background-size:250% auto; -webkit-background-clip:text; background-clip:text;
+  color:transparent; -webkit-text-fill-color:transparent;
 
-  /* Premium animated gold gradient */
-  background: linear-gradient(
-    120deg,
-    #f9f295 0%,
-    #ffffff 25%,
-    #d4af37 50%,
-    #ffffff 75%,
-    #f9f295 100%
-  );
-  background-size: 250% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-
-  /* speed */
-  animation: goldShine 2s linear infinite;
-
-  /* Gentle glow */
-  text-shadow:
-    0 0 8px rgba(255,255,200,0.45),
-    0 0 16px rgba(212,175,55,0.35),
-    0 0 28px rgba(255,255,255,0.22);
+  animation:goldShine 2s linear infinite;
+  text-shadow:0 0 8px rgba(255,255,200,.45),0 0 16px rgba(212,175,55,.35),0 0 28px rgba(255,255,255,.22);
+}
+.rbx-intro-overlay .rbx-title::after{
+  content:""; position:absolute; bottom:-8px; left:50%;
+  transform:translateX(-50%); width:50%; height:2px; pointer-events:none;
+  background:linear-gradient(90deg,transparent,#ffd700,transparent);
+  background-size:200% auto; animation:underlineSweep 6s ease-in-out infinite;
 }
 
-/* Underline (the sweeping streak) */
-.rbx-intro-overlay .rbx-title::after {
-  content:"";
-  position:absolute;
-  bottom:-8px;                   /* distance under the letters */
-  left:50%;                      /* start from center */
-  transform:translateX(-50%);    /* center the 50% span */
-  width:50%;                     /* only middle half underlines */
-  height:2px;                    /* elegant thin line */
-  background:linear-gradient(90deg, transparent, #ffd700, transparent);
-  background-size:200% auto;
-  animation:underlineSweep 6s ease-in-out infinite;
-  pointer-events:none;  
-
-  /* speed */
-  animation: underlineSweep 6s ease-in-out infinite;
+/* Title anims */
+@keyframes goldShine{
+  0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
+}
+@keyframes underlineSweep{
+  0%{background-position:-100% 50%;opacity:0}
+  10%,90%{opacity:1}
+  50%{background-position:100% 50%}
+  100%{background-position:300% 50%;opacity:0}
 }
 
-/* Keyframes (place once anywhere after the rules above) */
-@keyframes goldShine {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* === Rotating caption === */
+.rbx-subtitle{
+  margin:0 auto 36px; max-width:980px;
+  color:#cfd6e4; line-height:1.5; font-weight:400;
+  font-size:clamp(.9rem,1.2vw,1.05rem);
 }
+#rbx-rotating-caption{ display:inline-block; transition:opacity .45s ease; }
+.rbx-cap-out{opacity:0} .rbx-cap-in{opacity:1}
 
-@keyframes underlineSweep {
-  0%   { background-position: -100% center; opacity: 0; }
-  10%  { opacity: 1; }
-  50%  { background-position: 100% center; opacity: 1; }
-  90%  { opacity: 1; }
-  100% { background-position: 300% center; opacity: 0; }
-}
-
-/* Rotating caption */
-.rbx-subtitle {
-  margin: 0 auto 36px;
-  max-width: 980px;
-  color: #cfd6e4;
-  line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: 0;
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
-}
-
-.rbx-subtitle strong { font-weight: 700; }
-
-#rbx-rotating-caption {
-  display: inline-block;
-  transition: opacity .45s ease;
-}
-
-.rbx-cap-out { opacity: 0; }
-.rbx-cap-in  { opacity: 1; }
-
-/* Metrics */
-.rbx-metrics{ display:flex; flex-wrap:wrap; justify-content:center; gap:28px; margin:0 0 36px; }
-.rbx-metrics div{text-align:center;}
-.rbx-metrics span{ display:block; font-size:1.55rem; font-weight:800; color:#69c0ff; }
-.rbx-metrics p{ margin:6px 0 0; color:#b5c0d4; font-size:.95rem; }
-
-/* Metrics (2-up, rotating) */
-.rbx-metrics-rot{ margin: 0 0 36px; }
+/* === Metrics (2-up rotating) === */
+.rbx-metrics-rot{ margin:0 0 36px; }
 .rbx-metrics-row{
-  display:flex; justify-content:center; align-items:flex-start;
-  gap:28px; opacity:1; transition:opacity .35s ease;
+  display:flex; justify-content:center; align-items:flex-start; gap:28px;
+  opacity:1; transition:opacity .35s ease;
 }
 .rbx-metrics-row.rbx-fade-out{ opacity:0; }
-
 .rbx-metric{ text-align:center; min-width:130px; }
-.rbx-metric-val{
-  display:block; font-size:1.6rem; font-weight:800; color:#69c0ff;
-}
-.rbx-metric-cap{
-  margin:6px 0 0; color:#b5c0d4; font-size:.95rem;
-}
+.rbx-metric-val{ display:block; font-size:1.6rem; font-weight:800; color:#69c0ff; }
+.rbx-metric-cap{ margin:6px 0 0; color:#b5c0d4; font-size:var(--metric-label-size); line-height:1.2; }
 
-/* tiny pair indicator like 1/2, 2/3, ... */
-.rbx-metrics-indicator{
-  margin-top:10px; text-align:center; color:#8fa1ba; font-size:.9rem;
-}
-
-/* Mobile: keep two-up but allow wrap if super narrow */
-@media (max-width:420px){
-  .rbx-metrics-row{ gap:20px; }
-  .rbx-metric{ min-width:0; }
-}
-
-/* Skills */
+/* === Skill bars (lean, sharp) === */
 .rbx-skills{ max-width:820px; margin:0 auto 40px; text-align:left; }
-.rbx-skill{ display:flex; align-items:center; gap:12px; margin:12px 0; }
-.rbx-skill-name{ flex:0 0 210px; color:#dfe6f2; font-size:.96rem; }
-.rbx-skill-pct{ flex:0 0 48px; text-align:right; color:#a8b3c7; font-size:.94rem; }
+.rbx-skill{
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center;
+  column-gap:12px; row-gap:var(--bar-gap); margin:8px 0;
+}
+.rbx-skill-name{ font-size:var(--skill-name-size); color:#dfe6f2; margin:0; text-align:right; white-space:nowrap; }
+.rbx-skill-pct{ font-size:var(--pct-size); color:#a8b3c7; text-align:right; white-space:nowrap; }
 
-.rbx-bar{
-  position:relative; flex:1; height:12px; border-radius:8px; overflow:hidden;
-  background:#182237; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05);
+.rbx-bar{ position:relative; width:100%; min-width:0; height:var(--bar-h);
+  background:var(--track); border-radius:3px; overflow:hidden;
+  box-shadow:inset 0 -0.5px 0 var(--track-edge);
 }
 .rbx-bar-fill{
   position:relative; height:100%; width:0;
-  background:linear-gradient(90deg,var(--rbx-blue1),var(--rbx-blue2));
-  border-radius:inherit; 
-  transition:width 1.4s ease;
+  background:linear-gradient(90deg,var(--fill-start),var(--fill-end));
+  border-radius:inherit; transition:width 1.4s ease; transform:translateZ(0);
 }
+.rbx-skill:nth-child(1) .rbx-bar-fill{ transition:width 8s ease 0s }
+.rbx-skill:nth-child(2) .rbx-bar-fill{ transition:width 7.6s ease .4s }
+.rbx-skill:nth-child(3) .rbx-bar-fill{ transition:width 7.2s ease .8s }
+.rbx-skill:nth-child(4) .rbx-bar-fill{ transition:width 6.8s ease 1.2s }
+.rbx-skill:nth-child(5) .rbx-bar-fill{ transition:width 6.4s ease 1.6s }
 
-/* Staggered fill animations */
-.rbx-skill:nth-child(1) .rbx-bar-fill { transition: width 8s ease 0s; }
-.rbx-skill:nth-child(2) .rbx-bar-fill { transition: width 7.6s ease 0.4s; }
-.rbx-skill:nth-child(3) .rbx-bar-fill { transition: width 7.2s ease 0.8s; }
-.rbx-skill:nth-child(4) .rbx-bar-fill { transition: width 6.8s ease 1.2s; }
-.rbx-skill:nth-child(5) .rbx-bar-fill { transition: width 6.4s ease 1.6s; }
-
-/* Shimmer highlight sweeping across only the first 70% with no flicker */
+/* Thin highlight line (subtle start) */
 .rbx-bar-fill::after{
-  content:"";
-  position:absolute; top:0; left:0;
-  width:40%; height:100%;
-  background:linear-gradient(90deg,
-    rgba(255,255,255,0.00),
-    rgba(255,255,255,0.35),
-    rgba(255,255,255,0.00)
-  );
-  transform: translateX(-40%);   /* start before the fill */
-  transform-origin: left center;
-  will-change: transform, opacity;
-  pointer-events:none;
-  animation: rbx-shine 1.8s linear infinite;
+  content:""; position:absolute; left:0; right:0; top:0; height:1px; pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,.20),rgba(255,255,255,.10) 40%,rgba(255,255,255,0));
 }
 
-@keyframes rbx-shine{
-  0%   { transform: translateX(-40%); opacity: 0; } /* fade-in after restart */
-  2%   { opacity: 1; }
-  80%  { transform: translateX(70%);  opacity: 1; } /* stop at 70% of the fill */
-  99%  { opacity: 0; }                              /* fade-out before reset */
-  100% { transform: translateX(-40%); opacity: 0; } /* reset off-screen */
-}
-
-/* Calls to action (no conflict with .btn) */
+/* === CTAs === */
 .rbx-actions{ display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
 .rbx-cta{
-  display:inline-block; padding:12px 22px; border-radius:26px;
-  font-weight:700; text-decoration:none;
+  display:inline-block; padding:12px 22px; border-radius:26px; font-weight:700; text-decoration:none;
   transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
   box-shadow:0 6px 18px rgba(0,0,0,.28);
 }
@@ -208,140 +124,21 @@
 .rbx-cta-secondary{ background:#151a25; color:#e8eef8; border:1px solid #2b3242; }
 .rbx-cta-secondary:hover{ background:#1d2432; transform:translateY(-2px); }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  #rbx-rotating-caption, .rbx-bar-fill{ transition:none; }
-  .rbx-bar-fill::after{ animation:none; }
+/* === Responsive trims === */
+@media (max-width:768px){
+  .rbx-skill-name{ font-size:clamp(.7rem,2.8vw,.85rem); }
+  .rbx-skill-pct { font-size:clamp(.68rem,2.6vw,.82rem); }
+  .rbx-skills{ max-width:96vw; }
 }
-
-/* --- Progress bars: better mobile layout --- */
-
-/* Tablet and down: shrink name/pct so bar gets more room */
-@media (max-width: 768px){
-  .rbx-skill-name{ flex: 0 0 160px; }
-  .rbx-skill-pct { flex: 0 0 42px; }
-  .rbx-skills{ max-width: 96vw; }   /* let container breathe */
-}
-
-/* Small phones: stack to 2 rows so the bar is full width */
-@media (max-width: 480px){
+@media (max-width:480px){
   .rbx-skill{
-    display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns:1fr auto;
     grid-template-areas:
       "name pct"
       "bar  bar";
-    row-gap: 6px;
-    column-gap: 10px;
   }
-  .rbx-skill-name{ grid-area: name; min-width: 0; }
-  .rbx-skill-pct { grid-area: pct;  text-align: right; }
-  .rbx-bar       { grid-area: bar;  width: 100%; }
+  .rbx-skill-name{ grid-area:name; min-width:0; text-align:left; }
+  .rbx-skill-pct { grid-area:pct; }
+  .rbx-bar       { grid-area:bar; }
 }
 
-/* Ensure the bar can truly expand */
-.rbx-bar{ width: 100%; min-width: 0; }
-
-/* ===== Lean, sharp metrics + bars (replace previous block) ===== */
-:root{
-  --metric-label-size: clamp(0.68rem, 0.95vw, 0.84rem);
-  --skill-name-size:  clamp(0.72rem, 0.95vw, 0.88rem);
-  --pct-size:         clamp(0.68rem, 0.9vw, 0.82rem);
-  --bar-h:            4px;      /* razor thin */
-  --bar-gap:          6px;      /* tight vertical rhythm */
-  --track:            rgba(255,255,255,0.10);  /* subtle, not milky */
-  --track-edge:       rgba(255,255,255,0.22);  /* hairline edge */
-  --fill-start:       #66a7ff;  /* crisp blue */
-  --fill-end:         #2c74ff;  /* deeper blue */
-}
-
-/* 1) Under-number captions only (numbers stay as-is) */
-.rbx-metric .label,
-.rbx-metrics .label,
-.rbx-metric .caption,
-.rbx-metrics .caption{
-  font-size: var(--metric-label-size);
-  line-height: 1.2;
-  font-weight: 400;
-  opacity: 0.85;
-  margin-top: 2px;
-}
-
-/* 2) Skill/row titles (left of bars) */
-.rbx-skills .name,
-.rbx-bars .name,
-.rbx-skill-name,
-.rbx-skill .title{
-  font-size: var(--skill-name-size);
-  line-height: 1.2;
-  font-weight: 500;
-  letter-spacing: .2px;
-  opacity: 0.9;
-  margin: 0;               /* remove bloat */
-}
-
-/* 3) Stack: each bar row tighter */
-.rbx-bars,
-.rbx-skill-list{
-  display: grid;
-  row-gap: var(--bar-gap);
-}
-
-/* 4) Tracks — thin, with a razor edge and no glow */
-.rbx-bar-track,
-.rbx-bars .track{
-  position: relative;
-  height: var(--bar-h);
-  background: var(--track);
-  border-radius: 3px;                      /* sharper than pill */
-  box-shadow: inset 0 -0.5px 0 var(--track-edge); /* hairline bottom */
-  overflow: hidden;
-}
-
-/* 5) Fills — flat, fast, crisp */
-.rbx-bar-fill,
-.rbx-bars .fill{
-  height: 100%;
-  background: linear-gradient(90deg, var(--fill-start), var(--fill-end));
-  border-radius: inherit;
-  box-shadow: none;
-  transform: translateZ(0);
-  will-change: width;
-}
-
-/* 5a) Ultra-thin highlight line (adds 'sharpness' without bloom) */
-.rbx-bar-fill::after,
-.rbx-bars .fill::after{
-  content: "";
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  height: 1px;
-  background: linear-gradient(to right,
-              rgba(255,255,255,0.25),
-              rgba(255,255,255,0.15) 40%,
-              rgba(255,255,255,0.0));
-  pointer-events: none;
-}
-
-/* 6) Percent labels — compact, aligned */
-.rbx-bar .pct,
-.rbx-bars .pct,
-.rbx-bars .value{
-  font-size: var(--pct-size);
-  line-height: 1;
-  font-weight: 500;
-  opacity: 0.9;
-  margin-left: 8px;
-  white-space: nowrap;
-}
-
-/* 7) Optional: compress mobile a touch more */
-@media (max-width: 520px){
-  :root{
-    --metric-label-size: clamp(0.66rem, 3.2vw, 0.8rem);
-    --skill-name-size:  clamp(0.7rem,  3.4vw, 0.84rem);
-    --pct-size:         clamp(0.66rem, 3.0vw, 0.8rem);
-    --bar-h:            3.5px;
-    --bar-gap:          5px;
-  }
-}
