@@ -169,35 +169,4 @@ body.rb-intro-lock{ overflow:hidden; }
   color:#041024; border-color:transparent;
   box-shadow: 0 10px 26px rgba(80,150,255,.28);
 }
-.rb-btn:focus{ outline:2px solid rgba(120,170,255,.55); outline-offset:2px; }
 
-/* ===== Reveal animation ===== */
-.rb-intro.reveal{ animation: rb-openHole .9s ease-out forwards; }
-@keyframes rb-openHole{ from{ --rb-reveal:0% } to{ --rb-reveal:130% } }
-
-/* Hide glare when width is 0% */
-.rb-bar i[style*="width: 0%"]::after {
-  opacity: 0 !important;
-  animation: none !important;
-}
-
-/* --- HARD OFF: any pseudo-elements inside the loaders --- */
-.rb-loaders *::before,
-.rb-loaders *::after {
-  content: none !important;
-  display: none !important;
-  animation: none !important;
-}
-
-/* Keep caption clean too (no spark, no sheen) */
-.rb-tag::before,
-.rb-tag::after {
-  content: none !important;
-  display: none !important;
-  animation: none !important;
-}
-
-/* Ensure the bar fill shows without artifacts */
-.rb-bar i {
-  box-shadow: none;                 /* remove any concentrated glow */
-}
