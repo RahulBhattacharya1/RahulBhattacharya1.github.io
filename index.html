@@ -741,19 +741,16 @@ title: "Rahul's Portfolio"
 
 /* Diagonal broad sweep line (one pass every 2s) — separate layer on top */
 .rbx-bevel .rbx-sweep{
-  content: "";
-  position: absolute;
-  inset: -20%;                  /* oversized for soft edges */
-  border-radius: inherit;
-  pointer-events: none;
+  position: absolute; inset: -20%;
+  border-radius: inherit; pointer-events: none;
   background: linear-gradient(135deg,
     rgba(255,255,255,0) 45%,
     rgba(255,255,255,0.40) 50%,
     rgba(0,0,0,0.18)      55%,
     rgba(255,255,255,0)   60%
   );
-  filter: blur(1px);
-  opacity: 0.4;
+  filter: blur(2px);
+  opacity: .45;
   transform: translate(-140%, -140%) rotate(0.001deg);
   animation: rbxLineAcross 2s linear infinite;
 }
