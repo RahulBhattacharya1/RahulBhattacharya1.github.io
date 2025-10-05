@@ -93,9 +93,8 @@
 
 @media (max-width:480px){
   .rbx-skills{
-    width:75vw;       /* occupy 75% of screen width */
-    max-width:75vw;   /* cap it */
-    margin:0 auto;    /* center the block horizontally */
+    width:50vw;       /* occupy 50% of screen width */
+    max-width:50vw;   /* cap it */
   }
 }
 
