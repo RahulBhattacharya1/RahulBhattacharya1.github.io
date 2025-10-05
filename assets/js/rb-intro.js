@@ -261,6 +261,7 @@
     rbxFillBars();
     rbxRotateCaption();
     rbxOverlayControl();
+    rbxRotateMetrics();
   });
 })();
 
