@@ -146,19 +146,6 @@ body.rb-intro-lock{ overflow:hidden; }
   100% { transform: translateX(140%) rotate(10deg); opacity:0; }
 }
 
-.rb-pct{ font-variant-numeric: tabular-nums; color:#e6eeff; }
-
-/* ===== Actions ===== */
-.rb-actions{
-  position:absolute; left:50%;
-  top:calc(44% + 14px + 5*42px + 32px);
-  transform:translateX(-50%);
-  width:min(760px, 88vw);
-  display:flex; gap:12px; justify-content:center; align-items:center;
-  opacity:0; pointer-events:none; transition: opacity .4s ease;
-}
-
-.rb-actions.show{ opacity:1; pointer-events:auto; }
 
 .rb-btn{
   appearance:none; border:1px solid rgba(160,190,255,.28);
