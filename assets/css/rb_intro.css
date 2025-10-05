@@ -21,7 +21,7 @@
 .rbx-intro-wrap{ width:min(1080px,100%); text-align:center; color:var(--rbx-ink); }
 
 /* Scope to the intro area so other titles aren't affected */
-#rb-intro .rbx-title {
+#rbx-intro-overlay .rbx-title {
   margin: 0;
   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
   font-size: clamp(3rem, 6vw, 4.5rem);
@@ -57,7 +57,7 @@
 }
 
 /* Underline (the sweeping streak) */
-#rb-intro .rbx-title::after {
+#rbx-intro-overlay .rbx-title::after {
   content: "";
   position: absolute;
   left: 0;
