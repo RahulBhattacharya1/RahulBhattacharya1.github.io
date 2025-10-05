@@ -1,17 +1,23 @@
 // assets/js/rb-intro.js
-(function(){
-  var intro = document.getElementById('rbIntro');
+(function () {
+  "use strict";
+
+  var intro   = document.getElementById("rbIntro");
   if (!intro) return;
 
-  // Always show on page load
-  document.body.classList.add('rb-intro-lock');
-  intro.classList.add('show');
+  // Always show on load
+  document.body.classList.add("rb-intro-lock");
+  intro.classList.add("show");
 
-  var rows    = Array.prototype.slice.call(intro.querySelectorAll('.rb-row'));
-  var actions = document.getElementById('rbActions');
-  var btnGo   = document.getElementById('rbContinueBtn');
+  var rows    = Array.prototype.slice.call(intro.querySelectorAll(".rb-row"));
+  var actions = document.getElementById("rbActions");
+  var btnGo   = document.getElementById("rbContinueBtn");
+  var tagEl   = document.getElementById("rbTag");
 
-/* ==== Tagline variations: rotate all 5 within ~6s with cinematic effect ==== */
+  /* ================= TAGLINE (no overlay effects) =================
+     - Works with 0 or 1+ lines
+     - Simple JS fade; no CSS pseudo-elements are used
+  ================================================================== */
 var TAGLINES = [
   "Accelerated 120+ Databricks notebooks delivering 40% faster data pipelines",
   "Optimized Azure Data Factory jobs saving 1,200+ compute hours annually",
@@ -220,89 +226,112 @@ var TAGLINES = [
   "Delivered predictive dashboards increasing stakeholder trust by 35%"
 ];
 
-var tagEl = document.getElementById('rbTag');
+  // prepare a simple fade transition (no stars/sheen)
+  if (tagEl) {
+    tagEl.style.transition = "opacity 380ms ease";
+    tagEl.style.opacity = "0";
+  }
 
-function showOneLine(text, runtimeMs){
-  return new Promise(function(resolve){
-    if (!tagEl) return resolve();
-    tagEl.textContent = text || ""; // handle empty text
+  function setTagline(text) {
+    if (!tagEl) return;
+    // fade out
+    tagEl.style.opacity = "0";
+    // swap text after a short delay, then fade in
+    setTimeout(function () {
+      tagEl.textContent = text || "";
+      tagEl.style.opacity = "1";
+    }, 120);
+  }
 
-    // retrigger CSS animation (cinematic effect) only when we have text
-    if (text && text.length) {
-      tagEl.classList.remove('showline');
-      void tagEl.getBoundingClientRect(); // robust reflow
-      tagEl.classList.add('showline');
-      setTimeout(resolve, runtimeMs);
-    } else {
-      // no text to animate
-      tagEl.classList.remove('showline');
-      resolve();
+  async function playTaglines() {
+    if (!tagEl) return;
+
+    if (!TAGLINES || TAGLINES.length === 0) {
+      // nothing to show
+      tagEl.textContent = "";
+      tagEl.style.opacity = "1";
+      return;
     }
-  });
-}
-
-async function playAllLines(){
-  var per = 1100; // must match --dur in CSS if you keep the effect
-  if (!TAGLINES || TAGLINES.length === 0){
-    // no taglines; clear and skip
-    tagEl && (tagEl.textContent = "");
-    return;
+    if (TAGLINES.length === 1) {
+      setTagline(TAGLINES[0]);
+      return;
+    }
+    // 2+ lines: show each once; adjust timing if you want
+    var per = 1100; // ~1.1s per line
+    for (var i = 0; i < TAGLINES.length; i++) {
+      setTagline(TAGLINES[i]);
+      // wait for the line to display before moving to next
+      // (per includes fade timings above)
+      // eslint-disable-next-line no-loop-func
+      await new Promise(function (r) { setTimeout(r, per); });
+    }
+    // leave the first line visible at the end
+    setTagline(TAGLINES[0]);
   }
-  if (TAGLINES.length === 1){
-    // one tagline; show once and keep
-    await showOneLine(TAGLINES[0], per);
-    tagEl && tagEl.classList.remove('showline');
-    return;
-  }
-  // 2+ taglines; play once through then leave the first one
-  for (var i = 0; i < TAGLINES.length; i++){
-    await showOneLine(TAGLINES[i], per);
-  }
-  tagEl && tagEl.classList.remove('showline');
-  tagEl && (tagEl.textContent = TAGLINES[0]);
-}
-playAllLines();
 
+  /* ================= PROGRESS BARS =================
+     - JS animates width from 0 -> target%
+     - Ensure CSS positions the fill with left/top/bottom + width
+       (NOT with inset:0) so the width animation renders correctly.
+  =================================================== */
+  function animateBar(row) {
+    return new Promise(function (resolve) {
+      var pctEl  = row.querySelector(".rb-pct");
+      var fill   = row.querySelector(".rb-bar i");
+      var target = Number(row.getAttribute("data-target") || 100);
+      var dur    = 900;
+      var start  = performance.now();
 
-  /* ============================================ */
+      // small visual kick so "0%" bars don't look empty if glare is disabled
+      if (fill && !fill.style.width) fill.style.width = "0%";
 
-  function animateBar(row){
-    return new Promise(function(resolve){
-      var pctEl = row.querySelector('.rb-pct');
-      var fill  = row.querySelector('.rb-bar i');
-      var target= Number(row.getAttribute('data-target')||100);
-      var dur=900; var start=performance.now();
-      function ease(t){ return t<.5?2*t*t:-1+(4-2*t)*t; }
-      function frame(now){
-        var p=Math.min(1,(now-start)/dur);
-        var val=Math.round(target*ease(p));
-        fill.style.width=val+'%'; pctEl.textContent=val+'%';
-        if(p<1) requestAnimationFrame(frame);
-        else{ fill.style.width=target+'%'; pctEl.textContent=target+'%'; resolve(); }
+      function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+
+      function frame(now) {
+        var p   = Math.min(1, (now - start) / dur);
+        var val = Math.round(target * ease(p));
+        if (fill) fill.style.width = val + "%";
+        if (pctEl) pctEl.textContent = val + "%";
+        if (p < 1) requestAnimationFrame(frame);
+        else {
+          if (fill) fill.style.width = target + "%";
+          if (pctEl) pctEl.textContent = target + "%";
+          resolve();
+        }
       }
       requestAnimationFrame(frame);
     });
   }
 
-  (async function(){
-    for (var i=0;i<rows.length;i++){
+  (async function init() {
+    // captions first (simple fade, no overlays)
+    playTaglines();
+
+    // animate bars sequentially
+    for (var i = 0; i < rows.length; i++) {
+      // tiny stagger so they feel responsive
       await animateBar(rows[i]);
-      await new Promise(function(r){ setTimeout(r,150); });
+      await new Promise(function (r) { setTimeout(r, 150); });
     }
-    actions.classList.add('show');
+
+    // show actions when bars are done
+    if (actions) actions.classList.add("show");
   })();
 
-  function dismiss(){
-    intro.classList.add('reveal');
-    setTimeout(function(){
-      intro.classList.add('exit');
-      setTimeout(function(){
-        intro.parentNode && intro.parentNode.removeChild(intro);
-        document.body.classList.remove('rb-intro-lock');
+  /* ================= DISMISS ================= */
+  function dismiss() {
+    intro.classList.add("reveal");
+    setTimeout(function () {
+      intro.classList.add("exit");
+      setTimeout(function () {
+        if (intro.parentNode) intro.parentNode.removeChild(intro);
+        document.body.classList.remove("rb-intro-lock");
       }, 900);
     }, 900);
   }
 
-  btnGo && btnGo.addEventListener('click', dismiss);
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') dismiss(); }, {once:true});
+  if (btnGo) btnGo.addEventListener("click", dismiss);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") dismiss();
+  }, { once: true });
 })();
