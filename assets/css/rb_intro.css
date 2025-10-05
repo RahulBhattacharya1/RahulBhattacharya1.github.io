@@ -143,68 +143,63 @@
 }
 
 /* === Premium Siri-style animated gradient for metric numbers === */
+/* Base fallback (never shows colored blocks) */
 .rbx-metric-val{
-  position: relative;
-  font-weight: 800;               /* you already use this */
+  position: relative;           /* needed for ::after glint */
+  display: inline;              /* avoid boxy gradient blocks */
+  color: #69c0ff;               /* fallback ink if clipping unsupported */
+  font-weight: 800;
   letter-spacing: .5px;
-
-  /* gradient-as-text */
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text;
-  -webkit-background-clip: text;
-
-  /* Fallback: animated linear gradient (works everywhere) */
-  background-image: linear-gradient(
-    90deg,
-    #60a5fa,  /* blue */
-    #22d3ee,  /* cyan */
-    #06b6d4,  /* teal */
-    #a78bfa,  /* purple */
-    #ec4899,  /* pink */
-    #60a5fa   /* loop */
-  );
-  background-size: 300% 100%;
-  animation: rbx-aurora-slide 6s ease-in-out infinite;
-
-  /* Soft premium aura (very subtle) */
-  text-shadow:
-    0 0 10px rgba(96,165,250,0.20),
-    0 0 18px rgba(167,139,250,0.18);
+  padding: 0; margin: 0;        /* ensure no height/width artifacts */
+  background: none;             /* neutralize any inherited background */
+  text-shadow: none;
 }
 
-/* Optional: a thin moving highlight across the numbers (sparkle) */
-.rbx-metric-val::after{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.28) 50%, transparent 100%);
-  background-size: 200% 100%;
-  mix-blend-mode: screen;
-  pointer-events: none;
-  animation: rbx-aurora-glint 3.5s linear infinite;
-}
-
-/* Fallback animations */
-@keyframes rbx-aurora-slide{
-  0%   { background-position:   0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position:   0% 50%; }
-}
-@keyframes rbx-aurora-glint{
-  0%   { background-position: -100% 0; opacity: 0; }
-  10%  { opacity: .65; }
-  60%  { background-position: 150% 0; opacity: .65; }
-  100% { opacity: 0; }
-}
-
-/* Upgrade path (if the browser supports conic gradients with animated custom props) */
-@supports (background: conic-gradient(from 0deg, #000, #111)) {
-  @property --rbxA { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+/* Upgrade when text clipping is supported (Chrome/Safari/Firefox) */
+@supports ( (-webkit-background-clip: text) or (background-clip: text) ) {
   .rbx-metric-val{
-    background: conic-gradient(from var(--rbxA),
-      #60a5fa, #22d3ee, #06b6d4, #a78bfa, #ec4899, #60a5fa);
-    background-size: 100% 100%;              /* conic fills text */
-    animation: rbx-aurora-spin 7.5s linear infinite;
+    display: inline-block;                  /* paint background on the text box */
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* Siri aurora sweep */
+    background-image: linear-gradient(
+      90deg,
+      #60a5fa, #22d3ee, #06b6d4,
+      #a78bfa, #ec4899, #60a5fa
+    );
+    background-size: 300% 100%;
+    background-repeat: no-repeat;
+    animation: rbx-aurora-slide 6s ease-in-out infinite;
+
+    /* very soft aura */
+    text-shadow:
+      0 0 10px rgba(96,165,250,0.20),
+      0 0 18px rgba(167,139,250,0.18);
   }
-  @keyframes rbx-aurora-spin { to { --rbxA: 360deg; } }
+
+  /* subtle moving glint across the digits */
+  .rbx-metric-val::after{
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.22) 50%, transparent 100%);
+    background-size: 200% 100%;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    animation: rbx-aurora-glint 3.5s linear infinite;
+  }
+
+  @keyframes rbx-aurora-slide{
+    0%   { background-position:   0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position:   0% 50%; }
+  }
+  @keyframes rbx-aurora-glint{
+    0%   { background-position: -100% 0; opacity: 0; }
+    10%  { opacity: .6; }
+    60%  { background-position: 150% 0; opacity: .6; }
+    100% { opacity: 0; }
+  }
 }
