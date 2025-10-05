@@ -25,10 +25,17 @@
   font-size:clamp(2rem,4vw,3rem);
   font-weight:800; letter-spacing:.3px;
   /*color:#69c0ff;*/
+
   color: transparent !important;
-  background: inherit; /* pull parent background through */
-  -webkit-background-clip: text;
+  display: inline-block;                 /* ensure the background paints on the element */
+  -webkit-text-fill-color: transparent;  /* required for Safari/Chrome */
+  -webkit-background-clip: text;         /* clip bg to glyphs */
   background-clip: text;
+  /* Give the element an actual background to clip.
+     If your banner already has a gradient/image, RE-DECLARE it here. */
+  background-image: var(--banner-bg, linear-gradient(135deg,#e6f0ff,#dff7ff));
+  background-size: cover;
+  background-position: center;
 }
 
 /* Rotating caption */
