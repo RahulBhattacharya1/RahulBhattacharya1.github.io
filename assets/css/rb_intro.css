@@ -9,7 +9,7 @@
   --metric-label-size: clamp(0.68rem, 0.95vw, 0.84rem);
   --skill-name-size:  clamp(0.72rem, 0.95vw, 0.88rem);
   --pct-size:         clamp(0.68rem, 0.9vw, 0.82rem);
-  --bar-h:            4px;
+  --bar-h:            5px;
   --bar-gap:          6px;
   --track:            rgba(255,255,255,0.10);
   --track-edge:       rgba(255,255,255,0.22);
