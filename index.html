@@ -612,7 +612,10 @@ title: "Rahul's Portfolio"
   color: #6b7280; /* muted gray */
   margin-left: 0px;
   align-items: center;
-  line-height: 1;
+
+  line-height: 1;        /* prevents dropping */
+  display: inline-block; /* ensures text aligns with icon baseline */
+  vertical-align: middle;/* keep number centered with icon */  
 }
 
 /* Arrow outline by default */
