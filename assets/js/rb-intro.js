@@ -1,23 +1,4 @@
-// assets/js/rb-intro.js
-(function () {
-  "use strict";
-
-  var intro   = document.getElementById("rbIntro");
-  if (!intro) return;
-
-  // Always show on load
-  document.body.classList.add("rb-intro-lock");
-  intro.classList.add("show");
-
-  var rows    = Array.prototype.slice.call(intro.querySelectorAll(".rb-row"));
-  var actions = document.getElementById("rbActions");
-  var btnGo   = document.getElementById("rbContinueBtn");
-  var tagEl   = document.getElementById("rbTag");
-
-  /* ================= TAGLINE (no overlay effects) =================
-     - Works with 0 or 1+ lines
-     - Simple JS fade; no CSS pseudo-elements are used
-  ================================================================== */
+// 200 rotating taglines (your list exactly as given)
 var TAGLINES = [
   "Accelerated 120+ Databricks notebooks delivering 40% faster data pipelines",
   "Optimized Azure Data Factory jobs saving 1,200+ compute hours annually",
@@ -226,112 +207,52 @@ var TAGLINES = [
   "Delivered predictive dashboards increasing stakeholder trust by 35%"
 ];
 
-  // prepare a simple fade transition (no stars/sheen)
-  if (tagEl) {
-    tagEl.style.transition = "opacity 380ms ease";
-    tagEl.style.opacity = "0";
-  }
+// Rotator options
+var RB_ROTATOR_INTERVAL_MS = 2600;   // time each line is visible
+var RB_ROTATOR_FADE_MS = 450;        // must match CSS transition ~ .45s
 
-  function setTagline(text) {
-    if (!tagEl) return;
+function startTaglineRotation(){
+  var el = document.getElementById("rb-rotating-tagline");
+  if(!el || !Array.isArray(TAGLINES) || TAGLINES.length === 0) return;
+
+  // Start at a deterministic but non-zero index for freshness
+  var i = (TAGLINES.length > 1) ? 1 : 0;
+
+  function showNext(){
     // fade out
-    tagEl.style.opacity = "0";
-    // swap text after a short delay, then fade in
-    setTimeout(function () {
-      tagEl.textContent = text || "";
-      tagEl.style.opacity = "1";
-    }, 120);
+    el.classList.add("rb-fade-out");
+    // swap text after fade-out completes
+    setTimeout(function(){
+      el.textContent = TAGLINES[i];
+      el.classList.remove("rb-fade-out");
+      el.classList.add("rb-fade-in");
+
+      // remove rb-fade-in after paint so the next cycle can reuse it
+      setTimeout(function(){ el.classList.remove("rb-fade-in"); }, RB_ROTATOR_FADE_MS + 20);
+
+      i = (i + 1) % TAGLINES.length;
+    }, RB_ROTATOR_FADE_MS);
   }
 
-  async function playTaglines() {
-    if (!tagEl) return;
+  // advance every interval
+  var timer = setInterval(showNext, RB_ROTATOR_INTERVAL_MS);
 
-    if (!TAGLINES || TAGLINES.length === 0) {
-      // nothing to show
-      tagEl.textContent = "";
-      tagEl.style.opacity = "1";
-      return;
-    }
-    if (TAGLINES.length === 1) {
-      setTagline(TAGLINES[0]);
-      return;
-    }
-    // 2+ lines: show each once; adjust timing if you want
-    var per = 1100; // ~1.1s per line
-    for (var i = 0; i < TAGLINES.length; i++) {
-      setTagline(TAGLINES[i]);
-      // wait for the line to display before moving to next
-      // (per includes fade timings above)
-      // eslint-disable-next-line no-loop-func
-      await new Promise(function (r) { setTimeout(r, per); });
-    }
-    // leave the first line visible at the end
-    setTagline(TAGLINES[0]);
-  }
+  // pause on hover/focus for readability
+  el.addEventListener("mouseenter", function(){ clearInterval(timer); });
+  el.addEventListener("mouseleave", function(){ timer = setInterval(showNext, RB_ROTATOR_INTERVAL_MS); });
+  el.addEventListener("focus", function(){ clearInterval(timer); }, true);
+  el.addEventListener("blur", function(){ timer = setInterval(showNext, RB_ROTATOR_INTERVAL_MS); }, true);
+}
 
-  /* ================= PROGRESS BARS =================
-     - JS animates width from 0 -> target%
-     - Ensure CSS positions the fill with left/top/bottom + width
-       (NOT with inset:0) so the width animation renders correctly.
-  =================================================== */
-  function animateBar(row) {
-    return new Promise(function (resolve) {
-      var pctEl  = row.querySelector(".rb-pct");
-      var fill   = row.querySelector(".rb-bar i");
-      var target = Number(row.getAttribute("data-target") || 100);
-      var dur    = 900;
-      var start  = performance.now();
+// Animate skill bars on load
+function fillSkillBars(){
+  document.querySelectorAll(".skill .bar div").forEach(function(bar){
+    var v = bar.getAttribute("data-value");
+    if(v) bar.style.width = v + "%";
+  });
+}
 
-      // small visual kick so "0%" bars don't look empty if glare is disabled
-      if (fill && !fill.style.width) fill.style.width = "0%";
-
-      function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
-
-      function frame(now) {
-        var p   = Math.min(1, (now - start) / dur);
-        var val = Math.round(target * ease(p));
-        if (fill) fill.style.width = val + "%";
-        if (pctEl) pctEl.textContent = val + "%";
-        if (p < 1) requestAnimationFrame(frame);
-        else {
-          if (fill) fill.style.width = target + "%";
-          if (pctEl) pctEl.textContent = target + "%";
-          resolve();
-        }
-      }
-      requestAnimationFrame(frame);
-    });
-  }
-
-  (async function init() {
-    // captions first (simple fade, no overlays)
-    playTaglines();
-
-    // animate bars sequentially
-    for (var i = 0; i < rows.length; i++) {
-      // tiny stagger so they feel responsive
-      await animateBar(rows[i]);
-      await new Promise(function (r) { setTimeout(r, 150); });
-    }
-
-    // show actions when bars are done
-    if (actions) actions.classList.add("show");
-  })();
-
-  /* ================= DISMISS ================= */
-  function dismiss() {
-    intro.classList.add("reveal");
-    setTimeout(function () {
-      intro.classList.add("exit");
-      setTimeout(function () {
-        if (intro.parentNode) intro.parentNode.removeChild(intro);
-        document.body.classList.remove("rb-intro-lock");
-      }, 900);
-    }, 900);
-  }
-
-  if (btnGo) btnGo.addEventListener("click", dismiss);
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") dismiss();
-  }, { once: true });
-})();
+document.addEventListener("DOMContentLoaded", function(){
+  fillSkillBars();
+  startTaglineRotation();
+});
