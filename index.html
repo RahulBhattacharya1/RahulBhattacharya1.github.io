@@ -135,7 +135,7 @@ title: "Rahul's Portfolio"
           <span class="tab-btn active" style="pointer-events:none; 
             cursor:default; background:#D2E2FD; color:#01068B;
             letter-spacing: 0.15em;">
-            <span class="page-num">{{ paginator.page }}</span>/<span class="page-num">{{ paginator.total_pages }}</span>
+            <span style="letter-spacing: normal">{{ paginator.page }}</span>/<span style="letter-spacing: normal">{{ paginator.total_pages }}</span>
           </span>
       
           <a class="tab-btn next{% unless paginator.next_page %} is-disabled{% endunless %}"
