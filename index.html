@@ -25,6 +25,7 @@ title: "Rahul's Portfolio"
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
             <div class="rbx-bevel rbx-bevel--raised">
+              <span class="rbx-sweep"></span>
               <picture>
               {% if post.thumbnail_mobile %}
                 <source srcset="{{ post.thumbnail_mobile | relative_url }}" media="(max-width: 767px)">
@@ -150,6 +151,7 @@ title: "Rahul's Portfolio"
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
             <div class="rbx-bevel rbx-bevel--raised">
+              <span class="rbx-sweep"></span>
               <picture>
               {% if post.thumbnail_mobile %}
                 <source srcset="{{ post.thumbnail_mobile | relative_url }}" media="(max-width: 767px)">
