@@ -174,3 +174,9 @@ body.rb-intro-lock{ overflow:hidden; }
 /* ===== Reveal animation ===== */
 .rb-intro.reveal{ animation: rb-openHole .9s ease-out forwards; }
 @keyframes rb-openHole{ from{ --rb-reveal:0% } to{ --rb-reveal:130% } }
+
+/* Hide glare when width is 0% */
+.rb-bar i[style*="width: 0%"]::after {
+  opacity: 0 !important;
+  animation: none !important;
+}
