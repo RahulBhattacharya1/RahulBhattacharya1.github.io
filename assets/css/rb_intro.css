@@ -304,4 +304,32 @@
   box-shadow: none;                  /* remove glow/bloom */
   /* keep your existing gradient/color; if none, a soft blue: */
   background: linear-gradient(90deg, #6aa9ff, #2f7dff);
-  opaci
+  opacity: var(--bar-fill-alpha);
+}
+
+/* % labels on the right, smaller */
+.rbx-bar .pct,
+.rbx-bars .pct,
+.rbx-bars .value {
+  font-size: var(--pct-size);
+  line-height: 1;
+  opacity: 0.9;
+}
+
+/* 4) Vertical rhythm between rows of bars */
+.rbx-bars,
+.rbx-skill-list {
+  display: grid;
+  row-gap: var(--bar-gap);
+}
+
+/* Optional: tighten mobile a touch more */
+@media (max-width: 480px){
+  :root{
+    --metric-label-size: clamp(0.78rem, 3.5vw, 0.9rem);
+    --skill-name-size:  clamp(0.82rem, 3.8vw, 0.95rem);
+    --pct-size:         clamp(0.78rem, 3.2vw, 0.9rem);
+    --bar-h:            7px;
+    --bar-gap:          8px;
+  }
+}
