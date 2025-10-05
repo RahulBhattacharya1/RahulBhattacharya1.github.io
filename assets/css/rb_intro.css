@@ -91,6 +91,14 @@
 .rbx-skill-name{ font-size:var(--skill-name-size); color:#dfe6f2; margin:0; text-align:right; white-space:nowrap; }
 .rbx-skill-pct{ font-size:var(--pct-size); color:#a8b3c7; text-align:right; white-space:nowrap; }
 
+@media (max-width:480px){
+  .rbx-skills{
+    width:75vw;       /* occupy 75% of screen width */
+    max-width:75vw;   /* cap it */
+    margin:0 auto;    /* center the block horizontally */
+  }
+}
+
 .rbx-bar{ position:relative; width:100%; min-width:0; height:var(--bar-h);
   background:var(--track); border-radius:3px; overflow:hidden;
   box-shadow:inset 0 -0.5px 0 var(--track-edge);
