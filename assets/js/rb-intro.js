@@ -218,20 +218,38 @@
     });
   }
 
+// Regex to bold numbers with %, K/M/B, +, or unit words
+const RBX_CAP_UNIT_WORDS =
+  '(?:hours?|hrs?|hr|minutes?|mins?|min|days?|day|sec(?:onds?)?|secs?|transactions?|txns?|records?|rows?|reports?|models?|pipelines?|dashboards?|stores?|users?|hospitals?|accounts?)';
+
+const RBX_CAP_REGEX = new RegExp(
+  [
+    String.raw`\b(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?\s?(?:%|[kmbKMB])\+?\b`,   // 63%, 25M+, 300k
+    String.raw`\b(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?\+?\s?` + RBX_CAP_UNIT_WORDS + String.raw`\b` // 5,000+ hours, 320 reports
+  ].join('|'),
+  'g'
+);
+
+function rbxFormatCaption(text){
+  return text.replace(RBX_CAP_REGEX, m => `<strong>${m}</strong>`);
+}
+
   function rbxRotateCaption(){
-    const el = document.getElementById("rbx-rotating-caption");
-    if(!el || RBX_CAPTIONS.length === 0) return;
-    let i = 0;
-    function next(){
-      el.classList.add("rbx-cap-out");
-      setTimeout(()=>{
-        el.textContent = RBX_CAPTIONS[i];
-        el.classList.remove("rbx-cap-out");
-        el.classList.add("rbx-cap-in");
-        setTimeout(()=> el.classList.remove("rbx-cap-in"), RBX_FADE_MS+20);
-        i = (i + 1) % RBX_CAPTIONS.length;
-      }, RBX_FADE_MS);
-    }
+  const el = document.getElementById("rbx-rotating-caption");
+  if(!el || RBX_CAPTIONS.length === 0) return;
+  let i = 0;
+  function next(){
+    el.classList.add("rbx-cap-out");
+    setTimeout(()=>{
+      el.innerHTML = rbxFormatCaption(RBX_CAPTIONS[i]);  // <<< changed here
+      el.classList.remove("rbx-cap-out");
+      el.classList.add("rbx-cap-in");
+      setTimeout(()=> el.classList.remove("rbx-cap-in"), RBX_FADE_MS+20);
+      i = (i + 1) % RBX_CAPTIONS.length;
+    }, RBX_FADE_MS);
+  }
+  setInterval(next, RBX_ROTATE_MS || 2600);
+}
     let timer = setInterval(next, RBX_ROTATE_MS);
     el.addEventListener("mouseenter", ()=> clearInterval(timer));
     el.addEventListener("mouseleave", ()=> timer = setInterval(next, RBX_ROTATE_MS));
