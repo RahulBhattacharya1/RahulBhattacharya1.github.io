@@ -226,29 +226,10 @@ var TAGLINES = [
   "Delivered predictive dashboards increasing stakeholder trust by 35%"
 ];
 
-  // prepare a simple fade transition (no stars/sheen)
-  if (tagEl) {
-    tagEl.style.transition = "opacity 380ms ease";
-    tagEl.style.opacity = "0";
-  }
-
-  function setTagline(text) {
-    if (!tagEl) return;
-    // fade out
-    tagEl.style.opacity = "0";
-    // swap text after a short delay, then fade in
-    setTimeout(function () {
-      tagEl.textContent = text || "";
-      tagEl.style.opacity = "1";
-    }, 120);
-  }
 
 
 
 
 
-  if (btnGo) btnGo.addEventListener("click", dismiss);
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") dismiss();
-  }, { once: true });
+
 })();
