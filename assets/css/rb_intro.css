@@ -8,7 +8,7 @@
 /* Fullscreen overlay */
 .rbx-intro-overlay{
   position:fixed; inset:0; z-index:9999;
-  background: rgba(10,15,28,0.8);  /* 92% opaque */
+  background: rgba(10,15,28,0.85);  /* 92% opaque */
   backdrop-filter: blur(6px);       /* optional: soft blur for premium feel */
   display:flex; align-items:center; justify-content:center;
   padding:40px 16px;
@@ -93,11 +93,11 @@
 }
 
 /* Staggered fill animations */
-.rbx-skill:nth-child(1) .rbx-bar-fill { transition: width 2.2s ease 0s; }
-.rbx-skill:nth-child(2) .rbx-bar-fill { transition: width 2.4s ease 0.4s; }
-.rbx-skill:nth-child(3) .rbx-bar-fill { transition: width 2.6s ease 0.8s; }
+.rbx-skill:nth-child(1) .rbx-bar-fill { transition: width 4s ease 0s; }
+.rbx-skill:nth-child(2) .rbx-bar-fill { transition: width 3.6s ease 0.4s; }
+.rbx-skill:nth-child(3) .rbx-bar-fill { transition: width 3.2s ease 0.8s; }
 .rbx-skill:nth-child(4) .rbx-bar-fill { transition: width 2.8s ease 1.2s; }
-.rbx-skill:nth-child(5) .rbx-bar-fill { transition: width 3.0s ease 1.6s; }
+.rbx-skill:nth-child(5) .rbx-bar-fill { transition: width 2.4s ease 1.6s; }
 
 /* Shimmer highlight sweeping across only the first 70% with no flicker */
 .rbx-bar-fill::after{
