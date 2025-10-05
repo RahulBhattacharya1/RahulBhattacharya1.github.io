@@ -242,94 +242,106 @@
 /* Ensure the bar can truly expand */
 .rbx-bar{ width: 100%; min-width: 0; }
 
-/* ===== Compact metrics & bars (non-destructive overrides) ===== */
+/* ===== Lean, sharp metrics + bars (replace previous block) ===== */
 :root{
-  /* Tunables */
-  --metric-label-size: clamp(0.8rem, 1.2vw, 0.95rem);
-  --skill-name-size:  clamp(0.85rem, 1.3vw, 1rem);
-  --pct-size:         clamp(0.8rem, 1.1vw, 0.95rem);
-  --bar-h:            8px;                 /* was chunky; slimmer */
-  --bar-radius:       999px;               /* fully pill */
-  --bar-gap:          10px;                /* spacing between rows */
-  --bar-track-alpha:  0.14;                /* lighter track */
-  --bar-fill-alpha:   0.95;                /* reduce glow */
+  --metric-label-size: clamp(0.68rem, 0.95vw, 0.84rem);
+  --skill-name-size:  clamp(0.72rem, 0.95vw, 0.88rem);
+  --pct-size:         clamp(0.68rem, 0.9vw, 0.82rem);
+  --bar-h:            4px;      /* razor thin */
+  --bar-gap:          6px;      /* tight vertical rhythm */
+  --track:            rgba(255,255,255,0.10);  /* subtle, not milky */
+  --track-edge:       rgba(255,255,255,0.22);  /* hairline edge */
+  --fill-start:       #66a7ff;  /* crisp blue */
+  --fill-end:         #2c74ff;  /* deeper blue */
 }
 
-/* 1) Metrics: numbers stay; labels smaller */
+/* 1) Under-number captions only (numbers stay as-is) */
 .rbx-metric .label,
 .rbx-metrics .label,
 .rbx-metric .caption,
-.rbx-metrics .caption {
+.rbx-metrics .caption{
   font-size: var(--metric-label-size);
-  line-height: 1.25;
-  opacity: 0.9;
-  margin-top: 4px;
+  line-height: 1.2;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 2px;
 }
 
-/* 2) Progress-bucket titles on the left (e.g., "AI Model Tuning") */
+/* 2) Skill/row titles (left of bars) */
 .rbx-skills .name,
 .rbx-bars .name,
 .rbx-skill-name,
-.rbx-skill .title {
+.rbx-skill .title{
   font-size: var(--skill-name-size);
-  line-height: 1.25;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: .2px;
   opacity: 0.9;
+  margin: 0;               /* remove bloat */
 }
 
-/* 3) Bars themselves — slimmer, cleaner, less glow */
-.rbx-bar,
-.rbx-bars .bar {
-  display: grid;
-  grid-template-columns: 1fr auto;   /* track + optional % label on right */
-  align-items: center;
-  gap: 8px;
-  margin: 0;                         /* remove extra vertical bloat */
-}
-
-.rbx-bar-track,
-.rbx-bars .track {
-  position: relative;
-  width: 100%;
-  height: var(--bar-h);
-  border-radius: var(--bar-radius);
-  background: rgba(255,255,255,var(--bar-track-alpha));  /* subtler track */
-  overflow: hidden;
-  box-shadow: none;                  /* kill heavy inner/outer shadows */
-}
-
-.rbx-bar-fill,
-.rbx-bars .fill {
-  height: 100%;
-  border-radius: inherit;
-  box-shadow: none;                  /* remove glow/bloom */
-  /* keep your existing gradient/color; if none, a soft blue: */
-  background: linear-gradient(90deg, #6aa9ff, #2f7dff);
-  opacity: var(--bar-fill-alpha);
-}
-
-/* % labels on the right, smaller */
-.rbx-bar .pct,
-.rbx-bars .pct,
-.rbx-bars .value {
-  font-size: var(--pct-size);
-  line-height: 1;
-  opacity: 0.9;
-}
-
-/* 4) Vertical rhythm between rows of bars */
+/* 3) Stack: each bar row tighter */
 .rbx-bars,
-.rbx-skill-list {
+.rbx-skill-list{
   display: grid;
   row-gap: var(--bar-gap);
 }
 
-/* Optional: tighten mobile a touch more */
-@media (max-width: 480px){
+/* 4) Tracks — thin, with a razor edge and no glow */
+.rbx-bar-track,
+.rbx-bars .track{
+  position: relative;
+  height: var(--bar-h);
+  background: var(--track);
+  border-radius: 3px;                      /* sharper than pill */
+  box-shadow: inset 0 -0.5px 0 var(--track-edge); /* hairline bottom */
+  overflow: hidden;
+}
+
+/* 5) Fills — flat, fast, crisp */
+.rbx-bar-fill,
+.rbx-bars .fill{
+  height: 100%;
+  background: linear-gradient(90deg, var(--fill-start), var(--fill-end));
+  border-radius: inherit;
+  box-shadow: none;
+  transform: translateZ(0);
+  will-change: width;
+}
+
+/* 5a) Ultra-thin highlight line (adds 'sharpness' without bloom) */
+.rbx-bar-fill::after,
+.rbx-bars .fill::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 1px;
+  background: linear-gradient(to right,
+              rgba(255,255,255,0.55),
+              rgba(255,255,255,0.15) 40%,
+              rgba(255,255,255,0.0));
+  pointer-events: none;
+}
+
+/* 6) Percent labels — compact, aligned */
+.rbx-bar .pct,
+.rbx-bars .pct,
+.rbx-bars .value{
+  font-size: var(--pct-size);
+  line-height: 1;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+/* 7) Optional: compress mobile a touch more */
+@media (max-width: 520px){
   :root{
-    --metric-label-size: clamp(0.78rem, 3.5vw, 0.9rem);
-    --skill-name-size:  clamp(0.82rem, 3.8vw, 0.95rem);
-    --pct-size:         clamp(0.78rem, 3.2vw, 0.9rem);
-    --bar-h:            7px;
-    --bar-gap:          8px;
+    --metric-label-size: clamp(0.66rem, 3.2vw, 0.8rem);
+    --skill-name-size:  clamp(0.7rem,  3.4vw, 0.84rem);
+    --pct-size:         clamp(0.66rem, 3.0vw, 0.8rem);
+    --bar-h:            3.5px;
+    --bar-gap:          5px;
   }
 }
