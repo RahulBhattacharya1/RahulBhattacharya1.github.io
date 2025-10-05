@@ -47,6 +47,33 @@
 .rbx-metrics span{ display:block; font-size:1.55rem; font-weight:800; color:#69c0ff; }
 .rbx-metrics p{ margin:6px 0 0; color:#b5c0d4; font-size:.95rem; }
 
+/* Metrics (2-up, rotating) */
+.rbx-metrics-rot{ margin: 0 0 36px; }
+.rbx-metrics-row{
+  display:flex; justify-content:center; align-items:flex-start;
+  gap:28px; opacity:1; transition:opacity .35s ease;
+}
+.rbx-metrics-row.rbx-fade-out{ opacity:0; }
+
+.rbx-metric{ text-align:center; min-width:130px; }
+.rbx-metric-val{
+  display:block; font-size:1.6rem; font-weight:800; color:#69c0ff;
+}
+.rbx-metric-cap{
+  margin:6px 0 0; color:#b5c0d4; font-size:.95rem;
+}
+
+/* tiny pair indicator like 1/2, 2/3, ... */
+.rbx-metrics-indicator{
+  margin-top:10px; text-align:center; color:#8fa1ba; font-size:.9rem;
+}
+
+/* Mobile: keep two-up but allow wrap if super narrow */
+@media (max-width:420px){
+  .rbx-metrics-row{ gap:20px; }
+  .rbx-metric{ min-width:0; }
+}
+
 /* Skills */
 .rbx-skills{ max-width:820px; margin:0 auto 40px; text-align:left; }
 .rbx-skill{ display:flex; align-items:center; gap:12px; margin:12px 0; }
