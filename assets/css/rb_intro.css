@@ -317,7 +317,7 @@
   left: 0; right: 0; top: 0;
   height: 1px;
   background: linear-gradient(to right,
-              rgba(255,255,255,0.55),
+              rgba(255,255,255,0.25),
               rgba(255,255,255,0.15) 40%,
               rgba(255,255,255,0.0));
   pointer-events: none;
@@ -345,3 +345,43 @@
     --bar-gap:          5px;
   }
 }
+
+/* Bar rows: tighter grid between label + bar */
+.rbx-bar,
+.rbx-bars .bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;  /* label | track | % */
+  align-items: center;
+  column-gap: 12px;                      /* was bigger, now tighter */
+  margin: 0;
+}
+
+/* Labels on left: closer, smaller padding */
+.rbx-bar .name,
+.rbx-bars .name,
+.rbx-skill .title {
+  font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+  margin: 0;               /* remove default spacing */
+  line-height: 1.2;
+  text-align: right;       /* snug against bar start */
+  white-space: nowrap;
+}
+
+/* Track slimmer, as before */
+.rbx-bar-track,
+.rbx-bars .track {
+  flex: 1;
+  height: 4px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+
+/* Percent on right stays as is */
+.rbx-bar .pct,
+.rbx-bars .pct,
+.rbx-bars .value {
+  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+  margin-left: 6px;        /* closer to bar */
+}
+
