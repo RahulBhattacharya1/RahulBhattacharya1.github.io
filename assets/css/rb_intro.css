@@ -41,7 +41,7 @@
   background-size:250% auto; -webkit-background-clip:text; background-clip:text;
   color:transparent; -webkit-text-fill-color:transparent;
 
-  animation:goldShine 2s linear infinite;
+  animation:goldShine 4s linear infinite;
   text-shadow:0 0 8px rgba(255,255,200,.45),0 0 16px rgba(212,175,55,.35),0 0 28px rgba(255,255,255,.22);
 }
 .rbx-intro-overlay .rbx-title::after{
