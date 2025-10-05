@@ -117,7 +117,7 @@ body.rb-intro-lock{ overflow:hidden; }
   overflow:hidden;
 }
 
-/* Optional glare — only when width is being set by JS */
+/* Optional glare — only when width is being set by JS 
 .rb-bar i::after{
   content:"";
   position:absolute;
@@ -134,7 +134,7 @@ body.rb-intro-lock{ overflow:hidden; }
   transform:translateX(-120%) rotate(10deg);
   mix-blend-mode:screen;
   opacity:0; /* hidden by default */
-}
+
 .rb-bar i[style*="width"]::after{
   opacity:1;
   animation: rb-bar-glare 1.1s ease-out infinite;
