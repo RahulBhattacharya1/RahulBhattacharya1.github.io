@@ -41,29 +41,19 @@
     });
   }
 
-  // === Bold numbers + units in captions (robust) ===
-  const RBX_CAP_UNIT_WORDS =
-    '(?:hours?|hrs?|hr|minutes?|mins?|min|seconds?|secs?|sec|ms|days?|day|yrs?|years?|transactions?|txns?|records?|rows?|reports?|models?|pipelines?|dashboards?|stores?|users?|hospitals?|accounts?|GB|TB|MB|KB|B|gb|tb|mb|kb|b|h|m|s)';
+// === Bold numbers (with optional %, +, or unit) ===
+const RBX_CAP_UNIT_WORDS =
+  '(?:hours?|hrs?|hr|minutes?|mins?|min|seconds?|secs?|sec|ms|days?|day|yrs?|years?|transactions?|txns?|records?|rows?|reports?|models?|pipelines?|dashboards?|stores?|users?|hospitals?|accounts?|GB|TB|MB|KB|B|h|m|s)?';
 
-  // A) number with %, or K/M/B suffix, optional +
-  // B) number (optional +) then optional one-word descriptor then a unit word
-  const RBX_CAP_REGEX = new RegExp(
-  [
-    // number + optional decimal + optional comma grouping + optional spaces + %
-    String.raw`(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?\s*%`,  
-
-    // number + optional decimal + K/M/B (case-insensitive), optional +
-    String.raw`(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?[kmbKMB]\+?`,  
-
-    // number + optional + + optional word + unit
-    String.raw`(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?\+?(?:\s+\w{1,24})?\s+` + RBX_CAP_UNIT_WORDS
-  ].join('|'),
+// match any number, with optional decimal/comma, then optional % or + or unit
+const RBX_CAP_REGEX = new RegExp(
+  String.raw`\b(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?(?:%|\+)?\s*` + RBX_CAP_UNIT_WORDS + String.raw`\b`,
   'g'
 );
 
-  function rbxFormatCaption(text){
-    return text.replace(RBX_CAP_REGEX, m => `<strong>${m}</strong>`);
-  }
+function rbxFormatCaption(text){
+  return text.replace(RBX_CAP_REGEX, m => `<strong>${m}</strong>`);
+}
 
   /* =========================
      Caption rotation (single span)
