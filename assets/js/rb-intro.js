@@ -303,32 +303,7 @@ var TAGLINES = [
     });
   }
 
-  (async function init() {
-    // captions first (simple fade, no overlays)
-    playTaglines();
 
-    // animate bars sequentially
-    for (var i = 0; i < rows.length; i++) {
-      // tiny stagger so they feel responsive
-      await animateBar(rows[i]);
-      await new Promise(function (r) { setTimeout(r, 150); });
-    }
-
-    // show actions when bars are done
-    if (actions) actions.classList.add("show");
-  })();
-
-  /* ================= DISMISS ================= */
-  function dismiss() {
-    intro.classList.add("reveal");
-    setTimeout(function () {
-      intro.classList.add("exit");
-      setTimeout(function () {
-        if (intro.parentNode) intro.parentNode.removeChild(intro);
-        document.body.classList.remove("rb-intro-lock");
-      }, 900);
-    }, 900);
-  }
 
   if (btnGo) btnGo.addEventListener("click", dismiss);
   document.addEventListener("keydown", function (e) {
