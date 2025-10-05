@@ -11,31 +11,44 @@
   var actions = document.getElementById('rbActions');
   var btnGo   = document.getElementById('rbContinueBtn');
 
-  /* ==== Tagline variations + cinematic load ==== */
-  var TAGLINES = [
-    "Designing Precision AI for Real-World Impact",
-    "Turning Complex Data into Clear Decisions",
-    "Scaling Models from Notebook to Production",
-    "Building Reliable ML Systems End-to-End",
-    "Engineering Intelligence that Ships Value"
-  ];
-  var tagEl = document.getElementById('rbTag');
+/* ==== Tagline variations: rotate all 5 within ~6s with cinematic effect ==== */
+var TAGLINES = [
+  "Designing Precision AI for Real-World Impact",
+  "Turning Complex Data into Clear Decisions",
+  "Scaling Models from Notebook to Production",
+  "Building Reliable ML Systems End-to-End",
+  "Engineering Intelligence that Ships Value"
+];
+var tagEl = document.getElementById('rbTag');
 
-  function pickTagline(){
-    // Random each load (change to sequential if you prefer)
-    var i = Math.floor(Math.random()*TAGLINES.length);
-    return TAGLINES[i];
+/* Show one line with the effect, then resolve when its animation ends */
+function showOneLine(text, runtimeMs){
+  return new Promise(function(resolve){
+    if (!tagEl) return resolve();
+    tagEl.textContent = text;
+
+    // retrigger CSS animation
+    tagEl.classList.remove('showline');
+    void tagEl.offsetWidth;  // reflow
+    tagEl.classList.add('showline');
+
+    // resolve when the per-line animation completes
+    setTimeout(resolve, runtimeMs);
+  });
+}
+
+/* Play all lines sequentially once */
+async function playAllLines(){
+  var per = 1100; // must match --dur in CSS
+  for (var i = 0; i < TAGLINES.length; i++){
+    await showOneLine(TAGLINES[i], per);
   }
-  function playTagline(){
-    if (!tagEl) return;
-    tagEl.textContent = pickTagline();
-    // retrigger animation every time overlay shows
-    tagEl.classList.remove('rb-cine');
-    // force reflow
-    void tagEl.offsetWidth;
-    tagEl.classList.add('rb-cine');
-  }
-  playTagline();
+  // After last fade-out, leave the strongest line visible statically:
+  tagEl.classList.remove('showline');
+  tagEl.textContent = TAGLINES[0]; // choose your favorite to persist
+}
+playAllLines();
+
   /* ============================================ */
 
   function animateBar(row){
