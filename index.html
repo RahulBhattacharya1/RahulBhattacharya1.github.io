@@ -741,7 +741,7 @@ title: "Rahul's Portfolio"
   transition: filter 300ms ease;
 }
 
-/* Diagonal broad sweep line (one pass every 2s) — separate layer on top of image */
+/* Diagonal broad sweep line (one pass every 5s) — separate layer on top of image */
 .rbx-bevel .rbx-sweep{
   position: absolute; inset: -20%;
   border-radius: inherit; pointer-events: none;
@@ -755,7 +755,7 @@ title: "Rahul's Portfolio"
   filter: blur(2px);
   opacity: .45;
   transform: translate(-140%, -140%) rotate(0.001deg);
-  animation: rbxLineAcross 2s linear infinite;
+  animation: rbxLineAcross 5s linear infinite;
 }
 @keyframes rbxLineAcross { to { transform: translate(140%, 140%) rotate(0.001deg); } }
 
