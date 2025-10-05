@@ -180,3 +180,24 @@ body.rb-intro-lock{ overflow:hidden; }
   opacity: 0 !important;
   animation: none !important;
 }
+
+/* --- HARD OFF: any pseudo-elements inside the loaders --- */
+.rb-loaders *::before,
+.rb-loaders *::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+
+/* Keep caption clean too (no spark, no sheen) */
+.rb-tag::before,
+.rb-tag::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+
+/* Ensure the bar fill shows without artifacts */
+.rb-bar i {
+  box-shadow: none;                 /* remove any concentrated glow */
+}
