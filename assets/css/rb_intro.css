@@ -241,3 +241,67 @@
 
 /* Ensure the bar can truly expand */
 .rbx-bar{ width: 100%; min-width: 0; }
+
+/* ===== Compact metrics & bars (non-destructive overrides) ===== */
+:root{
+  /* Tunables */
+  --metric-label-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  --skill-name-size:  clamp(0.85rem, 1.3vw, 1rem);
+  --pct-size:         clamp(0.8rem, 1.1vw, 0.95rem);
+  --bar-h:            8px;                 /* was chunky; slimmer */
+  --bar-radius:       999px;               /* fully pill */
+  --bar-gap:          10px;                /* spacing between rows */
+  --bar-track-alpha:  0.14;                /* lighter track */
+  --bar-fill-alpha:   0.95;                /* reduce glow */
+}
+
+/* 1) Metrics: numbers stay; labels smaller */
+.rbx-metric .label,
+.rbx-metrics .label,
+.rbx-metric .caption,
+.rbx-metrics .caption {
+  font-size: var(--metric-label-size);
+  line-height: 1.25;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+/* 2) Progress-bucket titles on the left (e.g., "AI Model Tuning") */
+.rbx-skills .name,
+.rbx-bars .name,
+.rbx-skill-name,
+.rbx-skill .title {
+  font-size: var(--skill-name-size);
+  line-height: 1.25;
+  opacity: 0.9;
+}
+
+/* 3) Bars themselves — slimmer, cleaner, less glow */
+.rbx-bar,
+.rbx-bars .bar {
+  display: grid;
+  grid-template-columns: 1fr auto;   /* track + optional % label on right */
+  align-items: center;
+  gap: 8px;
+  margin: 0;                         /* remove extra vertical bloat */
+}
+
+.rbx-bar-track,
+.rbx-bars .track {
+  position: relative;
+  width: 100%;
+  height: var(--bar-h);
+  border-radius: var(--bar-radius);
+  background: rgba(255,255,255,var(--bar-track-alpha));  /* subtler track */
+  overflow: hidden;
+  box-shadow: none;                  /* kill heavy inner/outer shadows */
+}
+
+.rbx-bar-fill,
+.rbx-bars .fill {
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: none;                  /* remove glow/bloom */
+  /* keep your existing gradient/color; if none, a soft blue: */
+  background: linear-gradient(90deg, #6aa9ff, #2f7dff);
+  opaci
