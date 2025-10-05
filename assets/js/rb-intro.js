@@ -243,65 +243,7 @@ var TAGLINES = [
     }, 120);
   }
 
-  async function playTaglines() {
-    if (!tagEl) return;
 
-    if (!TAGLINES || TAGLINES.length === 0) {
-      // nothing to show
-      tagEl.textContent = "";
-      tagEl.style.opacity = "1";
-      return;
-    }
-    if (TAGLINES.length === 1) {
-      setTagline(TAGLINES[0]);
-      return;
-    }
-    // 2+ lines: show each once; adjust timing if you want
-    var per = 1100; // ~1.1s per line
-    for (var i = 0; i < TAGLINES.length; i++) {
-      setTagline(TAGLINES[i]);
-      // wait for the line to display before moving to next
-      // (per includes fade timings above)
-      // eslint-disable-next-line no-loop-func
-      await new Promise(function (r) { setTimeout(r, per); });
-    }
-    // leave the first line visible at the end
-    setTagline(TAGLINES[0]);
-  }
-
-  /* ================= PROGRESS BARS =================
-     - JS animates width from 0 -> target%
-     - Ensure CSS positions the fill with left/top/bottom + width
-       (NOT with inset:0) so the width animation renders correctly.
-  =================================================== */
-  function animateBar(row) {
-    return new Promise(function (resolve) {
-      var pctEl  = row.querySelector(".rb-pct");
-      var fill   = row.querySelector(".rb-bar i");
-      var target = Number(row.getAttribute("data-target") || 100);
-      var dur    = 900;
-      var start  = performance.now();
-
-      // small visual kick so "0%" bars don't look empty if glare is disabled
-      if (fill && !fill.style.width) fill.style.width = "0%";
-
-      function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
-
-      function frame(now) {
-        var p   = Math.min(1, (now - start) / dur);
-        var val = Math.round(target * ease(p));
-        if (fill) fill.style.width = val + "%";
-        if (pctEl) pctEl.textContent = val + "%";
-        if (p < 1) requestAnimationFrame(frame);
-        else {
-          if (fill) fill.style.width = target + "%";
-          if (pctEl) pctEl.textContent = target + "%";
-          resolve();
-        }
-      }
-      requestAnimationFrame(frame);
-    });
-  }
 
 
 
