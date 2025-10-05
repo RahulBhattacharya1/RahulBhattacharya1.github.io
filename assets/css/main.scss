@@ -1796,7 +1796,9 @@ pre {
   100% { left: 120%; opacity: 0; }
 }
 
-.tab-btn.active .page-num { letter-spacing: normal; }
+.tab-btn.active .slash {
+  padding: 0 0.3em;   /* controls side space */
+}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
