@@ -182,8 +182,64 @@ body.rb-home-dark {
   to { transform: translateX(120%); }
 }
 
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .rb-tag.rb-cine,
-  .rb-tag.rb-cine::after{ animation: none !important; }
+/* === Cinematic rotating taglines with sheen + spark === */
+.rb-tag{
+  position: relative;
+  color:#cfe1ff;
+  font-weight:500;
+  letter-spacing:.01em;
+  min-height: 1.2em; /* reserve space to avoid reflow between lines */
+  overflow: hidden;  /* hide the flying spark overflow */
 }
+
+/* Each shown line gets this class for the animation */
+.rb-tag.showline{
+  --dur: 1100ms;                /* per-line runtime */
+  animation: rb-tag-fade var(--dur) ease both;
+  will-change: opacity, transform, filter;
+}
+
+/* Light sweep across the text */
+.rb-tag.showline::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.35) 9%, transparent 18%);
+  transform: translateX(-120%);
+  animation: rb-sheen calc(var(--dur) * .85) ease-out 90ms both;
+  mix-blend-mode: screen;
+  pointer-events:none;
+}
+
+/* Little “star” that travels across the baseline */
+.rb-tag.showline::before{
+  content:"";
+  position:absolute;
+  left:-6%; top:55%;
+  width:6px; height:6px; border-radius:50%;
+  background: radial-gradient(circle, #ffffff 0%, #b9d3ff 45%, rgba(185,211,255,0) 70%);
+  box-shadow: 0 0 10px rgba(160,200,255,.75), 0 0 18px rgba(120,170,255,.55);
+  transform: translateY(-50%);
+  animation: rb-spark-run var(--dur) cubic-bezier(.22,.75,.25,1) 40ms both;
+  pointer-events:none;
+}
+
+/* Fade in, sharpen, fade out */
+@keyframes rb-tag-fade{
+  0%   { opacity:0; transform: translateY(6px); filter: blur(6px); }
+  20%  { opacity:1; transform: translateY(0);   filter: blur(.6px); }
+  70%  { opacity:1; transform: translateY(0);   filter: blur(0); }
+  100% { opacity:0; transform: translateY(-6px); filter: blur(4px); }
+}
+
+@keyframes rb-sheen{
+  to { transform: translateX(120%); }
+}
+
+@keyframes rb-spark-run{
+  0%   { left:-6%;  opacity:0;   transform: translateY(-50%) scale(.85); }
+  15%  { opacity:1; }
+  65%  { left:50%;  opacity:1;   transform: translateY(-50%) scale(1); }
+  100% { left:106%; opacity:0;   transform: translateY(-50%) scale(.9); }
+}
+
+
