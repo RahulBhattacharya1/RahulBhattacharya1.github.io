@@ -48,12 +48,18 @@
   // A) number with %, or K/M/B suffix, optional +
   // B) number (optional +) then optional one-word descriptor then a unit word
   const RBX_CAP_REGEX = new RegExp(
-    [
-      String.raw`\b(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?\s?(?:%|[kmbKMB])\+?\b`,
-      String.raw`\b(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?\+?(?:\s+\w{1,24})?\s+` + RBX_CAP_UNIT_WORDS + String.raw`\b`
-    ].join('|'),
-    'g'
-  );
+  [
+    // number + optional decimal + optional comma grouping + optional spaces + %
+    String.raw`(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?\s*%`,  
+
+    // number + optional decimal + K/M/B (case-insensitive), optional +
+    String.raw`(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?[kmbKMB]\+?`,  
+
+    // number + optional + + optional word + unit
+    String.raw`(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?\+?(?:\s+\w{1,24})?\s+` + RBX_CAP_UNIT_WORDS
+  ].join('|'),
+  'g'
+);
 
   function rbxFormatCaption(text){
     return text.replace(RBX_CAP_REGEX, m => `<strong>${m}</strong>`);
