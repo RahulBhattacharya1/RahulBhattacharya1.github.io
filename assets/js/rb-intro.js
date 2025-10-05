@@ -252,7 +252,27 @@ function fillSkillBars(){
   });
 }
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", () => {
+  // animate skill bars + start subtitle rotator
   fillSkillBars();
   startTaglineRotation();
+
+  // lock page scroll while banner is visible
+  document.body.style.overflow = "hidden";
+
+  const banner = document.querySelector(".rb-intro");
+  const continueBtn = document.querySelector(".btn.primary");
+  if (!banner || !continueBtn) return;
+
+  continueBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    // optional fade-out if you add the CSS below
+    banner.classList.add("rb-hide");
+    // after the fade, remove it and restore scroll
+    setTimeout(() => {
+      banner.classList.add("hidden");   // display:none; in your CSS
+      document.body.style.overflow = "auto";
+    }, 280); // match CSS transition
+  }, { once: true });
 });
+
