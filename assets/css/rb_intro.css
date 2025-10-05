@@ -65,7 +65,7 @@
 }
 @keyframes rbx-shine{
   0%{ left:-40%; }
-  100%{ left:110%; }
+  100%{ left:70%; }
 }
 
 /* Calls to action (no conflict with .btn) */
