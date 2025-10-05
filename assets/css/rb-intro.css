@@ -20,40 +20,34 @@ body.rb-intro-lock{ overflow:hidden; }
 .rb-intro.show{ display:block; }
 .rb-intro.exit{ opacity:0; visibility:hidden; }
 
-/* Optional: subtle sweep along the very top */
-.rb-intro::before{
-  content:"";
-  position:fixed; left:0; top:0; width:100%; height:8px;
-  pointer-events:none; z-index:1;
-  background:linear-gradient(90deg,
-    rgba(255,255,255,0) 0%,
-    rgba(160,200,255,0.35) 35%,
-    rgba(255,255,255,0.85) 50%,
-    rgba(160,200,255,0.35) 65%,
-    rgba(255,255,255,0) 100%);
-  filter:blur(3px) saturate(1.1);
-  transform:translateX(-100%);
-  animation: rb-top-scan 3.2s linear infinite;
+
+
+/* Caption text — no overlays, just text */
+.rb-tag{
+  margin:0 0 20px;
+  color:#cfe1ff;
+  opacity:.95;
+  font-weight:500;
+  letter-spacing:.01em;
+  min-height:1.2em; /* reserve height */
 }
-@keyframes rb-top-scan{ to{ transform:translateX(100%); } }
+/* hard kill any previous overlays that might exist */
+.rb-tag::before,
+.rb-tag::after{ content:none !important; display:none !important; }
 
-/* ===== Header / Hero ===== */
-.rb-top{
-  position:absolute; left:50%; top:6%;
-  transform:translateX(-50%);
-  text-align:center;
-  width:min(900px, 92vw);
+/* ===== Metrics ===== */
+.rb-metrics{ display:flex; flex-wrap:wrap; justify-content:center; gap:28px; margin-bottom:28px; }
+.rb-metric{ text-align:center; }
+.rb-num{ font-size: clamp(18px, 4vw, 28px); font-weight:700; color:#dfe7ff; margin-bottom:4px; }
+.rb-label{ font-size: clamp(12px, 2.6vw, 14px); color:#c7d2ff; }
+
+/* ===== Optional signature line (if present) ===== */
+.rb-signature{ position:absolute; left:50%; top:22%; transform:translateX(-50%); width:min(760px, 88vw); }
+.rb-signature svg{ width:100%; height:auto; display:block; }
+.rb-stroke{
+  stroke:url(#rb-g); stroke-width:2; fill:none; stroke-linecap:round;
+  filter: drop-shadow(0 0 4px rgba(120,170,255,.18));
 }
-
-.rb-name{
-  margin:0 0 6px; font-weight:800; letter-spacing:.02em;
-  font-size: clamp(22px, 5vw, 40px);
-  background: linear-gradient(180deg, var(--rb-blue), var(--rb-blue2));
-  -webkit-background-clip:text; background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-
 
 /* ===== Loaders (rows) ===== */
 .rb-loaders{
