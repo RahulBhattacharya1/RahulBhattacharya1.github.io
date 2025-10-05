@@ -53,19 +53,30 @@
   border-radius:inherit; 
   transition:width 1.4s ease;
 }
-/* Shimmer highlight sweeping across the fill */
+
+/* Shimmer highlight sweeping across only the first 70% with no flicker */
 .rbx-bar-fill::after{
   content:"";
-  position:absolute; top:0; left:-40%;
+  position:absolute; top:0; left:0;
   width:40%; height:100%;
-  background:linear-gradient(90deg, rgba(255,255,255,0.00), rgba(255,255,255,0.35), rgba(255,255,255,0.00));
-  transform:skewX(-20deg);
-  animation:rbx-shine 1.8s linear infinite;
+  background:linear-gradient(90deg,
+    rgba(255,255,255,0.00),
+    rgba(255,255,255,0.35),
+    rgba(255,255,255,0.00)
+  );
+  transform: translateX(-40%);   /* start before the fill */
+  transform-origin: left center;
+  will-change: transform, opacity;
   pointer-events:none;
+  animation: rbx-shine 1.8s linear infinite;
 }
+
 @keyframes rbx-shine{
-  0%{ left:-40%; }
-  100%{ left:70%; }
+  0%   { transform: translateX(-40%); opacity: 0; } /* fade-in after restart */
+  2%   { opacity: 1; }
+  80%  { transform: translateX(70%);  opacity: 1; } /* stop at 70% of the fill */
+  99%  { opacity: 0; }                              /* fade-out before reset */
+  100% { transform: translateX(-40%); opacity: 0; } /* reset off-screen */
 }
 
 /* Calls to action (no conflict with .btn) */
