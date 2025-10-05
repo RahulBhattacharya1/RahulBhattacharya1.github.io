@@ -676,74 +676,32 @@ title: "Rahul's Portfolio"
   stroke: none !important;
 }
 
-/* Thickness of the animated edge ring */
-.rbx-bevel{
-  --rbx-ring: 8px;              /* adjust 6–12px as you like */
+/* Bevel image */  
+  .rbx-bevel {
+    position: relative;
+    display: inline-block;
+    border-radius: 16px;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: 0 10px 24px rgba(0,0,0,.2);
+  }
 
-  position:relative;
-  display:inline-block;
-  border-radius:8px;
-  overflow:hidden;
-  background:transparent;       /* CHANGED: was #fff */
+  .rbx-bevel img {
+    display:block;
+    width:420px;
+    height:auto;
+    border-radius: inherit;
 
-  /* Strong outer lift all around */
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.22),
-    0 -6px 16px rgba(0,0,0,0.15),
-    6px 0 16px rgba(0,0,0,0.15),
-    -6px 0 16px rgba(0,0,0,0.15);
-}
+    /* Smooth clarity loop */
+    animation: rbxClarity 6s ease-in-out infinite;
+  }
 
-.rbx-bevel img{
-  display:block;
-  width:420px;                  /* your site-specific sizing overrides below will still win */
-  height:auto;
-  border-radius:inherit;
-}
-
-/* Inner depth: balanced diagonals (dark-only; keeps colors true) */
-.rbx-bevel::before{
-  content:"";
-  position:absolute; inset:0;
-  border-radius:inherit; pointer-events:none;
-  box-shadow:
-    inset 5px 5px 12px rgba(0,0,0,0.25),
-    inset -5px -5px 12px rgba(0,0,0,0.20);
-}
-
-/* Flashy animated edge sweep — clipped to a ring */
-.rbx-bevel::after{
-  content:"";
-  position:absolute; inset:0;
-  border-radius:inherit; pointer-events:none;
-
-  /* same sweep you had */
-  background: linear-gradient(
-    120deg,
-    transparent 20%,
-    rgba(0,170,255,0.35) 40%,
-    rgba(0,170,255,0.35) 60%,
-    transparent 80%
-  );
-  background-size: 200% 200%;
-  animation: rbxBevelSweep 8s linear infinite;
-
-  /* CHANGED: remove mix-blend; clip to a thin edge ring */
-  -webkit-mask:
-    radial-gradient(closest-side,
-      transparent calc(100% - var(--rbx-ring)),
-      #000       calc(100% - 0px));
-          mask:
-    radial-gradient(closest-side,
-      transparent calc(100% - var(--rbx-ring)),
-      #000       calc(100% - 0px));
-}
-
-/* Unique keyframes name already used */
-@keyframes rbxBevelSweep{
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
+  /* Keyframes for clarity loop */
+  @keyframes rbxClarity {
+    0%   { filter: brightness(1) contrast(1); }
+    50%  { filter: brightness(1.15) contrast(1.08); }
+    100% { filter: brightness(1) contrast(1); }
+  }
 
 /* Your strip sizing helpers (keep) */
 .featured-strip .rbx-bevel img,
