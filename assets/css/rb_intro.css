@@ -135,10 +135,10 @@ body.rb-intro-lock{ overflow:hidden; }
   mix-blend-mode:screen;
   opacity:0; /* hidden by default */
 }
-.rb-bar i[style*="width"]::after{
+/*.rb-bar i[style*="width"]::after{
   opacity:1;
   animation: rb-bar-glare 1.1s ease-out infinite;
-}
+}*/
 @keyframes rb-bar-glare{
   0%   { transform: translateX(-120%) rotate(10deg); opacity:0; }
   10%  { opacity:.9; }
