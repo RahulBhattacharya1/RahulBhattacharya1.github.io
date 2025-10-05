@@ -263,3 +263,54 @@
     rbxOverlayControl();
   });
 })();
+
+/* ===== Rotating 2-up metrics ===== */
+const RBX_METRICS = [
+  { v: "100+", c: "AI Models trained" },
+  { v: "300+", c: "Dashboards created" },
+  { v: "200+", c: "Data flows & pipelines" },
+  { v: "80+",  c: "Databricks" },
+  { v: "80+",  c: "Warehouses designed" }
+];
+
+const RBX_METRICS_INTERVAL = 2400; // ms between swaps
+const RBX_METRICS_FADE = 350;      // must match CSS .35s
+
+function rbxRotateMetrics(){
+  const row = document.getElementById("rbx-metrics-row");
+  const m1v = document.getElementById("rbx-m1-val");
+  const m1c = document.getElementById("rbx-m1-cap");
+  const m2v = document.getElementById("rbx-m2-val");
+  const m2c = document.getElementById("rbx-m2-cap");
+  const ind = document.getElementById("rbx-metrics-ind");
+  if(!row || !m1v || !m1c || !m2v || !m2c || !ind) return;
+
+  let i = 0; // left index
+  function render(){
+    // compute adjacent pair (i, j)
+    const j = (i + 1) % RBX_METRICS.length;
+
+    // fade out, swap contents, fade in
+    row.classList.add("rbx-fade-out");
+    setTimeout(()=>{
+      m1v.textContent = RBX_METRICS[i].v;
+      m1c.textContent = RBX_METRICS[i].c;
+      m2v.textContent = RBX_METRICS[j].v;
+      m2c.textContent = RBX_METRICS[j].c;
+
+      // indicator like 1/2, 2/3, 3/4, 4/5, 5/1 ...
+      ind.textContent = ((i+1)) + "/" + ((j+1));
+
+      row.classList.remove("rbx-fade-out");
+      i = j; // advance by one (next pair starts at previous right element)
+    }, RBX_METRICS_FADE);
+  }
+
+  // initial render uses indices 0/1
+  render();
+  let timer = setInterval(render, RBX_METRICS_INTERVAL);
+
+  // pause on hover/focus (optional)
+  row.addEventListener("mouseenter", ()=> clearInterval(timer));
+  row.addEventListener("mouseleave", ()=> timer = setInterval(render, RBX_METRICS_INTERVAL));
+}
