@@ -174,3 +174,21 @@ body.rb-intro-lock{ overflow:hidden; }
 /* ===== Reveal animation ===== */
 .rb-intro.reveal{ animation: rb-openHole .9s ease-out forwards; }
 @keyframes rb-openHole{ from{ --rb-reveal:0% } to{ --rb-reveal:130% } }
+
+/* Nuke every pseudo-element and any glow inside the intro */
+#rbIntro *::before,
+#rbIntro *::after{
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Also remove any residual dot-like glow from elements themselves */
+#rbIntro *{
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
