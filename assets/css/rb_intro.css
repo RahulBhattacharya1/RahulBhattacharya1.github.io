@@ -23,7 +23,10 @@
 .rbx-title{
   margin:0 0 10px;
   font-size:clamp(2rem,4vw,3rem);
-  font-weight:800; letter-spacing:.3px; color:#69c0ff;
+  font-weight:800; letter-spacing:.3px;
+  /*color:#69c0ff;*/
+  color: transparent !important;
+  background: none !important;
 }
 
 /* Rotating caption */
