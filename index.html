@@ -683,15 +683,12 @@ title: "Rahul's Portfolio"
 /* Base bevel wrapper used on all thumbnails */
 .rbx-bevel{
   position: relative;
-  display: block;               /* so it can fill the thumb slot */
-  border-radius: 16px;
+  display: block;               /* fills the thumb slot via rules below */
+  border-radius: 10px;
   overflow: hidden;
   background: transparent;
-  width:150px;
-  height:84px;
-  border-radius:10px;
 
-  /* inner bevel only (keeps colors true) – you can keep/tune or remove */
+  /* inner bevel only (keeps colors true) */
   box-shadow:
     inset 5px 5px 12px rgba(0,0,0,.22),
     inset -5px -5px 12px rgba(0,0,0,.16);
@@ -701,30 +698,30 @@ title: "Rahul's Portfolio"
   --rbx-brightness: 1;
 }
 
-/* “Raised” outer lift + rim highlight (optional, add this class when you want it) */
+/* “Raised” outer lift + rim highlight (optional) */
 .rbx-bevel--raised{
-  /* outer lift */
   box-shadow:
     0 10px 24px rgba(0,0,0,0.18),
     0 4px 12px  rgba(0,0,0,0.10);
 }
 
-/* Inner bevel edge (subtle inset light + shadow) – matching your sample */
+/* Inner bevel edge (subtle inset light + shadow) */
 .rbx-bevel--raised::before{
   content:"";
   position:absolute; inset:0;
   border-radius:inherit; pointer-events:none;
+  z-index: 2;
   box-shadow:
     inset 3px 3px 6px rgba(0,0,0,0.25),
-    inset 3px 3px 6px rgba(255,255,255,0.95);
+    inset -3px -3px 6px rgba(255,255,255,0.95);
 }
 
 /* Premium rim highlight */
 .rbx-bevel--raised::after{
-  /* NOTE: this is a second overlay; we still want the sweep, so we create a new layer below */
   content:"";
   position:absolute; inset:0;
   border-radius:inherit; pointer-events:none;
+  z-index: 4; /* above sweep */
   box-shadow:
     0 0 6px rgba(255,255,255,0.7) inset,
     0 0 8px rgba(255,255,255,0.5);
@@ -733,19 +730,22 @@ title: "Rahul's Portfolio"
 
 /* Image inside bevel: filters driven by CSS variables */
 .rbx-bevel img{
+  position: relative;
+  z-index: 1;                   /* below sweep, above base */
   display:block;
   width:100%;
   height:100%;
   border-radius: inherit;
+  object-fit: cover;
   filter: brightness(var(--rbx-brightness)) contrast(var(--rbx-contrast));
   transition: filter 300ms ease;
-  object-fit: cover;            /* preserves crops in cards */
 }
 
-/* Diagonal broad sweep line (one pass every 2s) — separate layer on top */
+/* Diagonal broad sweep line (one pass every 2s) — separate layer on top of image */
 .rbx-bevel .rbx-sweep{
   position: absolute; inset: -20%;
   border-radius: inherit; pointer-events: none;
+  z-index: 3; /* above image, below rim */
   background: linear-gradient(135deg,
     rgba(255,255,255,0) 45%,
     rgba(255,255,255,0.40) 50%,
@@ -776,6 +776,7 @@ title: "Rahul's Portfolio"
   border-radius:inherit;
   overflow:hidden;
 }
+
 
 
 </style>
