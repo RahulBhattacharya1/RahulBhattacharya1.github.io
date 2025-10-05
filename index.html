@@ -1026,7 +1026,9 @@ title: "Rahul's Portfolio"
       var start = (cur - 1) * pageSize;
       items.slice(start, start + pageSize).forEach(el => el.style.display = '');
 
-      counter.textContent = cur + '/' + totalPages;
+      const thinsp = String.fromCharCode(8201);
+      counter.textContent = cur + thinsp + '/' + thinsp + totalPages;
+
       prev.classList.toggle('is-disabled', cur <= 1);
       next.classList.toggle('is-disabled', cur >= totalPages);
 
