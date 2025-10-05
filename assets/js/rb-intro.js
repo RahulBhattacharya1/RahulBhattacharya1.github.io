@@ -3,7 +3,7 @@
      Config + Data
   ========================== */
   const RBX_ROTATE_MS = 4000;
-  const RBX_FADE_MS   = 1000;
+  const RBX_FADE_MS   = 200;
 
   const RBX_CAPTIONS = [
   "Accelerated 120+ Databricks notebooks delivering 40% faster data pipelines",
@@ -221,7 +221,7 @@
     { v: "80+",  c: "Warehouses designed" }
   ];
   const RBX_METRICS_INTERVAL = 4000;
-  const RBX_METRICS_FADE     = 800;
+  const RBX_METRICS_FADE     = 200;
 
   /* =========================
      Helpers
