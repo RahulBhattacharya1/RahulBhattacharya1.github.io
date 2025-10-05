@@ -279,35 +279,42 @@ function rbxFormatCaption(text){
   /* =========================
      Metrics: rotate 2 at a time
   ========================== */
-  function rbxRotateMetrics(){
-    const row = document.getElementById("rbx-metrics-row");
-    const m1v = document.getElementById("rbx-m1-val");
-    const m1c = document.getElementById("rbx-m1-cap");
-    const m2v = document.getElementById("rbx-m2-val");
-    const m2c = document.getElementById("rbx-m2-cap");
-    const ind = document.getElementById("rbx-metrics-ind");
-    if(!row || !m1v || !m1c || !m2v || !m2c || !ind) return;
+function rbxRotateMetrics(){
+  const row = document.getElementById("rbx-metrics-row");
+  const m1v = document.getElementById("rbx-m1-val");
+  const m1c = document.getElementById("rbx-m1-cap");
+  const m2v = document.getElementById("rbx-m2-val");
+  const m2c = document.getElementById("rbx-m2-cap");
+  if(!row || !m1v || !m1c || !m2v || !m2c) return;  // ← removed indicator requirement
 
-    let i = 0; // left index of the pair
+  let i = 0; // left index of the pair
+  let timer = null;
 
-    function render(){
-      const j = (i + 1) % RBX_METRICS.length;
-      row.classList.add("rbx-fade-out");
-      setTimeout(()=>{
-        m1v.textContent = RBX_METRICS[i].v;
-        m1c.textContent = RBX_METRICS[i].c;
-        m2v.textContent = RBX_METRICS[j].v;
-        m2c.textContent = RBX_METRICS[j].c;
-        row.classList.remove("rbx-fade-out");
-        i = j;
-      }, RBX_METRICS_FADE);
-    }
-
-    render();
-    let timer = setInterval(render, RBX_METRICS_INTERVAL);
-    row.addEventListener("mouseenter", ()=> clearInterval(timer));
-    row.addEventListener("mouseleave", ()=> timer = setInterval(render, RBX_METRICS_INTERVAL));
+  function render(){
+    const j = (i + 1) % RBX_METRICS.length;
+    row.classList.add("rbx-fade-out");
+    setTimeout(()=>{
+      m1v.textContent = RBX_METRICS[i].v;
+      m1c.textContent = RBX_METRICS[i].c;
+      m2v.textContent = RBX_METRICS[j].v;
+      m2c.textContent = RBX_METRICS[j].c;
+      row.classList.remove("rbx-fade-out");
+      i = j;
+    }, RBX_METRICS_FADE);
   }
+
+  function start(){ if(!timer) timer = setInterval(render, RBX_METRICS_INTERVAL); }
+  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+
+  render();
+  start();
+
+  // pause on hover/focus; resume on leave/blur
+  row.addEventListener("mouseenter", stop);
+  row.addEventListener("mouseleave", start);
+  row.addEventListener("focusin", stop);
+  row.addEventListener("focusout", start);
+}
 
   /* =========================
      Overlay control
