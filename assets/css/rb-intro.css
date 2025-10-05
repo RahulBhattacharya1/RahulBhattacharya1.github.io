@@ -95,11 +95,7 @@ body.rb-intro-lock{ overflow:hidden; }
 .rb-intro.reveal{ animation: rb-openHole .9s ease-out forwards; }
 @keyframes rb-openHole{ from{ --rb-reveal:0% } to{ --rb-reveal:130% } }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .rb-stroke, .rb-bar i, .rb-intro{ animation:none !important; transition:none !important; }
-  .rb-intro{ --rb-reveal:130% }
-}
+
 
 /* Premium dark theme for intro + homepage */
 .rb-intro {
@@ -199,29 +195,6 @@ body.rb-home-dark {
   will-change: opacity, transform, filter;
 }
 
-/* Light sweep across the text */
-.rb-tag.showline::after{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.35) 9%, transparent 18%);
-  transform: translateX(-120%);
-  animation: rb-sheen calc(var(--dur) * .85) ease-out 90ms both;
-  mix-blend-mode: screen;
-  pointer-events:none;
-}
-
-/* Little “star” that travels across the baseline */
-.rb-tag.showline::before{
-  content:"";
-  position:absolute;
-  left:-6%; top:55%;
-  width:6px; height:6px; border-radius:50%;
-  background: radial-gradient(circle, #ffffff 0%, #b9d3ff 45%, rgba(185,211,255,0) 70%);
-  box-shadow: 0 0 10px rgba(160,200,255,.75), 0 0 18px rgba(120,170,255,.55);
-  transform: translateY(-50%);
-  animation: rb-spark-run var(--dur) cubic-bezier(.22,.75,.25,1) 40ms both;
-  pointer-events:none;
-}
 
 /* Fade in, sharpen, fade out */
 @keyframes rb-tag-fade{
@@ -271,27 +244,6 @@ body.rb-home-dark {
 .rb-bar i{
   position: relative;     /* so the glare runs within the fill only */
   overflow: hidden;       /* keep glare clipped inside the fill */
-}
-
-/* Moving glare (specular highlight) riding over the fill */
-.rb-bar i::after{
-  content:"";
-  position: absolute;
-  top: -30%;
-  left: -15%;
-  width: 70px;
-  height: 200%;
-  pointer-events: none;
-  background: linear-gradient(110deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.35) 40%,
-    rgba(255,255,255,0.85) 50%,
-    rgba(255,255,255,0.35) 60%,
-    rgba(255,255,255,0) 100%);
-  filter: blur(2px);
-  transform: translateX(-120%) rotate(10deg);
-  mix-blend-mode: screen;
-  animation: rb-bar-glare 1.1s ease-out infinite;
 }
 
 /* Sweep left -> right across the colored fill */
