@@ -24,10 +24,10 @@
 .rbx-intro-overlay .rbx-title {
   margin: 0;
   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 700;
   font-variant: small-caps;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   line-height: 1.12;
   position: relative;
 
