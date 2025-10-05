@@ -117,7 +117,7 @@ body.rb-intro-lock{ overflow:hidden; }
   overflow:hidden;
 }
 
-/* Optional glare — only when width is being set by JS 
+/* Optional glare — only when width is being set by JS */
 .rb-bar i::after{
   content:"";
   position:absolute;
@@ -134,7 +134,7 @@ body.rb-intro-lock{ overflow:hidden; }
   transform:translateX(-120%) rotate(10deg);
   mix-blend-mode:screen;
   opacity:0; /* hidden by default */
-
+}
 .rb-bar i[style*="width"]::after{
   opacity:1;
   animation: rb-bar-glare 1.1s ease-out infinite;
@@ -157,7 +157,6 @@ body.rb-intro-lock{ overflow:hidden; }
   display:flex; gap:12px; justify-content:center; align-items:center;
   opacity:0; pointer-events:none; transition: opacity .4s ease;
 }
-
 .rb-actions.show{ opacity:1; pointer-events:auto; }
 
 .rb-btn{
@@ -170,15 +169,8 @@ body.rb-intro-lock{ overflow:hidden; }
   color:#041024; border-color:transparent;
   box-shadow: 0 10px 26px rgba(80,150,255,.28);
 }
-
 .rb-btn:focus{ outline:2px solid rgba(120,170,255,.55); outline-offset:2px; }
 
 /* ===== Reveal animation ===== */
 .rb-intro.reveal{ animation: rb-openHole .9s ease-out forwards; }
 @keyframes rb-openHole{ from{ --rb-reveal:0% } to{ --rb-reveal:130% } }
-
-/* Hide glare when width is 0% */
-.rb-bar i[style*="width: 0%"]::after {
-  opacity: 0 !important;
-  animation: none !important;
-}
