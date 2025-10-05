@@ -26,10 +26,20 @@
 }
 
 /* Rotating caption */
-.rbx-subtitle{ margin:0 auto 36px; max-width:980px; color:#cfd6e4; line-height:1.5; }
-#rbx-rotating-caption{ display:inline-block; transition:opacity .45s ease, transform .45s ease; }
-.rbx-cap-out{ opacity:0; transform:translateY(6px); }
-.rbx-cap-in { opacity:1; transform:translateY(0); }
+.rbx-subtitle {
+  margin: 0 auto 36px;
+  max-width: 980px;
+  color: #cfd6e4;
+  line-height: 1.5;
+}
+
+#rbx-rotating-caption {
+  display: inline-block;
+  transition: opacity .45s ease;
+}
+
+.rbx-cap-out { opacity: 0; }
+.rbx-cap-in  { opacity: 1; }
 
 /* Metrics */
 .rbx-metrics{ display:flex; flex-wrap:wrap; justify-content:center; gap:28px; margin:0 0 36px; }
