@@ -532,14 +532,14 @@ body {
 /* Home strips: add breathing room before the Share button */
 .featured-strip .post-stats .btn--share,
 .post-strip    .post-stats .btn--share{
-  margin-left: 8px;  /* tweak to taste: 6–12px */
+  margin-left: 4px;  /* tweak to taste: 6–12px */
 }
 
 /* Share count number formatting */
 .btn--share .count{
   min-width: 2ch;
   font-variant-numeric: tabular-nums;
-  margin-left: .35rem;
+  margin-left: .15rem;
 }
 
 .btn--share:hover {
