@@ -698,12 +698,12 @@ title: "Rahul's Portfolio"
   --rbx-brightness: 1;
 }
 
-/* “Raised” outer lift + rim highlight (optional) */
+/* “Raised” outer lift + rim highlight (optional) 
 .rbx-bevel--raised{
   box-shadow:
     0 10px 24px rgba(0,0,0,0.18),
     0 4px 12px  rgba(0,0,0,0.10);
-}
+}*/
 
 /* Inner bevel edge (subtle inset light + shadow) */
 .rbx-bevel--raised::before{
@@ -722,9 +722,9 @@ title: "Rahul's Portfolio"
   position:absolute; inset:0;
   border-radius:inherit; pointer-events:none;
   z-index: 4; /* above sweep */
-  box-shadow:
+  /*box-shadow:
     0 0 6px rgba(255,255,255,0.7) inset,
-    0 0 8px rgba(255,255,255,0.5);
+    0 0 8px rgba(255,255,255,0.5);*/
   mix-blend-mode: overlay;
 }
 
