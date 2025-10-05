@@ -777,6 +777,75 @@ title: "Rahul's Portfolio"
   overflow:hidden;
 }
 
+/* --- Bevel thumbnail sizing: put dimensions on the WRAPPER, not the <img> --- */
+
+/* DESKTOP */
+.featured-strip .post-item .thumb .rbx-bevel{
+  width:170px; height:110px; border-radius:10px;
+}
+.post-strip .post-item .thumb .rbx-bevel{
+  width:150px; height:84px; border-radius:10px;
+}
+
+/* Make picture/img fill the bevel wrapper and keep the rounded clip */
+.featured-strip .thumb picture,
+.post-strip    .thumb picture{
+  display:block; width:100%; height:100%;
+  border-radius:inherit; overflow:hidden;
+}
+.rbx-bevel img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  border-radius:inherit !important;
+}
+
+/* MOBILE: square thumbs via the WRAPPER */
+@media (max-width: 720px){
+  :root { --mobile-thumb: 110px; }
+
+  #featured-strip .thumb,
+  #post-strip .thumb{
+    flex: 0 0 var(--mobile-thumb) !important;
+    max-width: var(--mobile-thumb) !important;
+    width: var(--mobile-thumb) !important;
+  }
+
+  /* size the bevel wrapper itself */
+  #featured-strip .thumb .rbx-bevel,
+  #post-strip .thumb .rbx-bevel{
+    width: var(--mobile-thumb) !important;
+    height: var(--mobile-thumb) !important;
+    border-radius:10px;
+  }
+
+  /* picture fills bevel */
+  #featured-strip .thumb picture,
+  #post-strip .thumb picture{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    border-radius:inherit !important;
+    overflow:hidden !important;
+  }
+
+  /* img always stretches to bevel */
+  #featured-strip .thumb img,
+  #post-strip .thumb img{
+    width:100% !important;
+    height:100% !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    border-radius:inherit !important;
+  }
+}
+
+/* Layering for the sweep (keeps it visible but below the rim) */
+.rbx-bevel{ position:relative; background:transparent; }
+.rbx-bevel img{ position:relative; z-index:1; }
+.rbx-bevel--raised::before{ z-index:2; }
+.rbx-sweep{ z-index:3; }          /* above image */
+.rbx-bevel--raised::after{ z-index:4; } /* rim highlight */
 
 
 </style>
