@@ -24,7 +24,7 @@ title: "Rahul's Portfolio"
       {%- if post.featured == true -%}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <div class="bevel">
+            <div class="rbx-bevel">
               <picture>
               {% if post.thumbnail_mobile %}
                 <source srcset="{{ post.thumbnail_mobile | relative_url }}" media="(max-width: 767px)">
@@ -149,7 +149,8 @@ title: "Rahul's Portfolio"
       {% for post in paginator.posts %}
         <li class="post-item">
           <a class="thumb" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-            <picture>
+            <div class="rbx-bevel">
+              <picture>
               {% if post.thumbnail_mobile %}
                 <source srcset="{{ post.thumbnail_mobile | relative_url }}" media="(max-width: 767px)">
               {% endif %}
@@ -159,6 +160,7 @@ title: "Rahul's Portfolio"
               <img src="{{ (post.thumbnail | default: post.image | default: '/assets/images/default.webp') | relative_url }}"
                    alt="{{ post.title }}" loading="lazy">
             </picture>
+            </div>
           </a>
           <div class="post-text">
             <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
@@ -674,53 +676,66 @@ title: "Rahul's Portfolio"
   stroke: none !important;
 }
 
- .bevel {
+.rbx-bevel {
+  position:relative;
   display:inline-block;
   border-radius:20px;
   overflow:hidden;
-  position:relative;
   background:#fff;
 
-  /* Stronger outer lift */
+  /* Strong outer lift all around */
   box-shadow:
-    0 10px 24px rgba(0,0,0,0.18),
-    0 4px 12px rgba(0,0,0,0.10);
+    0 10px 24px rgba(0,0,0,0.22),
+    0 -6px 16px rgba(0,0,0,0.15),
+    6px 0 16px rgba(0,0,0,0.15),
+    -6px 0 16px rgba(0,0,0,0.15);
 }
 
-.bevel img {
+.rbx-bevel img {
   display:block;
-  width:100%;
+  width:420px;
   height:auto;
   border-radius:inherit;
 }
 
-/* Inner bevel edge */
-.bevel::before {
+/* Inner depth: balanced diagonals */
+.rbx-bevel::before {
   content:"";
   position:absolute;
   inset:0;
   border-radius:inherit;
   pointer-events:none;
   box-shadow:
-    inset 3px 3px 6px rgba(0,0,0,0.25),
-    inset -3px -3px 6px rgba(255,255,255,0.95);
+    inset 5px 5px 12px rgba(0,0,0,0.25),
+    inset -5px -5px 12px rgba(0,0,0,0.20);
 }
 
-/* Rim highlight */
-.bevel::after {
+/* Flashy animated edge sweep */
+.rbx-bevel::after {
   content:"";
   position:absolute;
   inset:0;
   border-radius:inherit;
   pointer-events:none;
-  box-shadow:
-    0 0 6px rgba(255,255,255,0.7) inset,
-    0 0 8px rgba(255,255,255,0.5);
-  mix-blend-mode:overlay;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(0,170,255,0.35) 40%,
+    rgba(0,170,255,0.35) 60%,
+    transparent 80%
+  );
+  background-size: 200% 200%;
+  animation: rbxBevelSweep 3.5s linear infinite;
+  mix-blend-mode: screen; /* adds premium shimmer without recoloring image */
+}
+
+@keyframes rbxBevelSweep {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
  
-.featured-strip .bevel img,
-.post-strip .bevel img {
+.featured-strip .rbx-bevel img,
+.post-strip .rbx-bevel img {
   width:100%;
   height:100%;
   object-fit:cover;
