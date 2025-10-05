@@ -1,4 +1,24 @@
+/* assets/css/rb-intro.css */
+:root{
+  --rb-blue:#0b66ff;
+  --rb-blue2:#1ea7ff;
+  --rb-ink:#0b0b0b;
+  --rb-reveal:0%;
+}
 
+body.rb-intro-lock{ overflow:hidden; }
+
+/* ===== Overlay ===== */
+.rb-intro{
+  position:fixed; inset:0; z-index:9999;
+  background: radial-gradient(1200px 600px at 50% 0%, #121929 0%, #0b1120 45%, #070c18 100%);
+  display:none;
+  -webkit-mask: radial-gradient(circle at 50% 55%, transparent var(--rb-reveal), #000 calc(var(--rb-reveal) + 1%));
+          mask: radial-gradient(circle at 50% 55%, transparent var(--rb-reveal), #000 calc(var(--rb-reveal) + 1%));
+  transition: opacity .9s ease, visibility .9s ease;
+}
+.rb-intro.show{ display:block; }
+.rb-intro.exit{ opacity:0; visibility:hidden; }
 
 /* Optional: subtle sweep along the very top */
 .rb-intro::before{
