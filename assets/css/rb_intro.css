@@ -143,63 +143,39 @@
 }
 
 /* === Premium Siri-style animated gradient for metric numbers === */
-/* Base fallback (never shows colored blocks) */
+/* Base fallback */
 .rbx-metric-val{
-  position: relative;           /* needed for ::after glint */
-  display: inline;              /* avoid boxy gradient blocks */
-  color: #69c0ff;               /* fallback ink if clipping unsupported */
+  position: relative;
+  display: inline;
+  color: #69c0ff;
   font-weight: 800;
   letter-spacing: .5px;
-  padding: 0; margin: 0;        /* ensure no height/width artifacts */
-  background: none;             /* neutralize any inherited background */
-  text-shadow: none;
+  background: none;
 }
 
-/* Upgrade when text clipping is supported (Chrome/Safari/Firefox) */
+/* Upgrade: aurora gradient with built-in glint */
 @supports ( (-webkit-background-clip: text) or (background-clip: text) ) {
   .rbx-metric-val{
-    display: inline-block;                  /* paint background on the text box */
+    display: inline-block;
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
     -webkit-background-clip: text;
-    background-clip: text;
+            background-clip: text;
 
-    /* Siri aurora sweep */
-    background-image: linear-gradient(
-      90deg,
-      #60a5fa, #22d3ee, #06b6d4,
-      #a78bfa, #ec4899, #60a5fa
-    );
-    background-size: 300% 100%;
-    background-repeat: no-repeat;
-    animation: rbx-aurora-slide 6s ease-in-out infinite;
+    background-image:
+      linear-gradient(90deg,#60a5fa,#22d3ee,#06b6d4,#a78bfa,#ec4899,#60a5fa),
+      linear-gradient(90deg,transparent 0%,rgba(255,255,255,.22) 50%,transparent 100%);
+    background-size: 300% 100%, 200% 100%;
+    animation: rbx-metric-aurora 6s ease-in-out infinite;
 
-    /* very soft aura */
     text-shadow:
-      0 0 10px rgba(96,165,250,0.20),
-      0 0 18px rgba(167,139,250,0.18);
+      0 0 10px rgba(96,165,250,.20),
+      0 0 18px rgba(167,139,250,.18);
   }
 
-  /* subtle moving glint across the digits */
-  .rbx-metric-val::after{
-    content: "";
-    position: absolute; inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.22) 50%, transparent 100%);
-    background-size: 200% 100%;
-    mix-blend-mode: screen;
-    pointer-events: none;
-    animation: rbx-aurora-glint 3.5s linear infinite;
-  }
-
-  @keyframes rbx-aurora-slide{
-    0%   { background-position:   0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position:   0% 50%; }
-  }
-  @keyframes rbx-aurora-glint{
-    0%   { background-position: -100% 0; opacity: 0; }
-    10%  { opacity: .6; }
-    60%  { background-position: 150% 0; opacity: .6; }
-    100% { opacity: 0; }
+  @keyframes rbx-metric-aurora{
+    0%   { background-position:   0% 50%, -100% 0; }
+    50%  { background-position: 100% 50%,   50% 0; }
+    100% { background-position:   0% 50%,  150% 0; }
   }
 }
