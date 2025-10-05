@@ -3,15 +3,15 @@
   --rb-blue:#0b66ff;
   --rb-blue2:#1ea7ff;
   --rb-ink:#0b0b0b;
-  --rb-reveal: 0%;
+  --rb-reveal:0%;
 }
 
 body.rb-intro-lock{ overflow:hidden; }
 
-/* Overlay */
+/* ===== Overlay ===== */
 .rb-intro{
   position:fixed; inset:0; z-index:9999;
-  background:#fff;
+  background: radial-gradient(1200px 600px at 50% 0%, #121929 0%, #0b1120 45%, #070c18 100%);
   display:none;
   -webkit-mask: radial-gradient(circle at 50% 55%, transparent var(--rb-reveal), #000 calc(var(--rb-reveal) + 1%));
           mask: radial-gradient(circle at 50% 55%, transparent var(--rb-reveal), #000 calc(var(--rb-reveal) + 1%));
@@ -20,13 +20,31 @@ body.rb-intro-lock{ overflow:hidden; }
 .rb-intro.show{ display:block; }
 .rb-intro.exit{ opacity:0; visibility:hidden; }
 
-/* Top */
+/* Optional: subtle sweep along the very top */
+.rb-intro::before{
+  content:"";
+  position:fixed; left:0; top:0; width:100%; height:8px;
+  pointer-events:none; z-index:1;
+  background:linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(160,200,255,0.35) 35%,
+    rgba(255,255,255,0.85) 50%,
+    rgba(160,200,255,0.35) 65%,
+    rgba(255,255,255,0) 100%);
+  filter:blur(3px) saturate(1.1);
+  transform:translateX(-100%);
+  animation: rb-top-scan 3.2s linear infinite;
+}
+@keyframes rb-top-scan{ to{ transform:translateX(100%); } }
+
+/* ===== Header / Hero ===== */
 .rb-top{
   position:absolute; left:50%; top:6%;
   transform:translateX(-50%);
   text-align:center;
   width:min(900px, 92vw);
 }
+
 .rb-name{
   margin:0 0 6px; font-weight:800; letter-spacing:.02em;
   font-size: clamp(22px, 5vw, 40px);
@@ -34,222 +52,125 @@ body.rb-intro-lock{ overflow:hidden; }
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-.rb-tag{ margin:0 0 20px; color:#1548b6; opacity:.9; font-size: clamp(13px, 2.6vw, 16px); }
 
-/* Metrics */
+/* Caption text — no overlays, just text */
+.rb-tag{
+  margin:0 0 20px;
+  color:#cfe1ff;
+  opacity:.95;
+  font-weight:500;
+  letter-spacing:.01em;
+  min-height:1.2em; /* reserve height */
+}
+/* hard kill any previous overlays that might exist */
+.rb-tag::before,
+.rb-tag::after{ content:none !important; display:none !important; }
+
+/* ===== Metrics ===== */
 .rb-metrics{ display:flex; flex-wrap:wrap; justify-content:center; gap:28px; margin-bottom:28px; }
 .rb-metric{ text-align:center; }
-.rb-num{ font-size: clamp(18px, 4vw, 28px); font-weight:700; color:var(--rb-blue); margin-bottom:4px; }
-.rb-label{ font-size: clamp(12px, 2.6vw, 14px); color:#444; }
+.rb-num{ font-size: clamp(18px, 4vw, 28px); font-weight:700; color:#dfe7ff; margin-bottom:4px; }
+.rb-label{ font-size: clamp(12px, 2.6vw, 14px); color:#c7d2ff; }
 
-/* Signature */
+/* ===== Optional signature line (if present) ===== */
 .rb-signature{ position:absolute; left:50%; top:22%; transform:translateX(-50%); width:min(760px, 88vw); }
 .rb-signature svg{ width:100%; height:auto; display:block; }
 .rb-stroke{
-  stroke:url(#rb-g); 
-  stroke-width:2;   /* make it thin */
-  fill:none; 
-  stroke-linecap:round;
-  filter: drop-shadow(0 0 4px rgba(11,102,255,.15));
+  stroke:url(#rb-g); stroke-width:2; fill:none; stroke-linecap:round;
+  filter: drop-shadow(0 0 4px rgba(120,170,255,.18));
 }
-@keyframes rb-draw{ to{ stroke-dashoffset:0 } }
 
-/* Loaders */
-.rb-loaders{ position:absolute; left:50%; top:48%; transform:translateX(-50%); width:min(760px, 88vw); display:grid; gap:14px; }
-.rb-row{ display:grid; grid-template-columns:160px 1fr 58px; align-items:center; gap:12px; }
+/* ===== Loaders (rows) ===== */
+.rb-loaders{
+  position:absolute; left:50%; top:48%;
+  transform:translateX(-50%);
+  width:min(760px, 88vw);
+  display:grid; gap:14px;
+}
+
+.rb-row{
+  display:grid; grid-template-columns:160px 1fr 58px;
+  align-items:center; gap:12px;
+}
+
+.rb-label{ color:#c7d2ff; }
+
+/* Track */
 .rb-bar{
-  position:relative; height:10px; border-radius:999px; overflow:hidden;
-  background:#eef5ff; border:1px solid rgba(11,102,255,.2);
-  box-shadow: inset 0 0 14px rgba(11,102,255,.12);
+  position:relative;
+  height:10px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(180,200,255,0.20);
+  box-shadow: inset 0 0 14px rgba(90,130,255,.16);
 }
-.rb-bar i{
-  position:absolute; inset:0; width:0%;
-  background: linear-gradient(90deg, var(--rb-blue), var(--rb-blue2));
-  box-shadow: 0 0 14px rgba(11,102,255,.28);
-  transition: width .9s cubic-bezier(.2,.7,.2,1);
-}
-.rb-pct{ font-variant-numeric: tabular-nums; color:#245bd6; }
 
-/* Actions */
+/* Fill — IMPORTANT: no inset:0; pin left/top/bottom and animate width */
+.rb-bar i{
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width:0; /* JS animates to NN% */
+  background: linear-gradient(90deg, #5ba8ff, #7cc7ff);
+  box-shadow: 0 0 16px rgba(110,170,255,.35);
+  transition: width .9s cubic-bezier(.2,.7,.2,1);
+  overflow:hidden;
+}
+
+/* Optional glare — only when width is being set by JS */
+.rb-bar i::after{
+  content:"";
+  position:absolute;
+  top:-30%; left:-15%;
+  width:70px; height:200%;
+  pointer-events:none;
+  background:linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.35) 40%,
+    rgba(255,255,255,0.85) 50%,
+    rgba(255,255,255,0.35) 60%,
+    rgba(255,255,255,0) 100%);
+  filter:blur(2px);
+  transform:translateX(-120%) rotate(10deg);
+  mix-blend-mode:screen;
+  opacity:0; /* hidden by default */
+}
+.rb-bar i[style*="width"]::after{
+  opacity:1;
+  animation: rb-bar-glare 1.1s ease-out infinite;
+}
+@keyframes rb-bar-glare{
+  0%   { transform: translateX(-120%) rotate(10deg); opacity:0; }
+  10%  { opacity:.9; }
+  60%  { opacity:.9; }
+  100% { transform: translateX(140%) rotate(10deg); opacity:0; }
+}
+
+.rb-pct{ font-variant-numeric: tabular-nums; color:#e6eeff; }
+
+/* ===== Actions ===== */
 .rb-actions{
-  position:absolute; left:50%; top:calc(44% + 14px + 5*42px + 32px);
+  position:absolute; left:50%;
+  top:calc(44% + 14px + 5*42px + 32px);
   transform:translateX(-50%);
   width:min(760px, 88vw);
   display:flex; gap:12px; justify-content:center; align-items:center;
   opacity:0; pointer-events:none; transition: opacity .4s ease;
 }
 .rb-actions.show{ opacity:1; pointer-events:auto; }
+
 .rb-btn{
-  appearance:none; border:1px solid rgba(11,102,255,.25);
+  appearance:none; border:1px solid rgba(160,190,255,.28);
   padding:12px 18px; border-radius:999px; font-weight:700;
-  letter-spacing:.01em; cursor:pointer; background:#fff; color:#0f3ea6;
+  letter-spacing:.01em; cursor:pointer; background:rgba(255,255,255,0.06); color:#dbe6ff;
 }
 .rb-btn.primary{
-  background: linear-gradient(180deg, var(--rb-blue), var(--rb-blue2));
-  color:#fff; border-color:transparent;
-  box-shadow: 0 6px 22px rgba(11,102,255,.25);
-}
-.rb-btn:focus{ outline:2px solid rgba(11,102,255,.4); outline-offset:2px; }
-
-/* Reveal */
-.rb-intro.reveal{ animation: rb-openHole .9s ease-out forwards; }
-@keyframes rb-openHole{ from{ --rb-reveal:0% } to{ --rb-reveal:130% } }
-
-
-
-/* Premium dark theme for intro + homepage */
-.rb-intro {
-  background: radial-gradient(1200px 600px at 50% 0%, #121929 0%, #0b1120 45%, #070c18 100%);
-}
-
-/* Typography colors tuned for dark */
-.rb-name { /* gradient text is already bright; keep as-is */ }
-.rb-tag { color: #b9ccff; opacity: .95; }
-.rb-label { color: #c7d2ff; }
-.rb-num { color: #dfe7ff; }
-
-/* Bars tuned for dark */
-.rb-bar {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(180,200,255,0.20);
-  box-shadow: inset 0 0 14px rgba(90,130,255,.16);
-}
-.rb-bar i {
-  background: linear-gradient(90deg, #5ba8ff, #7cc7ff);
-  box-shadow: 0 0 16px rgba(110,170,255,.35);
-}
-.rb-pct { color: #e6eeff; }
-
-/* Buttons on dark */
-.rb-btn {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(160,190,255,.28);
-  color: #dbe6ff;
-}
-.rb-btn.primary {
   background: linear-gradient(180deg, #3f8cff, #69b3ff);
-  color: #041024;
-  border-color: transparent;
+  color:#041024; border-color:transparent;
   box-shadow: 0 10px 26px rgba(80,150,255,.28);
 }
-.rb-btn:focus { outline: 2px solid rgba(120,170,255,.55); }
+.rb-btn:focus{ outline:2px solid rgba(120,170,255,.55); outline-offset:2px; }
 
-/* Thin straight line version (if you're using it) */
-.rb-stroke {
-  stroke-width: 2;
-  filter: drop-shadow(0 0 4px rgba(120,170,255,.18));
-}
-
-/* Make the homepage (under the overlay) dark as well */
-body.rb-home-dark {
-  background: linear-gradient(180deg, #0a1020 0%, #0a0f1a 40%, #070c16 100%);
-  color: #e8ecff;
-}
-
-/* ==== Cinematic tagline effect ==== */
-.rb-tag{
-  position: relative;
-  color:#b9ccff;             /* looks great on your dark intro */
-  opacity:.95;
-}
-
-/* fade-up + defocus-to-crisp + letter-spacing settle */
-.rb-tag.rb-cine{
-  --dur: 900ms;
-  animation: rb-tag-cine var(--dur) cubic-bezier(.2,.7,.2,1) both;
-}
-@keyframes rb-tag-cine{
-  0%   { opacity:0; transform: translateY(10px); filter: blur(6px); letter-spacing:.08em; }
-  60%  { opacity:1; transform: translateY(0);   filter: blur(0.5px); }
-  100% { opacity:1; transform: translateY(0);   filter: blur(0); letter-spacing:.01em; }
-}
-
-/* subtle light sweep across the text */
-.rb-tag.rb-cine::after{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.28) 8%, transparent 16%);
-  transform: translateX(-120%);
-  animation: rb-sheen 1.1s ease-out 120ms both;
-  pointer-events:none;
-  mix-blend-mode: screen;
-}
-@keyframes rb-sheen{
-  to { transform: translateX(120%); }
-}
-
-/* === Cinematic rotating taglines with sheen + spark === */
-.rb-tag{
-  position: relative;
-  color:#cfe1ff;
-  font-weight:500;
-  letter-spacing:.01em;
-  min-height: 1.2em; /* reserve space to avoid reflow between lines */
-  overflow: hidden;  /* hide the flying spark overflow */
-}
-
-/* Each shown line gets this class for the animation */
-.rb-tag.showline{
-  --dur: 1100ms;                /* per-line runtime */
-  animation: rb-tag-fade var(--dur) ease both;
-  will-change: opacity, transform, filter;
-}
-
-
-/* Fade in, sharpen, fade out */
-@keyframes rb-tag-fade{
-  0%   { opacity:0; transform: translateY(6px); filter: blur(6px); }
-  20%  { opacity:1; transform: translateY(0);   filter: blur(.6px); }
-  70%  { opacity:1; transform: translateY(0);   filter: blur(0); }
-  100% { opacity:0; transform: translateY(-6px); filter: blur(4px); }
-}
-
-@keyframes rb-sheen{
-  to { transform: translateX(120%); }
-}
-
-@keyframes rb-spark-run{
-  0%   { left:-6%;  opacity:0;   transform: translateY(-50%) scale(.85); }
-  15%  { opacity:1; }
-  65%  { left:50%;  opacity:1;   transform: translateY(-50%) scale(1); }
-  100% { left:106%; opacity:0;   transform: translateY(-50%) scale(.9); }
-}
-
-
-/* ==== Top-edge cinematic sweep ==== */
-.rb-intro::before{
-  content:"";
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 8px;                        /* thin bar at the very top */
-  pointer-events: none;
-  z-index: 1;                         /* stays above bg, below content */
-  background: linear-gradient(90deg,
-    rgba(255,255,255,0) 0%,
-    rgba(160,200,255,0.35) 35%,
-    rgba(255,255,255,0.85) 50%,
-    rgba(160,200,255,0.35) 65%,
-    rgba(255,255,255,0) 100%);
-  filter: blur(3px) saturate(1.1);
-  transform: translateX(-100%);
-  animation: rb-top-scan 3.2s linear infinite;
-}
-@keyframes rb-top-scan{
-  to { transform: translateX(100%); }
-}
-
-/* Ensure the fill is the containing context */
-.rb-bar i{
-  position: relative;     /* so the glare runs within the fill only */
-  overflow: hidden;       /* keep glare clipped inside the fill */
-}
-
-/* Sweep left -> right across the colored fill */
-@keyframes rb-bar-glare{
-  0%   { transform: translateX(-120%) rotate(10deg); opacity: 0; }
-  10%  { opacity: .9; }
-  60%  { opacity: .9; }
-  100% { transform: translateX(140%) rotate(10deg); opacity: 0; }
-}
+/* ===== Reveal animation ===== */
+.rb-intro.reveal{ animation: rb-openHole .9s ease-out forwards; }
+@keyframes rb-openHole{ from{ --rb-reveal:0% } to{ --rb-reveal:130% } }
