@@ -32,7 +32,10 @@
 <body{% if page.collection == "posts" %} class="is-post"{% endif %}>
 
  <!-- Reading Progress Bar -->
-<div id="rbx-progressbar" class="rbx-progress rbx-bottom" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-hidden="true">
+<div id="rbx-progressbar"
+     class="rbx-progress rbx-bottom"
+     data-rbx-scroll-root=".main-inner"
+     role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-hidden="true">
   <span class="rbx-progress__fill"></span>
   <span class="rbx-progress__sheen" aria-hidden="true"></span>
 </div>
