@@ -50,6 +50,25 @@
       </div>
     </div>
 
+    <!-- Projects growth line (hidden until bars finish) -->
+<div class="rbx-progress-alt" id="rbx-projects-alt" hidden>
+  <div class="rbx-progress-head">
+    <span class="label">Projects over time</span>
+    <span class="value" id="rbx-projects-total">—</span>
+  </div>
+
+  <!-- Simple 0→N line, sized to container; JS builds path -->
+  <svg class="rbx-progress-spark"
+       id="rbx-projects-spark"
+       viewBox="0 0 240 60"
+       preserveAspectRatio="none"
+       aria-label="Projects growth line chart"></svg>
+
+  <!-- Inject your dynamic total projects using Liquid -->
+  <span id="rbx-total-posts" data-total="{{ site.posts | size }}" hidden></span>
+</div>
+
+
     <!-- Actions (no 'btn' class used) -->
     <div class="rbx-actions">
       <a href="/" class="rbx-cta rbx-cta-primary" id="rbx-continue">Continue to site</a>
