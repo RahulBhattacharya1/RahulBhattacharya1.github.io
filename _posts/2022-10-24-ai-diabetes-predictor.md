@@ -4,7 +4,7 @@ title: "Building my AI Diabetes Risk Classifier"
 date: 2022-10-24 18:32:43
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/diabetes_risk.webp
 demo_link: https://rahuls-ai-diabetes-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-diabetes-predictor
 ---
