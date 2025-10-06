@@ -4,7 +4,7 @@ title: "Creating my AI Cancer Severity Predictor"
 date: 2022-11-16 14:27:32
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/cancer_severity.webp
 demo_link: https://rahuls-ai-cancer-severity-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_cancer_severity_predictor
 featured: true
