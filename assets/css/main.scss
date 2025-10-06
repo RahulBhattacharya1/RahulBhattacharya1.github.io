@@ -1842,71 +1842,72 @@ pre {
 
   .rbx-mobile-tech-hub { margin: 16px 0; padding: 0; }
 
-  /* Two columns touching (tags | list) */
   .rbx-mth-shell{
     display: grid;
-    grid-template-columns: 110px 1fr; /* tags rail | posts pane */
-    gap: 0; /* touching */
-    border: 1px solid #d8d8d8; /* outer border for table feel */
-    border-left: 0; /* we’ll add borders per cell below */
-    border-right: 0;
-  }
-
-  /* Left tag column — plain list, no counts */
-  .rbx-mth-tags{
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid #d8d8d8; /* divider */
-  }
-  .rbx-mth-tag{
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 8px 10px;
-    border-bottom: 1px solid #e8e8e8;
-    background: #fff;
-    font-size: 14px;
-    line-height: 1.2;
-  }
-  .rbx-mth-tag.is-active{ background: #f3f6ff; }
-  .rbx-mth-tag:last-child{ border-bottom: 0; }
-
-  /* Right pane */
-  .rbx-mth-pane{ display: flex; flex-direction: column; }
-
-  /* Tabs touching, square, plain */
-  .rbx-mth-tabs{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 110px 1fr; /* left rail | right pane */
+    grid-template-rows: auto 1fr;     /* header | body */
+    gap: 0;
+    border-top: 1px solid #d8d8d8;
     border-bottom: 1px solid #d8d8d8;
+  }
+
+  /* Header row spans both columns, but visually split into left+right cells */
+  .rbx-mth-head{
+    grid-column: 1 / span 2;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    background: #f7f7f7;
+    border-bottom: 1px solid #d8d8d8;
+  }
+  .rbx-mth-head-left{
+    padding: 10px 10px;
+    border-right: 1px solid #d8d8d8;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* Tabs sit in the right header cell, flat & touching */
+  .rbx-mth-tabs{
+    display: flex;
   }
   .rbx-mth-tab{
     appearance: none;
     border: 0;
     margin: 0;
-    padding: 10px 8px;
-    font-weight: 600;
+    padding: 10px 12px;
     background: #f7f7f7;
     border-right: 1px solid #d8d8d8;
+    font-weight: 600;
     font-size: 14px;
   }
   .rbx-mth-tab:last-child{ border-right: 0; }
   .rbx-mth-tab.is-active{ background: #fff; }
 
-  /* Posts list — simple rows, 5 visible, scroll the rest */
+  /* Body row: left tags cell and right posts cell align under the header */
+  .rbx-mth-tags{
+    grid-row: 2; grid-column: 1;
+    display: flex; flex-direction: column;
+    border-right: 1px solid #d8d8d8;
+  }
+  .rbx-mth-tag{
+    display: block; width: 100%;
+    text-align: left; padding: 8px 10px;
+    border-bottom: 1px solid #e8e8e8;
+    background: #fff; font-size: 14px; line-height: 1.2;
+  }
+  .rbx-mth-tag.is-active{ background: #f3f6ff; }
+  .rbx-mth-tag:last-child{ border-bottom: 0; }
+
+  .rbx-mth-pane{ grid-row: 2; grid-column: 2; display: flex; flex-direction: column; }
   .rbx-mth-list{
     --row-h: 44px;
     max-height: calc(var(--row-h) * 5);
     overflow-y: auto;
   }
   .rbx-mth-row{
-    display: block;
-    padding: 10px 12px;
+    display: block; padding: 10px 12px;
     border-bottom: 1px solid #e8e8e8;
-    font-size: 14px;
-    line-height: 1.2;
-    color: #1b1b1b;
-    background: #fff;
+    font-size: 14px; line-height: 1.2; color: #1b1b1b; background: #fff;
   }
   .rbx-mth-row:last-child{ border-bottom: 0; }
 
