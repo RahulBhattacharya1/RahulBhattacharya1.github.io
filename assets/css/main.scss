@@ -1897,6 +1897,10 @@ pre {
   }
 }
 
+/* Progress bar – mobile robustness */
+.rbx-progress{ z-index: 2147483647 !important; }
+.rbx-progress__fill{ transform-origin: left center; }  /* ensure scale grows from left */
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
