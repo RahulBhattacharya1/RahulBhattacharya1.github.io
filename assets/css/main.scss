@@ -1821,10 +1821,27 @@ pre {
   100% { transform: scale(1); }
 }
 
-.progress-bar {
-  height: 8px;
-  background: #04AA6D;
+/* Reading progress bar (top, 4px, always on top) */
+.progress-container{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: transparent;       /* no grey strip behind */
+  pointer-events: none;
+  z-index: 9999;
+}
+.progress-bar{
+  height: 100%;
   width: 0%;
+  background: linear-gradient(90deg,
+    #b9c7ff, #7fb6ff, #67e8f9, #80ffd3, #b9c7ff);
+  background-size: 300% 100%;
+  animation: metallicSweep 6s linear infinite;
+  box-shadow: 0 0 6px rgba(0,0,0,.12), 0 0 20px rgba(120,170,255,.35) inset;
+}
+@keyframes metallicSweep{
+  0%{ background-position: 0% 50%; }
+  100%{ background-position: 300% 50%; }
 }
 
 /* Giscus Comments Box */
