@@ -482,6 +482,18 @@
             a.target = '_blank';
             a.setAttribute('data-iconized', '1'); // prevent reprocessing inside
             frag.appendChild(a);
+
+            // NEW: still show the icon next to the link
+            if (iconSrc) {
+              var img = document.createElement('img');
+              img.src = iconSrc;
+              img.alt = match + ' icon';
+              img.className = 'inl-icon';
+              img.style.height = '1em';
+              img.style.verticalAlign = '-0.15em';
+              img.style.marginLeft = '.15em';
+              frag.appendChild(img);
+            }            
           } else {
             // Plain word + optional icon
             // Wrap the word in a span and mark as iconized so we don't duplicate on re-runs
