@@ -1,16 +1,15 @@
-GB{% assign tag_pairs = site.tags | sort_natural %}
 <section id="rbx-mobile-tech-hub" class="rbx-mobile-tech-hub{% if include.mobile_only %} rbx-monly{% endif %}" aria-label="Explore by technology">
   <div class="rbx-mth-shell">
     <!-- Left: Tag Ribbon -->
-<nav class="rbx-mth-tags" aria-label="Tags"></nav>
+    <nav class="rbx-mth-tags" aria-label="Tags"></nav>
 
     <!-- Right: Content Pane -->
     <div class="rbx-mth-pane">
       <div class="rbx-mth-tabs" role="tablist" aria-label="Post filter">
-        <button class="rbx-mth-tab is-active" role="tab" aria-selected="true" data-view="featured">
+        <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="featured">
           Featured Posts
         </button>
-        <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="all">
+        <button class="rbx-mth-tab is-active" role="tab" aria-selected="true" data-view="all">
           All Posts
         </button>
       </div>
@@ -48,10 +47,10 @@ GB{% assign tag_pairs = site.tags | sort_natural %}
     if(!root) return;
 
     const payload = JSON.parse(root.querySelector('#rbx-mth-data').textContent.trim());
-  const POSTS = (payload.posts || []).map(p => ({
-    ...p,
-    _tags: (p.tags || []).map(t => String(t).toLowerCase())
-  }));
+    const POSTS = (payload.posts || []).map(p => ({
+      ...p,
+      _tags: (p.tags || []).map(t => String(t).toLowerCase())
+    }));
 
     const tagsNav = root.querySelector('.rbx-mth-tags');
     const tabsEl  = root.querySelector('.rbx-mth-tabs');
@@ -59,7 +58,7 @@ GB{% assign tag_pairs = site.tags | sort_natural %}
     const emptyEl = root.querySelector('.rbx-mth-empty');
 
     let currentTag = null;
-    let currentView = 'featured';
+    let currentView = 'all'; // default to All so first paint isn't blank
 
     function setActiveTag(btn){
       tagsNav.querySelectorAll('.rbx-mth-tag').forEach(b=>b.classList.remove('is-active'));
@@ -85,7 +84,13 @@ GB{% assign tag_pairs = site.tags | sort_natural %}
       listEl.innerHTML = '';
       emptyEl.hidden = items.length > 0;
 
-      items.forEach(p=>{
+      // If user is on Featured but nothing to show, auto-flip to All
+      if(currentView === 'featured' && items.length === 0){
+        const allBtn = root.querySelector('.rbx-mth-tab[data-view="all"]');
+        if(allBtn){ setActiveTab(allBtn); return render(); }
+      }
+
+      for(const p of items){
         const a = document.createElement('a');
         a.href = p.url;
         a.className = 'rbx-mth-card';
@@ -103,44 +108,45 @@ GB{% assign tag_pairs = site.tags | sort_natural %}
         box.appendChild(h4); box.appendChild(meta);
         a.appendChild(img); a.appendChild(box);
         listEl.appendChild(a);
-      });
+      }
       listEl.setAttribute('aria-busy','false');
     }
 
-  // Build tag map: { tag -> count }, lowercase & dedup
-  function buildTagMap(){
-    const map = new Map();
-    for(const p of POSTS){
-      const uniq = Array.from(new Set(p._tags || []));
-      for(const t of uniq){
-        map.set(t, (map.get(t) || 0)  1);
+    // Build tag map: { tag -> count }, lowercase & dedup
+    function buildTagMap(){
+      const map = new Map();
+      for(const p of POSTS){
+        const uniq = Array.from(new Set(p._tags || []));
+        for(const t of uniq){
+          map.set(t, (map.get(t) || 0) + 1); // <-- fixed +
+        }
       }
+      return map;
     }
-    return map;
-  }
 
-  // Render the left ribbon from the map
-  function renderTags(){
-    const map = buildTagMap();
-    const entries = Array.from(map.entries())
-      .sort((a,b) => a[0].localeCompare(b[0])); // alpha; swap to count sort if you like
-    const frag = document.createDocumentFragment();
-    for(const [tag, count] of entries){
-      const btn = document.createElement('button');
-      btn.className = 'rbx-mth-tag';
-      btn.dataset.tag = tag;
-      btn.innerHTML =
-        `<span class="rbx-mth-tag-label">${tag}</span>
-         <span class="rbx-mth-tag-count">${count}</span>`;
-      frag.appendChild(btn);
+    // Render the left ribbon from the map
+    function renderTags(){
+      const map = buildTagMap();
+      const entries = Array.from(map.entries())
+        .sort((a,b) => a[0].localeCompare(b[0])); // alpha; change to (b[1]-a[1]) for count desc
+      const frag = document.createDocumentFragment();
+      for(const [tag, count] of entries){
+        const btn = document.createElement('button');
+        btn.className = 'rbx-mth-tag';
+        btn.dataset.tag = tag;
+        btn.innerHTML =
+          `<span class="rbx-mth-tag-label">${tag}</span>
+           <span class="rbx-mth-tag-count">${count}</span>`;
+        frag.appendChild(btn);
+      }
+      tagsNav.innerHTML = '';
+      tagsNav.appendChild(frag);
     }
-    tagsNav.innerHTML = '';
-    tagsNav.appendChild(frag);
-  }
-  
+
+    // First render
     renderTags();
-  let firstTagBtn = tagsNav.querySelector('.rbx-mth-tag');
-if(firstTagBtn){ setActiveTag(firstTagBtn); }
+    const firstTagBtn = tagsNav.querySelector('.rbx-mth-tag');
+    if(firstTagBtn){ setActiveTag(firstTagBtn); }
 
     tagsNav.addEventListener('click', (e)=>{
       const btn = e.target.closest('.rbx-mth-tag'); if(!btn) return;
