@@ -4,7 +4,7 @@ title: "Creating my AI Hospital Billing Estimator"
 date: 2022-09-24 14:25:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/hospital_billing.webp
 demo_link: https://rahuls-ai-hospital-billing-estimator.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_hospital-billing_estimator
 ---
