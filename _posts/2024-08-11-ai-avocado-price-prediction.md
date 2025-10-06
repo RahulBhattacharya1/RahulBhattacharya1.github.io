@@ -4,7 +4,7 @@ title: "Building my AI Avocado Price Predictor"
 date: 2024-08-11 10:21:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/avocado.webp
 demo_link: https://rahuls-ai-avocado-price-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_avocado_price_prediction
 featured: true
