@@ -27,9 +27,9 @@
 /* Frame that hosts the spark ring */
 .sidebar .avatar-frame {
   position: relative;
+  display: inline-block;
   border-radius: 50%;
-  overflow: hidden;                 // keep clipping the zoom
-  box-shadow: 0 0 0 2px #02A9BF;    // ← ring
+  margin: 0 auto 0.75rem;
 }
 
 /* caret that never shifts vertically when the word is empty */
