@@ -4,7 +4,7 @@ title: "Creating my Employee Attrition Predictor"
 date: 2022-11-03 21:46:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/attrition.webp
 demo_link: https://rahuls-ai-employee-attrition-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_employee_attrition_predictor
 ---
