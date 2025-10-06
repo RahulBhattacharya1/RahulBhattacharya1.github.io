@@ -257,12 +257,14 @@ function rbxFormatCaption(text){
 
     let i = 0;
     el.innerHTML = rbxFormatCaption(RBX_CAPTIONS[i]); // initial paint
+    if (window.runWordIconizer) window.runWordIconizer(el);
 
     function next(){
       el.classList.add("rbx-cap-out");
       setTimeout(()=>{
         i = (i + 1) % RBX_CAPTIONS.length;
         el.innerHTML = rbxFormatCaption(RBX_CAPTIONS[i]); // IMPORTANT: innerHTML
+        if (window.runWordIconizer) window.runWordIconizer(el);
         el.classList.remove("rbx-cap-out");
         el.classList.add("rbx-cap-in");
         setTimeout(()=> el.classList.remove("rbx-cap-in"), RBX_FADE_MS + 20);
