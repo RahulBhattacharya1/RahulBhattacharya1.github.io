@@ -241,22 +241,18 @@
 }
 
 /* === Banner Background Image Layer === */
-#rb-intro::before {
-  content: "";
-  position: absolute;
-  inset: 0; /* top:0; right:0; bottom:0; left:0 */
-  background: url("/assets/images/banner-bg.webp") no-repeat center center;
-  background-size: cover;           /* stretch to fit screen */
-  filter: blur(6px) brightness(0.9); /* blur + slight dim for readability */
+.rbx-intro-overlay { position: fixed; inset: 0; z-index: 9999; } /* already present */
+
+.rbx-intro-overlay::before{
+  content:"";
+  position:absolute; inset:0;
+  background: url("/assets/images/banner-bg.webp") no-repeat center/cover;
+  filter: blur(6px) brightness(.9);
   z-index: 0;
 }
+.rbx-intro-overlay > *{
+  position: relative;
+  z-index: 1; /* content above bg */
+}
 
-/* Keep banner content above the blurred background */
-#rb-intro {
-  position: relative;
-}
-#rb-intro > * {
-  position: relative;
-  z-index: 1;
-}
  
