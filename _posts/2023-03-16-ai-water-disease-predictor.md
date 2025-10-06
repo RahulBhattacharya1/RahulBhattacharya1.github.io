@@ -4,7 +4,7 @@ title: "Creating my AI Water Disease Predictor"
 date: 2023-03-16 14:35:52
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/water_disease.webp
 demo_link: https://rahuls-ai-water-disease-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_water_disease_predictor
 featured: true
