@@ -4,7 +4,7 @@ title: "Building my AI Rent Predictor"
 date: 2022-12-02 17:45:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/rent.webp
 demo_link: https://rahuls-ai-rent-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_rent_predictor
 ---
