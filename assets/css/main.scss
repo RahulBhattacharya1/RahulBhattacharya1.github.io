@@ -1821,6 +1821,12 @@ pre {
   100% { transform: scale(1); }
 }
 
+.progress-bar {
+  height: 8px;
+  background: #04AA6D;
+  width: 0%;
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
