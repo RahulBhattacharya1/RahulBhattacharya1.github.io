@@ -4,7 +4,7 @@ title: "Creating my AI Sleep Disorder Classifier"
 date: 2022-07-28 12:31:29
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/sleep_disorder.webp
 demo_link: https://rahuls-ai-sleep-disorder-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_sleep_disorder_classifier
 featured: true
