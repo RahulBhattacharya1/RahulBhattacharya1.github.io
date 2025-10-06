@@ -1890,14 +1890,6 @@ pre {
   100% { transform: translateX(130%); opacity:.45; }
 }
 
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .rbx-progress__fill, .rbx-progress__sheen{
-    animation: none;
-    background-size: 100% 100%;
-  }
-}
-
 /* Optional: dark-on-light and light-on-dark slight tuning */
 @media (prefers-color-scheme: dark){
   .rbx-progress__fill{
