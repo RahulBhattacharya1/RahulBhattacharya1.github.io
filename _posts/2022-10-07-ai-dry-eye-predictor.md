@@ -4,7 +4,7 @@ title: "Building my AI Dry Eye Predictor"
 date: 2022-10-07 08:21:35
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/dry_eye.webp
 demo_link: https://rahuls-ai-dry-eye-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_dry_eye_predictor
 featured: true
