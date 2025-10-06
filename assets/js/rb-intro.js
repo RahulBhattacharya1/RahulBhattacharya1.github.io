@@ -345,4 +345,134 @@ function rbxRotateMetrics(){
     rbxRotateMetrics();
     rbxOverlayControl();
   });
+
+  // Config
+  var WAIT_AFTER_BARS_MS = 2000;   // 2s after bars complete
+  var CHART_SHOW_MS      = 10000;  // chart visible duration (10s)
+
+  // DOM
+  var metricsBox   = document.querySelector('.rbx-metrics, .rbx-metrics-rot'); // whichever you use
+  var barFills     = function(){ return document.querySelectorAll('.rbx-bar-fill'); };
+  var chartBox     = document.getElementById('rbx-projects-alt');
+  var svg          = document.getElementById('rbx-projects-spark');
+  var totalSpan    = document.getElementById('rbx-projects-total');
+  var totalPostsEl = document.getElementById('rbx-total-posts');
+
+  if(!metricsBox || !chartBox || !svg || !totalPostsEl) return;
+
+  // Build the simple 0→N line each time we show the chart
+  function drawChart(total){
+    // clear previous
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+    var ns = "http://www.w3.org/2000/svg";
+    var W=240, H=60, PAD=6;
+    var max = Math.max(1, total);           // avoid divide-by-zero
+    var x0 = PAD,          y0 = H - PAD;    // start at 0
+    var x1 = W - PAD,      y1 = H - PAD - (total/max)*(H - 2*PAD);
+
+    // gradient
+    var defs = document.createElementNS(ns,'defs');
+    var grad = document.createElementNS(ns,'linearGradient');
+    grad.setAttribute('id','rbxGradAlt');
+    grad.setAttribute('x1','0'); grad.setAttribute('y1','0');
+    grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
+    var s1 = document.createElementNS(ns,'stop');
+    s1.setAttribute('offset','0%');   s1.setAttribute('stop-color','#66a7ff'); s1.setAttribute('stop-opacity','0.95');
+    var s2 = document.createElementNS(ns,'stop');
+    s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#3dd7ff'); s2.setAttribute('stop-opacity','0.95');
+    grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad); svg.appendChild(defs);
+
+    // path (0 -> N)
+    var path = document.createElementNS(ns,'path');
+    path.setAttribute('d', 'M '+x0+' '+y0+' L '+x1+' '+y1);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke','url(#rbxGradAlt)');
+    path.setAttribute('stroke-width','2.5');
+    path.style.filter = "drop-shadow(0 1px 1px rgba(0,0,0,.35))";
+    svg.appendChild(path);
+
+    // soft area from line down
+    var area = document.createElementNS(ns,'path');
+    area.setAttribute('d', 'M '+x0+' '+y0+' L '+x1+' '+y1+' L '+x1+' '+(H-PAD)+' L '+x0+' '+(H-PAD)+' Z');
+    area.setAttribute('fill','url(#rbxGradAlt)');
+    area.setAttribute('opacity','0.18');
+    svg.appendChild(area);
+
+    // total label
+    if(totalSpan) totalSpan.textContent = total + '+';
+
+    // animate the line draw
+    var len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    path.getBoundingClientRect(); // force layout
+    path.style.transition = 'stroke-dashoffset 900ms ease';
+    path.style.strokeDashoffset = 0;
+  }
+
+  // Detect when *all* bars have completed their width transition
+  function whenBarsComplete(callback){
+    var fills = barFills();
+    if(!fills.length){ callback(); return; }
+
+    var remaining = new Set();
+    fills.forEach(function(el){
+      // mark each bar; on next transitionend reduce remaining
+      remaining.add(el);
+      // Ensure we only count once per cycle
+      el.addEventListener('transitionend', function onEnd(ev){
+        if(ev.propertyName !== 'width') return;
+        if(remaining.has(el)){
+          remaining.delete(el);
+          if(!remaining.size){
+            // cleanup for this cycle
+            fills.forEach(function(n){ n.removeEventListener('transitionend', onEnd); });
+            callback();
+          }
+        }
+      });
+    });
+  }
+
+  // Show chart, then return to bars
+  function showChartThenBack(){
+    // Hide bars, show chart
+    metricsBox.hidden = true;
+    chartBox.hidden   = false;
+
+    var total = parseInt(totalPostsEl.getAttribute('data-total'), 10);
+    if(isNaN(total) || total < 0) total = 0;
+
+    drawChart(total);
+
+    // after CHART_SHOW_MS, go back to bars
+    setTimeout(function(){
+      chartBox.hidden   = true;
+      // reset bars to 0 width (for a visible replay)
+      barFills().forEach(function(el){ el.style.width = '0%'; });
+
+      // unhide bars and trigger your existing filler
+      metricsBox.hidden = false;
+
+      // Important: call your existing function that fills the bars
+      // (You already have this from earlier)
+      if(typeof rbxFillBars === 'function'){
+        // next frame for smoother restart
+        requestAnimationFrame(rbxFillBars);
+      }
+
+      // wait until they finish again, then rerun the cycle
+      whenBarsComplete(function(){
+        setTimeout(showChartThenBack, WAIT_AFTER_BARS_MS);
+      });
+    }, CHART_SHOW_MS);
+  }
+
+  // Kick off: wait for current bars to finish → +2s → chart → 10s → bars → loop
+  // If you already call rbxFillBars() elsewhere on load, leave it; we only orchestrate.
+  whenBarsComplete(function(){
+    setTimeout(showChartThenBack, WAIT_AFTER_BARS_MS);
+  });
+
 })();
