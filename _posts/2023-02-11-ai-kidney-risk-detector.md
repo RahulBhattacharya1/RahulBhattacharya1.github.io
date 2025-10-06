@@ -4,7 +4,7 @@ title: "Building my AI Kidney Disease Risk Detector"
 date: 2023-02-11 22:35:17
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/kidney_disease.webp
 demo_link: https://rahuls-ai-kidney-disease-risk-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_kidney_disease_risk_classifier
 featured: true
