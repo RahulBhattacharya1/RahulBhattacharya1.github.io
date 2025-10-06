@@ -240,3 +240,44 @@
   }
 }
 
+/* --- Progress bars vs chart: same footprint, clean swap --- */
+.rbx-progress-alt{
+  width:min(720px, 96%);
+  margin: 12px auto 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+
+.rbx-progress-alt[hidden]{ display:none !important; }
+
+.rbx-progress-alt .rbx-progress-head{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin-bottom:8px;
+}
+.rbx-progress-alt .rbx-progress-head .label{
+  color:#cfd6e4;
+  font-size: clamp(.86rem, 1.05vw, .98rem);
+  letter-spacing:.2px;
+}
+.rbx-progress-alt .rbx-progress-head .value{
+  font-weight:800;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color:#69c0ff;
+}
+
+/* ensure bar fills animate width so we can detect transitionend reliably */
+.rbx-bar-fill{
+  transition: width 900ms ease;
+}
+
+/* shared svg box */
+.rbx-progress-spark{
+  display:block;
+  width:100%;
+  height:64px;
+  overflow:visible;
+}
