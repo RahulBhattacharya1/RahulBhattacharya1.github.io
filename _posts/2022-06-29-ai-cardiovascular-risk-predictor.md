@@ -4,7 +4,7 @@ title: "Creating my AI Cardiovascular Risk Predictor"
 date: 2022-06-29 17:31:44
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/cardiovascular.webp
 demo_link: https://rahuls-ai-cardiovascular-risk-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_cardiovascular_risk_predictor
 featured: true
