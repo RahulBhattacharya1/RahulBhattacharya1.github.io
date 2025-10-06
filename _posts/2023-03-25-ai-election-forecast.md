@@ -4,7 +4,7 @@ title: "Creating my AI Election Forecasting App"
 date: 2023-03-25 08:57:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/election_forecasting.webp
 demo_link: https://rahuls-ai-election-forecast.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_election_forecast
 featured: true
