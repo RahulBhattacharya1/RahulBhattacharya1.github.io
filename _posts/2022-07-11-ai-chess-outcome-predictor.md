@@ -4,7 +4,7 @@ title: "Building my AI Chess Game Outcome Predictor"
 date: 2022-07-11 08:33:21
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/chess.webp
 demo_link: https://rahuls-ai-chess-outcome-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_chess_outcome_predictor
 featured: true
