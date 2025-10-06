@@ -50,21 +50,17 @@
       </div>
     </div>
 
-    <!-- Projects growth line (hidden until bars finish) -->
-<div class="rbx-progress-alt" id="rbx-projects-alt" hidden>
-  <div class="rbx-progress-head">
-    <span class="label">Projects over time</span>
-    <span class="value" id="rbx-projects-total">—</span>
-  </div>
 
-  <!-- Simple 0→N line, sized to container; JS builds path -->
-  <svg class="rbx-progress-spark"
-       id="rbx-projects-spark"
-       viewBox="0 0 240 60"
-       preserveAspectRatio="none"
+
+<!-- Projects growth chart (replaces bars; initially hidden) -->
+<div class="rbx-progress-alt" id="rbx-projects-alt" hidden
+     data-series="8,14,22,31,45,58,72,86,100"
+     data-years="2017,2018,2019,2020,2021,2022,2023,2024,2025">
+  <svg class="rbx-progress-spark" id="rbx-projects-spark"
+       viewBox="0 0 320 120" preserveAspectRatio="none"
        aria-label="Projects growth line chart"></svg>
 
-  <!-- Inject your dynamic total projects using Liquid -->
+  <!-- dynamic post count for last point if you prefer -->
   <span id="rbx-total-posts" data-total="{{ site.posts | size }}" hidden></span>
 </div>
 
