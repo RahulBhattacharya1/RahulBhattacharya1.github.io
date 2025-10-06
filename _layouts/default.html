@@ -1131,16 +1131,117 @@ document.addEventListener('DOMContentLoaded', function () {
 {% endif %}
 
 <script>
-// When the user scrolls the page, execute myFunction 
-window.onscroll = function() {pageScrollProgress()};
+(function () {
+  // 0) Grab the bar (support either id you used)
+  var bar = document.getElementById('pageScrollProgress') || document.getElementById('myBar');
+  if (!bar) return;
 
-function pageScrollProgress() {
-  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  var scrolled = (winScroll / height) * 100;
-  document.getElementById("pageScrollProgress").style.width = scrolled + "%";
-}
+  // 1) Find the element that actually scrolls (root or a wrapper)
+  function detectScroller() {
+    var root = document.scrollingElement || document.documentElement;
+
+    // Collect likely containers; add any of your wrappers here if needed
+    var candidates = [root].concat(Array.from(document.querySelectorAll(
+      'main, .site, .page, .content, .container, .layout, body, html'
+    )));
+
+    // Pick the one with a real scroll range and scrollable overflow
+    var best = root, bestRange = (root.scrollHeight - root.clientHeight);
+    candidates.forEach(function (el) {
+      if (!el) return;
+      var cs = (el === document.documentElement || el === document.body) ? null : getComputedStyle(el);
+      var overflowY = cs ? (cs.overflowY || cs.overflow || '') : 'auto';
+      var canScroll = el.scrollHeight > el.clientHeight && /(auto|scroll)/.test(overflowY);
+      if (canScroll) {
+        var range = el.scrollHeight - el.clientHeight;
+        if (range > bestRange) { best = el; bestRange = range; }
+      }
+    });
+    return best;
+  }
+
+  var scroller = detectScroller();
+
+  // 2) Compute % for either window or element scroller
+  function computePct() {
+    var total, top;
+    if (scroller === document.documentElement || scroller === document.body) {
+      top = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      var docHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight,  document.documentElement.offsetHeight,
+        document.body.clientHeight,  document.documentElement.clientHeight
+      );
+      var viewH = window.innerHeight || document.documentElement.clientHeight || 0;
+      total = Math.max(docHeight - viewH, 1);
+    } else {
+      top = scroller.scrollTop;
+      total = Math.max(scroller.scrollHeight - scroller.clientHeight, 1);
+    }
+    return (top / total) * 100;
+  }
+
+  // 3) Update the bar, rAF-throttled
+  var ticking = false;
+  function update() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      bar.style.width = computePct() + '%';
+      ticking = false;
+    });
+  }
+
+  // 4) Attach listeners to the current scroller + window
+  var opts = { passive: true };
+  function bind() {
+    unbind();
+    if (scroller === document.documentElement || scroller === document.body) {
+      window.addEventListener('scroll', update, opts);
+    } else {
+      scroller.addEventListener('scroll', update, opts);
+      // Also mirror window scroll just in case some parts still move it
+      window.addEventListener('scroll', update, opts);
+    }
+  }
+  function unbind() {
+    window.removeEventListener('scroll', update, opts);
+    if (scroller && scroller.removeEventListener) {
+      scroller.removeEventListener('scroll', update, opts);
+    }
+  }
+
+  // 5) Re-detect scroller when layout changes (narrowing the window triggers this)
+  function reflow() {
+    var prev = scroller;
+    scroller = detectScroller();
+    if (scroller !== prev) bind();
+    update();
+  }
+
+  // Resize/orientation, visualViewport, media query flips, and content growth
+  window.addEventListener('resize', reflow, opts);
+  window.addEventListener('orientationchange', reflow, opts);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', reflow, opts);
+  }
+  if ('ResizeObserver' in window) {
+    // Watch the root and your common wrappers for height changes
+    var ro = new ResizeObserver(reflow);
+    [document.documentElement, document.body].forEach(function (el){ ro.observe(el); });
+    document.querySelectorAll('main, .site, .page, .content, .container, .layout')
+      .forEach(function (el){ ro.observe(el); });
+  }
+  // Optional: respond when your CSS breakpoint flips
+  var mq = window.matchMedia('(max-width: 768px)');
+  if (mq && mq.addEventListener) mq.addEventListener('change', reflow);
+
+  // Init
+  bind();
+  update();
+})();
 </script>
+
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
