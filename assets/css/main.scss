@@ -1833,6 +1833,98 @@ pre {
   .progress-container { padding-top: env(safe-area-inset-top); }
 }
 
+/* ===== Mobile Tech Hub ===== */
+.rbx-monly { display:block; }
+@media (min-width: 769px) { .rbx-monly { display:none; } }
+
+@media (max-width: 768px) {
+  #rbx-mobile-tech-hub { display:block; }
+
+  .rbx-mobile-tech-hub {
+    margin: 18px 0 24px 0;
+    padding: 0 12px;
+  }
+  .rbx-mth-shell {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .rbx-mth-tags {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    --tag-row: 42px;
+    max-height: calc(var(--tag-row) * 5);
+    overflow-y: auto;
+    padding-right: 2px;
+  }
+  .rbx-mth-tag {
+    height: var(--tag-row);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 6px;
+    padding: 0 10px;
+    border: 1px solid rgba(150, 185, 255, 0.40);
+    border-radius: 999px 0 0 999px;
+    background: linear-gradient(145deg, #f8fbff 0%, #eef6ff 45%, #f3faff 100%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.65);
+    color: #0b254a; font-weight: 600; line-height: 1;
+    cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    text-align: left; white-space: nowrap;
+  }
+  .rbx-mth-tag:active { transform: translateY(1px); }
+  .rbx-mth-tag.is-active {
+    border-color: rgba(60, 120, 255, 0.65);
+    box-shadow: 0 6px 16px rgba(50, 110, 255, 0.16), inset 0 1px 0 rgba(255,255,255,0.80);
+  }
+  .rbx-mth-tag-label { overflow: hidden; text-overflow: ellipsis; }
+  .rbx-mth-tag-count { font-size: 12px; padding: 3px 8px; border-radius: 999px; background: rgba(30, 120, 255, 0.10); }
+
+  .rbx-mth-pane { position: relative; }
+
+  .rbx-mth-tabs {
+    display: grid; grid-auto-flow: column; gap: 8px; margin-bottom: 10px;
+  }
+  .rbx-mth-tab {
+    height: 36px; padding: 0 12px; border-radius: 10px;
+    border: 1px solid rgba(160, 195, 255, 0.55);
+    background: linear-gradient(145deg, #f5faff 0%, #eef6ff 45%, #f2fbff 100%);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.7);
+    font-weight: 700; letter-spacing: .2px; color: #0b254a;
+  }
+  .rbx-mth-tab.is-active {
+    border-color: rgba(60,120,255,0.65);
+    box-shadow: 0 6px 16px rgba(60,120,255,0.18), inset 0 1px 0 rgba(255,255,255,0.85);
+  }
+
+  .rbx-mth-list {
+    --card-h: 84px;
+    max-height: calc(var(--card-h) * 5);
+    overflow-y: auto;
+    border: 1px solid rgba(150,185,255,0.35);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    padding: 6px;
+  }
+  .rbx-mth-card {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 10px; align-items: center;
+    padding: 8px; border-radius: 12px;
+    transition: background .15s ease;
+  }
+  .rbx-mth-card:hover { background: rgba(12, 90, 255, 0.06); }
+  .rbx-mth-thumb { width: 84px; height: 68px; border-radius: 8px; object-fit: cover; background: #edf3ff; }
+  .rbx-mth-card h4 { margin: 0 0 4px 0; font-size: 15px; line-height: 1.25; color: #0b254a; font-weight: 800; }
+  .rbx-mth-meta { font-size: 12px; color: #3a537d; }
+}
+@media (min-width: 769px) {
+  #rbx-mobile-tech-hub { display:block; } /* visible on standalone page unless mobile_only */
+}
 
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
