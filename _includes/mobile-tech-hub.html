@@ -1,0 +1,130 @@
+{% assign tag_pairs = site.tags | sort_natural %}
+<section id="rbx-mobile-tech-hub" class="rbx-mobile-tech-hub{% if include.mobile_only %} rbx-monly{% endif %}" aria-label="Explore by technology">
+  <div class="rbx-mth-shell">
+    <!-- Left: Tag Ribbon -->
+    <nav class="rbx-mth-tags" aria-label="Tags">
+      {% for pair in tag_pairs %}
+        {% assign tagname = pair[0] %}
+        <button class="rbx-mth-tag" data-tag="{{ tagname | escape }}">
+          <span class="rbx-mth-tag-label">{{ tagname }}</span>
+          <span class="rbx-mth-tag-count">{{ pair[1].size }}</span>
+        </button>
+      {% endfor %}
+    </nav>
+
+    <!-- Right: Content Pane -->
+    <div class="rbx-mth-pane">
+      <div class="rbx-mth-tabs" role="tablist" aria-label="Post filter">
+        <button class="rbx-mth-tab is-active" role="tab" aria-selected="true" data-view="featured">
+          Featured Posts
+        </button>
+        <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="all">
+          All Posts
+        </button>
+      </div>
+
+      <div class="rbx-mth-list" role="region" aria-live="polite" aria-busy="false">
+        <div class="rbx-mth-empty" hidden>No posts yet.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data seed -->
+  <script type="application/json" id="rbx-mth-data">
+  {
+    "posts": [
+      {% assign all_posts = site.posts | where_exp: "p","p.draft != true" %}
+      {% for p in all_posts %}
+        {
+          "title": {{ p.title | jsonify }},
+          "url": {{ p.url | relative_url | jsonify }},
+          "date": {{ p.date | date: "%Y-%m-%d" | jsonify }},
+          "excerpt": {{ p.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }},
+          "featured": {{ p.featured | default: false | jsonify }},
+          "tags": [{% for t in p.tags %}{{ t | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+          "thumb": {% if p.image %}{{ p.image | relative_url | jsonify }}{% else %}null{% endif %}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+  </script>
+
+  <!-- Controller (scoped) -->
+  <script>
+  (function(){
+    const root = document.currentScript.closest('#rbx-mobile-tech-hub');
+    if(!root) return;
+
+    const payload = JSON.parse(root.querySelector('#rbx-mth-data').textContent.trim());
+    const POSTS = payload.posts || [];
+
+    const tagsNav = root.querySelector('.rbx-mth-tags');
+    const tabsEl  = root.querySelector('.rbx-mth-tabs');
+    const listEl  = root.querySelector('.rbx-mth-list');
+    const emptyEl = root.querySelector('.rbx-mth-empty');
+
+    let currentTag = null;
+    let currentView = 'featured';
+
+    function setActiveTag(btn){
+      tagsNav.querySelectorAll('.rbx-mth-tag').forEach(b=>b.classList.remove('is-active'));
+      if(btn){ btn.classList.add('is-active'); currentTag = btn.dataset.tag; }
+    }
+    function setActiveTab(tabBtn){
+      tabsEl.querySelectorAll('.rbx-mth-tab').forEach(t=>{
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected','false');
+      });
+      tabBtn.classList.add('is-active');
+      tabBtn.setAttribute('aria-selected','true');
+      currentView = tabBtn.dataset.view;
+    }
+    function filterPosts(){
+      let items = POSTS;
+      if(currentTag){ items = items.filter(p => (p.tags || []).includes(currentTag)); }
+      if(currentView === 'featured'){ items = items.filter(p => !!p.featured); }
+      return items;
+    }
+    function render(){
+      const items = filterPosts();
+      listEl.innerHTML = '';
+      emptyEl.hidden = items.length > 0;
+
+      items.forEach(p=>{
+        const a = document.createElement('a');
+        a.href = p.url;
+        a.className = 'rbx-mth-card';
+
+        const img = document.createElement('img');
+        img.className = 'rbx-mth-thumb';
+        img.loading = 'lazy';
+        img.alt = '';
+        if(p.thumb){ img.src = p.thumb; }
+
+        const box = document.createElement('div');
+        const h4 = document.createElement('h4'); h4.textContent = p.title;
+        const meta = document.createElement('div'); meta.className = 'rbx-mth-meta'; meta.textContent = p.date || '';
+
+        box.appendChild(h4); box.appendChild(meta);
+        a.appendChild(img); a.appendChild(box);
+        listEl.appendChild(a);
+      });
+      listEl.setAttribute('aria-busy','false');
+    }
+
+    const firstTagBtn = tagsNav.querySelector('.rbx-mth-tag');
+    if(firstTagBtn){ setActiveTag(firstTagBtn); }
+
+    tagsNav.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.rbx-mth-tag'); if(!btn) return;
+      setActiveTag(btn); listEl.setAttribute('aria-busy','true'); render();
+    });
+    tabsEl.addEventListener('click', (e)=>{
+      const t = e.target.closest('.rbx-mth-tab'); if(!t) return;
+      setActiveTab(t); listEl.setAttribute('aria-busy','true'); render();
+    });
+
+    render();
+  })();
+  </script>
+</section>
