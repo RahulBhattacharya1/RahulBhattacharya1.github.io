@@ -4,7 +4,7 @@ title: "Building my AI Asthma Risk Classifier"
 date: 2022-12-16 15:26:37
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/asthma_risk.webp
 demo_link: https://rahuls-ai-asthma-risk-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_asthma_risk_classifier
 featured: true
