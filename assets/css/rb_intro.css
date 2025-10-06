@@ -1,8 +1,8 @@
 /* === Core vars === */
 :root{
-  --rbx-bg:#0a0f1c;
-  --rbx-blue1:#0b66ff;
-  --rbx-blue2:#1ea7ff;
+  --rbx-bg:#000;
+  --rbx-blue1:#0052dd;
+  --rbx-blue2:#0097F8;
   --rbx-ink:#e9eef8;
 
   /* metrics + bars (lean) */
@@ -14,7 +14,7 @@
   --track:            rgba(255,255,255,0.10);
   --track-edge:       rgba(255,255,255,0.22);
   --fill-start:       #66a7ff;
-  --fill-end:         #2c74ff;
+  --fill-end:         #085CFF;
 }
 
 /* === Fullscreen intro overlay === */
@@ -37,7 +37,7 @@
   font-size:clamp(2rem,4.5vw,3rem);
   font-weight:700; font-variant:small-caps; letter-spacing:1.5px; line-height:1.12;
 
-  background:linear-gradient(120deg,#f9f295 0%,#fff 25%,#d4af37 50%,#fff 75%,#f9f295 100%);
+  background:linear-gradient(120deg,#f9f295 0%,#fff 25%,#E7AF22 50%,#fff 75%,#f9f295 100%);
   background-size:250% auto; -webkit-background-clip:text; background-clip:text;
   color:transparent; -webkit-text-fill-color:transparent;
 
