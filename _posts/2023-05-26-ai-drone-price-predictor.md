@@ -4,7 +4,7 @@ title: "Creating my AI Drone Price Predictor"
 date: 2023-05-26 08:42:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/drone_price.webp
 demo_link: https://rahuls-ai-drone-price-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_drone_price_predictor
 ---
