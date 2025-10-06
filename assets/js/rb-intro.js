@@ -336,6 +336,241 @@ function rbxRotateMetrics(){
     }, { once: true });
   }
 
+
+  // Line Chart Start
+  // Timings
+  var WAIT_AFTER_BARS_MS = 2000;   // 2s after bars finish
+  var CHART_ANIM_MS      = 5000;   // 5s line draw
+  var CHART_SHOW_MS      = 10000;  // chart on-screen time before returning to bars
+
+  // DOM
+  var metricsBox   = document.querySelector('.rbx-metrics, .rbx-metrics-rot'); // your bars wrapper
+  var chartBox     = document.getElementById('rbx-projects-alt');
+  var svg          = document.getElementById('rbx-projects-spark');
+  var totalPostsEl = document.getElementById('rbx-total-posts');
+
+  if(!metricsBox || !chartBox || !svg) return;
+
+  // Helper: current .rbx-bar-fill NodeList each cycle
+  function barFills(){ return document.querySelectorAll('.rbx-bar-fill'); }
+
+  // Wait until *all* bars emit transitionend for 'width'
+  function whenBarsComplete(callback){
+    var fills = barFills();
+    if(!fills.length){ callback(); return; }
+    var remaining = new Set(fills);
+    fills.forEach(function(el){
+      function onEnd(ev){
+        if(ev.propertyName !== 'width') return;
+        if(remaining.has(el)){
+          remaining.delete(el);
+          if(!remaining.size){
+            fills.forEach(function(n){ n.removeEventListener('transitionend', onEnd); });
+            callback();
+          }
+        }
+      }
+      el.addEventListener('transitionend', onEnd);
+    });
+  }
+
+  // Draw chart with: blue axes, blue ticks, blue line, blue dots; transparent bg
+  function drawProjectsChart(){
+    // Clear prior content
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+    var ns = "http://www.w3.org/2000/svg";
+    var W = 320, H = 120;
+
+    // Parse series & years
+    var seriesStr = chartBox.getAttribute('data-series') || '';
+    var yearsStr  = chartBox.getAttribute('data-years')  || '';
+    var series = seriesStr.split(',').map(function(s){ return parseFloat(s.trim()); }).filter(function(n){return !isNaN(n);});
+    var years  = yearsStr.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+
+    // If you want the final value to equal total posts dynamically:
+    if(totalPostsEl){
+      var totalPosts = parseInt(totalPostsEl.getAttribute('data-total'),10);
+      if(!isNaN(totalPosts) && series.length){ series[series.length-1] = totalPosts; }
+    }
+
+    if(series.length < 2 || years.length !== series.length) return;
+
+    // Fixed Y ticks: 20,40,60,80,100 as requested
+    var yTicks = [20,40,60,80,100];
+    var yMax   = 100; // fixed scale top at 100 (per request)
+    var yMin   = 0;
+
+    // Layout paddings for axes & labels
+    var PAD_L = 36;  // left room for 3-digit labels
+    var PAD_R = 8;
+    var PAD_T = 10;
+    var PAD_B = 24;  // bottom room for year labels
+
+    var plotW = W - PAD_L - PAD_R;
+    var plotH = H - PAD_T - PAD_B;
+
+    function sx(i){ return PAD_L + (series.length===1 ? 0 : (i * (plotW/(series.length-1)))); }
+    function sy(v){ return PAD_T + (plotH - ( (v - yMin) * plotH / (yMax - yMin) )); }
+
+    // Blue color for all lines and points
+    var BLUE = '#0b66ff';
+
+    // Axes
+    var axes = document.createElementNS(ns,'g');
+    svg.appendChild(axes);
+
+    // X axis line
+    var xAxis = document.createElementNS(ns,'line');
+    xAxis.setAttribute('x1', PAD_L);
+    xAxis.setAttribute('y1', PAD_T + plotH);
+    xAxis.setAttribute('x2', PAD_L + plotW);
+    xAxis.setAttribute('y2', PAD_T + plotH);
+    xAxis.setAttribute('stroke', BLUE);
+    xAxis.setAttribute('stroke-width','1.25');
+    axes.appendChild(xAxis);
+
+    // Y axis line
+    var yAxis = document.createElementNS(ns,'line');
+    yAxis.setAttribute('x1', PAD_L);
+    yAxis.setAttribute('y1', PAD_T);
+    yAxis.setAttribute('x2', PAD_L);
+    yAxis.setAttribute('y2', PAD_T + plotH);
+    yAxis.setAttribute('stroke', BLUE);
+    yAxis.setAttribute('stroke-width','1.25');
+    axes.appendChild(yAxis);
+
+    // Y ticks + labels (20…100)
+    yTicks.forEach(function(t){
+      var y = sy(t);
+      // tick line
+      var tl = document.createElementNS(ns,'line');
+      tl.setAttribute('x1', PAD_L - 5);
+      tl.setAttribute('y1', y);
+      tl.setAttribute('x2', PAD_L);
+      tl.setAttribute('y2', y);
+      tl.setAttribute('stroke', BLUE);
+      tl.setAttribute('stroke-width','1');
+      axes.appendChild(tl);
+
+      // grid (optional subtle) — comment out if you truly want only axes
+      // var gl = document.createElementNS(ns,'line');
+      // gl.setAttribute('x1', PAD_L);
+      // gl.setAttribute('y1', y);
+      // gl.setAttribute('x2', PAD_L + plotW);
+      // gl.setAttribute('y2', y);
+      // gl.setAttribute('stroke', BLUE);
+      // gl.setAttribute('stroke-opacity','0.10');
+      // gl.setAttribute('stroke-width','1');
+      // axes.appendChild(gl);
+
+      // label
+      var txt = document.createElementNS(ns,'text');
+      txt.setAttribute('x', PAD_L - 8);
+      txt.setAttribute('y', y + 3);
+      txt.setAttribute('text-anchor','end');
+      txt.setAttribute('font-size','10');
+      txt.setAttribute('font-family','ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif');
+      txt.setAttribute('fill', BLUE);
+      txt.textContent = t;
+      axes.appendChild(txt);
+    });
+
+    // X ticks + year labels (every point)
+    years.forEach(function(yr, i){
+      var x = sx(i);
+      // tick
+      var tl = document.createElementNS(ns,'line');
+      tl.setAttribute('x1', x);
+      tl.setAttribute('y1', PAD_T + plotH);
+      tl.setAttribute('x2', x);
+      tl.setAttribute('y2', PAD_T + plotH + 5);
+      tl.setAttribute('stroke', BLUE);
+      tl.setAttribute('stroke-width','1');
+      axes.appendChild(tl);
+
+      // label
+      var txt = document.createElementNS(ns,'text');
+      txt.setAttribute('x', x);
+      txt.setAttribute('y', PAD_T + plotH + 16);
+      txt.setAttribute('text-anchor','middle');
+      txt.setAttribute('font-size','10');
+      txt.setAttribute('font-family','ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif');
+      txt.setAttribute('fill', BLUE);
+      txt.textContent = yr;
+      axes.appendChild(txt);
+    });
+
+    // Line path through all points
+    var d = '';
+    series.forEach(function(v,i){
+      var x = sx(i), y = sy(v);
+      d += (i ? ' L ' : 'M ') + x + ' ' + y;
+    });
+    var path = document.createElementNS(ns,'path');
+    path.setAttribute('d', d);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke', BLUE);
+    path.setAttribute('stroke-width','2.2');
+    svg.appendChild(path);
+
+    // Dots at each project point (small blue circles)
+    var dots = document.createElementNS(ns,'g');
+    svg.appendChild(dots);
+    series.forEach(function(v,i){
+      var c = document.createElementNS(ns,'circle');
+      c.setAttribute('cx', sx(i));
+      c.setAttribute('cy', sy(v));
+      c.setAttribute('r', 2.6);
+      c.setAttribute('fill', BLUE);
+      dots.appendChild(c);
+    });
+
+    // Animate the line draw over 5s
+    var len = path.getTotalLength();
+    path.style.strokeDasharray  = String(len);
+    path.style.strokeDashoffset = String(len);
+    // Force layout, then animate
+    path.getBoundingClientRect();
+    path.style.transition = 'stroke-dashoffset '+CHART_ANIM_MS+'ms linear';
+    path.style.strokeDashoffset = '0';
+  }
+
+  // Swap logic: bars → (2s) → chart (10s) → bars → loop
+  function showChartThenBack(){
+    // Hide bars, show chart
+    metricsBox.hidden = true;
+    chartBox.hidden   = false;
+
+    drawProjectsChart();
+
+    // After showing for CHART_SHOW_MS, go back to bars and replay them
+    setTimeout(function(){
+      chartBox.hidden = true;
+
+      // Reset bars to 0% so replay is visible
+      barFills().forEach(function(el){ el.style.width = '0%'; });
+
+      metricsBox.hidden = false;
+
+      if(typeof rbxFillBars === 'function'){
+        requestAnimationFrame(rbxFillBars);
+      }
+
+      // Wait for bars to complete again, then repeat cycle
+      whenBarsComplete(function(){
+        setTimeout(showChartThenBack, WAIT_AFTER_BARS_MS);
+      });
+    }, CHART_SHOW_MS);
+  }
+
+  // Kick off: once current bars finish, wait 2s, then show chart
+  whenBarsComplete(function(){
+    setTimeout(showChartThenBack, WAIT_AFTER_BARS_MS);
+  });
+
+
+  
   /* =========================
      Init
   ========================== */
@@ -344,135 +579,6 @@ function rbxRotateMetrics(){
     rbxRotateCaption();
     rbxRotateMetrics();
     rbxOverlayControl();
-  });
-
-  // Config
-  var WAIT_AFTER_BARS_MS = 2000;   // 2s after bars complete
-  var CHART_SHOW_MS      = 10000;  // chart visible duration (10s)
-
-  // DOM
-  var metricsBox   = document.querySelector('.rbx-metrics, .rbx-metrics-rot'); // whichever you use
-  var barFills     = function(){ return document.querySelectorAll('.rbx-bar-fill'); };
-  var chartBox     = document.getElementById('rbx-projects-alt');
-  var svg          = document.getElementById('rbx-projects-spark');
-  var totalSpan    = document.getElementById('rbx-projects-total');
-  var totalPostsEl = document.getElementById('rbx-total-posts');
-
-  if(!metricsBox || !chartBox || !svg || !totalPostsEl) return;
-
-  // Build the simple 0→N line each time we show the chart
-  function drawChart(total){
-    // clear previous
-    while(svg.firstChild) svg.removeChild(svg.firstChild);
-
-    var ns = "http://www.w3.org/2000/svg";
-    var W=240, H=60, PAD=6;
-    var max = Math.max(1, total);           // avoid divide-by-zero
-    var x0 = PAD,          y0 = H - PAD;    // start at 0
-    var x1 = W - PAD,      y1 = H - PAD - (total/max)*(H - 2*PAD);
-
-    // gradient
-    var defs = document.createElementNS(ns,'defs');
-    var grad = document.createElementNS(ns,'linearGradient');
-    grad.setAttribute('id','rbxGradAlt');
-    grad.setAttribute('x1','0'); grad.setAttribute('y1','0');
-    grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
-    var s1 = document.createElementNS(ns,'stop');
-    s1.setAttribute('offset','0%');   s1.setAttribute('stop-color','#66a7ff'); s1.setAttribute('stop-opacity','0.95');
-    var s2 = document.createElementNS(ns,'stop');
-    s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#3dd7ff'); s2.setAttribute('stop-opacity','0.95');
-    grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad); svg.appendChild(defs);
-
-    // path (0 -> N)
-    var path = document.createElementNS(ns,'path');
-    path.setAttribute('d', 'M '+x0+' '+y0+' L '+x1+' '+y1);
-    path.setAttribute('fill','none');
-    path.setAttribute('stroke','url(#rbxGradAlt)');
-    path.setAttribute('stroke-width','2.5');
-    path.style.filter = "drop-shadow(0 1px 1px rgba(0,0,0,.35))";
-    svg.appendChild(path);
-
-    // soft area from line down
-    var area = document.createElementNS(ns,'path');
-    area.setAttribute('d', 'M '+x0+' '+y0+' L '+x1+' '+y1+' L '+x1+' '+(H-PAD)+' L '+x0+' '+(H-PAD)+' Z');
-    area.setAttribute('fill','url(#rbxGradAlt)');
-    area.setAttribute('opacity','0.18');
-    svg.appendChild(area);
-
-    // total label
-    if(totalSpan) totalSpan.textContent = total + '+';
-
-    // animate the line draw
-    var len = path.getTotalLength();
-    path.style.strokeDasharray = len;
-    path.style.strokeDashoffset = len;
-    path.getBoundingClientRect(); // force layout
-    path.style.transition = 'stroke-dashoffset 900ms ease';
-    path.style.strokeDashoffset = 0;
-  }
-
-  // Detect when *all* bars have completed their width transition
-  function whenBarsComplete(callback){
-    var fills = barFills();
-    if(!fills.length){ callback(); return; }
-
-    var remaining = new Set();
-    fills.forEach(function(el){
-      // mark each bar; on next transitionend reduce remaining
-      remaining.add(el);
-      // Ensure we only count once per cycle
-      el.addEventListener('transitionend', function onEnd(ev){
-        if(ev.propertyName !== 'width') return;
-        if(remaining.has(el)){
-          remaining.delete(el);
-          if(!remaining.size){
-            // cleanup for this cycle
-            fills.forEach(function(n){ n.removeEventListener('transitionend', onEnd); });
-            callback();
-          }
-        }
-      });
-    });
-  }
-
-  // Show chart, then return to bars
-  function showChartThenBack(){
-    // Hide bars, show chart
-    metricsBox.hidden = true;
-    chartBox.hidden   = false;
-
-    var total = parseInt(totalPostsEl.getAttribute('data-total'), 10);
-    if(isNaN(total) || total < 0) total = 0;
-
-    drawChart(total);
-
-    // after CHART_SHOW_MS, go back to bars
-    setTimeout(function(){
-      chartBox.hidden   = true;
-      // reset bars to 0 width (for a visible replay)
-      barFills().forEach(function(el){ el.style.width = '0%'; });
-
-      // unhide bars and trigger your existing filler
-      metricsBox.hidden = false;
-
-      // Important: call your existing function that fills the bars
-      // (You already have this from earlier)
-      if(typeof rbxFillBars === 'function'){
-        // next frame for smoother restart
-        requestAnimationFrame(rbxFillBars);
-      }
-
-      // wait until they finish again, then rerun the cycle
-      whenBarsComplete(function(){
-        setTimeout(showChartThenBack, WAIT_AFTER_BARS_MS);
-      });
-    }, CHART_SHOW_MS);
-  }
-
-  // Kick off: wait for current bars to finish → +2s → chart → 10s → bars → loop
-  // If you already call rbxFillBars() elsewhere on load, leave it; we only orchestrate.
-  whenBarsComplete(function(){
-    setTimeout(showChartThenBack, WAIT_AFTER_BARS_MS);
   });
 
 })();
