@@ -48,7 +48,10 @@ GB{% assign tag_pairs = site.tags | sort_natural %}
     if(!root) return;
 
     const payload = JSON.parse(root.querySelector('#rbx-mth-data').textContent.trim());
-    const POSTS = payload.posts || [];
+  const POSTS = (payload.posts || []).map(p => ({
+    ...p,
+    _tags: (p.tags || []).map(t => String(t).toLowerCase())
+  }));
 
     const tagsNav = root.querySelector('.rbx-mth-tags');
     const tabsEl  = root.querySelector('.rbx-mth-tabs');
