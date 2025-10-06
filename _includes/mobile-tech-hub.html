@@ -15,11 +15,14 @@ Params (optional):
     <!-- Right: Content Pane -->
     <div class="rbx-mth-pane">
       <!-- Flat tabs: Tags | Featured | All -->
-      <div class="rbx-mth-tabs" role="tablist" aria-label="Post filter">
-        <button class="rbx-mth-tab is-active" role="tab" aria-selected="true" data-view="all">All</button>
-        <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="featured">Featured</button>
-        <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="tags">Tags</button>
-      </div>
+<!-- Header row: "Tags" label on left, tabs on right -->
+<div class="rbx-mth-head" role="presentation">
+  <div class="rbx-mth-head-left">Tags</div>
+  <div class="rbx-mth-tabs" role="tablist" aria-label="Post filter">
+    <button class="rbx-mth-tab is-active" role="tab" aria-selected="true" data-view="all">All</button>
+    <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="featured">Featured</button>
+  </div>
+</div>
 
       <!-- Posts (titles only, no dates) -->
       <div class="rbx-mth-list" role="region" aria-live="polite" aria-busy="false">
