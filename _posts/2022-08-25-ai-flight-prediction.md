@@ -4,7 +4,7 @@ title: "Creating my AI Flight Price Prediction App"
 date: 2022-08-25 16:51:32
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/flight_price.webp
 demo_link: https://rahuls-ai-flight-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_flight_prediction
 ---
