@@ -251,20 +251,48 @@ function rbxFormatCaption(text){
   /* =========================
      Caption rotation (single span)
   ========================== */
+  // Banner-only iconizer (scoped to the caption element)
+function rbxIconizeCaption(el){
+  if (!el) return;
+
+  // Terms → icons (lowercased keys)
+  const ICONS = {
+    'python':        '/assets/icons/python.svg',
+    'databricks':    '/assets/icons/databricks.svg',
+    'azure':         '/assets/icons/azure.svg',
+    'power bi':      '/assets/icons/powerbi.svg',
+    'tableau':       '/assets/icons/tableau.svg',
+    'adf':           '/assets/icons/azure.svg',
+    'numpy':         '/assets/icons/numpy.svg',
+    'hugging face':  '/assets/icons/huggingface.svg'
+  };
+
+  // Match common variants (case-insensitive); allow “PowerBI”, “HuggingFace”, “pl/sql”, etc.
+  const RE = /\b(databricks|python|azure|power\s*bi|tableau|adf|numpy|hugging\s*face)\b/gi;
+
+  // Only touch this one caption node; don’t walk the page
+  el.innerHTML = el.innerHTML.replace(RE, (m) => {
+    const k = m.toLowerCase().replace(/\s+/g,' ');
+    const src = ICONS[k];
+    if (!src) return m;
+    return `${m}<img src="${src}" alt="${m} icon" class="inl-icon" style="height:1em;vertical-align:-0.15em;margin-left:.15em;">`;
+  });
+}
+
   function rbxRotateCaption(){
     const el = document.getElementById("rbx-rotating-caption");
     if(!el || !Array.isArray(RBX_CAPTIONS) || RBX_CAPTIONS.length === 0) return;
 
     let i = 0;
     el.innerHTML = rbxFormatCaption(RBX_CAPTIONS[i]); // initial paint
-    if (window.runWordIconizer) window.runWordIconizer(el);
+    rbxIconizeCaption(el);
 
     function next(){
       el.classList.add("rbx-cap-out");
       setTimeout(()=>{
         i = (i + 1) % RBX_CAPTIONS.length;
         el.innerHTML = rbxFormatCaption(RBX_CAPTIONS[i]); // IMPORTANT: innerHTML
-        if (window.runWordIconizer) window.runWordIconizer(el);
+        rbxIconizeCaption(el);
         el.classList.remove("rbx-cap-out");
         el.classList.add("rbx-cap-in");
         setTimeout(()=> el.classList.remove("rbx-cap-in"), RBX_FADE_MS + 20);
