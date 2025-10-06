@@ -32,13 +32,9 @@
 <body{% if page.collection == "posts" %} class="is-post"{% endif %}>
 
  <!-- Reading Progress Bar -->
-<div id="rbx-progressbar"
-     class="rbx-progress rbx-bottom"
-     data-rbx-scroll-root=".main-inner"
-     role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-hidden="true">
-  <span class="rbx-progress__fill"></span>
-  <span class="rbx-progress__sheen" aria-hidden="true"></span>
-</div>
+  <div class="progress-container">
+    <div class="progress-bar" id="pageScrollProgress"></div>
+  </div>  
  
 {% if page.url == "/" %}
   {% include rb-intro.html %}
@@ -1135,88 +1131,15 @@ document.addEventListener('DOMContentLoaded', function () {
 {% endif %}
 
 <script>
-(function(){
-  const bar  = document.getElementById('rbx-progressbar');
-  if(!bar) return;
-  const fill = bar.querySelector('.rbx-progress__fill');
+// When the user scrolls the page, execute myFunction 
+window.onscroll = function() {pageScrollProgress()};
 
-  // 1) Detect the correct scroll root.
-  //    Optional override: <div id="rbx-progressbar" data-rbx-scroll-root="#content">
-  const overrideSel = bar.getAttribute('data-rbx-scroll-root');
-  const overrideEl  = overrideSel ? document.querySelector(overrideSel) : null;
-
-  // default to the true scrolling element; iOS Safari prefers document.body as scrollingElement
-  const defaultRoot = document.scrollingElement || document.documentElement || document.body;
-  const root = overrideEl || defaultRoot;
-
-  // 2) Update function (supports both window and element scrolling)
-  let rafId = null;
-
-  function getScrollTop() {
-    if (overrideEl) return overrideEl.scrollTop;
-    // Robust cross-browser:
-    return window.pageYOffset != null ? window.pageYOffset
-         : (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop || 0;
-  }
-
-  function getClientHeight() {
-    if (overrideEl) return overrideEl.clientHeight;
-    return document.documentElement.clientHeight || window.innerHeight || 0;
-  }
-
-  function getScrollHeight() {
-    if (overrideEl) return overrideEl.scrollHeight;
-    return root.scrollHeight || document.body.scrollHeight || 0;
-  }
-
-  function setProgress(pct){
-    const clamped = Math.max(0, Math.min(100, pct));
-    fill.style.transform = 'scaleX(' + (clamped/100) + ')';
-    bar.setAttribute('aria-valuenow', String(clamped));
-  }
-
-  function compute(){
-    const scrollTop    = getScrollTop();
-    const clientHeight = getClientHeight();
-    const scrollHeight = getScrollHeight();
-
-    const total = Math.max(1, scrollHeight - clientHeight);
-
-    // If there is effectively no scrollable content, hide the bar to avoid “stuck” look.
-    if (total <= 1) {
-      setProgress(0);
-      bar.style.opacity = '0';
-      return;
-    } else {
-      bar.style.opacity = '';
-    }
-
-    const pct = (scrollTop / total) * 100;
-    setProgress(pct);
-  }
-
-  function onScrollOrResize(){
-    if (rafId !== null) return;
-    rafId = requestAnimationFrame(()=>{
-      rafId = null;
-      compute();
-    });
-  }
-
-  // 3) Bind to the right scroller
-  compute();
-  if (overrideEl) {
-    overrideEl.addEventListener('scroll', onScrollOrResize, {passive:true});
-    window.addEventListener('resize', onScrollOrResize);
-  } else {
-    window.addEventListener('scroll', onScrollOrResize, {passive:true});
-    window.addEventListener('resize', onScrollOrResize);
-  }
-
-  // 4) Recompute after fonts/images load (affects scrollHeight on mobile)
-  window.addEventListener('load', compute);
-  document.addEventListener('readystatechange', compute);
-})();
+function pageScrollProgress() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("myBar").style.width = scrolled + "%";
+}
 </script>
   
 <footer class="site-footer">
