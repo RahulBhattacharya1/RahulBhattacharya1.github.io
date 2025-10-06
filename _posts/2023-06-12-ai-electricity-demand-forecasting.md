@@ -4,7 +4,7 @@ title: "Creating my AI Electricity Demand Predictor"
 date: 2023-06-12 12:45:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/electricity_demand.webp
 demo_link: https://rahuls-ai-electricity-demand-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_electricity_demand_forecasting
 ---
