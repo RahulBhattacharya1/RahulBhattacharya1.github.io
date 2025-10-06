@@ -1800,6 +1800,32 @@ pre {
   padding: 0 0.3em;   /* controls side space */
 }
 
+/* === Alive slow zoom for profile avatar === */
+.avatar-frame {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;     /* clip the zoom inside the circle */
+}
+
+.avatar-frame .alive-zoom {
+  display: block;
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+  animation: slowZoom 60s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes slowZoom {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }  /* your requested 1.4 zoom */
+  100% { transform: scale(1); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .avatar-frame .alive-zoom { animation: none; }
+}
+
 /* Giscus Comments Box */
 .giscus, .giscus-frame {
   display: block;
