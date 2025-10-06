@@ -4,7 +4,7 @@ title: "Building my AI USA Housing Price Predictor"
 date: 2023-01-03 10:43:19
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/housing_price.webp
 demo_link: https://rahuls-ai-house-price-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_house_price_predictor
 featured: true
