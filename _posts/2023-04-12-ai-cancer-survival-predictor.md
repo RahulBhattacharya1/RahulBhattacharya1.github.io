@@ -4,7 +4,7 @@ title: "Building my AI Cancer Survival Predictor"
 date: 2023-04-12 18:22:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/cancer_survival.webp
 demo_link: https://rahuls-ai-cancer-survival-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_cancer_survival_predictor
 featured: true
