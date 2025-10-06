@@ -4,7 +4,7 @@ title: "Building my AI Brain Tumor Detector"
 date: 2023-05-11 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/brain_tumor.webp
 demo_link: https://rahuls-ai-brain-tumor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_brain_tumor
 featured: true
