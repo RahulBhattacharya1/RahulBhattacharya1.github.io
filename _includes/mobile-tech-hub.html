@@ -76,7 +76,7 @@ GB{% assign tag_pairs = site.tags | sort_natural %}
     }
     function filterPosts(){
       let items = POSTS;
-      if(currentTag){ items = items.filter(p => (p.tags || []).includes(currentTag)); }
+      if(currentTag){ items = items.filter(p => (p._tags || []).includes(currentTag)); }
       if(currentView === 'featured'){ items = items.filter(p => !!p.featured); }
       return items;
     }
@@ -107,8 +107,40 @@ GB{% assign tag_pairs = site.tags | sort_natural %}
       listEl.setAttribute('aria-busy','false');
     }
 
-    const firstTagBtn = tagsNav.querySelector('.rbx-mth-tag');
-    if(firstTagBtn){ setActiveTag(firstTagBtn); }
+  // Build tag map: { tag -> count }, lowercase & dedup
+  function buildTagMap(){
+    const map = new Map();
+    for(const p of POSTS){
+      const uniq = Array.from(new Set(p._tags || []));
+      for(const t of uniq){
+        map.set(t, (map.get(t) || 0)  1);
+      }
+    }
+    return map;
+  }
+
+  // Render the left ribbon from the map
+  function renderTags(){
+    const map = buildTagMap();
+    const entries = Array.from(map.entries())
+      .sort((a,b) => a[0].localeCompare(b[0])); // alpha; swap to count sort if you like
+    const frag = document.createDocumentFragment();
+    for(const [tag, count] of entries){
+      const btn = document.createElement('button');
+      btn.className = 'rbx-mth-tag';
+      btn.dataset.tag = tag;
+      btn.innerHTML =
+        `<span class="rbx-mth-tag-label">${tag}</span>
+         <span class="rbx-mth-tag-count">${count}</span>`;
+      frag.appendChild(btn);
+    }
+    tagsNav.innerHTML = '';
+    tagsNav.appendChild(frag);
+  }
+  
+    renderTags();
+  let firstTagBtn = tagsNav.querySelector('.rbx-mth-tag');
+if(firstTagBtn){ setActiveTag(firstTagBtn); }
 
     tagsNav.addEventListener('click', (e)=>{
       const btn = e.target.closest('.rbx-mth-tag'); if(!btn) return;
