@@ -4,7 +4,7 @@ title: "Building my AI Tuberculosis Mortality Predictor"
 date: 2023-01-16 14:29:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/tuberculosis.webp
 demo_link: https://rahuls-ai-tuberculosis-mortality-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_tuberculosis_mortality_predictor
 featured: true
