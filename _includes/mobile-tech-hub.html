@@ -1,16 +1,8 @@
-{% assign tag_pairs = site.tags | sort_natural %}
+GB{% assign tag_pairs = site.tags | sort_natural %}
 <section id="rbx-mobile-tech-hub" class="rbx-mobile-tech-hub{% if include.mobile_only %} rbx-monly{% endif %}" aria-label="Explore by technology">
   <div class="rbx-mth-shell">
     <!-- Left: Tag Ribbon -->
-    <nav class="rbx-mth-tags" aria-label="Tags">
-      {% for pair in tag_pairs %}
-        {% assign tagname = pair[0] %}
-        <button class="rbx-mth-tag" data-tag="{{ tagname | escape }}">
-          <span class="rbx-mth-tag-label">{{ tagname }}</span>
-          <span class="rbx-mth-tag-count">{{ pair[1].size }}</span>
-        </button>
-      {% endfor %}
-    </nav>
+<nav class="rbx-mth-tags" aria-label="Tags"></nav>
 
     <!-- Right: Content Pane -->
     <div class="rbx-mth-pane">
