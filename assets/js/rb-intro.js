@@ -376,165 +376,156 @@ function rbxRotateMetrics(){
 
   // Draw chart with: blue axes, blue ticks, blue line, blue dots; transparent bg
   function drawProjectsChart(){
-    // Clear prior content
-    while(svg.firstChild) svg.removeChild(svg.firstChild);
+  // Clear prior content
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
 
-    var ns = "http://www.w3.org/2000/svg";
-    var W = 320, H = 120;
+  const ns = "http://www.w3.org/2000/svg";
+  const W = 360, H = 160;                 // match SVG viewBox
 
-    // Parse series & years
-    var seriesStr = chartBox.getAttribute('data-series') || '';
-    var yearsStr  = chartBox.getAttribute('data-years')  || '';
-    var series = seriesStr.split(',').map(function(s){ return parseFloat(s.trim()); }).filter(function(n){return !isNaN(n);});
-    var years  = yearsStr.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+  // Parse series & years
+  const seriesStr = chartBox.getAttribute('data-series') || '';
+  const yearsStr  = chartBox.getAttribute('data-years')  || '';
+  const series = seriesStr.split(',').map(s=>parseFloat(s.trim())).filter(n=>!isNaN(n));
+  const years  = yearsStr.split(',').map(s=>s.trim()).filter(Boolean);
 
-    // If you want the final value to equal total posts dynamically:
-    if(totalPostsEl){
-      var totalPosts = parseInt(totalPostsEl.getAttribute('data-total'),10);
-      if(!isNaN(totalPosts) && series.length){ series[series.length-1] = totalPosts; }
-    }
-
-    if(series.length < 2 || years.length !== series.length) return;
-
-    // Fixed Y ticks: 20,40,60,80,100 as requested
-    var yTicks = [20,40,60,80,100];
-    var yMax   = 100; // fixed scale top at 100 (per request)
-    var yMin   = 0;
-
-    // Layout paddings for axes & labels
-    var PAD_L = 36;  // left room for 3-digit labels
-    var PAD_R = 8;
-    var PAD_T = 10;
-    var PAD_B = 24;  // bottom room for year labels
-
-    var plotW = W - PAD_L - PAD_R;
-    var plotH = H - PAD_T - PAD_B;
-
-    function sx(i){ return PAD_L + (series.length===1 ? 0 : (i * (plotW/(series.length-1)))); }
-    function sy(v){ return PAD_T + (plotH - ( (v - yMin) * plotH / (yMax - yMin) )); }
-
-    // Blue color for all lines and points
-    var BLUE = '#0b66ff';
-
-    // Axes
-    var axes = document.createElementNS(ns,'g');
-    svg.appendChild(axes);
-
-    // X axis line
-    var xAxis = document.createElementNS(ns,'line');
-    xAxis.setAttribute('x1', PAD_L);
-    xAxis.setAttribute('y1', PAD_T + plotH);
-    xAxis.setAttribute('x2', PAD_L + plotW);
-    xAxis.setAttribute('y2', PAD_T + plotH);
-    xAxis.setAttribute('stroke', BLUE);
-    xAxis.setAttribute('stroke-width','1.25');
-    axes.appendChild(xAxis);
-
-    // Y axis line
-    var yAxis = document.createElementNS(ns,'line');
-    yAxis.setAttribute('x1', PAD_L);
-    yAxis.setAttribute('y1', PAD_T);
-    yAxis.setAttribute('x2', PAD_L);
-    yAxis.setAttribute('y2', PAD_T + plotH);
-    yAxis.setAttribute('stroke', BLUE);
-    yAxis.setAttribute('stroke-width','1.25');
-    axes.appendChild(yAxis);
-
-    // Y ticks + labels (20…100)
-    yTicks.forEach(function(t){
-      var y = sy(t);
-      // tick line
-      var tl = document.createElementNS(ns,'line');
-      tl.setAttribute('x1', PAD_L - 5);
-      tl.setAttribute('y1', y);
-      tl.setAttribute('x2', PAD_L);
-      tl.setAttribute('y2', y);
-      tl.setAttribute('stroke', BLUE);
-      tl.setAttribute('stroke-width','1');
-      axes.appendChild(tl);
-
-      // grid (optional subtle) — comment out if you truly want only axes
-      // var gl = document.createElementNS(ns,'line');
-      // gl.setAttribute('x1', PAD_L);
-      // gl.setAttribute('y1', y);
-      // gl.setAttribute('x2', PAD_L + plotW);
-      // gl.setAttribute('y2', y);
-      // gl.setAttribute('stroke', BLUE);
-      // gl.setAttribute('stroke-opacity','0.10');
-      // gl.setAttribute('stroke-width','1');
-      // axes.appendChild(gl);
-
-      // label
-      var txt = document.createElementNS(ns,'text');
-      txt.setAttribute('x', PAD_L - 8);
-      txt.setAttribute('y', y + 3);
-      txt.setAttribute('text-anchor','end');
-      txt.setAttribute('font-size','10');
-      txt.setAttribute('font-family','ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif');
-      txt.setAttribute('fill', BLUE);
-      txt.textContent = t;
-      axes.appendChild(txt);
-    });
-
-    // X ticks + year labels (every point)
-    years.forEach(function(yr, i){
-      var x = sx(i);
-      // tick
-      var tl = document.createElementNS(ns,'line');
-      tl.setAttribute('x1', x);
-      tl.setAttribute('y1', PAD_T + plotH);
-      tl.setAttribute('x2', x);
-      tl.setAttribute('y2', PAD_T + plotH + 5);
-      tl.setAttribute('stroke', BLUE);
-      tl.setAttribute('stroke-width','1');
-      axes.appendChild(tl);
-
-      // label
-      var txt = document.createElementNS(ns,'text');
-      txt.setAttribute('x', x);
-      txt.setAttribute('y', PAD_T + plotH + 16);
-      txt.setAttribute('text-anchor','middle');
-      txt.setAttribute('font-size','10');
-      txt.setAttribute('font-family','ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif');
-      txt.setAttribute('fill', BLUE);
-      txt.textContent = yr;
-      axes.appendChild(txt);
-    });
-
-    // Line path through all points
-    var d = '';
-    series.forEach(function(v,i){
-      var x = sx(i), y = sy(v);
-      d += (i ? ' L ' : 'M ') + x + ' ' + y;
-    });
-    var path = document.createElementNS(ns,'path');
-    path.setAttribute('d', d);
-    path.setAttribute('fill','none');
-    path.setAttribute('stroke', BLUE);
-    path.setAttribute('stroke-width','2.2');
-    svg.appendChild(path);
-
-    // Dots at each project point (small blue circles)
-    var dots = document.createElementNS(ns,'g');
-    svg.appendChild(dots);
-    series.forEach(function(v,i){
-      var c = document.createElementNS(ns,'circle');
-      c.setAttribute('cx', sx(i));
-      c.setAttribute('cy', sy(v));
-      c.setAttribute('r', 2.6);
-      c.setAttribute('fill', BLUE);
-      dots.appendChild(c);
-    });
-
-    // Animate the line draw over 5s
-    var len = path.getTotalLength();
-    path.style.strokeDasharray  = String(len);
-    path.style.strokeDashoffset = String(len);
-    // Force layout, then animate
-    path.getBoundingClientRect();
-    path.style.transition = 'stroke-dashoffset '+CHART_ANIM_MS+'ms linear';
-    path.style.strokeDashoffset = '0';
+  // Overwrite final point with live post count (keeps array lengths equal)
+  if(totalPostsEl && series.length){
+    const totalPosts = parseInt(totalPostsEl.getAttribute('data-total'),10);
+    if(!isNaN(totalPosts)) series[series.length - 1] = totalPosts;
   }
+
+  // Must match to proceed
+  if(series.length < 2 || years.length !== series.length) return;
+
+  const yTicks = [20,40,60,80,100];
+  const yMax = 100, yMin = 0;
+
+  // Paddings allow room for tick labels + captions
+  const PAD_L = 48, PAD_R = 12, PAD_T = 16, PAD_B = 34;
+
+  const plotW = W - PAD_L - PAD_R;
+  const plotH = H - PAD_T - PAD_B;
+
+  const sx = i => PAD_L + (i * (plotW/(series.length - 1)));
+  const sy = v => PAD_T + (plotH - ((v - yMin) * plotH / (yMax - yMin)));
+
+  const BLUE = '#0b66ff';
+
+  // Axes group
+  const gAxes = document.createElementNS(ns,'g'); svg.appendChild(gAxes);
+
+  // X axis
+  const xAxis = document.createElementNS(ns,'line');
+  xAxis.setAttribute('x1', PAD_L);
+  xAxis.setAttribute('y1', PAD_T + plotH);
+  xAxis.setAttribute('x2', PAD_L + plotW);
+  xAxis.setAttribute('y2', PAD_T + plotH);
+  xAxis.setAttribute('stroke', BLUE);
+  xAxis.setAttribute('stroke-width','1.25');
+  gAxes.appendChild(xAxis);
+
+  // Y axis
+  const yAxis = document.createElementNS(ns,'line');
+  yAxis.setAttribute('x1', PAD_L);
+  yAxis.setAttribute('y1', PAD_T);
+  yAxis.setAttribute('x2', PAD_L);
+  yAxis.setAttribute('y2', PAD_T + plotH);
+  yAxis.setAttribute('stroke', BLUE);
+  yAxis.setAttribute('stroke-width','1.25');
+  gAxes.appendChild(yAxis);
+
+  // Y ticks + labels (20…100)
+  yTicks.forEach(t=>{
+    const yy = sy(t);
+    const tl = document.createElementNS(ns,'line');
+    tl.setAttribute('x1', PAD_L - 6); tl.setAttribute('y1', yy);
+    tl.setAttribute('x2', PAD_L);     tl.setAttribute('y2', yy);
+    tl.setAttribute('stroke', BLUE); tl.setAttribute('stroke-width','1');
+    gAxes.appendChild(tl);
+
+    const txt = document.createElementNS(ns,'text');
+    txt.setAttribute('x', PAD_L - 10);
+    txt.setAttribute('y', yy + 3);
+    txt.setAttribute('text-anchor','end');
+    txt.setAttribute('font-size','11');
+    txt.setAttribute('font-family','ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif');
+    txt.setAttribute('fill', BLUE);
+    txt.textContent = t;
+    gAxes.appendChild(txt);
+  });
+
+  // X ticks + year labels (each point)
+  years.forEach((yr,i)=>{
+    const xx = sx(i);
+    const tl = document.createElementNS(ns,'line');
+    tl.setAttribute('x1', xx); tl.setAttribute('y1', PAD_T + plotH);
+    tl.setAttribute('x2', xx); tl.setAttribute('y2', PAD_T + plotH + 6);
+    tl.setAttribute('stroke', BLUE); tl.setAttribute('stroke-width','1');
+    gAxes.appendChild(tl);
+
+    const txt = document.createElementNS(ns,'text');
+    txt.setAttribute('x', xx);
+    txt.setAttribute('y', PAD_T + plotH + 18);
+    txt.setAttribute('text-anchor','middle');
+    txt.setAttribute('font-size','11');
+    txt.setAttribute('font-family','ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif');
+    txt.setAttribute('fill', BLUE);
+    txt.textContent = yr;
+    gAxes.appendChild(txt);
+  });
+
+  // Axis captions
+  const xCap = document.createElementNS(ns,'text');
+  xCap.setAttribute('x', PAD_L + plotW/2);
+  xCap.setAttribute('y', H - 8);
+  xCap.setAttribute('text-anchor','middle');
+  xCap.setAttribute('font-size','12');
+  xCap.setAttribute('font-weight','700');
+  xCap.setAttribute('fill', BLUE);
+  xCap.textContent = 'Year';
+  svg.appendChild(xCap);
+
+  const yCap = document.createElementNS(ns,'text');
+  yCap.setAttribute('x', 14);
+  yCap.setAttribute('y', PAD_T + plotH/2);
+  yCap.setAttribute('text-anchor','middle');
+  yCap.setAttribute('font-size','12');
+  yCap.setAttribute('font-weight','700');
+  yCap.setAttribute('fill', BLUE);
+  yCap.setAttribute('transform', `rotate(-90 14 ${PAD_T + plotH/2})`);
+  yCap.textContent = 'Number of Projects';
+  svg.appendChild(yCap);
+
+  // Line path
+  let d = '';
+  series.forEach((v,i)=>{ d += (i?' L ':'M ') + sx(i) + ' ' + sy(v); });
+  const path = document.createElementNS(ns,'path');
+  path.setAttribute('d', d);
+  path.setAttribute('fill','none');
+  path.setAttribute('stroke', BLUE);
+  path.setAttribute('stroke-width','2.2');
+  svg.appendChild(path);
+
+  // Dots
+  const gDots = document.createElementNS(ns,'g'); svg.appendChild(gDots);
+  series.forEach((v,i)=>{
+    const c = document.createElementNS(ns,'circle');
+    c.setAttribute('cx', sx(i));
+    c.setAttribute('cy', sy(v));
+    c.setAttribute('r', 2.8);
+    c.setAttribute('fill', BLUE);
+    gDots.appendChild(c);
+  });
+
+  // 5s draw animation
+  const len = path.getTotalLength();
+  path.style.strokeDasharray  = String(len);
+  path.style.strokeDashoffset = String(len);
+  path.getBoundingClientRect(); // force layout
+  path.style.transition = `stroke-dashoffset 5000ms linear`;
+  path.style.strokeDashoffset = '0';
+}
+
 
   // Swap logic: bars → (2s) → chart (10s) → bars → loop
   function showChartThenBack(){
