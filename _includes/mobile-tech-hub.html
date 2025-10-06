@@ -1,26 +1,34 @@
-<section id="rbx-mobile-tech-hub" class="rbx-mobile-tech-hub{% if include.mobile_only %} rbx-monly{% endif %}" aria-label="Explore by technology">
+{% comment %}
+Params (optional):
+- mobile_only: true|false
+- tags_allowlist: "databricks,python,sql"   # use these tags (lower/upper doesn’t matter), up to 5
+- tags_blocklist: "legacy,old"              # exclude these from auto-top-5
+{% endcomment %}
+
+<section id="rbx-mobile-tech-hub" class="rbx-mobile-tech-hub{% if include.mobile_only %} rbx-monly{% endif %}" aria-label="Explore by technology"
+         data-tags-allowlist="{{ include.tags_allowlist | default: '' }}"
+         data-tags-blocklist="{{ include.tags_blocklist | default: '' }}">
   <div class="rbx-mth-shell">
-    <!-- Left: Tag Ribbon -->
+    <!-- Left: Tag Ribbon (no counts) -->
     <nav class="rbx-mth-tags" aria-label="Tags"></nav>
 
     <!-- Right: Content Pane -->
     <div class="rbx-mth-pane">
+      <!-- Flat tabs: Tags | Featured | All -->
       <div class="rbx-mth-tabs" role="tablist" aria-label="Post filter">
-        <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="featured">
-          Featured Posts
-        </button>
-        <button class="rbx-mth-tab is-active" role="tab" aria-selected="true" data-view="all">
-          All Posts
-        </button>
+        <button class="rbx-mth-tab is-active" role="tab" aria-selected="true" data-view="all">All</button>
+        <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="featured">Featured</button>
+        <button class="rbx-mth-tab" role="tab" aria-selected="false" data-view="tags">Tags</button>
       </div>
 
+      <!-- Posts (titles only, no dates) -->
       <div class="rbx-mth-list" role="region" aria-live="polite" aria-busy="false">
         <div class="rbx-mth-empty" hidden>No posts yet.</div>
       </div>
     </div>
   </div>
 
-  <!-- Data seed -->
+  <!-- Data seed (all posts) -->
   <script type="application/json" id="rbx-mth-data">
   {
     "posts": [
@@ -29,27 +37,25 @@
         {
           "title": {{ p.title | jsonify }},
           "url": {{ p.url | relative_url | jsonify }},
-          "date": {{ p.date | date: "%Y-%m-%d" | jsonify }},
           "excerpt": {{ p.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }},
           "featured": {{ p.featured | default: false | jsonify }},
-          "tags": [{% for t in p.tags %}{{ t | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
-          "thumb": {% if p.image %}{{ p.image | relative_url | jsonify }}{% else %}null{% endif %}
+          "tags": [{% for t in p.tags %}{{ t | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]
         }{% unless forloop.last %},{% endunless %}
       {% endfor %}
     ]
   }
   </script>
 
-  <!-- Controller (scoped) -->
+  <!-- Controller -->
   <script>
   (function(){
     const root = document.currentScript.closest('#rbx-mobile-tech-hub');
     if(!root) return;
 
-    const payload = JSON.parse(root.querySelector('#rbx-mth-data').textContent.trim());
+    const payload = JSON.parse(root.querySelector('#rbx-mth-data').textContent.trim() || '{"posts":[]}');
     const POSTS = (payload.posts || []).map(p => ({
       ...p,
-      _tags: (p.tags || []).map(t => String(t).toLowerCase())
+      _tags: (p.tags || []).map(t => String(t).toLowerCase().trim())
     }));
 
     const tagsNav = root.querySelector('.rbx-mth-tags');
@@ -57,8 +63,14 @@
     const listEl  = root.querySelector('.rbx-mth-list');
     const emptyEl = root.querySelector('.rbx-mth-empty');
 
+    // Params for manual tag control
+    const ALLOW = (root.dataset.tagsAllowlist || '')
+      .split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+    const BLOCK = (root.dataset.tagsBlocklist || '')
+      .split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+
     let currentTag = null;
-    let currentView = 'all'; // default to All so first paint isn't blank
+    let currentView = 'all'; // All by default (never blank)
 
     function setActiveTag(btn){
       tagsNav.querySelectorAll('.rbx-mth-tag').forEach(b=>b.classList.remove('is-active'));
@@ -66,25 +78,69 @@
     }
     function setActiveTab(tabBtn){
       tabsEl.querySelectorAll('.rbx-mth-tab').forEach(t=>{
-        t.classList.remove('is-active');
-        t.setAttribute('aria-selected','false');
+        t.classList.remove('is-active'); t.setAttribute('aria-selected','false');
       });
-      tabBtn.classList.add('is-active');
-      tabBtn.setAttribute('aria-selected','true');
+      tabBtn.classList.add('is-active'); tabBtn.setAttribute('aria-selected','true');
       currentView = tabBtn.dataset.view;
     }
+
+    function buildTagMap(){
+      const map = new Map();
+      for(const p of POSTS){
+        const uniq = Array.from(new Set(p._tags || []));
+        for(const t of uniq){
+          if(BLOCK.length && BLOCK.includes(t)) continue;
+          map.set(t, (map.get(t) || 0) + 1);
+        }
+      }
+      return map;
+    }
+
+    function selectTop5Tags(){
+      // If allow-list provided, take up to 5 from it (ignoring duplicates & blocks).
+      if(ALLOW.length){
+        const uniq = Array.from(new Set(ALLOW.filter(t => !BLOCK.includes(t))));
+        return uniq.slice(0,5);
+      }
+      // Else: top 5 by count desc
+      const map = buildTagMap();
+      return Array.from(map.entries())
+        .sort((a,b) => b[1] - a[1])
+        .slice(0,5)
+        .map(([t]) => t);
+    }
+
+    function renderTags(){
+      const topTags = selectTop5Tags();
+      const frag = document.createDocumentFragment();
+      for(const tag of topTags){
+        const btn = document.createElement('button');
+        btn.className = 'rbx-mth-tag';
+        btn.dataset.tag = tag;
+        // No counts, just the tag label (lowercased input -> show as-is)
+        btn.textContent = tag;
+        frag.appendChild(btn);
+      }
+      tagsNav.innerHTML = '';
+      tagsNav.appendChild(frag);
+
+      const first = tagsNav.querySelector('.rbx-mth-tag');
+      if(first) setActiveTag(first);
+    }
+
     function filterPosts(){
       let items = POSTS;
       if(currentTag){ items = items.filter(p => (p._tags || []).includes(currentTag)); }
       if(currentView === 'featured'){ items = items.filter(p => !!p.featured); }
+      // currentView === 'tags' doesn't change list content; it’s just a simple tab label
       return items;
     }
+
     function render(){
       const items = filterPosts();
       listEl.innerHTML = '';
       emptyEl.hidden = items.length > 0;
 
-      // If user is on Featured but nothing to show, auto-flip to All
       if(currentView === 'featured' && items.length === 0){
         const allBtn = root.querySelector('.rbx-mth-tab[data-view="all"]');
         if(allBtn){ setActiveTab(allBtn); return render(); }
@@ -93,61 +149,18 @@
       for(const p of items){
         const a = document.createElement('a');
         a.href = p.url;
-        a.className = 'rbx-mth-card';
-
-        const img = document.createElement('img');
-        img.className = 'rbx-mth-thumb';
-        img.loading = 'lazy';
-        img.alt = '';
-        if(p.thumb){ img.src = p.thumb; }
-
-        const box = document.createElement('div');
-        const h4 = document.createElement('h4'); h4.textContent = p.title;
-        const meta = document.createElement('div'); meta.className = 'rbx-mth-meta'; meta.textContent = p.date || '';
-
-        box.appendChild(h4); box.appendChild(meta);
-        a.appendChild(img); a.appendChild(box);
+        a.className = 'rbx-mth-row'; // flat row
+        a.textContent = p.title;     // title only (no date, no thumb)
         listEl.appendChild(a);
       }
       listEl.setAttribute('aria-busy','false');
     }
 
-    // Build tag map: { tag -> count }, lowercase & dedup
-    function buildTagMap(){
-      const map = new Map();
-      for(const p of POSTS){
-        const uniq = Array.from(new Set(p._tags || []));
-        for(const t of uniq){
-          map.set(t, (map.get(t) || 0) + 1); // <-- fixed +
-        }
-      }
-      return map;
-    }
-
-    // Render the left ribbon from the map
-    function renderTags(){
-      const map = buildTagMap();
-      const entries = Array.from(map.entries())
-        .sort((a,b) => a[0].localeCompare(b[0])); // alpha; change to (b[1]-a[1]) for count desc
-      const frag = document.createDocumentFragment();
-      for(const [tag, count] of entries){
-        const btn = document.createElement('button');
-        btn.className = 'rbx-mth-tag';
-        btn.dataset.tag = tag;
-        btn.innerHTML =
-          `<span class="rbx-mth-tag-label">${tag}</span>
-           <span class="rbx-mth-tag-count">${count}</span>`;
-        frag.appendChild(btn);
-      }
-      tagsNav.innerHTML = '';
-      tagsNav.appendChild(frag);
-    }
-
-    // First render
+    // Init
     renderTags();
-    const firstTagBtn = tagsNav.querySelector('.rbx-mth-tag');
-    if(firstTagBtn){ setActiveTag(firstTagBtn); }
+    render();
 
+    // Events
     tagsNav.addEventListener('click', (e)=>{
       const btn = e.target.closest('.rbx-mth-tag'); if(!btn) return;
       setActiveTag(btn); listEl.setAttribute('aria-busy','true'); render();
@@ -156,8 +169,6 @@
       const t = e.target.closest('.rbx-mth-tab'); if(!t) return;
       setActiveTab(t); listEl.setAttribute('aria-busy','true'); render();
     });
-
-    render();
   })();
   </script>
 </section>
