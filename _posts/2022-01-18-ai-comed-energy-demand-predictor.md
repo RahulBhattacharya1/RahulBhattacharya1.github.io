@@ -4,7 +4,7 @@ title: "Building my AI Comed Energy Demand Predictor"
 date: 2022-01-18 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/comed.webp
 demo_link: https://rahuls-ai-comed-energy-demand-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_comed_energy_demand_forecasting
 featured: true
