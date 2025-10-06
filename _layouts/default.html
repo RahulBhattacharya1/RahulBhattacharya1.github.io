@@ -31,6 +31,12 @@
 </head>
 <body{% if page.collection == "posts" %} class="is-post"{% endif %}>
 
+ <!-- Reading Progress Bar -->
+<div id="rbx-progressbar" class="rbx-progress rbx-top" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-hidden="true">
+  <span class="rbx-progress__fill"></span>
+  <span class="rbx-progress__sheen" aria-hidden="true"></span>
+</div>
+ 
 {% if page.url == "/" %}
   {% include rb-intro.html %}
 {% endif %}
@@ -1124,6 +1130,49 @@ document.addEventListener('DOMContentLoaded', function () {
 {% if page.url == "/" %}
   <script defer src="{{ '/assets/js/rb-intro.js' | relative_url }}"></script>
 {% endif %}
+
+<script>
+(function(){
+  const bar = document.getElementById('rbx-progressbar');
+  if(!bar) return;
+  const fill = bar.querySelector('.rbx-progress__fill');
+
+  let rafId = null;
+
+  function setProgress(pct){
+    // Clamp 0–100 and set transform scale for crisp perf
+    const clamped = Math.max(0, Math.min(100, pct));
+    fill.style.transform = 'scaleX(' + (clamped/100) + ')';
+    bar.setAttribute('aria-valuenow', String(clamped));
+  }
+
+  function compute(){
+    const doc = document.documentElement;
+    const body = document.body;
+
+    const scrollTop = (doc && doc.scrollTop) || body.scrollTop || 0;
+    const scrollHeight = (doc && doc.scrollHeight) || body.scrollHeight || 0;
+    const clientHeight = doc.clientHeight;
+
+    const total = Math.max(1, scrollHeight - clientHeight);
+    const pct = (scrollTop / total) * 100;
+    setProgress(pct);
+  }
+
+  function onScrollOrResize(){
+    if(rafId !== null) return;       // throttle with rAF
+    rafId = requestAnimationFrame(()=>{
+      rafId = null;
+      compute();
+    });
+  }
+
+  // Init and bind
+  compute();
+  addEventListener('scroll', onScrollOrResize, {passive:true});
+  addEventListener('resize', onScrollOrResize);
+})();
+</script>
   
 <footer class="site-footer">
   <p>© {{ site.time | date: "%Y" }} Rahul Bhattacharya. All rights reserved.</p>
