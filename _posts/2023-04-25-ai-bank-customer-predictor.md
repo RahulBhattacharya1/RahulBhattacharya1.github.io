@@ -4,7 +4,7 @@ title: "Creating my AI Bank Customer Subscription Predictor"
 date: 2023-04-25 11:53:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/bank_customer.webp
 demo_link: https://rahuls-ai-bank-customer-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_bank_customer_predictor
 ---
