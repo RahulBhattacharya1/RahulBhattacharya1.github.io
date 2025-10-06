@@ -411,19 +411,6 @@ body {
   color: #383838;            /* post body text color */
 }
 
-/* Indent the first line of each content paragraph */
-.is-post .main-inner > p {
-  text-indent: 2em;          /* ~a “tab” */
-  margin-top: 0;             /* avoid extra jump after the header */
-}
-
-/* Don’t indent meta/captions or list items */
-.is-post .post-header p,
-.is-post .post-hero__caption,
-.is-post .main-inner li p {
-  text-indent: 0;
-}
-
 /* Post body images: 75% on desktop, full-width on mobile */
 .is-post .main-inner img:not(.inl-icon) {
   width: 75% !important;
