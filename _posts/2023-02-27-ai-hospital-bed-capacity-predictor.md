@@ -4,7 +4,7 @@ title: "Building my AI Hospital Bed Capacity Predictor"
 date: 2023-02-27 14:27:43
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/hospital_bed.webp
 demo_link: https://rahuls-ai-hospital-bed-capacity-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_hospital_bed_capacity_predictor
 ---
