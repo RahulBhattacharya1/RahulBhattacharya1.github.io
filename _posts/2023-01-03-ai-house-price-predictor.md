@@ -5,9 +5,9 @@ date: 2023-01-03 10:43:19
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/housing_price.webp
+thumbnail_mobile: /assets/images/usa_housing_price_sq.webp
 demo_link: https://rahuls-ai-house-price-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_house_price_predictor
-featured: true
 ---
 
 I wanted to create something that combined my interest in data and my curiosity about real estate. 
