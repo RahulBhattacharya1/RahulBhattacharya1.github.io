@@ -5,9 +5,9 @@ date: 2025-05-09 12:23:49
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
 thumbnail: /assets/images/sentiment.webp
+thumbnail_mobile: /assets/images/sentiment_analysis_sq.webp
 demo_link: https://rahuls-ai-sentiment-analysis.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_sentiment_analysis
-featured: true
 ---
 
 # Building My IMDb Sentiment Classifier
