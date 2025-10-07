@@ -5,9 +5,9 @@ date: 2025-01-04 10:11:45
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/f1.webp
+thumbnail_mobile: /assets/images/f1_race_sq.webp
 demo_link: https://rahuls-ai-f1-race-outcome-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_f1_race_outcome_predictor
-featured: true
 ---
 
 One evening, I rewatched an old F1 Grand Prix. The winner wasn’t the pole sitter, and many midfield cars outperformed expectations. It struck me that race results were influenced by more than just qualifying pace. Elements like tire wear, pit stops, circuit type, and driver consistency subtly shifted the outcome. That night, I asked myself: “Could a simple machine learning model predict a car’s final position using only race metadata?”
