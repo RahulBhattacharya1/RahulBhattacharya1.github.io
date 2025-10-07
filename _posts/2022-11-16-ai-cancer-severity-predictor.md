@@ -5,9 +5,9 @@ date: 2022-11-16 14:27:32
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/cancer_severity.webp
+thumbnail_mobile: /assets/images/cancer_severity_sq.webp
 demo_link: https://rahuls-ai-cancer-severity-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_cancer_severity_predictor
-featured: true
 ---
 
 There was a day when I was reading about how people face uncertainty
