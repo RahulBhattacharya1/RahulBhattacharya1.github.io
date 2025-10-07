@@ -5,9 +5,9 @@ date: 2025-01-16 07:22:31
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/movie_rating.webp
+thumbnail_mobile: /assets/images/movie_rating_sq.webp
 demo_link: https://rahuls-ai-movie-rating-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_movie_rating_predictor
-featured: true
 ---
 
 I created a project that predicts a movie rating using a clean dataset and a model. The goal was clarity over flash. Every file in the repository is plain and easy to follow. The final app trains in seconds and gives a quick sense of how features push a rating up or down.
