@@ -5,9 +5,9 @@ date: 2023-11-24 17:31:22
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/college.webp
+thumbnail_mobile: /assets/images/college_placement_sq.webp
 demo_link: https://rahuls-ai-college-placement.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-college-placement
-featured: true
 ---
 
 There are moments when uncertainty shapes the mind more than clarity. I once watched several students struggling to understand how their academic record would impact their placement chances. The doubt on their faces stayed with me for long. It made me think about building a tool that could bring numbers into the discussion. Instead of vague assumptions, a student could see probabilities, and maybe even salary ranges. That personal encounter sparked this project. Dataset used [here](https://www.kaggle.com/datasets/vrajesh0sharma7/college-student-placement).
