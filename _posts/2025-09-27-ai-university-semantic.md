@@ -5,6 +5,7 @@ date: 2025-09-27 10:16:34
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/university.webp
+thumbnail_mobile: /assets/images/university_search_sq.webp
 demo_link: https://rahuls-ai-university-semantic.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_university_semantic
 ---
