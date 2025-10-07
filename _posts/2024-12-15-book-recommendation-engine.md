@@ -5,9 +5,9 @@ date: 2024-12-15 09:46:21
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/book.webp
+thumbnail_mobile: /assets/images/book_recommendation_sq.webp
 demo_link: https://rahuls-ai-book-recommendation-engine.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_book_recommendation_engine
-featured: true
 ---
 
 It began with a simple thought. I had been reading books in different genres, but I often felt lost when I wanted to choose my next read. The world of books is wide and deep, and I wanted a guide that could help me find titles matching my taste. That was the moment when I realized I needed a personal recommendation engine. I decided to build one using Python, data, and simple machine learning logic. The result is a working AI Book Recommendation Engine that I deployed as a web application with Streamlit. This post explains every file, every function, and every helper used in the project.
