@@ -5,9 +5,9 @@ date: 2023-08-24 16:54:23
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/crisis.webp
+thumbnail_mobile: /assets/images/crisis_eco_sq.webp
 demo_link: https://rahuls-ai-employment-gdp.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_employment_gdp
-featured: true
 ---
 
 Sometimes inspiration begins in small observations. I was reading about economic reports and saw how numbers told stories long before analysts announced conclusions. Employment percentages and GDP figures quietly shifted and carried warnings of disruption. That created a thought about what it would mean if such signals were noticed earlier. A project like this was born not from theory but from curiosity about practical signals. Dataset used [here](https://www.kaggle.com/datasets/akshatsharma2/global-jobs-gdp-and-unemployment-data-19912022).
