@@ -5,9 +5,9 @@ date: 2023-05-11 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/brain_tumor.webp
+thumbnail_mobile: /assets/images/brain_tumor_sq.webp
 demo_link: https://rahuls-ai-brain-tumor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_brain_tumor
-featured: true
 ---
 
 It started with a moment that seemed ordinary but stayed with me for a long time. I once attended a technical session where medical images were being discussed. Among them was an MRI scan of a brain. To me, at that time, it looked like a complex blur of shapes and shades. The speaker pointed out subtle patterns and explained how doctors could interpret them to detect early signs of tumors. I was struck not just by the science but by how critical timely recognition was. Dataset used [here](https://www.kaggle.com/datasets/arwabasal/brain-tumor-mri-detection).
