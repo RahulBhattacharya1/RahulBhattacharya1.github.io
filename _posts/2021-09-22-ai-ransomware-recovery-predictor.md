@@ -4,10 +4,10 @@ title: "Building my AI Ransomware Recovery Time Predictor"
 date: 2021-09-22 10:27:34
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/ransomware.webp
+thumbnail_mobile: /assets/images/ransomware.webp
 demo_link: https://rahuls-ai-ransomware-recovery-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_ransomware_recovery_predictor
-featured: true
 ---
 
 A winter outage story pushed this build into motion. A regional healthcare network suffered a ransomware event, and the updates from the incident response team read like weather reports that never got better. Recovery windows moved from days to weeks, and every new dependency uncovered another delay. I kept wondering if a simple model could at least frame the timeline in a grounded way for leaders who need to plan. The question was not about certainty, but about getting a baseline that could be refined with more data. That line of thinking grew into a small tool I could ship fast and improve over time. Dataset used [here](https://www.kaggle.com/datasets/rivalytics/healthcare-ransomware-dataset).
