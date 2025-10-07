@@ -5,9 +5,9 @@ date: 2025-04-30 10:37:14
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/titanic.webp
+thumbnail_mobile: /assets/images/titanic_survival_sq.webp
 demo_link: https://rahuls-ai-titanic-survival-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_titanic_survival_prediction
-featured: true
 ---
 
 The Titanic tragedy has been studied for decades, yet every time I see the passenger records, I feel both the weight of history and the pull of data. Each row in the dataset represents a human life, marked by features like age, gender, class, fare, and survival outcome. I could not help but wonder if survival was random or if patterns existed beneath the surface. Could a model discover relationships hidden in these variables? That thought drove me to create a survival prediction app that merged history with science. Dataset used [here](https://www.kaggle.com/datasets/heptapod/titanic).
