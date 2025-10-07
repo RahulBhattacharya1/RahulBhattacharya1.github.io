@@ -4,10 +4,10 @@ title: "Creating my AI Diamond Price Predictor"
 date: 2022-03-30 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/diamond_price.webp
+thumbnail_mobile: /assets/images/diamond_price_sq.webp
 demo_link: https://rahuls-ai-diamond-price-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_diamond_price_predictor
-featured: true
 ---
 
 There was a moment in a jewelry shop that stayed with me. Two diamonds were placed side by side in a display tray. They were the same size, both sparkling under the lights, and to my eyes they appeared nearly identical. Yet the price tags showed values that were vastly different. The salesperson explained with terms like brilliance, fire, and proportions, but the words felt abstract. I walked away wondering why something that should be quantifiable felt so unclear. Dataset used [here](https://www.kaggle.com/datasets/shivam2503/diamonds).
