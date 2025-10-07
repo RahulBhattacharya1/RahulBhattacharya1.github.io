@@ -5,9 +5,9 @@ date: 2023-10-04 16:29:15
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/farm.webp
+thumbnail_mobile: /assets/images/farm_output_sq.webp
 demo_link: https://rahuls-ai-farm-output-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_farm_output_predictor
-featured: true
 ---
 
 The idea for this project came from a simple observation during a local farm visit. I noticed that farmers often rely on intuition to estimate crop outputs. Their guesses were based on memory, weather patterns, and past harvests. I started wondering if I could build a model that predicts farm output using data and machine learning. That thought eventually shaped into this project, the AI Farm Output Predictor. It was not an overnight decision. It came from reflecting on how uncertainty affects planning, supply chains, and even market prices. I felt a structured data-driven approach would provide clarity where guesswork previously dominated. This personal realization gave me the motivation to design and deploy a working prototype. Dataset used [here](https://www.kaggle.com/datasets/georgeam/european-agriculture-indicatorseurostat-2016).
