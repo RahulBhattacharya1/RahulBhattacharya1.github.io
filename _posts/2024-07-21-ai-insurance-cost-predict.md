@@ -5,9 +5,9 @@ date: 2024-07-21 11:35:27
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/insurance.webp
+thumbnail_mobile: /assets/images/insurance_cost_sq.webp
 demo_link: https://rahuls-ai-insurance-model.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_insurance_model
-featured: true
 ---
 
 
