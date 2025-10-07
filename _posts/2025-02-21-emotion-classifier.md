@@ -5,9 +5,9 @@ date: 2025-02-21 09:11:46
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/emotion.webp
+thumbnail_mobile: /assets/images/emotion_classifier_sq.webp
 demo_link: https://rahuls-ai-emotion-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_emotion_classifier
-featured: true
 ---
 
 I built a emotion classifier which reads text and predicts the emotion label.
