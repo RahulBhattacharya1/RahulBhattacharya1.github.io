@@ -5,9 +5,9 @@ date: 2023-09-13 21:32:54
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/soccer.webp
+thumbnail_mobile: /assets/images/soccer_injury_sq.webp
 demo_link: https://rahuls-ai-players-risk-predict.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_players_risk_predict
-featured: true
 ---
 
 Sometimes ideas arrive from a moment of reflection rather than a moment of need. I once watched a sports match where a key player had to leave because of an injury that seemed predictable if someone had only looked closely at the data. That scene made me wonder if data could be used to anticipate such risks before they happened. I imagined that a simple dashboard could score risk levels and highlight patterns that would otherwise remain hidden. The thought of being able to create such a tool with my own code stayed with me until I decided to attempt it. Dataset used [here](https://www.kaggle.com/datasets/hubertsidorowicz/football-players-stats-2025-2026).
