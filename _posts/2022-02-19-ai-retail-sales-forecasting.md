@@ -5,9 +5,9 @@ date: 2022-02-19 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/resume.webp
+thumbnail_mobile: /assets/images/retail_sales_forecast.webp
 demo_link: https://rahuls-ai-retail-sales-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_retail_sales_forecasting
-featured: true
 ---
 
 A quiet Saturday grocery run changed how I look at store shelves. Some aisles were empty and others were overflowing with items no one seemed to want. The imbalance felt avoidable if demand could be estimated with a better lens. I kept thinking about what a simple forecast could do for weekly planning. That thought became a small blueprint for a tool I could build with Python and Streamlit. What followed was a focused effort to turn data into decisions that store teams can trust. Dataset used [here](https://www.kaggle.com/datasets/manjeetsingh/retaildataset).
