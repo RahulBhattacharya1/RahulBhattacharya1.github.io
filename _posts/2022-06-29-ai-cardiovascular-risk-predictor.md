@@ -5,9 +5,9 @@ date: 2022-06-29 17:31:44
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/cardiovascular.webp
+thumbnail_mobile: /assets/images/cardiovascular_risk_sq.webp
 demo_link: https://rahuls-ai-cardiovascular-risk-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_cardiovascular_risk_predictor
-featured: true
 ---
 
 Sometimes ideas are born from the most ordinary of moments. For me, it was a routine health assessment. The process felt mechanical and generalized. I noticed how the medical staff relied on a handful of questions and quick calculations to provide risk guidance. It struck me that these assessments, while useful, could be more tailored. That realization made me curious. Could machine learning capture subtle interactions between risk factors and provide richer insights? Dataset used [here](https://www.kaggle.com/datasets/sulianova/cardiovascular-disease-dataset).
