@@ -5,9 +5,9 @@ date: 2021-12-03 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/resume.webp
+thumbnail_mobile: /assets/images/medical_appointment.webp
 demo_link: https://rahuls-ai-medical-appointment-noshow-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_medical_appointment_noshow_predictor
-featured: true
 ---
 
 The inspiration for this project came from a real situation that left me reflecting on how clinics manage patient schedules. I had once booked an appointment, carefully arranged my commitments around it, and arrived early. The clinic, however, was backed up because several patients simply did not come. I realized that every no-show not only wasted the physician’s time but also created cascading delays for those who did arrive. This inefficiency was not just a matter of personal inconvenience. Dataset used [here](https://www.kaggle.com/datasets/joniarroba/noshowappointments).
