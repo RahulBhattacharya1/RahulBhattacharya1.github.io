@@ -5,9 +5,9 @@ date: 2024-02-03 18:39:22
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/game_sales.webp
+thumbnail_mobile: /assets/images/game_sales_sq.webp
 demo_link: https://rahuls-ai-game-sales-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_game_sales_predictor
-featured: true
 ---
 
 I had a simple question that kept returning whenever I browsed game charts: why do some titles explode while others sink quietly? I would see an indie platformer win a weekend, then watch a big budget sequel struggle a month later. Those swings fascinated me more than the headlines. I started sketching rough patterns from magazine reviews and store rankings. The notes were messy, but a picture formed. If I could capture genre, platform, year, and a few quality signals, I might forecast sales before release. Dataset used [here](https://www.kaggle.com/datasets/gregorut/videogamesales).
