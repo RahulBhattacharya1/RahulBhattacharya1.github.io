@@ -5,9 +5,9 @@ date: 2022-05-22 09:34:43
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/text_summarizer.webp
+thumbnail_mobile: /assets/images/text_summarizer_sq.webp
 demo_link: https://huggingface.co/spaces/RahulBhattacharya/RahulsTextSummarizer
 github_link: https://github.com/RahulBhattacharya1/ai_text_summarizer
-featured: true
 ---
 
 This project is a web app that summarizes long text. It uses a pretrained model from Hugging Face. It wraps the model with a friendly Gradio interface. I run it locally during development and also on Hugging Face Spaces. I keep the code short and focused so I can debug it fast.
