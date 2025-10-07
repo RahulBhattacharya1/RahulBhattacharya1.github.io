@@ -5,9 +5,9 @@ date: 2025-02-04 17:32:45
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/book_rating.webp
+thumbnail_mobile: /assets/images/book_rating_sq.webp
 demo_link: https://rahuls-ai-book-rating-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_book_rating_predictor
-featured: true
 ---
 
 The idea for this project came from a simple frustration while browsing online bookstores. I often came across books with an overwhelming number of ratings and reviews. Some books had thousands of reviews but still averaged only a moderate score, while others with fewer reviews managed to hold stellar ratings. I began to wonder if I could build a small application that would let me experiment with predicting the average rating of a book based only on basic measurable features. I imagined this as a learning exercise that could connect model training with deployment. Dataset used [here](https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks).
