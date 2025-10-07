@@ -5,9 +5,9 @@ date: 2023-03-16 14:35:52
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/water_disease.webp
+thumbnail_mobile: /assets/images/water_disease_sq.webp
 demo_link: https://rahuls-ai-water-disease-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_water_disease_predictor
-featured: true
 ---
 
 It began with a personal observation during a visit to a rural area where clean drinking water was not consistently available. The water often looked cloudy and sometimes even smelled unusual. People in the area frequently complained of stomach problems, and I realized these illnesses were not random but closely linked to the water they were drinking. That moment stayed with me and eventually shaped my desire to create something meaningful. Dataset used [here](https://www.kaggle.com/datasets/khushikyad001/water-pollution-and-disease).
