@@ -5,9 +5,9 @@ date: 2021-11-14 12:45:32
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/journalist.webp
+thumbnail_mobile: /assets/images/journalist_sq.webp
 demo_link: https://rahuls-ai-journalist.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_journalist
-featured: true
 ---
 
 I wanted a simple tool that drafts news style article ideas quickly. I also wanted guardrails around costs and fair usage for shared use. This post walks through the exact code that I shipped today. I write in first person and keep the explanations practical and clear.
