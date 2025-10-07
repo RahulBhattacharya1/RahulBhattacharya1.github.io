@@ -5,9 +5,9 @@ date: 2024-10-10 14:23:51
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/sms.webp
+thumbnail_mobile: /assets/images/sms_sentiment_sq.webp
 demo_link: https://rahuls-ai-sms-sentiment-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_sms_sentiment_classifier
-featured: true
 ---
 
  Sometimes daily events spark unexpected ideas. One day I received several promotional and personal text messages back to back. I found myself quickly deciding which ones mattered and which ones I could ignore. That simple act of judgment made me wonder how a machine could learn the same distinction. I wanted to see if I could train a program to understand whether a message feels positive or negative. That thought became the seed of this project.
