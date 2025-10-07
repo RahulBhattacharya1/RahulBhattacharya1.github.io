@@ -5,9 +5,9 @@ date: 2021-10-12 20:28:21
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/trip.webp
+thumbnail_mobile: /assets/images/trip_sq.webp
 demo_link: https://rahuls-ai-trip-planner.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_trip_planner
-featured: true
 ---
 
 I built a Streamlit app that can plan trips with attractions and hikes. It works in two modes: offline and AI-powered using OpenAI. It also enforces usage limits to keep costs safe.
