@@ -5,9 +5,9 @@ date: 2023-12-03 10:19:25
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/education.webp
+thumbnail_mobile: /assets/images/education_level_sq.webp
 demo_link: https://rahuls-ai-education-level-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_education_level_predictor
-featured: true
 ---
 
 When I first thought about creating this project, it came from an observation about how demographic information often relates to education outcomes. I noticed that data such as sex, age group, and geography can influence the distribution of education levels in a population. That made me curious about whether I could create a small predictor that demonstrates this relationship in practice. This curiosity was enough to push me into building a compact Streamlit app that loads a trained pipeline and makes predictions. Dataset used [here](https://www.kaggle.com/datasets/gpreda/population-by-education-level-in-europe).
