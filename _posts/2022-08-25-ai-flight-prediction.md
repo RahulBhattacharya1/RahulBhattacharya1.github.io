@@ -5,6 +5,7 @@ date: 2022-08-25 16:51:32
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/flight_price.webp
+thumbnail_mobile: /assets/images/flight_price_sq.webp
 demo_link: https://rahuls-ai-flight-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_flight_prediction
 ---
