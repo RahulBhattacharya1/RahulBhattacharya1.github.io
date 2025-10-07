@@ -5,9 +5,9 @@ date: 2023-03-25 08:57:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/election_forecasting.webp
+thumbnail_mobile: /assets/images/election_forecasting_sq.webp
 demo_link: https://rahuls-ai-election-forecast.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_election_forecast
-featured: true
 ---
 
 I once tracked election polls daily and wanted a forecast that revealed every step rather than a black box. That curiosity turned into a project that reads public polling data, engineers time‑series features, and predicts weekly margins. I chose Streamlit because I could share a transparent, reproducible app that runs directly from a GitHub repository. The goal is simple: show how the national generic ballot margin moves week by week, and document the full pipeline that makes it possible. Dataset used [here](https://www.kaggle.com/datasets/iamtanmayshukla/2024-u-s-election-generic-ballot-polling-data).
