@@ -4,10 +4,10 @@ title: "Building my AI Airline Tweet Sentiment Classifier"
 date: 2022-04-02 14:33:18
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/airline_tweet.webp
+thumbnail_mobile: /assets/images/airline_tweet_sq.webp
 demo_link: https://rahuls-ai-airline-tweet-sentiment-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_airline_tweet_sentiment_classifier
-featured: true
 ---
 
 There are times when I scroll through online platforms and see streams of opinions. Many of these are about airlines. Some are positive, while others are filled with frustration. I remember a situation when a delayed flight caused confusion for many passengers. Reading their posts gave me an idea. What if I could build a tool that reads these texts and predicts whether the sentiment is positive, neutral, or negative? That thought stayed in my mind. I wanted something simple, clear, and useful. It became the seed for this project. Dataset used [here](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment).
