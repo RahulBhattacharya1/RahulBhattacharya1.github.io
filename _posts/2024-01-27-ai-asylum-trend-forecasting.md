@@ -5,9 +5,9 @@ date: 2024-01-27 09:23:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/asylum.webp
+thumbnail_mobile: /assets/images/asylum_app_sq.webp
 demo_link: https://rahuls-ai-asylum-trend-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_asylum_trend_forecasting
-featured: true
 ---
 
 I once came across an official report that tried to predict how many asylum applications different countries in Europe would receive in the coming years. The report was full of technical terms, and while the graphs were helpful, I wanted something more interactive. I wanted to type a country code and immediately see a forecast line chart appear before me. That personal curiosity led me to imagine and then build this project. Dataset used [here](https://www.kaggle.com/datasets/gpreda/asylum-applicants-by-citizenship-in-europe).
