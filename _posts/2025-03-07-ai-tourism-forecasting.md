@@ -5,9 +5,9 @@ date: 2025-03-07 13:46:39
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
 thumbnail: /assets/images/tourism.webp
+thumbnail_mobile: /assets/images/tourism_forecasting_sq.webp
 demo_link: https://rahuls-ai-tourism-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_tourism_forecasting
-featured: true
 ---
 
 This post walks through a small forecasting project that I packaged as a simple Streamlit app. I
