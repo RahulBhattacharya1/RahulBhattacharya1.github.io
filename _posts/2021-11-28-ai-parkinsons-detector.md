@@ -5,7 +5,7 @@ date: 2021-11-28 10:26:45
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/parkinsons.webp
-thumbnail_mobile: /assets/images/resume.webp
+thumbnail_mobile: /assets/images/parkingsons_sq.webp
 demo_link: https://rahuls-ai-parkinsons-detection-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_parkinsons_detection_classifier
 ---
