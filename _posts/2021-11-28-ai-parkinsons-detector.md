@@ -4,10 +4,10 @@ title: "Creating my AI Parkinson's Disease Classifier"
 date: 2021-11-28 10:26:45
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
+thumbnail: /assets/images/parkinsons.webp
+thumbnail_mobile: /assets/images/resume.webp
 demo_link: https://rahuls-ai-parkinsons-detection-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_parkinsons_detection_classifier
-featured: true
 ---
 
 I once came across a health article that described how subtle changes in the human voice could reveal the presence of neurological conditions. That article stayed in my mind for a long time. Later, when I began exploring data science projects, I realized that building a simple and accessible voice-based classifier could be powerful. The possibility that voice recordings might carry early indicators of Parkinson's disease inspired me to develop this project. Dataset used [here](https://www.kaggle.com/datasets/shreyadutta1116/parkinsons-disease).
