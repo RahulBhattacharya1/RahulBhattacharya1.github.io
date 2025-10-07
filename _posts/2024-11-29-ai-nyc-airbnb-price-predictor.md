@@ -5,9 +5,9 @@ date: 2024-11-29 10:25:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/airbnb.webp
+thumbnail_mobile: /assets/images/nyc_airbnb_sq.webp
 demo_link: https://rahuls-ai-airbnb-price-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_airbnb_price_prediction
-featured: true
 ---
 
 It all started with a simple experience. I was browsing through different listings on a travel platform and noticed that two very similar apartments had very different prices. Both were located in Brooklyn, had similar reviews, and looked almost identical in photos. Yet one was priced almost double the other. That inconsistency made me curious. Was there some hidden logic that determined these prices? Could data explain why some listings were valued higher than others? This thought became the seed of the project. Dataset used [here](https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data).
