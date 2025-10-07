@@ -5,7 +5,7 @@ date: 2021-10-24 15:29:32
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/diabetes_classifier.webp
-thumbnail_mobile: /assets/images/diabetes_classifier.webp
+thumbnail_mobile: /assets/images/diabetes_classifier_sq.webp
 demo_link: https://rahuls-ai-diabetes-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_diabetes_classifier
 ---
