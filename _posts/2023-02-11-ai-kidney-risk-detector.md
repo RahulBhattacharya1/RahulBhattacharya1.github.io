@@ -5,9 +5,9 @@ date: 2023-02-11 22:35:17
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/kidney_disease.webp
+thumbnail_mobile: /assets/images/kidney_disease_sq.webp
 demo_link: https://rahuls-ai-kidney-disease-risk-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_kidney_disease_risk_classifier
-featured: true
 ---
 
 It started with a moment that stayed in my thoughts for days. I came across a news article that explained how many people discover kidney disease too late because the symptoms are subtle and often ignored. That made me think of the role technology could play if it could predict risks much earlier. The thought did not come from a conversation or a group setting, it came from a quiet realization while reflecting on the importance of preventive care. Dataset used [here](https://www.kaggle.com/datasets/miadul/kidney-disease-risk-dataset).
