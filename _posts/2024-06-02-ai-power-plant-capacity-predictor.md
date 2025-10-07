@@ -5,9 +5,9 @@ date: 2024-06-02 10:27:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/plant.webp
+thumbnail_mobile: /assets/images/power_plant_sq.webp
 demo_link: https://rahuls-ai-power-plant-capacity-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_power_plant_capacity_predictor
-featured: true
 ---
 
 The motivation for this project started when I realized how difficult it can be to make sense of raw capacity data in energy reports. Many reports describe plants by fuel type, technology, or commissioning year, but then they jump straight to presenting final capacities. I found myself wondering how those capacities were estimated. This inspired me to create an application that could act as a bridge. Dataset used [here](https://www.kaggle.com/datasets/trolukovich/conventional-power-plants-in-europe).
