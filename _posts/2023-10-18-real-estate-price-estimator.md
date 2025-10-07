@@ -5,9 +5,9 @@ date: 2023-10-18 14:26:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/real_estate.webp
+thumbnail_mobile: /assets/images/real_estate_price_sq.webp
 demo_link: https://rahuls-ai-property-price-estimator.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_property_price_estimator
-featured: true
 ---
 
 I once spent a long time browsing real estate listings, trying to understand why two houses with similar size and features were priced so differently. It was not only confusing but also frustrating, since I wanted to get a sense of whether a place was overvalued or fairly listed. That experience made me wonder how I could use machine learning to quickly generate an estimate of property prices, based only on the main details that I could collect. Dataset used [here](https://www.kaggle.com/datasets/hassankhaled21/egyptian-real-estate-listings).
