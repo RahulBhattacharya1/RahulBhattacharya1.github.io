@@ -5,9 +5,9 @@ date: 2024-06-14 09:22:06
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/battery.webp
+thumbnail_mobile: /assets/images/phone_battery_sq.webp
 demo_link: https://rahuls-ai-phone-battery.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_phone_battery
-featured: true
 ---
 
 It started from a moment of frustration. While researching phones online, I realized that battery capacity was often hidden in long specification sheets. Many times, the listed features like RAM or screen refresh rate were clear, but the actual battery capacity was not always highlighted. I imagined a tool that could predict the battery capacity from other known specifications. This thought gave birth to the project I am describing here.
