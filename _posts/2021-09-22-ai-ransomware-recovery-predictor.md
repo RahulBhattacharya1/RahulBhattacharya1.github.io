@@ -5,7 +5,7 @@ date: 2021-09-22 10:27:34
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/ransomware.webp
-thumbnail_mobile: /assets/images/ransomware.webp
+thumbnail_mobile: /assets/images/ransomware_sq.webp
 demo_link: https://rahuls-ai-ransomware-recovery-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_ransomware_recovery_predictor
 ---
