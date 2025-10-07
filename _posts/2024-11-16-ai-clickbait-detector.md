@@ -5,9 +5,9 @@ date: 2024-11-16 10:22:51
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/headline.webp
+thumbnail_mobile: /assets/images/headline_clickbait_sq.webp
 demo_link: https://rahuls-ai-headline-clickbait-detector.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_headline_clickbait_detector
-featured: true
 ---
 
 It started with a simple experience while browsing headlines online. I noticed how some headlines grabbed attention with exaggerated words while others felt straightforward. That moment gave me the thought that I should try detecting clickbait automatically. I wanted a small tool that could separate genuine news headlines from overly sensational ones. The idea felt practical because news and media today often mix informative writing with clickbait techniques.
