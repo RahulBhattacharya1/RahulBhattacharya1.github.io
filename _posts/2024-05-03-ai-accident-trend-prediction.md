@@ -5,9 +5,9 @@ date: 2024-05-03 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/railway.webp
+thumbnail_mobile: /assets/images/railway_accident_sq.webp
 demo_link: https://rahuls-ai-accident-trend-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_accident_trend_prediction
-featured: true
 ---
 
 The idea for this project came from a simple observation. I was reading reports about railway accidents across Europe and noticed how inconsistent the numbers often appeared. Some years recorded sharp rises without obvious explanations, while other years showed unexpected declines. The trend lines did not seem to follow predictable patterns. That inconsistency made me think that a lightweight predictive tool could help highlight potential accident risks more transparently. Dataset used [here](https://www.kaggle.com/datasets/gpreda/railways-accidents-in-europe).
