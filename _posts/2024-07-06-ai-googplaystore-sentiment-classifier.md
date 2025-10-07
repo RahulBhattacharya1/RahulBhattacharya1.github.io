@@ -5,9 +5,9 @@ date: 2024-07-06 10:22:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/play.webp
+thumbnail_mobile: /assets/images/google_play_review_sq.webp
 demo_link: https://rahuls-ai-googplaystore-sentiment-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_googleplaystore_sentiment_classifier
-featured: true
 ---
 
 This project emerged from my own experience of browsing reviews on the Google Play Store. I frequently noticed that many reviews were emotionally charged but not easy to interpret quickly. A review might start with a complaint but end on a positive note, or it could contain praise followed by criticism about a small feature. As I read more of these, I realized that manual scanning was inefficient. I needed a tool that could summarize the underlying sentiment at a glance. Dataset used [here](https://www.kaggle.com/datasets/lava18/google-play-store-apps).
