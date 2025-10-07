@@ -4,8 +4,8 @@ title: "Building my AI Medical Appointment No-Show Predictor"
 date: 2021-12-03 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
-thumbnail_mobile: /assets/images/medical_appointment.webp
+thumbnail: /assets/images/medical_appointment.webp
+thumbnail_mobile: /assets/images/medical_appointment_sq.webp
 demo_link: https://rahuls-ai-medical-appointment-noshow-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_medical_appointment_noshow_predictor
 ---
