@@ -5,9 +5,9 @@ date: 2022-07-11 08:33:21
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/chess.webp
+thumbnail_mobile: /assets/images/chess_game_sq.webp
 demo_link: https://rahuls-ai-chess-outcome-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_chess_outcome_predictor
-featured: true
 ---
 
 This project grew from a personal observation about how chess games unfold. I noticed patterns in player ratings and number of turns that often signaled the likely outcome. That curiosity led me to design a predictor application. I wanted it to be interactive, accessible, and built on reliable tools. Streamlit made sense as the framework, while a scikit-learn model handled the prediction. In this post I will go through every single file, code block, and helper in detail. Dataset used [here](https://www.kaggle.com/datasets/datasnaek/chess).
