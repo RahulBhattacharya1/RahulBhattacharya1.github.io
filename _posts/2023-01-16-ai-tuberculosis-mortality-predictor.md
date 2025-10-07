@@ -5,9 +5,9 @@ date: 2023-01-16 14:29:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/tuberculosis.webp
+thumbnail_mobile: /assets/images/tb_mortality_sq.webp
 demo_link: https://rahuls-ai-tuberculosis-mortality-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_tuberculosis_mortality_predictor
-featured: true
 ---
 
 It started with a quiet afternoon when I was reading a long article about how mortality rates in different regions vary widely depending on several hidden factors. The article showed tables of health statistics and explained how policymakers sometimes miss subtle trends that could have saved lives if only the right indicators had been highlighted. I realized that with a bit of machine learning and some careful design, I could build something that tries to forecast mortality risk from tuberculosis in a way that is both accessible and transparent. That idea stayed with me because it felt personal in the sense of curiosity, like a challenge waiting to be solved. Dataset used [here](https://www.kaggle.com/datasets/khushikyad001/tuberculosis-trends-global-and-regional-insights).
