@@ -5,9 +5,9 @@ date: 2024-08-23 12:34:19
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/news.webp
+thumbnail_mobile: /assets/images/fake_news_sq.webp
 demo_link: https://rahuls-ai-fake-news-detector.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_fake_news_detector
-featured: true
 ---
 
 I once stumbled upon an online article that looked reliable at first. The formatting was polished and the headline was striking. Yet as I kept reading, some statements did not align with facts I already knew. That personal experience inspired me to imagine a tool that could highlight questionable claims. I decided to create a Fake News Detector using Streamlit and OpenAI.
