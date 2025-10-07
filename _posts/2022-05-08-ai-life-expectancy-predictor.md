@@ -5,9 +5,9 @@ date: 2022-05-08 10:21:15
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/resume.webp
+thumbnail_mobile: /assets/images/life_expectancy_sq.webp
 demo_link: https://rahuls-ai-life-expectancy-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_life_expectancy_predictor
-featured: true
 ---
 
 There was a moment when I was reading a report about health differences between nations. The report described how alcohol consumption, childhood immunizations, and economic spending all shaped how long people lived. That reading sparked a question in my mind. Could I take a dataset with those indicators and actually predict life expectancy? It seemed ambitious, but it also felt like the type of problem that combined data science curiosity with real social meaning. Dataset used [here](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who).
