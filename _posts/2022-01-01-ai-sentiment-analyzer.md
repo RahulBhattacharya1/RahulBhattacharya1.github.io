@@ -4,10 +4,10 @@ title: "Creating my AI Sentiment Analysis App"
 date: 2022-01-01 08:22:12
 categories: [ai]
 tags: [python,streamlit,openai]
-thumbnail: /assets/images/ai_rock_paper_scissor.webp
+thumbnail: /assets/images/sentiment_anaysis.webp
+thumbnail_mobile: /assets/images/sentiment_analysis2_sq.webp
 demo_link: https://huggingface.co/spaces/RahulBhattacharya/Rahuls_Text_Classification_Sentiment_Analysis
 github_link: https://github.com/RahulBhattacharya1/ai_sentiment_analyzer
-featured: true
 ---
 
 The idea first struck me while scrolling through movie reviews late at night. Some comments felt spot on, others were wildly off, and I found myself wishing there were a way to instantly sense the overall tone without reading through every word. That moment made me imagine a tool that could act like a sharp set of eyes, quietly classifying whether a review was positive or negative. It didn’t need to argue or explain—it just needed to capture the sentiment hidden in the text. From that passing thought, the seed of a project was planted. What started as idle curiosity turned into my IMDB sentiment analysis app.
