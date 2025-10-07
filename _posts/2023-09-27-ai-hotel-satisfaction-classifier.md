@@ -5,9 +5,9 @@ date: 2023-09-27 10:56:29
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/hotel.webp
+thumbnail_mobile: /assets/images/hotel_satisfaction_sq.webp
 demo_link: https://rahuls-ai-hotel-satisfaction-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_hotel_satisfaction_classifier
-featured: true
 ---
 
 A few years ago, while traveling through Europe, I stayed at a hotel that looked great on paper. The online reviews praised certain aspects like the wifi and comfort but criticized others like the food and cleanliness. When I finally stayed there, I noticed that my own impression was a mix of these reviews. The room was comfortable, but the restaurant quality was indeed low. That trip made me realize how subjective satisfaction is, and how much it depends on specific features that matter differently to each scenario. Dataset used [here](https://www.kaggle.com/datasets/ishansingh88/europe-hotel-satisfaction-score).
