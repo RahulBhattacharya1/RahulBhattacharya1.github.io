@@ -5,9 +5,9 @@ date: 2022-10-07 08:21:35
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/dry_eye.webp
+thumbnail_mobile: /assets/images/dry_eye_sq.webp
 demo_link: https://rahuls-ai-dry-eye-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_dry_eye_predictor
-featured: true
 ---
 
 When I first noticed how long hours in front of a bright monitor strained my vision, I realized my eyes would often feel dry and tired. I wondered if these small discomforts were early signs of something bigger. That curiosity became the seed for this project. I wanted to know if everyday lifestyle and health signals could give me a reliable prediction about my risk for dry eye disease. The idea started as a personal observation and slowly transformed into a technical experiment. It gave me a chance to merge my interest in machine learning with a real health concern that affects many who spend their lives in front of screens. Dataset used [here](https://www.kaggle.com/datasets/dakshnagra/dry-eye-disease).
