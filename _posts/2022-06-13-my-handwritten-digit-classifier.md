@@ -5,9 +5,9 @@ date: 2022-06-13 21:24:33
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
 thumbnail: /assets/images/classifier2.webp
+thumbnail_mobile: /assets/images/handwritten_digit_sq.webp
 demo_link: https://rahuls-ai-mnist-digit-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_mnist_digit_classifier
-featured: true
 ---
 
 I list every file that sits in the project. This gives a map before the deep dive. It also helps later when someone checks the same tree on GitHub.
