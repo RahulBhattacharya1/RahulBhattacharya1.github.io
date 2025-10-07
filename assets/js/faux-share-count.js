@@ -83,6 +83,10 @@
   }
 
   function initShare(btn){
+    // init-once guard per element
+    if (btn.dataset.fauxShareInited === "1") return;
+    btn.dataset.fauxShareInited = "1";
+
     const id  = btn.getAttribute("data-share-id") || "";
     const pub = btn.getAttribute("data-share-pub") || "";
     const countEl = btn.querySelector(".count");
@@ -131,7 +135,31 @@
     }, { passive:false });
   }
 
-  document.addEventListener("DOMContentLoaded", ()=>{
+  function initAllShares(){
     document.querySelectorAll(CFG.selector).forEach(initShare);
+  }
+  
+  // First load
+  document.addEventListener("DOMContentLoaded", initAllShares);
+  
+  // BFCache restore
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) initAllShares();
   });
+  
+  // DOM swaps (if pager injects)
+  try {
+    const mo = new MutationObserver(function (ml) {
+      for (const m of ml) {
+        if (m.addedNodes && m.addedNodes.length) { initAllShares(); break; }
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  } catch(_) {}
+  
+  // Optional hook your pager can dispatch
+  document.addEventListener("rbx:page-updated", initAllShares);
+  
+  window.FauxShare = { initAll: initAllShares, config: CFG };
+
 })();
