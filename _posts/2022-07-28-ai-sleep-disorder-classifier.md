@@ -5,9 +5,9 @@ date: 2022-07-28 12:31:29
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/sleep_disorder.webp
+thumbnail_mobile: /assets/images/sleep_disorder_sq.webp
 demo_link: https://rahuls-ai-sleep-disorder-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_sleep_disorder_classifier
-featured: true
 ---
 
 The idea for this project came from moments when I struggled with fatigue despite what seemed like reasonable sleep hours. I often wondered whether the problem was lifestyle, stress, or something more clinical. This uncertainty sparked the thought that a simple machine learning application might give insights by classifying the likelihood of common sleep disorders. It would not replace professional diagnosis, but it could encourage further attention. Dataset used [here](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset).
