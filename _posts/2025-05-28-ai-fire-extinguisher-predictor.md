@@ -5,9 +5,9 @@ date: 2025-05-28 10:21:17
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/fire.webp
+thumbnail_mobile: /assets/images/fire_extinguisher_sq.webp
 demo_link: https://rahuls-ai-fire-extinguisher-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_fire_extinguisher_prediction
-featured: true
 ---
 
 The idea for this project began during a safety demonstration where I observed how traditional extinguishers suppress flames. Water and chemicals are effective, but they often damage electronics or leave residue. That experience led me to wonder whether a different physical principle could be harnessed. I discovered research on acoustic fire suppression, which suggested that sound waves can disrupt combustion. This concept fascinated me because it combined physics, engineering, and machine learning. I imagined building a simple predictor that lets anyone explore how sound and airflow could extinguish a fire. Dataset used [here](https://www.kaggle.com/datasets/muratkokludataset/acoustic-extinguisher-fire-dataset).
