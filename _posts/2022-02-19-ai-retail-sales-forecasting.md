@@ -4,8 +4,8 @@ title: "Creating my AI Retail Sales Forecasting"
 date: 2022-02-19 11:43:26
 categories: [ai]
 tags: [python,streamlit,self-trained]
-thumbnail: /assets/images/resume.webp
-thumbnail_mobile: /assets/images/retail_sales_forecast.webp
+thumbnail: /assets/images/retail_sales_forecast.webp
+thumbnail_mobile: /assets/images/retail_sales_sq.webp
 demo_link: https://rahuls-ai-retail-sales-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_retail_sales_forecasting
 ---
