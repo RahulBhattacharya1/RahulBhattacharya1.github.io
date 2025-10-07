@@ -5,9 +5,9 @@ date: 2023-04-12 18:22:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/cancer_survival.webp
+thumbnail_mobile: /assets/images/cancer_survival_sq.webp
 demo_link: https://rahuls-ai-cancer-survival-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_cancer_survival_predictor
-featured: true
 ---
 
 The idea for this project came from a quiet moment of reflection when I was reading about the ways machine learning is used in health care. Articles kept mentioning how predictive models can help guide clinical decision making by providing probabilities, not final answers. I realized that building a simple demonstration could help me practice technical skills while showing how such an idea works in real life. The focus was not to provide medical advice, but to show how technology can assist. Dataset used [here](https://www.kaggle.com/datasets/amankumar094/lung-cancer-dataset).
