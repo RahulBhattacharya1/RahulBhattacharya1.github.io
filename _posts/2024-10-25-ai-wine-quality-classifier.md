@@ -5,9 +5,9 @@ date: 2024-10-25 11:14:23
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/wine.webp
+thumbnail_mobile: /assets/images/wine_quality_sq.webp
 demo_link: https://rahuls-ai-wine-quality-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_wine_quality_classifier
-featured: true
 ---
 
 I once read an article that described how people struggle to judge wine quality without years of tasting experience. I imagined how difficult it must be for someone who enjoys wine but does not have the vocabulary or training of a sommelier. That personal thought became the seed for this project. Instead of depending on subjective judgment, I wanted to create a model that could classify wine quality based on measurable attributes. The goal was not to replace human expertise but to complement it with data. Dataset used [here](https://www.kaggle.com/datasets/uciml/red-wine-quality-cortez-et-al-2009).
