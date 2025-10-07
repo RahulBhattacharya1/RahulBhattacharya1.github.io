@@ -5,9 +5,9 @@ date: 2024-04-22 09:16:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/water_quality.webp
+thumbnail_mobile: /assets/images/water_quality_sq.webp
 demo_link: https://rahuls-ai-indian-water.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_indian_water
-featured: true
 ---
 
 It started with a simple thought while pouring a glass of water one late evening. The clarity of the water looked fine, but I wondered what invisible details could be hidden in that liquid. Access to clean water is something I never take lightly, and the idea of using machine learning to check water quality seemed both practical and exciting. That is how I began this small project, where I built an application that predicts water potability using trained models.
