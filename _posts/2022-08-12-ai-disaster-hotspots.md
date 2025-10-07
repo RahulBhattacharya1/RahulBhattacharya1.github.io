@@ -5,6 +5,7 @@ date: 2022-08-12 10:46:35
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/global_disaster.webp
+thumbnail_mobile: /assets/images/disaster_hotspot_sq.webp
 demo_link: https://rahuls-ai-disaster-hotspots.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_disaster_hotspots
 ---
