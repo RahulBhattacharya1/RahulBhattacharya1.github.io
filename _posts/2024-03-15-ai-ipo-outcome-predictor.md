@@ -5,9 +5,9 @@ date: 2024-03-15 10:12:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/ipo.webp
+thumbnail_mobile: /assets/images/ipo_outcome_sq.webp
 demo_link: https://rahuls-ai-initial-public-offering.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_initial_public_offering
-featured: true
 ---
 
 Sometimes inspiration comes from unexpected places. I once found myself reading news articles about companies planning to go public, and I kept wondering which of these would perform well. The market reports offered opinions but lacked structured analysis. That gap gave me the idea of creating a tool where IPO details could be entered and predictions generated instantly.
