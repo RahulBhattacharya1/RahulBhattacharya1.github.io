@@ -5,9 +5,9 @@ date: 2024-09-14 16:31:25
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/email.webp
+thumbnail_mobile: /assets/images/spam_classifier_sq.webp
 demo_link: https://rahuls-ai-spam-email-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_spam_email_classifier
-featured: true
 ---
 
 The idea for this project came to me after a personal experience. I once received a strange email that claimed I had won a lottery prize. The subject line promised an urgent reward, but the message itself was filled with suspicious links and generic greetings. At that moment I wondered how many people might fall for such messages. It made me realize the importance of creating tools that help distinguish between harmless communication and harmful scams. This experience inspired me to create a spam email classifier that can be run in a browser using Streamlit.
