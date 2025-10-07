@@ -5,9 +5,9 @@ date: 2023-11-05 07:36:44
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/lifestyle.webp
+thumbnail_mobile: /assets/images/lifestyle_classifier_sq.webp
 demo_link: https://rahuls-ai-life-style-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_lifestyle_classifier
-featured: true
 ---
 
 The idea for this project came when I thought about how daily routines shape identity. Every country has its unique cultural rhythm, and much of that rhythm is visible in how people spend their time. Some societies dedicate longer hours to work, while others emphasize leisure or family. I wanted to test if these daily choices could be used as signals for classification. The concept was simple but fascinating: can a machine learning model predict a country code just from how many minutes are spent on common daily activities?
