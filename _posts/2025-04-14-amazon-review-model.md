@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Training my Amazon Review Stars Model"
+title: "Training my AI Amazon Review Stars Model"
 date: 2025-04-14 10:12:27
 categories: [ai]
 tags: [python,streamlit,self-trained]
