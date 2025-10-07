@@ -5,9 +5,9 @@ date: 2022-03-17 11:21:45
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/tictactoe.webp
+thumbnail_mobile: /assets/images/tic_tac_toe_sq.webp
 demo_link: https://rahuls-ai-tic-tac-toe.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_tic_tac_toe
-featured: true
 ---
 
 I wrote a small Streamlit app that plays Tic Tac Toe against me. The app has two brains. One brain is an offline minimax engine. The second brain is an OpenAI call that returns a JSON move. Both brains respect budget guardrails and a simple rate limiter. In this post I explain every code block and why I wrote it that way. I avoid long sentences and keep the style simple and direct.
