@@ -5,9 +5,9 @@ date: 2024-05-19 08:41:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/student.webp
+thumbnail_mobile: /assets/images/student_performance_sq.webp
 demo_link: https://rahuls-ai-student-performance.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_student_performance
-featured: true
 ---
 
 It started with a moment of curiosity while looking at a dataset of student records. I wondered if there was a simple way to estimate how students might perform in mathematics if I only had some details about their study habits, attendance, and classroom engagement. The thought lingered for days until I decided to turn it into a small project. The goal was clear: take raw attributes about a student, feed them into a model, and let the application produce an estimated math score.
