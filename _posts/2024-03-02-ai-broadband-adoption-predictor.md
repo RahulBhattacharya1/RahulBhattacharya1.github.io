@@ -5,9 +5,9 @@ date: 2024-03-02 14:27:53
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/broadband.webp
+thumbnail_mobile: /assets/images/broadband_sq.webp
 demo_link: https://rahuls-ai-broadband-adoption-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_broadband_adoption_predictor
-featured: true
 ---
 
 I wrote this app after noticing how broadband adoption numbers shift in uneven steps across countries and years. Budget cycles, infrastructure delays, and policy waves create surges followed by plateaus. I needed a compact tool that reads a simple TSV, applies a lightweight linear model, and lets me inspect predictions with context. The goal was clarity over complexity, and portability over vendor lock‑in. Dataset used [here](https://www.kaggle.com/datasets/gpreda/household-internet-connection-in-european-union).
