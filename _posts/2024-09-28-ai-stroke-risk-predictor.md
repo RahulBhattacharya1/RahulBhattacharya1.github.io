@@ -5,9 +5,9 @@ date: 2024-09-28 18:23:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/stroke.webp
+thumbnail_mobile: /assets/images/stroke_risk_sq.webp
 demo_link: https://rahuls-ai-stroke-risk-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_stroke_risk_predictor
-featured: true
 ---
 
 The spark for this project came from thinking about health risks that often go unnoticed. I once came across an account of someone who had no outward symptoms yet suffered a stroke without warning. The event was sudden, and it raised a question in my mind: could accessible tools give people an early sense of risk? That thought kept returning whenever I read about health and technology. It turned into motivation to build a system that used data inputs to provide awareness. Dataset used [here](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset).
