@@ -5,9 +5,9 @@ date: 2023-06-23 19:14:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/income.webp
+thumbnail_mobile: /assets/images/income_pred_sq.webp
 demo_link: https://rahuls-ai-income-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_income_prediction
-featured: true
 ---
 
 A few months ago, I was filling out an online form that asked about my education, work hours, and job type. As I answered, I realized that these details can hint at something deeper. They can point toward an estimated income range. That thought stayed in my mind, and I began to imagine a project that could actually predict whether someone’s income might be above or below a certain threshold based on similar features. It was not about curiosity alone but also about building something that connects data, learning, and a working application. Dataset used [here](https://www.kaggle.com/datasets/mosapabdelghany/adult-income-prediction-dataset).
