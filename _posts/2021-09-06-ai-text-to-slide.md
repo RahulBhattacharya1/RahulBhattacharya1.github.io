@@ -5,7 +5,7 @@ date: 2021-09-06 14:12:43
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/text_to_slide.webp
-thumbnail_mobile: /assets/images/text_to_slide.webp
+thumbnail_mobile: /assets/images/text_to_slide_sq.webp
 demo_link: https://rahuls-ai-text-to-slide.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_text_to_slide
 ---
