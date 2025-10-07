@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "Building my own AI Financial Guide"
+title: "Building my AI Financial Guide"
 date: 2021-12-18 14:25:12
 categories: [ai]
 tags: [python,streamlit,openai]
 thumbnail: /assets/images/financial.webp
+thumbnail_mobile: /assets/images/financial_guide_sq.webp
 demo_link: https://rahuls-ai-financial-mentor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_financial_mentor
-featured: true
 ---
 
 It started with a simple thought that kept circling in my head: why do everyday financial choices feel so complicated? Deciding whether to tuck money away, invest it, or just spend a little extra often seems harder than it should be. I wondered what it would feel like if a small voice could cut through the noise and just say, “Here’s a clear step forward.” Not a lecture, not a spreadsheet—just something short and useful. That curiosity stuck with me, and before long it turned into the spark for building something of my own. I wanted a mentor in my pocket, and if it didn’t exist, I’d try to make it.
