@@ -5,9 +5,9 @@ date: 2024-08-11 10:21:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/avocado.webp
+thumbnail_mobile: /assets/images/avocado_price_sq.webp
 demo_link: https://rahuls-ai-avocado-price-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_avocado_price_prediction
-featured: true
 ---
 
 I once stood in a grocery store aisle staring at a pile of avocados. Prices had changed from the week before, and I began to wonder what drove the fluctuations. It felt random at first glance, yet I knew deeper factors like seasonality, supply volumes, and regional differences influenced those numbers. That personal curiosity was enough to spark this project. I decided to build a predictive tool that could estimate avocado prices based on historical and structural features. Dataset used [here](https://www.kaggle.com/datasets/neuromusic/avocado-prices).
