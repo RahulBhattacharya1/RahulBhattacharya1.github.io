@@ -5,9 +5,9 @@ date: 2023-08-11 13:27:51
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/station.webp
+thumbnail_mobile: /assets/images/station_type_sq.webp
 demo_link: https://rahuls-ai-station-type-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_station_type_classifier
-featured: true
 ---
 
 The origin of this project goes back to a recurring thought during my regular train commutes. I often moved between different types of stations: small suburban ones, medium-sized regional stops, and larger urban terminals. Each of them had unique characteristics like the number of tracks, size of platforms, presence of parking, and the flow of passengers. I imagined that if there was a simple tool that could take these attributes and instantly classify the type of a station, it would save time for planner. Dataset used [here](https://www.kaggle.com/datasets/headsortails/train-stations-in-europe).
