@@ -5,9 +5,9 @@ date: 2022-02-02 15:22:41
 categories: [ai]
 tags: [python,streamlit,bert,self-trained]
 thumbnail: /assets/images/classifier.webp
+thumbnail_mobile: /assets/images/news_topic_sq.webp
 demo_link: https://rahuls-ai-news-topic-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-news-topic-classifier
-featured: true
 ---
 
 I wanted a portfolio project that does not rely on OpenAI’s API. I picked a classic problem that still feels practical for recruiters. I built a topic classifier that reads a short news headline or snippet and predicts one of four AG News categories. I trained the model in Google Colab. I pushed a small set of files to GitHub. I deployed a clean demo on Streamlit Community Cloud.
