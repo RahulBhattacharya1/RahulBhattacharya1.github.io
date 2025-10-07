@@ -5,9 +5,9 @@ date: 2024-01-12 21:14:53
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/automotive.webp
+thumbnail_mobile: /assets/images/auto_market_sq.webp
 demo_link: https://rahuls-ai-clustering-automotive-market.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-clustering-automotive-market
-featured: true
 ---
 
 I once spent hours comparing vehicle prices on different websites. I was curious why some models seemed overpriced while others followed smoother trends. That curiosity turned into frustration when I realized I had no clear way to see patterns across thousands of models. I wanted to know if certain groups of vehicles behaved similarly. The idea of creating clusters of car models based on their price behavior started forming in my mind. Dataset used [here](https://www.kaggle.com/datasets/jockeroika/cars-dataset).
