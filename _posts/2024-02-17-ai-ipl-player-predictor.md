@@ -5,9 +5,9 @@ date: 2024-02-17 11:34:52
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/ipl_player.webp
+thumbnail_mobile: /assets/images/ipl_player_sq.webp
 demo_link: https://rahuls-ai-ipl-players.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_ipl_players
-featured: true
 ---
 
 There are times when an idea refuses to fade until it finds an outlet. Mine began when I was reading through cricket player statistics late one night. The rows of averages, strike rates, and boundary counts made me think about patterns hidden in plain sight. It struck me that these numbers, if combined with the right tools, could tell me much more than surface-level performance. I wanted to know if a machine learning model could interpret those values and provide predictions in a structured way.
