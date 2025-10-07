@@ -5,9 +5,9 @@ date: 2025-08-12 10:45:16
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/reddit.webp
+thumbnail_mobile: /assets/images/reddit_post_sq.webp
 demo_link: https://rahuls-ai-reddit-post-popularity-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_reddit_post_popularity_predictor
-featured: true
 ---
 
 I remember browsing through online forums and noticing how some posts gained massive attention while others faded away quickly. I wanted to know if there was a way to anticipate this behavior in advance. That thought slowly grew into a project idea where I tried to predict the popularity of Reddit posts. The result was a simple but effective web application powered by machine learning. Dataset used [here](https://www.kaggle.com/datasets/gpreda/reddit-vaccine-myths).
