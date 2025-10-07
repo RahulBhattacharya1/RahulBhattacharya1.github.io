@@ -5,9 +5,9 @@ date: 2025-03-28 10:16:33
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/rain.webp
+thumbnail_mobile: /assets/images/rain_predictor_sq.webp
 demo_link: https://rahuls-ai-rain-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_rain_prediction
-featured: true
 ---
 
 I grew tired of glancing at the daily forecast and guessing whether to carry an umbrella. Several days looked like clear skies, yet short showers arrived anyway. That small inconvenience created a bigger question for me. Could I make a compact predictor that reads today’s numbers and estimates tomorrow’s rain. I wanted something simple, fast, and transparent enough to trust. Dataset used [here](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package).
