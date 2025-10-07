@@ -72,6 +72,9 @@
 
   // ---------- Per-button logic ----------
   function initButton(btn) {
+    // init-once guard per element
+    if (btn.dataset.fauxLikeInited === "1") return;
+    btn.dataset.fauxLikeInited = "1";
     const id  = btn.getAttribute(CFG.attrId) || "";
     const pub = btn.getAttribute(CFG.attrPub) || "";
     if (!id || !pub) return;
@@ -119,14 +122,31 @@
     }
   }
 
-  // ---------- Auto-init ----------
-  document.addEventListener("DOMContentLoaded", () => {
-    $all(CFG.selector).forEach(initButton);
-  });
+// ---------- Auto-init (robust to page swaps) ----------
+function initAllLikes(){ $all(CFG.selector).forEach(initButton); }
 
-  // Optional: expose a tiny API if you ever need manual init
-  window.FauxLikes = {
-    initAll: () => $all(CFG.selector).forEach(initButton),
-    config: CFG
-  };
+// First load
+document.addEventListener("DOMContentLoaded", initAllLikes);
+
+// BFCache restore (e.g., Safari/iOS when navigating back/forward)
+window.addEventListener("pageshow", function (e) {
+  if (e.persisted) initAllLikes();
+});
+
+// DOM swaps (e.g., if pager injects new HTML)
+try {
+  const mo = new MutationObserver(function (ml) {
+    for (const m of ml) {
+      if (m.addedNodes && m.addedNodes.length) { initAllLikes(); break; }
+    }
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+} catch(_) {}
+
+// Optional hook your pager can dispatch manually after it updates the list
+document.addEventListener("rbx:page-updated", initAllLikes);
+
+// Optional: expose a tiny API
+window.FauxLikes = { initAll: initAllLikes, config: CFG };
+
 })();
