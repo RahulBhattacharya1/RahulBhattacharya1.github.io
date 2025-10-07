@@ -5,6 +5,7 @@ date: 2023-06-12 12:45:31
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/electricity_demand.webp
+thumbnail_mobile: /assets/images/electricity_demand_sq.webp
 demo_link: https://rahuls-ai-electricity-demand-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_electricity_demand_forecasting
 ---
