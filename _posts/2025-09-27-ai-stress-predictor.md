@@ -5,6 +5,7 @@ date: 2025-09-27 13:46:29
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/stress.webp
+thumbnail_mobile: /assets/images/stress_sq.webp
 demo_link: https://rahuls-ai-stress-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_stress_predictor
 ---
