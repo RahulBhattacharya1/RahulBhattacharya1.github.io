@@ -5,9 +5,9 @@ date: 2023-07-12 20:11:42
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/board_game.webp
+thumbnail_mobile: /assets/images/board_game_sim_sq.webp
 demo_link: https://rahuls-ai-boardgame-embedding-map.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_boardgame_embedding_map
-featured: true
 ---
 
 It started with a simple observation. I often spent time trying to find board games that matched the exact mood or theme I wanted. Sometimes I looked for games that were cooperative, other times competitive. There were evenings when I wanted something heavy and strategic, and other times when I wanted light and fun. Searching for games online gave lists, but those lists felt flat and unconnected. I wanted a map, not just a table.
