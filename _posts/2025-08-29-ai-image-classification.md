@@ -8,7 +8,6 @@ thumbnail: /assets/images/ai_image_classifier.webp
 thumbnail_mobile: /assets/images/ai_image_classifier_sq.webp
 demo_link: https://rahulbhattacharya-rahuls-image-classifier.hf.space/
 github_link: https://github.com/RahulBhattacharya1/ai_image_classification
-featured: true
 ---
 
 I’ve built and deployed an **image classifier** on [Hugging Face Spaces](https://rahulbhattacharya-rahuls-image-classifier.hf.space) that lets you upload a picture and get predictions in real time. This project combines **PyTorch**, **Torchvision models**, and **Gradio** to create a smooth end-to-end pipeline — from training a custom model to deploying it with an interactive UI.
@@ -21,7 +20,7 @@ style="width:100%;height:820px;border:0;border-radius:12px;overflow:hidden"></if
 # 🖼️ Rahul’s Image Classifier – Build, Train, and Deploy with Hugging Face
 
 
-## 🚀 The Idea
+## The Idea
 
 The goal is simple:  
 - Train a model on your own dataset.  
@@ -32,7 +31,7 @@ If no custom model is uploaded, the app falls back to **ImageNet** with a pretra
 
 ---
 
-## 🛠️ The App (app.py)
+## The App (app.py)
 
 The app is powered by **Gradio Blocks**. Here’s what happens under the hood:
 
@@ -89,7 +88,7 @@ with gr.Blocks(title="Image Classifier (Transfer Learning)") as demo:
 
 ---
 
-## 🎓 Training the Model (train.py)
+## Training the Model (train.py)
 
 Before deploying, I trained my own model with a flexible script.
 
@@ -122,7 +121,7 @@ with open(os.path.join(args.out_dir, "labels.json"), "w") as f:
 
 ---
 
-## ✨ Why This Project Matters
+## Thoughts
 
 - **Transfer Learning**: Reuses pretrained models for fast, accurate classification.  
 - **Flexible Deployment**: Works with your own custom dataset or defaults to ImageNet.  
