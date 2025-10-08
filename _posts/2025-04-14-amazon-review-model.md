@@ -100,12 +100,12 @@ I keep small constants near the top so they are easy to audit and override durin
 ```python
 col1, col2 = st.columns(2)
 ```
-I keep small constants near the top so they are easy to audit and override during experiments.
+I place small constants at the beginning to facilitate auditing and modification during experiments.
 
 ```python
 file = st.file_uploader("Upload CSV", type=["csv"])
 ```
-I keep small constants near the top so they are easy to audit and override during experiments.
+I position small constants at the top to facilitate easy auditing and modification during experiments.
 
 
 **Function: `load_pipeline`**
@@ -125,32 +125,17 @@ I wrote `load_pipeline()` to isolate one job in the pipeline and make the script
 
 ```python
 st.set_page_config(page_title="Amazon Review Star Predictor (1–5)", layout="wide")
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 st.title("Amazon Review Star Predictor — Trained on Your CSV")
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 st.subheader("Single Prediction")
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 with col1:
     title = st.text_input("Review title (optional)", "")
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 with col2:
     body = st.text_area("Review body", "", height=160)
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 if st.button("Predict Stars"):
     text = (title + " " + body).strip()
     if text:
@@ -165,25 +150,13 @@ if st.button("Predict Stars"):
                 st.write(f"- {int(c)} stars: {p:.2f}")
     else:
         st.warning("Enter title or body to predict.")
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 st.divider()
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 st.subheader("Batch Prediction (CSV)")
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 st.write("Upload a CSV with either a **text** column, or **review_title + review_content**, or **Summary + Text**.")
-```
-It wires all the pieces together so the project runs end to end.
 
-```python
 if file:
     df = pd.read_csv(file)
     cols = {c.lower(): c for c in df.columns}
