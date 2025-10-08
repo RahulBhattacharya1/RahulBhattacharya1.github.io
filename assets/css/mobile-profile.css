@@ -204,6 +204,8 @@
 .mobile-profile .chip{
   font-size:.82rem; padding:6px 10px; border-radius:999px; border:1px solid #e8e7f6; background:#fff;
   box-shadow:0 8px 16px rgba(2,6,23,.05), 0 1px 0 rgba(255,255,255,.8) inset;
+  display:inline-flex;      /* was inline element */
+  align-items:center;       /* vertically center icon + text */
 }
 .mobile-profile .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px }
 .mobile-profile .stat{
