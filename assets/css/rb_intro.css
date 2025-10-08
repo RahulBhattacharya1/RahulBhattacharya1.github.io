@@ -249,7 +249,7 @@
   background: url("/assets/images/banner-bg.webp") no-repeat center/cover;
   filter: blur(0px) brightness(.3);
   z-index: 0;
-  animation: banner-rotate 160s linear infinite;
+  animation: banner-rotate 320s linear infinite;
   transform-origin: center center;
   will-change: transform; /* GPU optimization */
 }
