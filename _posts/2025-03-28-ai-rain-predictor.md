@@ -10,7 +10,7 @@ demo_link: https://rahuls-ai-rain-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_rain_prediction
 ---
 
-I grew tired of glancing at the daily forecast and guessing whether to carry an umbrella. Several days looked like clear skies, yet short showers arrived anyway. That small inconvenience created a bigger question for me. Could I make a compact predictor that reads today’s numbers and estimates tomorrow’s rain. I wanted something simple, fast, and transparent enough to trust. Dataset used [here](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package).
+I wondered glancing at the daily forecasts and guessing whether it would rain. Several days looked like clear skies, yet short showers arrived anyway. That small inconvenience created a bigger question for me. Could I make a compact predictor that reads today’s numbers and estimates tomorrow’s rain. I wanted something simple, fast, and transparent enough to trust. Dataset used [here](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package).
 
 The idea turned into a plan when I realized a small pipeline could travel well. If I trained once and froze the bundle, I could ship only the lightweight parts to users. It would avoid the heavy training environment and still be useful. The result is this app: a focused interface that turns inputs into a clear yes or no. It does not try to replace professional forecasts; it tries to be a dependable assistant.
 
@@ -66,7 +66,7 @@ The loader returns two artifacts: the model object and a stable `feature_order` 
 model, feature_order = load_model()
 ```
 
-I immediately unpack the two items into local variables. This keeps later code legible and avoids nested indexing calls. The pattern also makes it easy to swap models later with minimal edits.
+I unpack the two items into local variables. This keeps later code legible and avoids nested indexing calls. The pattern also makes it easy to swap models later with minimal edits.
 
 Placing this near the top ensures the app fails fast if the bundle is missing. Users receive a clear error before they interact with the form.
 
