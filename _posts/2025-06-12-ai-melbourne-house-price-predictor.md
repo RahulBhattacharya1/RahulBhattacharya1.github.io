@@ -371,5 +371,5 @@ Planned work includes integrating interpretability methods like SHAP, adding rea
 
 ## Conclusion
 
-
+ 
 The Melbourne House Price Predictor represents the full lifecycle of a machine learning project. Every file contributes to reproducibility and usability: requirements.txt freezes dependencies, ENV_VERSIONS.txt captures the training environment, app.py drives the logic, and the joblib file stores the trained model. The project demonstrates that successful machine learning depends not only on accuracy but also on deployment, maintainability, and responsibility.
