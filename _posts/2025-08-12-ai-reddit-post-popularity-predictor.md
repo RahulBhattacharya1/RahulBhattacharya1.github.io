@@ -184,10 +184,8 @@ Finally, reflecting on my personal growth, this project gave me confidence to ta
 
 ## Closing Thoughts
 
-When I first thought about this idea, it seemed too small. But after finishing the deployment, I realized that even small projects carry valuable lessons. I learned how to package a model, how to connect it to a Streamlit interface, and how to host it online for others to use. That process gave me confidence for larger projects.
+When I first thought about this idea, it seemed small. But after finishing the deployment, I realized that even small projects carry valuable lessons. I learned how to package a model, how to connect it to a Streamlit interface, and how to host it online for others to use. That process gave me confidence for larger projects.
 
 This post became long because I wanted to explain each block carefully. Every helper, conditional, and import played a role. In the end, this application is proof that simple design choices, when executed carefully, can produce a functional and valuable tool.
-
-Finally, reflecting on my personal growth, this project gave me confidence to take on bigger ideas. Writing about it in such detail forced me to evaluate why I made each decision. That habit of reflection is what will guide me in future projects. I do not just write code now; I think about the why and the how.
 
 ---
