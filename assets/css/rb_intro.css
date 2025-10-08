@@ -249,13 +249,15 @@
   background: url("/assets/images/banner-bg.webp") no-repeat center/cover;
   filter: blur(0px) brightness(.3);
   z-index: 0;
-  animation: banner-rotate 320s linear infinite;
+  animation: banner-zoom 120s ease-in-out infinite alternate; /* ← changed */
   transform-origin: center center;
   will-change: transform; /* GPU optimization */
 }
-.rbx-intro-overlay > *{
-  position: relative;
-  z-index: 1; /* content above bg */
+
+/* Replace rotation with zoom animation */
+@keyframes banner-zoom {
+  0%   { transform: scale(1); }     /* ← changed */
+  100% { transform: scale(1.2); }   /* ← changed */
 }
 
 /* Keyframes for continuous rotation */
