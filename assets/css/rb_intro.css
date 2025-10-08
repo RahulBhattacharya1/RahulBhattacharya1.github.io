@@ -255,4 +255,23 @@
   z-index: 1; /* content above bg */
 }
 
- 
+ /* === Slow Rotation Animation for Banner Background === */
+.rbx-intro-overlay::before {
+  animation: banner-rotate 160s linear infinite;
+  transform-origin: center center;
+  will-change: transform; /* GPU optimization */
+}
+
+/* Keyframes for continuous rotation */
+@keyframes banner-rotate {
+  0% {
+    transform: rotate(0deg) scale(1.08);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.08);
+  }
+}
+
+.rbx-intro-overlay::before {
+  filter: blur(2px) brightness(0.8);
+}
