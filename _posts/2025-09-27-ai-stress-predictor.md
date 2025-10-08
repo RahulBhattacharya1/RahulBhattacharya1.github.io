@@ -10,7 +10,7 @@ demo_link: https://rahuls-ai-stress-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_stress_predictor
 ---
 
-I noticed my decision making became inconsistent during tight deadlines. I would drink more coffee, sleep less, and then wonder why productivity slipped further. There was no simple way to quantify how close I was to a stress cliff before symptoms showed. I wanted a quiet signal that could read a few daily inputs and return a calm, objective score. That idea felt practical if I stitched a trained model to a friendly interface. The result is this stress predictor that runs in a browser and responds in real time. Dataset used [here](https://www.kaggle.com/datasets/nagpalprabhavalkar/tech-use-and-stress-wellness).
+I noticed how decision making can become inconsistent during tight deadlines. We would drink more coffee, sleep less, and then wonder why productivity slipped further. There was no simple way to quantify how close we are to a stress cliff before symptoms showed. I wanted a quiet signal that could read a few daily inputs and return a calm, objective score. That idea felt practical if I stitched a trained model to a friendly interface. The result is this stress predictor that runs in a browser and responds in real time. Dataset used [here](https://www.kaggle.com/datasets/nagpalprabhavalkar/tech-use-and-stress-wellness).
 
 I kept the feature list small on purpose. The goal was not to perform medical diagnosis but to translate basic habits into a consistent risk indicator. A Random Forest works well for tabular features and does not need heavy computing. Streamlit hides front‑end complexity and lets people focus on the decision. Together, they form a tool that invites quick check‑ins during the week. It is a reminder to adjust habits early rather than react late.
 
@@ -31,7 +31,7 @@ Each file serves a distinct purpose. The README orients new readers. The app scr
 
 ## Full application code (`app.py`)
 
-Below is the exact code from my repository. I will explain the blocks in the sections that follow.
+Below is the exact code from my repository.
 ```python
 import os
 import io
@@ -318,7 +318,7 @@ Replacing the model is straightforward. Train a compatible estimator on the same
 
 ---
 
-## Explanation of every helper and branch
+## Explanation of the helpers and branches
 
 **`load_model()`** encapsulates model retrieval, path building, and existence checks. It reduces repetition and centralizes error messages. If a future refactor moves the artifact to cloud storage, I can extend this function to fetch from a bucket while callers remain unchanged.
 
@@ -336,7 +336,7 @@ Replacing the model is straightforward. Train a compatible estimator on the same
 3. Streamlit Cloud installs packages from `requirements.txt` and runs the script.
 4. Verify that the interface loads and the single prediction path works.
 5. Test batch CSV uploads with a small sample file to confirm schema validation.
-6. 
+
 ## Testing strategy and data checks
 I test the loader with both correct and missing model paths to confirm error messages are clear. For the single form, I try boundary values on sliders to ensure numeric types are consistent. For batch mode, I construct a minimal CSV with headers in the exact order and verify the predicted column is appended. I also try a file with a wrong header to confirm the error branch activates.
 
