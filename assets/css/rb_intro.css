@@ -249,17 +249,13 @@
   background: url("/assets/images/banner-bg.webp") no-repeat center/cover;
   filter: blur(0px) brightness(.3);
   z-index: 0;
+  animation: banner-rotate 160s linear infinite;
+  transform-origin: center center;
+  will-change: transform; /* GPU optimization */
 }
 .rbx-intro-overlay > *{
   position: relative;
   z-index: 1; /* content above bg */
-}
-
- /* === Slow Rotation Animation for Banner Background === */
-.rbx-intro-overlay::before {
-  animation: banner-rotate 160s linear infinite;
-  transform-origin: center center;
-  will-change: transform; /* GPU optimization */
 }
 
 /* Keyframes for continuous rotation */
@@ -270,8 +266,4 @@
   100% {
     transform: rotate(360deg) scale(2);
   }
-}
-
-.rbx-intro-overlay::before {
-  filter: brightness(0.3);
 }
