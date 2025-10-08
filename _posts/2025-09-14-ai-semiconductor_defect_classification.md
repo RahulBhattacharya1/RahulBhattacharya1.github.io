@@ -14,9 +14,8 @@ featured: true
 I once visited a manufacturing floor where large silicon wafers were stacked in clean trays. Each wafer carried a story of precision and fragility. A minor scratch or a faint ring pattern could mean the difference between thousands of functional chips and wasted effort. Watching that process made me think about how engineers and analysts could benefit from fast tools that reveal defect patterns. That curiosity led me to build a small application that simulates wafer maps, predicts defect types, and displays dashboards to analyze performance.
 
 The project became a learning experience about connecting machine learning with visualization. I imagined a scenario where quick insights about wafer quality could help in training models, teaching students, or prototyping research ideas. Streamlit provided a way to build interactive pages. Python libraries helped generate synthetic data, extract features, train models, and visualize outcomes. In this blog, I will describe every part of the project, file by file and block by block. The goal is to make the explanation clear enough that someone else could recreate it with the same files in their own GitHub repository.
+
 ## Main Application (app/app.py)
-
-
 
 ```python
 # app/app.py
