@@ -10,7 +10,7 @@ demo_link: https://rahuls-ai-university-semantic.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_university_semantic
 ---
 
-The idea for this project came from a personal search problem. I often wanted to explore universities by describing them in plain language. I imagined scenarios where I would type phrases like *technical university in Germany, old* or *medical college in Japan established before 1900*. Regular search tools did not let me combine country, founding year, and theme in one flexible query. That limitation pushed me to think about semantic search. Dataset used [here](https://www.kaggle.com/datasets/ibrahimqasimi/wilierds).
+The idea for this project came from a search problem. I often wanted to explore universities by describing them in plain language. I imagined scenarios where I would type phrases like *technical university in Germany, old* or *medical college in Japan established before 1900*. That thought pushed me to think about semantic search. Dataset used [here](https://www.kaggle.com/datasets/ibrahimqasimi/wilierds).
 
 I decided to create an application that would accept natural language queries and map them to real universities. Instead of fixed keyword matching, the system uses embeddings. This allowed me to capture meaning rather than surface tokens. The process was not only educational but also showed me how embeddings can make structured data more accessible. This is the story of how I built, packaged, and deployed the system.
 
@@ -59,7 +59,7 @@ Without locking versions, the app may behave differently on Streamlit Cloud. Pin
 
 The README explains the flow. It shows that data is produced in Colab and uploaded here. It clarifies that two files, the parquet and npz, must exist in the `data/` folder. The document also gives deployment steps. For example, it instructs how to connect the repository to Streamlit Cloud and specify `app.py` as the entry file. Finally, it lists example queries that demonstrate the natural language search capability.
 
-This README is short but vital. It provides instructions for others to reproduce results. Without it, the context of how embeddings were generated would be missing. That gap would stop new users from understanding why those artifacts exist.
+This README is short but crucial. It provides instructions for others to reproduce results. Without it, the context of how embeddings were generated would be missing. That gap would stop new users from understanding why those artifacts exist.
 
 ---
 
@@ -297,7 +297,7 @@ Several extensions are possible. The metadata could be enriched with student pop
 
 ## Reflections
 
-Looking back, the most striking aspect is how small code can deliver powerful search. Less than 200 lines integrate deep learning, efficient similarity, and a user‑friendly interface. The project demonstrates how modern NLP tools reduce barriers. Anyone with basic Python skills can now create semantic systems that once required large teams.
+Looking back, the most striking aspect is how small code can deliver powerful search. Less than 200 lines integrate deep learning, efficient similarity, and a user‑friendly interface. The project demonstrates how modern NLP tools reduce barriers. Users with comprehensive Python skills can now create semantic systems that once required large teams.
 
 ---
 
