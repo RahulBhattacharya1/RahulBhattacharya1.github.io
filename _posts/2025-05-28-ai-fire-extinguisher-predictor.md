@@ -271,4 +271,4 @@ The choice of Streamlit success and error messages shaped user experience. A num
 
 Completing this project reminded me that clarity is power. A well-structured repository, with pinned dependencies and modular files, has lasting value. Others can clone it, learn from it, and extend it. That openness is part of why I share it on GitHub Pages. It transforms a personal experiment into a resource for the community.
 
-This app may be small, but it demonstrates the full lifecycle of machine learning: from idea to dataset, from training to serialization, from deployment to documentation. Writing this blog is as much part of the project as coding. It captures the reasoning, the trade-offs, and the lessons. That makes the work not only reproducible, but also teachable.
+This app may be small, but it demonstrates the full lifecycle of machine learning: from idea to dataset, from training to serialization, from deployment to documentation. Writing this blog is as much part of the project as coding. It captures the reasoning, the trade-offs, and the lessons.
