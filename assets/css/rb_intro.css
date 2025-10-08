@@ -26,6 +26,14 @@
   padding:40px 16px; overflow:auto;
   opacity:1; transition:opacity .28s ease;
 }
+
+/* Your actual content ALWAYS above */
+.rbx-intro-overlay > *{
+  position:relative;
+  z-index:2;                   /* <-- above both pseudo-layers */
+  pointer-events:auto;
+}
+
 .rbx-intro-overlay.rbx-fade-out{ opacity:0; }
 .rbx-intro-overlay.rbx-hidden{ display:none; }
 .rbx-intro-wrap{ width:min(1080px,100%); text-align:center; color:var(--rbx-ink); }
