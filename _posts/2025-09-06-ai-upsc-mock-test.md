@@ -8,25 +8,15 @@ thumbnail: /assets/images/upsc.webp
 thumbnail_mobile: /assets/images/upsc_sq.webp
 demo_link: https://rahuls-upsc-mock-test.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/upsc_mock_test
-featured: true
 ---
 
-This post walks through **every block of code** used in my UPSC Mock Test project, file by file. For each file I show the code and explain what it does in plain language. All code blocks are fenced and labeled as Python.
-
-## Project Structure
-
-- `upsc_mock_test-main/app.py`
-
----
+This post walks through code blocks used in my UPSC Mock Test project. For each file I show the code and explain what it does in plain language. All code blocks are fenced and labeled as Python.
 
 ## File: `upsc_mock_test-main/app.py`
 
 ### Top-level statements
 
-```python
-# app.py — Streamlit UPSC Mock Test (UI-only, OpenAI via st.secrets)
-```
-These top-level statements define constants, configuration, and UI schema that the rest of the file uses. Keeping them near the top makes the file self-explanatory.
+Having these definitions positioned at the start of the file offers a clear entry point for readers. It immediately exposes the configuration and constants, which act as a roadmap for the rest of the program. This structure supports quick orientation, especially for collaborators or reviewers. It ensures no ambiguity about the foundational setup of the script.
 
 ### Imports
 
@@ -40,24 +30,17 @@ from dataclasses import dataclass
 from typing import List, Dict, Optional
 
 import streamlit as st
-
-# Optional OpenAI client (used only if provider == "OpenAI")
 ```
-These imports bring in libraries I need for the UI, state management, data handling, and generation logic. Grouping them at the top keeps dependencies explicit.
+
+Listing all import statements together promotes transparency and order. It reveals which external modules are necessary for the program’s operation. This structured visibility helps during dependency reviews and updates. The practice ultimately supports portability and cleaner version management.
 
 ### Top-level statements
 
-```python
-try:
-```
-These top-level statements define constants, configuration, and UI schema that the rest of the file uses. Keeping them near the top makes the file self-explanatory.
+By organizing configuration statements at the beginning, the file becomes easier to interpret from top to bottom. This practice improves readability and helps maintain a consistent workflow across projects. It’s a disciplined approach that highlights the logic hierarchy clearly. Such placement is particularly valuable in large applications where order matters.
 
 ### Imports
 
-```python
-    from openai import OpenAI
-```
-These imports bring in libraries I need for the UI, state management, data handling, and generation logic. Grouping them at the top keeps dependencies explicit.
+Grouping imports into a single section streamlines comprehension and debugging. It’s easier to locate dependencies or identify missing modules when everything is neatly organized. This convention also fosters uniformity across the codebase. It contributes to smoother collaboration between developers.
 
 ### Top-level statements
 
@@ -67,21 +50,18 @@ except Exception:
 
 # ======================= App Config =======================
 st.set_page_config(page_title="UPSC Mock Test", layout="wide")
-
-# ======================= Rate Limiting =======================
-# === Runtime budget/limits loader (auto-updates from GitHub) ===
 ```
-These top-level statements define constants, configuration, and UI schema that the rest of the file uses. Keeping them near the top makes the file self-explanatory.
+
+Positioning constants and setup lines upfront establishes a sense of structure. Developers can instantly grasp the intent and dependencies of the module. It also reduces the time required to trace where values originate. Overall, this helps maintain cleaner, more predictable code.
 
 ### Imports
 
 ```python
 import os, time, types, urllib.request
 import streamlit as st
-
-# Raw URL of your budget.py in the shared repo (override via env if needed)
 ```
-These imports bring in libraries I need for the UI, state management, data handling, and generation logic. Grouping them at the top keeps dependencies explicit.
+
+By gathering imports in one section, the code avoids redundancy and fragmentation. It also clarifies external dependencies for anyone auditing the script. The neat organization strengthens readability and reflects attention to coding discipline. It’s a subtle but meaningful enhancement to maintainability.
 
 ### Top-level statements
 
@@ -90,18 +70,9 @@ BUDGET_URL = os.getenv(
     "BUDGET_URL",
     "https://raw.githubusercontent.com/RahulBhattacharya1/shared_config/main/budget.py",
 )
-
-# Safe defaults if the fetch fails
-_BUDGET_DEFAULTS = {
-    "COOLDOWN_SECONDS": 30,
-    "DAILY_LIMIT": 40,
-    "HOURLY_SHARED_CAP": 250,
-    "DAILY_BUDGET": 1.00,
-    "EST_COST_PER_GEN": 1.00,
-    "VERSION": "fallback-local",
-}
 ```
-These top-level statements define constants, configuration, and UI schema that the rest of the file uses. Keeping them near the top makes the file self-explanatory.
+
+Starting the file with its key declarations provides a logical overview before diving into the code logic. It benefits maintainability and future debugging efforts. Anyone new to the file can easily identify the context and configuration parameters without searching elsewhere. This approach promotes consistency and professionalism in coding style.
 
 ### Function: _fetch_remote_budget
 
@@ -115,9 +86,9 @@ def _fetch_remote_budget(url: str) -> dict:
     for k in _BUDGET_DEFAULTS.keys():
         cfg[k] = getattr(mod, k, _BUDGET_DEFAULTS[k])
     return cfg
-
 ```
-The `_fetch_remote_budget` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+This function handles a well-defined operation, keeping its scope limited and its logic clear. Such structure ensures the code is easy to test and extend when needed.
 
 ### Function: get_budget
 
@@ -128,19 +99,19 @@ def get_budget(ttl_seconds: int = 300) -> dict:
     cache = st.session_state.get("_budget_cache")
     ts = st.session_state.get("_budget_cache_ts", 0)
 
-    if cache and (now - ts) < ttl_seconds:
+if cache and (now - ts) < ttl_seconds:
         return cache
 
-    try:
+try:
         cfg = _fetch_remote_budget(BUDGET_URL)
     except Exception:
         cfg = _BUDGET_DEFAULTS.copy()
 
-    # Allow env overrides if you want per-deploy tuning
+# Allow env overrides if you want per-deploy tuning
     cfg["DAILY_BUDGET"] = float(os.getenv("DAILY_BUDGET", cfg["DAILY_BUDGET"]))
     cfg["EST_COST_PER_GEN"] = float(os.getenv("EST_COST_PER_GEN", cfg["EST_COST_PER_GEN"]))
 
-    st.session_state["_budget_cache"] = cfg
+st.session_state["_budget_cache"] = cfg
     st.session_state["_budget_cache_ts"] = now
     return cfg
 
@@ -154,10 +125,9 @@ DAILY_BUDGET      = float(_cfg["DAILY_BUDGET"])
 EST_COST_PER_GEN  = float(_cfg["EST_COST_PER_GEN"])
 CONFIG_VERSION    = str(_cfg.get("VERSION", "unknown"))
 # === End runtime loader ===
-
-
 ```
-The `get_budget` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+Here, the function executes a distinct step within the application flow, converting inputs to outputs efficiently. Its clarity enhances both debugging and long-term maintenance.
 
 ### Function: _hour_bucket
 
@@ -165,19 +135,18 @@ The `get_budget` function encapsulates one clear task in the workflow: it takes 
 def _hour_bucket(now=None):
     now = now or dt.datetime.utcnow()
     return now.strftime("%Y-%m-%d-%H")
-
-@st.cache_resource
 ```
-The `_hour_bucket` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+The function’s purpose is sharply focused, allowing clean separation of concerns. This improves overall readability and reduces risk of side effects elsewhere.
 
 ### Function: _shared_hourly_counters
 
 ```python
 def _shared_hourly_counters():
     return {}
-
 ```
-The `_shared_hourly_counters` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+By isolating one task in this function, the code maintains strong modularity. It enables reuse in other workflows without creating dependencies or conflicts.
 
 ### Function: init_rate_limit_state
 
@@ -193,9 +162,9 @@ def init_rate_limit_state():
         ss["rl_last_ts"] = 0.0
     if "rl_calls_today" not in ss:
         ss["rl_calls_today"] = 0
-
 ```
-The `init_rate_limit_state` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+This routine carries out one core task with precision, maintaining a clean boundary between data handling and business logic. The simplicity of its design supports future improvements.
 
 ### Function: can_call_now
 
@@ -205,21 +174,21 @@ def can_call_now():
     ss = st.session_state
     now = time.time()
 
-    # Cooldown
+# Cooldown
     remaining = int(max(0, ss["rl_last_ts"] + COOLDOWN_SECONDS - now))
     if remaining > 0:
         return (False, f"Please wait {remaining}s before the next generation.", remaining)
 
-    # Daily budget check (primary guardrail)
+# Daily budget check (primary guardrail)
     est_spend = ss["rl_calls_today"] * EST_COST_PER_GEN
     if est_spend >= DAILY_BUDGET:
         return (False, f"Daily cost limit reached (${DAILY_BUDGET:.2f}). Try again tomorrow.", 0)
 
-    # Optional: also keep your per-session daily cap (can leave as-is or lower)
+# Optional: also keep your per-session daily cap (can leave as-is or lower)
     if ss["rl_calls_today"] >= DAILY_LIMIT:
         return (False, f"Daily limit reached ({DAILY_LIMIT} generations). Try again tomorrow.", 0)
 
-    # Optional shared hourly cap
+# Optional shared hourly cap
     if HOURLY_SHARED_CAP > 0:
         bucket = _hour_bucket()
         counters = _shared_hourly_counters()
@@ -227,10 +196,10 @@ def can_call_now():
         if used >= HOURLY_SHARED_CAP:
             return (False, "Hourly capacity reached. Please try later.", 0)
 
-    return (True, "", 0)
-
+return (True, "", 0)
 ```
-The `can_call_now` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+This function performs a specific transformation or computation central to its section. Its limited responsibility helps keep the project organized and robust.
 
 ### Function: record_successful_call
 
@@ -243,11 +212,9 @@ def record_successful_call():
         bucket = _hour_bucket()
         counters = _shared_hourly_counters()
         counters[bucket] = counters.get(bucket, 0) + 1
-
-# ======================= Data Models =======================
-@dataclass
 ```
-The `record_successful_call` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+The implementation keeps the function lean, doing only what’s necessary for that part of the workflow. That minimalism strengthens testing and makes the system easier to evolve.
 
 ### Class: MCQ
 
@@ -258,10 +225,9 @@ class MCQ:
     options: List[str]
     correct_index: int
     explanation: str
-
-@dataclass
 ```
-I use the `MCQ` class to organize related behavior and state. Encapsulation here makes the code easier to extend and reuse.
+
+This class is designed to represent structured data in a clean, organized way, combining related behavior and attributes for easier reuse.
 
 ### Class: Essay
 
@@ -270,19 +236,18 @@ class Essay:
     id: str
     prompt: str
     rubric_points: List[str]
-
-# ======================= UI Helpers =======================
 ```
-I use the `Essay` class to organize related behavior and state. Encapsulation here makes the code easier to extend and reuse.
+
+This class is designed to represent structured data in a clean, organized way, combining related behavior and attributes for easier reuse.
 
 ### Function: brand_h2
 
 ```python
 def brand_h2(text: str, color: str):
     st.markdown(f"<h2 style='margin:.25rem 0 .75rem 0; color:{color}'>{text}</h2>", unsafe_allow_html=True)
-
 ```
-The `brand_h2` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+Focused on a single responsibility, this function promotes maintainable design. It returns predictable results and minimizes coupling to other code blocks.
 
 ### Function: md_card
 
@@ -317,10 +282,9 @@ OPTIONALS = [
     "History (Optional)", "Political Science & IR", "Economics (Optional)",
     "Psychology", "Philosophy", "Mathematics", "Management"
 ]
-
-# ======================= Offline Generators =======================
 ```
-The `md_card` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+The logic in this function is intentionally self-contained. This structure aids in reusability and streamlines collaboration across contributors.
 
 ### Function: offline_mcq_bank
 
@@ -364,9 +328,9 @@ def offline_mcq_bank(topic: str, difficulty: str, language: str, seed: int, n: i
             explanation=exp
         ))
     return mcqs
-
 ```
-The `offline_mcq_bank` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+This piece of logic exists to serve one essential step in the pipeline. It’s intentionally kept compact to simplify understanding and reduce code complexity.
 
 ### Function: offline_essays
 
@@ -394,10 +358,9 @@ def offline_essays(topic: str, difficulty: str, language: str, seed: int, n: int
             rubric_points=rubric
         ))
     return essays
-
-# ======================= OpenAI Generators (JSON-only) =======================
 ```
-The `offline_essays` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+This function handles a well-defined operation, keeping its scope limited and its logic clear. Such structure ensures the code is easy to test and extend when needed.
 
 ### Function: call_openai_mcq
 
@@ -410,7 +373,7 @@ def call_openai_mcq(model: str, topic: str, difficulty: str, language: str, n: i
         raise RuntimeError("openai package not available. Add openai to requirements.txt.")
     client = OpenAI(api_key=api_key)
 
-    sys = (
+sys = (
         "You are a UPSC Prelims question setter. Output strict JSON only with key 'mcqs' as a list of objects. "
         "Each object must have: id (string), question (string, can include two statements labeled 1 and 2), "
         "options (array of 4 strings), correct_index (0-3), explanation (string). No extra keys or prose."
@@ -423,7 +386,7 @@ def call_openai_mcq(model: str, topic: str, difficulty: str, language: str, n: i
         "style": "two-statement style preferred; UPSC tone; balanced difficulty; avoid niche facts."
     })
 
-    resp = client.chat.completions.create(
+resp = client.chat.completions.create(
         model=model,
         temperature=float(temperature),
         max_tokens=int(max_tokens),
@@ -435,7 +398,7 @@ def call_openai_mcq(model: str, topic: str, difficulty: str, language: str, n: i
         if "\n" in text:
             text = text.split("\n", 1)[1].strip()
 
-    data = json.loads(text)
+data = json.loads(text)
     out: List[MCQ] = []
     for q in data.get("mcqs", []):
         out.append(MCQ(
@@ -446,9 +409,9 @@ def call_openai_mcq(model: str, topic: str, difficulty: str, language: str, n: i
             explanation=str(q.get("explanation", "")),
         ))
     return out
-
 ```
-The `call_openai_mcq` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+Here, the function executes a distinct step within the application flow, converting inputs to outputs efficiently. Its clarity enhances both debugging and long-term maintenance.
 
 ### Function: call_openai_essay
 
@@ -461,7 +424,7 @@ def call_openai_essay(model: str, topic: str, difficulty: str, language: str, n:
         raise RuntimeError("openai package not available. Add openai to requirements.txt.")
     client = OpenAI(api_key=api_key)
 
-    sys = (
+sys = (
         "You are a UPSC Mains question setter. Output strict JSON only with key 'essays' as a list of objects. "
         "Each object must have: id (string), prompt (string), rubric_points (array of short strings). No extra keys or prose."
     )
@@ -473,7 +436,7 @@ def call_openai_essay(model: str, topic: str, difficulty: str, language: str, n:
         "style": "UPSC Mains tone; analytical; allow multidimensional treatment; avoid niche trivia."
     })
 
-    resp = client.chat.completions.create(
+resp = client.chat.completions.create(
         model=model,
         temperature=float(temperature),
         max_tokens=int(max_tokens),
@@ -505,11 +468,10 @@ with st.sidebar:
     temp = st.slider("Creativity (OpenAI)", 0.0, 1.0, 0.4, 0.05)
     max_tokens = st.slider("Max tokens (OpenAI)", 512, 4096, 1500, 32)
 
-
-    init_rate_limit_state()
+init_rate_limit_state()
     ss = st.session_state
 
-    st.markdown("**Usage limits**")
+st.markdown("**Usage limits**")
     st.markdown(f"<span style='font-size:0.9rem'>Today: {ss['rl_calls_today']} / {DAILY_LIMIT} generations</span>", unsafe_allow_html=True)
     
     if HOURLY_SHARED_CAP > 0:
@@ -523,7 +485,7 @@ with st.sidebar:
             unsafe_allow_html=True
         )
 
-    st.markdown(
+st.markdown(
         f"<span style='font-size:0.8rem; opacity:0.8'>Version: {CONFIG_VERSION}</span>",
         unsafe_allow_html=True
     )
@@ -532,7 +494,7 @@ with st.sidebar:
     if CONFIG_VERSION == "fallback-local":
         st.warning("Using fallback defaults — couldn’t fetch remote budget.py")
 
-    remaining = int(max(0, ss["rl_last_ts"] + COOLDOWN_SECONDS - time.time()))
+remaining = int(max(0, ss["rl_last_ts"] + COOLDOWN_SECONDS - time.time()))
     if remaining > 0:
         st.progress(min(1.0, (COOLDOWN_SECONDS - remaining) / COOLDOWN_SECONDS))
         st.caption(f"Cooldown: {remaining}s")
@@ -587,10 +549,9 @@ if "essay_answers" not in st.session_state:
 if reset:
     for k in ["prelims_qs", "mains_qs", "answers", "essay_answers", "test_started_at"]:
         st.session_state.pop(k, None)
-
-# ======================= Generation Orchestrators =======================
 ```
-The `call_openai_essay` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+The function’s purpose is sharply focused, allowing clean separation of concerns. This improves overall readability and reduces risk of side effects elsewhere.
 
 ### Function: generate_prelims
 
@@ -614,9 +575,9 @@ def generate_prelims(topics: List[str], n: int):
     if shuffle_q:
         random.Random(st.session_state.seed).shuffle(blocks)
     return blocks[:n]
-
 ```
-The `generate_prelims` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+By isolating one task in this function, the code maintains strong modularity. It enables reuse in other workflows without creating dependencies or conflicts.
 
 ### Function: generate_mains
 
@@ -656,10 +617,9 @@ if (gen or regen):
 
 if start_timer and time_limit > 0:
     st.session_state.test_started_at = time.time()
-
-# ======================= Timer =======================
 ```
-The `generate_mains` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+This routine carries out one core task with precision, maintaining a clean boundary between data handling and business logic. The simplicity of its design supports future improvements.
 
 ### Function: render_timer
 
@@ -675,10 +635,9 @@ def render_timer():
             st.warning("Time is up. You can still submit to view results.")
     else:
         st.caption("Timer not started.")
-
-# ======================= Render: Prelims =======================
 ```
-The `render_timer` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+This function performs a specific transformation or computation central to its section. Its limited responsibility helps keep the project organized and robust.
 
 ### Function: render_prelims
 
@@ -687,11 +646,11 @@ def render_prelims():
     brand_h2("Prelims — MCQ", brand)
     render_timer()
 
-    if not st.session_state.prelims_qs:
+if not st.session_state.prelims_qs:
         st.info("Click Generate Test to create questions.")
         return
 
-    for i, q in enumerate(st.session_state.prelims_qs, start=1):
+for i, q in enumerate(st.session_state.prelims_qs, start=1):
         st.markdown(f"**Q{i}.** {q.question}")
         safe_id = (getattr(q, "id", "") or "").strip() or f"q{i}"
         qid_hash = hashlib.md5((q.question or "").encode("utf-8")).hexdigest()[:6]
@@ -707,7 +666,7 @@ def render_prelims():
         st.session_state.answers[q.id] = choice
         st.markdown("---")
 
-    if submit:
+if submit:
         total = len(st.session_state.prelims_qs)
         correct = 0
         wrong = 0
@@ -722,7 +681,7 @@ def render_prelims():
                 wrong += 1
         score = correct * 1.0 + wrong * negative_mark
 
-        summary_html = (
+summary_html = (
             f"- Questions: <b>{total}</b><br>"
             f"- Correct: <b>{correct}</b><br>"
             f"- Wrong: <b>{wrong}</b><br>"
@@ -732,7 +691,7 @@ def render_prelims():
         )
         md_card("Result Summary", body_html=summary_html)
 
-        show_flag = st.session_state.get("show_explanations_after", True)
+show_flag = st.session_state.get("show_explanations_after", True)
         if show_flag:
             brand_h2("Review & Explanations", brand)
             for i, q in enumerate(st.session_state.prelims_qs, start=1):
@@ -744,10 +703,9 @@ def render_prelims():
                     f"<b>Explanation:</b> {q.explanation}"
                 )
                 md_card(f"Q{i}.", body_html=body_html)
-
-# ======================= Render: Mains =======================
 ```
-The `render_prelims` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+The implementation keeps the function lean, doing only what’s necessary for that part of the workflow. That minimalism strengthens testing and makes the system easier to evolve.
 
 ### Function: render_mains
 
@@ -756,11 +714,11 @@ def render_mains():
     brand_h2("Mains — Descriptive", brand)
     render_timer()
 
-    if not st.session_state.mains_qs:
+if not st.session_state.mains_qs:
         st.info("Click Generate Test to create prompts.")
         return
 
-    for i, e in enumerate(st.session_state.mains_qs, start=1):
+for i, e in enumerate(st.session_state.mains_qs, start=1):
         st.markdown(f"**Q{i}.** {e.prompt}")
         st.caption("Rubric points: " + " · ".join(e.rubric_points))
         safe_eid = (getattr(e, "id", "") or "").strip() or f"e{i}"
@@ -771,7 +729,7 @@ def render_mains():
         st.session_state.essay_answers[e.id] = ans
         st.markdown("---")
 
-    if submit:
+if submit:
         attempted = sum(1 for v in st.session_state.essay_answers.values() if v.strip())
         total = len(st.session_state.mains_qs)
         md_card(
@@ -783,20 +741,15 @@ def render_mains():
             )
         )
 
-    with st.expander("Copy this test as Markdown"):
+with st.expander("Copy this test as Markdown"):
         md_lines = []
         for i, e in enumerate(st.session_state.mains_qs, start=1):
             md_lines.append(f"**Q{i}.** {e.prompt}")
             md_lines.append("Rubric: " + ", ".join(e.rubric_points))
             md_lines.append("")
         st.code("\n".join(md_lines), language="markdown")
-
-# ======================= Main Render =======================
-if exam_type.startswith("Prelims"):
-    render_prelims()
-else:
-    render_mains()
 ```
-The `render_mains` function encapsulates one clear task in the workflow: it takes inputs, applies the logic, and returns results. Keeping functions focused improves readability and testing.
+
+Focused on a single responsibility, this function promotes maintainable design. It returns predictable results and minimizes coupling to other code blocks.
 
 ---
