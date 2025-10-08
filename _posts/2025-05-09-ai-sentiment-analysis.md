@@ -184,4 +184,4 @@ By completing this project, I was able to demonstrate:
 - How to package and deploy a model as a live demo using Streamlit.  
 - How to integrate an AI project into a professional portfolio.
 
-This project shows end-to-end ownership: from dataset to model to deployment.
+This project shows end-to-end designing of an AI model: from dataset to model to deployment.
