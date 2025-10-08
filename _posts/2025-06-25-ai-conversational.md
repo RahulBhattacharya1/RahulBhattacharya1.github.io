@@ -8,7 +8,6 @@ thumbnail: /assets/images/ai_conversational.webp
 thumbnail_mobile: /assets/images/ai_conversational_sq.webp
 demo_link: https://huggingface.co/spaces/RahulBhattacharya/Rahuls_Morning_Planner
 github_link: https://github.com/RahulBhattacharya1/ai_conversational_planner
-featured: true
 ---
 I wanted to build something lightweight yet useful—a conversational morning planner that runs locally and feels personal. The idea was simple:
 
