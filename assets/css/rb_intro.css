@@ -265,13 +265,13 @@
 /* Keyframes for continuous rotation */
 @keyframes banner-rotate {
   0% {
-    transform: rotate(0deg) scale(1.08);
+    transform: rotate(0deg) scale(2);
   }
   100% {
-    transform: rotate(360deg) scale(1.08);
+    transform: rotate(360deg) scale(2);
   }
 }
 
 .rbx-intro-overlay::before {
-  filter: blur(2px) brightness(0.8);
+  filter: brightness(0.1);
 }
