@@ -273,5 +273,5 @@
 }
 
 .rbx-intro-overlay::before {
-  filter: brightness(0.1);
+  filter: brightness(0.3);
 }
