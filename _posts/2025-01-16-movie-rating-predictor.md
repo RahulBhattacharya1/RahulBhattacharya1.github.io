@@ -420,4 +420,4 @@ Interstellar,Sci-Fi,169,165000000,1700000,8.6
 Joker,Drama,122,55000000,1200000,8.4
 ```
 
-That is everything needed to run and deploy the project. The app stays in one file. The dataset is bundled. The environment is minimal. The post above walks through each block so a reader can adapt it quickly.
+That is everything needed to run and deploy the project. The app stays in one file. The dataset is bundled. The environment is minimal. The post above walks through each block so we can adapt it quickly.
