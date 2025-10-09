@@ -145,6 +145,6 @@ One interesting challenge was balancing complexity with accessibility. The model
 
 Another subtle design choice was the directory layout. Placing the model file in a `models` folder separates it from the app code. This makes the repository cleaner and more extensible. If I train another version in the future, I can drop it in the same folder without touching the rest of the structure. Similarly, having a dedicated `requirements.txt` at the root ensures compatibility across environments. These small organizational details save hours of debugging later.
 
-The decision to use Streamlit was deliberate. Alternatives like Flask or Django offer more customization but at the cost of complexity. Streamlit provides rapid development while still delivering a professional interface. For machine learning demos this tradeoff is ideal. It allows focusing on the model and logic rather than web infrastructure. The entire app fits within a few dozen lines of Python, yet it delivers real predictive power.
+The decision to use Streamlit was deliberate. Alternatives like Flask or Django offer more customization but at the cost of complexity. Streamlit provides rapid development while still delivering a professional interface. For machine learning demos this tradeoff is ideal. It allows focusing on the model and logic rather than web infrastructure. The entire app fits within these Python logics, and delivers real predictive power.
 
 ---
