@@ -12,8 +12,8 @@ github_link: https://github.com/RahulBhattacharya1/ai_tourism_forecasting
 
 This post walks through a small forecasting project that I packaged as a simple Streamlit app. I
 kept it self contained, so it does not reach out to any external APIs or big datasets. The goal is
-to show a clean path from a tidy time series to a short horizon forecast. I will go through each code
-block, every helper, and each file I committed to make the app run on my machine and in the cloud.
+to show a clean path from a tidy time series to a short horizon forecast. I will go through the code
+blocks, helpers, and files I committed to make the app run on my machine and in the cloud.
 
 Project files I committed
 - `app.py` — the Streamlit app with all logic and UI
