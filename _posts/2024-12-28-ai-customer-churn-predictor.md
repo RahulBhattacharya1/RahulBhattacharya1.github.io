@@ -163,4 +163,4 @@ Predicting human behavior always raises questions of fairness and ethics. Income
 Deploying with Streamlit was smooth, but scaling to heavy usage would require thought. Streamlit apps are ideal for internal teams or demos. For production at scale, containerization and orchestration with Docker and Kubernetes would be more robust. Still, as a personal learning project, the simplicity of pushing to GitHub and running in Streamlit Cloud was more than enough.
 
 ### Personal Growth
-Working on this app reminded me that even short scripts carry complexity when unpacked. Explaining every block forced me to articulate why each line exists. This practice deepened my appreciation for documentation as part of development, not an afterthought. It also made me more confident in communicating technical details in plain language.
+Working on this app reminded me that even short scripts carry complexity when unpacked. Explaining every block forced me to explain why each line exists. This practice deepened my appreciation for documentation as part of development, not an afterthought. It also made me more confident in communicating technical details in plain language.
