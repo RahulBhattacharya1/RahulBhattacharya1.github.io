@@ -10,7 +10,7 @@ demo_link: https://rahuls-ai-emotion-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_emotion_classifier
 ---
 
-I built a emotion classifier which reads text and predicts the emotion label.
+I built a emotion classifier which reads text, and predicts the emotion label.
 
 ## Repository Structure
 
@@ -111,7 +111,7 @@ if file is not None:
 ```
 
 ### What this file does
-This file is part of the end to end classifier. I commit it so the repository runs without guesswork. It holds well scoped code and avoids hidden side effects.
+This file is part of the end to end classifier. I commit it so the repository runs without issues. It holds well scoped code and avoids hidden side effects.
 
 ### Functions and helpers explained
 
@@ -123,17 +123,7 @@ In the bigger picture, this helper keeps training and inference readable. It als
 
 ### Key conditionals and why they matter
 
-- The code checks `st.button('Predict Emotion')`. This reduces runtime errors and avoids silent failures. It keeps flows explicit and safe.
-
-- The code checks `file is not None`. This reduces runtime errors and avoids silent failures. It keeps flows explicit and safe.
-
-- The code checks `not path.exists()`. This reduces runtime errors and avoids silent failures. It keeps flows explicit and safe.
-
-- The code checks `text.strip()`. This reduces runtime errors and avoids silent failures. It keeps flows explicit and safe.
-
-- The code checks `proba_fn`. This reduces runtime errors and avoids silent failures. It keeps flows explicit and safe.
-
-- The code checks `'text' not in df.columns`. This reduces runtime errors and avoids silent failures. It keeps flows explicit and safe.
+- The code checks `st.button('Predict Emotion')`, `file is not None`, `not path.exists()`, `text.strip()`, `proba_fn`, `'text' not in df.columns`. This reduces runtime errors and avoids silent failures. It keeps flows explicit and safe.
 
 ## File: requirements.txt
 
@@ -223,7 +213,7 @@ files.download(str(out_path))
 
 **Explanation**
 
-This block runs a focused step. It loads data, prepares inputs, or trains the model. I kept the cell short so the outputs stay readable. I reused helpers from the modules when possible. This kept the notebook honest and close to production code.
+This block loads data, prepares inputs, or trains the model. I kept the cell short so the outputs stay readable. I reused helpers from the modules when possible.
 
 ## Files I uploaded to GitHub
 I added these files to the repository so the project runs without extra work.
@@ -236,7 +226,7 @@ requirements.txt
 
 
 ## Running the project
-I prefer simple commands. I describe the typical steps below. I keep the run flow linear and predictable.
+I preferred simple commands and described the typical steps below.
 
 ```python
 # 1) Create a fresh environment
