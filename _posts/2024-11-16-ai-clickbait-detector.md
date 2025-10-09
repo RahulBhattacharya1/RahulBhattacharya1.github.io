@@ -248,4 +248,4 @@ This is the main interactive section. A text input lets the user provide a headl
 
 ## Conclusion
 
-This project combines three approaches: GPT few-shot reasoning, embedding nearest centroid, and offline heuristics. Each plays a role in maintaining accuracy, speed, and reliability. The structure of the code separates helpers, classifiers, and interface clearly. The dataset, requirements, and README complete the package. Together these files form a simple yet insightful project. The design shows how AI and simple heuristics can work together to solve a small but meaningful problem.
+This project combines three approaches: GPT few-shot reasoning, embedding nearest centroid, and offline heuristics. Each plays a role in maintaining accuracy, speed, and reliability. The structure of the code separates helpers, classifiers, and interface clearly. The dataset, requirements, and README complete the package. Together these files form a simple yet insightful project. The design shows how AI and simple heuristics can work together to solve a real and meaningful problem.
