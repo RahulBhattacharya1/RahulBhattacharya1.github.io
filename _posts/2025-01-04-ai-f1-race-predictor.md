@@ -357,7 +357,7 @@ While building this app, I intentionally kept the ML pipeline abstracted away fr
 
 One unexpected challenge was handling lap times. Not all users enter values consistently. Some typed “92.5” while others used “1:32.5”. I had to build a robust parser. Regular expressions and float conversions helped solve this.
 
-Deployment on Streamlit was easy, but I had to make sure the joblib file path and asset directories aligned properly. Relative paths like `assets/` and `models/` must exist or the app crashes.
+Deployment on Streamlit was complex, and I had to make sure the joblib file path and asset directories aligned properly. Relative paths like `assets/` and `models/` must exist or the app crashes.
 
 Going forward, I want to integrate weather APIs or add safety car flags into the feature set. Right now, the model treats all races as if they're dry and uninterrupted. This limits accuracy.
 
@@ -378,8 +378,6 @@ Make sure folders like `models/` and `assets/` are not empty. They hold essentia
 
 ---
 
-
----
 
 ## CSV Lookup Files (Explained)
 
