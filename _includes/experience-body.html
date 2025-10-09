@@ -99,29 +99,42 @@
 
     <!-- ========= Scientist ========= -->
     <div class="role-accordion" id="panel-scientist" hidden>
-      <article class="acc-item">
-        <span class="acc-head">
-          <button class="acc-btn" aria-expanded="false" aria-controls="acc-scientist-1" id="acc-scientist-1-label">
-            Walgreens — Workforce Forecasting at Scale
-            <span class="acc-meta">Databricks · PySpark · ADF · Time-series</span>
-          </button>
-        </span>
-        <div class="acc-panel" id="acc-scientist-1" role="region" aria-labelledby="acc-scientist-1-label" hidden>
-          <div class="acc-body">
-            <p><strong>Summary:</strong> Modular time-series pipelines with automated refresh and seasonality.</p>
-            <details><summary>S · Situation</summary><p>Manual, reactive scheduling across thousands of stores.</p></details>
-            <details><summary>T · Task</summary><p>Stabilize forecasts and reduce manual corrections.</p></details>
-            <details><summary>A · Action</summary><p>Feature engineering; hierarchical models; ADF triggers; staffing constraints.</p></details>
-            <details open><summary>R · Result</summary>
-              <ul>
-                <li><span class="kpi" data-target="30">0</span>% reduction in manual intervention</li>
-                <li>Improved stability; fewer late corrections</li>
-              </ul>
-            </details>
-            <p><strong>Stack:</strong> Python, PySpark, Databricks, ADF, ADLS, SQL</p>
-          </div>
-        </div>
-      </article>
+<article class="acc-item">
+  <span class="acc-head">
+    <button class="acc-btn" aria-expanded="false" aria-controls="acc-scientist-1" id="acc-scientist-1-label">
+      Walgreens — Workforce AI Scheduling and Forecasting
+      <span class="acc-meta">Databricks · PySpark · ADF · Time-series</span>
+    </button>
+  </span>
+  <div class="acc-panel" id="acc-scientist-1" role="region" aria-labelledby="acc-scientist-1-label" hidden>
+    <div class="acc-body">
+      <p><strong>Summary:</strong> Designed and deployed an AI scheduling engine using Python and Gurobi optimization, integrated with time-series forecasting pipelines. The system generates optimized weekly schedules for ~150,000 employees across 8,000+ stores, incorporating availability constraints, store-level demand signals, and fairness rules. Iteratively improved the model for accuracy and reduced manual corrections through incremental learning and feature updates.</p>
+
+      <details><summary>S · Situation</summary>
+        <p>Scheduling was previously manual, highly reactive, and error-prone. Store teams spent hours adjusting shifts to align with employee availability, while demand fluctuations created inefficiencies and compliance risks.</p>
+      </details>
+
+      <details><summary>T · Task</summary>
+        <p>Develop an automated scheduling system that balances employee availability, regulatory rules, and forecasted demand. Reduce the time store leaders spend on manual scheduling, while improving fairness, coverage, and forecast stability.</p>
+      </details>
+
+      <details><summary>A · Action</summary>
+        <p>Implemented an optimization model in Python leveraging the Gurobi solver to enforce staffing constraints and maximize shift alignment with employee availability. Built Databricks-based PySpark pipelines for data preprocessing and feature engineering (availability parsing, PTO windows, role hierarchies). Integrated time-series forecasts via ADF triggers to dynamically adjust staffing needs. Iteratively enhanced the AI model with incremental improvements—such as day-cap logic, PTO overlap handling, and technician/pharmacist balance—ensuring scalable weekly deployment across 150k employees.</p>
+      </details>
+
+      <details open><summary>R · Result</summary>
+        <ul>
+          <li><span class="kpi" data-target="30">0</span>% reduction in manual intervention</li>
+          <li>Automated weekly scheduling for 150,000+ employees, reducing store-level manual effort by thousands of hours</li>
+          <li>Improved schedule fairness and availability matching, lowering late shift corrections</li>
+          <li>Delivered scalable AI-driven scheduling framework now used enterprise-wide</li>
+        </ul>
+      </details>
+
+      <p><strong>Stack:</strong> Python, Gurobi, PySpark, Databricks, ADF, ADLS, SQL</p>
+    </div>
+  </div>
+</article>
 
       <article class="acc-item">
         <span class="acc-head">
