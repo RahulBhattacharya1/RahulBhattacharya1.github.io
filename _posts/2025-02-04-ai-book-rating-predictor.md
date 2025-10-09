@@ -219,7 +219,7 @@ Each of these steps would push the project closer to a production-level system.
 
 ## Reflections on Learning Journey
 
-This project was not only about building a predictor. It was about practicing an end-to-end cycle. From idea to code, from local environment to public deployment, every step mattered. I learned the importance of environment isolation, the ease of deploying on cloud platforms, and the responsibility that comes with even small predictions. Models can mislead if poorly communicated. Thus, clarity of output is as important as accuracy of model.
+This project was not only about building a predictor. It was about practicing an end-to-end cycle. From idea to code, from local environment to public deployment, every step mattered. I learned the importance of environment isolation, the ease of deploying on cloud platforms, and the responsibility that comes with even small predictions. Models can mislead if not accurately communicated. Thus, clarity of output is as important as accuracy of model.
 
 ---
 
@@ -284,6 +284,6 @@ As I continue building more projects, this one remains a reference point. It rem
 
 ## Final Reflection
 
-Reaching this point reminded me that many great projects begin as small personal experiments. What starts with curiosity can become a structured application. By writing down the process in detail, I not only documented it for others but also deepened my own understanding. Documentation is not a side task. It is part of the engineering process. This blog post is my way of making sure the learning stays visible.
+Reaching this point reminded me that many great projects begin as small personal experiments. What starts with curiosity can become a structured application. By writing down the process in detail, I not only documented it for others but also deepened my own understanding. Documentation is not a side task. It is part of the engineering process. This blog post is my way of making sure the learning stays documented.
 
 ---
