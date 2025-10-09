@@ -14,7 +14,7 @@ It began with a simple thought. I had been reading books in different genres, bu
 
 ## What this post covers
 
-This post explains every code block and every file that I pushed to GitHub to make the app run. The style is simple and direct, because the goal is clarity. I walk through helpers, functions, conditionals, and the user interface. I also show how caching and fallbacks keep the app steady when APIs fail or quotas run out. The explanations aim to stay concrete and consistent without jumping between concepts.
+This post explains code blocks and files that I pushed to GitHub to make the app run. The style is simple and direct, because the goal is clarity. I walk through helpers, functions, conditionals, and the user interface. I also show how caching and fallbacks keep the app steady when APIs fail or quotas run out. The explanations aim to stay concrete and consistent without moving between concepts.
 
 ## Repository layout I pushed to GitHub
 
@@ -705,130 +705,88 @@ if OPENAI_API_KEY.startswith("sk-proj-") and OPENAI_PROJECT:
     kwargs["project"] = OPENAI_PROJECT
 
 client = OpenAI(**kwargs)
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
         st.error(f"Embeddings call failed: {type(e).__name__}: {e}")
         body = getattr(e, "response", None)
         if body:
             st.code(str(body), language="json")
     try:
         r = client.responses.create(
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
         st.error(f"Responses call failed: {type(e).__name__}: {e}")
         body = getattr(e, "response", None)
         if body:
             st.code(str(body), language="json")
 
 st.set_page_config(page_title="Book Recommendation Engine", layout="wide")
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
 def _cosine(a: np.ndarray, b: np.ndarray) -> float:
     denom = (np.linalg.norm(a) * np.linalg.norm(b))
     if denom == 0:
         return 0.0
     return float(np.dot(a, b) / denom)
 
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
-
-```python
     try:
         start = s.find("{"); end = s.rfind("}")
         if start != -1 and end != -1:
             s = s[start:end+1]
         data = json.loads(s)
         return data if isinstance(data, dict) else {}
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
 def retrieve_top_k(query: str, df: pd.DataFrame, M: np.ndarray, k: int, genre_filter: List[str]) -> pd.DataFrame:
     base = df if not genre_filter else df[df["genre"].isin(genre_filter)].reset_index(drop=True)
     if M is None:
         # offline scoring
         scores = _offline_scores(query, base["search_text"].tolist())
     else:
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
         # offline scoring
         scores = _offline_scores(query, base["search_text"].tolist())
     else:
         try:
             qvec = client.embeddings.create(model=EMBED_MODEL, input=[query]).data[0].embedding
             q = np.array(qvec, dtype=np.float32)
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
-    Returns candidates with 'rank' and 'reason' columns.
-    """
     if candidates.empty:
         return candidates
 
     items = []
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
         return out.sort_values(["rank", "score"], ascending=[True, False]).reset_index(drop=True)
     except Exception as e:
         if "insufficient_quota" in str(e):
             st.info("Offline demo: GPT re-rank unavailable; showing embedding/keyword ranking.")
             candidates["rank"] = np.arange(1, len(candidates)+1)
             candidates["reason"] = ""
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
     clear = st.button("Clear", on_click=lambda: st.session_state.update({"history": []}))
 
 if run and summary.strip():
     # Retrieve
     hits = retrieve_top_k(summary, df, M, k*2 if use_rerank else k, chosen_genres)
     # Re-rank (optional)
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
     hits = retrieve_top_k(summary, df, M, k*2 if use_rerank else k, chosen_genres)
     # Re-rank (optional)
     if use_rerank:
         hits = rerank_with_gpt(summary, hits).head(k)
     else:
         hits = hits.head(k)
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
     if use_rerank:
         hits = rerank_with_gpt(summary, hits).head(k)
     else:
         hits = hits.head(k)
 
     st.subheader("Recommendations")
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
         st.markdown(f"**{r['title']}** — {r['author']}  \n*{r['genre']}*")
         st.markdown(r['description'])
         if r.get("reason"):
             st.caption(f"Why: {r['reason']}")
         if pd.notna(r.get("link")) and str(r.get("link")).strip():
             st.write(f"[Learn more]({r['link']})")
-```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
-```python
         if r.get("reason"):
             st.caption(f"Why: {r['reason']}")
         if pd.notna(r.get("link")) and str(r.get("link")).strip():
@@ -836,7 +794,7 @@ The check is narrow and localized. It returns early when inputs are missing, or 
         st.markdown("---")
 
 ```
-The check is narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
+The checks are narrow and localized. It returns early when inputs are missing, or switches to a safe fallback when an external call fails.
 
 
 ## Exact `requirements.txt` used
