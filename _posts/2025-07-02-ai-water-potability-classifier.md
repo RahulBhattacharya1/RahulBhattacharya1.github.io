@@ -8,6 +8,9 @@ thumbnail: /assets/images/potability.webp
 thumbnail_mobile: /assets/images/water_potability_sq.webp
 demo_link: https://rahuls-ai-water-potability-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_water_potability_classifier
+synopsis: In this project I introduce a water potability classifier that evaluates drinking safety using parameters such as pH, hardness, and turbidity. Designed for accessibility, it converts raw inputs into clear assessments, offering individuals practical guidance and reassurance about water quality in daily life.
+custom_snippet: true
+custom_snippet_text: Classifies water safety using practical measurable parameters. 
 ---
 
 There was a time when I started doubting the quality of the water supplied in my neighborhood. I wondered if it was safe for consumption. That concern made me realize how valuable it would be to have a small system that could instantly evaluate water potability. I imagined using measurable parameters like pH, hardness, turbidity, and other chemical indicators to produce a reliable assessment. This thought planted the seed for the project that became my Water Potability Classifier. Dataset used [here](https://www.kaggle.com/datasets/adityakadiwal/water-potability).
