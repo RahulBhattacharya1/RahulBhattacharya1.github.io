@@ -8,9 +8,12 @@ thumbnail: /assets/images/stress.webp
 thumbnail_mobile: /assets/images/stress_sq.webp
 demo_link: https://rahuls-ai-stress-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_stress_predictor
+synopsis: In this project I introduce a stress prediction tool that converts simple daily habits into a consistent risk score. Designed for awareness rather than diagnosis, it helps individuals monitor wellness trends, anticipate stress buildup, and make proactive adjustments before productivity or health decline.
+custom_snippet: true
+custom_snippet_text: Predicts stress risk from daily habits, encouraging wellness adjustments. 
 ---
 
-I noticed how decision making can become inconsistent during tight deadlines. We would drink more coffee, sleep less, and then wonder why productivity slipped further. There was no simple way to quantify how close we are to a stress cliff before symptoms showed. I wanted a quiet signal that could read a few daily inputs and return a calm, objective score. That idea felt practical if I stitched a trained model to a friendly interface. The result is this stress predictor that runs in a browser and responds in real time. Dataset used [here](https://www.kaggle.com/datasets/nagpalprabhavalkar/tech-use-and-stress-wellness).
+We know how decision making can become inconsistent during tight deadlines. We would drink more coffee, sleep less, and then wonder why productivity slipped further. There was no simple way to quantify how close we are to a stress cliff before symptoms showed. I wanted a quiet signal that could read a few daily inputs and return a calm, objective score. That idea felt practical if I stitched a trained model to a friendly interface. The result is this stress predictor that runs in a browser and responds in real time. Dataset used [here](https://www.kaggle.com/datasets/nagpalprabhavalkar/tech-use-and-stress-wellness).
 
 I kept the feature list small on purpose. The goal was not to perform medical diagnosis but to translate basic habits into a consistent risk indicator. A Random Forest works well for tabular features and does not need heavy computing. Streamlit hides front‑end complexity and lets people focus on the decision. Together, they form a tool that invites quick check‑ins during the week. It is a reminder to adjust habits early rather than react late.
 
