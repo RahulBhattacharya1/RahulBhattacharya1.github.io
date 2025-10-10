@@ -15,7 +15,7 @@ custom_snippet_text: Predicts cancer severity, translating risks into interactiv
 ---
 
 There was a day when I was reading about how people face uncertainty
-during medical treatment. The numbers that are given to them often sound
+during medical treatment. The metrics and stats that are given to them often sound
 abstract. I thought about how difficult it must be to get even a rough
 estimate of how severe a condition may turn out. This personal thought
 made me imagine that if I could build a simple tool, it would let people
@@ -51,13 +51,13 @@ that the app runs smoothly from end to end.
 
 1.  **app.py**: This is the Streamlit application script. It handles the
     user interface, input collection, feature alignment, and prediction
-    process.\
+    process.
 2.  **requirements.txt**: This file contains all the Python dependencies
     needed for the app to run. Streamlit Cloud uses this file to install
-    packages.\
+    packages.
 3.  **models/severity_model.joblib**: This is the trained machine
     learning model saved using joblib. It stores the weights and
-    structure learned during training.\
+    structure learned during training.
 4.  **models/feature_list.json**: This JSON file stores the exact list
     of features the model expects. It ensures that the input data aligns
     correctly with the model schema.
@@ -377,13 +377,13 @@ create a smooth deployment.
 ## Future Improvements
 
 1.  **Better Visualizations**: Instead of only showing numbers, I could
-    plot severity scores on a chart or provide comparisons.\
+    plot severity scores on a chart or provide comparisons.
 2.  **Expanded Feature Set**: Adding more lifestyle or genetic factors
-    could improve accuracy.\
+    could improve accuracy.
 3.  **Model Monitoring**: In a real-world setting, monitoring
-    predictions for drift would be necessary.\
+    predictions for drift would be necessary.
 4.  **Internationalization**: Supporting multiple languages for the
-    interface would expand accessibility.\
+    interface would expand accessibility.
 5.  **Security and Privacy**: A medical-related app must take care of
     how data is handled, even if it is only for demonstration.
 
@@ -391,13 +391,13 @@ create a smooth deployment.
 
 1.  **Importance of Feature Alignment**: Even a single mismatched
     feature can break predictions. Having a stored feature list protects
-    against this.\
+    against this.
 2.  **Version Pinning**: Library versions must be pinned to guarantee
-    consistent behavior between training and deployment.\
+    consistent behavior between training and deployment.
 3.  **Interactive Interfaces**: Allowing users to input values directly
-    makes machine learning more approachable.\
+    makes machine learning more approachable.
 4.  **Error Transparency**: Showing detailed error messages helps debug
-    issues quickly when deploying models.\
+    issues quickly when deploying models.
 5.  **End-to-End Thinking**: Building the app forced me to think not
     only about training models but also about packaging, serving, and
     presenting them.
