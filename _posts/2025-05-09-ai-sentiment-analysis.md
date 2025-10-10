@@ -10,8 +10,6 @@ demo_link: https://rahuls-ai-sentiment-analysis.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_sentiment_analysis
 ---
 
-# Building My IMDb Sentiment Classifier
-
 In this post, I want to walk through how I created an AI-powered IMDb Sentiment Classifier. The goal of this project was simple: take a piece of text (a movie review) and classify it as **Positive** or **Negative**. I trained my own model, saved it, and deployed it as a live demo using Streamlit.
 
 ---
