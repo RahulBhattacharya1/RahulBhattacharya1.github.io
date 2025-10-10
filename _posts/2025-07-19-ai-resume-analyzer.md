@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Building My AI Resume Analyzer"
-date: 2025-07-19 15:54:21
+date: 2025-09-17 15:54:21
 thumbnail: /assets/images/resume.webp
 thumbnail_mobile: /assets/images/resume_sq.webp
 categories: [ai]
