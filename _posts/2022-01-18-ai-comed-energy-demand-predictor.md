@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/comed_predict_sq.webp
 demo_link: https://rahuls-ai-comed-energy-demand-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_comed_energy_demand_forecasting
 featured: true
+synopsis: Here I analyze seasonal electricity consumption patterns and develops a forecasting tool using historical demand data. It produces an interactive app for visualizing and predicting future usage, offering practical insights into demand spikes, efficiency, and planning for different weather-driven consumption trends.
+custom_snippet: true
+custom_snippet_text: Forecasts electricity demand patterns with interactive visualizations.
 ---
 
 A few months ago I noticed how unpredictable our local electricity usage felt during different seasons. In summer, air conditioning made demand spike in late afternoons. In winter, heating created another curve that felt less predictable. I started wondering if I could design something that helped me visualize and forecast this demand better. That curiosity eventually grew into a small project where I took historical demand data and built an interactive app to forecast usage for the future. This blog post is my complete breakdown of how I built it step by step. Dataset used [here](https://www.kaggle.com/datasets/robikscube/hourly-energy-consumption).
