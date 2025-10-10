@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/usa_housing_price_sq.webp
 demo_link: https://rahuls-ai-house-price-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_house_price_predictor
 featured: true
+synopsis: Here I develop a home price estimator from structured listings, modeling relationships between bedrooms, size, and location. Addresses inconsistent valuations and produces estimates. Documentation describes setup, inputs, helpers, and design choices, enabling readers to understand, reproduce, and adapt the approach across markets.
+custom_snippet: true
+custom_snippet_text: Predicts prices from listing features, resolving inconsistent market valuations. 
 ---
 
 I wanted to create something that combined my interest in data and my curiosity about real estate. 
