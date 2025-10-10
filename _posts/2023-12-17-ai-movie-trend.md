@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/movie_trends_sq.webp
 demo_link: https://rahuls-ai-movie-trends.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai-movie-trends
 featured: true
+synopsis: In this project I explore how movie trends evolve over time by analyzing ratings, genres, and popularity patterns. It provides an interactive platform where users can explore historical data, apply filters, and visualize changes dynamically, offering deeper insight into shifting audience preferences and behaviors.
+custom_snippet: true
+custom_snippet_text: Interactive platform visualizes evolving movie trends through ratings and genres. 
 ---
 
 It started with a simple thought during a weekend binge of old films. I wondered how trends in movies evolve with time. Ratings shift, genres rise and fall, and audience attention drifts in ways that are not obvious. I wanted something that could let me look at this visually instead of trying to guess by memory. That thought slowly shaped into this project. Dataset used [here](https://www.kaggle.com/datasets/kajaldeore04/movies-dataset-tmdb-ratings-popularity-votes).
