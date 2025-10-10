@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/rent_predict_sq.webp
 demo_link: https://rahuls-ai-rent-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_rent_predictor
 featured: true
+synopsis: Here I develop a rent prediction tool using demographic and regional factors such as household income, ownership rates, and population. It estimates typical rental costs across cities, providing individuals with quick insights to guide relocation decisions and housing affordability planning.
+custom_snippet: true
+custom_snippet_text: Predicts regional rent using demographics, aiding relocation and housing decisions. 
 ---
 
 A few months ago I was reading about how rent prices have been rising across many regions. 
