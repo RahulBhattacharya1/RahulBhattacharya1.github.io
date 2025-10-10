@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Creating my AI Cancer Severity Predictor"
-date: 2022-11-16 14:27:32
+date: 2025-09-16 14:27:32
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/cancer_severity.webp
