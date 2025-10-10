@@ -11,7 +11,7 @@ github_link: https://github.com/RahulBhattacharya1/ai_diabetes_classifier
 featured: true
 synopsis: Here I build a diabetes risk classifier that transforms raw health indicators into clear, educational insights. By simplifying interpretation of values like glucose, blood pressure, and body mass index, it offers an accessible tool aimed at raising awareness and supporting personal understanding.
 custom_snippet: true
-custom_snippet_text: Transforms health indicators into clear insights for diabetes risk awareness. 
+custom_snippet_text: Transforms indicators into insights for diabetes risk awareness. 
 ---
 
 There was a moment when I realized how fragile health can be. I had come across a routine medical camp where many individuals were quietly waiting for their turn. What struck me most was the silent anxiety in the air. People were holding reports that they barely understood. I kept thinking how useful it would be if simple tools existed to guide them in real time. That thought stayed with me, and it gradually shaped into an idea. I wanted to create something that could take raw numbers and give back clarity. The motivation did not come from a sudden spark but from a slow build-up of small observations. I knew that technology could step in where words often fail. Dataset used [here](https://www.kaggle.com/datasets/nanditapore/healthcare-diabetes).
