@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Creating my AI Water Potability Classifier"
-date: 2025-07-02 13:28:49
+date: 2025-09-17 10:28:49
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/potability.webp
