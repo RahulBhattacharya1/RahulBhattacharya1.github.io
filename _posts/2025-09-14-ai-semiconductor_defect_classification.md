@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Creating my AI Semiconductor Wafer Defect Classification App"
+title: "Creating my AI Semiconductor Wafer Defect Classifier"
 date: 2025-09-14 15:43:29
 categories: [ai]
 tags: [python,streamlit,self-trained]
