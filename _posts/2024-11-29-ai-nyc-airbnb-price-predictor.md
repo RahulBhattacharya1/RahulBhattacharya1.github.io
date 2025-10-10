@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/nyc_airbnb_sq.webp
 demo_link: https://rahuls-ai-airbnb-price-prediction.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_airbnb_price_prediction
 featured: true
+synopsis: Here I investigate pricing inconsistencies in short-term rental listings using data analysis and machine learning. By examining factors such as location, reviews, and property attributes, it uncovers hidden patterns influencing price variation, offering insights for more transparent and data-driven pricing strategies.
+custom_snippet: true
+custom_snippet_text: Uncovers rental pricing patterns through data-driven machine learning insights. 
 ---
 
 It all started with a simple experience. I was browsing through different listings on a travel platform and noticed that two very similar apartments had very different prices. Both were located in Brooklyn, had similar reviews, and looked almost identical in photos. Yet one was priced almost double the other. That inconsistency made me curious. Was there some hidden logic that determined these prices? Could data explain why some listings were valued higher than others? This thought became the seed of the project. Dataset used [here](https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data).
