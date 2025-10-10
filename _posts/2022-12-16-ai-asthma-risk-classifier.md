@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/asthma_risk_sq.webp
 demo_link: https://rahuls-ai-asthma-risk-classifier.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_asthma_risk_classifier
 featured: true
+synopsis: In this project I introduce an asthma risk classifier that transforms health data into a prediction. It emphasizes awareness and early detection by identifying hidden patterns behind common symptoms, providing a supportive tool for education and personal health decision-making.
+custom_snippet: true
+custom_snippet_text: Classifies asthma risk, promoting awareness through data-driven health insights. 
 ---
 
 It started with a memory of a difficult evening when breathing became heavier after a simple walk outside. That moment stayed in my thoughts for weeks. I realized how fragile health can feel when air itself turns into an obstacle. This led me to imagine a small digital companion, something that could tell me in advance if I might be at risk. I knew I wanted to build more than a model. I wanted to create a tool that felt practical and personal at the same time. That became the seed for my asthma risk classifier project. Dataset used [here](https://www.kaggle.com/datasets/jatinthakur706/copd-asthma-patient-dataset).
