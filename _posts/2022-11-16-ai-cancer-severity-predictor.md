@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/cancer_severity_sq.webp
 demo_link: https://rahuls-ai-cancer-severity-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_cancer_severity_predictor
 featured: true
+synopsis: Here I build a cancer severity predictor that translates abstract risks into interactive estimates. Using lifestyle factors and condition stages, it demonstrates how predictive systems can clarify uncertainty, focusing on awareness, transparency, and practical deployment rather than providing medical advice.
+custom_snippet: true
+custom_snippet_text: Predicts cancer severity, translating risks into interactive insights. 
 ---
 
 There was a day when I was reading about how people face uncertainty
