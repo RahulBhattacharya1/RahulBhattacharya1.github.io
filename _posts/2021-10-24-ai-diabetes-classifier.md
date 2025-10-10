@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Creating my AI Diabetes Classifier"
-date: 2021-10-24 15:29:32
+date: 2025-09-15 15:29:32
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/diabetes_classifier.webp
