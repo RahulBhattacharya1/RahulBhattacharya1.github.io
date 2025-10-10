@@ -9,6 +9,7 @@ thumbnail_mobile: /assets/images/coffee_sales_forecasting_sq.webp
 demo_link: https://rahuls-ai-coffee-forecast.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_coffee_forecast
 featured: true
+synopsis: I built this project to predict coffee sales using an AI model and generate visualizations for different durations. It is flexible and allows users to upload a different dataset as needed to generate corresponding forecasts.
 ---
 
 
