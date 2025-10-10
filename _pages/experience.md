@@ -11,7 +11,7 @@ hide_date: true
 featured: true
 hide_top_title: true
 custom_snippet: true
-custom_snippet_text: "Role-based case studies with measurable outcomes from healthcare, retail, and finance."
+custom_snippet_text: "Role-based contributions producing measurable impact in healthcare, retail, and finance."
 ---
 
 {::nomarkdown}
