@@ -7,6 +7,9 @@ thumbnail_mobile: /assets/images/resume_sq.webp
 categories: [ai]
 demo_link: https://huggingface.co/spaces/RahulBhattacharya/Rahuls_AI_Resume_Analyzer
 github_link: https://github.com/RahulBhattacharya1/ai_resume_analyzer
+synopsis: Here I create a resume analyzer that compares candidate documents with job descriptions, highlighting missing keywords and evaluating semantic alignment. It transforms resumes into structured insights, helping applicants identify gaps, strengthen applications, and better match opportunities through clear, data-driven feedback.
+custom_snippet: true
+custom_snippet_text: Analyzes resumes against jobs, highlighting gaps and semantic alignment. 
 ---
 
 I recently built Rahul’s AI Resume Analyzer, a tool that compares a resume against a job description and highlights missing keywords while measuring semantic fit. Let me walk you through the code that powers it.
