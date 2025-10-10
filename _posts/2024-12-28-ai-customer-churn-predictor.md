@@ -11,7 +11,7 @@ github_link: https://github.com/RahulBhattacharya1/ai_customer_churn_predictor
 featured: true
 synopsis: In this project I focus on predicting customer responses to marketing promotions using data-driven machine learning models. By analyzing spending behavior and campaign history, it reduces wasted efforts, lowers costs, and enables targeted promotions, ultimately improving marketing efficiency and customer engagement outcomes.
 custom_snippet: true
-custom_snippet_text: Predicts customer responses with data-driven marketing insights.
+custom_snippet_text: Predicts customer responses with marketing insights.
 ---
 
 It started with a moment of curiosity when I was analyzing campaign reports. Numbers showed that many people never reacted to offers despite similar spending patterns. I began to wonder if there was a way to anticipate which customers would likely respond before sending the next promotion. That thought stayed with me as I considered the cost of each campaign and the missed opportunity when the wrong people were targeted. Predicting customer response became not just a technical project but a way to align marketing actions with data-driven insight. Dataset used [here](https://www.kaggle.com/datasets/imakash3011/customer-personality-analysis).
