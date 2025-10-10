@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/ai_rock_paper_scissor_sq.webp
 demo_link: https://rahuls-ai-rock-paper-scisor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_rock_paper_scissor
 featured: true
+synopsis: In this project I demonstrate an interactive rock–paper–scissors game with configurable limits, offline and AI-driven strategies, and session-based tracking. It integrates budget controls, counters, and cooldowns while providing a responsive interface that combines gameplay, feedback, and usage monitoring in a single streamlined experience.
+custom_snippet: true
+custom_snippet_text: Interactive rock–paper–scissors with limits, counters, offline and AI strategies. 
 ---
 
 This post explains every part of the attached `app.py`, block by block, and clarifies how configuration, limits, offline and OpenAI logic, and UI all fit together.
