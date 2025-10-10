@@ -8,6 +8,9 @@ thumbnail: /assets/images/bank_customer.webp
 thumbnail_mobile: /assets/images/bank_customer_sub_sq.webp
 demo_link: https://rahuls-ai-bank-customer-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_bank_customer_predictor
+synopsis: Here I apply machine learning to predict customer subscription likelihood for financial services. By analyzing campaign and customer data, it identifies patterns that influence conversion rates, offering institutions a data-driven tool to improve targeting, optimize marketing strategies, and enhance campaign efficiency.
+custom_snippet: true
+custom_snippet_text: Machine learning predicts financial service subscriptions, optimizing campaigns.
 ---
 
 A few years ago, I was reflecting on how financial institutions decide whether a customer will subscribe to a new service or product. The idea stayed in my mind after noticing how banks often run campaigns that do not always convert as expected. I imagined that if I had a way to analyze the customer data with machine learning, I could predict the likelihood of subscription. That personal thought became the seed of this project. It was less about coding at first, more about curiosity of how data tells a story. From that curiosity came this application, which I will now explain in detail. Dataset used [here](https://www.kaggle.com/datasets/adilshamim8/binary-classification-with-a-bank-dataset).
