@@ -11,7 +11,7 @@ github_link: https://github.com/RahulBhattacharya1/semiconductor_defect_classifi
 featured: true
 synopsis: My application designed to simulate wafer maps, predict defect types, and generate dashboards that highlight performance trends and defect patterns in semiconductor manufacturing. The tool emphasizes rapid detection of anomalies such as scratches and ring patterns, enabling more efficient quality control and yield analysis.
 custom_snippet: true
-custom_snippet_text: Simulates wafers, predicts defects, enhances semiconductor yield.
+custom_snippet_text: Simulates wafers, predicts defects, enhances yield.
 ---
 
 I once visited a manufacturing floor where large silicon wafers were stacked in clean trays. Each wafer carried a story of precision and fragility. A minor scratch or a faint ring pattern could mean the difference between thousands of functional chips and wasted effort. Watching that process made me think about how engineers and analysts could benefit from fast tools that reveal defect patterns. That curiosity led me to build a small application that simulates wafer maps, predicts defect types, and displays dashboards to analyze performance.
