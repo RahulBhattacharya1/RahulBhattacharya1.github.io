@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/melbourne_house_sq.webp
 demo_link: https://rahuls-ai-melbourne-house-price-predictor.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_melbourne_house_price_predictor
 featured: true
+synopsis: My Melbourne House Price Predictor applies machine learning regression to uncover hidden relationships in property values. By analyzing inconsistencies between house size, location, and price, it produces a reliable application that helps users better understand market dynamics and forecast housing trends.
+custom_snippet: true
+custom_snippet_text: Machine learning regression predicts Melbourne housing prices, revealing hidden market dynamics.
 ---
 
 The Melbourne House Price Predictor originated from a simple observation: property prices often appear inconsistent. Two houses with the same number of rooms might differ greatly in value. Some smaller houses near central Melbourne were priced higher than much larger homes further away. These inconsistencies suggested the presence of complex interactions between variables. I wanted to see if machine learning could reveal these hidden relationships. Training a regression model was the first step, but the real challenge was building an application that others could use reliably. Dataset used [here](https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot).
