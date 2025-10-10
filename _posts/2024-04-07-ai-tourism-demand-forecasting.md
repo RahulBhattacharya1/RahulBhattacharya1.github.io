@@ -9,6 +9,9 @@ thumbnail_mobile: /assets/images/tourism_demand_sq.webp
 demo_link: https://rahuls-ai-tourism-demand-forecasting.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_tourism_demand_forecasting
 featured: true
+synopsis: My forecasting app using European tourism data to predict seasonal demand. It lets users select a country to view history and forecasts side by side. Lightweight preprocessing yields insights for capacity planning, staffing, and marketing decisions.
+custom_snippet: true
+custom_snippet_text: This app forecasts European seasonal tourism demand and travels.
 ---
 
 There are times when one observes a repeating pattern in the world and feels compelled to design a tool around it. My motivation for this app came from observing travel numbers that rose and fell with seasons yet were rarely anticipated with enough precision. Businesses often guessed demand instead of forecasting it. That left gaps during busy times and waste during slow times. I imagined a solution where data spoke more clearly. Dataset used [here](https://www.kaggle.com/datasets/gpreda/tourism-trips-in-europe).
