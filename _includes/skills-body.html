@@ -538,7 +538,7 @@ const ROLE_SUMMARIES = {
 
     // Update the dynamic summary text
     if (summaryEl) {
-      summaryEl.textContent = ROLE_SUMMARIES[role] || "Rahul is highly skilled in Python, Databricks, and Azure.";
+      summaryEl.innerHTML = ROLE_SUMMARIES[role] || "Rahul is highly skilled in Python, Databricks, and Azure.";
       if (window.runWordIconizer) window.runWordIconizer(summaryEl);
     }
     
