@@ -11,7 +11,7 @@ github_link: https://github.com/RahulBhattacharya1/ai_coffee_forecast
 featured: true
 synopsis: I built this project to predict coffee sales using an AI model and generate visualizations for different durations. It is flexible and allows users to upload a different dataset as needed to generate corresponding forecasts.
 custom_snippet: true
-custom_snippet_text: "I built this AI based model to predict coffee sales and create visualizations on sales forecasting. I built this AI based model to predict coffee sales and create visualizations on sales forecasting."
+custom_snippet_text: "This AI model helps forecast coffee sales with detailed visualizations."
 ---
 
 
