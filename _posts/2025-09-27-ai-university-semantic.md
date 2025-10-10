@@ -8,6 +8,9 @@ thumbnail: /assets/images/university.webp
 thumbnail_mobile: /assets/images/university_search_sq.webp
 demo_link: https://rahuls-ai-university-semantic.streamlit.app/
 github_link: https://github.com/RahulBhattacharya1/ai_university_semantic
+synopsis: In this project I develop a semantic search tool for exploring universities using natural language queries. By interpreting meaning rather than keywords, it connects descriptive inputs to structured data, enabling flexible discovery and demonstrating how search can become more intuitive and user-friendly.
+custom_snippet: true
+custom_snippet_text: Enables search through natural language. 
 ---
 
 The idea for this project came from a search problem. I often wanted to explore universities by describing them in plain language. I imagined scenarios where I would type phrases like *technical university in Germany, old* or *medical college in Japan established before 1900*. That thought pushed me to think about semantic search. Dataset used [here](https://www.kaggle.com/datasets/ibrahimqasimi/wilierds).
