@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Creating my AI Coffee Sales Forecasting App"
-date: 2025-09-27 10:33:41
+date: 2025-09-13 10:33:41
 categories: [ai]
 tags: [python,streamlit,self-trained]
 thumbnail: /assets/images/coffee.webp
