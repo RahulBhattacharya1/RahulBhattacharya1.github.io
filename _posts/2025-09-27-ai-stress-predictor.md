@@ -225,6 +225,7 @@ if not single_input:
 - **pandas**: organizes batch input rows into a DataFrame, performs type checks, and helps build a clean CSV export.
 - **streamlit**: renders the UI, manages widget state, and wires click events to Python code. It allows a pure‑Python web app without HTML.
 - **plotly.express**: draws quick visualizations such as bar charts for feature importance or simple histograms if the app surfaces analytics.
+
 ---
 
 ## Import block explained
