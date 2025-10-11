@@ -18,7 +18,7 @@
 .mobile-profile *{ box-sizing: border-box; }
 
 /* Container similar to .stage in demo */
-.mobile-profile .stage{ width:100%; max-width:100%; margin:0 auto; }
+.mobile-profile .stage{ width:100%; max-width:none !important; margin:0 auto; }
 
 /* Hide the expand/collapse checkbox only in this component */
 .mobile-profile #satinA{ position:absolute; left:-9999px }
