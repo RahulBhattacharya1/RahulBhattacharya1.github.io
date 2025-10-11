@@ -30,7 +30,7 @@
 /* Your actual content ALWAYS above */
 .rbx-intro-overlay > *{
   position:relative;
-  z-index:2;                   /* <-- above both pseudo-layers */
+  z-index:6;                   /* <-- above both pseudo-layers */
   pointer-events:auto;
 }
 
