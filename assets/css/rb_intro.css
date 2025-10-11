@@ -24,7 +24,7 @@
   backdrop-filter: blur(14px);
   display:flex; align-items:center; justify-content:center;
   padding:0px 16px; overflow:auto;
-  opacity:1; transition:opacity 1s ease;
+  opacity:1; transition:opacity .5s ease;
 }
 
 /* Your actual content ALWAYS above */
