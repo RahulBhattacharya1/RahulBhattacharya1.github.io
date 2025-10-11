@@ -29,7 +29,8 @@
     background: rgba(255,255,255,0.2) !important; /* light glass look */
   }
   .fab::before{
-    content:""; position:absolute; inset:-4px; border-radius:50%;
+    content:""; position:absolute; inset:-6px; border-radius:50%;
+    filter: saturate(1.8) brightness(1.2);  /* makes colors pop */
     background: var(--ring-colors);
     animation: spin 4s linear infinite;
     z-index:-1;
