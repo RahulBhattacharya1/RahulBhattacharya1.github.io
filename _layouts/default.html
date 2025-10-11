@@ -457,20 +457,39 @@
   // Return an icon URL to append after the word (non-link case)
   function iconFor(word) {
     var w = word.toLowerCase();
-    if (w === 'python')     return '/assets/icons/python.svg';
-    if (w === 'databricks') return '/assets/icons/databricks.svg';
-    if (w === 'azure')      return '/assets/icons/azure.svg';
-    if (w === 'epm')     return '/assets/icons/oracle.svg';
-    if (w === 'power bi') return '/assets/icons/powerbi.svg';
-    if (w === 'tableau')      return '/assets/icons/tableau.svg';
-    if (w === 'adf')      return '/assets/icons/azure.svg';
-    if (w === 'numpy')     return '/assets/icons/numpy.svg';
-    if (w === 'hugging face')      return '/assets/icons/huggingface.svg';       
+        if (w === 'python')        return '/assets/icons/python.svg';
+        if (w === 'databricks')    return '/assets/icons/databricks.svg';
+        if (w === 'azure')         return '/assets/icons/azure.svg';
+        if (w === 'adf')           return '/assets/icons/azure.svg';
+        if (w === 'html')          return '/assets/icons/html.svg';
+        if (w === 'css')           return '/assets/icons/css.svg';
+        if (w === 'javascript')    return '/assets/icons/javascript.svg';
+        if (w === 'power bi')      return '/assets/icons/powerbi.svg';
+        if (w === 'tableau')       return '/assets/icons/tableau.svg';
+        if (w === 'quicksight')    return '/assets/icons/awsquicksight.svg';
+        if (w === 'bi apps')       return '/assets/icons/oracle.svg';
+        if (w === 'sql')           return '/assets/icons/oracle.svg';
+        if (w === 'pl/sql')        return '/assets/icons/oracle.svg';
+        if (w === 'epm')           return '/assets/icons/oracle.svg';
+        if (w === 'informatica')   return '/assets/icons/informatica.svg';
+        if (w === 'glue')          return '/assets/icons/awsglue.png';
+        if (w === 'draw.io')       return '/assets/icons/drawio.svg';
+        if (w === 'redshift')      return '/assets/icons/redshift.svg';
+        if (w === 's3')            return '/assets/icons/amazons3.svg';
+        if (w === 'hugging face')  return '/assets/icons/huggingface.svg';
+        if (w === 'spark')         return '/assets/icons/spark.svg';
+        if (w === 'mysql')         return '/assets/icons/mysql.svg';
+        if (w === 'postgresql')    return '/assets/icons/postgresql.svg';      
     return null;
   }
 
-  // Words to detect (case-insensitive, whole word)
-  var RE = /\b(data|import|python|databricks|azure|epm|power bi|tableau|adf|numpy|hugging face)\b/gi;
+  // Words to detect (case-insensitive, whole word); build regex dynamically from keys
+  const RE = new RegExp(
+    "\\b(" + Object.keys(ICONS)
+      .map(k => k.replace(/\s+/g, "\\s*").replace(/\//g,"\\/").replace(/\./g,"\\."))
+      .join("|") + ")\\b",
+    "gi"
+  );
 
   // ----- ICONIZER CORE -----
 
