@@ -30,7 +30,7 @@
   }
   .fab::before{
     content:""; position:absolute; inset:-6px; border-radius:50%;
-    filter: saturate(1.8) brightness(1.2);  /* makes colors pop */
+    filter: saturate(1.8);  /* makes colors pop */
     background: var(--ring-colors);
     animation: spin 4s linear infinite;
     z-index:-1;
