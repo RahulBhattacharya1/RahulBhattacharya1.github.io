@@ -884,25 +884,25 @@ activateRole("analyst");
 /* ===== Script to add icons to technologies ===== */  
 document.addEventListener("DOMContentLoaded", () => {
   const iconMap = {
-    "Python": `<img src="/assets/icons/python.svg" alt="Python Icon" style="height:1.4em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "Python": `<img src="/assets/icons/python.svg" alt="Python Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
     "Databricks": `<img src="/assets/icons/databricks.svg" alt="Databricks Icon" style="height:1.2em; vertical-align:-0.25em; margin:0 2px 0 0;">`,
-    "Azure": `<img src="/assets/icons/azure.svg" alt="Azure Icon" style="height:1.5em; vertical-align:-0.4em; margin:0 2px 0 0;">`,
-    "HTML": `<img src="/assets/icons/html.svg" alt="HTML Icon" style="height:1.3em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "CSS": `<img src="/assets/icons/css.svg" alt="CSS Icon" style="height:1.3em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "JavaScript": `<img src="/assets/icons/javascript.svg" alt="JS Icon" style="height:1.3em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "Power BI": `<img src="/assets/icons/powerbi.svg" alt="Power BI Icon" style="height:1.3em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "Tableau": `<img src="/assets/icons/tableau.svg" alt="Tableau Icon" style="height:1.25em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "QuickSight": `<img src="/assets/icons/awsquicksight.svg" alt="QuickSight Icon" style="height:1.1em; vertical-align:-0.2em; margin:0 2px 0 0;">`,
-    "Oracle": `<img src="/assets/icons/oracle.svg" alt="Oracle Icon" style="height:1.3em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "Informatica": `<img src="/assets/icons/informatica.svg" alt="Informatica Icon" style="height:1.3em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "Glue": `<img src="/assets/icons/awsglue.png" alt="Glue Icon" style="height:1.2em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "Draw.io": `<img src="/assets/icons/drawio.svg" alt="Draw.io Icon" style="height:1.1em; vertical-align:-0.35em; margin:0 3px 0 0;">`,
-    "Redshift": `<img src="/assets/icons/redshift.svg" alt="Redshift Icon" style="height:1.2em; vertical-align:-0.35em; margin:0 1px 0 0;">`,
-    "S3": `<img src="/assets/icons/amazons3.svg" alt="S3 Icon" style="height:1.5em; vertical-align:-0.45em; margin:0 1px 0 0;">`,
-    "Hugging Face": `<img src="/assets/icons/huggingface.svg" alt="Hugging Face Icon" style="height:1.3em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
-    "Spark": `<img src="/assets/icons/spark.svg" alt="Apache Spark Icon" style="height:1.2em; vertical-align:-0.25em; margin:0 2px 0 0;">`,
+    "Azure": `<img src="/assets/icons/azure.svg" alt="Azure Icon" style="height:1em; vertical-align:-0.4em; margin:0 2px 0 0;">`,
+    "HTML": `<img src="/assets/icons/html.svg" alt="HTML Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "CSS": `<img src="/assets/icons/css.svg" alt="CSS Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "JavaScript": `<img src="/assets/icons/javascript.svg" alt="JS Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "Power BI": `<img src="/assets/icons/powerbi.svg" alt="Power BI Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "Tableau": `<img src="/assets/icons/tableau.svg" alt="Tableau Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "QuickSight": `<img src="/assets/icons/awsquicksight.svg" alt="QuickSight Icon" style="height:1em; vertical-align:-0.2em; margin:0 2px 0 0;">`,
+    "Oracle": `<img src="/assets/icons/oracle.svg" alt="Oracle Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "Informatica": `<img src="/assets/icons/informatica.svg" alt="Informatica Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "Glue": `<img src="/assets/icons/awsglue.png" alt="Glue Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "Draw.io": `<img src="/assets/icons/drawio.svg" alt="Draw.io Icon" style="height:1em; vertical-align:-0.35em; margin:0 3px 0 0;">`,
+    "Redshift": `<img src="/assets/icons/redshift.svg" alt="Redshift Icon" style="height:1em; vertical-align:-0.35em; margin:0 1px 0 0;">`,
+    "S3": `<img src="/assets/icons/amazons3.svg" alt="S3 Icon" style="height:1em; vertical-align:-0.45em; margin:0 1px 0 0;">`,
+    "Hugging Face": `<img src="/assets/icons/huggingface.svg" alt="Hugging Face Icon" style="height:1em; vertical-align:-0.35em; margin:0 2px 0 0;">`,
+    "Spark": `<img src="/assets/icons/spark.svg" alt="Apache Spark Icon" style="height:1em; vertical-align:-0.25em; margin:0 2px 0 0;">`,
     "MySQL": `<img src="/assets/icons/mysql.svg" alt="MySQL Icon" style="height:2em; vertical-align:-0.6em; margin:0 2px 0 0;">`,
-    "PostgreSQL": `<img src="/assets/icons/postgresql.svg" alt="PostgreSQL Icon" style="height:1.2em; vertical-align:-0.25em; margin:0 2px 0 0;">`
+    "PostgreSQL": `<img src="/assets/icons/postgresql.svg" alt="PostgreSQL Icon" style="height:1em; vertical-align:-0.25em; margin:0 2px 0 0;">`
   };
 
   // Walk all text nodes and replace keywords
