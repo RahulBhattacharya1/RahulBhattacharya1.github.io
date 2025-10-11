@@ -18,7 +18,7 @@
 .mobile-profile *{ box-sizing: border-box; }
 
 /* Container similar to .stage in demo */
-.mobile-profile .stage{ width:100%; max-width:1080px; margin:0 auto; }
+.mobile-profile .stage{ width:100%; max-width:100%; margin:0 auto; }
 
 /* Hide the expand/collapse checkbox only in this component */
 .mobile-profile #satinA{ position:absolute; left:-9999px }
@@ -245,7 +245,7 @@
 
 /* Fill only when the panel is open AND the Impact tab is selected (order-agnostic) */
 .mobile-profile #satinA:checked ~ #profile-panel:has(#tab-impact:checked) #panel-impact .fill {
-  width: var(--w, 100%);
+  width: var(--w, 0%);
 }
 
 /* ========= Responsive ========= */
@@ -340,11 +340,4 @@
   max-height: 1200px;  /* adjust if needed */
   opacity: 1;
   transform: translateY(0);
-}
-
-@media (max-width: 768px){
-  .mobile-profile{ max-width: 100% !important; width: 100% !important;}
-  .mobile-profile .stage{ max-width: 100% !important; width: 100% !important;} 
-  .mobile-profile .card{ max-width: 100% !important; width: 100% !important;}
-   .mobile-profile #satinA { max-width: 100% !important; width: 100% !important;}
 }
