@@ -319,7 +319,7 @@
   background: url("/assets/images/banner-bg.webp") no-repeat center/cover;
   filter: blur(0px) brightness(.3);
   z-index: 6;
-  animation: banner-zoom 30s ease-in-out infinite alternate; /* ← changed */
+  animation: banner-zoom 15s ease-out forwards;
   transform-origin: center center;
   will-change: transform; /* GPU optimization */
 }
