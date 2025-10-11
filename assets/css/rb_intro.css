@@ -72,7 +72,7 @@
 
 /* === Rotating caption === */
 .rbx-subtitle{
-  margin:0 auto 24px; max-width:980px;
+  margin:10px auto 24px; max-width:980px;
   color:#cfd6e4; line-height:1.5; font-weight:400;
   font-size:clamp(.9rem,1.2vw,1.05rem);
 }
