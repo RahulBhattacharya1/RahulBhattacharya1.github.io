@@ -343,7 +343,7 @@
 }
 
 @media (max-width: 768px){
-  .mobile-profile{ padding: 0; }                 /* remove outer gutter */
-  .mobile-profile .stage{ max-width: none; margin: 0; }  /* remove cap + centering */
-  .mobile-profile .card{ border-radius: 0; }      /* optional: make it look edge-to-edge */
+  .mobile-profile{ max-width: 100% !important; }                 /* remove outer gutter */
+  .mobile-profile .stage{ max-width: 100% !important; }  /* remove cap + centering */
+  .mobile-profile .card{ max-width: 100% !important; }      /* optional: make it look edge-to-edge */
 }
