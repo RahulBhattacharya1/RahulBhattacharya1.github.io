@@ -2,7 +2,7 @@
   /* =========================
      Config + Data
   ========================== */
-  const RBX_ROTATE_MS = 4000;
+  const RBX_ROTATE_MS = 5000;
   const RBX_FADE_MS   = 200;
 
   const RBX_CAPTIONS = [
