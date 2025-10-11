@@ -190,7 +190,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);  
-  animation: rbx-reveal-ctas 0.001s linear 8s forwards;
+  animation: rbx-reveal-ctas 0.001s linear 9s forwards;
 }
 
 /* Reveal after the delay */
@@ -216,6 +216,8 @@
   isolation:isolate;       /* separates text from glow */
   color:#fff !important;   /* text always white */
   -webkit-text-fill-color:#fff !important;
+  text-shadow: none !important;   /* remove any glow overlay */
+  mix-blend-mode: normal !important; /* prevent blending with bg */  
   z-index:1;
 }
 
