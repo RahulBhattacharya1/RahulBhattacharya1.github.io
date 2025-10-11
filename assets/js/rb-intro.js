@@ -267,14 +267,29 @@ function rbxIconizeCaption(el){
 
   // Terms → icons (lowercased keys)
   const ICONS = {
-    'python':        '/assets/icons/python.svg',
-    'databricks':    '/assets/icons/databricks.svg',
-    'azure':         '/assets/icons/azure.svg',
-    'power bi':      '/assets/icons/powerbi.svg',
-    'tableau':       '/assets/icons/tableau.svg',
-    'adf':           '/assets/icons/azure.svg',
-    'numpy':         '/assets/icons/numpy.svg',
-    'hugging face':  '/assets/icons/huggingface.svg'
+      'python':        '/assets/icons/python.svg',
+      'databricks':    '/assets/icons/databricks.svg',
+      'azure':         '/assets/icons/azure.svg',
+      'adf':           '/assets/icons/azure.svg',
+      'html':          '/assets/icons/html.svg',
+      'css':           '/assets/icons/css.svg',
+      'javascript':    '/assets/icons/javascript.svg',
+      'power bi':      '/assets/icons/powerbi.svg',
+      'tableau':       '/assets/icons/tableau.svg',
+      'quicksight':    '/assets/icons/awsquicksight.svg',
+      'bi apps':       '/assets/icons/oracle.svg',
+      'sql':           '/assets/icons/oracle.svg',
+      'pl/sql':        '/assets/icons/oracle.svg',
+      'epm':           '/assets/icons/oracle.svg',
+      'informatica':   '/assets/icons/informatica.svg',
+      'glue':          '/assets/icons/awsglue.png',
+      'draw.io':       '/assets/icons/drawio.svg',
+      'redshift':      '/assets/icons/redshift.svg',
+      's3':            '/assets/icons/amazons3.svg',
+      'hugging face':  '/assets/icons/huggingface.svg',
+      'spark':         '/assets/icons/spark.svg',
+      'mysql':         '/assets/icons/mysql.svg',
+      'postgresql':    '/assets/icons/postgresql.svg'
   };
 
   // Match common variants (case-insensitive); allow “PowerBI”, “HuggingFace”, “pl/sql”, etc.
