@@ -43,19 +43,17 @@
     inset:-40px;                 /* much larger than the button */
     box-shadow: 0 0 28px 10px rgba(150,190,255,0.35);
     /*animation: pulse 3.2s ease-in-out infinite;*/
-    box-shadow: 0 0 65px 25px rgba(150,190,255,0.65); /* larger halo */
+    /*box-shadow: 0 0 65px 25px rgba(150,190,255,0.65);*/ /* larger halo */
     /*filter: saturate(1.6) brightness(1.15);*/          /* richer glow */
     z-index:-2;
 
   content:""; 
   position:absolute; 
-  inset:-30px;             /* was -18px → pushes halo farther out */
   border-radius:50%;
 
   animation: spin 12s linear infinite, pulse 3.2s ease-in-out infinite;
   filter: blur(40px) saturate(1.6) brightness(1.15);
   opacity: 0.9;
-  z-index: 1;              /* bring above FAB’s background */
   pointer-events: none;    
   }
   .fab-emoji{ display:inline-block; line-height:1; }
