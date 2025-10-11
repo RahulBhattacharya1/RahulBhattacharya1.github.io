@@ -33,7 +33,6 @@
 /* ========= Card ========= */
 .mobile-profile .card{
   position:relative; border-radius:var(--radius); overflow:hidden; will-change:transform;
-  width: 100%;
    background:
     radial-gradient(120% 140% at 10% 0%, #fff 0%, #fff 40%, #f8fafc 100%),
     conic-gradient(from 200deg at 80% 20%, rgba(255,255,255,.0), rgba(255,255,255,.14), rgba(255,255,255,0) 60%);
@@ -343,3 +342,8 @@
   transform: translateY(0);
 }
 
+@media (max-width: 768px){
+  .mobile-profile{ padding: 0; }                 /* remove outer gutter */
+  .mobile-profile .stage{ max-width: none; margin: 0; }  /* remove cap + centering */
+  .mobile-profile .card{ border-radius: 0; }      /* optional: make it look edge-to-edge */
+}
