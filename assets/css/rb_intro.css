@@ -254,7 +254,7 @@
   position:absolute; inset:0;
   background: url("/assets/images/banner-bg.webp") no-repeat center/cover;
   filter: blur(0px) brightness(.3);
-  z-index: 0;
+  z-index: 6;
   animation: banner-zoom 30s ease-in-out infinite alternate; /* ← changed */
   transform-origin: center center;
   will-change: transform; /* GPU optimization */
