@@ -45,7 +45,7 @@
     /*animation: pulse 3.2s ease-in-out infinite;*/
     box-shadow: 0 0 65px 25px rgba(150,190,255,0.65); /* larger halo */
     /*filter: saturate(1.6) brightness(1.15);*/          /* richer glow */
-    /*z-index:-2;*/
+    z-index:-2;
 
   content:""; 
   position:absolute; 
