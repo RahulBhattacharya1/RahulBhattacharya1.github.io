@@ -41,6 +41,8 @@
     content:""; position:absolute; inset:-8px; border-radius:50%;
     box-shadow: 0 0 28px 10px rgba(150,190,255,0.35);
     animation: pulse 3.2s ease-in-out infinite;
+    box-shadow: 0 0 55px 22px rgba(150,190,255,0.65); /* stronger halo */
+    filter: saturate(1.6) brightness(1.15);          /* richer glow */
     z-index:-2;
   }
   .fab-emoji{ display:inline-block; line-height:1; }
