@@ -33,7 +33,8 @@
 /* ========= Card ========= */
 .mobile-profile .card{
   position:relative; border-radius:var(--radius); overflow:hidden; will-change:transform;
-  background:
+  width: 100%;
+   background:
     radial-gradient(120% 140% at 10% 0%, #fff 0%, #fff 40%, #f8fafc 100%),
     conic-gradient(from 200deg at 80% 20%, rgba(255,255,255,.0), rgba(255,255,255,.14), rgba(255,255,255,0) 60%);
   border:1px solid var(--line);
@@ -250,7 +251,8 @@
 
 /* ========= Responsive ========= */
 @media (max-width:720px){
-  .mobile-profile .card{ grid-template-columns:68px 1fr auto; gap:14px; padding:18px; border-radius:18px }
+  .mobile-profile .card{ grid-template-columns:68px 1fr auto; gap:14px; 
+                        padding:18px; border-radius:18px }
   .mobile-profile .avatar-wrap{ width:68px; height:68px }
   .mobile-profile h2{ font-size:1.22rem }
   .mobile-profile .stats{ grid-template-columns:1fr 1fr }
