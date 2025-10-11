@@ -905,21 +905,48 @@ document.addEventListener("DOMContentLoaded", () => {
     "PostgreSQL": `<img src="/assets/icons/postgresql.svg" alt="PostgreSQL Icon" style="height:1em; vertical-align:-0.25em; margin:0 2px 0 0;">`
   };
 
-  // Walk all text nodes and replace keywords
-  function walk(node) {
-    if (node.nodeType === 3) { // text node
-      let text = node.nodeValue;
-      for (const [word, icon] of Object.entries(iconMap)) {
-        const regex = new RegExp(`\\b${word}\\b`, "g");
-        if (regex.test(text)) {
-          const span = document.createElement("span");
-          span.innerHTML = text.replace(regex, `$& ${icon}`);
-          node.replaceWith(span);
-          break; // replaced, stop for this node
-        }
+  // Sort keys longest-first to avoid partial collisions (e.g., SQL within PostgreSQL/MySQL)
+  const keys = Object.keys(iconMap).sort((a,b)=>b.length - a.length);
+
+  // Escape regex special characters in keys
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  // Build one alternation regex; case-insensitive; custom "word-ish" boundaries
+  // Using lookarounds so punctuation like dots in "Draw.io" still match.
+  const pattern = new RegExp(
+    `(?<![A-Za-z0-9_])(?:${keys.map(esc).join("|")})(?![A-Za-z0-9_])`,
+    "gi"
+  );
+
+  function walk(node){
+    if(node.nodeType === 3){ // text node
+      const original = node.nodeValue;
+      if(!original.trim()) return;
+
+      let replaced = original.replace(pattern, (m) => {
+        // Use the canonical key from iconMap (case-insensitive match)
+        const key = keys.find(k => k.toLowerCase() === m.toLowerCase()) || m;
+        return `${m} ${iconMap[key] || ""}`;
+      });
+
+      if(replaced !== original){
+        const span = document.createElement("span");
+        span.innerHTML = replaced;
+        node.replaceWith(span);
       }
-    } else if (node.nodeType === 1 && node.nodeName !== "SCRIPT" && node.nodeName !== "STYLE") {
+      return;
+    }
+
+    if(node.nodeType === 1){
+      // Skip scripts/styles and already iconized <img> containers
+      const tag = node.tagName;
+      if(tag === "SCRIPT" || tag === "STYLE" || tag === "IMG") return;
+      // Avoid reprocessing areas we added icons to on subsequent passes
+      if(node.closest && node.closest("[data-iconized='1']")) return;
+
       node.childNodes.forEach(walk);
+      // mark once processed
+      node.setAttribute && node.setAttribute("data-iconized","1");
     }
   }
 
