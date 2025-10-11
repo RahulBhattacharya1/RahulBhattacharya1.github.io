@@ -190,7 +190,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);  
-  animation: rbx-reveal-ctas 0.001s linear var(--bars-finish) forwards;
+  animation: rbx-reveal-ctas 0.001s linear 8s forwards;
 }
 
 /* Reveal after the delay */
