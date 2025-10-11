@@ -326,7 +326,7 @@
 
 /* Replace rotation with zoom animation */
 @keyframes banner-zoom {
-  0%   { transform: scale(1); }     /* ← changed */
-  100% { transform: scale(4); }   /* ← changed */
+  0%   { transform: scale(4); }
+  100% { transform: scale(1); }
 }
 
