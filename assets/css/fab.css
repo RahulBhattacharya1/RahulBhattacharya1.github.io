@@ -35,7 +35,7 @@
     animation: spin 4s linear infinite;
     z-index:-1;
     mask: radial-gradient(farthest-side, transparent calc(100% - 20px), black 100%);
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 12px), black 100%);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 20px), black 100%);
   }
   .fab::after{
     content:""; position:absolute; inset:-8px; border-radius:50%;
