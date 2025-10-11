@@ -245,7 +245,7 @@
 
 /* Fill only when the panel is open AND the Impact tab is selected (order-agnostic) */
 .mobile-profile #satinA:checked ~ #profile-panel:has(#tab-impact:checked) #panel-impact .fill {
-  width: var(--w, 0%);
+  width: var(--w, 100%);
 }
 
 /* ========= Responsive ========= */
@@ -341,15 +341,3 @@
   transform: translateY(0);
 }
 
-@media (max-width: 768px){
-  .mobile-profile{
-    width: 100%;
-    /* cancel page gutters without vw; set to your real mobile gutter */
-    --page-gutter: 16px;
-    margin-left:  calc(-1 * var(--page-gutter));
-    margin-right: calc(-1 * var(--page-gutter));
-    padding-left:  var(--page-gutter);
-    padding-right: var(--page-gutter);
-    box-sizing: border-box;
-  }
-}
