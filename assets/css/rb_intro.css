@@ -181,27 +181,34 @@
 
 
 /* === CTAs === */
-.rbx-actions{ display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+/* === Actions Container === */
+.rbx-actions{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+/* === Base CTA === */
 .rbx-cta{
-  display:inline-block; 
-  padding:12px 22px; 
-  border-radius:26px; 
+  display:inline-block;
+  padding:12px 22px;
+  border-radius:26px;
   font-weight:700;
   text-decoration:none;
-  transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  transition:transform .2s ease, box-shadow .2s ease;
   box-shadow:0 6px 18px rgba(0,0,0,.28);
 
-  position:relative;       /* ensure stacking context */
-  isolation:isolate;       /* separate text vs glow layers */
-  color:#fff !important;   /* force constant white */
-  -webkit-text-fill-color:#fff !important; /* Safari/WebKit safety */
+  position:relative; 
+  isolation:isolate;       /* separates text from glow */
+  color:#fff !important;   /* text always white */
+  -webkit-text-fill-color:#fff !important;
   z-index:1;
 }
 
+/* === Primary CTA (Continue to Home) === */
 .rbx-cta-primary{
-  position:relative;
-  color:#fff;
-  background:#ebc100;
+  background:#222;          /* dark base so glow pops */
   border-radius:14px;
   overflow:hidden;
 }
@@ -211,22 +218,18 @@
   top:-60%; left:-60%;
   width:220%; height:220%;
   background:conic-gradient(
-    #ff3c7d,#ff8a3c,#ffed3c,#3cffda,#3c7dff,#b43cff,#ff3c7d);
+    #ff3c7d,#ff8a3c,#ffed3c,#3cffda,#3c7dff,#b43cff,#ff3c7d
+  );
   animation:spin 10s linear infinite;
   filter:blur(38px);
   opacity:.9;
   z-index:0;
-  pointer-events:none;       /* don’t block clicks */  
+  pointer-events:none;
 }
-.rbx-cta-primary span{ position:relative; z-index:1; 
-                       color:#fff !important;     /* constant white text */
-                      -webkit-text-fill-color:#fff !important;}
+.rbx-cta-primary:hover{ transform:translateY(-2px); }
 
-.rbx-cta-primary:hover{ background:#0b66ff; transform:translateY(-2px); }
-
+/* === Secondary CTA (Schedule) === */
 .rbx-cta-secondary{
-  position:relative;
-  color:#fff;
   background:#111;
   border-radius:14px;
   overflow:hidden;
@@ -237,17 +240,17 @@
   top:-60%; left:-60%;
   width:220%; height:220%;
   background:conic-gradient(
-    #00ffe7,#3c91ff,#a83cff,#ff3cf4,#ff913c,#00ffe7);
-  animation:spin 5s linear infinite;
+    #00ffe7,#3c91ff,#a83cff,#ff3cf4,#ff913c,#00ffe7
+  );
+  animation:spin 6s linear infinite;
   filter:blur(38px);
   opacity:.9;
   z-index:0;
-  pointer-events:none;       /* don’t block clicks */  
+  pointer-events:none;
 }
-.rbx-cta-secondary span{ position:relative; z-index:1; }
+.rbx-cta-secondary:hover{ transform:translateY(-2px); }
 
-.rbx-cta-secondary:hover{ background:#1d2432; transform:translateY(-2px); }
-
+/* === Glow Spin Animation === */
 @keyframes spin{
   0%{transform:rotate(0deg);}
   100%{transform:rotate(360deg);}
