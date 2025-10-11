@@ -343,7 +343,8 @@
 }
 
 @media (max-width: 768px){
-  .mobile-profile{ max-width: 100% !important; }                 /* remove outer gutter */
-  .mobile-profile .stage{ max-width: 100% !important; }  /* remove cap + centering */
-  .mobile-profile .card{ max-width: 100% !important; }      /* optional: make it look edge-to-edge */
+  .mobile-profile{ max-width: 100% !important; width: 100% !important;}
+  .mobile-profile .stage{ max-width: 100% !important; width: 100% !important;} 
+  .mobile-profile .card{ max-width: 100% !important; width: 100% !important;}
+   .mobile-profile #satinA { max-width: 100% !important; width: 100% !important;}
 }
