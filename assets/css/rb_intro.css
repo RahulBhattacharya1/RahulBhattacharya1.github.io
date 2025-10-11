@@ -23,8 +23,8 @@
   background: rgba(10,15,28,0.8);
   backdrop-filter: blur(14px);
   display:flex; align-items:center; justify-content:center;
-  padding:20px 16px; overflow:auto;
-  opacity:1; transition:opacity .28s ease;
+  padding:0px 16px; overflow:auto;
+  opacity:1; transition:opacity 1s ease;
 }
 
 /* Your actual content ALWAYS above */
@@ -327,6 +327,6 @@
 /* Replace rotation with zoom animation */
 @keyframes banner-zoom {
   0%   { transform: scale(4); }
-  100% { transform: scale(1); }
+  100% { transform: scale(1.05); }
 }
 
