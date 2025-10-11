@@ -183,10 +183,21 @@
 /* === CTAs === */
 .rbx-actions{ display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
 .rbx-cta{
-  display:inline-block; padding:12px 22px; border-radius:26px; font-weight:700; text-decoration:none;
+  display:inline-block; 
+  padding:12px 22px; 
+  border-radius:26px; 
+  font-weight:700;
+  text-decoration:none;
   transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
   box-shadow:0 6px 18px rgba(0,0,0,.28);
+
+  position:relative;       /* ensure stacking context */
+  isolation:isolate;       /* separate text vs glow layers */
+  color:#fff !important;   /* force constant white */
+  -webkit-text-fill-color:#fff !important; /* Safari/WebKit safety */
+  z-index:1;
 }
+
 .rbx-cta-primary{
   position:relative;
   color:#fff;
@@ -201,7 +212,7 @@
   width:220%; height:220%;
   background:conic-gradient(
     #ff3c7d,#ff8a3c,#ffed3c,#3cffda,#3c7dff,#b43cff,#ff3c7d);
-  animation:spin 5s linear infinite;
+  animation:spin 10s linear infinite;
   filter:blur(38px);
   opacity:.9;
 }
