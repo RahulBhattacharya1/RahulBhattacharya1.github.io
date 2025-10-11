@@ -340,3 +340,16 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+@media (max-width: 768px){
+  .mobile-profile{
+    width: 100%;
+    /* cancel page gutters without vw; set to your real mobile gutter */
+    --page-gutter: 16px;
+    margin-left:  calc(-1 * var(--page-gutter));
+    margin-right: calc(-1 * var(--page-gutter));
+    padding-left:  var(--page-gutter);
+    padding-right: var(--page-gutter);
+    box-sizing: border-box;
+  }
+}
