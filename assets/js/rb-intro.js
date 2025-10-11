@@ -218,7 +218,17 @@
     { v: "300+", c: "Dashboards created" },
     { v: "200+", c: "Data flows & pipelines" },
     { v: "80+",  c: "Databricks" },
-    { v: "80+",  c: "Warehouses designed" }
+    { v: "80+",  c: "Warehouses designed" },
+    { v: "8,000+", c: "Stores supported" },
+    { v: "40%",    c: "Faster pipelines" },
+    { v: "1,200+", c: "Compute hours saved" },
+    { v: "95%",    c: "Query speed gains" },
+    { v: "5,000+", c: "Staff hours saved" },
+    { v: "500M+",  c: "Records processed" },
+    { v: "92%",    c: "Forecast accuracy" },
+    { v: "$3M",    c: "Annualized savings" },
+    { v: "150k",   c: "Employees scheduled" },
+    { v: "99.9%",  c: "Pipeline uptime" }    
   ];
   const RBX_METRICS_INTERVAL = 4000;
   const RBX_METRICS_FADE     = 200;
@@ -329,7 +339,7 @@ function rbxRotateMetrics(){
       m2v.textContent = RBX_METRICS[j].v;
       m2c.textContent = RBX_METRICS[j].c;
       row.classList.remove("rbx-fade-out");
-      i = j;
+      i = (i + 2) % RBX_METRICS.length;;
     }, RBX_METRICS_FADE);
   }
 
