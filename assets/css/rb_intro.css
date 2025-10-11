@@ -23,7 +23,7 @@
   background: rgba(10,15,28,0.8);
   backdrop-filter: blur(14px);
   display:flex; align-items:center; justify-content:center;
-  padding:40px 16px; overflow:auto;
+  padding:20px 16px; overflow:auto;
   opacity:1; transition:opacity .28s ease;
 }
 
