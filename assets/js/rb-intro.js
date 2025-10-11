@@ -292,8 +292,8 @@ function rbxIconizeCaption(el){
       'postgresql':    '/assets/icons/postgresql.svg'
   };
 
-  // Match common variants (case-insensitive); allow “PowerBI”, “HuggingFace”, “pl/sql”, etc.
-  const RE = /\b(databricks|python|azure|power\s*bi|tableau|adf|numpy|hugging\s*face)\b/gi;
+  // Build regex dynamically from keys. Match common variants (case-insensitive); allow “PowerBI”, “HuggingFace”, “pl/sql”, etc.
+  const RE = new RegExp(`\\b(${Object.keys(ICONS).join('|').replace(/\s+/g,'\\s*')})\\b`, 'gi');
 
   // Only touch this one caption node; don’t walk the page
   el.innerHTML = el.innerHTML.replace(RE, (m) => {
