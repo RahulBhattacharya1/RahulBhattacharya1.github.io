@@ -215,8 +215,12 @@
   animation:spin 10s linear infinite;
   filter:blur(38px);
   opacity:.9;
+  z-index:0;
+  pointer-events:none;       /* don’t block clicks */  
 }
-.rbx-cta-primary span{ position:relative; z-index:1; }
+.rbx-cta-primary span{ position:relative; z-index:1; 
+                       color:#fff !important;     /* constant white text */
+                      -webkit-text-fill-color:#fff !important;}
 
 .rbx-cta-primary:hover{ background:#0b66ff; transform:translateY(-2px); }
 
@@ -237,6 +241,8 @@
   animation:spin 5s linear infinite;
   filter:blur(38px);
   opacity:.9;
+  z-index:0;
+  pointer-events:none;       /* don’t block clicks */  
 }
 .rbx-cta-secondary span{ position:relative; z-index:1; }
 
