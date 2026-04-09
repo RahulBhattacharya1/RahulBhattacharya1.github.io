@@ -3,7 +3,7 @@ on:
   push: { branches: [ main ] }
   workflow_dispatch:
   schedule:
-  - cron: '45 18 27 8 *'   # 1:45 PM CDT (Aug 27, 2025)
+  - cron: '0 */10 * * *'    # Every 10 hours
 
 permissions:
   contents: read
